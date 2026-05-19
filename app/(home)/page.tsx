@@ -4,6 +4,7 @@ import ZazzLineartBg from "@/components/zazz-lineart-bg";
 
 const links = [
   { label: "Read the docs", href: "/docs", external: false },
+  { label: "Theme builder", href: "/theme", external: false },
   { label: "Foundations / tokens", href: "/docs/foundations", external: false },
   { label: "Primitives", href: "/docs/primitives", external: false },
   {

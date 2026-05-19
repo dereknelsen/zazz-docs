@@ -101,6 +101,9 @@
 .home__link:nth-child(5) {
   animation-delay: 0.63s;
 }
+.home__link:nth-child(6) {
+  animation-delay: 0.7s;
+}
 
 .home__link:hover {
   color: #9a92ff;

@@ -1,0 +1,53 @@
+---
+title: Overflow
+description: Utilities for clipping content that exceeds its container.
+---
+
+## Class reference
+
+| Class | Property |
+| --- | --- |
+| `overflow-hidden` | `overflow: hidden` |
+| `overflow-clip` | `overflow: clip` |
+| `no-scrollbar` | Hides scrollbars while keeping scroll behavior |
+
+## Examples
+
+### Clip a child to the parent's box
+
+```html
+<div class="overflow-hidden radius-lg" style="aspect-ratio: 16/9">
+  <img src="hero.jpg" alt="" class="w-full h-full object-cover" />
+</div>
+```
+
+### Hide scrollbars on a scrollable region
+
+```html
+<div class="no-scrollbar" style="overflow-x: auto; white-space: nowrap">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</div>
+```
+
+The element still scrolls — only the scrollbar UI is hidden. Use with care; visible scrollbars are a usability affordance for keyboard and assistive-tech users.
+
+## Hidden vs. clip
+
+- **`overflow-hidden`** clips content and prevents scrolling. Children can still receive focus and be programmatically scrolled into view, which can cause unexpected jumps.
+- **`overflow-clip`** clips content without creating a scroll container. No programmatic scroll-into-view. Slightly better performance.
+
+Prefer `overflow-clip` for purely decorative clipping (rounded image masks, hero overflow). Use `overflow-hidden` when you intend to support programmatic scrolling.
+
+## Scrollable regions
+
+Zazz doesn't ship `overflow-auto`, `overflow-scroll`, or axis-specific overflow utilities. Apply directly:
+
+```css
+.scrollable {
+  overflow-y: auto;
+  max-height: 60vh;
+  overscroll-behavior: contain;
+}
+```

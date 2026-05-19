@@ -1,0 +1,110 @@
+---
+title: Naming
+description: The conventions behind every variable, class, and token name in Zazz.
+---
+
+The shape of a Zazz name is part of the system. Consistency in naming is what lets the same variable live in Figma, Webflow, Tailwind, and CSS without translation. Here's what the rules are and why.
+
+## Variables are unprefixed
+
+Zazz CSS custom properties don't carry a `--zazz-*` prefix. The variable is just `--primary`, not `--zazz-primary`.
+
+```css
+--primary:    var(--primary-600);
+--gap-md:     var(--step-6);
+--radius-md:  calc(var(--step-2) * var(--radius-multiplier));
+```
+
+The reasoning: tokens describe roles, not products. `--primary` reads as a brand color anywhere; `--zazz-primary` reads as a vendor-locked thing. If your project later replaces Zazz with something else, the variable name doesn't need to change.
+
+## Roles, not values
+
+Tokens are named for what they're *for*, not what they *are*. A scale called "Indigo" today might become "Teal" next year — but it's still `--primary`. Components consuming `--primary-600` never need to know what color it actually is.
+
+This applies at every layer:
+
+- **Color scales**: `primary`, `secondary`, `tertiary` — not `indigo`, `orange`, `rose`.
+- **Spacing**: `gap-md`, `step-4` — not `medium-gap`, `four-pixel-grid`.
+- **Radius**: `radius-md`, `radius-button` — not `small-corner`, `button-rounded`.
+- **Shadow**: `shadow-md`, `shadow-popover` — not `medium-shadow`, `dropdown-shadow`.
+
+## Semantic / scale / primitive layering
+
+Tokens come in tiers. Names reflect the tier:
+
+| Tier | Naming | Example |
+| --- | --- | --- |
+| Modifier | `--{property}-{modifier}` | `--spacing-interval`, `--radius-multiplier` |
+| Scale | `--{property}-{step}` | `--step-4`, `--primary-600` |
+| Semantic | `--{role}-{size?}` | `--gap-md`, `--background`, `--destructive` |
+| Primitive | `--{role}-{primitive}` | `--radius-button`, `--shadow-popover` |
+
+Higher tiers reference lower ones via `var()`. Components consume semantic and primitive tokens; they don't reach into scales or modifiers directly.
+
+## Foreground pairs
+
+For every color token that's used as a *background*, there's a paired `*-foreground` token for *text on that background*.
+
+```css
+--primary:            var(--primary-600);
+--primary-foreground: var(--white);
+
+--card:               white;
+--card-foreground:    var(--neutral-900);
+```
+
+Components reach for the pair together:
+
+```css
+.primary-button {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+```
+
+When you re-target `--primary` to a different scale, `--primary-foreground` continues to work because it's the *role*, not the value.
+
+## Sizes follow t-shirt scale
+
+Sizes use `xs / sm / md / lg / xl` rather than numeric or named scales. The pattern extends to `2xl`, `3xl` when needed.
+
+```css
+--gap-xs:     var(--step-2);
+--gap-md:     var(--step-6);
+--shadow-lg:  /* ... */;
+--radius-xl:  /* ... */;
+```
+
+Why t-shirt: it's universal across designers, devs, and product. "Medium" reads the same in Figma as it does in code.
+
+## Numeric scales follow Tailwind
+
+Color and step scales use the `50 / 100 / 200 / … / 900 / 950` pattern.
+
+```css
+--primary-50:  /* lightest */
+--primary-500: /* middle */
+--primary-950: /* darkest */
+
+--step-1:  /* 0.25rem at default interval */
+--step-96: /* largest */
+```
+
+Eleven color steps give enough range for surface, text, accent, hover, and active without thinning the scale. The numbers match what most designers expect.
+
+## Utility classes mirror variables
+
+A utility class named `gap-md` consumes `--gap-md`. A class named `radius-lg` consumes `--radius-lg`. The pattern is one-to-one — knowing one tells you the other.
+
+```css
+:where(.gap-md)    { gap: var(--gap-md); }
+:where(.radius-lg) { border-radius: var(--radius-lg); }
+:where(.text-h1)   { /* composes from --font-size-h1, --weight-heading, etc. */ }
+```
+
+## What's avoided
+
+- **Product names** in variables: no `--zazz-*`, no `--starter-*`.
+- **Implementation names** in variables: no `--button-padding-y` (use `--gap-sm` or `--step-3`).
+- **Vibe names** in variables: no `--cozy-spacing`, `--soft-blue`. Roles only.
+- **Numeric guesses**: no `gap: 13px` in component CSS. Use a token or document why a literal is intentional.

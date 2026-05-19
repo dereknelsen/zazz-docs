@@ -1,0 +1,146 @@
+---
+title: Typography
+description: Composed text styles backed by tokens for family, size, weight, tracking, and leading.
+---
+
+## Class reference
+
+Each `text-*` class composes five tokens — family, size, weight, line-height, letter-spacing — into one style. The conceptual model lives in [Foundations → Typography](/docs/foundations/typography).
+
+| Class | Family | Size | Weight | Leading | Tracking | Notes |
+| --- | --- | --- | --- | --- | --- | --- |
+| `text-display` | heading | `--font-size-display` | `--weight-heading` | `1` | `-0.025em` | |
+| `text-h1` | heading | `--font-size-h1` | `--weight-heading` | `1` | `-0.025em` | |
+| `text-h2` | heading | `--font-size-h2` | `--weight-heading` | `1` | `-0.025em` | |
+| `text-h3` | heading | `--font-size-h3` | `--weight-heading` | `1.05` | `-0.02em` | |
+| `text-h4` | heading | `--font-size-h4` | `--weight-heading` | `1.05` | `-0.01em` | |
+| `text-h5` | heading | `--font-size-h5` | `--weight-heading` | `1.1` | `-0.005em` | |
+| `text-h6` | heading | `--font-size-h6` | `--weight-heading` | `1.1` | `-0.0025em` | |
+| `text-xl` | body | `--font-size-xl` | `--weight-body` | `1.5` | `0` | Lead paragraphs |
+| `text-lg` | body | `--font-size-lg` | `--weight-body` | `1.5` | `0` | |
+| `text-md` | body | `--font-size-md` | `--weight-body` | `1.6` | `0` | Default body |
+| `text-sm` | body | `--font-size-sm` | `--weight-body` | `1.5` | `0` | |
+| `text-xs` | body | `--font-size-xs` | `--weight-body` | `1.5` | `0` | |
+| `text-eyebrow` | heading | `--font-size-eyebrow` | `--weight-eyebrow` | `1.2` | `0.12em` | `text-transform: uppercase` |
+
+## Examples
+
+```html
+<h1 class="text-h1">Designed for design teams</h1>
+<p class="text-lg">A lead paragraph that sits comfortably below the headline.</p>
+<p class="text-md">Default body copy.</p>
+<span class="text-eyebrow">Episode 04</span>
+```
+
+Or compose directly in component CSS:
+
+```css
+.callout-title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-h4);
+  font-weight: var(--weight-heading);
+  line-height: var(--leading-h4);
+  letter-spacing: var(--tracking-h4);
+}
+```
+
+## Font family
+
+```css
+--font-body:    Geist, Verdana, sans-serif;
+--font-heading: Geist, Verdana, sans-serif;
+--font-mono:    "Geist Mono", "Palatino Linotype", sans-serif;
+```
+
+Override `--font-heading` to introduce a contrast typeface for headlines without touching body copy.
+
+## Font size
+
+Fluid sizes use `clamp(min, target, max)` with `vi` (viewport-inline) progress for smooth scaling between mobile and desktop.
+
+```css
+--font-size-display: clamp(4.2998rem, calc(3.545rem  + 3.0194vi), 5.9605rem);
+--font-size-h1:      clamp(3.5832rem, calc(3.0445rem + 2.1549vi), 4.7684rem);
+--font-size-h2:      clamp(2.986rem,  calc(2.6093rem + 1.5068vi), 3.8147rem);
+--font-size-h3:      clamp(2.4883rem, calc(2.2322rem + 1.0244vi), 3.0518rem);
+--font-size-h4:      clamp(2.0736rem, calc(1.9064rem + 0.6687vi), 2.4414rem);
+--font-size-h5:      clamp(1.728rem,  calc(1.6257rem + 0.4093vi), 1.9531rem);
+--font-size-h6:      clamp(1.44rem,   calc(1.3843rem + 0.2227vi), 1.5625rem);
+
+--font-size-xl:      clamp(1.44rem,   calc(1.3843rem + 0.2227vi), 1.5625rem);
+--font-size-lg:      clamp(1.2rem,    calc(1.1773rem + 0.0909vi), 1.25rem);
+--font-size-md:      clamp(1rem,      calc(1rem      + 0vi),      1rem);
+--font-size-sm:      clamp(0.8rem,    calc(0.8485rem + 0.0606vi), 0.8333rem);
+--font-size-xs:      clamp(0.64rem,   calc(0.7192rem + 0.099vi),  0.6944rem);
+--font-size-eyebrow: clamp(0.64rem,   calc(0.7192rem + 0.099vi),  0.6944rem);
+```
+
+`text-h6` and `text-xl` share size values. Use `text-h6` for heading semantics; `text-xl` for lead paragraphs.
+
+## Font weight
+
+```css
+--weight-body:    400;
+--weight-heading: 600;
+--weight-strong:  600;
+--weight-mono:    400;
+--weight-eyebrow: 500;
+```
+
+Role-based weights survive font swaps. A rebrand from a 400/700 to a 300/600 family is one variable change per role.
+
+## Letter spacing
+
+```css
+--tracking-display: -0.025em;
+--tracking-h1:      -0.025em;
+--tracking-h2:      -0.025em;
+--tracking-h3:      -0.02em;
+--tracking-h4:      -0.01em;
+--tracking-h5:      -0.005em;
+--tracking-h6:      -0.0025em;
+--tracking-xl:       0em;
+--tracking-lg:       0em;
+--tracking-md:       0em;
+--tracking-sm:       0em;
+--tracking-xs:       0em;
+--tracking-eyebrow:  0.12em;
+```
+
+Larger type tightens; body sits at zero; eyebrow opens up.
+
+## Line height
+
+```css
+--leading-display: 1;
+--leading-h1:      1;
+--leading-h2:      1;
+--leading-h3:      1.05;
+--leading-h4:      1.05;
+--leading-h5:      1.1;
+--leading-h6:      1.1;
+--leading-xl:      1.5;
+--leading-lg:      1.5;
+--leading-md:      1.6;
+--leading-sm:      1.5;
+--leading-xs:      1.5;
+--leading-eyebrow: 1.2;
+```
+
+Heading leading runs tight; body runs comfortable; eyebrow sits between.
+
+Leading is code-only today — Figma Variables don't yet support `line-height` as a primitive.
+
+## Text utilities
+
+A few utility classes for content presentation:
+
+| Class | Property |
+| --- | --- |
+| `text-balance` | `text-wrap: balance` — balanced lines for headings |
+| `text-pretty` | `text-wrap: pretty` — better last-line behavior for paragraphs |
+| `line-clamp-1` … `line-clamp-6` | Truncate to N lines |
+
+## Adding a new style
+
+Define the underlying tokens, then compose a class. See [Foundations → Typography → Adding a new style](/docs/foundations/typography#style-scale).

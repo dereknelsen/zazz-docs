@@ -1,0 +1,667 @@
+/* =============================================================================
+Zazz Utility Classes
+============================================================================= */
+
+/* =============================================================================
+DISPLAY & LAYOUT UTILITIES
+============================================================================= */
+
+/* Basic display utilities */
+:where(.hidden) {
+    display: none;
+}
+
+:where(.block) {
+    display: block;
+}
+
+:where(.inline-block) {
+    display: inline-block;
+}
+
+:where(.inline) {
+    display: inline;
+}
+
+/* Flexbox utilities */
+:where(.flex) {
+    display: flex;
+}
+
+:where(.inline-flex) {
+    display: inline-flex;
+}
+
+:where(.flex-row) {
+    flex-direction: row;
+}
+
+:where(.flex-row-reverse) {
+    flex-direction: row-reverse;
+}
+
+:where(.flex-col) {
+    flex-direction: column;
+}
+
+:where(.flex-col-reverse) {
+    flex-direction: column-reverse;
+}
+
+/* Flex grow/shrink utilities */
+:where(.flex-1) {
+    flex: 1;
+}
+
+:where(.flex-auto) {
+    flex: auto;
+}
+
+:where(.flex-initial) {
+    flex: initial;
+}
+
+:where(.flex-none) {
+    flex: none;
+}
+
+/* Flexbox alignment utilities */
+:where(.items-start) {
+    align-items: start;
+}
+
+:where(.items-center) {
+    align-items: center;
+}
+
+:where(.items-end) {
+    align-items: end;
+}
+
+:where(.items-stretch) {
+    align-items: stretch;
+}
+
+:where(.justify-start) {
+    justify-content: start;
+}
+
+:where(.justify-center) {
+    justify-content: center;
+}
+
+:where(.justify-end) {
+    justify-content: end;
+}
+
+:where(.justify-stretch) {
+    justify-content: stretch;
+}
+
+:where(.justify-around) {
+    justify-content: space-around;
+}
+
+:where(.justify-between) {
+    justify-content: space-between;
+}
+
+/* Grid utilities */
+:where(.grid) {
+    display: grid;
+}
+
+:where(.grid-cols-1) {
+    grid-template-columns: 1fr;
+}
+
+:where(.grid-cols-2) {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+:where(.grid-cols-3) {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+:where(.grid-cols-4) {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+:where(.grid-cols-5) {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+:where(.grid-cols-6) {
+    grid-template-columns: repeat(6, 1fr);
+}
+
+/* Grid placement utilities */
+:where(.place-items-start) {
+    place-items: start;
+}
+
+:where(.place-items-center) {
+    place-items: center;
+}
+
+:where(.place-items-end) {
+    place-items: end;
+}
+
+/* Order utilities */
+:where(.order-first) {
+    order: -9999;
+}
+
+:where(.order-last) {
+    order: 9999;
+}
+
+:where(.order-none) {
+    order: 0;
+}
+
+/* =============================================================================
+POSITIONING UTILITIES
+============================================================================= */
+
+:where(.static) {
+    position: static;
+}
+
+:where(.relative) {
+    position: relative;
+}
+
+:where(.absolute) {
+    position: absolute;
+}
+
+:where(.fixed) {
+    position: fixed;
+}
+
+:where(.sticky) {
+    position: sticky;
+}
+
+/* =============================================================================
+INTERACTION & VISIBILITY UTILITIES
+============================================================================= */
+
+:where(.pointer-events-none) {
+    pointer-events: none;
+}
+
+/* Screen reader only - visually hidden but accessible to assistive technology */
+:where(.sr-only) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* =============================================================================
+OVERFLOW UTILITIES
+============================================================================= */
+
+:where(.overflow-hidden) {
+    overflow: hidden;
+}
+
+:where(.overflow-clip) {
+    overflow: clip;
+}
+
+/* Hide scrollbars while maintaining scroll functionality */
+:where(.no-scrollbar) {
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+}
+
+:where(.no-scrollbar)::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}
+
+/* =============================================================================
+TEXT & TYPOGRAPHY UTILITIES
+============================================================================= */
+
+/* Text wrapping utilities for better typography */
+:where(.text-pretty) {
+    text-wrap: pretty; /* Prevents orphans and improves line breaks */
+}
+
+:where(.text-balance) {
+    text-wrap: balance; /* Balances text across multiple lines */
+}
+
+/* Line clamping utilities - truncate text after specified number of lines */
+[class*="line-clamp"] {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+:where(.line-clamp-1) {
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+}
+
+:where(.line-clamp-2) {
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+}
+
+:where(.line-clamp-3) {
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+}
+
+:where(.line-clamp-4) {
+    line-clamp: 4;
+    -webkit-line-clamp: 4;
+}
+
+:where(.line-clamp-5) {
+    line-clamp: 5;
+    -webkit-line-clamp: 5;
+}
+
+:where(.line-clamp-6) {
+    line-clamp: 6;
+    -webkit-line-clamp: 6;
+}
+
+/* =============================================================================
+Z-INDEX UTILITIES
+============================================================================= */
+
+:where(.z-isolate) {
+    z-index: isolate; /* Creates new stacking context */
+}
+
+:where(.z-0) {
+    z-index: 0;
+}
+
+:where(.z-10) {
+    z-index: 10;
+}
+
+:where(.z-20) {
+    z-index: 20;
+}
+
+:where(.z-30) {
+    z-index: 30;
+}
+
+:where(.z-40) {
+    z-index: 40;
+}
+
+:where(.z-50) {
+    z-index: 50;
+}
+
+/* =============================================================================
+OPACITY UTILITIES
+============================================================================= */
+
+:where(.opacity-0) {
+    opacity: 0;
+}
+
+:where(.opacity-25) {
+    opacity: 0.25;
+}
+
+:where(.opacity-50) {
+    opacity: 0.5;
+}
+
+:where(.opacity-75) {
+    opacity: 0.75;
+}
+
+:where(.opacity-100) {
+    opacity: 1;
+}
+
+/* =============================================================================
+IMAGE & MEDIA UTILITIES
+============================================================================= */
+
+/* Aspect ratio utilities for common media formats */
+:where(.aspect-anamorphic) {
+    aspect-ratio: 2.39 / 1; /* Ultra-widescreen cinema format */
+}
+
+:where(.aspect-univisium) {
+    aspect-ratio: 2 / 1; /* Univisium cinema format */
+}
+
+:where(.aspect-widescreen) {
+    aspect-ratio: 16 / 9; /* Standard widescreen */
+}
+
+:where(.aspect-landscape) {
+    aspect-ratio: 3 / 2; /* Traditional landscape photography */
+}
+
+:where(.aspect-portrait) {
+    aspect-ratio: 2 / 3; /* Portrait orientation */
+}
+
+:where(.aspect-square) {
+    aspect-ratio: 1 / 1; /* Perfect square */
+}
+
+/* Object fit utilities for controlling how images/videos fit their containers */
+:where(.object-contain) {
+    object-fit: contain; /* Scale to fit while maintaining aspect ratio */
+}
+
+:where(.object-cover) {
+    object-fit: cover; /* Scale to fill container, may crop content */
+}
+
+:where(.object-fill) {
+    object-fit: fill; /* Stretch to fill container, may distort */
+}
+
+:where(.object-none) {
+    object-fit: none; /* Keep original size */
+}
+
+:where(.object-scale-down) {
+    object-fit: scale-down; /* Scale down if needed, otherwise keep original */
+}
+
+/* =============================================================================
+SHADOW UTILITIES
+============================================================================= */
+
+:where(.shadow-none) {
+    box-shadow: var(--shadow-none);
+}
+
+:where(.shadow-xs) {
+    box-shadow: var(--shadow-xs);
+}
+
+:where(.shadow-sm) {
+    box-shadow: var(--shadow-sm);
+}
+
+:where(.shadow-md) {
+    box-shadow: var(--shadow-md);
+}
+
+:where(.shadow-lg) {
+    box-shadow: var(--shadow-lg);
+}
+
+:where(.shadow-xl) {
+    box-shadow: var(--shadow-xl);
+}
+
+/* =============================================================================
+TEXT UTILITIES
+============================================================================= */
+
+:where(.text-display) {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-display);
+    font-weight: var(--weight-heading);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+}
+
+:where(.text-h1) {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h1);
+    font-weight: var(--weight-heading);
+    line-height: var(--leading-h1);
+    letter-spacing: var(--tracking-h1);
+}
+
+:where(.text-h2) {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h2);
+    font-weight: var(--weight-heading);
+    line-height: var(--leading-h2);
+    letter-spacing: var(--tracking-h2);
+}
+
+:where(.text-h3) {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h3);
+    font-weight: var(--weight-heading);
+    line-height: var(--leading-h3);
+    letter-spacing: var(--tracking-h3);
+}
+
+:where(.text-h4) {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h4);
+    font-weight: var(--weight-heading);
+    line-height: var(--leading-h4);
+    letter-spacing: var(--tracking-h4);
+}
+
+:where(.text-h5) {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h5);
+    font-weight: var(--weight-heading);
+    line-height: var(--leading-h5);
+    letter-spacing: var(--tracking-h5);
+}
+
+:where(.text-h6) {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h6);
+    font-weight: var(--weight-heading);
+    line-height: var(--leading-h6);
+    letter-spacing: var(--tracking-h6);
+}
+
+:where(.text-eyebrow) {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-eyebrow);
+    font-weight: var(--weight-eyebrow);
+    line-height: var(--leading-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+}
+
+:where(.text-xl) {
+    font-family: var(--font-body);
+    font-size: var(--font-size-xl);
+    font-weight: var(--weight-body);
+    line-height: var(--leading-xl);
+    letter-spacing: var(--tracking-xl);
+}
+
+:where(.text-lg) {
+    font-family: var(--font-body);
+    font-size: var(--font-size-lg);
+    font-weight: var(--weight-body);
+    line-height: var(--leading-lg);
+    letter-spacing: var(--tracking-lg);
+}
+
+:where(.text-md) {
+    font-family: var(--font-body);
+    font-size: var(--font-size-md);
+    font-weight: var(--weight-body);
+    line-height: var(--leading-md);
+    letter-spacing: var(--tracking-md);
+}
+
+:where(.text-sm) {
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    font-weight: var(--weight-body);
+    line-height: var(--leading-sm);
+    letter-spacing: var(--tracking-sm);
+}
+
+:where(.text-xs) {
+    font-family: var(--font-body);
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-body);
+    line-height: var(--leading-xs);
+    letter-spacing: var(--tracking-xs);
+}
+
+/* =============================================================================
+GAP UTILITIES
+============================================================================= */
+
+:where(.gap-xs) { gap: var(--gap-xs); }
+:where(.gap-sm) { gap: var(--gap-sm); }
+:where(.gap-md) { gap: var(--gap-md); }
+:where(.gap-lg) { gap: var(--gap-lg); }
+:where(.gap-xl) { gap: var(--gap-xl); }
+
+/* =============================================================================
+PADDING UTILITIES — physical sides, logical axes (px/py)
+============================================================================= */
+
+:where(.p-xs) { padding: var(--gap-xs); }
+:where(.p-sm) { padding: var(--gap-sm); }
+:where(.p-md) { padding: var(--gap-md); }
+:where(.p-lg) { padding: var(--gap-lg); }
+:where(.p-xl) { padding: var(--gap-xl); }
+
+:where(.px-xs) { padding-inline: var(--gap-xs); }
+:where(.px-sm) { padding-inline: var(--gap-sm); }
+:where(.px-md) { padding-inline: var(--gap-md); }
+:where(.px-lg) { padding-inline: var(--gap-lg); }
+:where(.px-xl) { padding-inline: var(--gap-xl); }
+
+:where(.py-xs) { padding-block: var(--gap-xs); }
+:where(.py-sm) { padding-block: var(--gap-sm); }
+:where(.py-md) { padding-block: var(--gap-md); }
+:where(.py-lg) { padding-block: var(--gap-lg); }
+:where(.py-xl) { padding-block: var(--gap-xl); }
+
+:where(.pt-xs) { padding-top: var(--gap-xs); }
+:where(.pt-sm) { padding-top: var(--gap-sm); }
+:where(.pt-md) { padding-top: var(--gap-md); }
+:where(.pt-lg) { padding-top: var(--gap-lg); }
+:where(.pt-xl) { padding-top: var(--gap-xl); }
+
+:where(.pr-xs) { padding-right: var(--gap-xs); }
+:where(.pr-sm) { padding-right: var(--gap-sm); }
+:where(.pr-md) { padding-right: var(--gap-md); }
+:where(.pr-lg) { padding-right: var(--gap-lg); }
+:where(.pr-xl) { padding-right: var(--gap-xl); }
+
+:where(.pb-xs) { padding-bottom: var(--gap-xs); }
+:where(.pb-sm) { padding-bottom: var(--gap-sm); }
+:where(.pb-md) { padding-bottom: var(--gap-md); }
+:where(.pb-lg) { padding-bottom: var(--gap-lg); }
+:where(.pb-xl) { padding-bottom: var(--gap-xl); }
+
+:where(.pl-xs) { padding-left: var(--gap-xs); }
+:where(.pl-sm) { padding-left: var(--gap-sm); }
+:where(.pl-md) { padding-left: var(--gap-md); }
+:where(.pl-lg) { padding-left: var(--gap-lg); }
+:where(.pl-xl) { padding-left: var(--gap-xl); }
+
+/* =============================================================================
+MARGIN UTILITIES — physical sides, logical axes (mx/my)
+============================================================================= */
+
+:where(.m-xs) { margin: var(--gap-xs); }
+:where(.m-sm) { margin: var(--gap-sm); }
+:where(.m-md) { margin: var(--gap-md); }
+:where(.m-lg) { margin: var(--gap-lg); }
+:where(.m-xl) { margin: var(--gap-xl); }
+
+:where(.mx-xs) { margin-inline: var(--gap-xs); }
+:where(.mx-sm) { margin-inline: var(--gap-sm); }
+:where(.mx-md) { margin-inline: var(--gap-md); }
+:where(.mx-lg) { margin-inline: var(--gap-lg); }
+:where(.mx-xl) { margin-inline: var(--gap-xl); }
+:where(.mx-auto) { margin-inline: auto; }
+
+:where(.my-xs) { margin-block: var(--gap-xs); }
+:where(.my-sm) { margin-block: var(--gap-sm); }
+:where(.my-md) { margin-block: var(--gap-md); }
+:where(.my-lg) { margin-block: var(--gap-lg); }
+:where(.my-xl) { margin-block: var(--gap-xl); }
+:where(.my-auto) { margin-block: auto; }
+
+:where(.mt-xs) { margin-top: var(--gap-xs); }
+:where(.mt-sm) { margin-top: var(--gap-sm); }
+:where(.mt-md) { margin-top: var(--gap-md); }
+:where(.mt-lg) { margin-top: var(--gap-lg); }
+:where(.mt-xl) { margin-top: var(--gap-xl); }
+:where(.mt-auto) { margin-top: auto; }
+
+:where(.mr-xs) { margin-right: var(--gap-xs); }
+:where(.mr-sm) { margin-right: var(--gap-sm); }
+:where(.mr-md) { margin-right: var(--gap-md); }
+:where(.mr-lg) { margin-right: var(--gap-lg); }
+:where(.mr-xl) { margin-right: var(--gap-xl); }
+:where(.mr-auto) { margin-right: auto; }
+
+:where(.mb-xs) { margin-bottom: var(--gap-xs); }
+:where(.mb-sm) { margin-bottom: var(--gap-sm); }
+:where(.mb-md) { margin-bottom: var(--gap-md); }
+:where(.mb-lg) { margin-bottom: var(--gap-lg); }
+:where(.mb-xl) { margin-bottom: var(--gap-xl); }
+:where(.mb-auto) { margin-bottom: auto; }
+
+:where(.ml-xs) { margin-left: var(--gap-xs); }
+:where(.ml-sm) { margin-left: var(--gap-sm); }
+:where(.ml-md) { margin-left: var(--gap-md); }
+:where(.ml-lg) { margin-left: var(--gap-lg); }
+:where(.ml-xl) { margin-left: var(--gap-xl); }
+:where(.ml-auto) { margin-left: auto; }
+
+/* =============================================================================
+BORDER RADIUS UTILITIES
+============================================================================= */
+
+:where(.radius-none) { border-radius: var(--radius-none); }
+:where(.radius-xs) { border-radius: var(--radius-xs); }
+:where(.radius-sm) { border-radius: var(--radius-sm); }
+:where(.radius-md) { border-radius: var(--radius-md); }
+:where(.radius-lg) { border-radius: var(--radius-lg); }
+:where(.radius-xl) { border-radius: var(--radius-xl); }
+:where(.radius-full) { border-radius: var(--radius-full); }
+
+/* =============================================================================
+LAYOUT — container and article wrappers (with container queries)
+============================================================================= */
+
+:where(.container) {
+    width: var(--container);
+    margin-inline: auto;
+    container: container / inline-size;
+}
+
+:where(.article) {
+    width: var(--article);
+    margin-inline: auto;
+    container: article / inline-size;
+}
+
+/* =============================================================================
+FOCUS RING UTILITY
+============================================================================= */
+
+:where(.ring) {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}

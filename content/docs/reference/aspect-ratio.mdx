@@ -1,0 +1,43 @@
+---
+title: Aspect Ratio
+description: Named aspect-ratio utilities for common image, video, and media formats.
+---
+
+## Class reference
+
+| Class | Ratio | Typical use |
+| --- | --- | --- |
+| `aspect-anamorphic` | `2.39 / 1` | Ultra-widescreen cinema |
+| `aspect-univisium` | `2 / 1` | Univisium / cinematic web |
+| `aspect-widescreen` | `16 / 9` | Standard HD video, presentations |
+| `aspect-landscape` | `3 / 2` | Traditional landscape photography |
+| `aspect-portrait` | `2 / 3` | Portrait photography |
+| `aspect-square` | `1 / 1` | Avatars, product cards, social tiles |
+
+## Examples
+
+```html
+<div class="aspect-widescreen">
+  <iframe src="https://www.youtube.com/embed/..." class="w-full h-full"></iframe>
+</div>
+
+<img class="aspect-square object-cover" src="avatar.jpg" alt="" />
+
+<div class="aspect-anamorphic">
+  <video src="hero.mp4" class="w-full h-full object-cover"></video>
+</div>
+```
+
+Pair with [object-fit](/docs/reference/object-fit) utilities (`object-cover`, `object-contain`) to control how media fills the aspect-ratio box.
+
+## Custom ratios
+
+For one-off ratios, apply the property directly:
+
+```css
+.book-cover {
+  aspect-ratio: 5 / 8;
+}
+```
+
+The named utilities cover marketing and ecommerce defaults — hero blocks, product photography, video embeds. Cinematic and editorial work often calls for custom ratios; keep those as raw CSS rather than expanding the utility surface.

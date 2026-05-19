@@ -1,0 +1,41 @@
+---
+title: Display
+description: Utilities for setting the display type of an element.
+---
+
+## Class reference
+
+| Class | Property |
+| --- | --- |
+| `hidden` | `display: none` |
+| `block` | `display: block` |
+| `inline-block` | `display: inline-block` |
+| `inline` | `display: inline` |
+| `flex` | `display: flex` |
+| `inline-flex` | `display: inline-flex` |
+| `grid` | `display: grid` |
+
+## Examples
+
+```html
+<div class="hidden">Off-screen entirely.</div>
+
+<div class="block">Block-level — full width by default.</div>
+
+<span class="inline-block">In-flow but with width and height honored.</span>
+
+<div class="flex items-center gap-sm">
+  <span>Inline-aligned</span>
+  <span>via flex</span>
+</div>
+
+<div class="grid grid-cols-3 gap-md">
+  <div>Cell</div>
+  <div>Cell</div>
+  <div>Cell</div>
+</div>
+```
+
+## Hiding accessibly
+
+Use `hidden` to remove an element from layout and the accessibility tree. For visual-only hiding that keeps the content available to screen readers, use [`sr-only`](/docs/reference/screen-readers) instead.

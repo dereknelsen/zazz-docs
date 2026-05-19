@@ -1,0 +1,48 @@
+---
+title: Opacity
+description: Utilities for setting the opacity of an element.
+---
+
+## Class reference
+
+| Class | Property |
+| --- | --- |
+| `opacity-0` | `opacity: 0` |
+| `opacity-25` | `opacity: 0.25` |
+| `opacity-50` | `opacity: 0.5` |
+| `opacity-75` | `opacity: 0.75` |
+| `opacity-100` | `opacity: 1` |
+
+## Examples
+
+```html
+<div class="opacity-50">Half-transparent.</div>
+
+<button class="opacity-50" disabled>Disabled state visual.</button>
+```
+
+## Opacity vs. color alpha
+
+Opacity affects the entire element — including its text, borders, and children. For "make this color slightly transparent" while keeping the rest of the element opaque, use color alpha through OKLCH instead:
+
+```css
+.faded-bg {
+  /* element stays fully opaque; background gets transparency */
+  background: oklch(from var(--primary) l c h / 0.1);
+  color: var(--foreground);
+}
+```
+
+For dim or fade effects layered over content, use [shade or tint tokens](/docs/foundations/grayscale#shade) — they're built for this:
+
+```css
+.scrim {
+  background: var(--shade-700); /* 70% dark scrim */
+}
+```
+
+## When to use which
+
+- **Opacity utility** — disabled buttons, fading entire blocks in or out, transitioning visibility.
+- **Color alpha** — semi-transparent surfaces, borders, or text where the rest of the element should remain readable.
+- **Shade / tint tokens** — overlays designed to dim or fade what's behind them, with mode-aware behavior.

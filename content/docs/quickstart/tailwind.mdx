@@ -1,0 +1,80 @@
+---
+title: Tailwind + shadcn
+description: Use Zazz with Tailwind v4 by bridging tokens into the theme.
+---
+
+Zazz works alongside Tailwind v4 with a small `@theme` bridge. After bridging, every Zazz token is reachable as a Tailwind utility — `bg-primary`, `text-foreground`, `gap-md`, `rounded-lg`. shadcn components plug into the same tokens without modification.
+
+## 1. Start with the base install
+
+Follow the [Plain CSS](/docs/quickstart/css) install first. Tailwind builds on top of Zazz — it doesn't replace the variables, reset, or utility files.
+
+## 2. Bridge tokens into the Tailwind theme
+
+In your main stylesheet, after the Zazz imports, add a `@theme` block that maps Zazz variables onto Tailwind's expected names:
+
+```css
+@import "tailwindcss";
+@import "./zazz/_reset.css";
+@import "./zazz/_variables.css";
+@import "./zazz/_utilities.css";
+
+@theme {
+  /* Theme colors → Tailwind color utilities */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-input: var(--input);
+  --color-input-foreground: var(--input-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-faded: var(--faded);
+  --color-faded-foreground: var(--faded-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-foreground: var(--tertiary-foreground);
+  --color-info: var(--info);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-destructive: var(--destructive);
+
+  /* Spacing → Tailwind spacing utilities */
+  --spacing-xs: var(--gap-xs);
+  --spacing-sm: var(--gap-sm);
+  --spacing-md: var(--gap-md);
+  --spacing-lg: var(--gap-lg);
+  --spacing-xl: var(--gap-xl);
+
+  /* Radius → Tailwind radius utilities */
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+}
+```
+
+After this, `bg-primary` resolves to Zazz's `--primary`, `text-foreground` resolves to `--foreground`, `p-md` resolves to `--gap-md`, and so on. Mode switches and theme overrides propagate automatically because Tailwind reads CSS variables at runtime.
+
+## 3. shadcn components
+
+shadcn/ui components expect tokens named `--background`, `--foreground`, `--primary`, `--border`, etc. — names Zazz already provides. Run the shadcn install commands as normal; the components will pick up Zazz's theme without modification.
+
+A few notes:
+
+- **Status tokens.** shadcn doesn't reference `--info`, `--success`, or `--warning` in its default components. They're in the `@theme` block above so you can use them via Tailwind utilities.
+- **Tertiary brand.** shadcn ships with primary and secondary only. Tertiary is Zazz-specific; the `@theme` block exposes it for Tailwind use, but shadcn components won't reach for it on their own.
+- **Border foreground.** Zazz adds `--border-foreground` for outlined buttons and ghost inputs. Add `--color-border-foreground: var(--border-foreground);` to the `@theme` block if you want it as a Tailwind utility.
+
+## Where to next
+
+<Cards>
+  <Card title="Foundations" href="/docs/foundations" description="The token system underneath the bridge." />
+  <Card title="Theme" href="/docs/foundations/theme" description="Base, overlay, brand, and status — the surfaces shadcn components consume." />
+  <Card title="Customization" href="/docs/practices/customization" description="Retuning Zazz tokens per project or scoped section." />
+</Cards>

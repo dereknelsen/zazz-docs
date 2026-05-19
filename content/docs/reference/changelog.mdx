@@ -1,0 +1,33 @@
+---
+title: Changelog
+description: Notable changes to Zazz, organized by version.
+---
+
+Zazz follows semantic versioning loosely until 1.0 — minor versions can include breaking token renames, with migration notes for each.
+
+## v0.4.3 — current
+
+Token system standardized on OKLCH end-to-end. Eight collections finalized. Documentation overhaul.
+
+**Tokens**
+- Corporate scales now declare values directly in OKLCH (`oklch(L C H)`) rather than wrapping hex via `oklch(from #hex l c h)`. Same color space, cleaner syntax.
+- Status colors written in raw OKLCH with mode-specific values. Status darkens in dark mode by design.
+- Effects (shadows + focus ring) corrected to `px` units with proper blur values. Layered shadows now produce a natural smoke-trail falloff.
+- Effects collection added to formalize shadows and `--focus-ring`.
+
+**Utilities**
+- Added `gap-*`, `p-*`, `m-*`, `radius-*`, `shadow-*` utility classes — backed by the same tokens as the rest of the system.
+- `.container` and `.article` utility classes register inline-size container queries automatically.
+- `.text-eyebrow` fixed to `text-transform: uppercase` (was `upper`, an invalid value).
+- `<strong>` reset to consume `--weight-strong`.
+
+**Documentation**
+- New site at the URL you're reading. Foundations, Quickstart, and Reference sections live.
+
+## Earlier versions
+
+Prior versions of Zazz existed as a Figma kit and a Webflow kit without a unified codebase. v0.4.3 marks the first version with consistent CSS, Figma Variables, and Webflow Variables all sharing the same names and values.
+
+## Upcoming
+
+See the [roadmap](/docs/reference/roadmap) for what's planned for v0.5 and beyond.

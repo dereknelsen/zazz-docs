@@ -1,0 +1,83 @@
+---
+title: Container
+description: Self-padding semantic wrappers for page content and articles.
+---
+
+## Class reference
+
+| Class | CSS |
+| --- | --- |
+| `container` | `width: var(--container); margin-inline: auto; container: container / inline-size;` |
+| `article` | `width: var(--article); margin-inline: auto; container: article / inline-size;` |
+
+Both classes set an automatic max-width with built-in side gutter via `min()` math, center horizontally, and establish an inline-size container query context.
+
+## Examples
+
+```html
+<section>
+  <div class="container">
+    <h2 class="text-h2">Section heading</h2>
+    <p class="text-md">Body copy capped at --container width.</p>
+  </div>
+</section>
+
+<article class="article">
+  <h1 class="text-h1">Long-form heading</h1>
+  <p class="text-md">Body capped at --article width for comfortable line length.</p>
+</article>
+```
+
+You don't need a wrapping `.container` div with the class on it — apply the class to the section, article, or div that holds the content.
+
+## Tokens
+
+```css
+:root {
+  --article:   min(var(--screen-xs), 100% - var(--gap-md) * 2); /* 40rem max, 24px gutter */
+  --container: min(var(--screen-lg), 100% - var(--gap-md) * 2); /* 80rem max, 24px gutter */
+}
+```
+
+What the `min()` does:
+
+- **On wide viewports** the element resolves to the named screen width (`--screen-xs` or `--screen-lg`).
+- **On narrow viewports** it resolves to `100% - (gutter × 2)`. The 24px side padding is built in.
+
+## Container queries
+
+The `container: <name> / inline-size` declaration registers each as a container query context. Child elements can respond to the container's width:
+
+```css
+@container container (min-width: 48rem) {
+  .feature {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@container article (min-width: 36rem) {
+  .quote {
+    font-size: var(--font-size-h4);
+  }
+}
+```
+
+The container name (`container`, `article`) matches the class. Use `inline-size` to query width without including height.
+
+## Adding container sizes
+
+The `min()` pattern is composable — define new container variables with different max widths:
+
+```css
+:root {
+  --container-narrow: min(var(--screen-md), 100% - var(--gap-md) * 2);
+  --container-wide:   min(var(--screen-xl), 100% - var(--gap-md) * 2);
+}
+
+.container-narrow {
+  width: var(--container-narrow);
+  margin-inline: auto;
+}
+```
+
+See [Foundations → Layout](/docs/foundations/layout) for the architectural choice and rationale.

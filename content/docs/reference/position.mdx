@@ -1,0 +1,46 @@
+---
+title: Position
+description: Utilities for setting the position property of an element.
+---
+
+## Class reference
+
+| Class | Property |
+| --- | --- |
+| `static` | `position: static` |
+| `relative` | `position: relative` |
+| `absolute` | `position: absolute` |
+| `fixed` | `position: fixed` |
+| `sticky` | `position: sticky` |
+
+## Examples
+
+```html
+<div class="relative">
+  <div class="absolute" style="top: 0; right: 0">
+    Top-right corner of the relative parent.
+  </div>
+</div>
+
+<header class="sticky" style="top: 0">
+  Sticks to the top of the scroll container.
+</header>
+```
+
+## Offsets
+
+Zazz doesn't ship `top-*`, `right-*`, etc. utilities. Apply the offset directly:
+
+```css
+.dropdown {
+  position: absolute;
+  top: calc(100% + var(--gap-xs));
+  inset-inline-start: 0;
+}
+```
+
+Use logical properties (`inset-block-start`, `inset-inline-start`) for RTL-friendly positioning where possible.
+
+## Reset notes
+
+The Zazz reset sets `header` and `section` elements to `position: relative` so they establish stacking contexts predictably without an explicit class. `main` is positioned `relative` for the same reason. See [_reset.css](app/zazz/_reset.css).

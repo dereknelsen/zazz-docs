@@ -1,0 +1,95 @@
+---
+title: Focus Ring
+description: A primary-colored focus indicator with a background gap for keyboard navigation.
+---
+
+## Class reference
+
+| Class | Property |
+| --- | --- |
+| `ring` | `outline: 2px solid var(--primary); outline-offset: 2px` |
+
+The `ring` utility uses native CSS `outline` for the focus indicator — it doesn't affect layout and respects element shape automatically.
+
+For a more elaborate ring with a background gap (the brand-colored outer ring separated from any element border), use the `--focus-ring` token directly as a box-shadow.
+
+## Token
+
+```css
+--focus-ring:
+  0 0 0 4px var(--background),
+  0 0 0 2px var(--primary);
+```
+
+Two layered shadows:
+
+- Inner: 2px of `--primary` — the visible ring.
+- Outer: 4px of `--background` — a gap that separates the ring from any border the element already has.
+
+## Examples
+
+### Using the utility (outline-based)
+
+```css
+button:focus-visible {
+  @apply ring; /* if you use the utility */
+}
+```
+
+Or in vanilla CSS:
+
+```css
+.btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+```
+
+### Using the token (box-shadow-based)
+
+```css
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+```
+
+The box-shadow approach lets the ring sit *inside* the element's border-radius, which the outline approach can't do.
+
+## `:focus` vs `:focus-visible`
+
+Use `:focus-visible`, not `:focus`. The ring should appear on keyboard navigation, not on mouse clicks — `:focus-visible` is the browser's standard mechanism for that distinction.
+
+```css
+.btn:focus-visible { /* keyboard or programmatic focus */
+  box-shadow: var(--focus-ring);
+}
+
+.btn:focus:not(:focus-visible) { /* mouse click — no ring */
+  outline: none;
+}
+```
+
+Modern browsers handle `:focus-visible` automatically — you generally only need the `:focus-visible` rule.
+
+## Customizing
+
+Re-target `--focus-ring` to change the indicator across every component that consumes it:
+
+```css
+:root {
+  --focus-ring:
+    0 0 0 3px var(--background),
+    0 0 0 2px var(--destructive); /* destructive focus for delete buttons */
+}
+```
+
+For high-contrast accessibility modes, increase the spread:
+
+```css
+.high-contrast {
+  --focus-ring:
+    0 0 0 6px var(--background),
+    0 0 0 4px var(--foreground);
+}
+```

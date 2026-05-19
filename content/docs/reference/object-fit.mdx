@@ -1,0 +1,55 @@
+---
+title: Object Fit
+description: Utilities for controlling how images and videos fit their container.
+---
+
+## Class reference
+
+| Class | Property | Behavior |
+| --- | --- | --- |
+| `object-contain` | `object-fit: contain` | Scale to fit while maintaining aspect ratio. May leave empty space. |
+| `object-cover` | `object-fit: cover` | Scale to fill the container. May crop. |
+| `object-fill` | `object-fit: fill` | Stretch to fill. May distort. |
+| `object-none` | `object-fit: none` | Keep original size. May overflow. |
+| `object-scale-down` | `object-fit: scale-down` | Use `contain` or `none`, whichever is smaller. |
+
+## Examples
+
+### Cover — for hero images and product photography
+
+```html
+<div class="aspect-widescreen">
+  <img class="w-full h-full object-cover" src="hero.jpg" alt="" />
+</div>
+```
+
+### Contain — for logos and graphics that shouldn't crop
+
+```html
+<div class="aspect-square" style="background: var(--muted)">
+  <img class="w-full h-full object-contain" src="logo.svg" alt="" />
+</div>
+```
+
+### Scale-down — for thumbnails that should never upscale
+
+```html
+<div class="aspect-square">
+  <img class="w-full h-full object-scale-down" src="thumb.png" alt="" />
+</div>
+```
+
+## Pairing with aspect-ratio
+
+`object-fit` only matters when the container has a fixed size (or aspect ratio) different from the media's natural aspect. Pair with [aspect-ratio](/docs/reference/aspect-ratio) utilities for cleanly cropped grids of images.
+
+## Object position
+
+Zazz doesn't ship `object-position-*` utilities. Set directly when needed:
+
+```css
+.hero-img {
+  object-fit: cover;
+  object-position: 50% 30%; /* crop slightly above center */
+}
+```

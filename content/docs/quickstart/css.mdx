@@ -1,0 +1,76 @@
+---
+title: Plain CSS
+description: Install Zazz in any project that supports CSS imports.
+---
+
+import { Accordion, Accordions } from '@/components/accordion';
+
+Zazz is three CSS files: **variables** (the token surface), **reset** (sensible element defaults), and **utilities** (Tailwind-style helper classes). They have no JavaScript dependencies and no build step. Any project that can import a CSS file can run Zazz.
+
+## 1. Get the files
+
+The files live in the Zazz repo:
+
+- [_variables.css](app/zazz/_variables.css) — every Zazz token, organized into eight collections
+- [_reset.css](app/zazz/_reset.css) — universal box-sizing, sensible element defaults, native dialog enhancements
+- [_utilities.css](app/zazz/_utilities.css) — display, flex, grid, spacing, type, radius, shadow, and layout utility classes
+
+Copy all three into your project. A common location is `/styles/zazz/`.
+
+<Accordions>
+  <Accordion title="What's in each file?">
+    **`_variables.css`** declares the token surface in this order: theme (base, overlay, brand, status), corporate scales (primary, secondary, tertiary), grayscale (neutral, shade, tint), typography, spacing, radius, layout, effects.
+
+    **`_reset.css`** sets `box-sizing: border-box` on everything, removes default margins and padding, normalizes form element styling, and adds spring-eased transitions to native `<dialog>` elements.
+
+    **`_utilities.css`** ships Tailwind-style atomic classes — flex, grid, gap, padding, margin, radius, shadow, text styles, container, ring. Every class consumes Zazz tokens, so changes to the variables propagate through the utilities automatically.
+  </Accordion>
+</Accordions>
+
+## 2. Import them
+
+In your main stylesheet — `globals.css`, `app.css`, or wherever your entry-point CSS lives — import the three files in order:
+
+```css
+@import "./zazz/_reset.css";
+@import "./zazz/_variables.css";
+@import "./zazz/_utilities.css";
+```
+
+Order matters:
+
+- **Reset first.** Its declarations sit at the bottom of the cascade so component CSS overrides them.
+- **Variables second.** Tokens need to be defined before utilities reference them.
+- **Utilities third.** Utility classes consume the variables and apply on top of the reset.
+
+## 3. Verify
+
+Drop a button on the page that uses Zazz tokens and utility classes:
+
+```html
+<button class="p-md radius-md text-md" style="background: var(--primary); color: var(--primary-foreground);">
+  Confirm
+</button>
+```
+
+A rounded button in your primary brand color with 1.5rem of padding. If the button is unstyled, your import order is wrong. If the colors are missing, the variables file path is wrong.
+
+## Dark mode
+
+Zazz responds to system preference (`prefers-color-scheme: dark`) by default, and to a `.dark` class on any ancestor. To force a mode at the root:
+
+```html
+<html class="dark">
+  ...
+</html>
+```
+
+See [Theme → How modes work](/docs/foundations/theme#how-modes-work) for the full pattern, including how to add a third mode.
+
+## Where to next
+
+<Cards>
+  <Card title="Foundations" href="/docs/foundations" description="The token system you just installed. Start with Theme." />
+  <Card title="Tailwind" href="/docs/quickstart/tailwind" description="Add Tailwind v4 on top to get Tailwind utilities that resolve through Zazz tokens." />
+  <Card title="Customization" href="/docs/practices/customization" description="Override tokens to rebrand or scope changes per section." />
+</Cards>

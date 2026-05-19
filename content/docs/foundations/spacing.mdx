@@ -1,0 +1,158 @@
+---
+title: Spacing
+description: Semantic gaps, a full step scale, and one interval that scales everything globally.
+---
+
+import { Accordion, Accordions } from '@/components/accordion';
+
+**A spacing value is a relationship to one number, not a literal.**
+
+Every gap, padding, and margin in Zazz resolves through three layers: a single global interval, a numbered scale derived from it, and a small set of named gaps that map onto specific scale steps. The point is that one number — `--spacing-interval` — controls every space in the product. Change it, everything moves.
+
+You'll reach for the named gaps almost every day, the scale occasionally, and the interval once per project.
+
+## Semantic gaps
+
+The daily API. Five named gaps that cover most layout decisions.
+
+```css
+--gap-xs: var(--step-2);   /* 0.5rem   →  8px */
+--gap-sm: var(--step-4);   /* 1rem     → 16px */
+--gap-md: var(--step-6);   /* 1.5rem   → 24px */
+--gap-lg: var(--step-11);  /* 2.75rem  → 44px */
+--gap-xl: var(--step-24);  /* 6rem     → 96px */
+```
+
+Use these for any spacing decision a designer makes by name — *small gap between items*, *comfortable padding inside a card*, *breathing room between sections*. Most layouts compose from `--gap-sm`, `--gap-md`, and `--gap-lg` alone.
+
+```css
+.section {
+  padding-block: var(--gap-xl);
+}
+
+.card {
+  padding: var(--gap-md);
+  gap: var(--gap-sm);
+}
+
+.inline-icon {
+  margin-inline-end: var(--gap-xs);
+}
+```
+
+The mapping from semantic to step is intentionally non-linear: `2, 4, 6, 11, 24`. Spacing perception is also non-linear — a 16px gap reads as clearly different from 8px, but two gaps of 60px and 70px read the same. The named gaps land on values that feel distinctly different from their neighbors.
+
+<Accordions>
+  <Accordion title="Can I add a new semantic gap like `--gap-2xl`?">
+    Yes. The semantic layer is aliases over the scale. Add the variable, point it at a step:
+
+    ```css
+    :root {
+      --gap-2xl: var(--step-32); /* 8rem (128px) */
+    }
+    ```
+
+    Use the new gap exactly like the shipped ones.
+
+    If you find yourself adding the same custom gap to every project, consider whether the default scale needs an additional rung. But most teams should resist over-systematizing the semantic layer — five well-chosen gaps cover more cases than fifteen ad-hoc ones.
+  </Accordion>
+</Accordions>
+
+## The step scale
+
+When the semantic gaps don't fit — a 12px gap inside a tight component, a 60px gap between hero elements, a 1px hairline border — reach into the underlying step scale.
+
+```css
+--step-px:   1px;
+--step-0_5:  calc(var(--spacing-interval) / 2);
+--step-1:    var(--spacing-interval);
+--step-1_5:  calc(var(--spacing-interval) * 1.5);
+--step-2:    calc(var(--spacing-interval) * 2);
+--step-2_5:  calc(var(--spacing-interval) * 2.5);
+--step-3:    calc(var(--spacing-interval) * 3);
+--step-3_5:  calc(var(--spacing-interval) * 3.5);
+--step-4:    calc(var(--spacing-interval) * 4);
+--step-4_5:  calc(var(--spacing-interval) * 4.5);
+--step-5:    calc(var(--spacing-interval) * 5);
+--step-5_5:  calc(var(--spacing-interval) * 5.5);
+--step-6:    calc(var(--spacing-interval) * 6);
+--step-7:    calc(var(--spacing-interval) * 7);
+--step-8:    calc(var(--spacing-interval) * 8);
+--step-9:    calc(var(--spacing-interval) * 9);
+--step-10:   calc(var(--spacing-interval) * 10);
+--step-11:   calc(var(--spacing-interval) * 11);
+--step-12:   calc(var(--spacing-interval) * 12);
+--step-14:   calc(var(--spacing-interval) * 14);
+--step-16:   calc(var(--spacing-interval) * 16);
+--step-20:   calc(var(--spacing-interval) * 20);
+--step-24:   calc(var(--spacing-interval) * 24);
+--step-28:   calc(var(--spacing-interval) * 28);
+--step-32:   calc(var(--spacing-interval) * 32);
+--step-36:   calc(var(--spacing-interval) * 36);
+--step-40:   calc(var(--spacing-interval) * 40);
+--step-44:   calc(var(--spacing-interval) * 44);
+--step-48:   calc(var(--spacing-interval) * 48);
+--step-52:   calc(var(--spacing-interval) * 52);
+--step-56:   calc(var(--spacing-interval) * 56);
+--step-60:   calc(var(--spacing-interval) * 60);
+--step-64:   calc(var(--spacing-interval) * 64);
+--step-72:   calc(var(--spacing-interval) * 72);
+--step-80:   calc(var(--spacing-interval) * 80);
+--step-96:   calc(var(--spacing-interval) * 96);
+```
+
+Two things to know about the scale:
+
+- **Half-steps go up to `--step-5_5`.** Past that, the scale uses integer steps only — fine-grained control stops being useful at larger sizes.
+- **`--step-px` is the only literal.** It always renders as `1px` regardless of `--spacing-interval`. Use it for hairline borders that shouldn't scale with the rest of the system.
+
+```css
+.divider {
+  height: var(--step-px);          /* always 1px */
+  margin-block: var(--step-3);     /* scales with the interval */
+}
+```
+
+## Semantic or scale — which to use
+
+Reach for `--gap-*` by default. Reach for `--step-*` when the semantic doesn't fit — typically inside components or when matching a specific Figma value.
+
+- **Layout** — `--gap-lg` or `--gap-xl` for section breaks; `--gap-md` for card padding; `--gap-sm` for stack gaps.
+- **Component internals** — `--step-2`, `--step-3` for tight UI rhythm; `--step-4` for input padding.
+- **Hairlines** — `--step-px` for non-scaling borders.
+
+If you're picking a step for a designer-facing spacing decision, ask whether the value should track the named gaps. If yes, use the gap. If no — if it's something deliberately off-grid for a single component — use the step.
+
+## Global interval
+
+`--spacing-interval` is the lever that scales every gap, step, padding, and margin in the system.
+
+```css
+--spacing-interval: 0.25rem; /* 4px at default root font-size */
+```
+
+The default of `0.25rem` (4px) matches the base unit used by Tailwind, macOS, and most modern design systems — it gives a 4-pixel rhythm that aligns cleanly to a typical pixel grid.
+
+Override it to retune the entire spatial system in one variable:
+
+```css
+:root {
+  --spacing-interval: 0.3125rem; /* 5px — slightly looser than default */
+}
+
+.dense-app {
+  --spacing-interval: 0.2rem; /* 3.2px — tight, for data-dense surfaces */
+}
+```
+
+Components don't care; they consume the tokens that resolve to multiples of the interval. The interval can also be scoped — set it on a section or page, not just `:root`, to retune one part of an app without affecting the rest.
+
+The interval is in `rem`, not `px`, so the spacing system scales with the user's root font size. A user who bumps their browser font size for accessibility gets bigger spacing too, automatically.
+
+## Where to next
+
+<Cards>
+  <Card title="Layout" href="/docs/foundations/layout" description="Containers and breakpoints that compose with spacing tokens via `min()` calcs." />
+  <Card title="Radius" href="/docs/foundations/radius" description="Radii derive from the same step scale, so corners and gaps stay proportional." />
+  <Card title="Customization" href="/docs/practices/customization" description="Retuning the interval per project, app, or scoped section." />
+</Cards>

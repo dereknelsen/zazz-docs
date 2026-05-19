@@ -1,0 +1,196 @@
+---
+title: Typography
+description: Composed type styles backed by tokens for family, size, weight, tracking, and leading.
+---
+
+import { Accordion, Accordions } from '@/components/accordion';
+
+**A type style is one class, not five tokens.**
+
+Most design systems hand you font sizes, weights, line heights, and tracking separately and trust you to compose them correctly every time. Zazz composes them ahead of time. `text-h2` is *one* style — family, size, weight, leading, tracking, all locked together. You pick a style; you don't assemble one.
+
+The underlying tokens are still exposed for component-level work, but the daily API is the composed style.
+
+## Style scale
+
+Three families of composed styles, applied via class:
+
+- **Display & headings**: `text-display`, `text-h1` through `text-h6`. Use for hierarchy on marketing and content surfaces.
+- **Body**: `text-xl` through `text-xs`. Use for paragraphs, UI labels, and metadata.
+- **Eyebrow**: `text-eyebrow`. Use for small uppercase labels above a headline ("INTRODUCING", "EPISODE 04").
+
+Each style composes five tokens at once. The composition for `text-h2`, for example:
+
+| Layer | Token | Value |
+| --- | --- | --- |
+| Family | `--font-heading` | `Geist` |
+| Size | `--font-size-h2` | `clamp(2.986rem, calc(2.6093rem + 1.5068vi), 3.8147rem)` |
+| Weight | `--weight-heading` | `600` |
+| Leading | `--leading-h2` | `1` |
+| Tracking | `--tracking-h2` | `-0.025em` |
+
+In markup:
+
+```html
+<h1 class="text-h1">Designed for design teams</h1>
+<p class="text-lg">Body copy that pairs with the headline above.</p>
+<span class="text-eyebrow">Episode 04</span>
+```
+
+Or directly in component CSS, when you're composing a custom element and want to reference the same tokens:
+
+```css
+.callout-title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-h4);
+  font-weight: var(--weight-heading);
+  line-height: var(--leading-h4);
+  letter-spacing: var(--tracking-h4);
+}
+```
+
+<Accordions>
+  <Accordion title="How do I add a new text style?">
+    Two steps. Define the underlying tokens, then compose a class that uses them.
+
+    ```css
+    :root {
+      --font-size-quote: clamp(1.5rem, calc(1.4rem + 0.4vi), 1.875rem);
+      --weight-quote:    400;
+      --leading-quote:   1.4;
+      --tracking-quote:  -0.005em;
+    }
+
+    .text-quote {
+      font-family: var(--font-heading);
+      font-size: var(--font-size-quote);
+      font-weight: var(--weight-quote);
+      line-height: var(--leading-quote);
+      letter-spacing: var(--tracking-quote);
+    }
+    ```
+
+    If the new style reuses an existing weight, leading, or tracking, just reference the existing token instead of declaring a new one. The point is that the style is *composed* — what makes it a Zazz-style style is that all five layers come from tokens, not that every layer is bespoke.
+  </Accordion>
+</Accordions>
+
+## Font family
+
+Three families:
+
+```css
+--font-body:    Geist, Verdana, sans-serif;
+--font-heading: Geist, Verdana, sans-serif;
+--font-mono:    "Geist Mono", "Palatino Linotype", sans-serif;
+```
+
+The defaults set Geist as both the heading and body family — a single typeface for everything keeps a surface calm and is the most common pattern in modern marketing sites. Override `--font-heading` to introduce contrast (a display serif for headlines, say) without touching anything else; the composed styles pick the change up automatically.
+
+## Font size
+
+Sizes use `clamp()` for fluid scaling between mobile and desktop. Headlines breathe at full width and stay readable on small screens without media-query plumbing.
+
+```css
+--font-size-display: clamp(4.2998rem, calc(3.545rem  + 3.0194vi), 5.9605rem);
+--font-size-h1:      clamp(3.5832rem, calc(3.0445rem + 2.1549vi), 4.7684rem);
+--font-size-h2:      clamp(2.986rem,  calc(2.6093rem + 1.5068vi), 3.8147rem);
+--font-size-h3:      clamp(2.4883rem, calc(2.2322rem + 1.0244vi), 3.0518rem);
+--font-size-h4:      clamp(2.0736rem, calc(1.9064rem + 0.6687vi), 2.4414rem);
+--font-size-h5:      clamp(1.728rem,  calc(1.6257rem + 0.4093vi), 1.9531rem);
+--font-size-h6:      clamp(1.44rem,   calc(1.3843rem + 0.2227vi), 1.5625rem);
+
+--font-size-xl:      clamp(1.44rem,   calc(1.3843rem + 0.2227vi), 1.5625rem);
+--font-size-lg:      clamp(1.2rem,    calc(1.1773rem + 0.0909vi), 1.25rem);
+--font-size-md:      clamp(1rem,      calc(1rem      + 0vi),      1rem);
+--font-size-sm:      clamp(0.8rem,    calc(0.8485rem + 0.0606vi), 0.8333rem);
+--font-size-xs:      clamp(0.64rem,   calc(0.7192rem + 0.099vi),  0.6944rem);
+--font-size-eyebrow: clamp(0.64rem,   calc(0.7192rem + 0.099vi),  0.6944rem);
+```
+
+The values come from Figma's Desktop and Mobile breakpoint pairs — what looks right on a 1440px mockup translates to a `clamp()` that hits the same target at desktop width and the mobile equivalent at narrow widths. The `vi` unit (viewport inline progress) handles the interpolation.
+
+`text-h6` and `text-xl` share their size value. Use `text-h6` when you need heading semantics — tighter tracking, heading weight. Use `text-xl` for lead paragraphs and emphasized body copy.
+
+## Font weight
+
+Five role-based weights — no raw numbers in component CSS, just the role.
+
+```css
+--weight-body:    400;
+--weight-heading: 600;
+--weight-strong:  600;
+--weight-mono:    400;
+--weight-eyebrow: 500;
+```
+
+Role-based weights survive a font swap. A rebrand that moves from a 400/700 family to a 300/600 one is one variable change per weight; components referencing `var(--weight-strong)` follow automatically; components hardcoded to `font-weight: 700` don't.
+
+The reset wires `<strong>` to the strong-weight token, so inline emphasis tracks the system. `--weight-strong` matches `--weight-heading` by default — change `--weight-strong` to introduce a contrast between headings and inline emphasis.
+
+## Letter spacing
+
+Tracking tightens as type gets bigger — a small detail that's easy to miss when sizes are improvised.
+
+```css
+--tracking-display: -0.025em;
+--tracking-h1:      -0.025em;
+--tracking-h2:      -0.025em;
+--tracking-h3:      -0.02em;
+--tracking-h4:      -0.01em;
+--tracking-h5:      -0.005em;
+--tracking-h6:      -0.0025em;
+
+--tracking-xl:       0em;
+--tracking-lg:       0em;
+--tracking-md:       0em;
+--tracking-sm:       0em;
+--tracking-xs:       0em;
+
+--tracking-eyebrow:  0.12em;
+```
+
+Large headings tighten; body sits at zero; eyebrow opens up to `0.12em` for the spread-out feel of an overline. The composed `text-*` styles apply the right tracking automatically — you only think about it when adding a new style or overriding one.
+
+## Line height
+
+Heading leading runs tight (`1` to `1.1`), body leading runs comfortable (`1.5` to `1.6`), eyebrow sits between (`1.2`).
+
+```css
+--leading-display: 1;
+--leading-h1:      1;
+--leading-h2:      1;
+--leading-h3:      1.05;
+--leading-h4:      1.05;
+--leading-h5:      1.1;
+--leading-h6:      1.1;
+
+--leading-xl:      1.5;
+--leading-lg:      1.5;
+--leading-md:      1.6;
+--leading-sm:      1.5;
+--leading-xs:      1.5;
+
+--leading-eyebrow: 1.2;
+```
+
+Leading is **code-only today**. Figma Variables don't yet support line-height as a primitive, so the Figma kit carries leading as a paragraph property attached to each text style rather than as a shared variable. When Figma adds line-height to Variables, these will move into the kit as proper tokens.
+
+## Paragraph spacing
+
+Paragraph spacing — the vertical gap between paragraphs — lives on each text style. In Figma, it's the paragraph-spacing property on the style. In code, set it via a margin on the relevant selector, drawing from the spacing scale:
+
+```css
+.prose p + p {
+  margin-top: var(--gap-md);
+}
+```
+
+There is no global `--paragraph-spacing-*` token. If your design systematizes paragraph rhythm, define your own margin tokens per style (`--paragraph-md`, for example) and apply them in your content reset.
+
+## Where to next
+
+<Cards>
+  <Card title="Spacing" href="/docs/foundations/spacing" description="The interval-driven scale that paragraph margins compose against." />
+  <Card title="Theme" href="/docs/foundations/theme" description="Color tokens that pair with typography to build a complete surface." />
+  <Card title="Customization" href="/docs/practices/customization" description="Swapping families, weights, and the fluid clamp targets." />
+</Cards>

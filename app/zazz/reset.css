@@ -1,0 +1,347 @@
+  /* =============================================================================
+  Zazz Style Reset
+  ============================================================================= */
+
+/* =============================================================================
+UNIVERSAL RESET — box model, margins, padding, borders
+============================================================================= */
+
+*,
+::before,
+::after,
+::backdrop,
+::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+}
+
+/* =============================================================================
+BASE ELEMENT RESETS
+============================================================================= */
+
+html {
+    font-size: 16px;
+    line-height: 1.5;
+    tab-size: 4;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    /* Smoother font rendering across browsers */
+    font-optical-sizing: auto;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-wrap: pretty;
+}
+
+b,
+strong {
+    font-weight: var(--weight-strong);
+}
+
+main {
+    /* Allow for more predictable z-indexing and spacing */
+    display: flex;
+    z-index: isolate;
+    position: relative;
+    flex-direction: column;
+
+    /* Prevent floating footers */
+    min-height: 100svh;
+}
+
+header,
+section {
+    /* Allow for more predictable z-indexing */
+    position: relative;
+}
+
+pre {
+    margin: unset;
+}
+
+a {
+    color: unset;
+    background-color: unset;
+    text-decoration: inherit;
+}
+
+/* =============================================================================
+TYPOGRAPHY & SEMANTIC ELEMENTS
+============================================================================= */
+
+/* Headings inherit by default — utility classes (.text-h1, etc.) drive size/weight */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+small {
+    font-size: 80%;
+}
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+sup {
+    top: -0.5em;
+}
+
+abbr:where([title]) {
+    text-decoration: underline dotted;
+}
+
+hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+}
+
+code,
+kbd,
+samp,
+pre {
+    font-family: var(--font-mono);
+    font-size: 1em;
+}
+
+/* =============================================================================
+LIST RESETS
+============================================================================= */
+
+ol,
+ul,
+menu {
+    list-style: none;
+}
+
+/* =============================================================================
+TABLE RESETS
+============================================================================= */
+
+table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+}
+
+/* =============================================================================
+MEDIA RESETS
+============================================================================= */
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+    display: block;
+}
+
+img,
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Custom text selection styling */
+::selection {
+    color: var(--primary-foreground);
+    background-color: var(--primary);
+}
+
+/* =============================================================================
+FORM ELEMENT RESETS
+============================================================================= */
+
+/* Inherit font and color across all form controls */
+button,
+input,
+optgroup,
+select,
+textarea,
+::file-selector-button {
+    font: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+}
+
+/* Input field resets */
+textarea,
+input {
+    font-size: unset;
+    height: unset;
+    padding: unset;
+    margin-bottom: unset;
+    line-height: unset;
+    background-color: unset;
+    border: unset;
+}
+
+textarea {
+    resize: vertical;
+}
+
+::placeholder {
+    opacity: 1;
+    color: color-mix(in oklab, currentcolor 50%, transparent);
+}
+
+/* Range input styling */
+input[type='range'] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+    height: 0.5rem;
+    width: 100%;
+    background: var(--overlay--muted);
+    border: 1px solid var(--overlay--muted);
+    border-radius: var(--_radius---semantic--radius-full);
+}
+
+input[type='range']::-moz-range-track {
+    height: 0.5rem;
+    width: 100%;
+    background: var(--overlay--muted);
+    border-radius: var(--_radius---semantic--radius-full);
+}
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -0.25rem;
+    width: 0.875rem;
+    height: 0.875rem;
+    background-color: var(--base--background);
+    border-radius: var(--_radius---semantic--radius-full);
+    border: 1px solid var(--brand--primary);
+}
+
+input[type='range']::-moz-range-thumb {
+    appearance: none;
+    margin-top: -0.25rem;
+    width: 0.875rem;
+    height: 0.875rem;
+    background-color: var(--base--background);
+    border-radius: var(--_radius---semantic--radius-full);
+    border: 1px solid var(--brand--primary);
+}
+
+/* Select dropdown styling with custom chevron icon */
+select {
+    font-size: unset;
+    padding: unset;
+    margin: unset;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    /* Custom chevron up-down icon for select dropdowns */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' viewBox='0 0 24 24'%3E%3Cpath d='m7 15 5 5 5-5M7 9l5-5 5 5'/%3E%3C/svg%3E");
+}
+
+/* Allow customized select options */
+select,
+::picker(select) {
+    appearance: base-select;
+    padding: unset;
+    margin: unset;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-repeat: no-repeat;
+}
+
+select::picker {
+    display: none;
+}
+
+/* Button resets */
+button {
+    color: unset;
+    padding: unset;
+    text-align: inherit;
+    background-color: unset;
+}
+
+/* =============================================================================
+NATIVE DIALOG ELEMENT ENHANCEMENTS
+============================================================================= */
+
+/* Prevent body scroll when dialog is open */
+body:has(dialog[open]) {
+    overflow: hidden;
+}
+
+/* Dialog animations with spring easing */
+dialog {
+    z-index: 9999;
+    opacity: 0;
+    transform: scale(0.98);
+    transition:
+    opacity var(--spring-duration) var(--spring-easing),
+    transform var(--spring-duration) var(--spring-easing),
+    overlay var(--spring-duration) var(--spring-easing) allow-discrete,
+    display var(--spring-duration) var(--spring-easing) allow-discrete;
+}
+
+dialog[open] {
+    opacity: 1;
+    transform: scale(1);
+
+    @starting-style {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+}
+
+/* Dialog backdrop with smooth fade transition */
+dialog::backdrop {
+    background-color: oklch(from var(--shade-800) l c h / 0);
+    transition: background-color var(--spring-duration) var(--spring-easing);
+}
+
+dialog[open]::backdrop {
+    background-color: var(--shade-800);
+
+    @starting-style {
+        background-color: oklch(from var(--shade-800) l c h / 0);
+    }
+}
+
+/* =============================================================================
+MISCELLANEOUS RESETS
+============================================================================= */
+
+summary {
+    display: list-item;
+    cursor: pointer;
+}
+
+[hidden]:where(:not([hidden='until-found'])) {
+    display: none !important;
+}

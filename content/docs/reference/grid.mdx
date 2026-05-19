@@ -1,0 +1,83 @@
+---
+title: Grid
+description: Utilities for grid template columns and item placement.
+---
+
+## Class reference
+
+### Columns
+
+| Class | Property |
+| --- | --- |
+| `grid-cols-1` | `grid-template-columns: 1fr` |
+| `grid-cols-2` | `grid-template-columns: repeat(2, 1fr)` |
+| `grid-cols-3` | `grid-template-columns: repeat(3, 1fr)` |
+| `grid-cols-4` | `grid-template-columns: repeat(4, 1fr)` |
+| `grid-cols-5` | `grid-template-columns: repeat(5, 1fr)` |
+| `grid-cols-6` | `grid-template-columns: repeat(6, 1fr)` |
+
+### Place items
+
+| Class | Property |
+| --- | --- |
+| `place-items-start` | `place-items: start` |
+| `place-items-center` | `place-items: center` |
+| `place-items-end` | `place-items: end` |
+
+## Examples
+
+### Three-up grid
+
+```html
+<div class="grid grid-cols-3 gap-md">
+  <article>Card</article>
+  <article>Card</article>
+  <article>Card</article>
+</div>
+```
+
+### Centered single cell
+
+```html
+<div class="grid place-items-center" style="min-height: 50vh">
+  <div>Vertically and horizontally centered.</div>
+</div>
+```
+
+### Responsive feature grid
+
+For columns that change at breakpoints, write the property directly:
+
+```css
+.features {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-md);
+
+  @media (min-width: 48rem) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 64rem) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+```
+
+## Gap
+
+[`gap-*`](/docs/reference/gap) works on grid containers the same way it works on flex — `gap-md`, `gap-lg`, etc. Sets both row and column gaps.
+
+## Track sizing
+
+The default utilities use `1fr` tracks (equal width). For mixed-width grids — a fixed sidebar and a flexible main — write the property directly:
+
+```css
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--gap-lg);
+}
+```
+
+For named lines, subgrid, or complex template areas, drop into raw CSS. The Zazz utilities cover the common cases; the rest is CSS Grid in its full power.

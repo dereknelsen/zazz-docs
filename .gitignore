@@ -23,4 +23,5 @@ yarn-error.log*
 # others
 .env*.local
 .vercel
+.tints
 next-env.d.ts

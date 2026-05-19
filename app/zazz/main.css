@@ -1,3 +1,3 @@
-@import url("./variables.css") layer(variables);
-@import url("./reset.css") layer(reset);
-@import url("./utilities.css") layer(utilities);
+@import "./variables.css" layer(variables);
+@import "./reset.css" layer(reset);
+@import "./utilities.css" layer(utilities);

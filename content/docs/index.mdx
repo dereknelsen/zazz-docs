@@ -1,16 +1,31 @@
 ---
 title: Zazz
-description: A variables-driven design framework for agencies who need their work to be precise, polished, and portable.
+description: A variables-driven design framework that runs in Figma, Webflow, Tailwind, shadcn, and plain CSS using the same tokens.
 ---
 
-Zazz is a design framework for professionals and agencies. It runs in Figma, Webflow, Tailwind + shadcn, and plain CSS, using the same variables across all of them.
+**Design tokens that survive the export.**
 
-This site is being built section by section. The most complete area today is **Foundations**, which documents Zazz's eight token collections.
+Zazz is a variables-driven design framework. One token set drives Figma, Webflow, Tailwind + shadcn, and plain CSS, so the button you styled in Figma reads from the same `--primary` variable as the button you ship to production.
+
+It exists because most modern projects span two or three of those environments. Keeping color, type, spacing, and radius in sync across them is the kind of work nobody wants and clients never see. Zazz makes it the platform's job.
+
+## What you get
+
+- **Eight token collections.** Theme, corporate scales, neutrals, typography, spacing, radius, layout, shadows. Every primitive consumes them.
+- **Fourteen primitives.** Buttons, cards, inputs, dialogs, a carousel, scroll animations. Atomic, accessible, theme-driven.
+- **Light and dark from day one.** Every token has a paired value. Toggle the root and the product follows.
+- **Drop-in kits.** Figma library, Webflow kit, shadcn + Tailwind setup. Same names, same shapes.
+- **No build step.** Plain CSS variables. No PostCSS, no SCSS, no runtime.
+
+## Where to start
 
 <Cards>
-  <Card
-    title="Foundations"
-    href="/docs/foundations"
-    description="Start here. Tokens are the contract between design and code."
-  />
+  <Card title="Philosophy" href="/docs/philosophy" description="Why Zazz exists and what it refuses to do." />
+  <Card title="Quickstart" href="/docs/quickstart" description="Get Zazz into your stack in under five minutes." />
+  <Card title="Foundations" href="/docs/foundations" description="The token system every primitive consumes." />
+  <Card title="Primitives" href="/docs/primitives" description="The atomic UI elements you compose into product." />
 </Cards>
+
+## Status
+
+Zazz is at version 0.4.4. The token system and primitives are stable. Components, templates, and the brand presentation kit are still being added.

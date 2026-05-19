@@ -1,0 +1,39 @@
+---
+title: Philosophy
+description: Four commitments. Professional, Precise, Polished, Portable. Each one enforced by an architectural choice, not a marketing line.
+---
+
+**Four commitments. Each enforced by an architectural choice.**
+
+Zazz commits to four things: Professional, Precise, Polished, Portable. None of them are marketing language. Each one is backed by a decision in the kit that you can read in the code, the variables, or the Figma library.
+
+## Professional
+
+Zazz is built for the work agencies actually do: client websites that need to look bespoke and ship on a deadline. Every default lands somewhere a client would approve at first review, which means the team spends time on the parts that need judgment (composition, copy, hierarchy) and not on choosing whether a border radius should be 6px or 8px.
+
+The kit doesn't try to be a starter template for hobbyists or a CMS for content teams. It's a working set of tokens, primitives, and presentation surfaces for people who ship under their own name.
+
+## Precise
+
+Every visible property in Zazz traces back to a CSS variable. Colors, type, spacing, radius, shadows, motion durations. Override the variable at the root and the rest of the system follows.
+
+This is how Zazz keeps consistency without preventing customization. A designer changes `--primary` once; every button, badge, focus ring, and dialog accent updates. A developer can't accidentally use the wrong shade of orange because there isn't a way to spell it that bypasses the token.
+
+## Polished
+
+A new Zazz install ships looking presentable. The defaults are picked, not punted. Focus rings have the right opacity. Shadows have realistic ambient layers. The type scale uses fluid `clamp()` for legibility at every viewport.
+
+This matters for two reasons. The first client review should feel finished, not "we'll style it later." And the developer working from the kit should never have to add visual polish the system should have given them.
+
+## Portable
+
+Zazz is plain CSS variables, plain HTML structure, plain selectors. It runs in Webflow without a build, in Tailwind via `@theme`, in shadcn as a token layer, and in raw CSS as an import. The Figma library uses the same variable names as the stylesheet.
+
+When you move a project between tools, the variable surface comes with you. A `--card-foreground` in Figma is a `--card-foreground` in CSS. The naming isn't suggestive. It's identical.
+
+## Where to next
+
+<Cards>
+  <Card title="Who it's for" href="/docs/who-its-for" description="Agencies, freelancers, and design+dev teams shipping client work." />
+  <Card title="Quickstart" href="/docs/quickstart" description="Choose your stack and get Zazz running." />
+</Cards>

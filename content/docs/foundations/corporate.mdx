@@ -1,15 +1,15 @@
 ---
 title: Corporate
-description: Brand color scales — primary, secondary, tertiary, and easily extensible for additional palettes.
+description: Brand color scales for primary, secondary, tertiary, and any palette you add.
 ---
 
-import { Accordion, Accordions } from '@/components/accordion';
+import { Accordion, Accordions } from "@/components/accordion";
 
 **Corporate tokens are the raw brand scales. Theme tokens point into them.**
 
-A corporate scale is one identity color, expanded to eleven steps from `50` (near-white) to `950` (near-black). Zazz ships three: `primary`, `secondary`, and `tertiary`. Add as many more as your work needs — a quaternary scale for a fourth identity color, project-specific accents, white-label palettes.
+A corporate scale is one identity color, expanded to eleven steps from `50` (near-white) to `950` (near-black). Zazz ships three: `primary`, `secondary`, and `tertiary`. Add as many more as your work needs: a quaternary scale for a fourth identity color, project-specific accents, white-label palettes.
 
-The theme layer maps the active mode onto specific scale steps. `--primary` resolves to `--primary-600` in light mode and `--primary-500` in dark mode. Components consume the theme token. They never reach into corporate directly — which is what makes a rebrand a corporate-scale edit, not a component sweep.
+The theme layer maps the active mode onto specific scale steps. `--primary` resolves to `--primary-600` in light mode and `--primary-500` in dark mode. Components consume the theme token. They never reach into corporate directly. That is what makes a rebrand a corporate-scale edit, not a component sweep.
 
 ## The three default scales
 
@@ -17,29 +17,29 @@ Zazz ships defaults so a fresh project has a coherent palette out of the box. Mo
 
 ```css
 /* primary */
---primary-50:  oklch(0.984 0.007 286.46);
---primary-100: oklch(0.94  0.025 288.37);
---primary-200: oklch(0.85  0.068 285.81);
+--primary-50: oklch(0.984 0.007 286.46);
+--primary-100: oklch(0.94 0.025 288.37);
+--primary-200: oklch(0.85 0.068 285.81);
 --primary-300: oklch(0.765 0.108 284.76);
 --primary-400: oklch(0.674 0.154 283.18);
 --primary-500: oklch(0.593 0.193 280.79);
---primary-600: oklch(0.511 0.230 276.97);
+--primary-600: oklch(0.511 0.23 276.97);
 --primary-700: oklch(0.421 0.234 273.27);
---primary-800: oklch(0.320 0.179 273.06);
+--primary-800: oklch(0.32 0.179 273.06);
 --primary-900: oklch(0.229 0.127 273.39);
 --primary-950: oklch(0.158 0.088 274.05);
 ```
 
 ```css
 /* secondary */
---secondary-50:  oklch(0.984 0.008 27.43);
---secondary-100: oklch(0.95  0.023 24.19);
+--secondary-50: oklch(0.984 0.008 27.43);
+--secondary-100: oklch(0.95 0.023 24.19);
 --secondary-200: oklch(0.878 0.061 25.87);
 --secondary-300: oklch(0.814 0.101 27.69);
 --secondary-400: oklch(0.749 0.146 30.02);
 --secondary-500: oklch(0.687 0.198 34.85);
---secondary-600: oklch(0.610 0.194 36.80);
---secondary-700: oklch(0.500 0.159 36.84);
+--secondary-600: oklch(0.61 0.194 36.8);
+--secondary-700: oklch(0.5 0.159 36.84);
 --secondary-800: oklch(0.383 0.121 36.98);
 --secondary-900: oklch(0.276 0.088 36.22);
 --secondary-950: oklch(0.215 0.068 37.62);
@@ -47,10 +47,10 @@ Zazz ships defaults so a fresh project has a coherent palette out of the box. Mo
 
 ```css
 /* tertiary */
---tertiary-50:  oklch(0.984 0.006 17.54);
+--tertiary-50: oklch(0.984 0.006 17.54);
 --tertiary-100: oklch(0.942 0.023 11.04);
 --tertiary-200: oklch(0.861 0.062 11.02);
---tertiary-300: oklch(0.772 0.110 12.13);
+--tertiary-300: oklch(0.772 0.11 12.13);
 --tertiary-400: oklch(0.693 0.163 13.04);
 --tertiary-500: oklch(0.613 0.208 14.68);
 --tertiary-600: oklch(0.523 0.177 14.77);
@@ -64,37 +64,37 @@ The hues sit at roughly `280°` (primary, blue-violet), `30°` (secondary, warm 
 
 ## OKLCH
 
-Every corporate value is declared in OKLCH — three components: lightness, chroma, hue. OKLCH is a perceptually uniform color space, which means:
+Every corporate value is declared in OKLCH with three components: lightness, chroma, hue. OKLCH is a perceptually uniform color space, which means:
 
 - **Stepping lightness up or down maintains perceived hue and saturation.** A `--primary-500` lifted to `--primary-300` looks like a lighter version of the same color, not a different color.
 - **Mixing two corporate colors gives perceptually predictable results.** No RGB muddiness when blending primary and secondary in a gradient.
 - **Every Zazz primitive speaks the same color language.** Corporate, grayscale, shade, and tint are all OKLCH; theme overrides and derivations sit in one space.
 
-OKLCH was chosen over hex and HSL because it does for color what `rem` does for sizing — produces visually consistent results across hue families that older spaces handle unpredictably.
+OKLCH was chosen over hex and HSL because it does for color what `rem` does for sizing. It produces visually consistent results across hue families that older spaces handle unpredictably.
 
 ## Adding a scale
 
 A new scale is two steps: define the raw values, then point a theme token at them.
 
-**Step 1 — declare the scale.**
+**Step 1. Declare the scale.**
 
 ```css
 :root {
-  --quaternary-50:  oklch(0.985 0.020 85);
-  --quaternary-100: oklch(0.940 0.060 82);
-  --quaternary-200: oklch(0.860 0.130 80);
-  --quaternary-300: oklch(0.780 0.180 76);
-  --quaternary-400: oklch(0.700 0.200 72);
-  --quaternary-500: oklch(0.620 0.180 68);
-  --quaternary-600: oklch(0.550 0.150 64);
-  --quaternary-700: oklch(0.460 0.130 60);
-  --quaternary-800: oklch(0.360 0.100 56);
-  --quaternary-900: oklch(0.260 0.075 52);
-  --quaternary-950: oklch(0.180 0.060 48);
+  --quaternary-50: oklch(0.985 0.02 85);
+  --quaternary-100: oklch(0.94 0.06 82);
+  --quaternary-200: oklch(0.86 0.13 80);
+  --quaternary-300: oklch(0.78 0.18 76);
+  --quaternary-400: oklch(0.7 0.2 72);
+  --quaternary-500: oklch(0.62 0.18 68);
+  --quaternary-600: oklch(0.55 0.15 64);
+  --quaternary-700: oklch(0.46 0.13 60);
+  --quaternary-800: oklch(0.36 0.1 56);
+  --quaternary-900: oklch(0.26 0.075 52);
+  --quaternary-950: oklch(0.18 0.06 48);
 }
 ```
 
-**Step 2 — point a theme token at it.**
+**Step 2. Point a theme token at it.**
 
 ```css
 :root {
@@ -116,22 +116,35 @@ After that, components reference `--quaternary` exactly like they reference `--p
 
     **Tools.** Sites like UIColors, Tailwind Shades, and Radix's custom-palette builder accept a single brand color and return a complete eleven-step scale. Most can export directly to OKLCH now; if not, convert the hex output so the scale stays in the same color space as the rest of Zazz.
 
-    **OKLCH stepping by hand.** Define your `600` step (the theme target in light mode), then step the rest by adjusting `L` (lightness) in fixed increments. Hue stays roughly constant across a scale; chroma rises through the mid-steps and falls at the extremes. The Zazz default scales follow this curve — comparing `--primary-50` through `--primary-950` shows the pattern.
+    **OKLCH stepping by hand.** Define your `600` step (the theme target in light mode), then step the rest by adjusting `L` (lightness) in fixed increments. Hue stays roughly constant across a scale; chroma rises through the mid-steps and falls at the extremes. The Zazz default scales follow this curve. Compare `--primary-50` through `--primary-950` to see the pattern.
 
-    **Borrow from a Tailwind palette.** Tailwind v4 ships color palettes in OKLCH. If your brand color is close to one of the defaults — `slate`, `indigo`, `rose` — copy that palette and tweak the steps that don't match.
+    **Borrow from a Tailwind palette.** Tailwind v4 ships color palettes in OKLCH. If your brand color is close to one of the defaults (`slate`, `indigo`, `rose`), copy that palette and tweak the steps that don't match.
+
   </Accordion>
 </Accordions>
 
 ## Naming
 
-Scales are named by role, not by color: `primary`, `secondary`, `tertiary`, `quaternary` — not `indigo`, `orange`, `rose`, `amber`. The role name stays accurate through a rebrand. A primary that ships indigo today and teal next year is still `--primary`. Components that consume `--primary-600` never need to know what color it is.
+Scales are named by role, not by color: `primary`, `secondary`, `tertiary`, `quaternary`. Not `indigo`, `orange`, `rose`, `amber`. The role name stays accurate through a rebrand. A primary that ships indigo today and teal next year is still `--primary`. Components that consume `--primary-600` never need to know what color it is.
 
 Steps follow the familiar `50 / 100 / 200 / … / 900 / 950` convention. Eleven steps gives enough range for surface, text, accent, and hover/active states without the scale feeling thin.
 
 ## Where to next
 
 <Cards>
-  <Card title="Theme" href="/docs/foundations/theme" description="The layer that maps the active mode onto specific corporate steps." />
-  <Card title="Grayscale" href="/docs/foundations/grayscale" description="The neutral and overlay scales that pair with corporate to build a complete theme." />
-  <Card title="Customization" href="/docs/practices/customization" description="Replacing default scales, adding new ones, and overriding theme mappings." />
+  <Card
+    title="Theme"
+    href="/docs/foundations/theme"
+    description="The layer that maps the active mode onto specific corporate steps."
+  />
+  <Card
+    title="Grayscale"
+    href="/docs/foundations/grayscale"
+    description="The neutral and overlay scales that pair with corporate to build a complete theme."
+  />
+  <Card
+    title="Customization"
+    href="/docs/practices/customization"
+    description="Replacing default scales, adding new ones, and overriding theme mappings."
+  />
 </Cards>

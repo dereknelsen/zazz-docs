@@ -5,17 +5,17 @@ description: Utilities for controlling how images and videos fit their container
 
 ## Class reference
 
-| Class | Property | Behavior |
-| --- | --- | --- |
-| `object-contain` | `object-fit: contain` | Scale to fit while maintaining aspect ratio. May leave empty space. |
-| `object-cover` | `object-fit: cover` | Scale to fill the container. May crop. |
-| `object-fill` | `object-fit: fill` | Stretch to fill. May distort. |
-| `object-none` | `object-fit: none` | Keep original size. May overflow. |
-| `object-scale-down` | `object-fit: scale-down` | Use `contain` or `none`, whichever is smaller. |
+| Class               | Property                 | Behavior                                                            |
+| ------------------- | ------------------------ | ------------------------------------------------------------------- |
+| `object-contain`    | `object-fit: contain`    | Scale to fit while maintaining aspect ratio. May leave empty space. |
+| `object-cover`      | `object-fit: cover`      | Scale to fill the container. May crop.                              |
+| `object-fill`       | `object-fit: fill`       | Stretch to fill. May distort.                                       |
+| `object-none`       | `object-fit: none`       | Keep original size. May overflow.                                   |
+| `object-scale-down` | `object-fit: scale-down` | Use `contain` or `none`, whichever is smaller.                      |
 
 ## Examples
 
-### Cover — for hero images and product photography
+### Cover: hero images and product photography
 
 ```html
 <div class="aspect-widescreen">
@@ -23,7 +23,7 @@ description: Utilities for controlling how images and videos fit their container
 </div>
 ```
 
-### Contain — for logos and graphics that shouldn't crop
+### Contain: logos and graphics that shouldn't crop
 
 ```html
 <div class="aspect-square" style="background: var(--muted)">
@@ -31,7 +31,7 @@ description: Utilities for controlling how images and videos fit their container
 </div>
 ```
 
-### Scale-down — for thumbnails that should never upscale
+### Scale-down: thumbnails that should never upscale
 
 ```html
 <div class="aspect-square">

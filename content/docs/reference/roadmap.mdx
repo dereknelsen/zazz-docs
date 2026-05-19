@@ -9,23 +9,22 @@ What's coming, what's in progress, and what shipped recently. Public so you can 
 
 ### Theme builder
 
-An interactive page for generating Zazz CSS from one or more brand colors. Replaces the current copy-from-Tints workflow: pick base colors, preview the full system in light and dark, copy the generated `_variables.css`.
+An interactive page for generating Zazz CSS from one or more brand colors. Replaces the current copy-from-Tints workflow: pick base colors, preview the full system in light and dark, copy the generated `variables.css`.
 
 Until this ships, generate scales via [Tints.dev](https://www.tints.dev) (linked from the [Colors reference](/docs/reference/colors#brand-scales)) and paste the OKLCH output into your variables file.
 
 ### CLI installer
 
-`npx zazz init` — drops the three CSS files into a project, configures Tailwind bridging when Tailwind is detected, sets up the file structure, and verifies imports. Removes the manual copy-paste step from every install path that isn't Webflow or Figma.
+`npx zazz init` drops the three CSS files into a project, configures Tailwind bridging when Tailwind is detected, sets up the file structure, and verifies imports. Removes the manual copy-paste step from every install path that isn't Webflow or Figma.
 
 ## Documentation
 
-Sections still to write — listed in the order they'll likely land:
+Sections still to write, in the order they'll likely land:
 
-- **Primitives** — Unstyled building blocks. One page per primitive with API surface and composition examples.
-- **Components** — Styled, composed UI patterns. Buttons, inputs, cards, modals, forms, navigation, content blocks.
-- **Templates** — Design presentation deck, brand guidelines, dynamically updated style guide.
-- **Practices** — Best practices across frameworks, AI-friendly workflows, customization, porting between tools, stakeholder handoff.
-- **Reference, remaining utilities** — typography, container, display, flexbox, grid, position, z-index, aspect-ratio, object-fit, overflow, border-radius, box-shadow, opacity, focus-ring, screen-readers.
+- **Primitives.** Atomic UI elements, styled-by-default through theme tokens. One page per primitive with anatomy, variants, and the tokens it consumes.
+- **Components.** Styled, composed UI patterns. Buttons, inputs, cards, modals, forms, navigation, content blocks.
+- **Templates.** Design presentation deck, brand guidelines, dynamically updated style guide.
+- **Practices.** Best practices across frameworks, AI-friendly workflows, customization, porting between tools, stakeholder handoff.
 
 ## Future considerations
 
@@ -34,13 +33,13 @@ Smaller items being evaluated, not yet scheduled:
 - VSCode snippets for Zazz tokens and utility classes.
 - Figma plugin for two-way Variables sync between code and the kit.
 - Per-version Figma kits matched to release tags so a project can pin its design source to the same version as its CSS.
-- A pattern cookbook — common marketing and ecommerce layouts built from Zazz primitives.
+- A pattern cookbook of common marketing and ecommerce layouts built from Zazz primitives.
 - Native dark-mode-aware brand presets (warm-neutral, cool-neutral, brutalist).
 
 ## Recently shipped
 
-- Eight Foundations pages — Theme, Corporate, Grayscale, Typography, Spacing, Radius, Layout, Effects.
-- Five Quickstart paths — Plain CSS, Tailwind + shadcn, Webflow, Figma, and the stack selector.
+- Eight Foundations pages: Theme, Corporate, Grayscale, Typography, Spacing, Radius, Layout, Effects.
+- Five Quickstart paths: Plain CSS, Tailwind + shadcn, Webflow, Figma, and the stack selector.
 - Reference scaffolding with Colors, Padding, Margin, and Gap as the first template pages.
 - Swatch and PaletteHexInput components for live color tooling on the Colors reference.
 

@@ -5,15 +5,15 @@ description: Utilities for spacing between flex and grid items.
 
 ## Quick reference
 
-| Class | Properties |
-| --- | --- |
-| `gap-xs` | `gap: var(--gap-xs); /* 0.5rem */` |
-| `gap-sm` | `gap: var(--gap-sm); /* 1rem */` |
-| `gap-md` | `gap: var(--gap-md); /* 1.5rem */` |
+| Class    | Properties                          |
+| -------- | ----------------------------------- |
+| `gap-xs` | `gap: var(--gap-xs); /* 0.5rem */`  |
+| `gap-sm` | `gap: var(--gap-sm); /* 1rem */`    |
+| `gap-md` | `gap: var(--gap-md); /* 1.5rem */`  |
 | `gap-lg` | `gap: var(--gap-lg); /* 2.75rem */` |
-| `gap-xl` | `gap: var(--gap-xl); /* 6rem */` |
+| `gap-xl` | `gap: var(--gap-xl); /* 6rem */`    |
 
-`gap` sets the space between items inside a flex or grid container. It only takes effect on `flex` and `grid` parents — it has no effect on block-level layouts.
+`gap` sets the space between items inside a flex or grid container. It only takes effect on `flex` and `grid` parents. It has no effect on block-level layouts.
 
 ## Examples
 
@@ -54,21 +54,21 @@ A common pattern for vertical rhythm:
 </div>
 ```
 
-`gap` on a flex column replaces top-margin patterns. Each item sits exactly `--gap-md` below the previous one — no margin collapse, no last-child overrides.
+`gap` on a flex column replaces top-margin patterns. Each item sits exactly `--gap-md` below the previous one. No margin collapse, no last-child overrides.
 
 ## Spacing scale
 
-Same scale as [Padding](/docs/reference/padding) and [Margin](/docs/reference/margin) — the five [semantic gap tokens](/docs/foundations/spacing).
+Same scale as [Padding](/docs/reference/padding) and [Margin](/docs/reference/margin). The five [semantic gap tokens](/docs/foundations/spacing).
 
-| Token | Value | Pixels at 16px root |
-| --- | --- | --- |
-| `--gap-xs` | `var(--step-2)` | 8px |
-| `--gap-sm` | `var(--step-4)` | 16px |
-| `--gap-md` | `var(--step-6)` | 24px |
-| `--gap-lg` | `var(--step-11)` | 44px |
-| `--gap-xl` | `var(--step-24)` | 96px |
+| Token      | Value            | Pixels at 16px root |
+| ---------- | ---------------- | ------------------- |
+| `--gap-xs` | `var(--step-2)`  | 8px                 |
+| `--gap-sm` | `var(--step-4)`  | 16px                |
+| `--gap-md` | `var(--step-6)`  | 24px                |
+| `--gap-lg` | `var(--step-11)` | 44px                |
+| `--gap-xl` | `var(--step-24)` | 96px                |
 
-The default semantic gaps are intentionally non-linear (`2, 4, 6, 11, 24`) to match how spacing perception falls off — the larger the gap, the more visible difference each step needs to make.
+The default semantic gaps are intentionally non-linear (`2, 4, 6, 11, 24`) to match how spacing perception falls off. The larger the gap, the more visible difference each step needs to make.
 
 ## Different row and column gaps
 

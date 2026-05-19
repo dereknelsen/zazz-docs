@@ -5,40 +5,36 @@ description: Utilities for setting margin from the Zazz spacing scale, plus auto
 
 ## Quick reference
 
-| Class | Properties |
-| --- | --- |
-| `m-xs` … `m-xl` | `margin: var(--gap-*);` |
+| Class             | Properties                     |
+| ----------------- | ------------------------------ |
+| `m-xs` … `m-xl`   | `margin: var(--gap-*);`        |
 | `mx-xs` … `mx-xl` | `margin-inline: var(--gap-*);` |
-| `mx-auto` | `margin-inline: auto;` |
-| `my-xs` … `my-xl` | `margin-block: var(--gap-*);` |
-| `my-auto` | `margin-block: auto;` |
-| `mt-xs` … `mt-xl` | `margin-top: var(--gap-*);` |
-| `mt-auto` | `margin-top: auto;` |
-| `mr-xs` … `mr-xl` | `margin-right: var(--gap-*);` |
-| `mr-auto` | `margin-right: auto;` |
+| `mx-auto`         | `margin-inline: auto;`         |
+| `my-xs` … `my-xl` | `margin-block: var(--gap-*);`  |
+| `my-auto`         | `margin-block: auto;`          |
+| `mt-xs` … `mt-xl` | `margin-top: var(--gap-*);`    |
+| `mt-auto`         | `margin-top: auto;`            |
+| `mr-xs` … `mr-xl` | `margin-right: var(--gap-*);`  |
+| `mr-auto`         | `margin-right: auto;`          |
 | `mb-xs` … `mb-xl` | `margin-bottom: var(--gap-*);` |
-| `mb-auto` | `margin-bottom: auto;` |
-| `ml-xs` … `ml-xl` | `margin-left: var(--gap-*);` |
-| `ml-auto` | `margin-left: auto;` |
+| `mb-auto`         | `margin-bottom: auto;`         |
+| `ml-xs` … `ml-xl` | `margin-left: var(--gap-*);`   |
+| `ml-auto`         | `margin-left: auto;`           |
 
 ## Examples
 
 ### All sides
 
 ```html
-<div class="m-md">
-  Margin on all sides — var(--gap-md).
-</div>
+<div class="m-md">Margin on all sides at var(--gap-md).</div>
 ```
 
 ### Inline / block axes
 
-`mx-{size}` for horizontal margin, `my-{size}` for vertical. Logical properties — they flip in RTL.
+`mx-{size}` for horizontal margin, `my-{size}` for vertical. Logical properties; they flip in RTL.
 
 ```html
-<div class="mx-lg my-md">
-  Generous horizontal margin, modest vertical.
-</div>
+<div class="mx-lg my-md">Generous horizontal margin, modest vertical.</div>
 ```
 
 ### Centering with `auto`
@@ -46,9 +42,7 @@ description: Utilities for setting margin from the Zazz spacing scale, plus auto
 The `-auto` variants set the relevant margin to `auto`. Most common pattern: `mx-auto` to horizontally center a fixed-width block.
 
 ```html
-<div class="mx-auto" style="width: var(--container)">
-  Centered horizontally.
-</div>
+<div class="mx-auto" style="width: var(--container)">Centered horizontally.</div>
 ```
 
 `mt-auto` is useful inside a flex column to push an element to the bottom; `ml-auto` does the same horizontally.
@@ -63,22 +57,20 @@ The `-auto` variants set the relevant margin to `auto`. Most common pattern: `mx
 ### A single side
 
 ```html
-<div class="mt-lg mb-sm">
-  Lots of room above, a little below.
-</div>
+<div class="mt-lg mb-sm">Lots of room above, a little below.</div>
 ```
 
 ## Spacing scale
 
-Same scale as [Padding](/docs/reference/padding) — the five named [semantic gap tokens](/docs/foundations/spacing).
+Same scale as [Padding](/docs/reference/padding). The five named [semantic gap tokens](/docs/foundations/spacing).
 
-| Token | Value | Pixels at 16px root |
-| --- | --- | --- |
-| `--gap-xs` | `var(--step-2)` | 8px |
-| `--gap-sm` | `var(--step-4)` | 16px |
-| `--gap-md` | `var(--step-6)` | 24px |
-| `--gap-lg` | `var(--step-11)` | 44px |
-| `--gap-xl` | `var(--step-24)` | 96px |
+| Token      | Value            | Pixels at 16px root |
+| ---------- | ---------------- | ------------------- |
+| `--gap-xs` | `var(--step-2)`  | 8px                 |
+| `--gap-sm` | `var(--step-4)`  | 16px                |
+| `--gap-md` | `var(--step-6)`  | 24px                |
+| `--gap-lg` | `var(--step-11)` | 44px                |
+| `--gap-xl` | `var(--step-24)` | 96px                |
 
 ## Negative margins
 
@@ -104,4 +96,4 @@ For sizes off the semantic scale, reach for [step tokens](/docs/foundations/spac
 
 ## Customizing the scale
 
-The margin utilities consume the same `--gap-*` tokens as padding and gap. Overriding a gap token retunes margin, padding, and gap together — see [Padding → Customizing the scale](/docs/reference/padding#customizing-the-scale).
+The margin utilities consume the same `--gap-*` tokens as padding and gap. Overriding a gap token retunes margin, padding, and gap together. See [Padding → Customizing the scale](/docs/reference/padding#customizing-the-scale).

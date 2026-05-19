@@ -1,0 +1,18 @@
+{
+  "title": "Primitives",
+  "pages": [
+    "index",
+    "avatar",
+    "badge",
+    "button",
+    "card",
+    "checkbox",
+    "dialog",
+    "input",
+    "radio",
+    "select",
+    "slider",
+    "switch",
+    "textarea"
+  ]
+}

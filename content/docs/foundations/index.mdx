@@ -3,7 +3,7 @@ title: Overview
 description: Tokens are the contract between design and code. Eight collections, three platforms, one source of truth.
 ---
 
-import { Accordion, Accordions } from '@/components/accordion';
+import { Accordion, Accordions } from "@/components/accordion";
 
 **A token in Zazz is not a styling decision. It is the contract between design and code.**
 
@@ -19,19 +19,20 @@ This is what Zazz Foundations solves. The token system is built around the follo
 
 ## Variables-Driven
 
-Zazz exposes every visible choice — color, type, space, radius, shadow — as a token. The token, not the value, is what your work references. This means:
+Zazz exposes every visible choice (color, type, space, radius, shadow) as a token. The token, not the value, is what your work references. This means:
 
 - **One source of truth.** Change the token, the whole product changes with it.
 - **No hardcoded values.** Components don't ship with literal hex codes or pixel sizes.
 - **One vocabulary.** Designers and developers talk about the same `--gap-md`, not "the medium spacing" versus "16px."
 
-*In a typical setup, changing a corporate color is a search-and-replace across files. With Zazz, you change one variable and the rebrand is done — in Figma, in Webflow, and in code at once.*
+_In a typical setup, changing a corporate color is a search-and-replace across files. With Zazz, you change one variable and the rebrand is done: in Figma, in Webflow, and in code at once._
 
 <Accordions>
   <Accordion title="Isn't this more setup than just styling components directly?">
-    Upfront, yes. The token collections take an hour or two to wire to a project. After that, the math runs the other way: a rebrand is one variable away, dark mode is free, and a new client variant is editing a small surface — not sweeping a stylesheet.
+    Upfront, yes. The token collections take an hour or two to wire to a project. After that, the math runs the other way. A rebrand is one variable away, dark mode is free, and a new client variant is editing a small surface, not sweeping a stylesheet.
 
     Agencies that ship multiple projects a year recover the setup cost in the first one. If you're building a one-off site you won't reuse the system on, the upfront work won't pay back. Zazz is for teams that ship many things and need them to stay consistent.
+
   </Accordion>
 </Accordions>
 
@@ -43,7 +44,7 @@ Tokens describe roles. `--color-text` is a role, not a color. `--gap-md` is a ro
 - **Components are agnostic.** They consume `--color-text` and don't care what color it is.
 - **Customization is the default mode.** Override at the token layer; never touch components.
 
-*If you want a louder rebrand, change the corporate scales. If you want denser layouts, change `--spacing-interval`. If you want softer corners, change `--radius-multiplier`. The components don't care.*
+_If you want a louder rebrand, change the corporate scales. If you want denser layouts, change `--spacing-interval`. If you want softer corners, change `--radius-multiplier`. The components don't care._
 
 ## Derived, Not Duplicated
 
@@ -62,41 +63,73 @@ Zazz layers tokens so a single change propagates instead of replicating across f
 }
 ```
 
-*Change `--neutral-950`, and every shade overlay, every text color, every shadow that derives from it shifts in lockstep. No hunt-and-fix.*
+_Change `--neutral-950`, and every shade overlay, every text color, every shadow that derives from it shifts in lockstep. No hunt-and-fix._
 
 ## Themable by Mode
 
 Light, dark, and any additional modes attach to the variable itself, not to individual layers.
 
 - **One variable, multiple values.** `--color-background` resolves to the right value automatically when the mode switches.
-- **No mode-specific markup.** Components don't branch on theme — they consume the token and trust it.
+- **No mode-specific markup.** Components don't branch on theme. They consume the token and trust it.
 - **Modes are extensible.** Add high-contrast, brand-takeover, or holiday modes; they're all just additional values on existing variables.
 
-*Designers switch the Figma mode and the file recolors. Developers toggle a data attribute and the app recolors. Same variables, same outcome, no per-component logic.*
+_Designers switch the Figma mode and the file recolors. Developers toggle a data attribute and the app recolors. Same variables, same outcome, no per-component logic._
 
 ## Portable Across Tools
 
 The Zazz token in Figma is the Zazz token in Webflow is the Zazz token in Tailwind is the Zazz token in CSS.
 
-| Platform | Mechanism |
-| --- | --- |
-| Figma | Variables, with `light`/`dark` (and other) modes attached to the variable, not the layer. |
-| Webflow | Variables for primitives like `--gap-md` and `--color-text`; style classes for compositions. |
-| Tailwind + CSS | The Tailwind config extends CSS custom properties — `--gap-md` and `gap-md` resolve to the same value. |
+| Platform       | Mechanism                                                                                              |
+| -------------- | ------------------------------------------------------------------------------------------------------ |
+| Figma          | Variables, with `light`/`dark` (and other) modes attached to the variable, not the layer.              |
+| Webflow        | Variables for primitives like `--gap-md` and `--color-text`; style classes for compositions.           |
+| Tailwind + CSS | The Tailwind config extends CSS custom properties, so `--gap-md` and `gap-md` resolve to the same value. |
 
-*The same name lives in every tool. You're not learning four token languages — you're learning one.*
+_The same name lives in every tool. You're not learning four token languages. You're learning one._
 
 ## The eight collections
 
 Each collection is a category page.
 
 <Cards>
-  <Card title="Theme" href="/docs/foundations/theme" description="Base, overlay, brand, status — and the modes they switch between." />
-  <Card title="Corporate" href="/docs/foundations/corporate" description="Brand color scales for primary, secondary, tertiary, and beyond." />
-  <Card title="Grayscale" href="/docs/foundations/grayscale" description="Neutrals, and the shade and tint scales derived from them." />
-  <Card title="Typography" href="/docs/foundations/typography" description="Family, fluid size, weight, tracking, leading, paragraph spacing." />
-  <Card title="Spacing" href="/docs/foundations/spacing" description="Modifiers, semantic gap-*, and the step-* scale." />
-  <Card title="Radius" href="/docs/foundations/radius" description="Multiplier, semantic, and primitive-specific radii." />
-  <Card title="Layout" href="/docs/foundations/layout" description="Containers, article widths, and breakpoints for calcs and container queries." />
-  <Card title="Effects" href="/docs/foundations/effects" description="Shadows and states — focus rings and feedback." />
+  <Card
+    title="Theme"
+    href="/docs/foundations/theme"
+    description="Base, overlay, brand, status. And the modes they switch between."
+  />
+  <Card
+    title="Corporate"
+    href="/docs/foundations/corporate"
+    description="Brand color scales for primary, secondary, tertiary, and beyond."
+  />
+  <Card
+    title="Grayscale"
+    href="/docs/foundations/grayscale"
+    description="Neutrals, and the shade and tint scales derived from them."
+  />
+  <Card
+    title="Typography"
+    href="/docs/foundations/typography"
+    description="Family, fluid size, weight, tracking, leading, paragraph spacing."
+  />
+  <Card
+    title="Spacing"
+    href="/docs/foundations/spacing"
+    description="Modifiers, semantic gap-*, and the step-* scale."
+  />
+  <Card
+    title="Radius"
+    href="/docs/foundations/radius"
+    description="Multiplier, semantic, and primitive-specific radii."
+  />
+  <Card
+    title="Layout"
+    href="/docs/foundations/layout"
+    description="Containers, article widths, and breakpoints for calcs and container queries."
+  />
+  <Card
+    title="Effects"
+    href="/docs/foundations/effects"
+    description="Shadows and states. Focus rings and feedback."
+  />
 </Cards>

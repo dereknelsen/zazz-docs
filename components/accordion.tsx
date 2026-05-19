@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { Check, LinkIcon } from 'lucide-react';
-import { type ComponentProps, type ReactNode, useEffect, useRef, useState } from 'react';
-import { cn } from '../lib/cn';
-import { useCopyButton } from '@fumadocs/base-ui/utils/use-copy-button';
-import { buttonVariants } from './ui/button';
-import { mergeRefs } from '../lib/merge-refs';
+import { Check, LinkIcon } from "lucide-react";
+import { type ComponentProps, type ReactNode, useEffect, useRef, useState } from "react";
+import { cn } from "../lib/cn";
+import { useCopyButton } from "@fumadocs/base-ui/utils/use-copy-button";
+import { buttonVariants } from "./ui/button";
+import { mergeRefs } from "../lib/merge-refs";
 import {
   Accordion as Root,
   AccordionContent,
   AccordionHeader,
   AccordionItem,
   AccordionTrigger,
-} from './ui/accordion';
+} from "./ui/accordion";
 
 export function Accordions({
   ref,
@@ -31,7 +31,7 @@ export function Accordions({
 
     const selected = document.getElementById(id);
     if (!selected || !element.contains(selected)) return;
-    const value = selected.getAttribute('data-accordion-value');
+    const value = selected.getAttribute("data-accordion-value");
 
     if (value) setValue((prev) => [value, ...prev]);
   }, []);
@@ -43,8 +43,8 @@ export function Accordions({
       onValueChange={setValue}
       className={(s) =>
         cn(
-          'divide-y divide-fd-border overflow-hidden rounded-lg border bg-fd-card',
-          typeof className === 'function' ? className(s) : className,
+          "divide-y divide-fd-border overflow-hidden rounded-lg border bg-fd-card",
+          typeof className === "function" ? className(s) : className,
         )
       }
       {...props}
@@ -58,7 +58,7 @@ export function Accordion({
   value = String(title),
   children,
   ...props
-}: Omit<ComponentProps<typeof AccordionItem>, 'value' | 'title'> & {
+}: Omit<ComponentProps<typeof AccordionItem>, "value" | "title"> & {
   title: string | ReactNode;
   value?: string;
 }) {
@@ -91,8 +91,8 @@ function CopyButton({ id }: { id: string }) {
       aria-label="Copy Link"
       className={cn(
         buttonVariants({
-          color: 'ghost',
-          className: 'text-fd-muted-foreground me-2',
+          color: "ghost",
+          className: "text-fd-muted-foreground me-2",
         }),
       )}
       onClick={onClick}

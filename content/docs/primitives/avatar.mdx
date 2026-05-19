@@ -1,0 +1,111 @@
+---
+title: Avatar
+description: Circular identity surface with image, initials, or fallback.
+---
+
+An avatar represents a person, account, team, or any identity inside an interface. It's a circular surface that holds an image, a set of initials, or a placeholder fallback.
+
+The default size is `--step-10` (2.5rem at default interval). Override `width` and `height` directly when a context calls for a different size.
+
+## Anatomy
+
+```html
+<div class="avatar">
+  <img class="avatar__profile" src="/path/to/photo.jpg" alt="Author name" />
+</div>
+```
+
+| Part | Class | Notes |
+| --- | --- | --- |
+| Root | `avatar` | Sets the circular frame, border, and clipping. |
+| Profile image | `avatar__profile` | The `<img>` or `<svg>` shown inside. Fills the root. |
+| Initials | `avatar__initials` | Optional fallback layer painted in `--primary` with `--primary-foreground` text. Sits behind the profile image; reveals when the image fails to load or isn't present. |
+
+The root uses `isolation: isolate` and the initials layer sits at `z-index: -10`. When an image is absent or fails to load, the initials show through. When both image and initials are absent, the bordered surface alone reads as a placeholder.
+
+## With initials
+
+```html
+<div class="avatar">
+  <div class="avatar__initials">DN</div>
+  <img class="avatar__profile" src="/derek.jpg" alt="" />
+</div>
+```
+
+If the image loads, the initials sit behind it. If it doesn't, the initials remain. Keep initials to one or two characters for legibility.
+
+## Without an image
+
+```html
+<div class="avatar">
+  <div class="avatar__initials">DN</div>
+</div>
+```
+
+This is the recommended pattern for accounts that haven't uploaded a photo. Initials carry the identity and stay readable at the default size.
+
+## Author metadata composition
+
+A common pairing puts an avatar next to a name and a description. Zazz exposes this as the `avatar-author` composition:
+
+```html
+<div class="avatar-author">
+  <div class="avatar">
+    <img class="avatar__profile" src="/derek.jpg" alt="" />
+  </div>
+  <div class="avatar-author__info">
+    <span class="avatar-author__name text-sm">Derek Nelsen</span>
+    <span class="avatar-author__description text-xs text-muted-foreground">15 Mar 2025</span>
+  </div>
+</div>
+```
+
+The avatar's `alt` is empty when the name is rendered next to it. Screen readers announce the name from the visible text rather than from a duplicate alt.
+
+## Tokens
+
+| Property | Token / value |
+| --- | --- |
+| Width / height | `--step-10` (default) |
+| Aspect ratio | `1` |
+| Border | `1px solid var(--border)` |
+| Radius | `--radius-full` |
+| Initials background | `--primary` |
+| Initials text | `--primary-foreground` |
+| Initials font | family `--font-body`, size `--font-size-md`, weight `--weight-strong` |
+
+The avatar's circular shape is hardcoded to `--radius-full`. It does not respond to `--radius-multiplier`. If a project needs square avatars, override `.avatar` directly.
+
+## Sizes
+
+There is no built-in size system today. Set `width` and `height` on the root for the size you need:
+
+```css
+.avatar.is-sm  { width: 24px; height: 24px; }
+.avatar.is-lg  { width: 64px; height: 64px; }
+.avatar.is-xl  { width: 96px; height: 96px; }
+```
+
+A sized variant set is on the [roadmap](/docs/reference/roadmap).
+
+## Accessibility
+
+- Provide a meaningful `alt` on `<img>` when the avatar appears without a visible name.
+- When the name is rendered next to the avatar (`avatar-author` pattern), set `alt=""` to avoid double-announcement.
+- Fallback initials are decorative; the name in surrounding text carries the identity.
+- Avatars inside a link or button inherit the parent's accessible name; the image alt can be empty.
+
+## Cross-platform
+
+| Platform | Reference |
+| --- | --- |
+| Figma | `Zazz v0.4.4 → avatar` (component_set) |
+| Webflow | `avatar` root, `avatar__profile` and `avatar__initials` children, optional `avatar-author` wrapper |
+| CSS / Tailwind | The same classes after [installing utilities.css](/docs/quickstart/css) |
+
+## Where to next
+
+<Cards>
+  <Card title="Badge" href="/docs/primitives/badge" description="Pair a badge with an avatar to show online status or role." />
+  <Card title="Card" href="/docs/primitives/card" description="Cards regularly hold avatars in their footer." />
+</Cards>

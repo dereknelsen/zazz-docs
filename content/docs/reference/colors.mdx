@@ -1,12 +1,12 @@
 ---
 title: Colors
-description: Theme tokens, brand scales, grayscale, and status colors — values and usage.
+description: Theme tokens, brand scales, grayscale, and status colors. Values and usage.
 ---
 
-import { Swatch, SwatchGrid } from '@/components/swatch';
-import { PaletteHexInput } from '@/components/palette-input';
+import { Swatch, SwatchGrid } from "@/components/swatch";
+import { PaletteHexInput } from "@/components/palette-input";
 
-Zazz colors come in four layers — theme, brand scales, grayscale, and status. Every color is declared in OKLCH for perceptually consistent stepping and mode transitions.
+Zazz colors come in four layers: theme, brand scales, grayscale, and status. Every color is declared in OKLCH for perceptually consistent stepping and mode transitions.
 
 ## Using colors
 
@@ -24,7 +24,7 @@ Reference any color through its CSS variable:
 }
 ```
 
-With Zazz utilities installed, every theme color has a matching utility class (set up the same way [Tailwind would expose them](/docs/quickstart/tailwind)) — `bg-primary`, `text-foreground`, `border-border`, and so on.
+With Zazz utilities installed, every theme color has a matching utility class (set up the same way [Tailwind would expose them](/docs/quickstart/tailwind)): `bg-primary`, `text-foreground`, `border-border`, and so on.
 
 ## Theme tokens
 
@@ -34,16 +34,16 @@ Theme tokens like `--background`, `--primary`, and `--destructive` resolve to sp
 
 The raw color scales that brand theme tokens point into. Replace these per project to rebrand without touching any component. See [Foundations → Corporate](/docs/foundations/corporate).
 
-Each scale below has its own hex input — adjust the base color and **Generate** to open a fresh 11-step palette in [Tints.dev](https://www.tints.dev). Or [edit all four defaults at once](https://www.tints.dev/palette/v1:cHJpbWFyeXw0RDQ0RTR8NjAwfHB8MHwwfC0yfDEwM3xtfnNlY29uZGFyeXxERTQ5MTd8NjAwfHB8MHwwfDJ8MTAyfG1-dGVydGlhcnl8RTUzNzVCfDUwMHxwfDB8MHwxfDEwM3xtfm5ldXRyYWx8ODg4ODkwfDUwMHxwfDB8MHwxfDEwNHxt) in a single editor.
+Each scale below has its own hex input. Adjust the base color and **Generate** to open a fresh 11-step palette in [Tints.dev](https://www.tints.dev). Or [edit all four defaults at once](https://www.tints.dev/palette/v1:cHJpbWFyeXw0RDQ0RTR8NjAwfHB8MHwwfC0yfDEwM3xtfnNlY29uZGFyeXxERTQ5MTd8NjAwfHB8MHwwfDJ8MTAyfG1-dGVydGlhcnl8RTUzNzVCfDUwMHxwfDB8MHwxfDEwM3xtfm5ldXRyYWx8ODg4ODkwfDUwMHxwfDB8MHwxfDEwNHxt) in a single editor.
 
-A first-class theme builder is on the [roadmap](/docs/reference/roadmap) — for now, generate via Tints.dev and paste the OKLCH output into your variables file.
+A first-class theme builder is on the [roadmap](/docs/reference/roadmap). For now, generate via Tints.dev and paste the OKLCH output into your variables file.
 
 ### Primary
 
 <PaletteHexInput name="primary" defaultHex="4D44E4" />
 
 <SwatchGrid>
-  <Swatch step="50"  name="--primary-50"  color="oklch(0.984 0.007 286.46)" />
+  <Swatch step="50" name="--primary-50" color="oklch(0.984 0.007 286.46)" />
   <Swatch step="100" name="--primary-100" color="oklch(0.94 0.025 288.37)" />
   <Swatch step="200" name="--primary-200" color="oklch(0.85 0.068 285.81)" />
   <Swatch step="300" name="--primary-300" color="oklch(0.765 0.108 284.76)" />
@@ -58,16 +58,16 @@ A first-class theme builder is on the [roadmap](/docs/reference/roadmap) — for
 
 ```css
 :root {
-  /* Primary — base #4D44E4 */
-  --primary-50:  oklch(0.984 0.007 286.46);
-  --primary-100: oklch(0.94  0.025 288.37);
-  --primary-200: oklch(0.85  0.068 285.81);
+  /* Primary; base #4D44E4 */
+  --primary-50: oklch(0.984 0.007 286.46);
+  --primary-100: oklch(0.94 0.025 288.37);
+  --primary-200: oklch(0.85 0.068 285.81);
   --primary-300: oklch(0.765 0.108 284.76);
   --primary-400: oklch(0.674 0.154 283.18);
   --primary-500: oklch(0.593 0.193 280.79);
-  --primary-600: oklch(0.511 0.230 276.97);
+  --primary-600: oklch(0.511 0.23 276.97);
   --primary-700: oklch(0.421 0.234 273.27);
-  --primary-800: oklch(0.320 0.179 273.06);
+  --primary-800: oklch(0.32 0.179 273.06);
   --primary-900: oklch(0.229 0.127 273.39);
   --primary-950: oklch(0.158 0.088 274.05);
 }
@@ -78,7 +78,7 @@ A first-class theme builder is on the [roadmap](/docs/reference/roadmap) — for
 <PaletteHexInput name="secondary" defaultHex="DE4917" />
 
 <SwatchGrid>
-  <Swatch step="50"  name="--secondary-50"  color="oklch(0.984 0.008 27.43)" />
+  <Swatch step="50" name="--secondary-50" color="oklch(0.984 0.008 27.43)" />
   <Swatch step="100" name="--secondary-100" color="oklch(0.95 0.023 24.19)" />
   <Swatch step="200" name="--secondary-200" color="oklch(0.878 0.061 25.87)" />
   <Swatch step="300" name="--secondary-300" color="oklch(0.814 0.101 27.69)" />
@@ -93,15 +93,15 @@ A first-class theme builder is on the [roadmap](/docs/reference/roadmap) — for
 
 ```css
 :root {
-  /* Secondary — base #DE4917 */
-  --secondary-50:  oklch(0.984 0.008 27.43);
-  --secondary-100: oklch(0.950 0.023 24.19);
+  /* Secondary; base #DE4917 */
+  --secondary-50: oklch(0.984 0.008 27.43);
+  --secondary-100: oklch(0.95 0.023 24.19);
   --secondary-200: oklch(0.878 0.061 25.87);
   --secondary-300: oklch(0.814 0.101 27.69);
   --secondary-400: oklch(0.749 0.146 30.02);
   --secondary-500: oklch(0.687 0.198 34.85);
-  --secondary-600: oklch(0.610 0.194 36.80);
-  --secondary-700: oklch(0.500 0.159 36.84);
+  --secondary-600: oklch(0.61 0.194 36.8);
+  --secondary-700: oklch(0.5 0.159 36.84);
   --secondary-800: oklch(0.383 0.121 36.98);
   --secondary-900: oklch(0.276 0.088 36.22);
   --secondary-950: oklch(0.215 0.068 37.62);
@@ -113,7 +113,7 @@ A first-class theme builder is on the [roadmap](/docs/reference/roadmap) — for
 <PaletteHexInput name="tertiary" defaultHex="E5375B" />
 
 <SwatchGrid>
-  <Swatch step="50"  name="--tertiary-50"  color="oklch(0.984 0.006 17.54)" />
+  <Swatch step="50" name="--tertiary-50" color="oklch(0.984 0.006 17.54)" />
   <Swatch step="100" name="--tertiary-100" color="oklch(0.942 0.023 11.04)" />
   <Swatch step="200" name="--tertiary-200" color="oklch(0.861 0.062 11.02)" />
   <Swatch step="300" name="--tertiary-300" color="oklch(0.772 0.11 12.13)" />
@@ -128,11 +128,11 @@ A first-class theme builder is on the [roadmap](/docs/reference/roadmap) — for
 
 ```css
 :root {
-  /* Tertiary — base #E5375B */
-  --tertiary-50:  oklch(0.984 0.006 17.54);
+  /* Tertiary; base #E5375B */
+  --tertiary-50: oklch(0.984 0.006 17.54);
   --tertiary-100: oklch(0.942 0.023 11.04);
   --tertiary-200: oklch(0.861 0.062 11.02);
-  --tertiary-300: oklch(0.772 0.110 12.13);
+  --tertiary-300: oklch(0.772 0.11 12.13);
   --tertiary-400: oklch(0.693 0.163 13.04);
   --tertiary-500: oklch(0.613 0.208 14.68);
   --tertiary-600: oklch(0.523 0.177 14.77);
@@ -152,73 +152,73 @@ Neutrals plus the shade and tint scales derived from them. See [Foundations → 
 <PaletteHexInput name="neutral" defaultHex="888890" />
 
 <SwatchGrid cols={13}>
-  <Swatch step="white" name="--white"        color="white" />
-  <Swatch step="50"    name="--neutral-50"   color="oklch(0.9911 0 0)" />
-  <Swatch step="100"   name="--neutral-100"  color="oklch(0.9581 0 0)" />
-  <Swatch step="200"   name="--neutral-200"  color="oklch(0.871 0.004 286.58)" />
-  <Swatch step="300"   name="--neutral-300"  color="oklch(0.794 0.007 286.38)" />
-  <Swatch step="400"   name="--neutral-400"  color="oklch(0.708 0.009 286.28)" />
-  <Swatch step="500"   name="--neutral-500"  color="oklch(0.629 0.012 286.12)" />
-  <Swatch step="600"   name="--neutral-600"  color="oklch(0.535 0.015 285.91)" />
-  <Swatch step="700"   name="--neutral-700"  color="oklch(0.442 0.015 285.82)" />
-  <Swatch step="800"   name="--neutral-800"  color="oklch(0.336 0.014 285.66)" />
-  <Swatch step="900"   name="--neutral-900"  color="oklch(0.241 0.009 285.7)" />
-  <Swatch step="950"   name="--neutral-950"  color="oklch(0.198 0.008 285.68)" />
-  <Swatch step="black" name="--black"        color="black" />
+  <Swatch step="white" name="--white" color="white" />
+  <Swatch step="50" name="--neutral-50" color="oklch(0.9911 0 0)" />
+  <Swatch step="100" name="--neutral-100" color="oklch(0.9581 0 0)" />
+  <Swatch step="200" name="--neutral-200" color="oklch(0.871 0.004 286.58)" />
+  <Swatch step="300" name="--neutral-300" color="oklch(0.794 0.007 286.38)" />
+  <Swatch step="400" name="--neutral-400" color="oklch(0.708 0.009 286.28)" />
+  <Swatch step="500" name="--neutral-500" color="oklch(0.629 0.012 286.12)" />
+  <Swatch step="600" name="--neutral-600" color="oklch(0.535 0.015 285.91)" />
+  <Swatch step="700" name="--neutral-700" color="oklch(0.442 0.015 285.82)" />
+  <Swatch step="800" name="--neutral-800" color="oklch(0.336 0.014 285.66)" />
+  <Swatch step="900" name="--neutral-900" color="oklch(0.241 0.009 285.7)" />
+  <Swatch step="950" name="--neutral-950" color="oklch(0.198 0.008 285.68)" />
+  <Swatch step="black" name="--black" color="black" />
 </SwatchGrid>
 
 ```css
 :root {
-  /* Neutral — base #888890 */
-  --white:       white;
-  --neutral-50:  oklch(0.9911 0     0);
-  --neutral-100: oklch(0.9581 0     0);
-  --neutral-200: oklch(0.871  0.004 286.58);
-  --neutral-300: oklch(0.794  0.007 286.38);
-  --neutral-400: oklch(0.708  0.009 286.28);
-  --neutral-500: oklch(0.629  0.012 286.12);
-  --neutral-600: oklch(0.535  0.015 285.91);
-  --neutral-700: oklch(0.442  0.015 285.82);
-  --neutral-800: oklch(0.336  0.014 285.66);
-  --neutral-900: oklch(0.241  0.009 285.70);
-  --neutral-950: oklch(0.198  0.008 285.68);
-  --black:       black;
+  /* Neutral; base #888890 */
+  --white: white;
+  --neutral-50: oklch(0.9911 0 0);
+  --neutral-100: oklch(0.9581 0 0);
+  --neutral-200: oklch(0.871 0.004 286.58);
+  --neutral-300: oklch(0.794 0.007 286.38);
+  --neutral-400: oklch(0.708 0.009 286.28);
+  --neutral-500: oklch(0.629 0.012 286.12);
+  --neutral-600: oklch(0.535 0.015 285.91);
+  --neutral-700: oklch(0.442 0.015 285.82);
+  --neutral-800: oklch(0.336 0.014 285.66);
+  --neutral-900: oklch(0.241 0.009 285.7);
+  --neutral-950: oklch(0.198 0.008 285.68);
+  --black: black;
 }
 ```
 
 ### Shade
 
-Darkened overlays derived from `--neutral-950`. Each step is the neutral at a specific alpha — apply over a light surface for a "darken-it" effect.
+Darkened overlays derived from `--neutral-950`. Each step is the neutral at a specific alpha. Apply over a light surface for a "darken-it" effect.
 
 <SwatchGrid>
-  <Swatch step="50"   name="--shade-50"   color="oklch(0.198 0.008 285.68 / 0.05)" />
-  <Swatch step="100"  name="--shade-100"  color="oklch(0.198 0.008 285.68 / 0.10)" />
-  <Swatch step="200"  name="--shade-200"  color="oklch(0.198 0.008 285.68 / 0.20)" />
-  <Swatch step="300"  name="--shade-300"  color="oklch(0.198 0.008 285.68 / 0.30)" />
-  <Swatch step="400"  name="--shade-400"  color="oklch(0.198 0.008 285.68 / 0.40)" />
-  <Swatch step="500"  name="--shade-500"  color="oklch(0.198 0.008 285.68 / 0.50)" />
-  <Swatch step="600"  name="--shade-600"  color="oklch(0.198 0.008 285.68 / 0.60)" />
-  <Swatch step="700"  name="--shade-700"  color="oklch(0.198 0.008 285.68 / 0.70)" />
-  <Swatch step="800"  name="--shade-800"  color="oklch(0.198 0.008 285.68 / 0.80)" />
-  <Swatch step="900"  name="--shade-900"  color="oklch(0.198 0.008 285.68 / 0.90)" />
-  <Swatch step="950"  name="--shade-950"  color="oklch(0.198 0.008 285.68 / 0.95)" />
+  <Swatch step="50" name="--shade-50" color="oklch(0.198 0.008 285.68 / 0.05)" />
+  <Swatch step="100" name="--shade-100" color="oklch(0.198 0.008 285.68 / 0.10)" />
+  <Swatch step="200" name="--shade-200" color="oklch(0.198 0.008 285.68 / 0.20)" />
+  <Swatch step="300" name="--shade-300" color="oklch(0.198 0.008 285.68 / 0.30)" />
+  <Swatch step="400" name="--shade-400" color="oklch(0.198 0.008 285.68 / 0.40)" />
+  <Swatch step="500" name="--shade-500" color="oklch(0.198 0.008 285.68 / 0.50)" />
+  <Swatch step="600" name="--shade-600" color="oklch(0.198 0.008 285.68 / 0.60)" />
+  <Swatch step="700" name="--shade-700" color="oklch(0.198 0.008 285.68 / 0.70)" />
+  <Swatch step="800" name="--shade-800" color="oklch(0.198 0.008 285.68 / 0.80)" />
+  <Swatch step="900" name="--shade-900" color="oklch(0.198 0.008 285.68 / 0.90)" />
+  <Swatch step="950" name="--shade-950" color="oklch(0.198 0.008 285.68 / 0.95)" />
 </SwatchGrid>
 
 ```css
 :root {
-  /* Shade — derived from --neutral-950 */
+  /* Shade; derived from --neutral-950 */
   --shade-none: oklch(from var(--neutral-950) l c h / 0);
-  --shade-50:   oklch(from var(--neutral-950) l c h / 0.05);
-  --shade-100:  oklch(from var(--neutral-950) l c h / 0.10);
-  --shade-200:  oklch(from var(--neutral-950) l c h / 0.20);
-  --shade-300:  oklch(from var(--neutral-950) l c h / 0.30);
-  --shade-400:  oklch(from var(--neutral-950) l c h / 0.40);
-  --shade-500:  oklch(from var(--neutral-950) l c h / 0.50);
-  --shade-600:  oklch(from var(--neutral-950) l c h / 0.60);
-  --shade-700:  oklch(from var(--neutral-950) l c h / 0.70);
-  --shade-800:  oklch(from var(--neutral-950) l c h / 0.80);
-  --shade-900:  oklch(from var(--neutral-950) l c h / 0.90);
-  --shade-950:  oklch(from var(--neutral-950) l c h / 0.95);
+  --shade-50: oklch(from var(--neutral-950) l c h / 0.05);
+  --shade-100: oklch(from var(--neutral-950) l c h / 0.1);
+  --shade-200: oklch(from var(--neutral-950) l c h / 0.2);
+  --shade-300: oklch(from var(--neutral-950) l c h / 0.3);
+  --shade-400: oklch(from var(--neutral-950) l c h / 0.4);
+  --shade-500: oklch(from var(--neutral-950) l c h / 0.5);
+  --shade-600: oklch(from var(--neutral-950) l c h / 0.6);
+  --shade-700: oklch(from var(--neutral-950) l c h / 0.7);
+  --shade-800: oklch(from var(--neutral-950) l c h / 0.8);
+  --shade-900: oklch(from var(--neutral-950) l c h / 0.9);
+  --shade-950: oklch(from var(--neutral-950) l c h / 0.95);
   --shade-full: oklch(from var(--neutral-950) l c h / 1);
 }
 ```
@@ -228,34 +228,34 @@ Darkened overlays derived from `--neutral-950`. Each step is the neutral at a sp
 Faded overlays derived from `--white`. Apply over a dark surface for a "lighten-it" effect.
 
 <SwatchGrid>
-  <Swatch step="50"   name="--tint-50"   color="oklch(1 0 0 / 0.05)" />
-  <Swatch step="100"  name="--tint-100"  color="oklch(1 0 0 / 0.10)" />
-  <Swatch step="200"  name="--tint-200"  color="oklch(1 0 0 / 0.20)" />
-  <Swatch step="300"  name="--tint-300"  color="oklch(1 0 0 / 0.30)" />
-  <Swatch step="400"  name="--tint-400"  color="oklch(1 0 0 / 0.40)" />
-  <Swatch step="500"  name="--tint-500"  color="oklch(1 0 0 / 0.50)" />
-  <Swatch step="600"  name="--tint-600"  color="oklch(1 0 0 / 0.60)" />
-  <Swatch step="700"  name="--tint-700"  color="oklch(1 0 0 / 0.70)" />
-  <Swatch step="800"  name="--tint-800"  color="oklch(1 0 0 / 0.80)" />
-  <Swatch step="900"  name="--tint-900"  color="oklch(1 0 0 / 0.90)" />
-  <Swatch step="950"  name="--tint-950"  color="oklch(1 0 0 / 0.95)" />
+  <Swatch step="50" name="--tint-50" color="oklch(1 0 0 / 0.05)" />
+  <Swatch step="100" name="--tint-100" color="oklch(1 0 0 / 0.10)" />
+  <Swatch step="200" name="--tint-200" color="oklch(1 0 0 / 0.20)" />
+  <Swatch step="300" name="--tint-300" color="oklch(1 0 0 / 0.30)" />
+  <Swatch step="400" name="--tint-400" color="oklch(1 0 0 / 0.40)" />
+  <Swatch step="500" name="--tint-500" color="oklch(1 0 0 / 0.50)" />
+  <Swatch step="600" name="--tint-600" color="oklch(1 0 0 / 0.60)" />
+  <Swatch step="700" name="--tint-700" color="oklch(1 0 0 / 0.70)" />
+  <Swatch step="800" name="--tint-800" color="oklch(1 0 0 / 0.80)" />
+  <Swatch step="900" name="--tint-900" color="oklch(1 0 0 / 0.90)" />
+  <Swatch step="950" name="--tint-950" color="oklch(1 0 0 / 0.95)" />
 </SwatchGrid>
 
 ```css
 :root {
-  /* Tint — derived from --white */
+  /* Tint; derived from --white */
   --tint-none: oklch(from var(--white) l c h / 0);
-  --tint-50:   oklch(from var(--white) l c h / 0.05);
-  --tint-100:  oklch(from var(--white) l c h / 0.10);
-  --tint-200:  oklch(from var(--white) l c h / 0.20);
-  --tint-300:  oklch(from var(--white) l c h / 0.30);
-  --tint-400:  oklch(from var(--white) l c h / 0.40);
-  --tint-500:  oklch(from var(--white) l c h / 0.50);
-  --tint-600:  oklch(from var(--white) l c h / 0.60);
-  --tint-700:  oklch(from var(--white) l c h / 0.70);
-  --tint-800:  oklch(from var(--white) l c h / 0.80);
-  --tint-900:  oklch(from var(--white) l c h / 0.90);
-  --tint-950:  oklch(from var(--white) l c h / 0.95);
+  --tint-50: oklch(from var(--white) l c h / 0.05);
+  --tint-100: oklch(from var(--white) l c h / 0.1);
+  --tint-200: oklch(from var(--white) l c h / 0.2);
+  --tint-300: oklch(from var(--white) l c h / 0.3);
+  --tint-400: oklch(from var(--white) l c h / 0.4);
+  --tint-500: oklch(from var(--white) l c h / 0.5);
+  --tint-600: oklch(from var(--white) l c h / 0.6);
+  --tint-700: oklch(from var(--white) l c h / 0.7);
+  --tint-800: oklch(from var(--white) l c h / 0.8);
+  --tint-900: oklch(from var(--white) l c h / 0.9);
+  --tint-950: oklch(from var(--white) l c h / 0.95);
   --tint-full: oklch(from var(--white) l c h / 1);
 }
 ```
@@ -267,36 +267,36 @@ Status tokens cover info, success, warning, and destructive. Status colors step 
 ### Light mode
 
 <SwatchGrid cols={4}>
-  <Swatch name="--info"        color="oklch(0.5876 0.1389 241.97)" />
-  <Swatch name="--success"     color="oklch(0.596 0.1274 163.23)" />
-  <Swatch name="--warning"     color="oklch(0.6658 0.1574 58.32)" />
+  <Swatch name="--info" color="oklch(0.5876 0.1389 241.97)" />
+  <Swatch name="--success" color="oklch(0.596 0.1274 163.23)" />
+  <Swatch name="--warning" color="oklch(0.6658 0.1574 58.32)" />
   <Swatch name="--destructive" color="oklch(0.5771 0.2152 27.33)" />
 </SwatchGrid>
 
 ### Dark mode
 
 <SwatchGrid cols={4}>
-  <Swatch name="--info"        color="oklch(0.5 0.1193 242.75)" />
-  <Swatch name="--success"     color="oklch(0.5081 0.1049 165.61)" />
-  <Swatch name="--warning"     color="oklch(0.5553 0.1455 49)" />
+  <Swatch name="--info" color="oklch(0.5 0.1193 242.75)" />
+  <Swatch name="--success" color="oklch(0.5081 0.1049 165.61)" />
+  <Swatch name="--warning" color="oklch(0.5553 0.1455 49)" />
   <Swatch name="--destructive" color="oklch(0.5054 0.1905 27.52)" />
 </SwatchGrid>
 
 ```css
 :root {
-  /* Status — light mode */
-  --info:        oklch(0.5876 0.1389 241.97);
-  --success:     oklch(0.5960 0.1274 163.23);
-  --warning:     oklch(0.6658 0.1574  58.32);
-  --destructive: oklch(0.5771 0.2152  27.33);
+  /* Status: light mode */
+  --info: oklch(0.5876 0.1389 241.97);
+  --success: oklch(0.596 0.1274 163.23);
+  --warning: oklch(0.6658 0.1574 58.32);
+  --destructive: oklch(0.5771 0.2152 27.33);
 }
 
 :is(.dark, .dark *) {
-  /* Status — dark mode (steps darker, opposite of brand) */
-  --info:        oklch(0.5000 0.1193 242.75);
-  --success:     oklch(0.5081 0.1049 165.61);
-  --warning:     oklch(0.5553 0.1455  49.00);
-  --destructive: oklch(0.5054 0.1905  27.52);
+  /* Status: dark mode (steps darker, opposite of brand) */
+  --info: oklch(0.5 0.1193 242.75);
+  --success: oklch(0.5081 0.1049 165.61);
+  --warning: oklch(0.5553 0.1455 49);
+  --destructive: oklch(0.5054 0.1905 27.52);
 }
 ```
 
@@ -308,10 +308,10 @@ Override any color by re-declaring the variable. Re-target a theme token to poin
 :root {
   /* Re-target theme tokens */
   --primary: var(--secondary-600);
-  --destructive: oklch(0.55 0.20 15);
+  --destructive: oklch(0.55 0.2 15);
 
   /* Replace a corporate scale */
-  --primary-50:  oklch(0.97 0.02 200);
+  --primary-50: oklch(0.97 0.02 200);
   --primary-100: oklch(0.92 0.05 200);
   /* ... through 950 */
 }

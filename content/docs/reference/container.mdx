@@ -5,10 +5,10 @@ description: Self-padding semantic wrappers for page content and articles.
 
 ## Class reference
 
-| Class | CSS |
-| --- | --- |
+| Class       | CSS                                                                                 |
+| ----------- | ----------------------------------------------------------------------------------- |
 | `container` | `width: var(--container); margin-inline: auto; container: container / inline-size;` |
-| `article` | `width: var(--article); margin-inline: auto; container: article / inline-size;` |
+| `article`   | `width: var(--article); margin-inline: auto; container: article / inline-size;`     |
 
 Both classes set an automatic max-width with built-in side gutter via `min()` math, center horizontally, and establish an inline-size container query context.
 
@@ -28,13 +28,13 @@ Both classes set an automatic max-width with built-in side gutter via `min()` ma
 </article>
 ```
 
-You don't need a wrapping `.container` div with the class on it — apply the class to the section, article, or div that holds the content.
+You don't need a wrapping `.container` div with the class on it. Apply the class to the section, article, or div that holds the content.
 
 ## Tokens
 
 ```css
 :root {
-  --article:   min(var(--screen-xs), 100% - var(--gap-md) * 2); /* 40rem max, 24px gutter */
+  --article: min(var(--screen-xs), 100% - var(--gap-md) * 2); /* 40rem max, 24px gutter */
   --container: min(var(--screen-lg), 100% - var(--gap-md) * 2); /* 80rem max, 24px gutter */
 }
 ```
@@ -66,12 +66,12 @@ The container name (`container`, `article`) matches the class. Use `inline-size`
 
 ## Adding container sizes
 
-The `min()` pattern is composable — define new container variables with different max widths:
+The `min()` pattern is composable. Define new container variables with different max widths:
 
 ```css
 :root {
   --container-narrow: min(var(--screen-md), 100% - var(--gap-md) * 2);
-  --container-wide:   min(var(--screen-xl), 100% - var(--gap-md) * 2);
+  --container-wide: min(var(--screen-xl), 100% - var(--gap-md) * 2);
 }
 
 .container-narrow {

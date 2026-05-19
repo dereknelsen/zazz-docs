@@ -1,0 +1,79 @@
+---
+title: Textarea
+description: Multi-line text entry. Grows with content via field-sizing.
+---
+
+A textarea is a multi-line input for free-form copy: messages, descriptions, comments. Zazz's textarea styles the native `<textarea>` element to match the [Input](/docs/primitives/input) primitive and uses `field-sizing: content` so the field grows as the user types.
+
+## Default
+
+```html
+<textarea class="textarea" placeholder="Your message…"></textarea>
+```
+
+## Tokens
+
+| Property | Token / value |
+| --- | --- |
+| Width | `100%` |
+| Min height | `--step-24` |
+| Min width | `--step-48` |
+| Padding | `--step-1_5` block, `--step-2_5` inline |
+| Border | `1px solid var(--border)` (default), `--primary` (hover/focus) |
+| Radius | `--radius-input` (defaults to `--radius-md`) |
+| Background | `--input` |
+| Color | `--input-foreground` |
+| Font | `--font-size-md`, line-height `--leading-md`, weight `--weight-body` |
+| Field sizing | `content` (auto-grows) |
+| Focus ring | `--focus-ring` |
+
+## Form composition
+
+```html
+<div class="form-group">
+  <label class="form-label" for="message">Message</label>
+  <textarea class="textarea" id="message" placeholder="Your message…"></textarea>
+</div>
+```
+
+## Auto-growing
+
+`field-sizing: content` makes the textarea grow vertically as the user types, capped only by viewport (or any `max-height` you set). It starts at `--step-24` (6rem at default interval) so an empty textarea has visible breathing room.
+
+To disable auto-grow, override the property:
+
+```css
+.textarea-fixed {
+  field-sizing: auto;
+  resize: vertical;
+}
+```
+
+## States
+
+- **Default.** Border `--border`, background `--input`.
+- **Hover.** Border lifts to `--primary`.
+- **Focus.** Border stays `--primary`; the [focus ring](/docs/reference/focus-ring) applies via `box-shadow: var(--focus-ring)`.
+- **Disabled.** Set the `disabled` attribute. Pointer events disable; contrast drops.
+- **Invalid.** Pair with `form-error` for the destructive-themed message.
+
+## Accessibility
+
+- Every textarea needs a label, visible or via [`sr-only`](/docs/reference/screen-readers).
+- `placeholder` is for examples or hints, not labels.
+- For long-form composition (essays, code), consider adding `aria-describedby` to a character count or formatting note.
+
+## Cross-platform
+
+| Platform | Reference |
+| --- | --- |
+| Figma | `Zazz v0.4.4 → Textarea` (component_set) |
+| Webflow | `textarea` class on the `<textarea>` element |
+| CSS / Tailwind | The same class after [installing utilities.css](/docs/quickstart/css) |
+
+## Where to next
+
+<Cards>
+  <Card title="Input" href="/docs/primitives/input" description="The single-line sibling." />
+  <Card title="Select" href="/docs/primitives/select" description="Dropdown for fixed-option fields." />
+</Cards>

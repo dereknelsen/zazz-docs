@@ -1,10 +1,4 @@
 {
   "title": "Quickstart",
-  "pages": [
-    "index",
-    "css",
-    "tailwind",
-    "webflow",
-    "figma"
-  ]
+  "pages": ["index", "css", "tailwind", "webflow", "figma"]
 }

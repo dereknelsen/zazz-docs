@@ -1,17 +1,15 @@
 ---
 title: Focus Ring
-description: A primary-colored focus indicator with a background gap for keyboard navigation.
+description: A primary-colored ring with a background-gap halo. One token, one utility, one focus pattern across every primitive.
 ---
 
 ## Class reference
 
 | Class | Property |
 | --- | --- |
-| `ring` | `outline: 2px solid var(--primary); outline-offset: 2px` |
+| `ring` | `box-shadow: var(--focus-ring)` |
 
-The `ring` utility uses native CSS `outline` for the focus indicator — it doesn't affect layout and respects element shape automatically.
-
-For a more elaborate ring with a background gap (the brand-colored outer ring separated from any element border), use the `--focus-ring` token directly as a box-shadow.
+The `ring` utility applies the `--focus-ring` token. Use it on `:focus-visible` so keyboard navigation shows the ring without mouse clicks triggering it.
 
 ## Token
 
@@ -21,31 +19,16 @@ For a more elaborate ring with a background gap (the brand-colored outer ring se
   0 0 0 2px var(--primary);
 ```
 
-Two layered shadows:
+Two layered box-shadows:
 
-- Inner: 2px of `--primary` — the visible ring.
-- Outer: 4px of `--background` — a gap that separates the ring from any border the element already has.
+- **Inner ring** — 2px of `--primary`. The visible indicator.
+- **Outer gap** — 4px of `--background`. Separates the ring from any border the element already has so the two don't fight.
 
-## Examples
+Both layers reference theme tokens, so the ring adapts to mode automatically. Primary lightens in dark mode; the gap flips from off-white to near-black.
 
-### Using the utility (outline-based)
+## Usage
 
-```css
-button:focus-visible {
-  @apply ring; /* if you use the utility */
-}
-```
-
-Or in vanilla CSS:
-
-```css
-.btn:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-```
-
-### Using the token (box-shadow-based)
+Apply `box-shadow: var(--focus-ring)` (or the `ring` utility) on `:focus-visible`:
 
 ```css
 .btn:focus-visible {
@@ -54,37 +37,47 @@ Or in vanilla CSS:
 }
 ```
 
-The box-shadow approach lets the ring sit *inside* the element's border-radius, which the outline approach can't do.
+Or directly with the utility class:
+
+```css
+.btn:focus-visible {
+  @apply ring;
+}
+```
+
+The Zazz primitives ([Button](/docs/primitives/button), [Badge](/docs/primitives/badge), [Input](/docs/primitives/input), and friends) all consume `--focus-ring` for their focus state, so a single token tunes the ring everywhere.
 
 ## `:focus` vs `:focus-visible`
 
-Use `:focus-visible`, not `:focus`. The ring should appear on keyboard navigation, not on mouse clicks — `:focus-visible` is the browser's standard mechanism for that distinction.
+Use `:focus-visible`, not `:focus`. The ring should appear on keyboard navigation, not on mouse clicks. `:focus-visible` is the browser's mechanism for that distinction.
 
 ```css
-.btn:focus-visible { /* keyboard or programmatic focus */
+.btn:focus-visible {
   box-shadow: var(--focus-ring);
 }
 
-.btn:focus:not(:focus-visible) { /* mouse click — no ring */
+.btn:focus:not(:focus-visible) {
+  /* mouse click: no ring */
   outline: none;
+  box-shadow: none;
 }
 ```
 
-Modern browsers handle `:focus-visible` automatically — you generally only need the `:focus-visible` rule.
+Modern browsers handle the distinction automatically when you use `:focus-visible`. You generally don't need the secondary `:focus:not(:focus-visible)` rule.
 
 ## Customizing
 
-Re-target `--focus-ring` to change the indicator across every component that consumes it:
+Retune the ring for the whole product by overriding the token:
 
 ```css
 :root {
   --focus-ring:
     0 0 0 3px var(--background),
-    0 0 0 2px var(--destructive); /* destructive focus for delete buttons */
+    0 0 0 2px var(--destructive); /* destructive ring for delete buttons */
 }
 ```
 
-For high-contrast accessibility modes, increase the spread:
+For a high-contrast accessibility mode, increase the spread:
 
 ```css
 .high-contrast {
@@ -93,3 +86,9 @@ For high-contrast accessibility modes, increase the spread:
     0 0 0 4px var(--foreground);
 }
 ```
+
+Components that already consume `--focus-ring` follow the override automatically.
+
+## Why box-shadow instead of outline
+
+`outline` doesn't respect `border-radius`, so a rounded button would get a rectangular outline. `box-shadow` follows the element's shape exactly. The trade-off is that `box-shadow` doesn't push other elements aside the way `outline-offset` does — the gap layer in `--focus-ring` handles that by painting a `--background`-colored ring that visually separates the indicator from any border.

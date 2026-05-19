@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { ArrowUpRight } from 'lucide-react';
-import { useState } from 'react';
-import { cn } from '../lib/cn';
+import { ArrowUpRight } from "lucide-react";
+import { useState } from "react";
+import { cn } from "../lib/cn";
 
 interface PaletteHexInputProps {
   name: string;
@@ -10,20 +10,16 @@ interface PaletteHexInputProps {
   className?: string;
 }
 
-export function PaletteHexInput({
-  name,
-  defaultHex,
-  className,
-}: PaletteHexInputProps) {
-  const [hex, setHex] = useState(defaultHex.replace(/^#/, ''));
-  const clean = hex.replace(/^#/, '').toUpperCase().slice(0, 6);
+export function PaletteHexInput({ name, defaultHex, className }: PaletteHexInputProps) {
+  const [hex, setHex] = useState(defaultHex.replace(/^#/, ""));
+  const clean = hex.replace(/^#/, "").toUpperCase().slice(0, 6);
   const isValid = /^[0-9A-F]{6}$/.test(clean);
   const url = `https://tailwind.simeongriggs.dev/api/${name}/${clean}`;
 
   return (
     <div
       className={cn(
-        'my-4 flex items-center gap-2.5 rounded-lg border border-fd-border bg-fd-card/40 px-2.5 py-2',
+        "my-4 flex items-center gap-2.5 rounded-lg border border-fd-border bg-fd-card/40 px-2.5 py-2",
         className,
       )}
     >
@@ -34,13 +30,13 @@ export function PaletteHexInput({
       <div className="flex flex-1 items-center gap-2.5 rounded-md border border-fd-border/60 bg-fd-background pl-2 pr-2.5 py-1.5 min-w-0 focus-within:border-fd-ring focus-within:ring-2 focus-within:ring-fd-ring/30">
         <div
           className="size-5 shrink-0 rounded border border-fd-border/60"
-          style={{ background: isValid ? `#${clean}` : 'transparent' }}
+          style={{ background: isValid ? `#${clean}` : "transparent" }}
         />
         <span className="font-mono text-xs text-fd-muted-foreground/60 select-none">#</span>
         <input
           type="text"
           value={clean}
-          onChange={(e) => setHex(e.target.value.replace(/[^0-9A-Fa-f]/g, ''))}
+          onChange={(e) => setHex(e.target.value.replace(/[^0-9A-Fa-f]/g, ""))}
           maxLength={6}
           spellCheck={false}
           aria-label={`${name} base hex value`}
@@ -55,10 +51,10 @@ export function PaletteHexInput({
         rel="noopener noreferrer"
         aria-disabled={!isValid}
         className={cn(
-          'group/cta inline-flex shrink-0 items-center gap-1 rounded-md px-3 py-1.5 text-xs font-medium transition-colors',
+          "group/cta inline-flex shrink-0 items-center gap-1 rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
           isValid
-            ? 'bg-fd-primary text-fd-primary-foreground hover:bg-fd-primary/90'
-            : 'pointer-events-none bg-fd-muted text-fd-muted-foreground',
+            ? "bg-fd-primary text-fd-primary-foreground hover:bg-fd-primary/90"
+            : "pointer-events-none bg-fd-muted text-fd-muted-foreground",
         )}
       >
         Generate

@@ -1,6 +1,6 @@
-import { cn } from '../lib/cn';
-import { GitFork, Star } from 'lucide-react';
-import { type ComponentProps, use } from 'react';
+import { cn } from "../lib/cn";
+import { GitFork, Star } from "lucide-react";
+import { type ComponentProps, use } from "react";
 
 export interface FetchRepositoryInfoOptions {
   owner: string;
@@ -20,7 +20,7 @@ export async function fetchRepositoryInfo({
   owner,
   repo,
   token,
-  baseUrl = 'https://api.github.com',
+  baseUrl = "https://api.github.com",
   fetchOptions = {
     // default revalidate options for Next.js (optional)
     next: {
@@ -31,8 +31,8 @@ export async function fetchRepositoryInfo({
   const endpoint = `${baseUrl}/repos/${owner}/${repo}`;
   const headers = new Headers(fetchOptions.headers);
 
-  headers.set('Content-Type', 'application/json');
-  if (token) headers.set('Authorization', `Bearer ${token}`);
+  headers.set("Content-Type", "application/json");
+  if (token) headers.set("Authorization", `Bearer ${token}`);
 
   const response = await fetch(endpoint, {
     ...fetchOptions,
@@ -55,8 +55,8 @@ export async function fetchRepositoryInfo({
 /**
  * Uses compact notation (e.g., 1.5K, 2.3M).
  */
-const defaultFormatter = new Intl.NumberFormat('en', {
-  notation: 'compact',
+const defaultFormatter = new Intl.NumberFormat("en", {
+  notation: "compact",
   maximumFractionDigits: 1,
 });
 
@@ -69,7 +69,7 @@ export function GithubInfo({
   baseUrl,
   fetchOptions,
   ...props
-}: ComponentProps<'a'> & FetchRepositoryInfoOptions) {
+}: ComponentProps<"a"> & FetchRepositoryInfoOptions) {
   const options: FetchRepositoryInfoOptions = {
     repo,
     owner,
@@ -88,7 +88,7 @@ export function GithubInfo({
       target="_blank"
       {...props}
       className={cn(
-        'flex flex-col gap-1.5 p-2 rounded-lg text-sm text-fd-foreground/80 transition-colors hover:text-fd-accent-foreground hover:bg-fd-accent',
+        "flex flex-col gap-1.5 p-2 rounded-lg text-sm text-fd-foreground/80 transition-colors hover:text-fd-accent-foreground hover:bg-fd-accent",
         props.className,
       )}
     >

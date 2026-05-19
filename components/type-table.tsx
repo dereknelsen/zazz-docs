@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { ChevronDown } from 'lucide-react';
-import Link from 'fumadocs-core/link';
-import { cva } from 'class-variance-authority';
-import { cn } from '../lib/cn';
-import { type ComponentProps, type ReactNode, useEffect, useState } from 'react';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
+import { ChevronDown } from "lucide-react";
+import Link from "fumadocs-core/link";
+import { cva } from "class-variance-authority";
+import { cn } from "../lib/cn";
+import { type ComponentProps, type ReactNode, useEffect, useState } from "react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./ui/collapsible";
 
 export interface ParameterNode {
   name: string;
@@ -46,19 +46,19 @@ export interface TypeNode {
   returns?: ReactNode;
 }
 
-const fieldVariants = cva('text-fd-muted-foreground not-prose pe-2');
+const fieldVariants = cva("text-fd-muted-foreground not-prose pe-2");
 
 export function TypeTable({
   id,
   type,
   className,
   ...props
-}: { type: Record<string, TypeNode> } & ComponentProps<'div'>) {
+}: { type: Record<string, TypeNode> } & ComponentProps<"div">) {
   return (
     <div
       id={id}
       className={cn(
-        '@container flex flex-col p-1 bg-fd-card text-fd-card-foreground rounded-2xl border my-6 text-sm overflow-hidden',
+        "@container flex flex-col p-1 bg-fd-card text-fd-card-foreground rounded-2xl border my-6 text-sm overflow-hidden",
         className,
       )}
       {...props}
@@ -108,24 +108,24 @@ function Item({
       open={open}
       onOpenChange={(v) => {
         if (v && id) {
-          window.history.replaceState(null, '', `#${id}`);
+          window.history.replaceState(null, "", `#${id}`);
         }
         setOpen(v);
       }}
       className={cn(
-        'rounded-xl border overflow-hidden scroll-m-20 transition-all',
-        open ? 'shadow-sm bg-fd-background not-last:mb-2' : 'border-transparent',
+        "rounded-xl border overflow-hidden scroll-m-20 transition-all",
+        open ? "shadow-sm bg-fd-background not-last:mb-2" : "border-transparent",
       )}
     >
       <CollapsibleTrigger className="relative flex flex-row items-center w-full group text-start px-3 py-2 not-prose hover:bg-fd-accent">
         <code
           className={cn(
-            'text-fd-primary min-w-fit w-1/4 font-mono font-medium pe-2',
-            deprecated && 'line-through text-fd-primary/50',
+            "text-fd-primary min-w-fit w-1/4 font-mono font-medium pe-2",
+            deprecated && "line-through text-fd-primary/50",
           )}
         >
           {name}
-          {!required && '?'}
+          {!required && "?"}
         </code>
         {typeDescriptionLink ? (
           <Link href={typeDescriptionLink} className="underline @max-xl:hidden">

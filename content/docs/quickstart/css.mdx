@@ -3,61 +3,86 @@ title: Plain CSS
 description: Install Zazz in any project that supports CSS imports.
 ---
 
-import { Accordion, Accordions } from '@/components/accordion';
+import { Accordion, Accordions } from "@/components/accordion";
 
-Zazz is three CSS files: **variables** (the token surface), **reset** (sensible element defaults), and **utilities** (Tailwind-style helper classes). They have no JavaScript dependencies and no build step. Any project that can import a CSS file can run Zazz.
+Zazz is three CSS files. **Variables** hold the token surface. **Reset** sets sensible element defaults. **Utilities** ship Tailwind-style helper classes. None of them require JavaScript or a build step. Any project that can import CSS can run Zazz.
 
 ## 1. Get the files
 
-The files live in the Zazz repo:
+The files live at [app/zazz/](app/zazz/) in the Zazz repo:
 
-- [_variables.css](app/zazz/_variables.css) — every Zazz token, organized into eight collections
-- [_reset.css](app/zazz/_reset.css) — universal box-sizing, sensible element defaults, native dialog enhancements
-- [_utilities.css](app/zazz/_utilities.css) — display, flex, grid, spacing, type, radius, shadow, and layout utility classes
+- [variables.css](app/zazz/variables.css): every Zazz token, organized into eight collections
+- [reset.css](app/zazz/reset.css): box-sizing, element defaults, native dialog enhancements
+- [utilities.css](app/zazz/utilities.css): display, flex, grid, spacing, type, radius, shadow, and layout utility classes
+- [main.css](app/zazz/main.css): the recommended entry point. Imports the other three into CSS `@layer` rules with the right cascade order
 
-Copy all three into your project. A common location is `/styles/zazz/`.
+Copy all four into your project. A common location is `/styles/zazz/`.
 
 <Accordions>
   <Accordion title="What's in each file?">
-    **`_variables.css`** declares the token surface in this order: theme (base, overlay, brand, status), corporate scales (primary, secondary, tertiary), grayscale (neutral, shade, tint), typography, spacing, radius, layout, effects.
+    `variables.css` declares the token surface in this order: theme (base, overlay, brand, status), corporate scales (primary, secondary, tertiary), grayscale (neutral, shade, tint), typography, spacing, radius, layout, effects.
 
-    **`_reset.css`** sets `box-sizing: border-box` on everything, removes default margins and padding, normalizes form element styling, and adds spring-eased transitions to native `<dialog>` elements.
+    `reset.css` sets `box-sizing: border-box` on everything, removes default margins and padding, normalizes form element styling, and adds spring-eased transitions to native `<dialog>` elements.
 
-    **`_utilities.css`** ships Tailwind-style atomic classes — flex, grid, gap, padding, margin, radius, shadow, text styles, container, ring. Every class consumes Zazz tokens, so changes to the variables propagate through the utilities automatically.
+    `utilities.css` ships Tailwind-style atomic classes for flex, grid, gap, padding, margin, radius, shadow, text styles, container, and ring. Every class consumes Zazz tokens, so changes to the variables propagate through the utilities automatically.
+
+    `main.css` is a thin entry point that wraps the other three into CSS `@layer` rules. Three lines total.
+
   </Accordion>
 </Accordions>
 
-## 2. Import them
+## 2. Import
 
-In your main stylesheet — `globals.css`, `app.css`, or wherever your entry-point CSS lives — import the three files in order:
+The simplest path is a single import:
 
 ```css
-@import "./zazz/_reset.css";
-@import "./zazz/_variables.css";
-@import "./zazz/_utilities.css";
+@import "./zazz/main.css";
 ```
 
-Order matters:
+That file wraps the three files into named CSS layers:
 
-- **Reset first.** Its declarations sit at the bottom of the cascade so component CSS overrides them.
-- **Variables second.** Tokens need to be defined before utilities reference them.
-- **Utilities third.** Utility classes consume the variables and apply on top of the reset.
+```css
+@import url("./variables.css") layer(variables);
+@import url("./reset.css") layer(reset);
+@import url("./utilities.css") layer(utilities);
+```
+
+Layers apply in declaration order. Later layers win conflicts, so utility classes override reset declarations, which override anything in variables. Your own CSS sits outside any layer and wins over all of them.
+
+### Importing the files directly
+
+If you want to control layer ordering yourself (or your build chain doesn't support `@layer`), import each file separately:
+
+```css
+@import "./zazz/variables.css";
+@import "./zazz/reset.css";
+@import "./zazz/utilities.css";
+```
+
+When you skip layers, order matters:
+
+1. **Reset first.** Its declarations sit at the bottom of the cascade so component CSS overrides them.
+2. **Variables second.** Tokens need to be defined before utilities reference them.
+3. **Utilities third.** Utility classes consume the variables and apply on top of the reset.
 
 ## 3. Verify
 
 Drop a button on the page that uses Zazz tokens and utility classes:
 
 ```html
-<button class="p-md radius-md text-md" style="background: var(--primary); color: var(--primary-foreground);">
+<button
+  class="p-md radius-md text-md"
+  style="background: var(--primary); color: var(--primary-foreground);"
+>
   Confirm
 </button>
 ```
 
-A rounded button in your primary brand color with 1.5rem of padding. If the button is unstyled, your import order is wrong. If the colors are missing, the variables file path is wrong.
+A rounded button in your primary brand color with 1.5rem of padding. If the button is unstyled, your imports failed. If the colors are missing, check the variables file path.
 
 ## Dark mode
 
-Zazz responds to system preference (`prefers-color-scheme: dark`) by default, and to a `.dark` class on any ancestor. To force a mode at the root:
+Zazz responds to system preference (`prefers-color-scheme: dark`) and to a `.dark` class on any ancestor. Force a mode at the root:
 
 ```html
 <html class="dark">
@@ -65,12 +90,24 @@ Zazz responds to system preference (`prefers-color-scheme: dark`) by default, an
 </html>
 ```
 
-See [Theme → How modes work](/docs/foundations/theme#how-modes-work) for the full pattern, including how to add a third mode.
+See [Theme: How modes work](/docs/foundations/theme#how-modes-work) for the full pattern, including how to add a third mode.
 
 ## Where to next
 
 <Cards>
-  <Card title="Foundations" href="/docs/foundations" description="The token system you just installed. Start with Theme." />
-  <Card title="Tailwind" href="/docs/quickstart/tailwind" description="Add Tailwind v4 on top to get Tailwind utilities that resolve through Zazz tokens." />
-  <Card title="Customization" href="/docs/practices/customization" description="Override tokens to rebrand or scope changes per section." />
+  <Card
+    title="Foundations"
+    href="/docs/foundations"
+    description="The token system you just installed. Start with Theme."
+  />
+  <Card
+    title="Tailwind"
+    href="/docs/quickstart/tailwind"
+    description="Add Tailwind v4 on top to get Tailwind utilities that resolve through Zazz tokens."
+  />
+  <Card
+    title="Customization"
+    href="/docs/practices/customization"
+    description="Override tokens to rebrand or scope changes per section."
+  />
 </Cards>

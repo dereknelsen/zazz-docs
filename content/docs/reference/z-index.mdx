@@ -5,17 +5,17 @@ description: Utilities for controlling the stack order of positioned elements.
 
 ## Class reference
 
-| Class | Property |
-| --- | --- |
-| `z-isolate` | `z-index: isolate` — creates a new stacking context |
-| `z-0` | `z-index: 0` |
-| `z-10` | `z-index: 10` |
-| `z-20` | `z-index: 20` |
-| `z-30` | `z-index: 30` |
-| `z-40` | `z-index: 40` |
-| `z-50` | `z-index: 50` |
+| Class       | Property                                            |
+| ----------- | --------------------------------------------------- |
+| `z-isolate` | `z-index: isolate`. Creates a new stacking context |
+| `z-0`       | `z-index: 0`                                        |
+| `z-10`      | `z-index: 10`                                       |
+| `z-20`      | `z-index: 20`                                       |
+| `z-30`      | `z-index: 30`                                       |
+| `z-40`      | `z-index: 40`                                       |
+| `z-50`      | `z-index: 50`                                       |
 
-The `z-isolate` utility uses CSS isolation to start a new stacking context without affecting the painted z-index of children — useful when you need to contain stacking without forcing children to render in front of or behind unrelated content.
+The `z-isolate` utility uses CSS isolation to start a new stacking context without affecting the painted z-index of children. Useful when you need to contain stacking without forcing children to render in front of or behind unrelated content.
 
 ## Examples
 
@@ -24,9 +24,7 @@ The `z-isolate` utility uses CSS isolation to start a new stacking context witho
 ```html
 <div class="relative">
   <img class="z-0" src="hero.jpg" alt="" />
-  <div class="absolute z-10" style="inset: 0">
-    Overlay above the image, below the modal.
-  </div>
+  <div class="absolute z-10" style="inset: 0">Overlay above the image, below the modal.</div>
 </div>
 ```
 
@@ -42,16 +40,16 @@ The `z-isolate` utility uses CSS isolation to start a new stacking context witho
 
 Zazz's scale jumps by tens (`0, 10, 20, …, 50`) to leave room between for custom values without breaking the system. A suggested mapping:
 
-| Class | Typical use |
-| --- | --- |
-| `z-0` | Page content baseline |
+| Class  | Typical use                          |
+| ------ | ------------------------------------ |
+| `z-0`  | Page content baseline                |
 | `z-10` | Section overlays, scroll-hint badges |
-| `z-20` | Sticky headers, navigation |
-| `z-30` | Dropdowns, popovers |
-| `z-40` | Toasts, snackbars |
-| `z-50` | Modals, command palettes |
+| `z-20` | Sticky headers, navigation           |
+| `z-30` | Dropdowns, popovers                  |
+| `z-40` | Toasts, snackbars                    |
+| `z-50` | Modals, command palettes             |
 
-Native `<dialog>` elements set `z-index: 9999` via the [reset](app/zazz/_reset.css) and sit above everything in the utility scale.
+Native `<dialog>` elements set `z-index: 9999` via the [reset](app/zazz/reset.css) and sit above everything in the utility scale.
 
 ## Higher values
 

@@ -1,0 +1,86 @@
+---
+title: Switch
+description: Visual toggle for binary settings. Built on the checkbox semantic.
+---
+
+A switch is the right control when a setting takes effect immediately on toggle: turning a feature on, switching notifications, enabling autoplay. For choices that apply on submit (terms acceptance, multi-select filters), use [Checkbox](/docs/primitives/checkbox) instead. Both controls produce the same value semantically; the choice is one of UX expectation.
+
+## Default
+
+```html
+<label class="w-checkbox switch-base">
+  <input type="checkbox" class="w-checkbox-input w-checkbox-input--inputType-custom switch" />
+  <div class="switch-toggle w-form-label"></div>
+</label>
+```
+
+The switch is built from a native `<input type="checkbox">` (so it behaves like a checkbox semantically and submits as a form value), restyled as a horizontal track + sliding toggle.
+
+## Anatomy
+
+| Part | Class | Notes |
+| --- | --- | --- |
+| Wrapper | `switch-base` | Sets dimensions (width `--step-8`, height `--step-4`) and positioning. |
+| Input | `switch` | The native checkbox, absolutely positioned to fill the wrapper. Controls the visual state. |
+| Toggle dot | `switch-toggle` | The circular indicator that slides between off and on positions. |
+
+## Tokens
+
+| Property | Token / value |
+| --- | --- |
+| Track width | `--step-8` |
+| Track height | `--step-4` |
+| Track border (off) | `1px solid var(--muted)` |
+| Track background (off) | `--muted` |
+| Track border (on) | `--primary` |
+| Track background (on) | `--primary` |
+| Toggle width | `--step-3` |
+| Toggle radius | `--radius-full` |
+| Toggle background | `--background` |
+| Toggle shadow | `--shadow-xs` |
+| Toggle transition | `transform 0.2s ease` |
+| Focus ring | `--focus-ring` |
+
+The toggle slides via CSS transform when the input's checked state changes. Add a JavaScript class or use the `:checked` selector with a sibling combinator to wire the translation.
+
+## States
+
+- **Off.** Track is `--muted`, toggle sits at the left.
+- **On.** Track becomes `--primary`, toggle slides to the right.
+- **Focus.** Focus ring outlines the track.
+- **Disabled.** Set `disabled` on the input. Pointer events drop; the visual stays in the disabled-tinted state.
+
+## Composing in a form
+
+```html
+<div class="switch-group">
+  <label class="w-checkbox switch-base">
+    <input type="checkbox" class="switch" />
+    <div class="switch-toggle"></div>
+  </label>
+  <label class="form-label">Enable notifications</label>
+</div>
+```
+
+`switch-group` is the horizontal flex wrapper that puts the switch next to its label with `--gap-xs`.
+
+## Accessibility
+
+- The control is semantically a checkbox. Screen readers announce it as "checkbox, checked/unchecked," not "switch." If the role-as-switch matters (some screen readers handle it differently), add `role="switch"` to the input. Only do this after you've verified the announcement is clearer.
+- The label must convey what the switch controls. Bad: "Notifications." Better: "Enable email notifications." The user should know what happens when they flip it.
+- Switches that take effect immediately don't need a save button. If the switch sits inside a form that requires submission, make that clear in the form's helper text.
+
+## Cross-platform
+
+| Platform | Reference |
+| --- | --- |
+| Figma | No Figma component (representative mockup only). |
+| Webflow | `switch` class on a custom-styled `w-checkbox-input`, wrapped in `switch-base` with `switch-toggle` and `switch-group`. |
+| CSS / Tailwind | The same classes after [installing utilities.css](/docs/quickstart/css). |
+
+## Where to next
+
+<Cards>
+  <Card title="Checkbox" href="/docs/primitives/checkbox" description="Same semantic, different visual treatment." />
+  <Card title="Foundations / Effects" href="/docs/foundations/effects" description="The toggle uses `--shadow-xs` for its slight lift." />
+</Cards>

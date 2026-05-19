@@ -1,16 +1,16 @@
-import Link from 'fumadocs-core/link';
-import type { HTMLAttributes, ReactNode } from 'react';
-import { cn } from '../lib/cn';
+import Link from "fumadocs-core/link";
+import type { HTMLAttributes, ReactNode } from "react";
+import { cn } from "../lib/cn";
 
 export function Cards(props: HTMLAttributes<HTMLDivElement>) {
   return (
-    <div {...props} className={cn('grid grid-cols-2 gap-3 @container', props.className)}>
+    <div {...props} className={cn("grid grid-cols-2 gap-3 @container", props.className)}>
       {props.children}
     </div>
   );
 }
 
-export type CardProps = Omit<HTMLAttributes<HTMLElement>, 'title'> & {
+export type CardProps = Omit<HTMLAttributes<HTMLElement>, "title"> & {
   icon?: ReactNode;
   title: ReactNode;
   description?: ReactNode;
@@ -20,15 +20,15 @@ export type CardProps = Omit<HTMLAttributes<HTMLElement>, 'title'> & {
 };
 
 export function Card({ icon, title, description, ...props }: CardProps) {
-  const E = props.href ? Link : 'div';
+  const E = props.href ? Link : "div";
 
   return (
     <E
       {...props}
       data-card
       className={cn(
-        'block rounded-xl border bg-fd-card p-4 text-fd-card-foreground transition-colors @max-lg:col-span-full',
-        props.href && 'hover:bg-fd-accent/80',
+        "block rounded-xl border bg-fd-card p-4 text-fd-card-foreground transition-colors @max-lg:col-span-full",
+        props.href && "hover:bg-fd-accent/80",
         props.className,
       )}
     >

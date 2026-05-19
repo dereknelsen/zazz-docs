@@ -1,0 +1,102 @@
+---
+title: Button
+description: The primary action element. Four variants plus a square icon-only modifier.
+---
+
+A button is the element users press to do a thing. Apply the `button` class to an `<a>`, `<button>`, or any clickable element. Add a variant class to choose the visual treatment.
+
+## Variants
+
+| Variant class | Use for | shadcn equivalent |
+| --- | --- | --- |
+| `button` | Default outlined treatment. Neutral, fits anywhere. | `button` (default / outline) |
+| `button-primary` | The page's most important action. Filled with `--primary`. | `button-primary` (default) |
+| `button-muted` | A secondary action that still asks for attention. Soft background. | `button-secondary` |
+| `button-ghost` | Tertiary actions and toolbars. Transparent until hover. | `button-ghost` |
+| `button-link` | Inline text-style action that doesn't need to look like a button. | `button-link` |
+
+Variant classes apply alongside `button`. The base sets sizing, padding, and shared focus behavior; the variant sets color and surface.
+
+```html
+<a class="button" href="/contact">Get in touch</a>
+<a class="button button-primary" href="/signup">Start free trial</a>
+<a class="button button-muted" href="/save">Save draft</a>
+<a class="button button-ghost" href="/help">Help</a>
+<a class="button button-link" href="/learn">Learn more</a>
+```
+
+## Icon-only
+
+The `button-minimal` modifier makes a square icon-only button at the same height as the default button. Drop the `button-text` element and add `aria-label` to the root.
+
+```html
+<button class="button button-minimal" aria-label="Open menu">
+  <span class="button-icon"><!-- menu icon --></span>
+</button>
+
+<a class="button button-primary button-minimal" aria-label="Save" href="/save">
+  <span class="button-icon"><!-- check icon --></span>
+</a>
+```
+
+## Anatomy
+
+```html
+<a class="button" href="/example">
+  <span class="button-icon"><!-- optional leading icon --></span>
+  <span class="button-text">Label</span>
+  <span class="button-icon"><!-- optional trailing icon --></span>
+</a>
+```
+
+| Part | Class | Notes |
+| --- | --- | --- |
+| Root | `button` | The clickable element. Required. |
+| Variant | `button-primary`, `button-muted`, `button-ghost`, `button-link` | Optional. Apply at most one. |
+| Modifier | `button-minimal` | Square icon-only treatment. Stacks with variant. |
+| Icon | `button-icon` | Wraps the icon SVG. Use one on each side as needed. |
+| Label | `button-text` | The visible label. Omit for icon-only buttons. |
+
+## Tokens
+
+| Property | Token / value |
+| --- | --- |
+| Height | `--step-9` |
+| Padding (inline) | `--step-2_5` |
+| Gap between icon and label | `--step-1_5` |
+| Border | `1px solid var(--border)` (default), variant-dependent elsewhere |
+| Radius | `--radius-button` (defaults to `--radius-md`) |
+| Background (default) | `--card` |
+| Background (primary) | `--primary` → text `--primary-foreground` |
+| Background (muted) | `--muted` with `--faded` border → text `--foreground` |
+| Background (ghost) | transparent → hover paints `--muted` |
+| Background (link) | transparent → hover sets text to `--primary` |
+| Font | family `--font-body`, size `--font-size-sm`, weight `--weight-body`, line-height `1` |
+| Hover | background-color shifts to `--muted` (default) or stays + drops opacity (primary, muted) |
+| Active | `opacity: 0.8` |
+| Focus-visible | `box-shadow: var(--focus-ring)` (apply via the [`ring`](/docs/reference/focus-ring) utility class) |
+
+Re-target `--radius-button` (in [Foundations → Radius](/docs/foundations/radius)) to make every button a capsule or a perfect square.
+
+## Accessibility
+
+- Use `<button>` for actions in the page and `<a class="button">` for navigation. The class works on both; the element conveys the semantic.
+- For icon-only buttons (`button-minimal` without `button-text`), set `aria-label` describing the action.
+- Focus state uses `:focus-visible`, so keyboard users see the outline and mouse users don't.
+- Disabled buttons should set the `disabled` attribute on `<button>` or `aria-disabled="true"` on `<a>`. The button drops opacity and ignores pointer events.
+
+## Cross-platform
+
+| Platform | Reference |
+| --- | --- |
+| Figma | `Zazz v0.4.4 → button` (component_set with variant, label, icon-position properties) |
+| Webflow | `button` class with `button-{variant}` modifier |
+| CSS / Tailwind | The same classes after [installing utilities.css](/docs/quickstart/css) |
+
+## Where to next
+
+<Cards>
+  <Card title="Badge" href="/docs/primitives/badge" description="The small sibling of button. Same variants, no action." />
+  <Card title="Card" href="/docs/primitives/card" description="A container that often holds buttons." />
+  <Card title="Foundations / Radius" href="/docs/foundations/radius" description="`--radius-button` controls every button's corner." />
+</Cards>

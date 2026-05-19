@@ -1,0 +1,86 @@
+---
+title: Radio
+description: Mutually exclusive selection within a group. Styled native HTML control.
+---
+
+A radio is one of a set of mutually exclusive options. Picking one deselects the others in the same group. Use radios for binary or small fixed-option choices where the visible options matter. For longer lists, reach for [Select](/docs/primitives/select) instead.
+
+## Default
+
+```html
+<label class="w-radio radio-group">
+  <input type="radio" name="plan" value="starter" class="w-form-formradioinput w-form-formradioinput--inputType-custom radio w-radio-input" />
+  <span class="form-label">Starter</span>
+</label>
+
+<label class="w-radio radio-group">
+  <input type="radio" name="plan" value="pro" class="w-form-formradioinput w-form-formradioinput--inputType-custom radio w-radio-input" />
+  <span class="form-label">Pro</span>
+</label>
+```
+
+Radios in the same group share a `name` attribute. The browser handles the mutual exclusion.
+
+## Tokens
+
+| Property | Token / value |
+| --- | --- |
+| Width / height | `--step-4` |
+| Border | `1px solid var(--border)` (unchecked), `5px solid --primary` (checked) |
+| Radius | `--radius-full` |
+| Background | `--input` (unchecked), `--background` (checked, with thick primary border) |
+| Group gap | `--gap-xs` |
+| Focus ring | `--focus-ring` |
+
+The checked appearance uses a `5px` border that visually shrinks the background, creating a centered dot effect without an inner element.
+
+## States
+
+- **Unchecked.** Border `--border`, background `--input`.
+- **Checked.** Border thickens to 5px `--primary`. Background switches to `--background` so the visible center reads as the page surface.
+- **Focus.** Focus ring outlines the input.
+- **Disabled.** Set `disabled` on the input.
+
+## Composing a group
+
+```html
+<fieldset class="form-group">
+  <legend class="form-label">Plan</legend>
+  <label class="w-radio radio-group">
+    <input type="radio" name="plan" value="starter" class="radio" />
+    <span>Starter</span>
+  </label>
+  <label class="w-radio radio-group">
+    <input type="radio" name="plan" value="pro" class="radio" />
+    <span>Pro</span>
+  </label>
+  <label class="w-radio radio-group">
+    <input type="radio" name="plan" value="team" class="radio" />
+    <span>Team</span>
+  </label>
+</fieldset>
+```
+
+`<fieldset>` and `<legend>` give the group an accessible name. The shared `name="plan"` keeps the radios mutually exclusive.
+
+## Accessibility
+
+- Always wrap each radio in a `<label>` so clicking the label selects the option.
+- Group related radios in `<fieldset>` with a `<legend>` describing what the choice is for.
+- Sharing a `name` attribute is what makes radios mutually exclusive. The browser also handles keyboard navigation (`Arrow` to move between options, `Space` to select).
+- For a required radio group, use `required` on at least one input in the group.
+
+## Cross-platform
+
+| Platform | Reference |
+| --- | --- |
+| Figma | No Figma component (representative mockup only). |
+| Webflow | `radio` class on a custom-styled `w-radio-input`. Group wrapper is `w-radio radio-group`. |
+| CSS / Tailwind | The same class after [installing utilities.css](/docs/quickstart/css). |
+
+## Where to next
+
+<Cards>
+  <Card title="Checkbox" href="/docs/primitives/checkbox" description="The multi-select sibling. Same wrapper pattern." />
+  <Card title="Select" href="/docs/primitives/select" description="Better for longer lists of mutually exclusive options." />
+</Cards>

@@ -3,11 +3,11 @@ title: Tailwind + shadcn
 description: Use Zazz with Tailwind v4 by bridging tokens into the theme.
 ---
 
-Zazz works alongside Tailwind v4 with a small `@theme` bridge. After bridging, every Zazz token is reachable as a Tailwind utility — `bg-primary`, `text-foreground`, `gap-md`, `rounded-lg`. shadcn components plug into the same tokens without modification.
+Zazz works alongside Tailwind v4 with a small `@theme` bridge. After bridging, every Zazz token is reachable as a Tailwind utility: `bg-primary`, `text-foreground`, `gap-md`, `rounded-lg`. shadcn components plug into the same tokens without modification.
 
 ## 1. Start with the base install
 
-Follow the [Plain CSS](/docs/quickstart/css) install first. Tailwind builds on top of Zazz — it doesn't replace the variables, reset, or utility files.
+Follow the [Plain CSS](/docs/quickstart/css) install first. Tailwind builds on top of Zazz. It doesn't replace the variables, reset, or utility files.
 
 ## 2. Bridge tokens into the Tailwind theme
 
@@ -15,9 +15,7 @@ In your main stylesheet, after the Zazz imports, add a `@theme` block that maps 
 
 ```css
 @import "tailwindcss";
-@import "./zazz/_reset.css";
-@import "./zazz/_variables.css";
-@import "./zazz/_utilities.css";
+@import "./zazz/main.css";
 
 @theme {
   /* Theme colors → Tailwind color utilities */
@@ -63,7 +61,7 @@ After this, `bg-primary` resolves to Zazz's `--primary`, `text-foreground` resol
 
 ## 3. shadcn components
 
-shadcn/ui components expect tokens named `--background`, `--foreground`, `--primary`, `--border`, etc. — names Zazz already provides. Run the shadcn install commands as normal; the components will pick up Zazz's theme without modification.
+shadcn/ui components expect tokens named `--background`, `--foreground`, `--primary`, `--border`, and so on. Zazz already provides them. Run the shadcn install commands as normal; the components will pick up Zazz's theme without modification.
 
 A few notes:
 
@@ -74,7 +72,19 @@ A few notes:
 ## Where to next
 
 <Cards>
-  <Card title="Foundations" href="/docs/foundations" description="The token system underneath the bridge." />
-  <Card title="Theme" href="/docs/foundations/theme" description="Base, overlay, brand, and status — the surfaces shadcn components consume." />
-  <Card title="Customization" href="/docs/practices/customization" description="Retuning Zazz tokens per project or scoped section." />
+  <Card
+    title="Foundations"
+    href="/docs/foundations"
+    description="The token system underneath the bridge."
+  />
+  <Card
+    title="Theme"
+    href="/docs/foundations/theme"
+    description="Base, overlay, brand, and status. The surfaces shadcn components consume."
+  />
+  <Card
+    title="Customization"
+    href="/docs/practices/customization"
+    description="Retuning Zazz tokens per project or scoped section."
+  />
 </Cards>

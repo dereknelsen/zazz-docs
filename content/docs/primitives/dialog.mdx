@@ -1,0 +1,139 @@
+---
+title: Dialog
+description: A native dialog modal with spring-eased transitions, a tinted backdrop, and data-attribute wiring.
+---
+
+The dialog uses the native HTML `<dialog>` element. The [reset](app/zazz/reset.css) wires up spring-eased open and close transitions and a `--shade-800` backdrop. A small global script wires up open and close behavior via `data-dialog` attributes, so most projects never need to write dialog-specific JavaScript.
+
+Use a dialog for confirmations, forms, and any modal interaction where the rest of the page should pause.
+
+## Anatomy
+
+```html
+<dialog class="dialog">
+  <div class="dialog__modal article shadow-md">
+    <button
+      class="dialog__close button button-ghost button-minimal"
+      data-dialog="close"
+      aria-label="Close dialog"
+    >
+      <span class="button-icon"><!-- x icon --></span>
+    </button>
+
+    <div class="dialog__content">
+      <div class="dialog__titles">
+        <h2 class="dialog__title">Dialog title</h2>
+        <p class="dialog__subtitle text-sm text-muted-foreground">Optional supporting copy.</p>
+      </div>
+
+      <div class="dialog__body">
+        <!-- Forms, content, anything -->
+      </div>
+
+      <div class="dialog__buttons">
+        <button class="dialog__cancel button" type="button" data-dialog="close">
+          Cancel
+        </button>
+        <button class="dialog__submit button button-primary" type="submit">
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<button class="button button-primary" data-dialog="trigger">Open dialog</button>
+```
+
+| Part | Class | Notes |
+| --- | --- | --- |
+| Root | `dialog` | The native `<dialog>` element. |
+| Modal surface | `dialog__modal` | The visible card. Often composed with `article` (constrained width) and `shadow-md`. Padding `--gap-md`, border, `--radius-card`. |
+| Close button | `dialog__close` | Positioned absolute top-right. Often `button button-ghost button-minimal`. Add `data-dialog="close"` to wire it automatically. |
+| Content | `dialog__content` | Vertical stack of titles, body, and buttons with `--gap-sm` between. |
+| Titles | `dialog__titles` | Title + subtitle stack. |
+| Title | `dialog__title` | Heading. Weight `--weight-strong`. |
+| Subtitle | `dialog__subtitle` | Optional secondary line. Pairs with `text-sm` + `text-muted-foreground`. |
+| Body | `dialog__body` | The main content area. Free-form. |
+| Buttons row | `dialog__buttons` | Action row, aligned to the right with `--gap-xs`. |
+| Cancel | `dialog__cancel` | Secondary action. Apply `button` for the outline variant. Add `data-dialog="close"` to dismiss without submitting. |
+| Submit | `dialog__submit` | Primary action. Compose `button button-primary`. |
+
+## Open and close via data attributes
+
+The global script (`global-end__dialogs`) wires open and close automatically:
+
+- Any element with `data-dialog="trigger"` opens the dialog when clicked.
+- Any element with `data-dialog="close"` inside a `<dialog>` closes it.
+
+The trigger and dialog must share the same parent, and the trigger must come **after** the dialog in the DOM. The script walks each `<dialog>` and binds following siblings with `data-dialog="trigger"`.
+
+```html
+<section class="my-section">
+  <dialog class="dialog">
+    <!-- modal markup -->
+  </dialog>
+
+  <button data-dialog="trigger" class="button button-primary">Open</button>
+</section>
+```
+
+Multiple triggers can open the same dialog. Multiple close buttons can sit inside.
+
+## Open and close manually
+
+When the data-attribute pattern doesn't fit (cross-page links, programmatic flows, dialogs not in the same parent), call the native API directly:
+
+```js
+const dialog = document.querySelector('.dialog');
+dialog.showModal(); // opens with backdrop + focus trap
+dialog.close();
+```
+
+The browser handles the backdrop, focus trap, and `Esc`-to-close. Zazz's reset adds the visual transitions on top.
+
+## What the reset adds
+
+- Spring-eased opacity + scale transitions on open and close (via `--spring-duration` and `--spring-easing`).
+- A `--shade-800` backdrop that fades in.
+- `body` overflow lock while any dialog is open (`body:has(dialog[open])`).
+
+The `[open]` attribute is what the styles target. If you build a non-native modal from `<div>`, apply `open="true"` (or just `open=" "`) to the modal element to trigger the same transitions.
+
+## Tokens
+
+| Property | Token / value |
+| --- | --- |
+| Modal padding | `--gap-md` |
+| Modal border | `1px solid var(--border)` |
+| Modal radius | `--radius-card` |
+| Backdrop | `--shade-800` (fades in) |
+| Open transition | `--spring-duration` + `--spring-easing` (set in reset) |
+| Title weight | `--weight-strong` |
+| Content gap | `--gap-sm` |
+| Buttons gap | `--gap-xs` |
+| Close button position | `--gap-xs` from top and right |
+| z-index | `9999` (set in reset) |
+
+## Accessibility
+
+- Use the native `<dialog>` element. It handles focus trap, `Esc` to close, and the inert background.
+- `aria-label` or `aria-labelledby` on the dialog root is required when the title isn't immediately discoverable. Pointing `aria-labelledby` at the `dialog__title`'s `id` is the typical pattern.
+- The close button needs an `aria-label` (e.g., "Close dialog") since it's icon-only.
+- The first focusable element receives focus automatically when `showModal()` is called. Order your markup so the right element gets focus (often the close button or the first input).
+
+## Cross-platform
+
+| Platform | Reference |
+| --- | --- |
+| Figma | `Zazz v0.4.4 → dialog` |
+| Webflow | `dialog` root with `dialog__*` child classes; trigger and close behavior wired by the `global-end__dialogs` script via `data-dialog` attributes. |
+| CSS / Tailwind | The reset wires up `<dialog>` transitions and backdrop. Modal layout uses the `dialog__*` classes from [utilities.css](/docs/quickstart/css). For the data-attribute wiring, include the same script or call `showModal()` and `close()` directly. |
+
+## Where to next
+
+<Cards>
+  <Card title="Card" href="/docs/primitives/card" description="Same `--radius-card` and surface conventions as the dialog modal." />
+  <Card title="Button" href="/docs/primitives/button" description="The cancel/submit actions inside `dialog__buttons`." />
+  <Card title="Layout / Article" href="/docs/foundations/layout" description="`dialog__modal` often composes with `article` for constrained width." />
+</Cards>

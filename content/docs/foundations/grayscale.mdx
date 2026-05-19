@@ -3,21 +3,21 @@ title: Grayscale
 description: Neutrals, plus shade and tint scales derived from them.
 ---
 
-import { Accordion, Accordions } from '@/components/accordion';
+import { Accordion, Accordions } from "@/components/accordion";
 
 **Grayscale is the foundation everything dimmed or faded points to.**
 
 Three sub-scales: **neutral** (raw grayscale, `50` to `950` plus `white` and `black`), **shade** (darkened overlays derived from `--neutral-950`), and **tint** (faded overlays derived from `--white`). Theme tokens like `--background`, `--border`, `--muted`, and `--faded` all resolve into one of these three.
 
-The point of separating raw neutrals from overlays: neutrals are *colors*, overlays are *opacities*. A border at `--neutral-200` paints a specific gray; `--shade-100` paints whatever sits below at 10% opacity. The two solve different problems and shouldn't be confused.
+The point of separating raw neutrals from overlays: neutrals are _colors_, overlays are _opacities_. A border at `--neutral-200` paints a specific gray; `--shade-100` paints whatever sits below at 10% opacity. The two solve different problems and shouldn't be confused.
 
 ## Neutral
 
 The raw grayscale. Eleven OKLCH steps plus pure white and black.
 
 ```css
---white:       white;
---neutral-50:  oklch(0.9911 0 0);
+--white: white;
+--neutral-50: oklch(0.9911 0 0);
 --neutral-100: oklch(0.9581 0 0);
 --neutral-200: oklch(0.871 0.004 286.58);
 --neutral-300: oklch(0.794 0.007 286.38);
@@ -28,14 +28,14 @@ The raw grayscale. Eleven OKLCH steps plus pure white and black.
 --neutral-800: oklch(0.336 0.014 285.66);
 --neutral-900: oklch(0.241 0.009 285.7);
 --neutral-950: oklch(0.198 0.008 285.68);
---black:       black;
+--black: black;
 ```
 
-From `--neutral-200` through `--neutral-950`, the steps carry a faint blue-violet tilt (hue `~286°`, chroma `0.004` to `0.015`). The two lightest steps (`50` and `100`) are pure neutral gray — chroma `0`. Pure gray feels clinical at scale; a touch of blue in the mid-range and down gives backgrounds, text, and borders warmth without color-casting the rest of the palette.
+From `--neutral-200` through `--neutral-950`, the steps carry a faint blue-violet tilt (hue `~286°`, chroma `0.004` to `0.015`). The two lightest steps (`50` and `100`) are pure neutral gray at chroma `0`. Pure gray feels clinical at scale; a touch of blue in the mid-range and down gives backgrounds, text, and borders warmth without color-casting the rest of the palette.
 
 The endpoints (`--white` and `--black`) are kept as keyword colors rather than OKLCH. They're the references shade and tint derive from, so they need to be the cleanest possible anchors.
 
-Use neutral steps directly when you need a specific, opaque gray — typically borders, dividers, low-emphasis text, or surfaces where transparency would interfere with what sits below.
+Use neutral steps directly when you need a specific, opaque gray. Typically borders, dividers, low-emphasis text, or surfaces where transparency would interfere with what sits below.
 
 ## Shade
 
@@ -43,23 +43,23 @@ Darkened overlays derived from `--neutral-950`. The opacity scale ranges from 0%
 
 ```css
 --shade-none: oklch(from var(--neutral-950) l c h / 0);
---shade-50:   oklch(from var(--neutral-950) l c h / 0.05);
---shade-100:  oklch(from var(--neutral-950) l c h / 0.1);
---shade-200:  oklch(from var(--neutral-950) l c h / 0.2);
---shade-300:  oklch(from var(--neutral-950) l c h / 0.3);
---shade-400:  oklch(from var(--neutral-950) l c h / 0.4);
---shade-500:  oklch(from var(--neutral-950) l c h / 0.5);
---shade-600:  oklch(from var(--neutral-950) l c h / 0.6);
---shade-700:  oklch(from var(--neutral-950) l c h / 0.7);
---shade-800:  oklch(from var(--neutral-950) l c h / 0.8);
---shade-900:  oklch(from var(--neutral-950) l c h / 0.9);
---shade-950:  oklch(from var(--neutral-950) l c h / 0.95);
+--shade-50: oklch(from var(--neutral-950) l c h / 0.05);
+--shade-100: oklch(from var(--neutral-950) l c h / 0.1);
+--shade-200: oklch(from var(--neutral-950) l c h / 0.2);
+--shade-300: oklch(from var(--neutral-950) l c h / 0.3);
+--shade-400: oklch(from var(--neutral-950) l c h / 0.4);
+--shade-500: oklch(from var(--neutral-950) l c h / 0.5);
+--shade-600: oklch(from var(--neutral-950) l c h / 0.6);
+--shade-700: oklch(from var(--neutral-950) l c h / 0.7);
+--shade-800: oklch(from var(--neutral-950) l c h / 0.8);
+--shade-900: oklch(from var(--neutral-950) l c h / 0.9);
+--shade-950: oklch(from var(--neutral-950) l c h / 0.95);
 --shade-full: oklch(from var(--neutral-950) l c h / 1);
 ```
 
-Shade is what you reach for when you need to **dim** something — a hover state on a light card, a modal backdrop, a muted overlay over imagery. Whatever sits below shows through; the surface above gets darker.
+Shade is what you reach for when you need to **dim** something: a hover state on a light card, a modal backdrop, a muted overlay over imagery. Whatever sits below shows through; the surface above gets darker.
 
-Because shade derives from `--neutral-950` via `oklch(from ...)`, swapping the neutral palette — a rebrand, a warmer or cooler theme — updates every shade overlay automatically. The overlays carry the neutral palette's hue, so warming the neutrals warms the shadows.
+Because shade derives from `--neutral-950` via `oklch(from ...)`, swapping the neutral palette (a rebrand, a warmer or cooler theme) updates every shade overlay automatically. The overlays carry the neutral palette's hue, so warming the neutrals warms the shadows.
 
 ## Tint
 
@@ -67,21 +67,21 @@ Faded overlays derived from `--white`. The opacity scale mirrors shade.
 
 ```css
 --tint-none: oklch(from var(--white) l c h / 0);
---tint-50:   oklch(from var(--white) l c h / 0.05);
---tint-100:  oklch(from var(--white) l c h / 0.1);
---tint-200:  oklch(from var(--white) l c h / 0.2);
---tint-300:  oklch(from var(--white) l c h / 0.3);
---tint-400:  oklch(from var(--white) l c h / 0.4);
---tint-500:  oklch(from var(--white) l c h / 0.5);
---tint-600:  oklch(from var(--white) l c h / 0.6);
---tint-700:  oklch(from var(--white) l c h / 0.7);
---tint-800:  oklch(from var(--white) l c h / 0.8);
---tint-900:  oklch(from var(--white) l c h / 0.9);
---tint-950:  oklch(from var(--white) l c h / 0.95);
+--tint-50: oklch(from var(--white) l c h / 0.05);
+--tint-100: oklch(from var(--white) l c h / 0.1);
+--tint-200: oklch(from var(--white) l c h / 0.2);
+--tint-300: oklch(from var(--white) l c h / 0.3);
+--tint-400: oklch(from var(--white) l c h / 0.4);
+--tint-500: oklch(from var(--white) l c h / 0.5);
+--tint-600: oklch(from var(--white) l c h / 0.6);
+--tint-700: oklch(from var(--white) l c h / 0.7);
+--tint-800: oklch(from var(--white) l c h / 0.8);
+--tint-900: oklch(from var(--white) l c h / 0.9);
+--tint-950: oklch(from var(--white) l c h / 0.95);
 --tint-full: oklch(from var(--white) l c h / 1);
 ```
 
-Tint is shade's mirror. It **fades** what sits below — a hover state on a dark surface, a frosted-glass effect, a soft highlight band. The surface above gets lighter.
+Tint is shade's mirror. It **fades** what sits below: a hover state on a dark surface, a frosted-glass effect, a soft highlight band. The surface above gets lighter.
 
 ## Shade vs. tint
 
@@ -92,22 +92,35 @@ The mental model: **shade dims, tint fades**.
 
 This is why theme overlays swap their primitive between modes. `--muted` (always "darker than the surface") uses `--shade-50` in light mode and `--tint-50` in dark. `--faded` (always "lighter than the surface") does the opposite. The semantic stays constant; the underlying primitive flips with the mode.
 
-Use shade and tint directly when an overlay needs to read as transparent — a sticky header over a hero image, a modal backdrop, a hover that lightens or darkens without committing to a specific gray.
+Use shade and tint directly when an overlay needs to read as transparent: a sticky header over a hero image, a modal backdrop, a hover that lightens or darkens without committing to a specific gray.
 
 <Accordions>
   <Accordion title="When should I use `--neutral-200` vs `--shade-200` for a border?">
-    The rule: if the border needs to be *that specific gray* regardless of what's behind it, use `--neutral-200`. If you want the border to read as "20% of the neutral-950 hue, overlaid on whatever sits below" — for example, on a card that floats over a hero image — use `--shade-200`.
+    The rule: if the border needs to be *that specific gray* regardless of what's behind it, use `--neutral-200`. If you want the border to read as "20% of the neutral-950 hue, overlaid on whatever sits below" (for example, on a card that floats over a hero image), use `--shade-200`.
 
     Most everyday borders should be `--neutral-*`. Reserve shade and tint for cases where transparency is the point.
 
     Theme tokens make this call for you in the common cases. `--border` resolves to `--neutral-200` in light and `--neutral-800` in dark; `--muted` resolves to `--shade-50` and `--tint-50`. If you're consuming theme tokens, you rarely think about it directly.
+
   </Accordion>
 </Accordions>
 
 ## Where to next
 
 <Cards>
-  <Card title="Theme" href="/docs/foundations/theme" description="Where base and overlay tokens resolve into neutral, shade, or tint." />
-  <Card title="Corporate" href="/docs/foundations/corporate" description="The other half of color — brand identity scales that pair with grayscale." />
-  <Card title="Effects" href="/docs/foundations/effects" description="Shadows derive from neutral; the relationship is worth knowing." />
+  <Card
+    title="Theme"
+    href="/docs/foundations/theme"
+    description="Where base and overlay tokens resolve into neutral, shade, or tint."
+  />
+  <Card
+    title="Corporate"
+    href="/docs/foundations/corporate"
+    description="The other half of color: brand identity scales that pair with grayscale."
+  />
+  <Card
+    title="Effects"
+    href="/docs/foundations/effects"
+    description="Shadows derive from neutral; the relationship is worth knowing."
+  />
 </Cards>

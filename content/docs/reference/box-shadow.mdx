@@ -5,64 +5,147 @@ description: Layered shadow utilities for elevation.
 
 ## Class reference
 
-| Class | Value |
-| --- | --- |
+| Class         | Value                                                       |
+| ------------- | ----------------------------------------------------------- |
 | `shadow-none` | `box-shadow: var(--shadow-none); /* 0 0 0 0 transparent */` |
-| `shadow-xs` | `box-shadow: var(--shadow-xs);` |
-| `shadow-sm` | `box-shadow: var(--shadow-sm);` |
-| `shadow-md` | `box-shadow: var(--shadow-md);` |
-| `shadow-lg` | `box-shadow: var(--shadow-lg);` |
-| `shadow-xl` | `box-shadow: var(--shadow-xl);` |
+| `shadow-xs`   | `box-shadow: var(--shadow-xs);`                             |
+| `shadow-sm`   | `box-shadow: var(--shadow-sm);`                             |
+| `shadow-md`   | `box-shadow: var(--shadow-md);`                             |
+| `shadow-lg`   | `box-shadow: var(--shadow-lg);`                             |
+| `shadow-xl`   | `box-shadow: var(--shadow-xl);`                             |
 
 Each shadow stacks five layers with decreasing opacity and increasing offset, producing a natural "smoke trail" elevation rather than a single hard halo.
 
 ## Examples
 
 ```html
-<div class="shadow-md radius-lg p-md" style="background: var(--card)">
-  An elevated card.
-</div>
+<div class="shadow-md radius-lg p-md" style="background: var(--card)">An elevated card.</div>
 ```
 
 ## Visual
 
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: '2rem', margin: '2.5rem 0.5rem' }}>
-  <div style={{ aspectRatio: '1 / 1', background: 'var(--fd-card, #fff)', borderRadius: '8px', boxShadow: '0 8px 2px 0 oklch(0% 0 0 / 0), 0 5px 2px 0 oklch(0% 0 0 / 0.01), 0 3px 2px 0 oklch(0% 0 0 / 0.03), 0 1px 1px 0 oklch(0% 0 0 / 0.04), 0 0 1px 0 oklch(0% 0 0 / 0.05)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: '4px', fontSize: '11px', color: 'var(--fd-muted-foreground)' }}>xs</div>
-  <div style={{ aspectRatio: '1 / 1', background: 'var(--fd-card, #fff)', borderRadius: '8px', boxShadow: '0 25px 7px 0 oklch(0% 0 0 / 0), 0 16px 6px 0 oklch(0% 0 0 / 0.01), 0 9px 5px 0 oklch(0% 0 0 / 0.03), 0 4px 4px 0 oklch(0% 0 0 / 0.04), 0 1px 2px 0 oklch(0% 0 0 / 0.05)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: '4px', fontSize: '11px', color: 'var(--fd-muted-foreground)' }}>sm</div>
-  <div style={{ aspectRatio: '1 / 1', background: 'var(--fd-card, #fff)', borderRadius: '8px', boxShadow: '0 66px 18px 0 oklch(0% 0 0 / 0), 0 42px 17px 0 oklch(0% 0 0 / 0.01), 0 24px 14px 0 oklch(0% 0 0 / 0.03), 0 11px 11px 0 oklch(0% 0 0 / 0.04), 0 3px 6px 0 oklch(0% 0 0 / 0.05)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: '4px', fontSize: '11px', color: 'var(--fd-muted-foreground)' }}>md</div>
-  <div style={{ aspectRatio: '1 / 1', background: 'var(--fd-card, #fff)', borderRadius: '8px', boxShadow: '0 247px 69px 0 oklch(0% 0 0 / 0), 0 158px 63px 0 oklch(0% 0 0 / 0.01), 0 89px 53px 0 oklch(0% 0 0 / 0.03), 0 39px 39px 0 oklch(0% 0 0 / 0.05), 0 10px 22px 0 oklch(0% 0 0 / 0.06)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: '4px', fontSize: '11px', color: 'var(--fd-muted-foreground)' }}>lg</div>
-  <div style={{ aspectRatio: '1 / 1', background: 'var(--fd-card, #fff)', borderRadius: '8px', boxShadow: '0 370px 104px 0 oklch(0% 0 0 / 0), 0 237px 95px 0 oklch(0% 0 0 / 0.01), 0 133px 80px 0 oklch(0% 0 0 / 0.04), 0 59px 59px 0 oklch(0% 0 0 / 0.06), 0 15px 33px 0 oklch(0% 0 0 / 0.07)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: '4px', fontSize: '11px', color: 'var(--fd-muted-foreground)' }}>xl</div>
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(110px, 1fr))",
+    gap: "2rem",
+    margin: "2.5rem 0.5rem",
+  }}
+>
+  <div
+    style={{
+      aspectRatio: "1 / 1",
+      background: "var(--fd-card, #fff)",
+      borderRadius: "8px",
+      boxShadow:
+        "0 8px 2px 0 oklch(0% 0 0 / 0), 0 5px 2px 0 oklch(0% 0 0 / 0.01), 0 3px 2px 0 oklch(0% 0 0 / 0.03), 0 1px 1px 0 oklch(0% 0 0 / 0.04), 0 0 1px 0 oklch(0% 0 0 / 0.05)",
+      display: "flex",
+      alignItems: "flex-end",
+      justifyContent: "center",
+      paddingBottom: "4px",
+      fontSize: "11px",
+      color: "var(--fd-muted-foreground)",
+    }}
+  >
+    xs
+  </div>
+  <div
+    style={{
+      aspectRatio: "1 / 1",
+      background: "var(--fd-card, #fff)",
+      borderRadius: "8px",
+      boxShadow:
+        "0 25px 7px 0 oklch(0% 0 0 / 0), 0 16px 6px 0 oklch(0% 0 0 / 0.01), 0 9px 5px 0 oklch(0% 0 0 / 0.03), 0 4px 4px 0 oklch(0% 0 0 / 0.04), 0 1px 2px 0 oklch(0% 0 0 / 0.05)",
+      display: "flex",
+      alignItems: "flex-end",
+      justifyContent: "center",
+      paddingBottom: "4px",
+      fontSize: "11px",
+      color: "var(--fd-muted-foreground)",
+    }}
+  >
+    sm
+  </div>
+  <div
+    style={{
+      aspectRatio: "1 / 1",
+      background: "var(--fd-card, #fff)",
+      borderRadius: "8px",
+      boxShadow:
+        "0 66px 18px 0 oklch(0% 0 0 / 0), 0 42px 17px 0 oklch(0% 0 0 / 0.01), 0 24px 14px 0 oklch(0% 0 0 / 0.03), 0 11px 11px 0 oklch(0% 0 0 / 0.04), 0 3px 6px 0 oklch(0% 0 0 / 0.05)",
+      display: "flex",
+      alignItems: "flex-end",
+      justifyContent: "center",
+      paddingBottom: "4px",
+      fontSize: "11px",
+      color: "var(--fd-muted-foreground)",
+    }}
+  >
+    md
+  </div>
+  <div
+    style={{
+      aspectRatio: "1 / 1",
+      background: "var(--fd-card, #fff)",
+      borderRadius: "8px",
+      boxShadow:
+        "0 247px 69px 0 oklch(0% 0 0 / 0), 0 158px 63px 0 oklch(0% 0 0 / 0.01), 0 89px 53px 0 oklch(0% 0 0 / 0.03), 0 39px 39px 0 oklch(0% 0 0 / 0.05), 0 10px 22px 0 oklch(0% 0 0 / 0.06)",
+      display: "flex",
+      alignItems: "flex-end",
+      justifyContent: "center",
+      paddingBottom: "4px",
+      fontSize: "11px",
+      color: "var(--fd-muted-foreground)",
+    }}
+  >
+    lg
+  </div>
+  <div
+    style={{
+      aspectRatio: "1 / 1",
+      background: "var(--fd-card, #fff)",
+      borderRadius: "8px",
+      boxShadow:
+        "0 370px 104px 0 oklch(0% 0 0 / 0), 0 237px 95px 0 oklch(0% 0 0 / 0.01), 0 133px 80px 0 oklch(0% 0 0 / 0.04), 0 59px 59px 0 oklch(0% 0 0 / 0.06), 0 15px 33px 0 oklch(0% 0 0 / 0.07)",
+      display: "flex",
+      alignItems: "flex-end",
+      justifyContent: "center",
+      paddingBottom: "4px",
+      fontSize: "11px",
+      color: "var(--fd-muted-foreground)",
+    }}
+  >
+    xl
+  </div>
 </div>
 
 ## Tokens
 
-Each shadow is declared as five comma-separated layers — `offset-x offset-y blur spread color` per layer.
+Each shadow is declared as five comma-separated layers. Each layer is `offset-x offset-y blur spread color`.
 
 ```css
 --shadow-none: 0px 0px 0px 0px oklch(from var(--black) l c h / 0);
 
 --shadow-xs:
-  0  8px 2px 0 oklch(from var(--black) l c h / 0),
-  0  5px 2px 0 oklch(from var(--black) l c h / 0.01),
-  0  3px 2px 0 oklch(from var(--black) l c h / 0.03),
-  0  1px 1px 0 oklch(from var(--black) l c h / 0.04),
-  0    0 1px 0 oklch(from var(--black) l c h / 0.05);
+  0 8px 2px 0 oklch(from var(--black) l c h / 0), 0 5px 2px 0 oklch(from var(--black) l c h / 0.01),
+  0 3px 2px 0 oklch(from var(--black) l c h / 0.03),
+  0 1px 1px 0 oklch(from var(--black) l c h / 0.04), 0 0 1px 0 oklch(from var(--black) l c h / 0.05);
 
 --shadow-md:
   0 66px 18px 0 oklch(from var(--black) l c h / 0),
   0 42px 17px 0 oklch(from var(--black) l c h / 0.01),
   0 24px 14px 0 oklch(from var(--black) l c h / 0.03),
   0 11px 11px 0 oklch(from var(--black) l c h / 0.04),
-  0  3px  6px 0 oklch(from var(--black) l c h / 0.05);
+  0 3px 6px 0 oklch(from var(--black) l c h / 0.05);
 ```
 
-(See [_variables.css](app/zazz/_variables.css) for `--shadow-sm`, `--shadow-lg`, and `--shadow-xl` in full.)
+See [variables.css](app/zazz/variables.css) for `--shadow-sm`, `--shadow-lg`, and `--shadow-xl` in full.
 
 The OKLCH `from var(--black)` syntax means shadows derive from the `--black` token. Re-target `--black` (to a warm dark, for example) and every shadow shifts in tone.
 
 ## Layered approach
 
-The closest-to-element layer (last in the list) carries the highest opacity and tightest blur — this is the "real" shadow you see. Earlier layers extend the shadow further down with progressively lower opacity, simulating how light falls off in the real world.
+The closest-to-element layer (last in the list) carries the highest opacity and tightest blur. That is the "real" shadow you see. Earlier layers extend the shadow further down with progressively lower opacity, simulating how light falls off in the real world.
 
 Compared to a single shadow with a large blur:
 
@@ -76,8 +159,8 @@ Override a shadow by re-declaring the variable. Define a new shadow for a specif
 ```css
 :root {
   --shadow-popover:
-    0 4px 6px -1px oklch(from var(--black) l c h / 0.10),
-    0 2px 4px -2px oklch(from var(--black) l c h / 0.10);
+    0 4px 6px -1px oklch(from var(--black) l c h / 0.1),
+    0 2px 4px -2px oklch(from var(--black) l c h / 0.1);
 }
 ```
 

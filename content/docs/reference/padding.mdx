@@ -5,19 +5,19 @@ description: Utilities for setting padding from the Zazz spacing scale.
 
 ## Quick reference
 
-| Class | Properties |
-| --- | --- |
-| `p-xs` | `padding: var(--gap-xs); /* 0.5rem */` |
-| `p-sm` | `padding: var(--gap-sm); /* 1rem */` |
-| `p-md` | `padding: var(--gap-md); /* 1.5rem */` |
-| `p-lg` | `padding: var(--gap-lg); /* 2.75rem */` |
-| `p-xl` | `padding: var(--gap-xl); /* 6rem */` |
-| `px-xs` … `px-xl` | `padding-inline: var(--gap-*);` |
-| `py-xs` … `py-xl` | `padding-block: var(--gap-*);` |
-| `pt-xs` … `pt-xl` | `padding-top: var(--gap-*);` |
-| `pr-xs` … `pr-xl` | `padding-right: var(--gap-*);` |
-| `pb-xs` … `pb-xl` | `padding-bottom: var(--gap-*);` |
-| `pl-xs` … `pl-xl` | `padding-left: var(--gap-*);` |
+| Class             | Properties                              |
+| ----------------- | --------------------------------------- |
+| `p-xs`            | `padding: var(--gap-xs); /* 0.5rem */`  |
+| `p-sm`            | `padding: var(--gap-sm); /* 1rem */`    |
+| `p-md`            | `padding: var(--gap-md); /* 1.5rem */`  |
+| `p-lg`            | `padding: var(--gap-lg); /* 2.75rem */` |
+| `p-xl`            | `padding: var(--gap-xl); /* 6rem */`    |
+| `px-xs` … `px-xl` | `padding-inline: var(--gap-*);`         |
+| `py-xs` … `py-xl` | `padding-block: var(--gap-*);`          |
+| `pt-xs` … `pt-xl` | `padding-top: var(--gap-*);`            |
+| `pr-xs` … `pr-xl` | `padding-right: var(--gap-*);`          |
+| `pb-xs` … `pb-xl` | `padding-bottom: var(--gap-*);`         |
+| `pl-xs` … `pl-xl` | `padding-left: var(--gap-*);`           |
 
 ## Examples
 
@@ -26,42 +26,36 @@ description: Utilities for setting padding from the Zazz spacing scale.
 Use `p-{size}` to apply padding to every side of an element:
 
 ```html
-<div class="p-md">
-  Padded on all sides by var(--gap-md).
-</div>
+<div class="p-md">Padded on all sides by var(--gap-md).</div>
 ```
 
 ### Inline / block axes
 
-Use `px-{size}` for horizontal padding (inline axis) and `py-{size}` for vertical (block axis). These follow logical properties — they flip automatically in RTL languages.
+Use `px-{size}` for horizontal padding (inline axis) and `py-{size}` for vertical (block axis). These follow logical properties and flip automatically in RTL languages.
 
 ```html
-<div class="px-lg py-md">
-  Wider horizontally than vertically.
-</div>
+<div class="px-lg py-md">Wider horizontally than vertically.</div>
 ```
 
 ### A single side
 
-Each physical side has its own utility — `pt`, `pr`, `pb`, `pl`.
+Each physical side has its own utility: `pt`, `pr`, `pb`, `pl`.
 
 ```html
-<div class="pt-sm pb-lg">
-  Tight on top, generous on bottom.
-</div>
+<div class="pt-sm pb-lg">Tight on top, generous on bottom.</div>
 ```
 
 ## Spacing scale
 
 Padding utilities reference the [semantic gap tokens](/docs/foundations/spacing). Five named sizes:
 
-| Token | Value (default interval) | Pixels at 16px root |
-| --- | --- | --- |
-| `--gap-xs` | `var(--step-2)` | 8px |
-| `--gap-sm` | `var(--step-4)` | 16px |
-| `--gap-md` | `var(--step-6)` | 24px |
-| `--gap-lg` | `var(--step-11)` | 44px |
-| `--gap-xl` | `var(--step-24)` | 96px |
+| Token      | Value (default interval) | Pixels at 16px root |
+| ---------- | ------------------------ | ------------------- |
+| `--gap-xs` | `var(--step-2)`          | 8px                 |
+| `--gap-sm` | `var(--step-4)`          | 16px                |
+| `--gap-md` | `var(--step-6)`          | 24px                |
+| `--gap-lg` | `var(--step-11)`         | 44px                |
+| `--gap-xl` | `var(--step-24)`         | 96px                |
 
 Change `--spacing-interval` to retune every padding utility at once. See [Foundations → Spacing → Global interval](/docs/foundations/spacing#global-interval).
 
@@ -71,7 +65,7 @@ For padding values outside the semantic scale, reach for the underlying [step sc
 
 ```css
 .tight-card {
-  padding: var(--step-3); /* 0.75rem — not on the gap scale */
+  padding: var(--step-3); /* 0.75rem, not on the gap scale */
 }
 ```
 

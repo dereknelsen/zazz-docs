@@ -7,6 +7,7 @@ import { createSwatches } from "../../_lib/create-swatches";
 import type { PaletteConfig } from "../../_lib/types";
 import { ColorPicker } from "../color-picker";
 import { NumericInput } from "../numeric-input";
+import { StopSelect } from "../stop-select";
 
 interface Props {
   palette: PaletteConfig;
@@ -34,12 +35,9 @@ export function PaletteEditor({ palette, onChange }: Props) {
           value={palette.value}
           onChange={(v) => onChange({ ...palette, value: v })}
         />
-        <NumericInput
+        <StopSelect
           label="Stop"
           value={palette.valueStop}
-          step={50}
-          min={50}
-          max={950}
           onChange={(n) => onChange({ ...palette, valueStop: n })}
         />
         <NumericInput

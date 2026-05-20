@@ -1,20 +1,39 @@
 import chroma from "chroma-js";
 import { Hsluv } from "hsluv";
+import { isHex } from "./helpers";
 import type { PaletteConfig, SwatchValue } from "./types";
 
 const ALL_STOPS = [0, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950, 1000];
 
 export const VISIBLE_STOPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const;
 
+function snapStop(n: number): number {
+  const valid = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
+  let best = valid[0];
+  let smallest = Math.abs(n - best);
+  for (const v of valid) {
+    const d = Math.abs(n - v);
+    if (d < smallest) {
+      smallest = d;
+      best = v;
+    }
+  }
+  return best;
+}
+
 export function createSwatches(palette: PaletteConfig): SwatchValue[] {
-  const { value, valueStop, colorMode, h, s, lMin, lMax } = palette;
+  const { value, colorMode, h, s, lMin, lMax } = palette;
+  const valueStop = snapStop(palette.valueStop);
+
+  // Bail out for partially-typed or otherwise invalid hex; caller can
+  // re-render once user finishes typing.
+  if (!value || !isHex(value)) return [];
 
   const baseColor = chroma(`#${value}`);
   const [baseH, baseS, baseL] = baseColor.hsl();
   const normalizedBaseH = isNaN(baseH) ? 0 : baseH;
 
   const valueStopIndex = ALL_STOPS.indexOf(valueStop);
-  if (valueStopIndex === -1) throw new Error(`Invalid valueStop: ${valueStop}`);
 
   const hueScale = ALL_STOPS.map((stop, idx) => ({
     stop,

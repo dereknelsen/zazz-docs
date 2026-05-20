@@ -5,11 +5,13 @@ description: A bordered surface that groups related content. Composes with every
 
 A card holds related content as a single unit: an article preview, a feature description, a product tile. Zazz's card is a flexible container with named slots for figure, content, body, and footer. Build whatever the design calls for by composing those parts.
 
+<ComponentPreview name="card-basic" />
+
 ## Anatomy
 
 ```html
 <a class="card" href="/article">
-  <a class="card__figure w-inline-block" href="/article">
+  <a class="card__figure" href="/article">
     <img class="card__image" src="/cover.jpg" alt="" />
   </a>
 
@@ -20,7 +22,7 @@ A card holds related content as a single unit: an article preview, a feature des
     </div>
 
     <div class="card__body">
-      <a class="card__title-link w-inline-block" href="/article">
+      <a class="card__title-link" href="/article">
         <h3 class="card__title text-h6">How quickly zebras jump</h3>
       </a>
       <p class="card__description text-sm text-muted-foreground line-clamp-2">

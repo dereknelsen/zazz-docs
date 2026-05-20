@@ -100,7 +100,7 @@ export function Tabs({
       ref={ref}
       className={(s) =>
         cn(
-          "flex flex-col overflow-hidden rounded-xl border bg-fd-secondary my-4",
+          "flex flex-col overflow-hidden rounded-lg border bg-fd-secondary my-4",
           typeof className === "function" ? className(s) : className,
         )
       }
@@ -164,7 +164,7 @@ export function TabsContent({
       keepMounted
       className={(s) =>
         cn(
-          "p-4 text-[0.9375rem] bg-fd-background rounded-xl outline-none prose-no-margin data-[inactive]:hidden [&>figure:only-child]:-m-4 [&>figure:only-child]:border-none",
+          "p-4 text-[0.9375rem] bg-fd-background rounded-b-lg outline-none prose-no-margin data-inactive:hidden [&>figure:only-child]:-m-4 [&>figure:only-child]:border-none",
           typeof className === "function" ? className(s) : className,
         )
       }

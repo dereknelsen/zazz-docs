@@ -39,7 +39,7 @@ function ActivePanel({ id }: { id: SectionId }) {
 export function ThemeShell() {
   const [active, setActive] = useState<SectionId>("themes");
   return (
-    <div className="grid h-[100dvh] w-full grid-rows-[1fr_auto] overflow-hidden">
+    <div className="grid h-dvh w-full grid-rows-[1fr_auto] overflow-hidden">
       <div className="flex min-h-0 w-full">
         <SectionNav active={active} onChange={setActive} />
         <main className="flex min-w-0 flex-1 flex-col">

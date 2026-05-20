@@ -7,14 +7,16 @@ A checkbox is the standard control for binary or multi-select choices: terms acc
 
 ## Default
 
+<ComponentPreview name="checkbox-default" />
+
 ```html
-<label class="w-checkbox checkbox-group">
-  <input type="checkbox" class="w-checkbox-input w-checkbox-input--inputType-custom checkbox" />
+<label class="checkbox-group">
+  <input type="checkbox" class="checkbox" />
   <span class="form-label">Checkbox label</span>
 </label>
 ```
 
-The `checkbox-group` wrapper sets up flex alignment with `--gap-xs` between the input and the label. The `w-checkbox-input` classes are Webflow's custom-styled-checkbox utilities that hide the native UI; the `checkbox` class applies Zazz styling on top.
+The `checkbox-group` wrapper sets up flex alignment with `--gap-xs` between the input and the label. The `checkbox` class applies Zazz styling on top of the native input.
 
 ## Tokens
 
@@ -27,7 +29,7 @@ The `checkbox-group` wrapper sets up flex alignment with `--gap-xs` between the 
 | Group gap | `--gap-xs` |
 | Focus ring | `--focus-ring` |
 
-The checked state uses Webflow's `w--redirected-checked` modifier class. In other frameworks, the equivalent rule is:
+The checked state targets `input:checked`:
 
 ```css
 .checkbox:checked {
@@ -56,7 +58,7 @@ The checked state uses Webflow's `w--redirected-checked` modifier class. In othe
 | Platform | Reference |
 | --- | --- |
 | Figma | No Figma component (representative mockup only). |
-| Webflow | `checkbox` class on a custom-styled `w-checkbox-input`. Group wrapper is `w-checkbox checkbox-group`. |
+| Webflow | `checkbox` class on the `<input>`. Group wrapper is `checkbox-group`. |
 | CSS / Tailwind | The same class after [installing utilities.css](/docs/quickstart/css). |
 
 ## Where to next

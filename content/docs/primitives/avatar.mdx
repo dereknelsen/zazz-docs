@@ -9,6 +9,8 @@ The default size is `--step-10` (2.5rem at default interval). Override `width` a
 
 ## Anatomy
 
+<ComponentPreview name="avatar-with-image" />
+
 ```html
 <div class="avatar">
   <img class="avatar__profile" src="/path/to/photo.jpg" alt="Author name" />
@@ -36,6 +38,8 @@ If the image loads, the initials sit behind it. If it doesn't, the initials rema
 
 ## Without an image
 
+<ComponentPreview name="avatar-with-initials" />
+
 ```html
 <div class="avatar">
   <div class="avatar__initials">DN</div>
@@ -47,6 +51,8 @@ This is the recommended pattern for accounts that haven't uploaded a photo. Init
 ## Author metadata composition
 
 A common pairing puts an avatar next to a name and a description. Zazz exposes this as the `avatar-author` composition:
+
+<ComponentPreview name="avatar-author" />
 
 ```html
 <div class="avatar-author">

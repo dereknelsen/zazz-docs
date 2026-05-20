@@ -17,6 +17,8 @@ A button is the element users press to do a thing. Apply the `button` class to a
 
 Variant classes apply alongside `button`. The base sets sizing, padding, and shared focus behavior; the variant sets color and surface.
 
+<ComponentPreview name="button-variants" />
+
 ```html
 <a class="button" href="/contact">Get in touch</a>
 <a class="button button-primary" href="/signup">Start free trial</a>
@@ -25,9 +27,15 @@ Variant classes apply alongside `button`. The base sets sizing, padding, and sha
 <a class="button button-link" href="/learn">Learn more</a>
 ```
 
+## With icons
+
+<ComponentPreview name="button-with-icons" />
+
 ## Icon-only
 
 The `button-minimal` modifier makes a square icon-only button at the same height as the default button. Drop the `button-text` element and add `aria-label` to the root.
+
+<ComponentPreview name="button-minimal" />
 
 ```html
 <button class="button button-minimal" aria-label="Open menu">

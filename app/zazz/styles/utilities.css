@@ -522,6 +522,10 @@ Zazz Utility Classes (scoped to .zazz-preview)
     letter-spacing: var(--tracking-xs);
   }
 
+  :where(.tabular-nums) {
+    font-variant-numeric: tabular-nums;
+  }
+
   /* =============================================================================
   GAP UTILITIES
   ============================================================================= */

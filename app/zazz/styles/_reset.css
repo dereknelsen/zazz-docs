@@ -22,9 +22,16 @@ BASE ELEMENT RESETS
   font-size: 16px;
   line-height: 1.5;
   tab-size: 4;
+  -webkit-text-size-adjust: 100%;
   background-color: var(--background);
   -webkit-tap-highlight-color: transparent;
   overflow: clip;
+}
+
+:where(:host) {
+  line-height: 1.5;
+  tab-size: 4;
+  -webkit-text-size-adjust: 100%;
 }
 
 :where(body) {
@@ -82,6 +89,7 @@ BASE ELEMENT RESETS
 :where(a) {
   color: unset;
   background-color: unset;
+  -webkit-text-decoration: inherit;
   text-decoration: inherit;
 }
 
@@ -121,6 +129,7 @@ TYPOGRAPHY & SEMANTIC ELEMENTS
 }
 
 :where(abbr:where([title])) {
+  -webkit-text-decoration: underline dotted;
   text-decoration: underline dotted;
 }
 
@@ -139,11 +148,25 @@ TYPOGRAPHY & SEMANTIC ELEMENTS
 }
 
 :where(code) {
-  display: inline-flex;
-  background-color: var(--muted);
-  padding: 0em 0.25em;
-  border-radius: var(--radius-xs);
-  text-box: trim-both ex alphabetic;
+  --code-display: inline;
+  --code-background: var(--muted);
+  --code-border: var(--muted);
+  --code-padding-inline: 0.25em;
+  --code-padding-block: 0em;
+  --code-radius: var(--radius-xs);
+  --code-color: var(--foreground);
+
+  display: var(--code-display);
+  background-color: var(--code-background);
+  padding-inline: var(--code-padding-inline);
+  padding-block: var(--code-padding-block);
+  border: 1px solid var(--code-border);
+  border-radius: var(--code-radius);
+  color: var(--code-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 /* =============================================================================
@@ -179,6 +202,7 @@ MEDIA RESETS
 :where(embed),
 :where(object) {
   display: block;
+  vertical-align: middle;
 }
 
 :where(img),
@@ -208,8 +232,81 @@ FORM ELEMENT RESETS
 :where(textarea),
 ::file-selector-button {
   font: inherit;
+  font-feature-settings: inherit;
+  font-variation-settings: inherit;
   letter-spacing: inherit;
   color: inherit;
+}
+
+/* Preflight compatibility — cross-browser form baselines */
+:where(button),
+:where(input),
+:where(select),
+:where(textarea),
+::file-selector-button {
+  border-radius: 0;
+  background-color: transparent;
+  opacity: 1;
+}
+
+:where(button),
+:where(input:where([type="button"], [type="reset"], [type="submit"])),
+::file-selector-button {
+  appearance: button;
+}
+
+::file-selector-button {
+  margin-inline-end: 4px;
+}
+
+:where(select:is([multiple], [size])) optgroup {
+  font-weight: bolder;
+}
+
+:where(select:is([multiple], [size])) optgroup option {
+  padding-inline-start: 20px;
+}
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+::-webkit-date-and-time-value {
+  min-height: 1lh;
+  text-align: inherit;
+}
+
+::-webkit-datetime-edit {
+  display: inline-flex;
+}
+
+::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+
+::-webkit-datetime-edit,
+::-webkit-datetime-edit-year-field,
+::-webkit-datetime-edit-month-field,
+::-webkit-datetime-edit-day-field,
+::-webkit-datetime-edit-hour-field,
+::-webkit-datetime-edit-minute-field,
+::-webkit-datetime-edit-second-field,
+::-webkit-datetime-edit-millisecond-field,
+::-webkit-datetime-edit-meridiem-field {
+  padding-block: 0;
+}
+
+::-webkit-calendar-picker-indicator {
+  line-height: 1;
 }
 
 /* Input field resets */
@@ -230,7 +327,12 @@ FORM ELEMENT RESETS
 
 ::placeholder {
   opacity: 1;
-  color: color-mix(in oklab, currentcolor 50%, transparent);
+}
+
+@supports (not (-webkit-appearance: -apple-pay-button)) or (contain-intrinsic-size: 1px) {
+  ::placeholder {
+    color: color-mix(in oklab, currentcolor 50%, transparent);
+  }
 }
 
 /* Range input styling */
@@ -327,10 +429,10 @@ NATIVE DIALOG ELEMENT ENHANCEMENTS
 :where(dialog) {
   --dialog-starting-scale: 0.98;
   --dialog-starting-translate: 0, 0, 0;
-  --dialog-starting-backdrop: var(--shade-none);
-  --dialog-ending-scale: 1;
-  --dialog-ending-translate: 0 0 0;
-  --dialog-ending-backdrop: var(--shade-800);
+  --dialog-starting-backdrop-color: var(--shade-none);
+  --dialog-scale: 1;
+  --dialog-translate: 0 0 0;
+  --dialog-backdrop-color: var(--shade-800);
 
   margin: auto;
   max-inline-size: calc(100% - var(--gap-md));
@@ -349,12 +451,10 @@ NATIVE DIALOG ELEMENT ENHANCEMENTS
 
 :where([popover]) {
   --popover-starting-scale: 0.98;
-  --popover-starting-translate: 0, 0.25rem, 0;
-  --popover-ending-scale: 1;
-  --popover-ending-translate: 0, 0, 0;
+  --popover-scale: 1;
   --popover-origin: bottom center;
   --popover-margin-block: var(--step-1_5);
-  --popover-margin-inline: var(--step-1_5);
+  --popover-margin-inline: 0;
   --popover-position-area: block-end inline-start;
   --popover-position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
 
@@ -366,7 +466,7 @@ NATIVE DIALOG ELEMENT ENHANCEMENTS
   position-try-fallbacks: var(--popover-position-try-fallbacks);
   transform-origin: var(--popover-origin);
   opacity: 0;
-  transform: translate3d(var(--popover-starting-translate)) scale(var(--popover-starting-scale));
+  transform: scale(var(--popover-starting-scale));
   transition:
     opacity var(--default-transition-duration) var(--default-transition-timing-function),
     transform var(--default-transition-duration) var(--default-transition-timing-function),
@@ -379,37 +479,37 @@ NATIVE DIALOG ELEMENT ENHANCEMENTS
 :where(dialog[open]) {
   display: grid;
   opacity: 1;
-  transform: translate3d(var(--dialog-ending-translate)) scale(var(--dialog-ending-scale));
+  transform: scale(var(--dialog-scale));
 
   @starting-style {
     opacity: 0;
-    transform: translate3d(var(--dialog-starting-translate)) scale(var(--dialog-starting-scale));
+    transform: scale(var(--dialog-starting-scale));
   }
 }
 
 :where([popover]:popover-open) {
   display: grid;
   opacity: 1;
-  transform: translate3d(var(--popover-ending-translate)) scale(var(--popover-ending-scale));
+  transform: scale(var(--popover-scale));
 
   @starting-style {
     opacity: 0;
-    transform: translate3d(var(--popover-starting-translate)) scale(var(--popover-starting-scale));
+    transform: scale(var(--popover-starting-scale));
   }
 }
 
 /* Dialog backdrop with smooth fade transition */
 :where(dialog)::backdrop {
-  background-color: var(--dialog-starting-backdrop);
+  background-color: var(--dialog-starting-backdrop-color);
   transition: background-color var(--default-transition-duration)
     var(--default-transition-timing-function);
 }
 
 :where(dialog[open])::backdrop {
-  background-color: var(--dialog-ending-backdrop);
+  background-color: var(--dialog-backdrop-color);
 
   @starting-style {
-    background-color: var(--dialog-starting-backdrop);
+    background-color: var(--dialog-starting-backdrop-color);
   }
 }
 
@@ -437,6 +537,14 @@ DETAILS & SUMMARY (ACCORDIONS)
   text-decoration: none;
   user-select: none;
   list-style: none;
+}
+
+/* =============================================================================
+BROWSER NORMALIZATION
+============================================================================= */
+
+:where(progress) {
+  vertical-align: baseline;
 }
 
 /* =============================================================================

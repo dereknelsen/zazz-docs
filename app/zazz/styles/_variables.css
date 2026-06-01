@@ -196,16 +196,32 @@
   --leading-xs: 1.5;
   --leading-eyebrow: 1.2;
 
-  /* paragraph-spacing — Figma only; add per-style margin tokens as needed */
+  /* paragraph-spacing */
+  --margin-display: var(--step-4_5);
+  --margin-h1: var(--step-4_5);
+  --margin-h2: var(--step-4_5);
+  --margin-h3: var(--step-4_5);
+  --margin-h4: var(--step-3_5);
+  --margin-h5: var(--step-3_5);
+  --margin-h6: var(--step-3_5);
+  --margin-xl: var(--step-2_5);
+  --margin-lg: var(--step-2_5);
+  --margin-md: var(--step-2_5);
+  --margin-sm: var(--step-2);
+  --margin-xs: var(--step-1_5);
+  --margin-eyebrow: var(--step-none);
 
   /* ==========================================================================
     * 5. Spacing — interval modifier, semantic gaps, step scale
     * ========================================================================== */
 
-  /* modifiers (dev) */
-  --spacing-interval: 0.25rem;
+  /* modifiers */
+  /* @link https://utopia.fyi/clamp/calculator?a=400,1280,2—4 */
+  --spacing-interval: clamp(0.125rem, 0.0682rem + 0.2273vw, 0.25rem);
 
   /* scale */
+  --step-none: 0;
+  --step-px_5: 0.5px;
   --step-px: 1px;
   --step-0_5: calc(var(--spacing-interval) / 2);
   --step-1: var(--spacing-interval);
@@ -242,6 +258,7 @@
   --step-72: calc(var(--spacing-interval) * 72);
   --step-80: calc(var(--spacing-interval) * 80);
   --step-96: calc(var(--spacing-interval) * 96);
+  --step-full: 100%;
 
   /* semantic */
   --gap-xs: var(--step-2);
@@ -390,44 +407,44 @@
 /* ==========================================================================
 * 10. Dark Mode
 * ========================================================================== */
-:root {
-  :is(.dark, .dark *) {
-    /* base - dark */
-    --background: var(--neutral-950);
-    --foreground: var(--white);
-    --border: var(--neutral-800);
-    --border-foreground: var(--tint-100);
-    --card: var(--neutral-900);
-    --card-foreground: var(--white);
-    --input: var(--tint-50);
-    --input-foreground: var(--white);
+:is(.dark, .dark *) {
+  /* base - dark */
+  --background: var(--neutral-950);
+  --foreground: var(--white);
+  --border: var(--neutral-800);
+  --border-foreground: var(--tint-100);
+  --card: var(--neutral-900);
+  --card-foreground: var(--white);
+  --input: var(--tint-50);
+  --input-foreground: var(--white);
 
-    /* overlay - dark */
-    --muted: var(--tint-50);
-    --muted-foreground: var(--tint-600);
-    --faded: var(--shade-100);
-    --faded-foreground: var(--shade-600);
+  /* overlay - dark */
+  --muted: var(--tint-50);
+  --muted-foreground: var(--tint-600);
+  --faded: var(--shade-100);
+  --faded-foreground: var(--shade-600);
 
-    /* brand - dark */
-    --primary: var(--primary-500);
-    --primary-foreground: var(--white);
-    --secondary: var(--secondary-500);
-    --secondary-foreground: var(--white);
-    --tertiary: var(--tertiary-400);
-    --tertiary-foreground: var(--white);
+  /* brand - dark */
+  --primary: var(--primary-500);
+  --primary-foreground: var(--white);
+  --secondary: var(--secondary-500);
+  --secondary-foreground: var(--white);
+  --tertiary: var(--tertiary-400);
+  --tertiary-foreground: var(--white);
 
-    /* status - dark */
-    --info: oklch(0.5 0.1193 242.75);
-    --info-foreground: var(--white);
-    --success: oklch(0.5081 0.1049 165.61);
-    --success-foreground: var(--white);
-    --warning: oklch(0.5553 0.1455 49);
-    --warning-foreground: var(--white);
-    --destructive: oklch(0.5054 0.1905 27.52);
-    --destructive-foreground: var(--white);
-  }
+  /* status - dark */
+  --info: oklch(0.5 0.1193 242.75);
+  --info-foreground: var(--white);
+  --success: oklch(0.5081 0.1049 165.61);
+  --success-foreground: var(--white);
+  --warning: oklch(0.5553 0.1455 49);
+  --warning-foreground: var(--white);
+  --destructive: oklch(0.5054 0.1905 27.52);
+  --destructive-foreground: var(--white);
+}
 
-  @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
+  :root {
     /* base - dark */
     --background: var(--neutral-950);
     --foreground: var(--white);

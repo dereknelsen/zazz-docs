@@ -3,6 +3,9 @@
   --dialog-background: var(--card);
   --dialog-foreground: var(--card-foreground);
 
+  container-type: inline-size;
+  container-name: dialog;
+
   inline-size: var(--dialog-width);
   background-color: var(--dialog-background);
   color: var(--dialog-foreground);
@@ -48,7 +51,8 @@
 }
 
 :where(.dialog__body) {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   flex: 1;
   padding-inline: var(--gap-sm);
   padding-block: var(--gap-md);

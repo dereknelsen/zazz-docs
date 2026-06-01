@@ -63,7 +63,7 @@ export function Dialog() {
             <h1 className="text-lg weight-strong">Dialog title</h1>
             <p className="text-muted-foreground">Dialog description goes here.</p>
           </header>
-          <div className="dialog__body">
+          <div className="dialog__body text-prose">
             <p>
               This dialog was opened using an{" "}
               <a
@@ -74,6 +74,13 @@ export function Dialog() {
                 invoker command
               </a>
               .
+            </p>
+            <p>
+              Set the size of the dialog with the <code>data-size</code> attribute. <code>
+              &lt;dialog class="dialog" data-size="large"&gt;
+            </code>  <code>
+              &lt;dialog class="dialog" data-size="screen"&gt;
+            </code>
             </p>
           </div>
         </div>

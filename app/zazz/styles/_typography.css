@@ -176,3 +176,67 @@ TYPOGRAPHY STYLES
   border-radius: var(--radius-md);
   border: 1px solid var(--shade-50);
 }
+
+/* ===========================================================================
+PARAGRAPH RHYTHM
+- Applies margin to the first text element in a block of text-prose
+=========================================================================== */
+
+:where(.text-prose .text-display:not(:first-child)) {
+  margin-block-start: var(--margin-display);
+}
+
+:where(.text-prose .text-h1:not(:first-child)),
+:where(.text-prose h1:not(:first-child)) {
+  margin-block-start: var(--margin-display);
+}
+
+:where(.text-prose .text-h2:not(:first-child)),
+:where(.text-prose h2:not(:first-child)) {
+  margin-block-start: var(--margin-h2);
+}
+
+:where(.text-prose .text-h3:not(:first-child)),
+:where(.text-prose h3:not(:first-child)) {
+  margin-block-start: var(--margin-h3);
+}
+
+:where(.text-prose .text-h4:not(:first-child)),
+:where(.text-prose h4:not(:first-child)) {
+  margin-block-start: var(--margin-h4);
+}
+
+:where(.text-prose .text-h5:not(:first-child)),
+:where(.text-prose h5:not(:first-child)) {
+  margin-block-start: var(--margin-h5);
+}
+
+:where(.text-prose .text-h6:not(:first-child)),
+:where(.text-prose h6:not(:first-child)) {
+  margin-block-start: var(--margin-h6);
+}
+
+:where(.text-prose .text-xl:not(:first-child)) {
+  margin-block-start: var(--margin-xl);
+}
+
+:where(.text-prose .text-lg:not(:first-child)) {
+  margin-block-start: var(--margin-lg);
+}
+
+:where(.text-prose .text-md:not(:first-child)),
+:where(.text-prose p:not(:first-child)) {
+  margin-block-start: var(--margin-md);
+}
+
+:where(.text-prose .text-sm:not(:first-child)) {
+  margin-block-start: var(--margin-sm);
+}
+
+:where(.text-prose .text-xs:not(:first-child)) {
+  margin-block-start: var(--margin-xs);
+}
+
+:where(.text-prose .text-eyebrow:not(:first-child)) {
+  margin-block-start: var(--margin-eyebrow);
+}

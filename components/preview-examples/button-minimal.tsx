@@ -24,29 +24,17 @@ export default function ButtonMinimal() {
           <MenuIcon />
         </span>
       </button>
-      <button
-        type="button"
-        className="button button-primary button-minimal"
-        aria-label="Open menu"
-      >
+      <button type="button" className="button button-primary button-minimal" aria-label="Open menu">
         <span className="button-icon">
           <MenuIcon />
         </span>
       </button>
-      <button
-        type="button"
-        className="button button-muted button-minimal"
-        aria-label="Open menu"
-      >
+      <button type="button" className="button button-muted button-minimal" aria-label="Open menu">
         <span className="button-icon">
           <MenuIcon />
         </span>
       </button>
-      <button
-        type="button"
-        className="button button-ghost button-minimal"
-        aria-label="Open menu"
-      >
+      <button type="button" className="button button-ghost button-minimal" aria-label="Open menu">
         <span className="button-icon">
           <MenuIcon />
         </span>

@@ -44,33 +44,33 @@ A card holds related content as a single unit: an article preview, a feature des
 </a>
 ```
 
-| Part | Class | Notes |
-| --- | --- | --- |
-| Root | `card` | The bordered surface. Width and height stretch to 100% of the container. |
-| Figure | `card__figure` | Optional media region. 3:2 aspect by default, `--radius-md` corners. Wrap in an anchor for click-through behavior. |
-| Image | `card__image` | Absolute-positioned fill inside `card__figure`. |
-| Content | `card__content` | Padded text region. Stacks tags, body, and footer with `--gap-sm` between. |
-| Tags | `card__tags` | Inline badges row with `--gap-xs`. Often holds `badge-link` variants. |
-| Body | `card__body` | Title + description stack with `--gap-xs`. |
-| Title | `card__title` | Heading text. Apply a text style like `text-h6` separately. |
-| Title link | `card__title-link` | Anchor wrapping the title for click-through. |
-| Description | `card__description` | Short excerpt. Pair with `text-sm`, `text-muted-foreground`, and `line-clamp-2`. |
-| Footer | `card__footer` | Author meta + CTA row. Wraps when narrow. |
-| Footer CTA | `card__button` | The card's outbound action. Compose with `button button-muted` or another variant. |
+| Part        | Class               | Notes                                                                                                              |
+| ----------- | ------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Root        | `card`              | The bordered surface. Width and height stretch to 100% of the container.                                           |
+| Figure      | `card__figure`      | Optional media region. 3:2 aspect by default, `--radius-md` corners. Wrap in an anchor for click-through behavior. |
+| Image       | `card__image`       | Absolute-positioned fill inside `card__figure`.                                                                    |
+| Content     | `card__content`     | Padded text region. Stacks tags, body, and footer with `--gap-sm` between.                                         |
+| Tags        | `card__tags`        | Inline badges row with `--gap-xs`. Often holds `badge-link` variants.                                              |
+| Body        | `card__body`        | Title + description stack with `--gap-xs`.                                                                         |
+| Title       | `card__title`       | Heading text. Apply a text style like `text-h6` separately.                                                        |
+| Title link  | `card__title-link`  | Anchor wrapping the title for click-through.                                                                       |
+| Description | `card__description` | Short excerpt. Pair with `text-sm`, `text-muted-foreground`, and `line-clamp-2`.                                   |
+| Footer      | `card__footer`      | Author meta + CTA row. Wraps when narrow.                                                                          |
+| Footer CTA  | `card__button`      | The card's outbound action. Compose with `button button-muted` or another variant.                                 |
 
 The root can be any clickable element (commonly an `<a>`) or a plain `<div>` when the card itself isn't a single click target.
 
 ## Tokens
 
-| Property | Token / value |
-| --- | --- |
-| Width / height | `100%` (fills parent) |
-| Radius | `--radius-card` (defaults to `--radius-lg`) |
-| Color | `--card-foreground` |
-| Background | None set on root. Add `background: var(--card)` if the card needs its own surface. |
-| Internal gap | `--gap-sm` (content, footer), `--gap-xs` (tags, body) |
-| Figure aspect | `3 / 2`, `--radius-md` |
-| Title size | Whatever text style you apply (the demo uses `text-h6`) |
+| Property       | Token / value                                                                      |
+| -------------- | ---------------------------------------------------------------------------------- |
+| Width / height | `100%` (fills parent)                                                              |
+| Radius         | `--radius-card` (defaults to `--radius-lg`)                                        |
+| Color          | `--card-foreground`                                                                |
+| Background     | None set on root. Add `background: var(--card)` if the card needs its own surface. |
+| Internal gap   | `--gap-sm` (content, footer), `--gap-xs` (tags, body)                              |
+| Figure aspect  | `3 / 2`, `--radius-md`                                                             |
+| Title size     | Whatever text style you apply (the demo uses `text-h6`)                            |
 
 The card root is borderless by default. Combine with `border: 1px solid var(--border)` and `background: var(--card)` when the card needs to read as a surface. Without those, the card sits flush with the parent.
 
@@ -92,16 +92,28 @@ For a card with an explicit surface and shadow, add a class with `background`, `
 
 ## Cross-platform
 
-| Platform | Reference |
-| --- | --- |
-| Figma | `Zazz v0.4.4 → card` (component with figure, content, body, footer slots) |
-| Webflow | `card` root with `card__*` child classes |
-| CSS / Tailwind | The same classes after [installing utilities.css](/docs/quickstart/css) |
+| Platform       | Reference                                                                 |
+| -------------- | ------------------------------------------------------------------------- |
+| Figma          | `Zazz v0.4.4 → card` (component with figure, content, body, footer slots) |
+| Webflow        | `card` root with `card__*` child classes                                  |
+| CSS / Tailwind | The same classes after [installing utilities.css](/docs/quickstart/css)   |
 
 ## Where to next
 
 <Cards>
-  <Card title="Button" href="/docs/primitives/button" description="The primary action element inside `card__footer`." />
-  <Card title="Avatar" href="/docs/primitives/avatar" description="The author composition used inside cards." />
-  <Card title="Badge" href="/docs/primitives/badge" description="Category and tag chips for `card__tags`." />
+  <Card
+    title="Button"
+    href="/docs/primitives/button"
+    description="The primary action element inside `card__footer`."
+  />
+  <Card
+    title="Avatar"
+    href="/docs/primitives/avatar"
+    description="The author composition used inside cards."
+  />
+  <Card
+    title="Badge"
+    href="/docs/primitives/badge"
+    description="Category and tag chips for `card__tags`."
+  />
 </Cards>

@@ -73,7 +73,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, []);
   const reset = useCallback(() => dispatch({ type: "reset" }), []);
 
-  const value = useMemo(() => ({ theme, hydrated, update, reset }), [theme, hydrated, update, reset]);
+  const value = useMemo(
+    () => ({ theme, hydrated, update, reset }),
+    [theme, hydrated, update, reset],
+  );
   return <ThemeCtx.Provider value={value}>{children}</ThemeCtx.Provider>;
 }
 

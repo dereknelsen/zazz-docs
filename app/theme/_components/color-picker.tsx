@@ -32,7 +32,14 @@ export function ColorPicker({ label, value, onChange, className }: Props) {
         <input
           type="text"
           value={clean}
-          onChange={(e) => onChange(e.target.value.replace(/[^0-9A-Fa-f]/g, "").toUpperCase().slice(0, 6))}
+          onChange={(e) =>
+            onChange(
+              e.target.value
+                .replace(/[^0-9A-Fa-f]/g, "")
+                .toUpperCase()
+                .slice(0, 6),
+            )
+          }
           maxLength={6}
           spellCheck={false}
           className="flex-1 min-w-0 bg-transparent font-mono text-sm uppercase tracking-wide text-fd-foreground outline-none placeholder:text-fd-muted-foreground/40"

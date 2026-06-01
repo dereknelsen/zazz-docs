@@ -34,24 +34,37 @@ export function GrayscalePanel() {
 
   return (
     <div className="flex flex-1 flex-col overflow-auto">
-      <SectionHeader title="Grayscale" description="Neutral scale plus derived shade (from neutral-950) and tint (from white) overlays." />
+      <SectionHeader
+        title="Grayscale"
+        description="Neutral scale plus derived shade (from neutral-950) and tint (from white) overlays."
+      />
       <div className="flex flex-col gap-5 px-6 py-4">
         <PaletteEditor
           palette={neutral}
-          onChange={(next) => update((prev) => ({ ...prev, palettes: { ...prev.palettes, neutral: next } }))}
+          onChange={(next) =>
+            update((prev) => ({ ...prev, palettes: { ...prev.palettes, neutral: next } }))
+          }
         />
 
         <section className="flex flex-col gap-3 rounded-xl border border-fd-border/30 bg-fd-card/30 p-4">
-          <h3 className="text-sm font-semibold text-fd-foreground">shade — over neutral-950 ({hexToOklch(neutral950Hex)})</h3>
-          <div className="grid grid-cols-13 gap-1.5" style={{ gridTemplateColumns: `repeat(${OVERLAY_STOPS.length}, minmax(0, 1fr))` }}>
+          <h3 className="text-sm font-semibold text-fd-foreground">
+            shade — over neutral-950 ({hexToOklch(neutral950Hex)})
+          </h3>
+          <div
+            className="grid grid-cols-13 gap-1.5"
+            style={{ gridTemplateColumns: `repeat(${OVERLAY_STOPS.length}, minmax(0, 1fr))` }}
+          >
             {OVERLAY_STOPS.map(({ key, alpha }) => (
               <div key={key} className="flex flex-col gap-1">
-                <div
-                  className="aspect-square rounded-md border border-fd-border/30 [background-image:repeating-conic-gradient(hsl(0_0%_85%)_0%_25%,white_0%_50%)] [background-size:8px_8px]"
-                >
-                  <div className="size-full rounded-md" style={{ background: `oklch(from ${neutral950Hex} l c h / ${alpha})` }} />
+                <div className="aspect-square rounded-md border border-fd-border/30 [background-image:repeating-conic-gradient(hsl(0_0%_85%)_0%_25%,white_0%_50%)] [background-size:8px_8px]">
+                  <div
+                    className="size-full rounded-md"
+                    style={{ background: `oklch(from ${neutral950Hex} l c h / ${alpha})` }}
+                  />
                 </div>
-                <span className="text-center font-mono text-[10px] text-fd-muted-foreground">{key}</span>
+                <span className="text-center font-mono text-[10px] text-fd-muted-foreground">
+                  {key}
+                </span>
               </div>
             ))}
           </div>
@@ -59,13 +72,21 @@ export function GrayscalePanel() {
 
         <section className="flex flex-col gap-3 rounded-xl border border-fd-border/30 bg-fd-card/30 p-4">
           <h3 className="text-sm font-semibold text-fd-foreground">tint — over white</h3>
-          <div className="grid gap-1.5" style={{ gridTemplateColumns: `repeat(${OVERLAY_STOPS.length}, minmax(0, 1fr))` }}>
+          <div
+            className="grid gap-1.5"
+            style={{ gridTemplateColumns: `repeat(${OVERLAY_STOPS.length}, minmax(0, 1fr))` }}
+          >
             {OVERLAY_STOPS.map(({ key, alpha }) => (
               <div key={key} className="flex flex-col gap-1">
                 <div className="aspect-square rounded-md border border-fd-border/30 bg-neutral-900">
-                  <div className="size-full rounded-md" style={{ background: `oklch(from white l c h / ${alpha})` }} />
+                  <div
+                    className="size-full rounded-md"
+                    style={{ background: `oklch(from white l c h / ${alpha})` }}
+                  />
                 </div>
-                <span className="text-center font-mono text-[10px] text-fd-muted-foreground">{key}</span>
+                <span className="text-center font-mono text-[10px] text-fd-muted-foreground">
+                  {key}
+                </span>
               </div>
             ))}
           </div>

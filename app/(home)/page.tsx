@@ -21,12 +21,7 @@ const links = [
 
 function Arrow() {
   return (
-    <svg
-      className="home__link-arrow"
-      viewBox="0 0 14 14"
-      fill="none"
-      aria-hidden
-    >
+    <svg className="home__link-arrow" viewBox="0 0 14 14" fill="none" aria-hidden>
       <path
         d="M3.5 10.5L10.5 3.5M10.5 3.5H4.6M10.5 3.5V9.4"
         stroke="currentColor"
@@ -40,11 +35,7 @@ function Arrow() {
 export default function HomePage() {
   return (
     <div className="home">
-      <ZazzLineartBg
-        className="home__bg"
-        preserveAspectRatio="xMidYMid slice"
-        aria-hidden
-      />
+      <ZazzLineartBg className="home__bg" preserveAspectRatio="xMidYMid slice" aria-hidden />
 
       <div className="home__inner">
         <Logo variant="lockup" className="home__logo" />
@@ -80,7 +71,17 @@ export default function HomePage() {
         </h1>
 
         <div className="home__footer">
-          <span>Designed and maintained by <a className="home__footer-link" href="https://github.com/dereknelsen" target="_blank" rel="noopener noreferrer">Derek Nelsen</a></span>
+          <span>
+            Designed and maintained by{" "}
+            <a
+              className="home__footer-link"
+              href="https://github.com/dereknelsen"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Derek Nelsen
+            </a>
+          </span>
           <span>v0.4.4</span>
         </div>
       </div>

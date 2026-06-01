@@ -26,22 +26,40 @@ export function SpacingPanel() {
   };
 
   const removeStep = (s: string) =>
-    update((p) => ({ ...p, spacing: { ...p.spacing, steps: p.spacing.steps.filter((x) => x !== s) } }));
+    update((p) => ({
+      ...p,
+      spacing: { ...p.spacing, steps: p.spacing.steps.filter((x) => x !== s) },
+    }));
 
   return (
     <div className="flex flex-1 flex-col overflow-auto">
-      <SectionHeader title="Spacing" description="Spacing interval and step scale. Steps multiply --spacing-interval." />
+      <SectionHeader
+        title="Spacing"
+        description="Spacing interval and step scale. Steps multiply --spacing-interval."
+      />
       <div className="flex flex-col gap-5 px-6 py-4">
         <section className="rounded-xl border border-fd-border/30 bg-fd-card/30 p-4">
           <h3 className="mb-3 text-sm font-semibold text-fd-foreground">Interval</h3>
-          <TextInput mono label="--spacing-interval" value={spacing.interval} onChange={setInterval} className="max-w-xs" />
+          <TextInput
+            mono
+            label="--spacing-interval"
+            value={spacing.interval}
+            onChange={setInterval}
+            className="max-w-xs"
+          />
         </section>
 
         <section className="rounded-xl border border-fd-border/30 bg-fd-card/30 p-4">
           <h3 className="mb-3 text-sm font-semibold text-fd-foreground">Semantic gaps</h3>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-5">
             {(["xs", "sm", "md", "lg", "xl"] as const).map((k) => (
-              <TextInput key={k} mono label={`--gap-${k}`} value={spacing.gaps[k]} onChange={(v) => setGap(k, v)} />
+              <TextInput
+                key={k}
+                mono
+                label={`--gap-${k}`}
+                value={spacing.gaps[k]}
+                onChange={(v) => setGap(k, v)}
+              />
             ))}
           </div>
         </section>
@@ -68,7 +86,10 @@ export function SpacingPanel() {
           </header>
           <ul className="flex flex-wrap gap-1.5">
             {spacing.steps.map((s) => (
-              <li key={s} className="inline-flex items-center gap-1 rounded-md border border-fd-border/40 bg-fd-card/60 pl-2 pr-1 py-1">
+              <li
+                key={s}
+                className="inline-flex items-center gap-1 rounded-md border border-fd-border/40 bg-fd-card/60 pl-2 pr-1 py-1"
+              >
                 <span className="font-mono text-xs text-fd-foreground">step-{s}</span>
                 <button
                   type="button"

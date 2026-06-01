@@ -13,19 +13,19 @@ A text input is a single-line field for free-form entry. Zazz styles the native 
 <input class="input" type="text" placeholder="Placeholder" />
 ```
 
-| Token | Value |
-| --- | --- |
-| Width | `100%` |
-| Height | `--step-9` |
-| Min width | `--step-48` |
-| Padding | `0 --step-2_5` |
-| Border | `1px solid var(--border)` |
-| Radius | `--radius-input` (defaults to `--radius-md`) |
-| Background | `--input` |
-| Color | `--input-foreground` |
-| Font | `--font-size-md`, weight `--weight-body` |
-| Hover | Border color shifts to `--primary` |
-| Focus | Border `--primary`, plus the [focus ring](/docs/reference/focus-ring) |
+| Token      | Value                                                                 |
+| ---------- | --------------------------------------------------------------------- |
+| Width      | `100%`                                                                |
+| Height     | `--step-9`                                                            |
+| Min width  | `--step-48`                                                           |
+| Padding    | `0 --step-2_5`                                                        |
+| Border     | `1px solid var(--border)`                                             |
+| Radius     | `--radius-input` (defaults to `--radius-md`)                          |
+| Background | `--input`                                                             |
+| Color      | `--input-foreground`                                                  |
+| Font       | `--font-size-md`, weight `--weight-body`                              |
+| Hover      | Border color shifts to `--primary`                                    |
+| Focus      | Border `--primary`, plus the [focus ring](/docs/reference/focus-ring) |
 
 ## With a leading icon
 
@@ -61,12 +61,12 @@ Wrap the input in `input-wrapper` and add the icon inside. Apply `pl-input` to t
 
 ## Anatomy
 
-| Part | Class | Notes |
-| --- | --- | --- |
-| Wrapper | `input-wrapper` | Optional, required only when adding icons. Position context for absolute icons. |
-| Input | `input` | The `<input>` element. Apply `pl-input` or `pr-input` modifier when an icon sits inside. |
-| Icon container | `input-icon-start`, `input-icon-right` | Absolute-positioned wrapper that anchors the icon to the left or right edge. |
-| Icon | `input-icon` | The icon itself. Width `--step-4_5`, square aspect. |
+| Part           | Class                                  | Notes                                                                                    |
+| -------------- | -------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Wrapper        | `input-wrapper`                        | Optional, required only when adding icons. Position context for absolute icons.          |
+| Input          | `input`                                | The `<input>` element. Apply `pl-input` or `pr-input` modifier when an icon sits inside. |
+| Icon container | `input-icon-start`, `input-icon-right` | Absolute-positioned wrapper that anchors the icon to the left or right edge.             |
+| Icon           | `input-icon`                           | The icon itself. Width `--step-4_5`, square aspect.                                      |
 
 ## Form composition
 
@@ -100,17 +100,17 @@ Inside a form, pair each input with a label and wrap them in `form-group`. Use `
 
 ## Tokens summary
 
-| Property | Token |
-| --- | --- |
-| Height | `--step-9` |
-| Padding (inline) | `--step-2_5` |
-| Border | `--border` (default), `--primary` (hover/focus) |
-| Radius | `--radius-input` |
-| Background | `--input` |
-| Foreground | `--input-foreground` |
-| Icon size | `--step-4_5` |
-| Icon-side padding | `--step-8` (via `pl-input` / `pr-input`) |
-| Focus ring | `--focus-ring` |
+| Property          | Token                                           |
+| ----------------- | ----------------------------------------------- |
+| Height            | `--step-9`                                      |
+| Padding (inline)  | `--step-2_5`                                    |
+| Border            | `--border` (default), `--primary` (hover/focus) |
+| Radius            | `--radius-input`                                |
+| Background        | `--input`                                       |
+| Foreground        | `--input-foreground`                            |
+| Icon size         | `--step-4_5`                                    |
+| Icon-side padding | `--step-8` (via `pl-input` / `pr-input`)        |
+| Focus ring        | `--focus-ring`                                  |
 
 ## Accessibility
 
@@ -121,16 +121,28 @@ Inside a form, pair each input with a label and wrap them in `form-group`. Use `
 
 ## Cross-platform
 
-| Platform | Reference |
-| --- | --- |
-| Figma | `Zazz v0.4.4 → Input` (component_set with icon variants) |
-| Webflow | `input` class + optional `input-wrapper`, `input-icon-*`, `pl-input`, `pr-input` |
-| CSS / Tailwind | The same classes after [installing utilities.css](/docs/quickstart/css) |
+| Platform       | Reference                                                                        |
+| -------------- | -------------------------------------------------------------------------------- |
+| Figma          | `Zazz v0.4.4 → Input` (component_set with icon variants)                         |
+| Webflow        | `input` class + optional `input-wrapper`, `input-icon-*`, `pl-input`, `pr-input` |
+| CSS / Tailwind | The same classes after [installing utilities.css](/docs/quickstart/css)          |
 
 ## Where to next
 
 <Cards>
-  <Card title="Textarea" href="/docs/primitives/textarea" description="The multi-line sibling of input." />
-  <Card title="Select" href="/docs/primitives/select" description="Dropdown for fixed-option fields." />
-  <Card title="Foundations / Radius" href="/docs/foundations/radius" description="`--radius-input` controls every input's corner shape." />
+  <Card
+    title="Textarea"
+    href="/docs/primitives/textarea"
+    description="The multi-line sibling of input."
+  />
+  <Card
+    title="Select"
+    href="/docs/primitives/select"
+    description="Dropdown for fixed-option fields."
+  />
+  <Card
+    title="Foundations / Radius"
+    href="/docs/foundations/radius"
+    description="`--radius-input` controls every input's corner shape."
+  />
 </Cards>

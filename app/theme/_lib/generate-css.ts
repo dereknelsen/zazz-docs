@@ -1,13 +1,7 @@
 import { hexToOklch } from "./create-display-color";
 import { createSwatches } from "./create-swatches";
 import { fontSizeClampMap, FONT_SIZE_NAMES } from "./utopia-type";
-import type {
-  PaletteConfig,
-  PaletteName,
-  ThemeConfig,
-  ThemeBindings,
-  SemanticVar,
-} from "./types";
+import type { PaletteConfig, PaletteName, ThemeConfig, ThemeBindings, SemanticVar } from "./types";
 
 const SEMANTIC_GROUPS: { label: string; vars: SemanticVar[] }[] = [
   {
@@ -56,7 +50,11 @@ function bindingValue(binding: string): string {
   return `var(--${binding})`;
 }
 
-function emitThemeVars(bindings: ThemeBindings, side: "light" | "dark", status: ThemeConfig["status"]) {
+function emitThemeVars(
+  bindings: ThemeBindings,
+  side: "light" | "dark",
+  status: ThemeConfig["status"],
+) {
   const lines: string[] = [];
   for (const group of SEMANTIC_GROUPS) {
     lines.push(`  /* ${group.label}${side === "dark" ? " - dark" : ""} */`);
@@ -75,9 +73,7 @@ function emitThemeVars(bindings: ThemeBindings, side: "light" | "dark", status: 
 
 function emitPaletteScale(palette: PaletteConfig): string {
   const sw = createSwatches(palette).filter((s) => s.stop !== 0 && s.stop !== 1000);
-  return sw
-    .map((s) => `  --${palette.name}-${s.stop}: ${hexToOklch(s.hex)};`)
-    .join("\n");
+  return sw.map((s) => `  --${palette.name}-${s.stop}: ${hexToOklch(s.hex)};`).join("\n");
 }
 
 function emitNeutralScale(palette: PaletteConfig): string {
@@ -107,7 +103,8 @@ function emitOverlayScale(name: "shade" | "tint", base: "neutral-950" | "white")
 }
 
 export function generateThemeCSS(theme: ThemeConfig): string {
-  const { palettes, status, bindings, typography, spacing, radius, layout, effects, animations } = theme;
+  const { palettes, status, bindings, typography, spacing, radius, layout, effects, animations } =
+    theme;
   const fontClamps = fontSizeClampMap(typography.utopia);
 
   const themeLight = emitThemeVars(bindings, "light", status);

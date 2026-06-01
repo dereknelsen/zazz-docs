@@ -25,14 +25,14 @@ Radios in the same group share a `name` attribute. The browser handles the mutua
 
 ## Tokens
 
-| Property | Token / value |
-| --- | --- |
-| Width / height | `--step-4` |
-| Border | `1px solid var(--border)` (unchecked), `5px solid --primary` (checked) |
-| Radius | `--radius-full` |
-| Background | `--input` (unchecked), `--background` (checked, with thick primary border) |
-| Group gap | `--gap-xs` |
-| Focus ring | `--focus-ring` |
+| Property       | Token / value                                                              |
+| -------------- | -------------------------------------------------------------------------- |
+| Width / height | `--step-4`                                                                 |
+| Border         | `1px solid var(--border)` (unchecked), `5px solid --primary` (checked)     |
+| Radius         | `--radius-full`                                                            |
+| Background     | `--input` (unchecked), `--background` (checked, with thick primary border) |
+| Group gap      | `--gap-xs`                                                                 |
+| Focus ring     | `--focus-ring`                                                             |
 
 The checked appearance uses a `5px` border that visually shrinks the background, creating a centered dot effect without an inner element.
 
@@ -74,15 +74,23 @@ The checked appearance uses a `5px` border that visually shrinks the background,
 
 ## Cross-platform
 
-| Platform | Reference |
-| --- | --- |
-| Figma | No Figma component (representative mockup only). |
-| Webflow | `radio` class on the `<input>`. Group wrapper is `radio-group`. |
+| Platform       | Reference                                                              |
+| -------------- | ---------------------------------------------------------------------- |
+| Figma          | No Figma component (representative mockup only).                       |
+| Webflow        | `radio` class on the `<input>`. Group wrapper is `radio-group`.        |
 | CSS / Tailwind | The same class after [installing utilities.css](/docs/quickstart/css). |
 
 ## Where to next
 
 <Cards>
-  <Card title="Checkbox" href="/docs/primitives/checkbox" description="The multi-select sibling. Same wrapper pattern." />
-  <Card title="Select" href="/docs/primitives/select" description="Better for longer lists of mutually exclusive options." />
+  <Card
+    title="Checkbox"
+    href="/docs/primitives/checkbox"
+    description="The multi-select sibling. Same wrapper pattern."
+  />
+  <Card
+    title="Select"
+    href="/docs/primitives/select"
+    description="Better for longer lists of mutually exclusive options."
+  />
 </Cards>

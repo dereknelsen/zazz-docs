@@ -20,28 +20,28 @@ The switch is built from a native `<input type="checkbox">` (so it behaves like 
 
 ## Anatomy
 
-| Part | Class | Notes |
-| --- | --- | --- |
-| Wrapper | `switch-base` | Sets dimensions (width `--step-8`, height `--step-4`) and positioning. |
-| Input | `switch` | The native checkbox, absolutely positioned to fill the wrapper. Controls the visual state. |
-| Toggle dot | `switch-toggle` | The circular indicator that slides between off and on positions. |
+| Part       | Class           | Notes                                                                                      |
+| ---------- | --------------- | ------------------------------------------------------------------------------------------ |
+| Wrapper    | `switch-base`   | Sets dimensions (width `--step-8`, height `--step-4`) and positioning.                     |
+| Input      | `switch`        | The native checkbox, absolutely positioned to fill the wrapper. Controls the visual state. |
+| Toggle dot | `switch-toggle` | The circular indicator that slides between off and on positions.                           |
 
 ## Tokens
 
-| Property | Token / value |
-| --- | --- |
-| Track width | `--step-8` |
-| Track height | `--step-4` |
-| Track border (off) | `1px solid var(--muted)` |
-| Track background (off) | `--muted` |
-| Track border (on) | `--primary` |
-| Track background (on) | `--primary` |
-| Toggle width | `--step-3` |
-| Toggle radius | `--radius-full` |
-| Toggle background | `--background` |
-| Toggle shadow | `--shadow-xs` |
-| Toggle transition | `transform 0.2s ease` |
-| Focus ring | `--focus-ring` |
+| Property               | Token / value            |
+| ---------------------- | ------------------------ |
+| Track width            | `--step-8`               |
+| Track height           | `--step-4`               |
+| Track border (off)     | `1px solid var(--muted)` |
+| Track background (off) | `--muted`                |
+| Track border (on)      | `--primary`              |
+| Track background (on)  | `--primary`              |
+| Toggle width           | `--step-3`               |
+| Toggle radius          | `--radius-full`          |
+| Toggle background      | `--background`           |
+| Toggle shadow          | `--shadow-xs`            |
+| Toggle transition      | `transform 0.2s ease`    |
+| Focus ring             | `--focus-ring`           |
 
 The toggle slides via CSS transform when the input's checked state changes. Add a JavaScript class or use the `:checked` selector with a sibling combinator to wire the translation.
 
@@ -74,15 +74,23 @@ The toggle slides via CSS transform when the input's checked state changes. Add 
 
 ## Cross-platform
 
-| Platform | Reference |
-| --- | --- |
-| Figma | No Figma component (representative mockup only). |
-| Webflow | `switch` class on the `<input>`, wrapped in `switch-base` with `switch-toggle` and `switch-group`. |
-| CSS / Tailwind | The same classes after [installing utilities.css](/docs/quickstart/css). |
+| Platform       | Reference                                                                                          |
+| -------------- | -------------------------------------------------------------------------------------------------- |
+| Figma          | No Figma component (representative mockup only).                                                   |
+| Webflow        | `switch` class on the `<input>`, wrapped in `switch-base` with `switch-toggle` and `switch-group`. |
+| CSS / Tailwind | The same classes after [installing utilities.css](/docs/quickstart/css).                           |
 
 ## Where to next
 
 <Cards>
-  <Card title="Checkbox" href="/docs/primitives/checkbox" description="Same semantic, different visual treatment." />
-  <Card title="Foundations / Effects" href="/docs/foundations/effects" description="The toggle uses `--shadow-xs` for its slight lift." />
+  <Card
+    title="Checkbox"
+    href="/docs/primitives/checkbox"
+    description="Same semantic, different visual treatment."
+  />
+  <Card
+    title="Foundations / Effects"
+    href="/docs/foundations/effects"
+    description="The toggle uses `--shadow-xs` for its slight lift."
+  />
 </Cards>

@@ -1,4 +1,10 @@
-export function Logo({ variant = "lockup", className }: { variant?: "lockup" | "logomark" | "logotype", className?: string }) {
+export function Logo({
+  variant = "lockup",
+  className,
+}: {
+  variant?: "lockup" | "logomark" | "logotype";
+  className?: string;
+}) {
   if (variant === "lockup") {
     return (
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 83 23" className={className}>

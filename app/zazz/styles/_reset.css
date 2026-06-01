@@ -1,0 +1,448 @@
+/* =============================================================================
+UNIVERSAL RESET — box model, margins, padding, borders
+============================================================================= */
+
+:where(*),
+:where(::before),
+:where(::after),
+:where(::backdrop),
+:where(::file-selector-button) {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0 solid;
+}
+
+/* =============================================================================
+BASE ELEMENT RESETS
+============================================================================= */
+
+:where(html) {
+  font-family: var(--font-body, sans-serif);
+  font-size: 16px;
+  line-height: 1.5;
+  tab-size: 4;
+  background-color: var(--background);
+  -webkit-tap-highlight-color: transparent;
+  overflow: clip;
+}
+
+:where(body) {
+  display: grid;
+  font-optical-sizing: auto;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-wrap: pretty;
+  display: flex;
+  flex-direction: column;
+  color: var(--foreground);
+  background-color: var(--background);
+  block-size: 100svh;
+  inline-size: 100vi;
+  overflow-x: clip;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+:where(:focus-visible) {
+  outline: var(--ring-size) var(--ring-style) var(--ring);
+  outline-offset: var(--ring-offset);
+}
+
+:where(b),
+:where(strong) {
+  font-weight: var(--weight-strong);
+}
+
+:where(main) {
+  /* Allow for more predictable z-indexing and spacing */
+  display: flex;
+  z-index: isolate;
+  position: relative;
+  flex-direction: column;
+
+  /* Prevent floating footers */
+  min-height: 100svh;
+}
+
+:where(header),
+:where(footer),
+:where(section),
+:where(article) {
+  /* Allow for more predictable z-indexing */
+  position: relative;
+}
+
+:where(pre) {
+  margin: unset;
+}
+
+:where(a) {
+  color: unset;
+  background-color: unset;
+  text-decoration: inherit;
+}
+
+/* =============================================================================
+TYPOGRAPHY & SEMANTIC ELEMENTS
+============================================================================= */
+
+/* Headings inherit by default — utility classes (.text-h1, etc.) drive size/weight */
+:where(h1),
+:where(h2),
+:where(h3),
+:where(h4),
+:where(h5),
+:where(h6) {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+:where(small) {
+  font-size: 80%;
+}
+
+:where(sub),
+:where(sup) {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+:where(sub) {
+  bottom: -0.25em;
+}
+
+:where(sup) {
+  top: -0.5em;
+}
+
+:where(abbr:where([title])) {
+  text-decoration: underline dotted;
+}
+
+:where(hr) {
+  block-size: 0;
+  color: var(--border);
+  border-top-width: 1px;
+}
+
+:where(code),
+:where(kbd),
+:where(samp),
+:where(pre) {
+  font-family: var(--font-mono);
+  font-size: 1em;
+}
+
+:where(code) {
+  display: inline-flex;
+  background-color: var(--muted);
+  padding: 0em 0.25em;
+  border-radius: var(--radius-xs);
+  text-box: trim-both ex alphabetic;
+}
+
+/* =============================================================================
+LIST RESETS
+============================================================================= */
+
+:where(ol),
+:where(ul),
+:where(menu) {
+  list-style: none;
+}
+
+/* =============================================================================
+TABLE RESETS
+============================================================================= */
+
+:where(table) {
+  text-indent: 0;
+  border-color: inherit;
+  border-collapse: collapse;
+}
+
+/* =============================================================================
+MEDIA RESETS
+============================================================================= */
+
+:where(img),
+:where(svg),
+:where(video),
+:where(canvas),
+:where(audio),
+:where(iframe),
+:where(embed),
+:where(object) {
+  display: block;
+}
+
+:where(img),
+:where(video) {
+  max-inline-size: 100%;
+  block-size: auto;
+}
+
+/* Custom text selection styling */
+::selection {
+  /* Ensure text is always legible on the primary color at 30% opacity + the background color */
+  color: contrast-color(
+    color-mix(in oklab, var(--background) 50%, oklch(from var(--primary) calc(l + 0.1) c h / 0.3))
+  );
+  background-color: oklch(from var(--primary) calc(l + 0.1) c h / 0.3);
+}
+
+/* =============================================================================
+FORM ELEMENT RESETS
+============================================================================= */
+
+/* Inherit font and color across all form controls */
+:where(button),
+:where(input),
+:where(optgroup),
+:where(select),
+:where(textarea),
+::file-selector-button {
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
+/* Input field resets */
+:where(textarea),
+:where(input) {
+  font-size: unset;
+  block-size: unset;
+  padding: unset;
+  margin-bottom: unset;
+  line-height: unset;
+  background-color: unset;
+  border: unset;
+}
+
+:where(textarea) {
+  resize: vertical;
+}
+
+::placeholder {
+  opacity: 1;
+  color: color-mix(in oklab, currentcolor 50%, transparent);
+}
+
+/* Range input styling */
+:where(input[type="range"]) {
+  -webkit-appearance: none;
+  appearance: none;
+  inline-size: 100%;
+}
+
+:where(input[type="range"])::-webkit-slider-runnable-track {
+  block-size: 0.5rem;
+  inline-size: 100%;
+  background: var(--muted);
+  border: 1px solid var(--muted);
+  border-radius: var(--radius-full);
+}
+
+:where(input[type="range"])::-moz-range-track {
+  block-size: 0.5rem;
+  inline-size: 100%;
+  background: var(--muted);
+  border-radius: var(--radius-full);
+}
+
+:where(input[type="range"])::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -0.25rem;
+  inline-size: 0.875rem;
+  block-size: 0.875rem;
+  background-color: var(--background);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--primary);
+}
+
+:where(input[type="range"])::-moz-range-thumb {
+  appearance: none;
+  margin-top: -0.25rem;
+  inline-size: 0.875rem;
+  block-size: 0.875rem;
+  background-color: var(--background);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--primary);
+}
+
+/* Select dropdown styling with custom chevron icon */
+:where(select) {
+  font-size: unset;
+  padding: unset;
+  margin: unset;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  /* Custom chevron up-down icon for select dropdowns */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='1.5' viewBox='0 0 24 24'%3E%3Cpath d='m7 15 5 5 5-5M7 9l5-5 5 5'/%3E%3C/svg%3E");
+}
+
+/* Allow customized select options */
+:where(select),
+::picker(select) {
+  appearance: base-select;
+  padding: unset;
+  margin: unset;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-repeat: no-repeat;
+}
+
+:where(select::picker) {
+  display: none;
+}
+
+/* Button resets */
+:where(button) {
+  color: unset;
+  padding: unset;
+  text-align: inherit;
+  background-color: unset;
+}
+
+/* =============================================================================
+NATIVE DIALOG ELEMENT ENHANCEMENTS
+============================================================================= */
+
+/* Prevent body scroll when a dialog inside the preview is open */
+:where(html:has(dialog[open] body)) {
+  scrollbar-gutter: stable both-edges;
+}
+
+/* Dialog animations with spring easing */
+:where(dialog) {
+  --dialog-starting-scale: 0.98;
+  --dialog-starting-translate: 0, 0, 0;
+  --dialog-starting-backdrop: var(--shade-none);
+  --dialog-ending-scale: 1;
+  --dialog-ending-translate: 0 0 0;
+  --dialog-ending-backdrop: var(--shade-800);
+
+  margin: auto;
+  max-inline-size: calc(100% - var(--gap-md));
+  max-block-size: calc(100% - var(--gap-md));
+  contain: layout style;
+  opacity: 0;
+  transform: translate3d(var(--dialog-starting-translate)) scale(var(--dialog-starting-scale));
+  transition:
+    opacity var(--default-transition-duration) var(--default-transition-timing-function),
+    transform var(--default-transition-duration) var(--default-transition-timing-function),
+    overlay var(--default-transition-duration) var(--default-transition-timing-function)
+      allow-discrete,
+    display var(--default-transition-duration) var(--default-transition-timing-function)
+      allow-discrete;
+}
+
+:where([popover]) {
+  --popover-starting-scale: 0.98;
+  --popover-starting-translate: 0, 0.25rem, 0;
+  --popover-ending-scale: 1;
+  --popover-ending-translate: 0, 0, 0;
+  --popover-origin: top center;
+  --popover-margin-block: var(--step-1_5);
+  --popover-margin-inline: var(--step-1_5);
+  --popover-position-area: block-end inline-start;
+  --popover-position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
+
+  margin-block: var(--popover-margin-block);
+  margin-inline: var(--popover-margin-inline);
+  inset: auto;
+  position: fixed;
+  position-area: var(--popover-position-area);
+  position-try-fallbacks: var(--popover-position-try-fallbacks);
+  transform-origin: var(--popover-origin);
+  opacity: 0;
+  transform: translate3d(var(--popover-starting-translate)) scale(var(--popover-starting-scale));
+  transition:
+    opacity var(--default-transition-duration) var(--default-transition-timing-function),
+    transform var(--default-transition-duration) var(--default-transition-timing-function),
+    overlay var(--default-transition-duration) var(--default-transition-timing-function)
+      allow-discrete,
+    display var(--default-transition-duration) var(--default-transition-timing-function)
+      allow-discrete;
+}
+
+:where(dialog[open]) {
+  display: grid;
+  opacity: 1;
+  transform: translate3d(var(--dialog-ending-translate)) scale(var(--dialog-ending-scale));
+
+  @starting-style {
+    opacity: 0;
+    transform: translate3d(var(--dialog-starting-translate)) scale(var(--dialog-starting-scale));
+  }
+}
+
+:where([popover]:popover-open) {
+  display: grid;
+  opacity: 1;
+  transform: translate3d(var(--popover-ending-translate)) scale(var(--popover-ending-scale));
+
+  @starting-style {
+    opacity: 0;
+    transform: translate3d(var(--popover-starting-translate)) scale(var(--popover-starting-scale));
+  }
+}
+
+/* Dialog backdrop with smooth fade transition */
+:where(dialog)::backdrop {
+  background-color: var(--dialog-starting-backdrop);
+  transition: background-color var(--default-transition-duration)
+    var(--default-transition-timing-function);
+}
+
+:where(dialog[open])::backdrop {
+  background-color: var(--dialog-ending-backdrop);
+
+  @starting-style {
+    background-color: var(--dialog-starting-backdrop);
+  }
+}
+
+/* =============================================================================
+DETAILS & SUMMARY (ACCORDIONS)
+============================================================================= */
+
+:where(details)::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition:
+    opacity var(--default-transition-duration) var(--default-transition-timing-function),
+    transform var(--default-transition-duration) var(--default-transition-timing-function),
+    block-size var(--default-transition-duration) var(--default-transition-timing-function),
+    content-visibility var(--default-transition-duration) var(--default-transition-timing-function)
+      allow-discrete;
+}
+
+:where(details[open])::details-content {
+  block-size: auto;
+}
+
+:where(summary) {
+  display: flex;
+  text-decoration: none;
+  user-select: none;
+  list-style: none;
+}
+
+/* =============================================================================
+MISCELLANEOUS RESETS
+============================================================================= */
+
+:where([hidden]:where(:not([hidden="until-found"]))) {
+  display: none !important;
+}

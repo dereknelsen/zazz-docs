@@ -21,7 +21,9 @@ export function SwatchChip({ color, label, hasAlpha, className, onClick, as = "d
       <div className={cn("relative size-4 overflow-hidden rounded-sm", hasAlpha && checker)}>
         <div className="absolute inset-0" style={{ background: color }} />
       </div>
-      <span className="font-mono text-[11px] uppercase tracking-wide text-fd-foreground">{label}</span>
+      <span className="font-mono text-[11px] uppercase tracking-wide text-fd-foreground">
+        {label}
+      </span>
     </div>
   );
 
@@ -40,7 +42,12 @@ export function SwatchChip({ color, label, hasAlpha, className, onClick, as = "d
     );
   }
   return (
-    <div className={cn("inline-flex max-w-full items-center rounded-md border border-fd-border/40 bg-fd-card/40", className)}>
+    <div
+      className={cn(
+        "inline-flex max-w-full items-center rounded-md border border-fd-border/40 bg-fd-card/40",
+        className,
+      )}
+    >
       {inner}
     </div>
   );

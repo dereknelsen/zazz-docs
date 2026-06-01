@@ -26,7 +26,7 @@ That file is just:
 
 ```css
 @import url("./variables.css") layer(variables);
-@import url("./reset.css")     layer(reset);
+@import url("./reset.css") layer(reset);
 @import url("./utilities.css") layer(utilities);
 ```
 
@@ -37,9 +37,9 @@ Layers cascade in declaration order; your component CSS sits outside any layer a
 Order matters:
 
 ```css
-@import "./zazz/variables.css";   /* tokens first */
-@import "./zazz/reset.css";       /* element defaults */
-@import "./zazz/utilities.css";   /* utility classes last */
+@import "./zazz/variables.css"; /* tokens first */
+@import "./zazz/reset.css"; /* element defaults */
+@import "./zazz/utilities.css"; /* utility classes last */
 ```
 
 ### Dark mode
@@ -50,7 +50,9 @@ Two triggers, both wired:
 - `:is(.dark, .dark *)` — force a mode by adding `.dark` to any ancestor
 
 ```html
-<html class="dark">…</html>
+<html class="dark">
+  …
+</html>
 ```
 
 Add additional modes (high-contrast, brand-takeover, holiday) by adding a new selector that re-points the same theme variables.
@@ -136,7 +138,7 @@ Caveats:
 <h1 class="text-5xl font-semibold leading-none tracking-tight">…</h1>
 ```
 
-If a Tailwind utility *and* a Zazz `text-*` class are both applied to the same element, the Tailwind one will likely win on specificity (Zazz uses `:where()` for zero specificity). Pick one. The Zazz way is intentional — assume it overrules Tailwind defaults.
+If a Tailwind utility _and_ a Zazz `text-*` class are both applied to the same element, the Tailwind one will likely win on specificity (Zazz uses `:where()` for zero specificity). Pick one. The Zazz way is intentional — assume it overrules Tailwind defaults.
 
 ### Layout in Tailwind
 
@@ -237,17 +239,17 @@ Fluid clamps in Zazz use a Utopia-style algorithm — same approach as [utopia.f
 
 ### Inputs
 
-| Input | Default | Meaning |
-| --- | --- | --- |
-| `minWidth` | 320 | Mobile viewport |
-| `maxWidth` | 1440 | Desktop viewport |
-| `minFontSize` | 16 | Body size on mobile |
-| `maxFontSize` | 16 | Body size on desktop (same → body doesn't scale; only headings do) |
-| `minTypeScale` | 1.2 (Minor Third) | Scale ratio between sizes on mobile |
-| `maxTypeScale` | 1.25 (Major Third) | Scale ratio between sizes on desktop |
-| `positiveSteps` | 7 | Sizes above body (display + h1–h6) |
-| `negativeSteps` | 3 | Sizes below body (sm, xs, etc.) |
-| `relativeTo` | `viewport-width` | Whether interpolation tracks viewport or container |
+| Input           | Default            | Meaning                                                            |
+| --------------- | ------------------ | ------------------------------------------------------------------ |
+| `minWidth`      | 320                | Mobile viewport                                                    |
+| `maxWidth`      | 1440               | Desktop viewport                                                   |
+| `minFontSize`   | 16                 | Body size on mobile                                                |
+| `maxFontSize`   | 16                 | Body size on desktop (same → body doesn't scale; only headings do) |
+| `minTypeScale`  | 1.2 (Minor Third)  | Scale ratio between sizes on mobile                                |
+| `maxTypeScale`  | 1.25 (Major Third) | Scale ratio between sizes on desktop                               |
+| `positiveSteps` | 7                  | Sizes above body (display + h1–h6)                                 |
+| `negativeSteps` | 3                  | Sizes below body (sm, xs, etc.)                                    |
+| `relativeTo`    | `viewport-width`   | Whether interpolation tracks viewport or container                 |
 
 ### Output
 

@@ -1,0 +1,50 @@
+:where(.accordion) {
+  display: grid;
+  flex: 1;
+}
+
+:where(.accordion details) {
+  display: grid;
+  flex: 1 0 auto;
+}
+
+:where(.accordion details:not(:last-child)) {
+  border-bottom: 1px solid var(--border);
+}
+
+:where(.accordion summary) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--gap-sm);
+  font-weight: var(--weight-strong);
+
+  transition: var(--default-transition);
+
+  text-decoration: underline;
+  text-underline-offset: var(--decoration-offset);
+  text-decoration-style: var(--decoration-style);
+  text-decoration-thickness: var(--decoration-thickness);
+}
+
+:where(.accordion summary:hover) {
+  text-underline-offset: var(--decoration-offset--hover);
+}
+
+:where(.accordion details[open] summary) {
+  text-underline-offset: var(--decoration-offset--hover);
+}
+
+:where(.accordion summary > svg) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--step-4);
+  block-size: var(--step-4);
+  pointer-events: none;
+  transition: transform var(--default-transition-duration) var(--default-transition-timing-function);
+}
+
+:where(.accordion details[open] summary > svg) {
+  transform: rotate(-180deg);
+}

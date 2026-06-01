@@ -11,15 +11,15 @@ It exists because most marketing and ecommerce sites need scroll-reveal animatio
 
 ## Animations
 
-| Animation | Behavior |
-| --- | --- |
-| `slide-up` | Starts below its final position; translates up into place. |
-| `slide-down` | Starts above; translates down. |
-| `slide-left` | Starts to the right; translates left. |
-| `slide-right` | Starts to the left; translates right. |
-| `fade` | Starts transparent; fades to opaque. No transform. |
-| `grow` | Starts slightly smaller (scale 0.9); grows to full size. |
-| `shrink` | Starts slightly larger (scale 1.1); shrinks to full size. |
+| Animation     | Behavior                                                   |
+| ------------- | ---------------------------------------------------------- |
+| `slide-up`    | Starts below its final position; translates up into place. |
+| `slide-down`  | Starts above; translates down.                             |
+| `slide-left`  | Starts to the right; translates left.                      |
+| `slide-right` | Starts to the left; translates right.                      |
+| `fade`        | Starts transparent; fades to opaque. No transform.         |
+| `grow`        | Starts slightly smaller (scale 0.9); grows to full size.   |
+| `shrink`      | Starts slightly larger (scale 1.1); shrinks to full size.  |
 
 All animations transition `opacity` from `0` to `1`. Slide and scale animations also transition `transform` from a starting offset back to none.
 
@@ -69,17 +69,17 @@ Only direct children are animated. Nested elements are unaffected unless they ha
 
 Every animation behavior is tunable through data attributes on the animated element (for `data-zazz`) or the group parent (for `data-zazz-each`).
 
-| Attribute | Default | What it controls |
-| --- | --- | --- |
-| `data-zazz-duration` | `900` (ms) | Transition duration. |
-| `data-zazz-wait` | `0` (ms) | Base delay before the animation starts. |
-| `data-zazz-step` | `80` (ms) | Stagger delay between children. `data-zazz-each` only. |
-| `data-zazz-ease` | `cubic-bezier(0.4, 0, 0.2, 1)` | Timing function. Accepts CSS keywords (`ease-in-out`, `linear`) or a `cubic-bezier(...)` value. |
-| `data-zazz-distance` | `4rem` | Translation distance for slide animations. |
-| `data-zazz-scale` | `0.9` (grow) / `1.1` (shrink) | Override the initial scale for grow or shrink. |
-| `data-zazz-order` | natural | `reversed` flips the stagger order. `data-zazz-each` only. |
-| `data-zazz-margin` | `0px` | `IntersectionObserver` `rootMargin`. Negative values delay the trigger; positive values fire it before the element fully enters the viewport. |
-| `data-zazz-threshold` | `0.2` | `IntersectionObserver` threshold from `0` to `1`. Higher values require more of the element to be visible before firing. |
+| Attribute             | Default                        | What it controls                                                                                                                              |
+| --------------------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data-zazz-duration`  | `900` (ms)                     | Transition duration.                                                                                                                          |
+| `data-zazz-wait`      | `0` (ms)                       | Base delay before the animation starts.                                                                                                       |
+| `data-zazz-step`      | `80` (ms)                      | Stagger delay between children. `data-zazz-each` only.                                                                                        |
+| `data-zazz-ease`      | `cubic-bezier(0.4, 0, 0.2, 1)` | Timing function. Accepts CSS keywords (`ease-in-out`, `linear`) or a `cubic-bezier(...)` value.                                               |
+| `data-zazz-distance`  | `4rem`                         | Translation distance for slide animations.                                                                                                    |
+| `data-zazz-scale`     | `0.9` (grow) / `1.1` (shrink)  | Override the initial scale for grow or shrink.                                                                                                |
+| `data-zazz-order`     | natural                        | `reversed` flips the stagger order. `data-zazz-each` only.                                                                                    |
+| `data-zazz-margin`    | `0px`                          | `IntersectionObserver` `rootMargin`. Negative values delay the trigger; positive values fire it before the element fully enters the viewport. |
+| `data-zazz-threshold` | `0.2`                          | `IntersectionObserver` threshold from `0` to `1`. Higher values require more of the element to be visible before firing.                      |
 
 ```html
 <div
@@ -127,20 +127,20 @@ ZazzMotion.disableAutoInit();
 const motion = new ZazzMotion({
   config: {
     duration: 600,
-    ease: 'ease-in-out',
+    ease: "ease-in-out",
     threshold: 0.3,
-    margin: '100px',
+    margin: "100px",
     step: 100,
   },
 });
 ```
 
-| Method | Use for |
-| --- | --- |
-| `new ZazzMotion(options)` | Initialize with custom config. |
-| `motion.refresh()` | Re-scan the DOM and rewire observers. Call after dynamically inserting `data-zazz` markup. |
-| `ZazzMotion.disableAutoInit()` | Prevent the auto-init on `DOMContentLoaded` so you can instantiate manually. |
-| `ZazzMotion.getAutoInstance()` | Returns the auto-init instance, or `null` if disabled. |
+| Method                         | Use for                                                                                    |
+| ------------------------------ | ------------------------------------------------------------------------------------------ |
+| `new ZazzMotion(options)`      | Initialize with custom config.                                                             |
+| `motion.refresh()`             | Re-scan the DOM and rewire observers. Call after dynamically inserting `data-zazz` markup. |
+| `ZazzMotion.disableAutoInit()` | Prevent the auto-init on `DOMContentLoaded` so you can instantiate manually.               |
+| `ZazzMotion.getAutoInstance()` | Returns the auto-init instance, or `null` if disabled.                                     |
 
 Refresh is the important one. The library wires observers when it loads, not continuously. If you load content via fetch or change the DOM in a way that adds new `data-zazz` elements, call `motion.refresh()` so they pick up the animations.
 
@@ -176,15 +176,23 @@ The `.in-viewport` class is what triggers the transition to the final state. Unt
 
 ## Cross-platform
 
-| Platform | Reference |
-| --- | --- |
-| Figma | Not applicable. Animations happen at runtime in the browser. |
-| Webflow | Style block goes in `global-head__custom`; script goes in `global-end__motion` (or anywhere on the page before `</body>`). Auto-initializes once both are present. |
-| CSS / Tailwind | Paste the `<style>` block into your stylesheet (or its imported equivalent) and load the `<script>` once. The library has no dependencies. |
+| Platform       | Reference                                                                                                                                                          |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Figma          | Not applicable. Animations happen at runtime in the browser.                                                                                                       |
+| Webflow        | Style block goes in `global-head__custom`; script goes in `global-end__motion` (or anywhere on the page before `</body>`). Auto-initializes once both are present. |
+| CSS / Tailwind | Paste the `<style>` block into your stylesheet (or its imported equivalent) and load the `<script>` once. The library has no dependencies.                         |
 
 ## Where to next
 
 <Cards>
-  <Card title="Foundations / Effects" href="/docs/foundations/effects" description="Shadows and focus rings — the other side of the visual feedback system." />
-  <Card title="Customization" href="/docs/practices/customization" description="Set global motion defaults that match the rest of your design tokens." />
+  <Card
+    title="Foundations / Effects"
+    href="/docs/foundations/effects"
+    description="Shadows and focus rings — the other side of the visual feedback system."
+  />
+  <Card
+    title="Customization"
+    href="/docs/practices/customization"
+    description="Set global motion defaults that match the rest of your design tokens."
+  />
 </Cards>

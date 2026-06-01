@@ -10,53 +10,53 @@ Mode-aware role tokens. The surface most styling consumes.
 
 ### Base
 
-| Token | Light | Dark | Role |
-| --- | --- | --- | --- |
-| `--background` | `--neutral-50` | `--neutral-950` | Page surface everything sits on |
-| `--foreground` | `--neutral-900` | `--white` | Default text |
-| `--border` | `--neutral-200` | `--neutral-800` | Default 1px lines and dividers |
-| `--border-foreground` | `--tint-950` | `--tint-100` | Text on a border (outlined buttons, ghost inputs, bordered tags) |
-| `--card` | `--white` | `--neutral-900` | Card surface, one step elevated from background |
-| `--card-foreground` | `--neutral-900` | `--white` | Text on cards |
-| `--input` | `--neutral-50` | `--tint-50` | Input field background |
-| `--input-foreground` | `--neutral-900` | `--white` | Input text |
+| Token                 | Light           | Dark            | Role                                                             |
+| --------------------- | --------------- | --------------- | ---------------------------------------------------------------- |
+| `--background`        | `--neutral-50`  | `--neutral-950` | Page surface everything sits on                                  |
+| `--foreground`        | `--neutral-900` | `--white`       | Default text                                                     |
+| `--border`            | `--neutral-200` | `--neutral-800` | Default 1px lines and dividers                                   |
+| `--border-foreground` | `--tint-950`    | `--tint-100`    | Text on a border (outlined buttons, ghost inputs, bordered tags) |
+| `--card`              | `--white`       | `--neutral-900` | Card surface, one step elevated from background                  |
+| `--card-foreground`   | `--neutral-900` | `--white`       | Text on cards                                                    |
+| `--input`             | `--neutral-50`  | `--tint-50`     | Input field background                                           |
+| `--input-foreground`  | `--neutral-900` | `--white`       | Input text                                                       |
 
 ### Overlay
 
-| Token | Light | Dark | Role |
-| --- | --- | --- | --- |
-| `--muted` | `--shade-50` | `--tint-50` | Subtle dim over what sits below |
-| `--muted-foreground` | `--shade-600` | `--tint-600` | Text on muted; helper copy, de-emphasized labels |
-| `--faded` | `--tint-100` | `--shade-100` | Subtle fade over what sits below |
-| `--faded-foreground` | `--tint-600` | `--shade-600` | Text on faded |
+| Token                | Light         | Dark          | Role                                             |
+| -------------------- | ------------- | ------------- | ------------------------------------------------ |
+| `--muted`            | `--shade-50`  | `--tint-50`   | Subtle dim over what sits below                  |
+| `--muted-foreground` | `--shade-600` | `--tint-600`  | Text on muted; helper copy, de-emphasized labels |
+| `--faded`            | `--tint-100`  | `--shade-100` | Subtle fade over what sits below                 |
+| `--faded-foreground` | `--tint-600`  | `--shade-600` | Text on faded                                    |
 
 **Key behavior:** `--muted` is always darker than the surface, `--faded` always lighter — even though the underlying primitive flips between modes.
 
 ### Brand
 
-| Token | Light | Dark | Role |
-| --- | --- | --- | --- |
-| `--primary` | `--primary-600` | `--primary-500` | Primary brand |
-| `--primary-foreground` | `--white` | `--white` | Text on primary |
-| `--secondary` | `--secondary-600` | `--secondary-500` | Secondary brand |
-| `--secondary-foreground` | `--white` | `--white` | Text on secondary |
-| `--tertiary` | `--tertiary-500` | `--tertiary-400` | Tertiary brand (callouts, sale tags, seasonal) |
-| `--tertiary-foreground` | `--white` | `--white` | Text on tertiary |
+| Token                    | Light             | Dark              | Role                                           |
+| ------------------------ | ----------------- | ----------------- | ---------------------------------------------- |
+| `--primary`              | `--primary-600`   | `--primary-500`   | Primary brand                                  |
+| `--primary-foreground`   | `--white`         | `--white`         | Text on primary                                |
+| `--secondary`            | `--secondary-600` | `--secondary-500` | Secondary brand                                |
+| `--secondary-foreground` | `--white`         | `--white`         | Text on secondary                              |
+| `--tertiary`             | `--tertiary-500`  | `--tertiary-400`  | Tertiary brand (callouts, sale tags, seasonal) |
+| `--tertiary-foreground`  | `--white`         | `--white`         | Text on tertiary                               |
 
 Brand steps **lighter** in dark mode (so it stays readable on dark backgrounds).
 
 ### Status
 
-| Token | Light (OKLCH) | Dark (OKLCH) | Role |
-| --- | --- | --- | --- |
-| `--info` | `0.5876 0.1389 241.97` | `0.5 0.1193 242.75` | Informational notices |
-| `--info-foreground` | `--white` | `--white` |  |
-| `--success` | `0.596 0.1274 163.23` | `0.5081 0.1049 165.61` | Positive confirmations |
-| `--success-foreground` | `--white` | `--white` |  |
-| `--warning` | `0.6658 0.1574 58.32` | `0.5553 0.1455 49` | Cautionary alerts |
-| `--warning-foreground` | `--white` | `--white` |  |
-| `--destructive` | `0.5771 0.2152 27.33` | `0.5054 0.1905 27.52` | Errors, irreversible actions |
-| `--destructive-foreground` | `--white` | `--white` |  |
+| Token                      | Light (OKLCH)          | Dark (OKLCH)           | Role                         |
+| -------------------------- | ---------------------- | ---------------------- | ---------------------------- |
+| `--info`                   | `0.5876 0.1389 241.97` | `0.5 0.1193 242.75`    | Informational notices        |
+| `--info-foreground`        | `--white`              | `--white`              |                              |
+| `--success`                | `0.596 0.1274 163.23`  | `0.5081 0.1049 165.61` | Positive confirmations       |
+| `--success-foreground`     | `--white`              | `--white`              |                              |
+| `--warning`                | `0.6658 0.1574 58.32`  | `0.5553 0.1455 49`     | Cautionary alerts            |
+| `--warning-foreground`     | `--white`              | `--white`              |                              |
+| `--destructive`            | `0.5771 0.2152 27.33`  | `0.5054 0.1905 27.52`  | Errors, irreversible actions |
+| `--destructive-foreground` | `--white`              | `--white`              |                              |
 
 Status steps **darker** in dark mode (opposite of brand) so alerts don't dominate a dark surface.
 
@@ -71,7 +71,7 @@ Each scale has steps `50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950`. Def
 ### Primary (blue-violet, ~280° hue)
 
 ```css
---primary-50:  oklch(0.984 0.007 286.46);
+--primary-50: oklch(0.984 0.007 286.46);
 --primary-100: oklch(0.94 0.025 288.37);
 --primary-200: oklch(0.85 0.068 285.81);
 --primary-300: oklch(0.765 0.108 284.76);
@@ -87,7 +87,7 @@ Each scale has steps `50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950`. Def
 ### Secondary (warm orange, ~30° hue)
 
 ```css
---secondary-50:  oklch(0.984 0.008 27.43);
+--secondary-50: oklch(0.984 0.008 27.43);
 --secondary-100: oklch(0.95 0.023 24.19);
 --secondary-200: oklch(0.878 0.061 25.87);
 --secondary-300: oklch(0.814 0.101 27.69);
@@ -103,7 +103,7 @@ Each scale has steps `50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950`. Def
 ### Tertiary (pink-rose, ~15° hue)
 
 ```css
---tertiary-50:  oklch(0.984 0.006 17.54);
+--tertiary-50: oklch(0.984 0.006 17.54);
 --tertiary-100: oklch(0.942 0.023 11.04);
 --tertiary-200: oklch(0.861 0.062 11.02);
 --tertiary-300: oklch(0.772 0.11 12.13);
@@ -127,19 +127,19 @@ Add the 11 steps, then bind a theme token to the right step in each mode. See ma
 ### Neutral
 
 ```css
---white:        white;
---neutral-50:   oklch(0.9911 0 0);
---neutral-100:  oklch(0.9581 0 0);
---neutral-200:  oklch(0.871  0.004 286.58);
---neutral-300:  oklch(0.794  0.007 286.38);
---neutral-400:  oklch(0.708  0.009 286.28);
---neutral-500:  oklch(0.629  0.012 286.12);
---neutral-600:  oklch(0.535  0.015 285.91);
---neutral-700:  oklch(0.442  0.015 285.82);
---neutral-800:  oklch(0.336  0.014 285.66);
---neutral-900:  oklch(0.241  0.009 285.7);
---neutral-950:  oklch(0.198  0.008 285.68);
---black:        black;
+--white: white;
+--neutral-50: oklch(0.9911 0 0);
+--neutral-100: oklch(0.9581 0 0);
+--neutral-200: oklch(0.871 0.004 286.58);
+--neutral-300: oklch(0.794 0.007 286.38);
+--neutral-400: oklch(0.708 0.009 286.28);
+--neutral-500: oklch(0.629 0.012 286.12);
+--neutral-600: oklch(0.535 0.015 285.91);
+--neutral-700: oklch(0.442 0.015 285.82);
+--neutral-800: oklch(0.336 0.014 285.66);
+--neutral-900: oklch(0.241 0.009 285.7);
+--neutral-950: oklch(0.198 0.008 285.68);
+--black: black;
 ```
 
 A subtle blue-violet cast (~286° hue, low chroma) gives the mid-range warmth without color-casting. `--white` and `--black` stay as keywords (they're the anchors shade and tint derive from).
@@ -148,17 +148,17 @@ A subtle blue-violet cast (~286° hue, low chroma) gives the mid-range warmth wi
 
 ```css
 --shade-none: oklch(from var(--neutral-950) l c h / 0);
---shade-50:   oklch(from var(--neutral-950) l c h / 0.05);
---shade-100:  oklch(from var(--neutral-950) l c h / 0.10);
---shade-200:  oklch(from var(--neutral-950) l c h / 0.20);
---shade-300:  oklch(from var(--neutral-950) l c h / 0.30);
---shade-400:  oklch(from var(--neutral-950) l c h / 0.40);
---shade-500:  oklch(from var(--neutral-950) l c h / 0.50);
---shade-600:  oklch(from var(--neutral-950) l c h / 0.60);
---shade-700:  oklch(from var(--neutral-950) l c h / 0.70);
---shade-800:  oklch(from var(--neutral-950) l c h / 0.80);
---shade-900:  oklch(from var(--neutral-950) l c h / 0.90);
---shade-950:  oklch(from var(--neutral-950) l c h / 0.95);
+--shade-50: oklch(from var(--neutral-950) l c h / 0.05);
+--shade-100: oklch(from var(--neutral-950) l c h / 0.1);
+--shade-200: oklch(from var(--neutral-950) l c h / 0.2);
+--shade-300: oklch(from var(--neutral-950) l c h / 0.3);
+--shade-400: oklch(from var(--neutral-950) l c h / 0.4);
+--shade-500: oklch(from var(--neutral-950) l c h / 0.5);
+--shade-600: oklch(from var(--neutral-950) l c h / 0.6);
+--shade-700: oklch(from var(--neutral-950) l c h / 0.7);
+--shade-800: oklch(from var(--neutral-950) l c h / 0.8);
+--shade-900: oklch(from var(--neutral-950) l c h / 0.9);
+--shade-950: oklch(from var(--neutral-950) l c h / 0.95);
 --shade-full: oklch(from var(--neutral-950) l c h / 1);
 ```
 
@@ -168,17 +168,17 @@ Use to **dim** whatever sits below. Modal backdrops, hover-darkens on light surf
 
 ```css
 --tint-none: oklch(from var(--white) l c h / 0);
---tint-50:   oklch(from var(--white) l c h / 0.05);
---tint-100:  oklch(from var(--white) l c h / 0.10);
---tint-200:  oklch(from var(--white) l c h / 0.20);
---tint-300:  oklch(from var(--white) l c h / 0.30);
---tint-400:  oklch(from var(--white) l c h / 0.40);
---tint-500:  oklch(from var(--white) l c h / 0.50);
---tint-600:  oklch(from var(--white) l c h / 0.60);
---tint-700:  oklch(from var(--white) l c h / 0.70);
---tint-800:  oklch(from var(--white) l c h / 0.80);
---tint-900:  oklch(from var(--white) l c h / 0.90);
---tint-950:  oklch(from var(--white) l c h / 0.95);
+--tint-50: oklch(from var(--white) l c h / 0.05);
+--tint-100: oklch(from var(--white) l c h / 0.1);
+--tint-200: oklch(from var(--white) l c h / 0.2);
+--tint-300: oklch(from var(--white) l c h / 0.3);
+--tint-400: oklch(from var(--white) l c h / 0.4);
+--tint-500: oklch(from var(--white) l c h / 0.5);
+--tint-600: oklch(from var(--white) l c h / 0.6);
+--tint-700: oklch(from var(--white) l c h / 0.7);
+--tint-800: oklch(from var(--white) l c h / 0.8);
+--tint-900: oklch(from var(--white) l c h / 0.9);
+--tint-950: oklch(from var(--white) l c h / 0.95);
 --tint-full: oklch(from var(--white) l c h / 1);
 ```
 
@@ -191,36 +191,36 @@ Use to **fade** whatever sits below lighter. Frosted glass, hover-lightens on da
 ### Families
 
 ```css
---font-body:    Geist, Verdana, sans-serif;
+--font-body: Geist, Verdana, sans-serif;
 --font-heading: Geist, Verdana, sans-serif;
---font-mono:    "Geist Mono", "Palatino Linotype", sans-serif;
+--font-mono: "Geist Mono", "Palatino Linotype", sans-serif;
 ```
 
 ### Fluid sizes (clamp from Mobile → Desktop)
 
 ```css
---font-size-display: clamp(4.2998rem, calc(3.545rem + 3.0194vi),   5.9605rem);
---font-size-h1:      clamp(3.5832rem, calc(3.0445rem + 2.1549vi),  4.7684rem);
---font-size-h2:      clamp(2.986rem,  calc(2.6093rem + 1.5068vi),  3.8147rem);
---font-size-h3:      clamp(2.4883rem, calc(2.2322rem + 1.0244vi),  3.0518rem);
---font-size-h4:      clamp(2.0736rem, calc(1.9064rem + 0.6687vi),  2.4414rem);
---font-size-h5:      clamp(1.728rem,  calc(1.6257rem + 0.4093vi),  1.9531rem);
---font-size-h6:      clamp(1.44rem,   calc(1.3843rem + 0.2227vi),  1.5625rem);
---font-size-xl:      clamp(1.44rem,   calc(1.3843rem + 0.2227vi),  1.5625rem); /* shares h6 size */
---font-size-lg:      clamp(1.2rem,    calc(1.1773rem + 0.0909vi),  1.25rem);
---font-size-md:      clamp(1rem,      calc(1rem + 0vi),            1rem);
---font-size-sm:      clamp(0.8rem,    calc(0.8485rem + 0.0606vi),  0.8333rem);
---font-size-xs:      clamp(0.64rem,   calc(0.7192rem + 0.099vi),   0.6944rem);
---font-size-eyebrow: clamp(0.64rem,   calc(0.7192rem + 0.099vi),   0.6944rem); /* shares xs size */
+--font-size-display: clamp(4.2998rem, calc(3.545rem + 3.0194vi), 5.9605rem);
+--font-size-h1: clamp(3.5832rem, calc(3.0445rem + 2.1549vi), 4.7684rem);
+--font-size-h2: clamp(2.986rem, calc(2.6093rem + 1.5068vi), 3.8147rem);
+--font-size-h3: clamp(2.4883rem, calc(2.2322rem + 1.0244vi), 3.0518rem);
+--font-size-h4: clamp(2.0736rem, calc(1.9064rem + 0.6687vi), 2.4414rem);
+--font-size-h5: clamp(1.728rem, calc(1.6257rem + 0.4093vi), 1.9531rem);
+--font-size-h6: clamp(1.44rem, calc(1.3843rem + 0.2227vi), 1.5625rem);
+--font-size-xl: clamp(1.44rem, calc(1.3843rem + 0.2227vi), 1.5625rem); /* shares h6 size */
+--font-size-lg: clamp(1.2rem, calc(1.1773rem + 0.0909vi), 1.25rem);
+--font-size-md: clamp(1rem, calc(1rem + 0vi), 1rem);
+--font-size-sm: clamp(0.8rem, calc(0.8485rem + 0.0606vi), 0.8333rem);
+--font-size-xs: clamp(0.64rem, calc(0.7192rem + 0.099vi), 0.6944rem);
+--font-size-eyebrow: clamp(0.64rem, calc(0.7192rem + 0.099vi), 0.6944rem); /* shares xs size */
 ```
 
 ### Weights (role-based)
 
 ```css
---weight-body:    400;
+--weight-body: 400;
 --weight-heading: 600;
---weight-strong:  600;
---weight-mono:    400;
+--weight-strong: 600;
+--weight-mono: 400;
 --weight-eyebrow: 500;
 ```
 
@@ -228,17 +228,17 @@ Use to **fade** whatever sits below lighter. Frosted glass, hover-lightens on da
 
 ```css
 --tracking-display: -0.025em;
---tracking-h1:      -0.025em;
---tracking-h2:      -0.025em;
---tracking-h3:      -0.02em;
---tracking-h4:      -0.01em;
---tracking-h5:      -0.005em;
---tracking-h6:      -0.0025em;
---tracking-xl:      0em;
---tracking-lg:      0em;
---tracking-md:      0em;
---tracking-sm:      0em;
---tracking-xs:      0em;
+--tracking-h1: -0.025em;
+--tracking-h2: -0.025em;
+--tracking-h3: -0.02em;
+--tracking-h4: -0.01em;
+--tracking-h5: -0.005em;
+--tracking-h6: -0.0025em;
+--tracking-xl: 0em;
+--tracking-lg: 0em;
+--tracking-md: 0em;
+--tracking-sm: 0em;
+--tracking-xs: 0em;
 --tracking-eyebrow: 0.12em;
 ```
 
@@ -246,37 +246,37 @@ Use to **fade** whatever sits below lighter. Frosted glass, hover-lightens on da
 
 ```css
 --leading-display: 1;
---leading-h1:      1;
---leading-h2:      1;
---leading-h3:      1.05;
---leading-h4:      1.05;
---leading-h5:      1.1;
---leading-h6:      1.1;
---leading-xl:      1.5;
---leading-lg:      1.5;
---leading-md:      1.6;
---leading-sm:      1.5;
---leading-xs:      1.5;
+--leading-h1: 1;
+--leading-h2: 1;
+--leading-h3: 1.05;
+--leading-h4: 1.05;
+--leading-h5: 1.1;
+--leading-h6: 1.1;
+--leading-xl: 1.5;
+--leading-lg: 1.5;
+--leading-md: 1.6;
+--leading-sm: 1.5;
+--leading-xs: 1.5;
 --leading-eyebrow: 1.2;
 ```
 
 ### Composed `text-*` utility classes
 
-| Class | Family | Size | Weight | Leading | Tracking | Notes |
-| --- | --- | --- | --- | --- | --- | --- |
-| `text-display` | heading | display | heading | 1 | -0.025em |  |
-| `text-h1` | heading | h1 | heading | 1 | -0.025em |  |
-| `text-h2` | heading | h2 | heading | 1 | -0.025em |  |
-| `text-h3` | heading | h3 | heading | 1.05 | -0.02em |  |
-| `text-h4` | heading | h4 | heading | 1.05 | -0.01em |  |
-| `text-h5` | heading | h5 | heading | 1.1 | -0.005em |  |
-| `text-h6` | heading | h6 | heading | 1.1 | -0.0025em |  |
-| `text-eyebrow` | heading | eyebrow | eyebrow | 1.2 | 0.12em | `text-transform: uppercase` |
-| `text-xl` | body | xl | body | 1.5 | 0 |  |
-| `text-lg` | body | lg | body | 1.5 | 0 |  |
-| `text-md` | body | md | body | 1.6 | 0 |  |
-| `text-sm` | body | sm | body | 1.5 | 0 |  |
-| `text-xs` | body | xs | body | 1.5 | 0 |  |
+| Class          | Family  | Size    | Weight  | Leading | Tracking  | Notes                       |
+| -------------- | ------- | ------- | ------- | ------- | --------- | --------------------------- |
+| `text-display` | heading | display | heading | 1       | -0.025em  |                             |
+| `text-h1`      | heading | h1      | heading | 1       | -0.025em  |                             |
+| `text-h2`      | heading | h2      | heading | 1       | -0.025em  |                             |
+| `text-h3`      | heading | h3      | heading | 1.05    | -0.02em   |                             |
+| `text-h4`      | heading | h4      | heading | 1.05    | -0.01em   |                             |
+| `text-h5`      | heading | h5      | heading | 1.1     | -0.005em  |                             |
+| `text-h6`      | heading | h6      | heading | 1.1     | -0.0025em |                             |
+| `text-eyebrow` | heading | eyebrow | eyebrow | 1.2     | 0.12em    | `text-transform: uppercase` |
+| `text-xl`      | body    | xl      | body    | 1.5     | 0         |                             |
+| `text-lg`      | body    | lg      | body    | 1.5     | 0         |                             |
+| `text-md`      | body    | md      | body    | 1.6     | 0         |                             |
+| `text-sm`      | body    | sm      | body    | 1.5     | 0         |                             |
+| `text-xs`      | body    | xs      | body    | 1.5     | 0         |                             |
 
 Use these by default. Don't reassemble.
 
@@ -293,52 +293,52 @@ Use these by default. Don't reassemble.
 ### Semantic gaps (the daily API)
 
 ```css
---gap-xs: var(--step-2);   /*  0.5rem  →  8px  */
---gap-sm: var(--step-4);   /*  1rem    → 16px  */
---gap-md: var(--step-6);   /*  1.5rem  → 24px  */
---gap-lg: var(--step-11);  /*  2.75rem → 44px  */
---gap-xl: var(--step-24);  /*  6rem    → 96px  */
+--gap-xs: var(--step-2); /*  0.5rem  →  8px  */
+--gap-sm: var(--step-4); /*  1rem    → 16px  */
+--gap-md: var(--step-6); /*  1.5rem  → 24px  */
+--gap-lg: var(--step-11); /*  2.75rem → 44px  */
+--gap-xl: var(--step-24); /*  6rem    → 96px  */
 ```
 
 ### Step scale
 
 ```css
---step-px:   1px;
---step-0_5:  calc(var(--spacing-interval) / 2);
---step-1:    var(--spacing-interval);
---step-1_5:  calc(var(--spacing-interval) * 1.5);
---step-2:    calc(var(--spacing-interval) * 2);
---step-2_5:  calc(var(--spacing-interval) * 2.5);
---step-3:    calc(var(--spacing-interval) * 3);
---step-3_5:  calc(var(--spacing-interval) * 3.5);
---step-4:    calc(var(--spacing-interval) * 4);
---step-4_5:  calc(var(--spacing-interval) * 4.5);
---step-5:    calc(var(--spacing-interval) * 5);
---step-5_5:  calc(var(--spacing-interval) * 5.5);
---step-6:    calc(var(--spacing-interval) * 6);
---step-7:    calc(var(--spacing-interval) * 7);
---step-8:    calc(var(--spacing-interval) * 8);
---step-9:    calc(var(--spacing-interval) * 9);
---step-10:   calc(var(--spacing-interval) * 10);
---step-11:   calc(var(--spacing-interval) * 11);
---step-12:   calc(var(--spacing-interval) * 12);
---step-14:   calc(var(--spacing-interval) * 14);
---step-16:   calc(var(--spacing-interval) * 16);
---step-20:   calc(var(--spacing-interval) * 20);
---step-24:   calc(var(--spacing-interval) * 24);
---step-28:   calc(var(--spacing-interval) * 28);
---step-32:   calc(var(--spacing-interval) * 32);
---step-36:   calc(var(--spacing-interval) * 36);
---step-40:   calc(var(--spacing-interval) * 40);
---step-44:   calc(var(--spacing-interval) * 44);
---step-48:   calc(var(--spacing-interval) * 48);
---step-52:   calc(var(--spacing-interval) * 52);
---step-56:   calc(var(--spacing-interval) * 56);
---step-60:   calc(var(--spacing-interval) * 60);
---step-64:   calc(var(--spacing-interval) * 64);
---step-72:   calc(var(--spacing-interval) * 72);
---step-80:   calc(var(--spacing-interval) * 80);
---step-96:   calc(var(--spacing-interval) * 96);
+--step-px: 1px;
+--step-0_5: calc(var(--spacing-interval) / 2);
+--step-1: var(--spacing-interval);
+--step-1_5: calc(var(--spacing-interval) * 1.5);
+--step-2: calc(var(--spacing-interval) * 2);
+--step-2_5: calc(var(--spacing-interval) * 2.5);
+--step-3: calc(var(--spacing-interval) * 3);
+--step-3_5: calc(var(--spacing-interval) * 3.5);
+--step-4: calc(var(--spacing-interval) * 4);
+--step-4_5: calc(var(--spacing-interval) * 4.5);
+--step-5: calc(var(--spacing-interval) * 5);
+--step-5_5: calc(var(--spacing-interval) * 5.5);
+--step-6: calc(var(--spacing-interval) * 6);
+--step-7: calc(var(--spacing-interval) * 7);
+--step-8: calc(var(--spacing-interval) * 8);
+--step-9: calc(var(--spacing-interval) * 9);
+--step-10: calc(var(--spacing-interval) * 10);
+--step-11: calc(var(--spacing-interval) * 11);
+--step-12: calc(var(--spacing-interval) * 12);
+--step-14: calc(var(--spacing-interval) * 14);
+--step-16: calc(var(--spacing-interval) * 16);
+--step-20: calc(var(--spacing-interval) * 20);
+--step-24: calc(var(--spacing-interval) * 24);
+--step-28: calc(var(--spacing-interval) * 28);
+--step-32: calc(var(--spacing-interval) * 32);
+--step-36: calc(var(--spacing-interval) * 36);
+--step-40: calc(var(--spacing-interval) * 40);
+--step-44: calc(var(--spacing-interval) * 44);
+--step-48: calc(var(--spacing-interval) * 48);
+--step-52: calc(var(--spacing-interval) * 52);
+--step-56: calc(var(--spacing-interval) * 56);
+--step-60: calc(var(--spacing-interval) * 60);
+--step-64: calc(var(--spacing-interval) * 64);
+--step-72: calc(var(--spacing-interval) * 72);
+--step-80: calc(var(--spacing-interval) * 80);
+--step-96: calc(var(--spacing-interval) * 96);
 ```
 
 Half-steps stop at `--step-5_5`. `--step-px` is the only literal — always 1px, doesn't scale with interval. Use it for non-scaling hairlines.
@@ -371,21 +371,21 @@ Bump for rounder, drop for sharper. Doesn't affect `--radius-none` or `--radius-
 
 ```css
 --radius-none: 0rem;
---radius-xs:   calc(var(--step-1)   * var(--radius-multiplier));  /* 0.25rem (4px)  */
---radius-sm:   calc(var(--step-1_5) * var(--radius-multiplier));  /* 0.375rem (6px) */
---radius-md:   calc(var(--step-2)   * var(--radius-multiplier));  /* 0.5rem (8px)   */
---radius-lg:   calc(var(--step-4)   * var(--radius-multiplier));  /* 1rem (16px)    */
---radius-xl:   calc(var(--step-7)   * var(--radius-multiplier));  /* 1.75rem (28px) */
+--radius-xs: calc(var(--step-1) * var(--radius-multiplier)); /* 0.25rem (4px)  */
+--radius-sm: calc(var(--step-1_5) * var(--radius-multiplier)); /* 0.375rem (6px) */
+--radius-md: calc(var(--step-2) * var(--radius-multiplier)); /* 0.5rem (8px)   */
+--radius-lg: calc(var(--step-4) * var(--radius-multiplier)); /* 1rem (16px)    */
+--radius-xl: calc(var(--step-7) * var(--radius-multiplier)); /* 1.75rem (28px) */
 --radius-full: 9999rem;
 ```
 
 ### Primitive aliases (use on the corresponding element)
 
 ```css
---radius-button: var(--radius-md);   /* 8px  */
---radius-input:  var(--radius-md);   /* 8px  */
---radius-card:   var(--radius-lg);   /* 16px */
---radius-badge:  var(--radius-full); /* capsule */
+--radius-button: var(--radius-md); /* 8px  */
+--radius-input: var(--radius-md); /* 8px  */
+--radius-card: var(--radius-lg); /* 16px */
+--radius-badge: var(--radius-full); /* capsule */
 ```
 
 ### Utility classes
@@ -399,18 +399,18 @@ Bump for rounder, drop for sharper. Doesn't affect `--radius-none` or `--radius-
 ### Semantic widths
 
 ```css
---article:   min(var(--screen-xs), 100% - var(--gap-md) * 2);  /* 40rem cap, self-pads */
---container: min(var(--screen-lg), 100% - var(--gap-md) * 2);  /* 80rem cap, self-pads */
+--article: min(var(--screen-xs), 100% - var(--gap-md) * 2); /* 40rem cap, self-pads */
+--container: min(var(--screen-lg), 100% - var(--gap-md) * 2); /* 80rem cap, self-pads */
 ```
 
 ### Breakpoints (for `calc()`, not `@media`)
 
 ```css
---screen-xs: 40rem;   /*  640px */
---screen-sm: 48rem;   /*  768px */
---screen-md: 64rem;   /* 1024px */
---screen-lg: 80rem;   /* 1280px */
---screen-xl: 96rem;   /* 1536px */
+--screen-xs: 40rem; /*  640px */
+--screen-sm: 48rem; /*  768px */
+--screen-md: 64rem; /* 1024px */
+--screen-lg: 80rem; /* 1280px */
+--screen-xl: 96rem; /* 1536px */
 ```
 
 CSS spec disallows custom properties in `@media` size queries. Write the raw `40rem`/etc. in queries, use the variable everywhere else.
@@ -418,8 +418,16 @@ CSS spec disallows custom properties in `@media` size queries. Write the raw `40
 ### Utility classes
 
 ```css
-.container { width: var(--container); margin-inline: auto; container: container / inline-size; }
-.article   { width: var(--article);   margin-inline: auto; container: article   / inline-size; }
+.container {
+  width: var(--container);
+  margin-inline: auto;
+  container: container / inline-size;
+}
+.article {
+  width: var(--article);
+  margin-inline: auto;
+  container: article / inline-size;
+}
 ```
 
 Both register a container query name. Apply directly to your element — no wrapping padding div.
@@ -442,11 +450,11 @@ Each is a stack of 5 entries with increasing offset and decreasing alpha. Colors
 
 ```css
 --shadow-none: 0px 0px 0px 0px oklch(from var(--black) l c h / 0);
---shadow-xs:   /* very subtle, for borders that want a slight lift */ ;
---shadow-sm:   /* resting buttons, hover affordances */ ;
---shadow-md:   /* cards, dropdowns, popovers */ ;
---shadow-lg:   /* modals, side panels */ ;
---shadow-xl:   /* most elevated single surface in a view */ ;
+--shadow-xs: /* very subtle, for borders that want a slight lift */;
+--shadow-sm: /* resting buttons, hover affordances */;
+--shadow-md: /* cards, dropdowns, popovers */;
+--shadow-lg: /* modals, side panels */;
+--shadow-xl: /* most elevated single surface in a view */;
 ```
 
 ### Utility classes

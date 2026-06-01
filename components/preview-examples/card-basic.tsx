@@ -17,8 +17,8 @@ export default function CardBasic() {
             <h3 className="card__title text-h6">How quickly zebras jump</h3>
           </span>
           <p className="card__description text-sm text-muted-foreground line-clamp-2">
-            Short excerpt that wraps to two lines before truncating. Demonstrates the default
-            card composition.
+            Short excerpt that wraps to two lines before truncating. Demonstrates the default card
+            composition.
           </p>
         </div>
         <div className="card__footer">

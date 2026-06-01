@@ -10,8 +10,20 @@ export interface UtopiaStep {
 }
 
 const calculateTypeSize = (config: UtopiaTypeConfig, viewport: number, step: number): number => {
-  const scale = range(config.minWidth, config.maxWidth, config.minTypeScale, config.maxTypeScale, viewport);
-  const fontSize = range(config.minWidth, config.maxWidth, config.minFontSize, config.maxFontSize, viewport);
+  const scale = range(
+    config.minWidth,
+    config.maxWidth,
+    config.minTypeScale,
+    config.maxTypeScale,
+    viewport,
+  );
+  const fontSize = range(
+    config.minWidth,
+    config.maxWidth,
+    config.minFontSize,
+    config.maxFontSize,
+    viewport,
+  );
   return fontSize * Math.pow(scale, step);
 };
 

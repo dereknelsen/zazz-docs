@@ -1,4 +1,0 @@
-@import "./variables.css" layer(variables);
-@import "./reset.css" layer(reset);
-@import "./utilities.css" layer(utilities);
-@import "./primitives.css" layer(primitives);

@@ -12,14 +12,14 @@ The 14 shipped primitives: Avatar, Badge, Button, Card, Carousel, Checkbox, Dial
 
 ### Variants
 
-| Class | Use for | shadcn equivalent |
-| --- | --- | --- |
-| `button` | Default outlined | `button` / `button-outline` |
-| `button button-primary` | The page's most important action | `button-primary` (default) |
-| `button button-muted` | Secondary action with weight | `button-secondary` |
-| `button button-ghost` | Tertiary, toolbars | `button-ghost` |
-| `button button-link` | Inline text-style action | `button-link` |
-| `button button-minimal` | Square icon-only modifier (stacks with any variant) | — |
+| Class                   | Use for                                             | shadcn equivalent           |
+| ----------------------- | --------------------------------------------------- | --------------------------- |
+| `button`                | Default outlined                                    | `button` / `button-outline` |
+| `button button-primary` | The page's most important action                    | `button-primary` (default)  |
+| `button button-muted`   | Secondary action with weight                        | `button-secondary`          |
+| `button button-ghost`   | Tertiary, toolbars                                  | `button-ghost`              |
+| `button button-link`    | Inline text-style action                            | `button-link`               |
+| `button button-minimal` | Square icon-only modifier (stacks with any variant) | —                           |
 
 ### Anatomy
 
@@ -33,21 +33,21 @@ The 14 shipped primitives: Avatar, Badge, Button, Card, Carousel, Checkbox, Dial
 
 ### Tokens
 
-| Property | Token |
-| --- | --- |
-| Height | `--step-9` |
-| Padding (inline) | `--step-2_5` |
-| Icon ↔ label gap | `--step-1_5` |
-| Border | `1px solid var(--border)` (default), variant-dependent elsewhere |
-| Radius | `--radius-button` |
-| Background (default) | `--card` |
-| Background (primary) | `--primary` → text `--primary-foreground` |
-| Background (muted) | `--muted` with `--faded` border → text `--foreground` |
-| Background (ghost) | transparent → hover paints `--muted` |
-| Font | `--font-body`, `--font-size-sm`, `--weight-body`, line-height `1` |
-| Hover (default) | background `--muted` |
-| Active | `opacity: 0.8` |
-| Focus-visible | `box-shadow: var(--focus-ring)` |
+| Property             | Token                                                             |
+| -------------------- | ----------------------------------------------------------------- |
+| Height               | `--step-9`                                                        |
+| Padding (inline)     | `--step-2_5`                                                      |
+| Icon ↔ label gap     | `--step-1_5`                                                      |
+| Border               | `1px solid var(--border)` (default), variant-dependent elsewhere  |
+| Radius               | `--radius-button`                                                 |
+| Background (default) | `--card`                                                          |
+| Background (primary) | `--primary` → text `--primary-foreground`                         |
+| Background (muted)   | `--muted` with `--faded` border → text `--foreground`             |
+| Background (ghost)   | transparent → hover paints `--muted`                              |
+| Font                 | `--font-body`, `--font-size-sm`, `--weight-body`, line-height `1` |
+| Hover (default)      | background `--muted`                                              |
+| Active               | `opacity: 0.8`                                                    |
+| Focus-visible        | `box-shadow: var(--focus-ring)`                                   |
 
 Use `<button>` for in-page actions, `<a class="button">` for navigation. Icon-only buttons need `aria-label`.
 
@@ -72,9 +72,7 @@ Use `<button>` for in-page actions, `<a class="button">` for navigation. Icon-on
       <a class="card__title-link" href="/article">
         <h3 class="card__title text-h6">Title</h3>
       </a>
-      <p class="card__description text-sm text-muted-foreground line-clamp-2">
-        Short excerpt.
-      </p>
+      <p class="card__description text-sm text-muted-foreground line-clamp-2">Short excerpt.</p>
     </div>
 
     <div class="card__footer">
@@ -86,15 +84,15 @@ Use `<button>` for in-page actions, `<a class="button">` for navigation. Icon-on
 
 ### Tokens
 
-| Property | Token |
-| --- | --- |
-| Background | `--card` |
-| Text | `--card-foreground` |
-| Border | `1px solid var(--border)` |
-| Radius | `--radius-card` |
-| Padding | `--gap-md` (or larger on featured variants) |
+| Property      | Token                                       |
+| ------------- | ------------------------------------------- |
+| Background    | `--card`                                    |
+| Text          | `--card-foreground`                         |
+| Border        | `1px solid var(--border)`                   |
+| Radius        | `--radius-card`                             |
+| Padding       | `--gap-md` (or larger on featured variants) |
 | Figure radius | `--radius-md` (inner — half of card radius) |
-| Figure aspect | `3 / 2` default |
+| Figure aspect | `3 / 2` default                             |
 
 Cards stretch to 100% of their container by default. The figure radius is intentionally smaller than the card radius (16px outer / 8px inner) for clean nested corners.
 
@@ -128,17 +126,17 @@ Cards stretch to 100% of their container by default. The figure radius is intent
 
 ### Tokens
 
-| Property | Token |
-| --- | --- |
-| Height | `--step-9` |
-| Padding (inline) | `--step-2_5` |
-| Border | `--border` (default), `--primary` (hover/focus) |
-| Radius | `--radius-input` |
-| Background | `--input` |
-| Foreground | `--input-foreground` |
-| Icon size | `--step-4_5` |
-| Icon-side padding | `--step-8` (via `pl-input` / `pr-input`) |
-| Focus ring | `--focus-ring` |
+| Property          | Token                                           |
+| ----------------- | ----------------------------------------------- |
+| Height            | `--step-9`                                      |
+| Padding (inline)  | `--step-2_5`                                    |
+| Border            | `--border` (default), `--primary` (hover/focus) |
+| Radius            | `--radius-input`                                |
+| Background        | `--input`                                       |
+| Foreground        | `--input-foreground`                            |
+| Icon size         | `--step-4_5`                                    |
+| Icon-side padding | `--step-8` (via `pl-input` / `pr-input`)        |
+| Focus ring        | `--focus-ring`                                  |
 
 Every input needs a `<label class="form-label">` — visible or `sr-only`. Placeholders are not labels.
 
@@ -158,12 +156,12 @@ Same five-variant shape as button, just smaller and non-action.
 
 ### Tokens
 
-| Property | Token |
-| --- | --- |
-| Radius | `--radius-badge` (capsule) |
-| Padding | small inline/block from `--step-*` |
-| Font | `--font-size-xs`, `--weight-body` |
-| Background | matches button-variant pattern |
+| Property   | Token                              |
+| ---------- | ---------------------------------- |
+| Radius     | `--radius-badge` (capsule)         |
+| Padding    | small inline/block from `--step-*` |
+| Font       | `--font-size-xs`, `--weight-body`  |
+| Background | matches button-variant pattern     |
 
 ---
 
@@ -207,18 +205,18 @@ Native `<dialog>` with Zazz-styled backdrop, spring-eased transition, and a `dat
 
 ### Tokens
 
-| Property | Token |
-| --- | --- |
-| Modal padding | `--gap-md` |
-| Modal border | `1px solid var(--border)` |
-| Modal radius | `--radius-card` |
-| **Backdrop** | **`--shade-800`** — note: this is `--shade-*` deliberately, so the backdrop dims in both light and dark modes. `--muted` would lighten in dark. |
-| Open transition | `--spring-duration` + `--spring-easing` (set in reset) |
-| Title weight | `--weight-strong` |
-| Content gap | `--gap-sm` |
-| Buttons gap | `--gap-xs` |
-| Close button position | `--gap-xs` from top and right |
-| z-index | `9999` |
+| Property              | Token                                                                                                                                           |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Modal padding         | `--gap-md`                                                                                                                                      |
+| Modal border          | `1px solid var(--border)`                                                                                                                       |
+| Modal radius          | `--radius-card`                                                                                                                                 |
+| **Backdrop**          | **`--shade-800`** — note: this is `--shade-*` deliberately, so the backdrop dims in both light and dark modes. `--muted` would lighten in dark. |
+| Open transition       | `--spring-duration` + `--spring-easing` (set in reset)                                                                                          |
+| Title weight          | `--weight-strong`                                                                                                                               |
+| Content gap           | `--gap-sm`                                                                                                                                      |
+| Buttons gap           | `--gap-xs`                                                                                                                                      |
+| Close button position | `--gap-xs` from top and right                                                                                                                   |
+| z-index               | `9999`                                                                                                                                          |
 
 Note: `dialog__modal` often composes with the `article` width for constrained reading. The native `<dialog>` handles focus trap, `Esc` to close, and the inert background — don't reinvent.
 
@@ -262,7 +260,9 @@ Checkbox, radio, switch, slider, select — Zazz styles the native HTML elements
 <input type="radio" class="radio" name="group" />
 <input type="checkbox" class="switch" role="switch" />
 <input type="range" class="slider" min="0" max="100" />
-<select class="select">…</select>
+<select class="select">
+  …
+</select>
 <textarea class="textarea"></textarea>
 ```
 

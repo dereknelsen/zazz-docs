@@ -1,0 +1,69 @@
+:where(.dialog) {
+  --dialog-width: var(--article);
+  --dialog-background: var(--card);
+  --dialog-foreground: var(--card-foreground);
+
+  inline-size: var(--dialog-width);
+  background-color: var(--dialog-background);
+  color: var(--dialog-foreground);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-lg);
+  overflow: clip;
+  isolation: isolate;
+}
+
+:where(.dialog[data-size="large"]) {
+  --dialog-width: var(--container);
+}
+
+:where(.dialog[data-size="screen"]) {
+  --dialog-width: calc(100vi - 2 * var(--gap-md));
+
+  block-size: calc(100vb - 2 * var(--gap-md));
+}
+
+:where(.dialog__close > svg) {
+  inline-size: var(--step-4);
+  block-size: var(--step-4);
+  pointer-events: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding: 0;
+}
+
+:where(.dialog__content) {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-block-size: calc(100svh - 2 * var(--gap-md));
+  overflow-y: auto;
+}
+
+:where(.dialog__header) {
+  display: flex;
+  flex-direction: column;
+  padding-inline: var(--gap-sm);
+  padding-top: var(--gap-sm);
+}
+
+:where(.dialog__body) {
+  display: grid;
+  flex: 1;
+  padding-inline: var(--gap-sm);
+  padding-block: var(--gap-md);
+  min-height: var(--gap-xl);
+}
+
+:where(.dialog__footer) {
+  block-size: fit-content;
+  align-self: flex-end;
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--gap-xs);
+  padding: var(--gap-sm);
+  border-top: 1px solid var(--border);
+  background-color: var(--dialog-background);
+}

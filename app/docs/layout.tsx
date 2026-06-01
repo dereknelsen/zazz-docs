@@ -1,4 +1,5 @@
-import "@/app/zazz/styles/main.css";
+import "@/app/global.css";
+import "@/app/zazz/styles/index.css";
 import { source } from "@/lib/source";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import { baseOptions } from "@/lib/layout.shared";

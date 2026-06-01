@@ -26,7 +26,9 @@ export function PaletteEditor({ palette, onChange }: Props) {
     <section className="flex flex-col gap-4 rounded-xl border border-fd-border/30 bg-fd-card/30 p-4">
       <header className="flex items-baseline justify-between">
         <h3 className="text-sm font-semibold capitalize text-fd-foreground">{palette.name}</h3>
-        <span className="font-mono text-[11px] text-fd-muted-foreground">--{palette.name}-{palette.valueStop}</span>
+        <span className="font-mono text-[11px] text-fd-muted-foreground">
+          --{palette.name}-{palette.valueStop}
+        </span>
       </header>
 
       <div className="grid grid-cols-[1fr_auto_auto_auto_auto_auto] gap-3">
@@ -67,7 +69,9 @@ export function PaletteEditor({ palette, onChange }: Props) {
       </div>
 
       <div className="flex items-center gap-1 text-xs">
-        <span className="mr-2 text-[11px] uppercase tracking-[0.08em] text-fd-muted-foreground">Mode</span>
+        <span className="mr-2 text-[11px] uppercase tracking-[0.08em] text-fd-muted-foreground">
+          Mode
+        </span>
         {(["perceived", "linear"] as const).map((m) => (
           <button
             key={m}
@@ -101,8 +105,12 @@ export function PaletteEditor({ palette, onChange }: Props) {
                 style={{ background: oklch ?? sw.hex }}
                 title={oklch ?? sw.hex}
               />
-              <span className="text-center font-mono text-[10px] text-fd-muted-foreground">{stop}</span>
-              <span className="text-center font-mono text-[9px] text-fd-muted-foreground/60">{sw.hex}</span>
+              <span className="text-center font-mono text-[10px] text-fd-muted-foreground">
+                {stop}
+              </span>
+              <span className="text-center font-mono text-[9px] text-fd-muted-foreground/60">
+                {sw.hex}
+              </span>
             </div>
           );
         })}

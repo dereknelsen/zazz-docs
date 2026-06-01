@@ -1,0 +1,207 @@
+/* ===========================================================================
+BUTTON STYLES
+- Utilizes CSS variables for consistent button styling across the site
+=========================================================================== */
+
+:where(.button) {
+  --button-background: var(--background);
+  --button-background--hover: var(--muted);
+  --button-background--active: oklch(from var(--muted) l c h / calc(alpha - 0.02));
+
+  --button-foreground: var(--foreground);
+  --button-foreground--hover: var(--foreground);
+  --button-foreground--active: var(--foreground);
+
+  --button-border: var(--border);
+  --button-border--hover: var(--border);
+  --button-border--active: var(--border);
+
+  --button-gap: var(--step-1);
+  --button-padding: var(--step-2_5);
+  --button-height: var(--step-8);
+  --button-radius: var(--radius-md);
+
+  --button-icon-size: var(--step-4);
+
+  --button-shadow: var(--shadow-none);
+
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--weight-strong);
+  line-height: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--button-gap);
+  flex-shrink: 0;
+
+  block-size: var(--button-height);
+  min-width: max-content;
+  padding-inline: var(--button-padding);
+
+  border: 1px solid var(--button-border);
+  border-radius: var(--button-radius);
+
+  color: var(--button-foreground);
+  background-color: var(--button-background);
+
+  box-shadow: var(--button-shadow);
+
+  cursor: default;
+  text-decoration: none;
+
+  outline: var(--ring-size) var(--ring-style) oklch(from var(--ring) l c h / 0);
+  outline-offset: var(--ring-offset);
+
+  transition: var(--default-transition);
+
+  user-select: none;
+  text-box: trim-both ex alphabetic;
+}
+
+:where(a[href].button) {
+  cursor: pointer;
+}
+
+/* ===========================================================================
+BUTTON STATES
+=========================================================================== */
+
+:where(.button:hover) {
+  color: var(--button-foreground--hover);
+  background-color: var(--button-background--hover);
+  border-color: var(--button-border--hover);
+}
+
+:where(.button:active) {
+  color: var(--button-foreground--active);
+  background-color: var(--button-background--active);
+  border-color: var(--button-border--active);
+}
+
+:where(.button:focus-visible) {
+  outline-color: var(--ring);
+}
+
+:where(.button:disabled),
+:where(.button[aria-disabled="true"]) {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+:where(.button:disabled) {
+  pointer-events: none;
+}
+
+:where(.button[aria-busy="true"]) {
+  cursor: progress;
+}
+
+/* ===========================================================================
+BUTTON ICONS
+=========================================================================== */
+
+:where(.button > svg) {
+  inline-size: var(--button-icon-size);
+  block-size: var(--button-icon-size);
+  pointer-events: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding: 0;
+}
+
+/* ===========================================================================
+BUTTON VARIANTS
+=========================================================================== */
+
+:where(.button[data-variant="primary"]) {
+  --button-background: var(--primary);
+  --button-background--hover: oklch(from var(--primary) l c h / 0.9);
+  --button-background--active: oklch(from var(--primary) l c h / 0.8);
+
+  --button-foreground: var(--primary-foreground);
+  --button-foreground--hover: var(--primary-foreground);
+  --button-foreground--active: var(--primary-foreground);
+
+  --button-border: var(--button-background);
+  --button-border--hover: var(--button-background--hover);
+  --button-border--active: var(--button-background--active);
+
+  --button-shadow: var(--shadow-none);
+}
+
+:where(.button[data-variant="muted"]) {
+  --button-background: var(--muted);
+  --button-background--hover: oklch(from var(--muted) l c h / calc(alpha - 0.02));
+  --button-background--active: var(--muted);
+
+  --button-foreground: var(--foreground);
+  --button-foreground--hover: var(--foreground);
+  --button-foreground--active: var(--foreground);
+
+  --button-border: var(--muted);
+  --button-border--hover: var(--muted);
+  --button-border--active: var(--muted);
+
+  --button-shadow: var(--shadow-none);
+}
+
+:where(.button[data-variant="ghost"]) {
+  --button-background: transparent;
+  --button-background--hover: var(--muted);
+  --button-background--active: oklch(from var(--muted) l c h / calc(alpha - 0.02));
+
+  --button-foreground: var(--foreground);
+  --button-foreground--hover: var(--foreground);
+  --button-foreground--active: var(--foreground);
+
+  --button-border: transparent;
+  --button-border--hover: transparent;
+  --button-border--active: transparent;
+
+  --button-shadow: var(--shadow-none);
+}
+
+:where(.button[data-variant="link"]) {
+  --button-background: transparent;
+  --button-background--hover: transparent;
+  --button-background--active: transparent;
+
+  --button-foreground: var(--foreground);
+  --button-foreground--hover: var(--primary);
+  --button-foreground--active: oklch(from var(--primary) l c h / 0.8);
+
+  --button-height: fit-content;
+  --button-padding: 0;
+  --button-radius: 0;
+
+  --button-shadow: var(--shadow-none);
+
+  border: none;
+  text-decoration: underline;
+  text-underline-offset: var(--decoration-offset);
+  text-decoration-style: var(--decoration-style);
+  text-decoration-thickness: var(--decoration-thickness);
+}
+
+:where(.button[data-variant="link"]:hover) {
+  text-underline-offset: var(--decoration-offset--hover);
+}
+
+:where(.button[data-variant="link"]:active) {
+  transform: none;
+  text-underline-offset: var(--decoration-offset--active);
+}
+
+/* ===========================================================================
+BUTTON SIZES
+=========================================================================== */
+
+:where(.button[data-size="icon"]) {
+  block-size: var(--button-height);
+  inline-size: var(--button-height);
+  padding: 0;
+}

@@ -5,8 +5,8 @@ description: A primary-colored ring with a background-gap halo. One token, one u
 
 ## Class reference
 
-| Class | Property |
-| --- | --- |
+| Class  | Property                        |
+| ------ | ------------------------------- |
 | `ring` | `box-shadow: var(--focus-ring)` |
 
 The `ring` utility applies the `--focus-ring` token. Use it on `:focus-visible` so keyboard navigation shows the ring without mouse clicks triggering it.
@@ -14,9 +14,7 @@ The `ring` utility applies the `--focus-ring` token. Use it on `:focus-visible` 
 ## Token
 
 ```css
---focus-ring:
-  0 0 0 4px var(--background),
-  0 0 0 2px var(--primary);
+--focus-ring: 0 0 0 4px var(--background), 0 0 0 2px var(--primary);
 ```
 
 Two layered box-shadows:
@@ -72,8 +70,7 @@ Retune the ring for the whole product by overriding the token:
 ```css
 :root {
   --focus-ring:
-    0 0 0 3px var(--background),
-    0 0 0 2px var(--destructive); /* destructive ring for delete buttons */
+    0 0 0 3px var(--background), 0 0 0 2px var(--destructive); /* destructive ring for delete buttons */
 }
 ```
 
@@ -81,9 +78,7 @@ For a high-contrast accessibility mode, increase the spread:
 
 ```css
 .high-contrast {
-  --focus-ring:
-    0 0 0 6px var(--background),
-    0 0 0 4px var(--foreground);
+  --focus-ring: 0 0 0 6px var(--background), 0 0 0 4px var(--foreground);
 }
 ```
 

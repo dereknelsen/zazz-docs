@@ -12,7 +12,15 @@ interface Props {
   id?: string;
 }
 
-export function TextInput({ label, value, onChange, placeholder, mono = false, className, id }: Props) {
+export function TextInput({
+  label,
+  value,
+  onChange,
+  placeholder,
+  mono = false,
+  className,
+  id,
+}: Props) {
   return (
     <label className={cn("flex flex-col gap-1.5", className)} htmlFor={id}>
       {label && (

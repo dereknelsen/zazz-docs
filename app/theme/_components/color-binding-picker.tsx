@@ -8,7 +8,21 @@ import { createSwatches } from "../_lib/create-swatches";
 import type { PaletteName, ThemeConfig } from "../_lib/types";
 import { SwatchChip } from "./swatch-chip";
 
-const OVERLAY_STOPS = ["none", "50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950", "full"];
+const OVERLAY_STOPS = [
+  "none",
+  "50",
+  "100",
+  "200",
+  "300",
+  "400",
+  "500",
+  "600",
+  "700",
+  "800",
+  "900",
+  "950",
+  "full",
+];
 const NEUTRAL_KEYS = ["white", "black"];
 
 interface Props {

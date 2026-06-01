@@ -30,7 +30,9 @@ export function SectionNav({ active, onChange }: Props) {
       aria-label="Theme sections"
     >
       <header className="flex items-center justify-between px-2 py-1.5">
-        <Link href="/" className="text-sm font-semibold text-fd-foreground">Zazz Theme Builder</Link>
+        <Link href="/" className="text-sm font-semibold text-fd-foreground">
+          Zazz Theme Builder
+        </Link>
         <div className="flex items-center gap-1 text-fd-muted-foreground">
           <button
             type="button"

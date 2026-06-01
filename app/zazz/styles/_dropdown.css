@@ -1,0 +1,154 @@
+:where(.dropdown) {
+    anchor-scope: --dropdown-trigger;
+    display: inline-block;
+}
+
+:where(.dropdown > [popovertarget]) {
+    anchor-name: --dropdown-trigger;
+}
+
+:where(.dropdown__popover) {
+    position-anchor: --dropdown-trigger;
+    --popover-background: var(--card);
+    --popover-foreground: var(--card-foreground);
+    --popover-border: var(--border);
+    --popover-border-foreground: var(--border-foreground);
+    --popover-radius: var(--radius-md);
+    --popover-shadow: var(--shadow-md);
+    --popover-padding: var(--step-1_5);
+
+    min-inline-size: 15rem;
+    max-inline-size: 100vi;
+
+    background-color: var(--popover-background);
+    color: var(--popover-foreground);
+    border: 1px solid var(--popover-border);
+    border-radius: var(--popover-radius);
+    box-shadow: var(--popover-shadow);
+    padding: var(--popover-padding);
+    z-index: var(--popover-z-index);
+}
+
+:where(.dropdown__popover .button) {
+    --button-radius: var(--radius-xs)
+}
+
+/* ===========================================================================
+POSITIONING — side × align (row/block first, column/inline second per MDN)
+=========================================================================== */
+
+/* bottom */
+:where(.dropdown__popover[data-side="bottom"]:not([data-align])),
+:where(.dropdown__popover[data-side="bottom"][data-align="start"]) {
+  --popover-position-area: block-end span-inline-end;
+  --popover-position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
+  --popover-origin: top center;
+  --popover-starting-translate: 0, calc(1 * var(--step-1_5)), 0;
+  --popover-margin-block: var(--step-1_5);
+  --popover-margin-inline: 0;
+}
+
+:where(.dropdown__popover[data-side="bottom"][data-align="center"]) {
+  --popover-position-area: block-end span-all;
+  --popover-position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
+  --popover-origin: top center;
+  --popover-starting-translate: 0, calc(1 * var(--step-1_5)), 0;
+  --popover-margin-block: var(--step-1_5);
+  --popover-margin-inline: 0;
+}
+
+:where(.dropdown__popover[data-side="bottom"][data-align="end"]) {
+  --popover-position-area: block-end span-inline-start;
+  --popover-position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
+  --popover-origin: top center;
+  --popover-starting-translate: 0, calc(1 * var(--step-1_5)), 0;
+  --popover-margin-block: var(--step-1_5);
+  --popover-margin-inline: 0;
+}
+
+/* top */
+:where(.dropdown__popover[data-side="top"]:not([data-align])),
+:where(.dropdown__popover[data-side="top"][data-align="start"]) {
+  --popover-position-area: block-start span-inline-end;
+  --popover-position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
+  --popover-origin: bottom center;
+  --popover-starting-translate: 0, calc(1 * var(--step-1_5)), 0;
+  --popover-margin-block: var(--step-1_5);
+  --popover-margin-inline: 0;
+}
+
+:where(.dropdown__popover[data-side="top"][data-align="center"]) {
+  --popover-position-area: block-start span-all;
+  --popover-position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
+  --popover-origin: bottom center;
+  --popover-starting-translate: 0, calc(1 * var(--step-1_5)), 0;
+  --popover-margin-block: var(--step-1_5);
+  --popover-margin-inline: 0;
+}
+
+:where(.dropdown__popover[data-side="top"][data-align="end"]) {
+  --popover-position-area: block-start span-inline-start;
+  --popover-position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
+  --popover-origin: bottom center;
+  --popover-starting-translate: 0, calc(1 * var(--step-1_5)), 0;
+  --popover-margin-block: var(--step-1_5);
+  --popover-margin-inline: 0;
+}
+
+/* right */
+:where(.dropdown__popover[data-side="right"]:not([data-align])),
+:where(.dropdown__popover[data-side="right"][data-align="start"]) {
+  --popover-position-area: inline-end span-block-end;
+  --popover-position-try-fallbacks: flip-inline, flip-block, flip-inline flip-block;
+  --popover-origin: left center;
+  --popover-starting-translate: calc(-1 * var(--step-1_5)), 0, 0;
+  --popover-margin-block: 0;
+  --popover-margin-inline: var(--step-1_5);
+}
+
+:where(.dropdown__popover[data-side="right"][data-align="center"]) {
+  --popover-position-area: inline-end span-all;
+  --popover-position-try-fallbacks: flip-inline, flip-block, flip-inline flip-block;
+  --popover-origin: left center;
+  --popover-starting-translate: calc(-1 * var(--step-1_5)), 0, 0;
+  --popover-margin-block: 0;
+  --popover-margin-inline: var(--step-1_5);
+}
+
+:where(.dropdown__popover[data-side="right"][data-align="end"]) {
+  --popover-position-area: inline-end span-block-start;
+  --popover-position-try-fallbacks: flip-inline, flip-block, flip-inline flip-block;
+  --popover-origin: left center;
+  --popover-starting-translate: calc(-1 * var(--step-1_5)), 0, 0;
+  --popover-margin-block: 0;
+  --popover-margin-inline: var(--step-1_5);
+}
+
+/* left */
+:where(.dropdown__popover[data-side="left"]:not([data-align])),
+:where(.dropdown__popover[data-side="left"][data-align="start"]) {
+  --popover-position-area: inline-start span-block-end;
+  --popover-position-try-fallbacks: flip-inline, flip-block, flip-inline flip-block;
+  --popover-origin: right center;
+  --popover-starting-translate: calc(-1 * var(--step-1_5)), 0, 0;
+  --popover-margin-block: 0;
+  --popover-margin-inline: var(--step-1_5);
+}
+
+:where(.dropdown__popover[data-side="left"][data-align="center"]) {
+  --popover-position-area: inline-start span-all;
+  --popover-position-try-fallbacks: flip-inline, flip-block, flip-inline flip-block;
+  --popover-origin: right center;
+  --popover-starting-translate: calc(-1 * var(--step-1_5)), 0, 0;
+  --popover-margin-block: 0;
+  --popover-margin-inline: var(--step-1_5);
+}
+
+:where(.dropdown__popover[data-side="left"][data-align="end"]) {
+  --popover-position-area: inline-start span-block-start;
+  --popover-position-try-fallbacks: flip-inline, flip-block, flip-inline flip-block;
+  --popover-origin: right center;
+  --popover-starting-translate: calc(-1 * var(--step-1_5)), 0, 0;
+  --popover-margin-block: 0;
+  --popover-margin-inline: var(--step-1_5);
+}

@@ -23,7 +23,14 @@ const GROUPS: { label: string; vars: SemanticVar[] }[] = [
   { label: "overlay", vars: ["muted", "muted-foreground", "faded", "faded-foreground"] },
   {
     label: "brand",
-    vars: ["primary", "primary-foreground", "secondary", "secondary-foreground", "tertiary", "tertiary-foreground"],
+    vars: [
+      "primary",
+      "primary-foreground",
+      "secondary",
+      "secondary-foreground",
+      "tertiary",
+      "tertiary-foreground",
+    ],
   },
 ];
 
@@ -34,7 +41,10 @@ export function ThemesPanel() {
 
   return (
     <div className="flex flex-1 flex-col overflow-auto">
-      <SectionHeader title="Themes" description="Map semantic variables to scale tokens for light and dark modes." />
+      <SectionHeader
+        title="Themes"
+        description="Map semantic variables to scale tokens for light and dark modes."
+      />
       <div className="px-6 py-4">
         {/* table head */}
         <div className="grid grid-cols-[1fr_minmax(220px,1fr)_minmax(220px,1fr)] items-center gap-4 border-b border-fd-border/40 pb-2 text-[11px] font-medium uppercase tracking-[0.08em] text-fd-muted-foreground">
@@ -88,8 +98,14 @@ export function ThemesPanel() {
                 className="grid grid-cols-[1fr_minmax(220px,1fr)_minmax(220px,1fr)] items-center gap-4 px-3 py-2 text-sm"
               >
                 <span className="font-mono text-fd-foreground">{name}</span>
-                <SwatchChip color={theme.status[name].light} label={theme.status[name].light.slice(0, 22) + "…"} />
-                <SwatchChip color={theme.status[name].dark} label={theme.status[name].dark.slice(0, 22) + "…"} />
+                <SwatchChip
+                  color={theme.status[name].light}
+                  label={theme.status[name].light.slice(0, 22) + "…"}
+                />
+                <SwatchChip
+                  color={theme.status[name].dark}
+                  label={theme.status[name].dark.slice(0, 22) + "…"}
+                />
               </li>
             ))}
           </ul>

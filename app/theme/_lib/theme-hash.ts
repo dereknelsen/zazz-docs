@@ -6,7 +6,11 @@ const STORAGE_KEY = "zazz-theme-config";
 
 function b64urlEncode(str: string): string {
   if (typeof window === "undefined") return "";
-  return window.btoa(unescape(encodeURIComponent(str))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  return window
+    .btoa(unescape(encodeURIComponent(str)))
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/, "");
 }
 
 function b64urlDecode(str: string): string {

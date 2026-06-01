@@ -17,16 +17,16 @@ The reset handles the track and thumb styling. Most projects can use the bare in
 
 ## Tokens
 
-| Property | Token / value |
-| --- | --- |
-| Track height | `0.5rem` |
-| Track background | `--muted` |
-| Track border | `1px solid var(--muted)` |
-| Track radius | `--radius-full` |
-| Thumb width / height | `0.875rem` |
-| Thumb background | `--background` |
-| Thumb border | `1px solid var(--primary)` |
-| Thumb radius | `--radius-full` |
+| Property             | Token / value              |
+| -------------------- | -------------------------- |
+| Track height         | `0.5rem`                   |
+| Track background     | `--muted`                  |
+| Track border         | `1px solid var(--muted)`   |
+| Track radius         | `--radius-full`            |
+| Thumb width / height | `0.875rem`                 |
+| Thumb background     | `--background`             |
+| Thumb border         | `1px solid var(--primary)` |
+| Thumb radius         | `--radius-full`            |
 
 The thumb is a circular knob with a primary-colored border, sitting on a muted track. The active region (left of the thumb) is the same color as the inactive region; sliders don't fill the track by default. Add a custom paint via JavaScript and CSS if you need a filled track.
 
@@ -49,9 +49,9 @@ The thumb is a circular knob with a primary-colored border, sitting on a muted t
 The `<output>` element pairs with the slider to display the current value. Wire it with a small JS listener:
 
 ```js
-const slider = document.querySelector('#volume');
+const slider = document.querySelector("#volume");
 const output = document.querySelector('output[for="volume"]');
-slider.addEventListener('input', () => output.value = slider.value);
+slider.addEventListener("input", () => (output.value = slider.value));
 ```
 
 ## Accessibility
@@ -63,15 +63,23 @@ slider.addEventListener('input', () => output.value = slider.value);
 
 ## Cross-platform
 
-| Platform | Reference |
-| --- | --- |
-| Figma | No Figma component (representative mockup only). |
-| Webflow | `range` class on a native `<input type="range">`. Track and thumb styles live in `reset.css`. |
-| CSS / Tailwind | The same class after [installing reset.css](/docs/quickstart/css). |
+| Platform       | Reference                                                                                     |
+| -------------- | --------------------------------------------------------------------------------------------- |
+| Figma          | No Figma component (representative mockup only).                                              |
+| Webflow        | `range` class on a native `<input type="range">`. Track and thumb styles live in `reset.css`. |
+| CSS / Tailwind | The same class after [installing reset.css](/docs/quickstart/css).                            |
 
 ## Where to next
 
 <Cards>
-  <Card title="Switch" href="/docs/primitives/switch" description="For binary controls instead of ranges." />
-  <Card title="Input" href="/docs/primitives/input" description="Pair a slider with a numeric input for precise entry plus visual scrubbing." />
+  <Card
+    title="Switch"
+    href="/docs/primitives/switch"
+    description="For binary controls instead of ranges."
+  />
+  <Card
+    title="Input"
+    href="/docs/primitives/input"
+    description="Pair a slider with a numeric input for precise entry plus visual scrubbing."
+  />
 </Cards>

@@ -352,7 +352,7 @@ NATIVE DIALOG ELEMENT ENHANCEMENTS
   --popover-starting-translate: 0, 0.25rem, 0;
   --popover-ending-scale: 1;
   --popover-ending-translate: 0, 0, 0;
-  --popover-origin: top center;
+  --popover-origin: bottom center;
   --popover-margin-block: var(--step-1_5);
   --popover-margin-inline: var(--step-1_5);
   --popover-position-area: block-end inline-start;

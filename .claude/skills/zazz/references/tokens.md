@@ -2,6 +2,8 @@
 
 Every variable shipped with Zazz, organized by collection. Defaults shown; values can be overridden in any project. All colors are OKLCH.
 
+Tokens live in `app/zazz/styles/_variables.css` inside `@layer variables` (and a dark-mode block). The cascade order — `@layer variables, reset, components, utilities` — is declared once in `index.css`. Nine collections ship: the eight foundations plus an Animations group.
+
 ---
 
 ## 1. Theme
@@ -191,35 +193,39 @@ Use to **fade** whatever sits below lighter. Frosted glass, hover-lightens on da
 ### Families
 
 ```css
---font-body: Geist, Verdana, sans-serif;
---font-heading: Geist, Verdana, sans-serif;
---font-mono: "Geist Mono", "Palatino Linotype", sans-serif;
+--font-body: var(--font-geist-sans);
+--font-heading: var(--font-geist-sans);
+--font-mono: var(--font-geist-mono);
 ```
 
-### Fluid sizes (clamp from Mobile → Desktop)
+`--font-geist-sans` / `--font-geist-mono` are supplied by the demo app's `geist/font` (`next/font`) loader. A vanilla or Astro project must define them — or override `--font-body` / `--font-heading` / `--font-mono` to a real stack. See `references/integrations.md → Fonts`.
+
+### Fluid sizes (clamp from Mobile → Desktop, interpolating on `vi`)
 
 ```css
---font-size-display: clamp(4.2998rem, calc(3.545rem + 3.0194vi), 5.9605rem);
---font-size-h1: clamp(3.5832rem, calc(3.0445rem + 2.1549vi), 4.7684rem);
---font-size-h2: clamp(2.986rem, calc(2.6093rem + 1.5068vi), 3.8147rem);
---font-size-h3: clamp(2.4883rem, calc(2.2322rem + 1.0244vi), 3.0518rem);
---font-size-h4: clamp(2.0736rem, calc(1.9064rem + 0.6687vi), 2.4414rem);
---font-size-h5: clamp(1.728rem, calc(1.6257rem + 0.4093vi), 1.9531rem);
---font-size-h6: clamp(1.44rem, calc(1.3843rem + 0.2227vi), 1.5625rem);
---font-size-xl: clamp(1.44rem, calc(1.3843rem + 0.2227vi), 1.5625rem); /* shares h6 size */
---font-size-lg: clamp(1.2rem, calc(1.1773rem + 0.0909vi), 1.25rem);
---font-size-md: clamp(1rem, calc(1rem + 0vi), 1rem);
---font-size-sm: clamp(0.8rem, calc(0.8485rem + 0.0606vi), 0.8333rem);
---font-size-xs: clamp(0.64rem, calc(0.7192rem + 0.099vi), 0.6944rem);
---font-size-eyebrow: clamp(0.64rem, calc(0.7192rem + 0.099vi), 0.6944rem); /* shares xs size */
+--font-size-eyebrow: clamp(0.64rem, 0.8584rem + -0.273vi, 0.7901rem); /* shares xs */
+--font-size-xs: clamp(0.64rem, 0.8584rem + -0.273vi, 0.7901rem);
+--font-size-sm: clamp(0.8rem, 0.9293rem + -0.1616vi, 0.8889rem);
+--font-size-md: clamp(1rem, 1rem + 0vi, 1rem);
+--font-size-lg: clamp(1.125rem, 1.0682rem + 0.2273vi, 1.25rem);
+--font-size-xl: clamp(1.2656rem, 1.1307rem + 0.5398vi, 1.5625rem); /* shares h6 */
+--font-size-h6: clamp(1.2656rem, 1.1307rem + 0.5398vi, 1.5625rem);
+--font-size-h5: clamp(1.4238rem, 1.1832rem + 0.9624vi, 1.9531rem);
+--font-size-h4: clamp(1.6018rem, 1.2202rem + 1.5265vi, 2.4414rem);
+--font-size-h3: clamp(1.802rem, 1.234rem + 2.2722vi, 3.0518rem);
+--font-size-h2: clamp(2.0273rem, 1.2148rem + 3.2498vi, 3.8147rem);
+--font-size-h1: clamp(2.2807rem, 1.1499rem + 4.523vi, 4.7684rem);
+--font-size-display: clamp(2.5658rem, 1.0227rem + 6.1721vi, 5.9605rem);
 ```
+
+These are generated; don't hand-edit. Regenerate with the Utopia flow in `references/integrations.md`.
 
 ### Weights (role-based)
 
 ```css
 --weight-body: 400;
 --weight-heading: 600;
---weight-strong: 600;
+--weight-strong: 500;
 --weight-mono: 400;
 --weight-eyebrow: 500;
 ```
@@ -232,7 +238,7 @@ Use to **fade** whatever sits below lighter. Frosted glass, hover-lightens on da
 --tracking-h2: -0.025em;
 --tracking-h3: -0.02em;
 --tracking-h4: -0.01em;
---tracking-h5: -0.005em;
+--tracking-h5: -0.025em;
 --tracking-h6: -0.0025em;
 --tracking-xl: 0em;
 --tracking-lg: 0em;
@@ -269,7 +275,7 @@ Use to **fade** whatever sits below lighter. Frosted glass, hover-lightens on da
 | `text-h2`      | heading | h2      | heading | 1       | -0.025em  |                             |
 | `text-h3`      | heading | h3      | heading | 1.05    | -0.02em   |                             |
 | `text-h4`      | heading | h4      | heading | 1.05    | -0.01em   |                             |
-| `text-h5`      | heading | h5      | heading | 1.1     | -0.005em  |                             |
+| `text-h5`      | heading | h5      | heading | 1.1     | -0.025em  |                             |
 | `text-h6`      | heading | h6      | heading | 1.1     | -0.0025em |                             |
 | `text-eyebrow` | heading | eyebrow | eyebrow | 1.2     | 0.12em    | `text-transform: uppercase` |
 | `text-xl`      | body    | xl      | body    | 1.5     | 0         |                             |
@@ -278,7 +284,27 @@ Use to **fade** whatever sits below lighter. Frosted glass, hover-lightens on da
 | `text-sm`      | body    | sm      | body    | 1.5     | 0         |                             |
 | `text-xs`      | body    | xs      | body    | 1.5     | 0         |                             |
 
-Use these by default. Don't reassemble.
+Use these by default. Don't reassemble. `text-eyebrow` is also defined; `text-link` styles inline links (`--primary`, underline with animated offset).
+
+### Paragraph rhythm (`.text-prose` + `--margin-*`)
+
+`.text-prose` is a flex-column container (`gap: var(--gap-sm)`) that also applies a per-style top margin to every non-first child, giving long-form copy correct vertical rhythm without per-element margins. It styles bare tags too (`.text-prose h2`, `.text-prose p`, `.text-prose a`, `.text-prose strong/em/img/figure`), so you can drop raw HTML inside it.
+
+```css
+--margin-display: var(--step-4_5);
+--margin-h1: var(--step-4_5);
+--margin-h2: var(--step-4_5);
+--margin-h3: var(--step-4_5);
+--margin-h4: var(--step-3_5);
+--margin-h5: var(--step-3_5);
+--margin-h6: var(--step-3_5);
+--margin-xl: var(--step-2_5);
+--margin-lg: var(--step-2_5);
+--margin-md: var(--step-2_5);
+--margin-sm: var(--step-2);
+--margin-xs: var(--step-1_5);
+--margin-eyebrow: 0rem;
+```
 
 ---
 
@@ -287,8 +313,10 @@ Use these by default. Don't reassemble.
 ### Interval (the one number)
 
 ```css
---spacing-interval: 0.25rem; /* 4px at default root font-size */
+--spacing-interval: clamp(0.225rem, 0.2136rem + 0.0455vw, 0.25rem); /* ~3.6px → 4px, fluid */
 ```
+
+The interval is now a `clamp()`, so the whole step scale (and the gaps and radii built on it) shrinks slightly on small viewports and settles at 4px on desktop. Everything derived from it tracks automatically.
 
 ### Semantic gaps (the daily API)
 
@@ -303,6 +331,7 @@ Use these by default. Don't reassemble.
 ### Step scale
 
 ```css
+--step-px_5: 0.5px;
 --step-px: 1px;
 --step-0_5: calc(var(--spacing-interval) / 2);
 --step-1: var(--spacing-interval);
@@ -339,9 +368,10 @@ Use these by default. Don't reassemble.
 --step-72: calc(var(--spacing-interval) * 72);
 --step-80: calc(var(--spacing-interval) * 80);
 --step-96: calc(var(--spacing-interval) * 96);
+--step-full: 100%;
 ```
 
-Half-steps stop at `--step-5_5`. `--step-px` is the only literal — always 1px, doesn't scale with interval. Use it for non-scaling hairlines.
+Half-steps stop at `--step-5_5`. The literals that don't scale with the interval are `--step-px_5` (0.5px), `--step-px` (1px), and `--step-full` (100%) — use `--step-px` for non-scaling hairlines.
 
 ### Utility classes
 
@@ -371,26 +401,23 @@ Bump for rounder, drop for sharper. Doesn't affect `--radius-none` or `--radius-
 
 ```css
 --radius-none: 0rem;
---radius-xs: calc(var(--step-1) * var(--radius-multiplier)); /* 0.25rem (4px)  */
---radius-sm: calc(var(--step-1_5) * var(--radius-multiplier)); /* 0.375rem (6px) */
---radius-md: calc(var(--step-2) * var(--radius-multiplier)); /* 0.5rem (8px)   */
---radius-lg: calc(var(--step-4) * var(--radius-multiplier)); /* 1rem (16px)    */
---radius-xl: calc(var(--step-7) * var(--radius-multiplier)); /* 1.75rem (28px) */
+--radius-xs: calc(var(--step-1) * var(--radius-multiplier)); /* ~1× interval  */
+--radius-sm: calc(var(--step-1_5) * var(--radius-multiplier)); /* ~1.5× interval */
+--radius-md: calc(var(--step-2_5) * var(--radius-multiplier)); /* ~2.5× interval */
+--radius-lg: calc(var(--step-4) * var(--radius-multiplier)); /* ~4× interval  */
+--radius-xl: calc(var(--step-7) * var(--radius-multiplier)); /* ~7× interval  */
 --radius-full: 9999rem;
 ```
 
-### Primitive aliases (use on the corresponding element)
+(At the ~4px settled interval: xs ≈ 4px, sm ≈ 6px, md ≈ 10px, lg ≈ 16px, xl ≈ 28px.)
 
-```css
---radius-button: var(--radius-md); /* 8px  */
---radius-input: var(--radius-md); /* 8px  */
---radius-card: var(--radius-lg); /* 16px */
---radius-badge: var(--radius-full); /* capsule */
-```
+### No primitive radius aliases
+
+There are **no** `--radius-button` / `--radius-card` / `--radius-input` / `--radius-badge` tokens. Components reach the semantic scale through a local custom property instead — e.g. `_button.css` declares `--button-radius: var(--radius-md)`, `_badge.css` declares `--badge-radius: var(--radius-sm)`, `_dialog.css` uses `--radius-lg` directly. Retune a component's radius by overriding its local prop, or shift the whole system with `--radius-multiplier`.
 
 ### Utility classes
 
-`radius-none`, `radius-xs`, `radius-sm`, `radius-md`, `radius-lg`, `radius-xl`, `radius-full`. No utility classes for the primitive aliases — apply via component CSS.
+`rounded-none`, `rounded-xs`, `rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-full` — note the `rounded-*` prefix (Tailwind-style), each setting `border-radius` to the matching token.
 
 ---
 
@@ -419,12 +446,12 @@ CSS spec disallows custom properties in `@media` size queries. Write the raw `40
 
 ```css
 .container {
-  width: var(--container);
+  inline-size: var(--container);
   margin-inline: auto;
   container: container / inline-size;
 }
 .article {
-  width: var(--article);
+  inline-size: var(--article);
   margin-inline: auto;
   container: article / inline-size;
 }
@@ -436,13 +463,25 @@ Both register a container query name. Apply directly to your element — no wrap
 
 ## 8. Effects
 
-### Focus ring
+### Focus ring (outline-based)
 
 ```css
---focus-ring: 0px 0px 0px 4px var(--background), 0px 0px 0px 2px var(--primary);
+--ring: var(--primary);
+--ring-style: solid;
+--ring-size: 2px;
+--ring-offset: 1px;
 ```
 
-Apply via `box-shadow` on `:focus-visible`. Adapts to mode automatically.
+The reset applies these on every `:focus-visible`:
+
+```css
+:where(:focus-visible) {
+  outline: var(--ring-size) var(--ring-style) var(--ring);
+  outline-offset: var(--ring-offset);
+}
+```
+
+Components keep a transparent outline at rest and switch only the color on focus, so the ring doesn't shift layout: `outline: var(--ring-size) var(--ring-style) oklch(from var(--ring) l c h / 0)` then `outline-color: var(--ring)` on `:focus-visible`. The `.ring` utility applies the same pattern. (There is **no** `--focus-ring` box-shadow token.) Always target `:focus-visible`, never `:focus`.
 
 ### Shadows
 
@@ -465,39 +504,56 @@ Each is a stack of 5 entries with increasing offset and decreasing alpha. Colors
 
 ## 9. Animations
 
-Not part of the eight official foundations, but ships in `variables.css`:
+Not one of the eight named foundations, but ships in `_variables.css` and is used throughout the components:
 
 ```css
---spring-easing: linear(0, 0.012 0.9%, ..., 1);
+--spring-easing: linear(0, 0.012 0.9%, …, 1); /* 27-point spring curve */
 --spring-duration: 0.333s;
 --default-transition-timing-function: var(--spring-easing, cubic-bezier(0.17, 0.84, 0.44, 1));
---default-transition-duration: 0.333s;
+--default-transition-duration: var(--spring-duration, 0.333s);
+--default-transition-property:
+  text-underline-offset, box-shadow, background-color, color, transform, opacity, filter,
+  backdrop-filter, display, content-visibility, … /* ~19 properties */;
+--default-transition: /* the full property + duration + easing bundle */;
 ```
 
-The reset wires native `<dialog>` to spring-eased transitions. Use these variables in any custom transition for consistency.
+Use `transition: var(--default-transition)` for the standard spring-eased bundle, or a single property with `var(--default-transition-duration) var(--default-transition-timing-function)`. The reset wires native `<dialog>` and `[popover]` open/close (and `<details>` height) to this easing via `@starting-style`.
+
+### Text decoration (used by links, underlined buttons, accordions)
+
+```css
+--decoration-style: solid;
+--decoration-thickness: 1px;
+--decoration-offset: 1px;
+--decoration-offset--hover: 2px;
+--decoration-offset--active: 1px;
+```
 
 ---
 
 ## Other shipped utility classes
 
-Not tied to a specific foundation, but live in `utilities.css`:
+`_utilities.css` is large. Beyond the spacing, radius, shadow, and layout classes already listed under their foundations, these ship too:
 
+- **Color (text + background):** `text-{role}` / `bg-{role}` for every theme role (`text-foreground`, `bg-card`, `text-muted-foreground`, `bg-primary`, `bg-destructive`, …), every corporate step (`bg-primary-600`, `text-secondary-200`, …), and every grayscale value (`bg-neutral-800`, `bg-shade-800`, `bg-tint-100`, `text-white`, …). The shade/tint background classes are the idiomatic way to place a mode-correct overlay.
 - **Display:** `hidden`, `block`, `inline-block`, `inline`, `flex`, `inline-flex`, `grid`
-- **Flex direction / wrap:** `flex-row`, `flex-row-reverse`, `flex-col`, `flex-col-reverse`
-- **Flex sizing:** `flex-1`, `flex-auto`, `flex-initial`, `flex-none`
-- **Align/justify:** `items-{start|center|end|stretch}`, `justify-{start|center|end|stretch|around|between}`
-- **Grid columns:** `grid-cols-1` through `grid-cols-6`
-- **Placement:** `place-items-{start|center|end}`
+- **Flex:** `flex-{row|row-reverse|col|col-reverse}`, `flex-{1|auto|initial|none}`, `items-{start|center|end|stretch}`, `justify-{start|center|end|stretch|around|between}`
+- **Grid:** `grid-cols-1` … `grid-cols-12`, `col-span-1` … `col-span-12`, `place-items-{start|center|end}`
 - **Order:** `order-first`, `order-last`, `order-none`
 - **Position:** `static`, `relative`, `absolute`, `fixed`, `sticky`
+- **Inset / offsets:** `inset-0`, `inset-{xs..xl}`, `top-/right-/bottom-/left-{xs..xl}`
+- **Size:** `w-{none|px|auto|full|xs..xl|screen|screen-xs..xl}`, `h-…` (same), `size-…` (both axes); `min-w-/min-h-` and `max-w-/max-h-` with `{auto|full|none|screen|screen-xs..xl}`
 - **Z-index:** `z-isolate`, `z-0`, `z-10`, `z-20`, `z-30`, `z-40`, `z-50`
-- **Opacity:** `opacity-0`, `opacity-25`, `opacity-50`, `opacity-75`, `opacity-100`
-- **Overflow:** `overflow-hidden`, `overflow-clip`, `no-scrollbar`
+- **Opacity:** `opacity-{0|5|10|15|20|25|30|40|50|60|70|75|80|90|95|100}`
+- **Overflow:** `overflow-{hidden|clip|auto}`, `overflow-{x|y}-auto`, `no-scrollbar`
+- **Border:** `border` + directional `border-{t|r|b|l}` (color via `--border-color`, default `--border`; override with `border-{primary|destructive|…}`)
 - **Pointer events:** `pointer-events-none`
 - **Aspect ratios:** `aspect-anamorphic` (2.39:1), `aspect-univisium` (2:1), `aspect-widescreen` (16:9), `aspect-landscape` (3:2), `aspect-portrait` (2:3), `aspect-square` (1:1)
-- **Object fit:** `object-contain`, `object-cover`, `object-fill`, `object-none`, `object-scale-down`
-- **Text helpers:** `text-pretty`, `text-balance`, `tabular-nums`, `line-clamp-1` through `line-clamp-6`
+- **Object fit:** `object-{contain|cover|fill|none|scale-down}`
+- **Text helpers:** `uppercase`, `lowercase`, `capitalize`, `normal-case`, `text-pretty`, `text-balance`, `tabular-nums`, `italic`, `line-clamp-1` … `line-clamp-6`
+- **Transition:** `transition` (the `--default-transition` bundle), `transition-discrete`
 - **Accessibility:** `sr-only`
-- **Focus ring (utility):** `ring`
+- **Focus ring:** `ring` (transparent outline at rest, `--ring` color on `:focus-visible`)
+- **Layout widths:** `container`, `article`
 
-All Zazz utility classes are wrapped in `:where()` for zero specificity, so they don't fight component CSS or other utility frameworks. They sit inside `@scope (.zazz-preview)` in the docs site but apply globally in projects that import `utilities.css` at the root level.
+All Zazz utility classes are wrapped in `:where()` for zero specificity, so they never fight component CSS or another utility framework (any specificity-bearing rule wins). Imported at the project root, they apply globally.

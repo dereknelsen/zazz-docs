@@ -1,7 +1,8 @@
+import { RootProvider } from "fumadocs-ui/provider/next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 
-export default function Layout({ children }: LayoutProps<"/">) {
+export default function Layout({ children }: LayoutProps<"/docs">) {
   return (
     <html
       lang="en"
@@ -9,7 +10,7 @@ export default function Layout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="flex flex-col min-h-screen">
-        {children}
+        <RootProvider>{children}</RootProvider>
       </body>
     </html>
   );

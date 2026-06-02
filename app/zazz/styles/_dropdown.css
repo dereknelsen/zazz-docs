@@ -1,13 +1,14 @@
-:where(.dropdown) {
+@layer components {
+  :where(.dropdown) {
     anchor-scope: --dropdown-trigger;
     display: inline-block;
-}
+  }
 
-:where(.dropdown > [popovertarget]) {
+  :where(.dropdown > [popovertarget]) {
     anchor-name: --dropdown-trigger;
-}
+  }
 
-:where(.dropdown__popover) {
+  :where(.dropdown__popover) {
     position-anchor: --dropdown-trigger;
     --popover-background: var(--card);
     --popover-foreground: var(--card-foreground);
@@ -27,104 +28,113 @@
     box-shadow: var(--popover-shadow);
     padding: var(--popover-padding);
     z-index: var(--popover-z-index);
-}
+  }
 
-:where(.dropdown__popover .button) {
-    --button-radius: var(--radius-xs)
-}
+  :where(.dropdown__popover .button) {
+    --button-radius: var(--radius-sm);
+  }
 
-/* ===========================================================================
-POSITIONING — side × align (row/block first, column/inline second per MDN)
-=========================================================================== */
+  /* ===========================================================================
+  POSITIONING — side × align (row/block first, column/inline second per MDN)
+  =========================================================================== */
 
-/* bottom */
-:where(.dropdown__popover[data-side="bottom"]:not([data-align])),
-:where(.dropdown__popover[data-side="bottom"][data-align="start"]) {
-  --popover-position-area: block-end span-inline-end;
-  --popover-origin: bottom center;
-  --popover-margin-block: var(--step-1_5);
-  --popover-margin-inline: 0;
-}
+  /* bottom */
+  :where(
+    .dropdown__popover[data-side="bottom"]:not([data-align]),
+    .dropdown__popover[data-side="bottom"][data-align="start"]
+  ) {
+    --popover-position-area: block-end span-inline-end;
+    --popover-origin: bottom center;
+    --popover-margin-block: var(--step-1_5);
+    --popover-margin-inline: 0;
+  }
 
-:where(.dropdown__popover[data-side="bottom"][data-align="center"]) {
-  --popover-position-area: block-end span-all;
-  --popover-origin: bottom center;
-  --popover-margin-block: var(--step-1_5);
-  --popover-margin-inline: 0;
-}
+  :where(.dropdown__popover[data-side="bottom"][data-align="center"]) {
+    --popover-position-area: block-end span-all;
+    --popover-origin: bottom center;
+    --popover-margin-block: var(--step-1_5);
+    --popover-margin-inline: 0;
+  }
 
-:where(.dropdown__popover[data-side="bottom"][data-align="end"]) {
-  --popover-position-area: block-end span-inline-start;
-  --popover-origin: bottom center;
-  --popover-margin-block: var(--step-1_5);
-  --popover-margin-inline: 0;
-}
+  :where(.dropdown__popover[data-side="bottom"][data-align="end"]) {
+    --popover-position-area: block-end span-inline-start;
+    --popover-origin: bottom center;
+    --popover-margin-block: var(--step-1_5);
+    --popover-margin-inline: 0;
+  }
 
-/* top */
-:where(.dropdown__popover[data-side="top"]:not([data-align])),
-:where(.dropdown__popover[data-side="top"][data-align="start"]) {
-  --popover-position-area: block-start span-inline-end;
-  --popover-origin: top center;
-  --popover-margin-block: var(--step-1_5);
-  --popover-margin-inline: 0;
-}
+  /* top */
+  :where(
+    .dropdown__popover[data-side="top"]:not([data-align]),
+    .dropdown__popover[data-side="top"][data-align="start"]
+  ) {
+    --popover-position-area: block-start span-inline-end;
+    --popover-origin: top center;
+    --popover-margin-block: var(--step-1_5);
+    --popover-margin-inline: 0;
+  }
 
-:where(.dropdown__popover[data-side="top"][data-align="center"]) {
-  --popover-position-area: block-start span-all;
-  --popover-origin: top center;
-  --popover-margin-block: var(--step-1_5);
-  --popover-margin-inline: 0;
-}
+  :where(.dropdown__popover[data-side="top"][data-align="center"]) {
+    --popover-position-area: block-start span-all;
+    --popover-origin: top center;
+    --popover-margin-block: var(--step-1_5);
+    --popover-margin-inline: 0;
+  }
 
-:where(.dropdown__popover[data-side="top"][data-align="end"]) {
-  --popover-position-area: block-start span-inline-start;
-  --popover-origin: top center;
-  --popover-margin-block: var(--step-1_5);
-  --popover-margin-inline: 0;
-}
+  :where(.dropdown__popover[data-side="top"][data-align="end"]) {
+    --popover-position-area: block-start span-inline-start;
+    --popover-origin: top center;
+    --popover-margin-block: var(--step-1_5);
+    --popover-margin-inline: 0;
+  }
 
-/* right */
-:where(.dropdown__popover[data-side="right"]:not([data-align])),
-:where(.dropdown__popover[data-side="right"][data-align="start"]) {
-  --popover-position-area: inline-end span-block-end;
-  --popover-origin: top left;
-  --popover-margin-block: 0;
-  --popover-margin-inline: var(--step-1_5);
-}
+  /* right */
+  :where(
+    .dropdown__popover[data-side="right"]:not([data-align]),
+    .dropdown__popover[data-side="right"][data-align="start"]
+  ) {
+    --popover-position-area: inline-end span-block-end;
+    --popover-origin: top left;
+    --popover-margin-block: 0;
+    --popover-margin-inline: var(--step-1_5);
+  }
 
-:where(.dropdown__popover[data-side="right"][data-align="center"]) {
-  --popover-position-area: inline-end span-all;
-  --popover-origin: center left;
-  --popover-margin-block: 0;
-  --popover-margin-inline: var(--step-1_5);
-}
+  :where(.dropdown__popover[data-side="right"][data-align="center"]) {
+    --popover-position-area: inline-end span-all;
+    --popover-origin: center left;
+    --popover-margin-block: 0;
+    --popover-margin-inline: var(--step-1_5);
+  }
 
-:where(.dropdown__popover[data-side="right"][data-align="end"]) {
-  --popover-position-area: inline-end span-block-start;
-  --popover-origin: bottom left;
-  --popover-margin-block: 0;
-  --popover-margin-inline: var(--step-1_5);
-}
+  :where(.dropdown__popover[data-side="right"][data-align="end"]) {
+    --popover-position-area: inline-end span-block-start;
+    --popover-origin: bottom left;
+    --popover-margin-block: 0;
+    --popover-margin-inline: var(--step-1_5);
+  }
 
-/* left */
-:where(.dropdown__popover[data-side="left"]:not([data-align])),
-:where(.dropdown__popover[data-side="left"][data-align="start"]) {
-  --popover-position-area: inline-start span-block-end;
-  --popover-origin: top right;
-  --popover-margin-block: 0;
-  --popover-margin-inline: var(--step-1_5);
-}
+  /* left */
+  :where(
+    .dropdown__popover[data-side="left"]:not([data-align]),
+    .dropdown__popover[data-side="left"][data-align="start"]
+  ) {
+    --popover-position-area: inline-start span-block-end;
+    --popover-origin: top right;
+    --popover-margin-block: 0;
+    --popover-margin-inline: var(--step-1_5);
+  }
 
-:where(.dropdown__popover[data-side="left"][data-align="center"]) {
-  --popover-position-area: inline-start span-all;
-  --popover-origin: center right;
-  --popover-margin-block: 0;
-  --popover-margin-inline: var(--step-1_5);
-}
+  :where(.dropdown__popover[data-side="left"][data-align="center"]) {
+    --popover-position-area: inline-start span-all;
+    --popover-origin: center right;
+    --popover-margin-block: 0;
+    --popover-margin-inline: var(--step-1_5);
+  }
 
-:where(.dropdown__popover[data-side="left"][data-align="end"]) {
-  --popover-position-area: inline-start span-block-start;
-  --popover-origin: bottom right;
-  --popover-margin-block: 0;
-  --popover-margin-inline: var(--step-1_5);
+  :where(.dropdown__popover[data-side="left"][data-align="end"]) {
+    --popover-position-area: inline-start span-block-start;
+    --popover-origin: bottom right;
+    --popover-margin-block: 0;
+    --popover-margin-inline: var(--step-1_5);
+  }
 }

@@ -1,0 +1,41 @@
+@layer components {
+  /* ===========================================================================
+  TEXTAREA — .textarea (auto-sizing)
+  - field-sizing: content grows the box with the text; height clamps between
+    5 and 12 lines, then scrolls.
+  - Shares the --field-* tokens defined in _form.css so it matches .input /
+    .select / .button.
+  =========================================================================== */
+
+  :where(.textarea) {
+    field-sizing: content;
+    inline-size: 100%;
+    min-inline-size: 0;
+    min-block-size: 5lh;
+    max-block-size: 12lh;
+    padding: var(--field-padding);
+
+    font-size: var(--font-size-sm);
+    line-height: var(--leading-sm);
+    color: var(--field-foreground);
+    background-color: var(--field-background);
+
+    border: 1px solid var(--field-border);
+    border-radius: var(--field-radius);
+    resize: vertical;
+
+    outline: var(--ring-size) var(--ring-style) oklch(from var(--ring) l c h / 0);
+    outline-offset: var(--ring-offset);
+
+    transition: var(--default-transition);
+  }
+
+  :where(.textarea:hover) {
+    border-color: var(--field-border--hover);
+  }
+
+  :where(.textarea:focus-visible) {
+    border-color: var(--field-border--focus);
+    outline-color: var(--ring);
+  }
+}

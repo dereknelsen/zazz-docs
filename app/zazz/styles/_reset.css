@@ -1,556 +1,603 @@
-/* =============================================================================
-UNIVERSAL RESET — box model, margins, padding, borders
-============================================================================= */
+@layer reset {
+  /* ===========================================================================
+  UNIVERSAL RESET — box model, margins, padding, borders
+  =========================================================================== */
 
-:where(*),
-:where(::before),
-:where(::after),
-:where(::backdrop),
-:where(::file-selector-button) {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  border: 0 solid;
-}
+  :where(*, ::before, ::after, ::backdrop, ::file-selector-button) {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
 
-/* =============================================================================
-BASE ELEMENT RESETS
-============================================================================= */
+  /* ===========================================================================
+  BASE ELEMENT RESETS
+  =========================================================================== */
 
-:where(html) {
-  font-family: var(--font-body, sans-serif);
-  font-size: 16px;
-  line-height: 1.5;
-  tab-size: 4;
-  -webkit-text-size-adjust: 100%;
-  background-color: var(--background);
-  -webkit-tap-highlight-color: transparent;
-  overflow: clip;
-}
+  :where(html) {
+    font-family: var(--font-body, sans-serif);
+    font-size: 16px;
+    line-height: 1.5;
+    tab-size: 4;
+    -webkit-text-size-adjust: 100%;
+    background-color: var(--background);
+    -webkit-tap-highlight-color: transparent;
+    overflow: clip;
+  }
 
-:where(:host) {
-  line-height: 1.5;
-  tab-size: 4;
-  -webkit-text-size-adjust: 100%;
-}
+  :where(:host) {
+    line-height: 1.5;
+    tab-size: 4;
+    -webkit-text-size-adjust: 100%;
+  }
 
-:where(body) {
-  display: grid;
-  font-optical-sizing: auto;
-  -webkit-text-size-adjust: 100%;
-  text-rendering: optimizeLegibility;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  text-wrap: pretty;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background-color: var(--background);
-  block-size: 100svh;
-  inline-size: 100vi;
-  overflow-x: clip;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-}
+  :where(body) {
+    display: grid;
+    font-optical-sizing: auto;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-wrap: pretty;
+    display: flex;
+    flex-direction: column;
+    color: var(--foreground);
+    background-color: var(--background);
+    block-size: 100svh;
+    inline-size: 100vi;
+    overflow-x: clip;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+  }
 
-:where(:focus-visible) {
-  outline: var(--ring-size) var(--ring-style) var(--ring);
-  outline-offset: var(--ring-offset);
-}
+  :where(:focus-visible) {
+    outline: var(--ring-size) var(--ring-style) var(--ring);
+    outline-offset: var(--ring-offset);
+  }
 
-:where(b),
-:where(strong) {
-  font-weight: var(--weight-strong);
-}
+  :where(b, strong) {
+    font-weight: var(--weight-strong);
+  }
 
-:where(main) {
-  /* Allow for more predictable z-indexing and spacing */
-  display: flex;
-  z-index: isolate;
-  position: relative;
-  flex-direction: column;
+  :where(main) {
+    /* Allow for more predictable z-indexing and spacing */
+    display: flex;
+    z-index: isolate;
+    position: relative;
+    flex-direction: column;
 
-  /* Prevent floating footers */
-  min-height: 100svh;
-}
+    /* Prevent floating footers */
+    min-height: 100svh;
+  }
 
-:where(header),
-:where(footer),
-:where(section),
-:where(article) {
-  /* Allow for more predictable z-indexing */
-  position: relative;
-}
+  :where(header, footer, section, article) {
+    /* Allow for more predictable z-indexing */
+    position: relative;
+    container-type: inline-size;
+    container-name: section;
+  }
 
-:where(pre) {
-  margin: unset;
-}
+  :where(pre) {
+    margin: unset;
+  }
 
-:where(a) {
-  color: unset;
-  background-color: unset;
-  -webkit-text-decoration: inherit;
-  text-decoration: inherit;
-}
+  :where(a) {
+    color: unset;
+    background-color: unset;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
 
-/* =============================================================================
-TYPOGRAPHY & SEMANTIC ELEMENTS
-============================================================================= */
+  /* ===========================================================================
+  TYPOGRAPHY & SEMANTIC ELEMENTS
+  =========================================================================== */
 
-/* Headings inherit by default — utility classes (.text-h1, etc.) drive size/weight */
-:where(h1),
-:where(h2),
-:where(h3),
-:where(h4),
-:where(h5),
-:where(h6) {
-  font-size: inherit;
-  font-weight: inherit;
-}
+  /* Headings inherit by default — utility classes (.text-h1, etc.) drive size/weight */
+  :where(h1, h2, h3, h4, h5, h6) {
+    font-size: inherit;
+    font-weight: inherit;
+  }
 
-:where(small) {
-  font-size: 80%;
-}
+  :where(small) {
+    font-size: 80%;
+  }
 
-:where(sub),
-:where(sup) {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
+  :where(sub, sup) {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
 
-:where(sub) {
-  bottom: -0.25em;
-}
+  :where(sub) {
+    bottom: -0.25em;
+  }
 
-:where(sup) {
-  top: -0.5em;
-}
+  :where(sup) {
+    top: -0.5em;
+  }
 
-:where(abbr:where([title])) {
-  -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
-}
+  :where(abbr:where([title])) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
 
-:where(hr) {
-  block-size: 0;
-  color: var(--border);
-  border-top-width: 1px;
-}
+  :where(hr) {
+    block-size: 0;
+    color: var(--border);
+    border-top-width: 1px;
+  }
 
-:where(code),
-:where(kbd),
-:where(samp),
-:where(pre) {
-  font-family: var(--font-mono);
-  font-size: 1em;
-}
+  :where(code, samp, pre) {
+    font-family: var(--font-mono);
+    font-size: 1em;
+  }
 
-:where(code) {
-  --code-display: inline;
-  --code-background: var(--muted);
-  --code-border: var(--muted);
-  --code-padding-inline: 0.25em;
-  --code-padding-block: 0em;
-  --code-radius: var(--radius-xs);
-  --code-color: var(--foreground);
+  :where(code) {
+    --code-display: inline;
+    --code-background: var(--muted);
+    --code-border: 1px solid var(--muted);
+    --code-padding-inline: var(--step-1);
+    --code-padding-block: 0em;
+    --code-radius: var(--radius-xs);
+    --code-color: var(--foreground);
 
-  display: var(--code-display);
-  background-color: var(--code-background);
-  padding-inline: var(--code-padding-inline);
-  padding-block: var(--code-padding-block);
-  border: 1px solid var(--code-border);
-  border-radius: var(--code-radius);
-  color: var(--code-color);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-}
+    display: var(--code-display);
+    background-color: var(--code-background);
+    padding-inline: var(--code-padding-inline);
+    padding-block: var(--code-padding-block);
+    border: var(--code-border);
+    border-radius: var(--code-radius);
+    color: var(--code-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-inline-size: 100%;
+  }
 
-/* =============================================================================
-LIST RESETS
-============================================================================= */
+  :where(kbd) {
+    --kbd-font-family: var(--font-body);
+    --kbd-font-size: var(--font-size-sm);
+    --kbd-line-height: 1;
+    --kbd-display: inline-flex;
+    --kbd-align-items: center;
+    --kbd-justify-content: center;
+    --kbd-background: var(--muted);
+    --kbd-border: 1px solid transparent;
+    --kbd-padding-inline: 0;
+    --kbd-padding-block: 0;
+    --kbd-radius: var(--radius-xs);
+    --kbd-color: var(--muted-foreground);
+    --kbd-inline-size: var(--step-5);
+    --kbd-block-size: var(--step-5);
+    --kbd-icon-size: var(--step-3_5);
+    --kbd-gap: var(--step-1);
 
-:where(ol),
-:where(ul),
-:where(menu) {
-  list-style: none;
-}
+    font-family: var(--kbd-font-family);
+    font-size: var(--kbd-font-size);
+    line-height: var(--kbd-line-height);
+    display: var(--kbd-display);
+    align-items: var(--kbd-align-items);
+    justify-content: var(--kbd-justify-content);
+    gap: var(--kbd-gap);
+    background-color: var(--kbd-background);
+    padding-inline: var(--kbd-padding-inline);
+    padding-block: var(--kbd-padding-block);
+    border: var(--kbd-border);
+    border-radius: var(--kbd-radius);
+    color: var(--kbd-color);
+    overflow: hidden;
+    block-size: var(--kbd-block-size);
+    min-inline-size: var(--kbd-inline-size);
+    inline-size: fit-content;
+    text-box: trim-both ex alphabetic;
+  }
 
-/* =============================================================================
-TABLE RESETS
-============================================================================= */
+  :where(kbd > svg) {
+    inline-size: var(--kbd-icon-size);
+    block-size: var(--kbd-icon-size);
+  }
 
-:where(table) {
-  text-indent: 0;
-  border-color: inherit;
-  border-collapse: collapse;
-}
+  /* ===========================================================================
+  LIST RESETS
+  =========================================================================== */
 
-/* =============================================================================
-MEDIA RESETS
-============================================================================= */
+  :where(ol, ul, menu) {
+    list-style: none;
+  }
 
-:where(img),
-:where(svg),
-:where(video),
-:where(canvas),
-:where(audio),
-:where(iframe),
-:where(embed),
-:where(object) {
-  display: block;
-  vertical-align: middle;
-}
+  /* ===========================================================================
+  TABLE RESETS
+  =========================================================================== */
 
-:where(img),
-:where(video) {
-  max-inline-size: 100%;
-  block-size: auto;
-}
+  :where(table) {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
 
-/* Custom text selection styling */
-::selection {
-  /* Ensure text is always legible on the primary color at 30% opacity + the background color */
-  color: contrast-color(
-    color-mix(in oklab, var(--background) 50%, oklch(from var(--primary) calc(l + 0.1) c h / 0.3))
-  );
-  background-color: oklch(from var(--primary) calc(l + 0.1) c h / 0.3);
-}
+  /* ===========================================================================
+  MEDIA RESETS
+  =========================================================================== */
 
-/* =============================================================================
-FORM ELEMENT RESETS
-============================================================================= */
+  :where(img, svg, video, canvas, audio, iframe, embed, object) {
+    display: block;
+  }
 
-/* Inherit font and color across all form controls */
-:where(button),
-:where(input),
-:where(optgroup),
-:where(select),
-:where(textarea),
-::file-selector-button {
-  font: inherit;
-  font-feature-settings: inherit;
-  font-variation-settings: inherit;
-  letter-spacing: inherit;
-  color: inherit;
-}
+  :where(img, svg, video, canvas, audio, iframe, embed, object) {
+    vertical-align: middle;
+  }
 
-/* Preflight compatibility — cross-browser form baselines */
-:where(button),
-:where(input),
-:where(select),
-:where(textarea),
-::file-selector-button {
-  border-radius: 0;
-  background-color: transparent;
-  opacity: 1;
-}
+  :where(img, video) {
+    max-inline-size: 100%;
+    block-size: auto;
+  }
 
-:where(button),
-:where(input:where([type="button"], [type="reset"], [type="submit"])),
-::file-selector-button {
-  appearance: button;
-}
+  /* Custom text selection styling */
+  ::selection {
+    /* Ensure text is always legible on the primary color at 30% opacity + the background color */
+    color: contrast-color(
+      color-mix(in oklab, var(--background) 50%, oklch(from var(--primary) calc(l + 0.1) c h / 0.3))
+    );
+    background-color: oklch(from var(--primary) calc(l + 0.1) c h / 0.3);
+  }
 
-::file-selector-button {
-  margin-inline-end: 4px;
-}
+  /* ===========================================================================
+  FORM ELEMENT RESETS
+  =========================================================================== */
 
-:where(select:is([multiple], [size])) optgroup {
-  font-weight: bolder;
-}
+  /* Inherit font and color across all form controls */
+  :where(button, input, optgroup, select, textarea),
+  ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    padding: unset;
+  }
 
-:where(select:is([multiple], [size])) optgroup option {
-  padding-inline-start: 20px;
-}
+  /* Preflight compatibility — cross-browser form baselines */
+  :where(button, input, select, textarea),
+  ::file-selector-button {
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
 
-:-moz-ui-invalid {
-  box-shadow: none;
-}
+  :where(button, input:where([type="button"], [type="reset"], [type="submit"])),
+  ::file-selector-button {
+    appearance: button;
+  }
 
-::-webkit-inner-spin-button,
-::-webkit-outer-spin-button {
-  height: auto;
-}
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
 
-::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
 
-::-webkit-date-and-time-value {
-  min-height: 1lh;
-  text-align: inherit;
-}
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
 
-::-webkit-datetime-edit {
-  display: inline-flex;
-}
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
 
-::-webkit-datetime-edit-fields-wrapper {
-  padding: 0;
-}
+  ::-webkit-inner-spin-button,
+  ::-webkit-outer-spin-button {
+    height: auto;
+  }
 
-::-webkit-datetime-edit,
-::-webkit-datetime-edit-year-field,
-::-webkit-datetime-edit-month-field,
-::-webkit-datetime-edit-day-field,
-::-webkit-datetime-edit-hour-field,
-::-webkit-datetime-edit-minute-field,
-::-webkit-datetime-edit-second-field,
-::-webkit-datetime-edit-millisecond-field,
-::-webkit-datetime-edit-meridiem-field {
-  padding-block: 0;
-}
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
 
-::-webkit-calendar-picker-indicator {
-  line-height: 1;
-}
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
 
-/* Input field resets */
-:where(textarea),
-:where(input) {
-  font-size: unset;
-  block-size: unset;
-  padding: unset;
-  margin-bottom: unset;
-  line-height: unset;
-  background-color: unset;
-  border: unset;
-}
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
 
-:where(textarea) {
-  resize: vertical;
-}
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
 
-::placeholder {
-  opacity: 1;
-}
+  ::-webkit-datetime-edit,
+  ::-webkit-datetime-edit-year-field,
+  ::-webkit-datetime-edit-month-field,
+  ::-webkit-datetime-edit-day-field,
+  ::-webkit-datetime-edit-hour-field,
+  ::-webkit-datetime-edit-minute-field,
+  ::-webkit-datetime-edit-second-field,
+  ::-webkit-datetime-edit-millisecond-field,
+  ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
 
-@supports (not (-webkit-appearance: -apple-pay-button)) or (contain-intrinsic-size: 1px) {
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+
+  /* Input field resets */
+  :where(textarea, input) {
+    font-size: unset;
+    block-size: unset;
+    padding: unset;
+    margin-bottom: unset;
+    line-height: unset;
+    background-color: unset;
+    border: unset;
+  }
+
+  :where(textarea) {
+    resize: vertical;
+  }
+
   ::placeholder {
-    color: color-mix(in oklab, currentcolor 50%, transparent);
+    opacity: 1;
   }
-}
 
-/* Range input styling */
-:where(input[type="range"]) {
-  -webkit-appearance: none;
-  appearance: none;
-  inline-size: 100%;
-}
-
-:where(input[type="range"])::-webkit-slider-runnable-track {
-  block-size: 0.5rem;
-  inline-size: 100%;
-  background: var(--muted);
-  border: 1px solid var(--muted);
-  border-radius: var(--radius-full);
-}
-
-:where(input[type="range"])::-moz-range-track {
-  block-size: 0.5rem;
-  inline-size: 100%;
-  background: var(--muted);
-  border-radius: var(--radius-full);
-}
-
-:where(input[type="range"])::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  margin-top: -0.25rem;
-  inline-size: 0.875rem;
-  block-size: 0.875rem;
-  background-color: var(--background);
-  border-radius: var(--radius-full);
-  border: 1px solid var(--primary);
-}
-
-:where(input[type="range"])::-moz-range-thumb {
-  appearance: none;
-  margin-top: -0.25rem;
-  inline-size: 0.875rem;
-  block-size: 0.875rem;
-  background-color: var(--background);
-  border-radius: var(--radius-full);
-  border: 1px solid var(--primary);
-}
-
-/* Select dropdown styling with custom chevron icon */
-:where(select) {
-  font-size: unset;
-  padding: unset;
-  margin: unset;
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  background-repeat: no-repeat;
-  background-position: right 0.5rem center;
-  /* Custom chevron up-down icon for select dropdowns */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='1.5' viewBox='0 0 24 24'%3E%3Cpath d='m7 15 5 5 5-5M7 9l5-5 5 5'/%3E%3C/svg%3E");
-}
-
-/* Allow customized select options */
-:where(select),
-::picker(select) {
-  appearance: base-select;
-  padding: unset;
-  margin: unset;
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  background-repeat: no-repeat;
-}
-
-:where(select::picker) {
-  display: none;
-}
-
-/* Button resets */
-:where(button) {
-  color: unset;
-  padding: unset;
-  text-align: inherit;
-  background-color: unset;
-}
-
-/* =============================================================================
-NATIVE DIALOG ELEMENT ENHANCEMENTS
-============================================================================= */
-
-/* Prevent body scroll when a dialog inside the preview is open */
-:where(html:has(dialog[open] body)) {
-  scrollbar-gutter: stable both-edges;
-}
-
-/* Dialog animations with spring easing */
-:where(dialog) {
-  --dialog-starting-scale: 0.98;
-  --dialog-starting-translate: 0, 0, 0;
-  --dialog-starting-backdrop-color: var(--shade-none);
-  --dialog-scale: 1;
-  --dialog-translate: 0 0 0;
-  --dialog-backdrop-color: var(--shade-800);
-
-  margin: auto;
-  max-inline-size: calc(100% - var(--gap-md));
-  max-block-size: calc(100% - var(--gap-md));
-  contain: layout style;
-  opacity: 0;
-  transform: translate3d(var(--dialog-starting-translate)) scale(var(--dialog-starting-scale));
-  transition:
-    opacity var(--default-transition-duration) var(--default-transition-timing-function),
-    transform var(--default-transition-duration) var(--default-transition-timing-function),
-    overlay var(--default-transition-duration) var(--default-transition-timing-function)
-      allow-discrete,
-    display var(--default-transition-duration) var(--default-transition-timing-function)
-      allow-discrete;
-}
-
-:where([popover]) {
-  --popover-starting-scale: 0.98;
-  --popover-scale: 1;
-  --popover-origin: bottom center;
-  --popover-margin-block: var(--step-1_5);
-  --popover-margin-inline: 0;
-  --popover-position-area: block-end inline-start;
-  --popover-position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
-
-  margin-block: var(--popover-margin-block);
-  margin-inline: var(--popover-margin-inline);
-  inset: auto;
-  position: fixed;
-  position-area: var(--popover-position-area);
-  position-try-fallbacks: var(--popover-position-try-fallbacks);
-  transform-origin: var(--popover-origin);
-  opacity: 0;
-  transform: scale(var(--popover-starting-scale));
-  transition:
-    opacity var(--default-transition-duration) var(--default-transition-timing-function),
-    transform var(--default-transition-duration) var(--default-transition-timing-function),
-    overlay var(--default-transition-duration) var(--default-transition-timing-function)
-      allow-discrete,
-    display var(--default-transition-duration) var(--default-transition-timing-function)
-      allow-discrete;
-}
-
-:where(dialog[open]) {
-  display: grid;
-  opacity: 1;
-  transform: scale(var(--dialog-scale));
-
-  @starting-style {
-    opacity: 0;
-    transform: scale(var(--dialog-starting-scale));
+  @supports (not (-webkit-appearance: -apple-pay-button)) or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: color-mix(in oklab, currentcolor 50%, transparent);
+    }
   }
-}
 
-:where([popover]:popover-open) {
-  display: grid;
-  opacity: 1;
-  transform: scale(var(--popover-scale));
+  /* Range input styling */
+  :where(input[type="range"]) {
+    -webkit-appearance: none;
+    appearance: none;
+    inline-size: 100%;
+  }
 
-  @starting-style {
+  :where(input[type="range"])::-webkit-slider-runnable-track {
+    block-size: 0.5rem;
+    inline-size: 100%;
+    background: var(--muted);
+    border: 1px solid var(--muted);
+    border-radius: var(--radius-full);
+  }
+
+  :where(input[type="range"])::-moz-range-track {
+    block-size: 0.5rem;
+    inline-size: 100%;
+    background: var(--muted);
+    border-radius: var(--radius-full);
+  }
+
+  :where(input[type="range"])::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -0.25rem;
+    inline-size: 0.875rem;
+    block-size: 0.875rem;
+    background-color: var(--background);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--primary);
+  }
+
+  :where(input[type="range"])::-moz-range-thumb {
+    appearance: none;
+    margin-top: -0.25rem;
+    inline-size: 0.875rem;
+    block-size: 0.875rem;
+    background-color: var(--background);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--primary);
+  }
+
+  /* Checkbox — appearance: none redraws the native control from theme tokens.
+     Checked/indeterminate fill with --primary and layer a glyph (never colour alone). */
+  :where(input[type="checkbox"]:not([role="switch"])) {
+    --checkbox-size: var(--step-4_5);
+    --checkbox-background: var(--input);
+    --checkbox-border: var(--border);
+    --checkbox-border-hover: var(--primary);
+    --checkbox-background-checked: var(--primary);
+    --checkbox-border-checked: var(--primary);
+    --checkbox-radius: var(--radius-xs);
+    --checkbox-icon-size: 90%;
+    /* @see https://www.svgbackgrounds.com/tools/svg-to-css/
+    ** Set to Legacy / URL Wrapper to update icon */
+    --checkbox-checkmark-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'/%3E%3Cpolyline points='40 144 96 200 224 72' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3C/svg%3E");
+    --checkbox-indeterminate-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'/%3E%3Cline x1='40' y1='128' x2='216' y2='128' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3C/svg%3E");
+
+    appearance: none;
+    flex-shrink: 0;
+    inline-size: var(--checkbox-size);
+    block-size: var(--checkbox-size);
+
+    background-color: var(--checkbox-background);
+    border: 1px solid var(--checkbox-border);
+    border-radius: var(--checkbox-radius);
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: var(--checkbox-icon-size);
+
+    cursor: pointer;
+
+    outline: var(--ring-size) var(--ring-style) oklch(from var(--ring) l c h / 0);
+    outline-offset: var(--ring-offset);
+
+    transition: var(--default-transition);
+  }
+
+  :where(input[type="checkbox"]:not([role="switch"]):hover) {
+    border-color: var(--checkbox-border-hover);
+  }
+
+  :where(input[type="checkbox"]:not([role="switch"]):focus-visible) {
+    outline-color: var(--ring);
+  }
+
+  :where(
+    input[type="checkbox"]:not([role="switch"]):checked,
+    input[type="checkbox"]:not([role="switch"]):indeterminate
+  ) {
+    background-color: var(--checkbox-background-checked);
+    border-color: var(--checkbox-border-checked);
+  }
+
+  :where(input[type="checkbox"]:not([role="switch"]):checked) {
+    background-image: var(--checkbox-checkmark-mask);
+  }
+
+  :where(input[type="checkbox"]:not([role="switch"]):indeterminate) {
+    background-image: var(--checkbox-indeterminate-mask);
+  }
+
+  /* Switch — pill track with a sliding knob via radial-gradient background-position.
+     No pseudo-elements (unreliable on replaced inputs). */
+  :where(input[role="switch"]) {
+    --switch-track-width: var(--step-9);
+    --switch-track-height: var(--step-5);
+    --switch-thumb: var(--white);
+    --switch-thumb-size: var(--step-5);
+    --switch-track-background: var(--muted);
+    --switch-track-background-hover: oklch(from var(--muted) l c h / calc(alpha + 0.04));
+    --switch-track-background-checked: var(--primary);
+    --switch-track-background-checked-hover: oklch(from var(--primary) l c h / 0.9);
+    --switch-radius: var(--radius-full);
+
+    appearance: none;
+    flex-shrink: 0;
+    inline-size: var(--switch-track-width);
+    block-size: var(--switch-track-height);
+
+    background-color: var(--switch-track-background);
+    background-image: radial-gradient(circle, var(--switch-thumb) 0 40%, transparent 42%);
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: var(--switch-thumb-size) 100%;
+
+    border-radius: var(--switch-radius);
+    cursor: pointer;
+
+    outline: var(--ring-size) var(--ring-style) oklch(from var(--ring) l c h / 0);
+    outline-offset: var(--ring-offset);
+
+    transition:
+      var(--default-transition),
+      background-position var(--default-transition-duration)
+        var(--default-transition-timing-function);
+  }
+
+  :where(input[role="switch"]:hover) {
+    background-color: var(--switch-track-background-hover);
+  }
+
+  :where(input[role="switch"]:checked) {
+    background-color: var(--switch-track-background-checked);
+    background-position: right center;
+  }
+
+  :where(input[role="switch"]:hover:checked) {
+    background-color: var(--switch-track-background-checked-hover);
+  }
+
+  :where(input[role="switch"]:focus-visible) {
+    outline-color: var(--ring);
+  }
+
+  :where(select) {
+    font-size: unset;
+    padding: unset;
+    margin: unset;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-repeat: no-repeat;
+    background-position: right center;
+  }
+
+  /* Allow customized select options */
+  :where(select),
+  ::picker(select) {
+    appearance: base-select;
+    padding: unset;
+    margin: unset;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-repeat: no-repeat;
+  }
+
+  /* Native <select> internals (::picker panel, <option>, ::picker-icon) live in
+     _select.css under @layer reset to keep the select styling modular. */
+
+  /* Button resets */
+  :where(button) {
+    color: unset;
+    padding: unset;
+    text-align: inherit;
+    background-color: unset;
+  }
+
+  /* ===========================================================================
+  POPOVER ELEMENT ENHANCEMENTS
+  - [popover] is a shared primitive (dropdown, navigation-menu, …) with no single
+  component owner, so its base styling stays here. Native <dialog> base styling
+  lives in _dialog.css under @layer reset.
+  =========================================================================== */
+
+  :where([popover]) {
+    --popover-starting-scale: 0.98;
+    --popover-scale: 1;
+    --popover-origin: bottom center;
+    --popover-margin-block: var(--step-1_5);
+    --popover-margin-inline: 0;
+    --popover-position-area: block-end inline-start;
+    --popover-position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
+
+    margin-block: var(--popover-margin-block);
+    margin-inline: var(--popover-margin-inline);
+    inset: auto;
+    position: fixed;
+    position-area: var(--popover-position-area);
+    position-try-fallbacks: var(--popover-position-try-fallbacks);
+    transform-origin: var(--popover-origin);
     opacity: 0;
     transform: scale(var(--popover-starting-scale));
+    transition:
+      opacity var(--default-transition-duration) var(--default-transition-timing-function),
+      transform var(--default-transition-duration) var(--default-transition-timing-function),
+      overlay var(--default-transition-duration) var(--default-transition-timing-function)
+        allow-discrete,
+      display var(--default-transition-duration) var(--default-transition-timing-function)
+        allow-discrete;
   }
-}
 
-/* Dialog backdrop with smooth fade transition */
-:where(dialog)::backdrop {
-  background-color: var(--dialog-starting-backdrop-color);
-  transition: background-color var(--default-transition-duration)
-    var(--default-transition-timing-function);
-}
+  :where([popover]:popover-open) {
+    display: grid;
+    opacity: 1;
+    transform: scale(var(--popover-scale));
 
-:where(dialog[open])::backdrop {
-  background-color: var(--dialog-backdrop-color);
-
-  @starting-style {
-    background-color: var(--dialog-starting-backdrop-color);
+    @starting-style {
+      opacity: 0;
+      transform: scale(var(--popover-starting-scale));
+    }
   }
-}
 
-/* =============================================================================
-DETAILS & SUMMARY (ACCORDIONS)
-============================================================================= */
+  /* ===========================================================================
+  BROWSER NORMALIZATION
+  =========================================================================== */
 
-:where(details)::details-content {
-  block-size: 0;
-  overflow: hidden;
-  transition:
-    opacity var(--default-transition-duration) var(--default-transition-timing-function),
-    transform var(--default-transition-duration) var(--default-transition-timing-function),
-    block-size var(--default-transition-duration) var(--default-transition-timing-function),
-    content-visibility var(--default-transition-duration) var(--default-transition-timing-function)
-      allow-discrete;
-}
+  :where(progress) {
+    vertical-align: baseline;
+  }
 
-:where(details[open])::details-content {
-  block-size: auto;
-}
+  /* ===========================================================================
+  MISCELLANEOUS RESETS
+  =========================================================================== */
 
-:where(summary) {
-  display: flex;
-  text-decoration: none;
-  user-select: none;
-  list-style: none;
-}
-
-/* =============================================================================
-BROWSER NORMALIZATION
-============================================================================= */
-
-:where(progress) {
-  vertical-align: baseline;
-}
-
-/* =============================================================================
-MISCELLANEOUS RESETS
-============================================================================= */
-
-:where([hidden]:where(:not([hidden="until-found"]))) {
-  display: none !important;
+  :where([hidden]:where(:not([hidden="until-found"]))) {
+    display: none !important;
+  }
 }

@@ -1,0 +1,138 @@
+@layer components {
+  /* ===========================================================================
+  INPUT GROUP — .input-group  (shadcn-style composition)
+  - A single bordered shell that fuses a text control with addons (icons, text,
+    kbd) and buttons. The nested control goes borderless/transparent so the group
+    reads as one field; :focus-within lifts the whole shell.
+  - Addons are placed AFTER the control in the markup (for predictable tab/focus
+    order) and positioned with data-align:
+      inline-start (default) · inline-end · block-start · block-end
+    block-* span the full width on their own row — that's how a textarea grows a
+    toolbar above or below it.
+  - Composition: .input-group > [.input | .textarea] + .input-group__addon
+    where an addon may hold .input-group__text, an <svg>, <kbd>, or .button.
+  - Shares the --field-* tokens (height, radius, surface) defined in _form.css.
+  =========================================================================== */
+
+  :where(.input-group) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--step-1);
+
+    inline-size: 100%;
+    min-block-size: var(--field-height);
+    padding: 0;
+
+    /* The shell is a <label>: clicking a non-interactive addon focuses the
+       nested control, so the whole field reads as one clickable target. */
+    cursor: text;
+
+    color: var(--field-foreground);
+    background-color: var(--field-background);
+    border: 1px solid var(--field-border);
+    border-radius: var(--field-radius);
+
+    outline: var(--ring-size) var(--ring-style) oklch(from var(--ring) l c h / 0);
+    outline-offset: var(--ring-offset);
+
+    transition: var(--default-transition);
+  }
+
+  :where(.input-group:hover) {
+    border-color: var(--field-border--hover);
+  }
+
+  :where(.input-group:focus-within) {
+    border-color: var(--field-border--focus);
+    outline-color: var(--ring);
+  }
+
+  /* Nested control sheds its own chrome and fills the row */
+  :where(.input-group .input, .input-group .textarea) {
+    flex: 1;
+    min-inline-size: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    outline: none;
+  }
+
+  :where(.input-group .input) {
+    block-size: 100%;
+    padding-inline: 0;
+  }
+
+  /* A textarea claims the full width; addons stack above/below via block-* */
+  :where(.input-group .textarea) {
+    flex-basis: 100%;
+    min-block-size: 3lh;
+    padding-inline: var(--step-2);
+    padding-block: var(--step-1_5);
+    resize: none;
+  }
+
+  /* Addon — groups icons, text, kbd, or buttons together */
+  :where(.input-group__addon) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    gap: var(--step-1);
+    color: var(--muted-foreground);
+    white-space: nowrap;
+    block-size: var(--field-height);
+    min-inline-size: var(--field-height);
+    padding-inline: var(--field-addon-padding);
+  }
+
+  :where(.input-group__addon > svg) {
+    inline-size: var(--field-icon-size);
+    block-size: var(--field-icon-size);
+  }
+
+  /* Alignment — inline-start is the default (addon visually leads the control) */
+  :where(.input-group__addon:not([data-align]), .input-group__addon[data-align="inline-start"]) {
+    order: -1;
+  }
+
+  :where(.input-group__addon[data-align="inline-end"]) {
+    order: 1;
+  }
+
+  :where(.input-group__addon[data-align="block-start"]) {
+    order: -2;
+    flex-basis: 100%;
+    padding-block: var(--field-addon-padding);
+    align-items: flex-start;
+  }
+
+  :where(.input-group__addon[data-align="block-end"]) {
+    order: 2;
+    flex-basis: 100%;
+    padding-block: var(--field-addon-padding);
+    align-items: flex-end;
+  }
+
+  /* Text addon — units, protocols, @handles ("https://", "USD", "@user") */
+  :where(.input-group__text) {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gap-xs);
+    padding-inline: var(--field-addon-padding);
+    font-size: var(--font-size-sm);
+    color: var(--muted-foreground);
+    min-inline-size: max-content;
+  }
+
+  :where(.input-group__text > svg) {
+    inline-size: var(--field-icon-size);
+    block-size: var(--field-icon-size);
+  }
+
+  /* Buttons embedded in a group shrink to nest cleanly inside the shell */
+  :where(.input-group .button) {
+    flex-shrink: 0;
+    border-radius: var(--field-button-radius);
+  }
+}

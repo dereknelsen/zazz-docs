@@ -1,0 +1,188 @@
+@layer reset {
+  /* ===========================================================================
+  SELECT — native <select> internals (::picker, <option>, ::picker-icon)
+  - In the reset layer so component overrides win; the plain appearance reset
+    stays in _reset.css.
+  =========================================================================== */
+
+  ::picker(select) {
+    --select-starting-scale: 0.98;
+    --select-scale: 1;
+
+    opacity: 0;
+    transform: scale(var(--select-starting-scale));
+
+    transition:
+      opacity var(--default-transition-duration) var(--default-transition-timing-function),
+      transform var(--default-transition-duration) var(--default-transition-timing-function),
+      overlay var(--default-transition-duration) var(--default-transition-timing-function)
+        allow-discrete,
+      display var(--default-transition-duration) var(--default-transition-timing-function)
+        allow-discrete;
+  }
+
+  :where(option) {
+    /* @see https://www.svgbackgrounds.com/tools/svg-to-css/
+    ** Set to Legacy / URL Wrapper to update icon */
+    --option-checkmark-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'/%3E%3Cpolyline points='40 144 96 200 224 72' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3C/svg%3E");
+    --option-checkmark-size: var(--step-4);
+    --option-checkmark-color: currentColor;
+  }
+
+  :where(option)::checkmark {
+    content: "";
+    inline-size: var(--option-checkmark-size);
+    block-size: var(--option-checkmark-size);
+    background-color: var(--option-checkmark-color);
+    mask: var(--option-checkmark-mask) center / contain no-repeat;
+  }
+
+  :where(select:open)::picker(select) {
+    opacity: 1;
+    transform: scale(var(--select-scale));
+
+    @starting-style {
+      opacity: 0;
+      transform: scale(var(--select-starting-scale));
+    }
+  }
+
+  :where(select)::picker-icon {
+    /* @see https://www.svgbackgrounds.com/tools/svg-to-css/
+    ** Set to Legacy / URL Wrapper to update icon */
+    --picker-icon-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'/%3E%3Cpolyline points='80 176 128 224 176 176' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3Cpolyline points='80 80 128 32 176 80' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3C/svg%3E");
+    --picker-icon-size: var(--step-4);
+    --picker-icon-color: currentColor;
+
+    content: var(--picker-icon-url);
+    inline-size: var(--picker-icon-size);
+    block-size: var(--picker-icon-size);
+    color: var(--picker-icon-color);
+  }
+}
+
+@layer components {
+  /* ===========================================================================
+  SELECT — .select (customizable <select>, no JS)
+  - appearance: base-select themes the trigger, picker, options, and arrow while
+    the browser keeps keyboard nav, top-layer rendering, and form integration.
+  - Needs a <button><selectedcontent></selectedcontent></button> child. Degrades
+    to the native OS dropdown where unsupported (the _reset.css chevron covers it).
+  - Shares the --field-* tokens defined in _form.css.
+  =========================================================================== */
+
+  :where(select, select::picker(select)) {
+    appearance: base-select;
+  }
+
+  :where(select) {
+    --select-padding-inline-start: var(--field-padding);
+    --select-padding-inline-end: var(--step-2);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--field-gap);
+
+    inline-size: 100%;
+    min-inline-size: 0;
+    block-size: var(--field-height);
+    padding-inline: var(--select-padding-inline-start) var(--select-padding-inline-end);
+
+    font-size: var(--font-size-sm);
+    line-height: 1;
+    text-align: start;
+    color: var(--field-foreground);
+    background-color: var(--field-background);
+    background-image: none;
+
+    border: 1px solid var(--field-border);
+    border-radius: var(--field-radius);
+    cursor: pointer;
+
+    outline: var(--ring-size) var(--ring-style) oklch(from var(--ring) l c h / 0);
+    outline-offset: var(--ring-offset);
+
+    transition: var(--default-transition);
+  }
+
+  :where(select:hover) {
+    border-color: var(--field-border--hover);
+  }
+
+  :where(select:focus-visible, select:open) {
+    border-color: var(--field-border--focus);
+    outline-color: var(--ring);
+  }
+
+  /* Trigger button child holds the (optional) leading icon + mirrored value */
+  :where(select > button) {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: var(--field-gap);
+    min-inline-size: 0;
+    overflow: hidden;
+  }
+
+  :where(select selectedcontent) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Icons anywhere in the control (trigger or options) size to the field icon */
+  :where(select > button > svg, select option > svg, select selectedcontent > svg) {
+    flex-shrink: 0;
+    inline-size: var(--field-icon-size);
+    block-size: var(--field-icon-size);
+    color: var(--muted-foreground);
+  }
+
+  :where(select:open)::picker-icon {
+    transform: rotate(-180deg);
+  }
+
+  /* Dropdown panel — styled like the card popovers, anchored to the trigger */
+  :where(select)::picker(select) {
+    inline-size: anchor-size(width);
+    padding: var(--step-1_5);
+    margin-block: var(--step-1_5);
+
+    background-color: var(--card);
+    color: var(--card-foreground);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+  }
+
+  :where(select option) {
+    display: flex;
+    align-items: center;
+    gap: var(--field-gap);
+    padding: var(--step-1_5) var(--step-2);
+
+    font-size: var(--font-size-sm);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+
+    transition: var(--default-transition);
+  }
+
+  :where(select option:hover) {
+    background-color: var(--muted);
+  }
+
+  /* Checked option: brand fill plus a stronger weight (never colour alone) */
+  :where(select option:checked) {
+    background-color: var(--primary-100);
+    color: var(--primary);
+    font-weight: var(--weight-strong);
+  }
+
+  :where(select option)::checkmark {
+    order: 1;
+    margin-inline-start: auto;
+    color: currentcolor;
+  }
+}

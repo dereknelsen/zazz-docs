@@ -1,0 +1,58 @@
+@layer components {
+  /* ===========================================================================
+  RADIO — .radio (+ .radio-group)
+  - appearance: none redraws the circle from theme tokens; the checked dot is a
+    radial-gradient so it tracks --primary-foreground, not colour alone.
+  - Group by shared `name`; wrap in a <fieldset>/<legend> or .radio-group for an
+    accessible labelled set.
+  =========================================================================== */
+
+  :where(.radio) {
+    --control-size: var(--step-4_5);
+
+    appearance: none;
+    flex-shrink: 0;
+    inline-size: var(--control-size);
+    block-size: var(--control-size);
+
+    background-color: var(--input);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 90%;
+
+    cursor: pointer;
+
+    outline: var(--ring-size) var(--ring-style) oklch(from var(--ring) l c h / 0);
+    outline-offset: var(--ring-offset);
+
+    transition: var(--default-transition);
+  }
+
+  :where(.radio:hover) {
+    border-color: var(--primary);
+  }
+
+  :where(.radio:focus-visible) {
+    outline-color: var(--ring);
+  }
+
+  /* Checked fill + dot — tokenised via a gradient so it tracks --primary-foreground */
+  :where(.radio:checked) {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    background-image: radial-gradient(circle, var(--primary-foreground) 0 28%, transparent 30%);
+  }
+
+  /* Radio group — a labelled set of radios stacked together */
+  :where(.radio-group) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--step-1_5);
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+}

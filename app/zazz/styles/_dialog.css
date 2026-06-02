@@ -1,73 +1,138 @@
-:where(.dialog) {
-  --dialog-width: var(--article);
-  --dialog-background: var(--card);
-  --dialog-foreground: var(--card-foreground);
+@layer reset {
+  /* ===========================================================================
+  DIALOG — native <dialog> open/close animation, sizing, backdrop fade
+  - In the reset layer so the .dialog component styling below wins. Popover base
+    styling stays in _reset.css since it is a shared primitive.
+  =========================================================================== */
 
-  container-type: inline-size;
-  container-name: dialog;
+  /* Prevent body scroll when a dialog inside the preview is open */
+  :where(html:has(dialog[open] body)) {
+    scrollbar-gutter: stable both-edges;
+  }
 
-  inline-size: var(--dialog-width);
-  background-color: var(--dialog-background);
-  color: var(--dialog-foreground);
-  box-shadow: var(--shadow-md);
-  border-radius: var(--radius-lg);
-  overflow: clip;
-  isolation: isolate;
+  /* Dialog animations with spring easing */
+  :where(dialog) {
+    --dialog-starting-scale: 0.98;
+    --dialog-starting-translate: 0, 0, 0;
+    --dialog-starting-backdrop-color: var(--shade-none);
+    --dialog-scale: 1;
+    --dialog-translate: 0 0 0;
+    --dialog-backdrop-color: var(--shade-800);
+
+    margin: auto;
+    max-inline-size: calc(100% - var(--gap-md));
+    max-block-size: calc(100% - var(--gap-md));
+    contain: layout style;
+    opacity: 0;
+    transform: translate3d(var(--dialog-starting-translate)) scale(var(--dialog-starting-scale));
+    transition:
+      opacity var(--default-transition-duration) var(--default-transition-timing-function),
+      transform var(--default-transition-duration) var(--default-transition-timing-function),
+      overlay var(--default-transition-duration) var(--default-transition-timing-function)
+        allow-discrete,
+      display var(--default-transition-duration) var(--default-transition-timing-function)
+        allow-discrete;
+  }
+
+  :where(dialog[open]) {
+    display: grid;
+    opacity: 1;
+    transform: scale(var(--dialog-scale));
+
+    @starting-style {
+      opacity: 0;
+      transform: scale(var(--dialog-starting-scale));
+    }
+  }
+
+  /* Dialog backdrop with smooth fade transition */
+  :where(dialog)::backdrop {
+    background-color: var(--dialog-starting-backdrop-color);
+    transition: background-color var(--default-transition-duration)
+      var(--default-transition-timing-function);
+  }
+
+  :where(dialog[open])::backdrop {
+    background-color: var(--dialog-backdrop-color);
+
+    @starting-style {
+      background-color: var(--dialog-starting-backdrop-color);
+    }
+  }
 }
 
-:where(.dialog[data-size="large"]) {
-  --dialog-width: var(--container);
-}
+@layer components {
+  :where(.dialog) {
+    --dialog-width: var(--article);
+    --dialog-background: var(--card);
+    --dialog-foreground: var(--card-foreground);
 
-:where(.dialog[data-size="screen"]) {
-  --dialog-width: calc(100vi - 2 * var(--gap-md));
+    container-type: inline-size;
+    container-name: dialog;
 
-  block-size: calc(100vb - 2 * var(--gap-md));
-}
+    inline-size: var(--dialog-width);
+    background-color: var(--dialog-background);
+    color: var(--dialog-foreground);
+    box-shadow: var(--shadow-md);
+    border-radius: var(--radius-lg);
+    overflow: clip;
+    isolation: isolate;
+  }
 
-:where(.dialog__close > svg) {
-  inline-size: var(--step-4);
-  block-size: var(--step-4);
-  pointer-events: none;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  padding: 0;
-}
+  :where(.dialog[data-size="large"]) {
+    --dialog-width: var(--container);
+  }
 
-:where(.dialog__content) {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  max-block-size: calc(100svh - 2 * var(--gap-md));
-  overflow-y: auto;
-}
+  :where(.dialog[data-size="screen"]) {
+    --dialog-width: calc(100vi - 2 * var(--gap-md));
 
-:where(.dialog__header) {
-  display: flex;
-  flex-direction: column;
-  padding-inline: var(--gap-sm);
-  padding-top: var(--gap-sm);
-}
+    block-size: calc(100vb - 2 * var(--gap-md));
+  }
 
-:where(.dialog__body) {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding-inline: var(--gap-sm);
-  padding-block: var(--gap-md);
-  min-height: var(--gap-xl);
-}
+  :where(.dialog__close > svg) {
+    inline-size: var(--step-4);
+    block-size: var(--step-4);
+    pointer-events: none;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: 0;
+  }
 
-:where(.dialog__footer) {
-  block-size: fit-content;
-  align-self: flex-end;
-  position: sticky;
-  bottom: 0;
-  display: flex;
-  justify-content: flex-end;
-  gap: var(--gap-xs);
-  padding: var(--gap-sm);
-  border-top: 1px solid var(--border);
-  background-color: var(--dialog-background);
+  :where(.dialog__content) {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    max-block-size: calc(100svh - 2 * var(--gap-md));
+    overflow-y: auto;
+  }
+
+  :where(.dialog__header) {
+    display: flex;
+    flex-direction: column;
+    padding-inline: var(--gap-sm);
+    padding-top: var(--gap-sm);
+  }
+
+  :where(.dialog__body) {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding-inline: var(--gap-sm);
+    padding-block: var(--gap-md);
+    min-height: var(--gap-xl);
+  }
+
+  :where(.dialog__footer) {
+    block-size: fit-content;
+    align-self: flex-end;
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--gap-xs);
+    padding: var(--gap-sm);
+    border-top: 1px solid var(--border);
+    background-color: var(--dialog-background);
+  }
 }

@@ -1,203 +1,199 @@
-/* ===========================================================================
-BADGE STYLES
-- Utilizes CSS variables for consistent badge styling across the site
-=========================================================================== */
+@layer components {
+  /* ===========================================================================
+  BADGE
+  =========================================================================== */
 
-:where(.badge) {
-  --badge-background: var(--background);
-  --badge-background--hover: var(--muted);
-  --badge-background--active: oklch(from var(--muted) l c h / calc(alpha - 0.02));
+  :where(.badge) {
+    --badge-background: var(--background);
+    --badge-background--hover: var(--muted);
+    --badge-background--active: oklch(from var(--muted) l c h / calc(alpha - 0.02));
 
-  --badge-foreground: var(--foreground);
-  --badge-foreground--hover: var(--foreground);
-  --badge-foreground--active: var(--foreground);
+    --badge-foreground: var(--foreground);
+    --badge-foreground--hover: var(--foreground);
+    --badge-foreground--active: var(--foreground);
 
-  --badge-border: var(--border);
-  --badge-border--hover: var(--border);
-  --badge-border--active: var(--border);
+    --badge-border: 1px solid var(--border);
+    --badge-border--hover: 1px solid var(--border);
+    --badge-border--active: 1px solid var(--border);
 
-  --badge-gap: var(--step-1);
-  --badge-padding: var(--step-2);
-  --badge-height: var(--step-5);
-  --badge-radius: var(--radius-sm);
+    --badge-gap: var(--step-1);
+    --badge-padding: var(--step-2);
+    --badge-height: var(--step-5);
+    --badge-radius: var(--radius-sm);
 
-  --badge-icon-size: var(--step-3);
+    --badge-icon-size: var(--step-3);
 
-  font-family: var(--font-body);
-  font-size: var(--font-size-xs);
-  font-weight: var(--weight-strong);
-  line-height: 1;
+    font-family: var(--font-body);
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-strong);
+    line-height: 1;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--badge-gap);
-  flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--badge-gap);
+    flex-shrink: 0;
 
-  block-size: var(--badge-height);
-  min-width: max-content;
-  padding-inline: var(--badge-padding);
+    block-size: var(--badge-height);
+    min-width: max-content;
+    padding-inline: var(--badge-padding);
 
-  border: 1px solid var(--badge-border);
-  border-radius: var(--badge-radius);
+    border: var(--badge-border);
+    border-radius: var(--badge-radius);
 
-  color: var(--badge-foreground);
-  background-color: var(--badge-background);
+    color: var(--badge-foreground);
+    background-color: var(--badge-background);
 
-  cursor: default;
-  text-decoration: none;
+    cursor: default;
+    text-decoration: none;
 
-  outline: var(--ring-size) var(--ring-style) oklch(from var(--ring) l c h / 0);
-  outline-offset: var(--ring-offset);
+    outline: var(--ring-size) var(--ring-style) oklch(from var(--ring) l c h / 0);
+    outline-offset: var(--ring-offset);
 
-  transition: var(--default-transition);
+    transition: var(--default-transition);
 
-  user-select: none;
-  text-box: trim-both ex alphabetic;
-}
+    user-select: none;
+    text-box: trim-both ex alphabetic;
+  }
 
-:where(a[href].badge) {
-  cursor: pointer;
-}
+  :where(a[href].badge) {
+    cursor: pointer;
+  }
 
-/* ===========================================================================
-BADGE STATES
-=========================================================================== */
+  /* ===========================================================================
+  BADGE STATES
+  =========================================================================== */
 
-:where(button.badge:hover),
-:where(a[href].badge:hover) {
-  color: var(--badge-foreground--hover);
-  background-color: var(--badge-background--hover);
-  border-color: var(--badge-border--hover);
-}
+  :where(button.badge:hover, a[href].badge:hover) {
+    color: var(--badge-foreground--hover);
+    background-color: var(--badge-background--hover);
+    border: var(--badge-border--hover);
+  }
 
-:where(button.badge:active),
-:where(a[href].badge:active) {
-  color: var(--badge-foreground--active);
-  background-color: var(--badge-background--active);
-  border-color: var(--badge-border--active);
-}
+  :where(button.badge:active, a[href].badge:active) {
+    color: var(--badge-foreground--active);
+    background-color: var(--badge-background--active);
+    border: var(--badge-border--active);
+  }
 
-:where(button.badge:focus-visible),
-:where(a[href].badge:focus-visible) {
-  outline-color: var(--ring);
-}
+  :where(button.badge:focus-visible, a[href].badge:focus-visible) {
+    outline-color: var(--ring);
+  }
 
-:where(button.badge:disabled),
-:where(a[href].badge:disabled),
-:where(button.badge[aria-disabled="true"]),
-:where(a[href].badge[aria-disabled="true"]) {
-  opacity: 0.5;
-  cursor: not-allowed;
-  pointer-events: none;
-}
+  :where(
+    button.badge:disabled,
+    a[href].badge:disabled,
+    button.badge[aria-disabled="true"],
+    a[href].badge[aria-disabled="true"]
+  ) {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
 
-:where(button.badge:disabled),
-:where(a[href].badge:disabled) {
-  pointer-events: none;
-}
+  :where(button.badge:disabled, a[href].badge:disabled) {
+    pointer-events: none;
+  }
 
-:where(button.badge[aria-busy="true"]),
-:where(a[href].badge[aria-busy="true"]) {
-  cursor: progress;
-}
+  :where(button.badge[aria-busy="true"], a[href].badge[aria-busy="true"]) {
+    cursor: progress;
+  }
 
-/* ===========================================================================
-BADGE ICONS
-=========================================================================== */
+  /* ===========================================================================
+  BADGE ICONS
+  =========================================================================== */
 
-:where(.badge > svg) {
-  inline-size: var(--badge-icon-size);
-  block-size: var(--badge-icon-size);
-  pointer-events: none;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  padding: 0;
-}
+  :where(.badge > svg) {
+    inline-size: var(--badge-icon-size);
+    block-size: var(--badge-icon-size);
+    pointer-events: none;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: 0;
+  }
 
-/* ===========================================================================
-BADGE VARIANTS
-=========================================================================== */
+  /* ===========================================================================
+  BADGE VARIANTS
+  =========================================================================== */
 
-:where(.badge[data-variant="primary"]) {
-  --badge-background: var(--primary);
-  --badge-background--hover: oklch(from var(--primary) l c h / 0.9);
-  --badge-background--active: oklch(from var(--primary) l c h / 0.8);
+  :where(.badge[data-variant="primary"]) {
+    --badge-background: var(--primary);
+    --badge-background--hover: oklch(from var(--primary) l c h / 0.9);
+    --badge-background--active: oklch(from var(--primary) l c h / 0.8);
 
-  --badge-foreground: var(--primary-foreground);
-  --badge-foreground--hover: var(--primary-foreground);
-  --badge-foreground--active: var(--primary-foreground);
+    --badge-foreground: var(--primary-foreground);
+    --badge-foreground--hover: var(--primary-foreground);
+    --badge-foreground--active: var(--primary-foreground);
 
-  --badge-border: var(--badge-background);
-  --badge-border--hover: var(--badge-background--hover);
-  --badge-border--active: var(--badge-background--active);
-}
+    --badge-border: var(--badge-background);
+    --badge-border--hover: var(--badge-background--hover);
+    --badge-border--active: var(--badge-background--active);
+  }
 
-:where(.badge[data-variant="muted"]) {
-  --badge-background: var(--muted);
-  --badge-background--hover: oklch(from var(--muted) l c h / calc(alpha - 0.02));
-  --badge-background--active: var(--muted);
+  :where(.badge[data-variant="muted"]) {
+    --badge-background: var(--muted);
+    --badge-background--hover: oklch(from var(--muted) l c h / calc(alpha - 0.02));
+    --badge-background--active: var(--muted);
 
-  --badge-foreground: var(--foreground);
-  --badge-foreground--hover: var(--foreground);
-  --badge-foreground--active: var(--foreground);
+    --badge-foreground: var(--foreground);
+    --badge-foreground--hover: var(--foreground);
+    --badge-foreground--active: var(--foreground);
 
-  --badge-border: var(--muted);
-  --badge-border--hover: var(--muted);
-  --badge-border--active: var(--muted);
-}
+    --badge-border: var(--muted);
+    --badge-border--hover: var(--muted);
+    --badge-border--active: var(--muted);
+  }
 
-:where(.badge[data-variant="ghost"]) {
-  --badge-background: transparent;
-  --badge-background--hover: var(--muted);
-  --badge-background--active: oklch(from var(--muted) l c h / calc(alpha - 0.02));
+  :where(.badge[data-variant="ghost"]) {
+    --badge-background: transparent;
+    --badge-background--hover: var(--muted);
+    --badge-background--active: oklch(from var(--muted) l c h / calc(alpha - 0.02));
 
-  --badge-foreground: var(--foreground);
-  --badge-foreground--hover: var(--foreground);
-  --badge-foreground--active: var(--foreground);
+    --badge-foreground: var(--foreground);
+    --badge-foreground--hover: var(--foreground);
+    --badge-foreground--active: var(--foreground);
 
-  --badge-border: transparent;
-  --badge-border--hover: transparent;
-  --badge-border--active: transparent;
-}
+    --badge-border: transparent;
+    --badge-border--hover: transparent;
+    --badge-border--active: transparent;
+  }
 
-:where(.badge[data-variant="link"]) {
-  --badge-background: transparent;
-  --badge-background--hover: transparent;
-  --badge-background--active: transparent;
-  --badge-foreground: var(--foreground);
-  --badge-foreground--hover: var(--primary);
-  --badge-foreground--active: oklch(from var(--primary) l c h / 0.8);
-  --badge-height: fit-content;
-  --badge-padding: 0;
-  --badge-radius: 0;
+  :where(.badge[data-variant="link"]) {
+    --badge-background: transparent;
+    --badge-background--hover: transparent;
+    --badge-background--active: transparent;
+    --badge-foreground: var(--foreground);
+    --badge-foreground--hover: var(--primary);
+    --badge-foreground--active: oklch(from var(--primary) l c h / 0.8);
+    --badge-height: fit-content;
+    --badge-padding: 0;
+    --badge-radius: 0;
 
-  border: none;
-  text-decoration: underline;
-  text-underline-offset: var(--decoration-offset);
-  text-decoration-style: var(--decoration-style);
-  text-decoration-thickness: var(--decoration-thickness);
-}
+    border: none;
+    text-decoration: underline;
+    text-underline-offset: var(--decoration-offset);
+    text-decoration-style: var(--decoration-style);
+    text-decoration-thickness: var(--decoration-thickness);
+  }
 
-:where(button.badge[data-variant="link"]:hover),
-:where(a[href].badge[data-variant="link"]:hover) {
-  text-underline-offset: var(--decoration-offset--hover);
-}
+  :where(button.badge[data-variant="link"]:hover, a[href].badge[data-variant="link"]:hover) {
+    text-underline-offset: var(--decoration-offset--hover);
+  }
 
-:where(button.badge[data-variant="link"]:active),
-:where(a[href].badge[data-variant="link"]:active) {
-  transform: none;
-  text-underline-offset: var(--decoration-offset--active);
-}
+  :where(button.badge[data-variant="link"]:active, a[href].badge[data-variant="link"]:active) {
+    transform: none;
+    text-underline-offset: var(--decoration-offset--active);
+  }
 
-/* ===========================================================================
-BADGE SIZES
-=========================================================================== */
+  /* ===========================================================================
+  BADGE SIZES
+  =========================================================================== */
 
-:where(.badge[data-size="icon"]) {
-  justify-content: center;
-  block-size: var(--badge-height);
-  inline-size: var(--badge-height);
-  padding: 0;
+  :where(.badge[data-size="icon"]) {
+    justify-content: center;
+    block-size: var(--badge-height);
+    inline-size: var(--badge-height);
+    padding: 0;
+  }
 }

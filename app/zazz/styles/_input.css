@@ -1,0 +1,49 @@
+@layer components {
+  /* ===========================================================================
+  TEXT INPUTS — .input
+  - One class for every text-like type (text, search, email, number, date, …);
+    the type only changes the picker/keyboard, not the box.
+  - Shares the --field-* tokens defined in _form.css so it aligns with .select,
+    .textarea, and .button.
+  =========================================================================== */
+
+  :where(.input) {
+    inline-size: 100%;
+    min-inline-size: 0;
+    block-size: var(--field-height);
+    padding-inline: var(--field-padding);
+
+    font-size: var(--font-size-sm);
+    line-height: 1;
+    color: var(--field-foreground);
+    background-color: var(--field-background);
+
+    border: 1px solid var(--field-border);
+    border-radius: var(--field-radius);
+
+    outline: var(--ring-size) var(--ring-style) oklch(from var(--ring) l c h / 0);
+    outline-offset: var(--ring-offset);
+
+    transition: var(--default-transition);
+  }
+
+  :where(.input:hover) {
+    border-color: var(--field-border--hover);
+  }
+
+  :where(.input:focus-visible) {
+    border-color: var(--field-border--focus);
+    outline-color: var(--ring);
+  }
+
+  /* Native date/time controls keep their picker indicator tinted to the text */
+  :where(.input::-webkit-calendar-picker-indicator) {
+    cursor: pointer;
+    opacity: 0.6;
+    transition: var(--default-transition);
+  }
+
+  :where(.input:hover::-webkit-calendar-picker-indicator) {
+    opacity: 1;
+  }
+}

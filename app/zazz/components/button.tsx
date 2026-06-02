@@ -1,5 +1,4 @@
-{
-  /*
+/*
   BUTTON — .button
   ─────────────────────────────────────────────────────────────────────────────
   Element:   <button> or <a> (add href for pointer cursor on anchors)
@@ -23,226 +22,70 @@
   States: hover, active, focus-visible (ring), disabled, aria-busy
   ─────────────────────────────────────────────────────────────────────────────
 */
-}
+
+// Markup is authored as raw HTML so the docs mirror the vanilla markup exactly.
+const html = /* html */ `
+<!-- Buttons START -->
+<div class="flex flex-col gap-sm">
+  <div class="flex items-center gap-sm">
+    <button class="button">Button</button>
+    <button class="button" data-size="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+        <rect width="256" height="256" fill="none" />
+        <line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+        <line x1="40" y1="64" x2="216" y2="64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+        <line x1="40" y1="192" x2="216" y2="192" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+      </svg>
+    </button>
+  </div>
+  <div class="flex items-center gap-sm">
+    <button class="button" data-variant="primary">Button</button>
+    <button class="button" data-variant="primary" data-size="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+        <rect width="256" height="256" fill="none" />
+        <line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+        <line x1="40" y1="64" x2="216" y2="64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+        <line x1="40" y1="192" x2="216" y2="192" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+      </svg>
+    </button>
+  </div>
+  <div class="flex items-center gap-sm">
+    <button class="button" data-variant="muted">Button</button>
+    <button class="button" data-variant="muted" data-size="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+        <rect width="256" height="256" fill="none" />
+        <line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+        <line x1="40" y1="64" x2="216" y2="64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+        <line x1="40" y1="192" x2="216" y2="192" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+      </svg>
+    </button>
+  </div>
+  <div class="flex items-center gap-sm">
+    <button class="button" data-variant="ghost">Button</button>
+    <button class="button" data-variant="ghost" data-size="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+        <rect width="256" height="256" fill="none" />
+        <line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+        <line x1="40" y1="64" x2="216" y2="64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+        <line x1="40" y1="192" x2="216" y2="192" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+      </svg>
+    </button>
+  </div>
+  <div class="flex items-center gap-sm">
+    <button class="button" data-variant="link">Button</button>
+    <button class="button" data-variant="link" data-size="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+        <rect width="256" height="256" fill="none" />
+        <line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+        <line x1="40" y1="64" x2="216" y2="64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+        <line x1="40" y1="192" x2="216" y2="192" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+      </svg>
+    </button>
+  </div>
+</div>
+<!-- Buttons END -->
+`;
 
 export function Button() {
-  return (
-    <div className="flex flex-col gap-sm">
-      {/* Buttons START */}
-      <div className="flex items-center gap-sm">
-        <button className="button">Button</button>
-        <button className="button" data-size="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
-            <rect width="256" height="256" fill="none" />
-            <line
-              x1="40"
-              y1="128"
-              x2="216"
-              y2="128"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="16"
-            />
-            <line
-              x1="40"
-              y1="64"
-              x2="216"
-              y2="64"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="16"
-            />
-            <line
-              x1="40"
-              y1="192"
-              x2="216"
-              y2="192"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="16"
-            />
-          </svg>
-        </button>
-      </div>
-      <div className="flex items-center gap-sm">
-        <button className="button" data-variant="primary">
-          Button
-        </button>
-        <button className="button" data-variant="primary" data-size="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
-            <rect width="256" height="256" fill="none" />
-            <line
-              x1="40"
-              y1="128"
-              x2="216"
-              y2="128"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="16"
-            />
-            <line
-              x1="40"
-              y1="64"
-              x2="216"
-              y2="64"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="16"
-            />
-            <line
-              x1="40"
-              y1="192"
-              x2="216"
-              y2="192"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="16"
-            />
-          </svg>
-        </button>
-      </div>
-      <div className="flex items-center gap-sm">
-        <button className="button" data-variant="muted">
-          Button
-        </button>
-        <button className="button" data-variant="muted" data-size="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
-            <rect width="256" height="256" fill="none" />
-            <line
-              x1="40"
-              y1="128"
-              x2="216"
-              y2="128"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="16"
-            />
-            <line
-              x1="40"
-              y1="64"
-              x2="216"
-              y2="64"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="16"
-            />
-            <line
-              x1="40"
-              y1="192"
-              x2="216"
-              y2="192"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="16"
-            />
-          </svg>
-        </button>
-      </div>
-      <div className="flex itemcenter gap-sm">
-        <button className="button" data-variant="ghost">
-          Button
-        </button>
-        <button className="button" data-variant="ghost" data-size="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
-            <rect width="256" height="256" fill="none" />
-            <line
-              x1="40"
-              y1="128"
-              x2="216"
-              y2="128"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="16"
-            />
-            <line
-              x1="40"
-              y1="64"
-              x2="216"
-              y2="64"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="16"
-            />
-            <line
-              x1="40"
-              y1="192"
-              x2="216"
-              y2="192"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="16"
-            />
-          </svg>
-        </button>
-      </div>
-      <div className="flex itemcenter gap-sm">
-        <button className="button" data-variant="link">
-          Button
-        </button>
-        <button className="button" data-variant="link" data-size="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
-            <rect width="256" height="256" fill="none" />
-            <line
-              x1="40"
-              y1="128"
-              x2="216"
-              y2="128"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="16"
-            />
-            <line
-              x1="40"
-              y1="64"
-              x2="216"
-              y2="64"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="16"
-            />
-            <line
-              x1="40"
-              y1="192"
-              x2="216"
-              y2="192"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="16"
-            />
-          </svg>
-        </button>
-      </div>
-      {/* Buttons END */}
-    </div>
-  );
+  return <div style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: html }} />;
 }

@@ -1,0 +1,159 @@
+@layer components {
+  :where(.navigation-menu) {
+    display: inline-flex;
+    position: relative;
+    anchor-name: --navigation-menu-root;
+  }
+
+  :where(.navigation-menu__list) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--popover-gap);
+    anchor-name: --navigation-menu-list;
+  }
+
+  /* Each item scopes its own anchor name so triggers can share one name */
+  :where(.navigation-menu__item) {
+    anchor-scope: --navigation-menu-trigger;
+    position: relative;
+  }
+
+  :where(.navigation-menu__trigger) {
+    anchor-name: --navigation-menu-trigger;
+  }
+
+  /* Chevron points down by default, flips up while its popover is open (no JS) */
+  :where(.navigation-menu__trigger > svg) {
+    inline-size: var(--step-3_5);
+    block-size: var(--step-3_5);
+    transition: transform var(--default-transition-duration)
+      var(--default-transition-timing-function);
+  }
+
+  :where(
+    .navigation-menu__item:has(.navigation-menu__popover:popover-open)
+      .navigation-menu__trigger
+      > svg
+  ) {
+    transform: rotate(180deg);
+  }
+
+  /* ===========================================================================
+  POPOVER — shares the --popover-* vars consumed by :where([popover]) in _reset.css
+  =========================================================================== */
+
+  :where(.navigation-menu__popover) {
+    position-anchor: --navigation-menu-trigger;
+    --popover-background: var(--card);
+    --popover-foreground: var(--card-foreground);
+    --popover-border: var(--border);
+    --popover-radius: var(--radius-md);
+    --popover-child-radius: var(--radius-sm);
+    --popover-shadow: var(--shadow-md);
+    --popover-gap: var(--step-1_5);
+    --popover-inline-size: min(var(--screen-xs), 100% - var(--gap-md));
+
+    max-inline-size: var(--popover-inline-size);
+
+    background-color: var(--popover-background);
+    color: var(--popover-foreground);
+    border: 1px solid var(--popover-border);
+    border-radius: var(--popover-radius);
+    box-shadow: var(--popover-shadow);
+    padding: var(--popover-gap);
+    z-index: var(--popover-z-index);
+
+    /* Default: open below the trigger, aligned to its start edge */
+    --popover-position-area: block-end span-inline-end;
+    --popover-origin: top center;
+    --popover-margin-block: var(--step-1_5);
+  }
+
+  :where(.navigation-menu__popover .button) {
+    --button-radius: var(--radius-xs);
+  }
+
+  /* ===========================================================================
+  ALIGNMENT — nav menus only open downward, so just align along the inline axis
+  =========================================================================== */
+
+  :where(.navigation-menu__popover[data-align="center"]) {
+    --popover-position-area: block-end span-all;
+    --popover-origin: top center;
+  }
+
+  :where(.navigation-menu__popover[data-align="end"]) {
+    --popover-position-area: block-end span-inline-start;
+    --popover-origin: top right;
+  }
+
+  /* ===========================================================================
+  SIZING — target the list for full-width popovers (megamenu)
+  =========================================================================== */
+
+  :where(.navigation-menu__popover[data-size="full"]) {
+    position-anchor: --navigation-menu-root;
+    --popover-inline-size: min(100% - var(--gap-md) * 2);
+    --popover-position-area: block-end span-all;
+
+    inline-size: var(--popover-inline-size);
+  }
+
+  /* ===========================================================================
+  PANEL CONTENT
+  =========================================================================== */
+
+  :where(.navigation-menu__viewport) {
+    display: grid;
+    min-inline-size: 20ch;
+  }
+
+  /* Rich, two-column panels: featured callout beside a list of links */
+  :where(.navigation-menu__viewport[data-layout="featured"]) {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--popover-gap);
+  }
+
+  /* Featured callout cell — spans the full height of the link column */
+  :where(.navigation-menu__featured) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    grid-row-start: 1;
+    grid-row-end: -1;
+    padding: var(--gap-sm);
+    border-radius: var(--popover-child-radius);
+    text-decoration: none;
+    background-image: linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--primary) 8%, var(--muted)),
+      var(--muted)
+    );
+    transition: background-color var(--default-transition-duration)
+      var(--default-transition-timing-function);
+  }
+
+  :where(.navigation-menu__featured:hover) {
+    background-image: linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--primary) 14%, var(--muted)),
+      var(--muted)
+    );
+  }
+
+  /* Rich link row: title + description, hover fills with muted */
+  :where(.navigation-menu__link) {
+    display: flex;
+    flex-direction: column;
+    padding: var(--popover-gap);
+    border-radius: var(--popover-child-radius);
+    text-decoration: none;
+    transition: background-color var(--default-transition-duration)
+      var(--default-transition-timing-function);
+  }
+
+  :where(.navigation-menu__link:hover) {
+    background-color: var(--muted);
+  }
+}

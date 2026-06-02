@@ -1,15 +1,1 @@
 @layer variables, reset, components, utilities;
-
-@import "./_variables.css" layer(variables);
-@import "./_reset.css" layer(reset);
-@import "./_typography.css" layer(utilities);
-
-/* Components */
-@import "./_badge.css" layer(components);
-@import "./_button.css" layer(components);
-@import "./_accordion.css" layer(components);
-@import "./_dialog.css" layer(components);
-@import "./_dropdown.css" layer(components);
-
-/* Utilities */
-@import "./_utilities.css" layer(utilities);

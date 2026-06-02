@@ -1,6 +1,6 @@
 ---
 name: zazz-development
-description: Build UI using the Zazz design framework's eight foundations (Theme, Corporate, Grayscale, Typography, Spacing, Radius, Layout, Effects). Use this skill whenever you're styling components, writing CSS, picking colors or spacing, building primitives, or working in a project that imports `zazz/main.css` or uses Zazz tokens like `--background`, `--gap-md`, `--radius-card`, `--primary-600`, `text-h2`, `--shade-800`, or the `container`/`article` classes. Use it for plain CSS, Tailwind v4 + shadcn projects, Webflow sites built from the Zazz kit, and any framework where Zazz variables and utility classes are available. The Zazz way is opinionated — assume it overrules whatever the surrounding system (Tailwind defaults, shadcn defaults, Client-First, etc.) would do.
+description: Build UI using the Zazz design framework's eight foundations (Theme, Corporate, Grayscale, Typography, Spacing, Radius, Layout, Effects). Use this skill whenever you're styling components, writing CSS, picking colors or spacing, building components, or working in a project that imports the Zazz styles (`app/zazz/styles/index.css` / `load.ts`) or uses Zazz tokens and classes like `--background`, `--gap-md`, `--primary-600`, `--shade-800`, `--ring`, `text-h2`, `rounded-lg`, `.container`/`.article`, `.button`/`.badge` with `data-variant`, or the form controls (`.input`, `.textarea`, `.select`, `.input-group`, `.field`, `.radio`). Use it for vanilla HTML/CSS and Astro, Tailwind v4 + shadcn projects, Webflow sites built from the Zazz kit, and any framework where Zazz variables and utility classes are available. The Zazz way is opinionated — assume it overrules whatever the surrounding system (Tailwind defaults, shadcn defaults, Client-First, etc.) would do.
 ---
 
 # Zazz Development
@@ -26,16 +26,18 @@ If you find yourself fighting one of these rules, that's a signal to step back a
 
 ## The eight foundations at a glance
 
-| Collection     | What it is                                                           | Most-used tokens                                                                                                     |
-| -------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| **Theme**      | Mode-aware role tokens. The surface 90% of styling consumes.         | `--background`, `--foreground`, `--card`, `--border`, `--primary`, `--muted`, `--faded`, `--destructive`             |
-| **Corporate**  | Raw brand color scales (50–950). What Theme brand tokens point into. | `--primary-{50..950}`, `--secondary-{50..950}`, `--tertiary-{50..950}`                                               |
-| **Grayscale**  | Raw neutrals, plus shade (dim) and tint (fade) overlays.             | `--neutral-{50..950}`, `--white`, `--black`, `--shade-{50..950}`, `--tint-{50..950}`                                 |
-| **Typography** | Composed type styles via `text-*` classes.                           | `text-display`, `text-h1`–`text-h6`, `text-xl`–`text-xs`, `text-eyebrow`                                             |
-| **Spacing**    | Semantic gaps (xs–xl) and a numeric step scale.                      | `--gap-xs`, `--gap-sm`, `--gap-md`, `--gap-lg`, `--gap-xl`; `--step-px`, `--step-1` … `--step-96`                    |
-| **Radius**     | Semantic scale + primitive-specific tokens.                          | `--radius-xs`–`--radius-xl`, `--radius-full`, `--radius-button`, `--radius-card`, `--radius-input`, `--radius-badge` |
-| **Layout**     | Self-padding container widths + breakpoint constants.                | `--container`, `--article`, `--screen-xs`–`--screen-xl`, classes `.container`, `.article`                            |
-| **Effects**    | Shadows for elevation, one focus ring for accessibility.             | `--shadow-xs`–`--shadow-xl`, `--shadow-none`, `--focus-ring`                                                         |
+| Collection     | What it is                                                           | Most-used tokens                                                                                            |
+| -------------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| **Theme**      | Mode-aware role tokens. The surface 90% of styling consumes.         | `--background`, `--foreground`, `--card`, `--border`, `--primary`, `--muted`, `--faded`, `--destructive`    |
+| **Corporate**  | Raw brand color scales (50–950). What Theme brand tokens point into. | `--primary-{50..950}`, `--secondary-{50..950}`, `--tertiary-{50..950}`                                      |
+| **Grayscale**  | Raw neutrals, plus shade (dim) and tint (fade) overlays.             | `--neutral-{50..950}`, `--white`, `--black`, `--shade-{50..950}`, `--tint-{50..950}`                        |
+| **Typography** | Composed type styles via `text-*` classes.                           | `text-display`, `text-h1`–`text-h6`, `text-xl`–`text-xs`, `text-eyebrow`                                    |
+| **Spacing**    | Semantic gaps (xs–xl) and a numeric step scale.                      | `--gap-xs`, `--gap-sm`, `--gap-md`, `--gap-lg`, `--gap-xl`; `--step-px`, `--step-1` … `--step-96`           |
+| **Radius**     | Semantic scale; components alias it via a local prop.                | `--radius-xs`–`--radius-xl`, `--radius-none`, `--radius-full`, `--radius-multiplier`; utilities `rounded-*` |
+| **Layout**     | Self-padding container widths + breakpoint constants.                | `--container`, `--article`, `--screen-xs`–`--screen-xl`, classes `.container`, `.article`                   |
+| **Effects**    | Shadows for elevation, an outline focus ring for accessibility.      | `--shadow-xs`–`--shadow-xl`, `--shadow-none`, `--ring`, `--ring-size`, `--ring-style`, `--ring-offset`      |
+
+Alongside the eight, a small **Animations/motion** group ships too — `--spring-easing`, `--spring-duration`, and the `--default-transition` bundle that components use for hover/open transitions. And the cascade is organized into four layers, declared once in `index.css`: `@layer variables, reset, components, utilities` (the `components` layer is where the shipped component styles live, between reset and utilities).
 
 Detailed reference for every token and every utility class lives in [references/tokens.md](references/tokens.md). Read it when you need an exhaustive list; the SKILL body has what you need for day-to-day work.
 
@@ -195,7 +197,7 @@ Each class sets `font-family`, `font-size` (fluid `clamp()`), `font-weight`, `li
 Sizes use `clamp(min, preferred, max)` with `vi` (viewport inline) as the interpolation unit. The values come from Figma's Desktop and Mobile size pairs — what looks right at 1440px scales fluidly down to the mobile target without media queries.
 
 ```css
---font-size-h2: clamp(2.986rem, calc(2.6093rem + 1.5068vi), 3.8147rem);
+--font-size-h2: clamp(2.0273rem, 1.2148rem + 3.2498vi, 3.8147rem);
 ```
 
 You don't need to touch the clamp math. The `text-h2` class does it. If you need to generate new sizes, see [Updating type scales with Utopia](#updating-type-scales-with-utopia).
@@ -231,27 +233,29 @@ Don't write `font-weight: 700`. Write `font-weight: var(--weight-strong)`. A reb
 | ------------------ | ------- | ------------------------------ |
 | `--weight-body`    | 400     | Body copy                      |
 | `--weight-heading` | 600     | Headings                       |
-| `--weight-strong`  | 600     | `<strong>` and inline emphasis |
+| `--weight-strong`  | 500     | `<strong>` and inline emphasis |
 | `--weight-mono`    | 400     | Code, monospaced labels        |
 | `--weight-eyebrow` | 500     | Eyebrow labels                 |
 
-### Paragraph rhythm
+### Paragraph rhythm — use `.text-prose`
 
-There's no global `--paragraph-spacing-*` token. Apply margin from the spacing scale on `p + p`:
+For long-form copy, wrap it in `.text-prose` rather than hand-spacing paragraphs. It's a flex-column container (`gap: var(--gap-sm)`) that also applies a per-style top margin to every non-first child, drawn from the `--margin-*` tokens (`--margin-h2`, `--margin-md`, etc. — each keyed to a text style). It styles bare tags too, so you can drop raw HTML inside it:
 
-```css
-.prose p + p {
-  margin-top: var(--gap-md);
-}
+```html
+<div class="text-prose">
+  <h2 class="text-h2">Section</h2>
+  <p>First paragraph — no top margin (it's first).</p>
+  <p>Second paragraph gets <code>--margin-md</code> above it automatically.</p>
+</div>
 ```
 
-If your content system needs systematized paragraph rhythm, define `--paragraph-md` style tokens per text style and apply them in your content reset.
+The `--margin-*` scale is what to tune if you want tighter or looser rhythm — one edit, applied consistently across every prose block.
 
 ---
 
 ## Spacing
 
-Three layers: a global `--spacing-interval` (defaults to `0.25rem` / 4px), a numeric step scale derived from it, and five semantic gaps that map onto specific steps.
+Three layers: a global `--spacing-interval` (a responsive `clamp()` that settles at `0.25rem` / 4px on desktop and shrinks slightly on small viewports), a numeric step scale derived from it, and five semantic gaps that map onto specific steps. Because the interval is fluid, the whole scale — steps, gaps, and the radii built on them — tracks viewport size automatically.
 
 ```
 --spacing-interval (one number)
@@ -322,46 +326,46 @@ Steps are **static** — they don't shift between breakpoints the way semantic g
 
 ## Radius
 
-Three layers, mirroring spacing's structure:
+Two layers, plus a per-component alias pattern:
 
 ```
 --radius-multiplier (one number, scales all radii)
     ↓ multiplies
 --radius-xs / sm / md / lg / xl + none / full (semantic scale)
-    ↑ aliases
---radius-button / input / card / badge (primitive aliases)
+    ↑ a component aliases via its own local prop, e.g. --button-radius: var(--radius-md)
 ```
 
-### Use primitive radii on primitives
+### There are no primitive radius tokens
 
-A button uses `--radius-button`, a card uses `--radius-card`, an input uses `--radius-input`, a badge uses `--radius-badge`. These exist so nested radii look right by default — a button (8px) inside a card (16px) reads as visually correct. Retune `--radius-button` once, every button in the product follows.
+Earlier versions had `--radius-button` / `--radius-card` / `--radius-input` / `--radius-badge`. **Those are gone.** A component now reaches the semantic scale through a local custom property it declares itself:
 
 ```css
-.card {
-  border-radius: var(--radius-card);
-} /* lg, ~16px */
-.button {
-  border-radius: var(--radius-button);
-} /* md, ~8px  */
-.input {
-  border-radius: var(--radius-input);
-} /* md, ~8px  */
-.badge {
-  border-radius: var(--radius-badge);
-} /* full      */
+:where(.button) {
+  --button-radius: var(--radius-md);
+  border-radius: var(--button-radius);
+}
+:where(.badge) {
+  --badge-radius: var(--radius-sm);
+  border-radius: var(--badge-radius);
+}
+:where(.dialog) {
+  border-radius: var(--radius-lg);
+} /* uses the semantic token directly */
 ```
 
-### Use semantic radii for everything else
+This keeps the win condition the same — retune a button's corners by overriding `--button-radius`, or shift the entire system at once with `--radius-multiplier` — without a separate token layer to maintain. When you build a new component, follow the pattern: pick a semantic step, expose it as `--mycomponent-radius`, consume that.
 
-`--radius-xs` through `--radius-xl` for surfaces that aren't one of the named primitives. `--radius-none` for explicit "no radius" (better than literal `0` because it stays a token). `--radius-full` for capsules and pills.
+### Use semantic radii directly for everything else
+
+`--radius-xs` through `--radius-xl` for surfaces. `--radius-none` for explicit "no radius" (better than literal `0` — it stays a token). `--radius-full` for capsules and pills.
 
 ### Utility classes
 
-`radius-none`, `radius-xs`, `radius-sm`, `radius-md`, `radius-lg`, `radius-xl`, `radius-full` — each sets `border-radius` to the corresponding token.
+`rounded-none`, `rounded-xs`, `rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-full` — note the **`rounded-*`** prefix (Tailwind-style), each sets `border-radius` to the matching token.
 
 ### Nested radius rule of thumb
 
-When nesting, the inner radius should be roughly half the outer, and never more than two-thirds. The shipped primitives already follow this: card (16px) → button (8px) is half. If you retune the primitives, eyeball your most common nesting and verify the inner stays visibly smaller than the outer.
+When nesting, the inner radius should be roughly half the outer, and never more than two-thirds. The shipped components follow this — a `.button` (`--radius-md`, ~10px) inside a `.dialog` (`--radius-lg`, ~16px) reads correctly; inside a popover, buttons drop to `--radius-sm`. If you retune, eyeball your most common nesting and keep the inner visibly smaller than the outer.
 
 ---
 
@@ -384,12 +388,12 @@ The `.container` and `.article` utility classes apply the width, set `margin-inl
 
 ```css
 .container {
-  width: var(--container);
+  inline-size: var(--container);
   margin-inline: auto;
   container: container / inline-size;
 }
 .article {
-  width: var(--article);
+  inline-size: var(--article);
   margin-inline: auto;
   container: article / inline-size;
 }
@@ -455,56 +459,103 @@ Shadows derive from `oklch(from var(--black) l c h / α)`, so the alpha varies a
 
 ### Focus ring
 
-One token covers every interactive element:
+The ring is **outline-based**, built from four tokens:
 
 ```css
---focus-ring: 0 0 0 4px var(--background), 0 0 0 2px var(--primary);
+--ring: var(--primary); /* color */
+--ring-style: solid;
+--ring-size: 2px;
+--ring-offset: 1px;
 ```
 
-Two layered shadows — inner is `--primary`, outer is `--background` to gap the ring away from any existing border. Both reference theme tokens, so the ring adapts to mode automatically.
+The reset applies it to every `:focus-visible` automatically:
 
 ```css
-.interactive:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
+:where(:focus-visible) {
+  outline: var(--ring-size) var(--ring-style) var(--ring);
+  outline-offset: var(--ring-offset);
 }
 ```
 
-**Always use `:focus-visible`, not `:focus`.** The ring should appear on keyboard navigation, not on mouse clicks. There's also a `.ring` utility, but the project-wide pattern is to apply `--focus-ring` directly in the primitive's CSS.
+Components keep a _transparent_ outline at rest so the ring doesn't shift layout when it appears, then switch only the color on focus:
+
+```css
+:where(.button) {
+  outline: var(--ring-size) var(--ring-style) oklch(from var(--ring) l c h / 0);
+  outline-offset: var(--ring-offset);
+}
+:where(.button:focus-visible) {
+  outline-color: var(--ring);
+}
+```
+
+There's a `.ring` utility that does the same. **Always target `:focus-visible`, never `:focus`** — the ring should appear on keyboard navigation, not mouse clicks. (There is no `--focus-ring` box-shadow token; that's been replaced by this outline system.)
+
+### Motion
+
+A small motion layer ships alongside Effects. `--spring-easing` is a 27-point spring curve; `--spring-duration` is `0.333s`. The composed `--default-transition` bundles ~19 properties at that duration and easing — reach for it instead of hand-writing transitions:
+
+```css
+.thing {
+  transition: var(--default-transition);
+}
+/* or a single property: */
+.chevron {
+  transition: transform var(--default-transition-duration) var(--default-transition-timing-function);
+}
+```
+
+The reset already wires native `<dialog>`, `[popover]`, and `<details>` open/close to this easing via `@starting-style`, so the shipped components animate consistently without per-component motion code.
 
 ---
 
 ## Naming convention: utilities + BEM
 
-Zazz uses both utility classes and BEM together. Utilities for common, repeatable stuff (spacing, type, radius, display); BEM for the custom organization a specific component needs. **This pattern is portable** — same shape in React, vanilla, and Webflow.
+Zazz uses utility classes and BEM together, with one twist the shipped components make explicit: **variants are data attributes, not BEM modifiers.** Utilities for common, repeatable stuff (spacing, type, radius, display); a `block` + `block__element` structure for the custom organization a component needs; `[data-variant]` / `[data-size]` (and friends) for variants. **This pattern is portable** — same shape in React, vanilla, and Webflow.
 
-In Webflow specifically: utility classes go in the class list, the BEM root class goes in the style box, and the style box becomes where you put any additional custom styling that doesn't have a utility for it.
+In Webflow specifically: utility classes go in the class list, the block class goes in the style box (where custom styling that has no utility lives), and variants go in as custom attributes.
 
 ```html
 <!-- React/vanilla -->
-<article class="card card--featured p-md radius-card shadow-md">
+<article class="card p-md rounded-lg shadow-md">
   <h3 class="card__title text-h4">Featured article</h3>
   <p class="card__excerpt text-md">…</p>
-  <a class="card__cta button button-primary">Read</a>
+  <a class="card__cta button" data-variant="primary">Read</a>
 </article>
-
-<!-- Webflow: same shape -->
-<!-- class list: card card--featured p-md radius-card shadow-md -->
-<!-- style box: .card (BEM root) holds custom rules that aren't utilities -->
 ```
 
-BEM rules:
+Naming:
 
-- `block` — the component root (`card`)
-- `block__element` — a part of the block (`card__title`)
-- `block--modifier` — a variant (`card--featured`)
+- `block` — the component root (`card`, `button`)
+- `block__element` — a part of the block (`card__title`, `dialog__footer`)
+- `[data-variant="…"]` / `[data-size="…"]` — variants (`data-variant="primary"`, **not** `button-primary` or `card--featured`)
 
-Keep utilities doing what utilities do well (spacing, type, radius, display) and let BEM hold the bespoke (`card__title` setting `letter-spacing`, `card--featured` adding a brand accent). Don't BEM what a utility class would have handled cleanly.
+### Theme a component with local custom properties
+
+The shipped components don't hard-code colors into their rules — they declare local `--component-*` props off theme roles, then a `[data-variant]` block re-points those locals. This is the pattern to copy: the base rule stays untouched, and a variant is just a short list of variable swaps.
+
+```css
+:where(.button) {
+  --button-background: var(--background);
+  --button-foreground: var(--foreground);
+  --button-border: var(--border);
+  background-color: var(--button-background);
+  color: var(--button-foreground);
+  border: 1px solid var(--button-border);
+}
+:where(.button[data-variant="primary"]) {
+  --button-background: var(--primary);
+  --button-foreground: var(--primary-foreground);
+  --button-border: var(--button-background);
+}
+```
+
+Keep utilities doing what utilities do well (spacing, type, radius, display) and let the block class hold the bespoke (`card__title` setting `letter-spacing`, a `--card-*` local for a brand accent). Don't reach for a custom rule where a utility would have done it cleanly.
 
 ### Variables are unprefixed and role-based
 
-- No `--zazz-*` prefix. Variables are just `--primary`, `--gap-md`, `--radius-card`.
-- Names describe **roles**, not values: `primary` not `indigo`, `gap-md` not `medium-spacing`, `radius-card` not `card-rounded`.
+- No `--zazz-*` prefix. Variables are just `--primary`, `--gap-md`, `--radius-lg`.
+- Names describe **roles**, not values: `primary` not `indigo`, `gap-md` not `medium-spacing`, `radius-lg` not `large-rounded`.
 - Sizes use t-shirt scale (`xs/sm/md/lg/xl`); numeric scales use Tailwind's `50..950`.
 - Utility class names mirror variables one-to-one: `gap-md` consumes `--gap-md`; `radius-lg` consumes `--radius-lg`.
 
@@ -512,15 +563,17 @@ Keep utilities doing what utilities do well (spacing, type, radius, display) and
 
 ## Primitives
 
-The 14 shipped primitives (Avatar, Badge, Button, Card, Carousel, Checkbox, Dialog, Input, Motion, Radio, Select, Slider, Switch, Textarea) are **suggestions for how to style and build common atomic components using Zazz tokens**. They are not a packaged component library you must adopt wholesale.
+Zazz ships **eight example components** under `app/zazz/components/`, each paired with a stylesheet in `app/zazz/styles/`: **Accordion, Badge, Button, Dialog, Dropdown, Navigation menu, Section, and the Form family** (`.input`, `.textarea`, `.select`, `.input-group`, `.field`, checkbox, switch, `.radio`). They are **suggestions for how to build common components on Zazz tokens** — not a packaged library you must adopt wholesale. Notably, they're dependency-free: native HTML and modern platform APIs (Popover API, CSS anchor positioning, Invoker Commands, native `<dialog>`/`<details>`, the customizable `<select>` (`appearance: base-select`), `field-sizing: content`, `:has()`, `:user-invalid`) carry all behavior, so most work with **zero JavaScript**.
 
-When asked to build a primitive:
+They share one pattern — block class + `:where()` zero specificity + local `--component-*` props defaulting to theme tokens + `[data-variant]`/`[data-size]` variants + the `--ring*` focus outline. The form controls add a shared `--field-*` token set (in `_form.css`) so `.input`, `.textarea`, `.select`, and `.input-group` read as one family, a `.field` wrapper for label/control/hint/error layout, and validation that surfaces only on `:user-invalid` (after blur/submit, never while typing).
 
-- **In an existing component system** (shadcn/ui, Radix, Headless UI, a Webflow component, your own framework), follow that system's component patterns and adapt them to use Zazz tokens for color, type, spacing, radius, and effects. Don't fight the surrounding system's architecture; reskin it through Zazz.
-- **In a fresh project**, the [Zazz primitives docs](https://zazz docs primitives) give the recommended class names, anatomy, variants, tokens, and accessibility notes. Mirror them for consistency.
-- **Always** consume theme tokens. A button's background should be `--primary`, not `--primary-600` directly. Its radius should be `--radius-button`, not `--radius-md` directly.
+When asked to build a component:
 
-See [references/primitives.md](references/primitives.md) for the per-primitive recipes (button variants, card anatomy, dialog setup, input + icon patterns, etc.).
+- **In an existing component system** (shadcn/ui, Radix, Headless UI, a Webflow component, your own framework), follow that system's architecture and adapt it to use Zazz tokens for color, type, spacing, radius, and effects. Don't fight it; reskin it through Zazz.
+- **In a fresh project**, mirror the shipped examples for consistency — copy the markup and the local-prop pattern.
+- **Always** consume theme tokens. A button's background should be `--primary`, not `--primary-600` directly. Its radius comes from a local `--button-radius: var(--radius-md)`, not a hard-coded value.
+
+See [references/primitives.md](references/primitives.md) for the per-component reference (anatomy, variants, the platform feature each uses, and how to build one Zazz doesn't ship).
 
 ---
 
@@ -528,14 +581,14 @@ See [references/primitives.md](references/primitives.md) for the per-primitive r
 
 Zazz uses **Tints.dev** (by Simeon Griggs) for generating 11-step OKLCH color scales from a single brand hex. The default palettes ship from there.
 
-- **Per-scale**: visit `https://www.tints.dev`, paste the hex for a single brand color, generate. Output is OKLCH; paste the 11 lines into your `variables.css` under `--{name}-50` through `--{name}-950`.
+- **Per-scale**: visit `https://www.tints.dev`, paste the hex for a single brand color, generate. Output is OKLCH; paste the 11 lines into `_variables.css` under `--{name}-50` through `--{name}-950`.
 - **All four defaults at once** (primary, secondary, tertiary, neutral): there's a pre-loaded editor link in [Zazz reference / colors](https://zazz.example/docs/reference/colors) — adjust hexes, copy the OKLCH output back to the project.
 
 If the user asks for help updating palettes, the workflow is:
 
 1. Get the brand hex(es) from the user.
 2. Generate the 11-step OKLCH scale (either by sending them to Tints.dev with the hex prefilled, or generating it inline — the Zazz docs site has a built-in theme builder that uses the same algorithm).
-3. Replace the `--{name}-{step}` block in `variables.css`.
+3. Replace the `--{name}-{step}` block in `_variables.css`.
 4. Re-check `--{name}` Theme bindings — defaults are `600` in light and `500` in dark for primary/secondary, `500`/`400` for tertiary. If the hue's lightness curve is unusual you may need to adjust.
 
 ## Updating type scales with Utopia
@@ -549,7 +602,7 @@ Inputs are:
 - `minTypeScale` / `maxTypeScale`: scale ratio at each end (Minor Third 1.2, Perfect Fourth 1.333, etc.).
 - `positiveSteps` / `negativeSteps`: how many steps above and below body.
 
-The output is a set of `--font-size-{name}: clamp(...)` declarations. Paste into `variables.css` under the Typography section. The `text-*` classes will pick them up automatically.
+The output is a set of `--font-size-{name}: clamp(...)` declarations. Paste into `_variables.css` under the Typography section. The `text-*` classes will pick them up automatically.
 
 If the user wants to retune type scales, walk them through the inputs and regenerate; don't hand-author clamps unless they need an off-system one-off.
 
@@ -557,11 +610,11 @@ If the user wants to retune type scales, walk them through the inputs and regene
 
 ## Working in different stacks
 
-The same names exist in every environment. See [references/integrations.md](references/integrations.md) for full setup details. Quick orientations:
+The same names exist in every environment. The first decision is which of two integration _models_ you're in. See [references/integrations.md](references/integrations.md) for full setup. Quick orientations:
 
-- **Plain CSS**: import `zazz/main.css`. Variables, reset, utilities all present. Use `text-*`, `p-md`, `radius-card`, etc. directly in HTML.
-- **Tailwind v4 + shadcn**: add a `@theme` block that maps Zazz variables onto Tailwind names (`--color-primary: var(--primary)`, `--spacing-md: var(--gap-md)`, etc.). After bridging, `bg-primary`, `text-foreground`, `gap-md`, `rounded-lg` all resolve through Zazz. **Prefer Zazz's `text-*` classes over Tailwind's `text-{size} font-{weight}` compositions** — Zazz's are tuned together.
-- **Webflow**: clone the Zazz Webflow Kit. Variables, classes, and starter components arrive pre-wired. Apply utility classes in the class list and use BEM in the style box for custom styling.
+- **Vanilla — bring the whole framework** (plain HTML/CSS, Astro): import everything. With a bundler, `import "./zazz/styles/load.ts"` (it pulls `index.css` then every partial). Without one, `@import "./zazz/styles/index.css"` first (it declares the `@layer` order), then the `_*.css` partials. Then use `text-*`, `p-md`, `rounded-lg`, `.container`, `.button[data-variant]` directly. There is no `main.css`. One gotcha: the font roles point at `--font-geist-*` (a Next.js loader), so a vanilla/Astro project must define those or override `--font-body`/`--font-heading`/`--font-mono`.
+- **shadcn/ui + Tailwind v4 — bring the variables, borrow a few utilities**: import only `_variables.css`, bridge tokens into a `@theme` block (`--color-primary: var(--primary)`, `--spacing-md: var(--gap-md)`, plus shade/tint as `--color-shade-*`), and let Tailwind/shadcn own the utility layer. Then opt into the four Zazz utilities Tailwind can't reproduce: the composed `text-*` typography, `.container`/`.article`, the shade/tint overlay colors, and the tuned `shadow-*` scale. (Shadows and radius share Tailwind's namespace — don't self-reference them in `@theme`; see [references/integrations.md](references/integrations.md).)
+- **Webflow**: clone the Zazz Webflow Kit. Variables, classes, and starter components arrive pre-wired. Utility classes in the class list, block class in the style box, variants as custom attributes (`data-variant`).
 - **Figma**: open the Zazz Figma Kit. Variables, text styles, and components live there. Connect as a library to share across files.
 
 ---
@@ -571,10 +624,10 @@ The same names exist in every environment. See [references/integrations.md](refe
 **A card with a primary CTA:**
 
 ```html
-<article class="card p-md radius-card shadow-md">
+<article class="card p-md rounded-lg shadow-md">
   <h3 class="card__title text-h4">Title</h3>
   <p class="card__excerpt text-md">…</p>
-  <a class="button button-primary card__cta">Read more</a>
+  <a class="button card__cta" data-variant="primary">Read more</a>
 </article>
 ```
 
@@ -606,7 +659,7 @@ The same names exist in every environment. See [references/integrations.md](refe
 .modal {
   background: var(--card);
   color: var(--card-foreground);
-  border-radius: var(--radius-card);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-xl);
   padding: var(--gap-lg);
 }
@@ -646,7 +699,9 @@ No `padding-global` wrapper. The `.container` self-pads via `min()`.
 | Wrapping `.container` in a padding div                                  | Doubles up; container already self-pads                                                 | Apply `.container` directly to your inner element       |
 | `gap: 12px`                                                             | Hardcodes a value that should track the spacing system                                  | `gap: var(--step-3)` (escape hatch) or pick a `--gap-*` |
 | `font-weight: 700`                                                      | Locks the weight to a specific number; breaks if the typeface swaps                     | `font-weight: var(--weight-strong)`                     |
-| `border-radius: 4px` on a card                                          | Doesn't compose with the radius multiplier or primitive radius pattern                  | `border-radius: var(--radius-card)`                     |
+| `border-radius: 4px` on a card                                          | Doesn't compose with the radius multiplier                                              | `border-radius: var(--radius-lg)` (or a local prop)     |
+| `class="button button-primary"` for a variant                           | BEM-modifier variants were removed; that class does nothing                             | `class="button" data-variant="primary"`                 |
+| `box-shadow: var(--focus-ring)` on focus                                | `--focus-ring` no longer exists; focus is an outline now                                | `outline-color: var(--ring)` on `:focus-visible`        |
 | Reaching for `--primary-600` in component CSS                           | Skips Theme; breaks dark-mode lightening (600→500)                                      | `background: var(--primary)`                            |
 | Hardcoding `#000` shadows                                               | Won't adapt; isn't part of the shadow scale                                             | Use `--shadow-md` (or another scale step)               |
 

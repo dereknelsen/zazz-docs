@@ -1,11 +1,8 @@
 export default function SwitchDefault() {
   return (
-    <div className="switch-group">
-      <label className="switch-base">
-        <input className="switch" type="checkbox" defaultChecked />
-        <span className="switch-toggle" />
-      </label>
-      <span className="form-label">Enable notifications</span>
-    </div>
+    <label className="field" data-inline>
+      <input type="checkbox" role="switch" defaultChecked />
+      <span className="field__label">Enable notifications</span>
+    </label>
   );
 }

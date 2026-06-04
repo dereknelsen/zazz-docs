@@ -86,7 +86,7 @@
     inline-size: var(--field-inline-size);
   }
 
-  :where(.field > :not(.field__label):not(.field__hint):not(.field__error)) {
+  :where(.field > :not(.field__label):not(.field__description)) {
     grid-row: 2;
     grid-column: 1;
   }
@@ -102,63 +102,66 @@
     text-align: start;
   }
 
-  /* Hint and error share one grid row so only the visible message affects layout */
-  :where(.field__hint, .field__error) {
+  /* ---------------------------------------------------------------------------
+  FIELD DESCRIPTION — .field__description (wrapper for hint + error)
+  - Occupies a stable grid slot so hint↔error swaps never cause layout shift.
+    The wrapper keeps a fixed block-size while the children crossfade inside it.
+  --------------------------------------------------------------------------- */
+
+  :where(.field__description) {
     grid-row: 3;
     grid-column: 1;
-    display: inline-flex;
+    display: grid;
+    grid-template-areas: "msg";
     font-size: var(--font-size-xs);
-    contain: layout style paint;
+  }
+
+  /* Hint and error stack in the same grid area — only one is visible at a time */
+  :where(.field__hint, .field__error) {
+    grid-area: msg;
+    display: inline-flex;
     transition:
-      block-size var(--default-transition-duration) var(--default-transition-timing-function),
       opacity var(--default-transition-duration) var(--default-transition-timing-function),
       translate var(--default-transition-duration) var(--default-transition-timing-function),
-      content-visibility var(--default-transition-duration)
-        var(--default-transition-timing-function) allow-discrete;
+      visibility var(--default-transition-duration) var(--default-transition-timing-function) allow-discrete;
   }
 
   :where(.field__hint) {
     color: var(--muted-foreground);
     opacity: 1;
-    block-size: auto;
     translate: var(--field-hint-translate);
-    content-visibility: visible;
+    visibility: visible;
   }
 
   :where(.field__error) {
     color: var(--destructive);
     opacity: 0;
-    block-size: 0;
     translate: var(--field-hint-starting-translate);
-    content-visibility: hidden;
+    visibility: hidden;
   }
 
-  /* After interaction: invalid controls turn destructive, reveal the message */
+  /* After interaction: invalid controls turn destructive, reveal the error */
   :where(.field:has(:user-invalid)) .field__hint {
     opacity: 0;
-    block-size: 0;
     translate: var(--field-hint-starting-translate);
-    content-visibility: hidden;
+    visibility: hidden;
 
     @starting-style {
       opacity: 1;
-      block-size: auto;
       translate: var(--field-hint-translate);
-      content-visibility: visible;
+      visibility: visible;
     }
   }
 
   :where(.field:has(:user-invalid)) .field__error {
     opacity: 1;
-    block-size: auto;
     translate: var(--field-hint-translate);
-    content-visibility: visible;
+    visibility: visible;
 
     @starting-style {
       opacity: 0;
-      block-size: 0;
       translate: var(--field-hint-starting-translate);
-      content-visibility: hidden;
+      visibility: hidden;
     }
   }
 

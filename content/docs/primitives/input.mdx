@@ -69,7 +69,7 @@ Addon alignment via `data-align`: `inline-start` (default), `inline-end`, `block
 
 ## Form composition
 
-Wrap each input in a `.field` with a `.field__label`. The `.field` is a grid that stacks the label (row 1), the control (row 2), and any `.field__hint` / `.field__error` (shared row 3). Add `.field__hint` for muted helper copy and `.field__error` for the destructive-themed validation message.
+Wrap each input in a `.field` with a `.field__label`. The `.field` is a grid that stacks the label (row 1), the control (row 2), and a `.field__description` (row 3). Inside `.field__description`, add `.field__hint` for muted helper copy and `.field__error` for the destructive-themed validation message.
 
 ```html
 <div class="field">
@@ -82,8 +82,10 @@ Wrap each input in a `.field` with a `.field__label`. The `.field` is a grid tha
     placeholder="you@example.com"
     aria-describedby="email-hint"
   />
-  <span class="field__hint" id="email-hint">We'll only use this to send receipts.</span>
-  <span class="field__error" role="alert">Please enter a valid email address.</span>
+  <div class="field__description">
+    <span class="field__hint" id="email-hint">We'll only use this to send receipts.</span>
+    <span class="field__error" role="alert">Please enter a valid email address.</span>
+  </div>
 </div>
 ```
 

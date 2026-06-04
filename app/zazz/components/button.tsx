@@ -5,14 +5,14 @@
   Class:     .button
 
   Variants (data-variant attribute):
-    (none)    — Default: card background, border, foreground text
+    none    — Default: card background, border, foreground text
     "primary" — Primary brand color background, white text
     "muted"   — Muted/subtle background, no visible border
     "ghost"   — Transparent until hover (reveals muted fill)
     "link"    — No background, underline text decoration, no height constraint
 
   Sizes (data-size attribute):
-    (none)    — Standard height (--step-8), inline padding (--step-2_5)
+    none    — Standard height (--step-8), inline padding (--step-2_5)
     "icon"    — Square (height × height), no padding, centers child SVG
 
   Icons:
@@ -63,6 +63,17 @@ const html = /* html */ `
   <div class="flex items-center gap-sm">
     <button class="button" data-variant="ghost">Button</button>
     <button class="button" data-variant="ghost" data-size="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+        <rect width="256" height="256" fill="none" />
+        <line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+        <line x1="40" y1="64" x2="216" y2="64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+        <line x1="40" y1="192" x2="216" y2="192" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+      </svg>
+    </button>
+  </div>
+  <div class="flex items-center gap-sm">
+    <button class="button" data-variant="destructive">Button</button>
+    <button class="button" data-variant="destructive" data-size="icon">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
         <rect width="256" height="256" fill="none" />
         <line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />

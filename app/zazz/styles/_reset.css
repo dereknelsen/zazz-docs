@@ -50,6 +50,8 @@
     font-size: var(--font-size-md);
     line-height: var(--leading-md);
     letter-spacing: var(--tracking-md);
+    container-type: inline-size;
+    container-name: body;
   }
 
   :where(:focus-visible) {
@@ -70,6 +72,8 @@
 
     /* Prevent floating footers */
     min-height: 100svh;
+    container-type: inline-size;
+    container-name: main;
   }
 
   :where(header, footer, section, article) {
@@ -313,6 +317,41 @@
   ::-webkit-search-decoration {
     -webkit-appearance: none;
   }
+
+  ::-webkit-search-cancel-button {
+    --search-cancel-display: block;
+    --search-cancel-color: currentColor;
+    --search-cancel-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'/%3E%3Cline x1='200' y1='56' x2='56' y2='200' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3Cline x1='200' y1='200' x2='56' y2='56' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3C/svg%3E");
+    --search-cancel-icon-size: var(--step-4);
+    --search-cancel-size: var(--step-6);
+    --search-cancel-radius: var(--radius-sm);
+
+    -webkit-appearance: none;
+
+    margin: 0;
+    padding: 0;
+    inline-size: var(--search-cancel-size);
+    block-size: var(--search-cancel-size);
+    border-radius: var(--search-cancel-radius);
+
+    transition:
+      opacity var(--default-transition-duration) var(--default-transition-timing-function),
+      display var(--default-transition-duration) var(--default-transition-timing-function)
+        allow-discrete;
+    
+    mask: var(--search-cancel-mask) no-repeat center / var(--search-cancel-icon-size);
+    background-size: var(--search-cancel-icon-size);
+    background-color: var(--search-cancel-color);
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  ::-webkit-search-cancel-button:is(:hover) {
+    opacity: 0.5;
+  }
+
+
+  
 
   /* Suppress the browser's built-in password reveal / clear glyphs (Edge/IE) so
      they never double up with the Zazz .password__toggle button. */

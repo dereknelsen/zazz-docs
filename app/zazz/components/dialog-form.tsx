@@ -39,8 +39,10 @@ const html = /* html */ `
             <div class="field">
               <label class="field__label" for="fd-email">Email</label>
               <input class="input" id="fd-email" name="email" type="email" inputmode="email" required placeholder="you@example.com" autocomplete="email" aria-describedby="fd-email-hint" />
-              <span class="field__hint" id="fd-email-hint">We'll only use this to send receipts.</span>
-              <span class="field__error" role="alert">Please enter a valid email address.</span>
+              <div class="field__description">
+                <span class="field__hint" id="fd-email-hint">We'll only use this to send receipts.</span>
+                <span class="field__error" role="alert">Please enter a valid email address.</span>
+              </div>
             </div>
             <label class="field-group col-span-2">
               <span class="field__label">Repository</span>

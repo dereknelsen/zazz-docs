@@ -32,58 +32,25 @@
 
 @layer components {
   :where(.accordion) {
-    --accordion-decoration-line: var(--decoration-line);
-    --accordion-decoration-color: color-mix(in oklch, currentColor 20%, transparent);
-    --accordion-decoration-color--hover: var(--decoration-color--hover);
-    --accordion-decoration-color--active: var(--decoration-color--active);
-    --accordion-decoration-style: dotted;
-    --accordion-decoration-thickness: var(--decoration-thickness);
-    --accordion-decoration-offset: var(--decoration-offset);
-    --accordion-decoration-offset--hover: var(--decoration-offset--hover);
-    --accordion-decoration-offset--active: var(--decoration-offset--hover);
-
     display: grid;
     flex: 1;
   }
 
-  :where(.accordion details) {
+  :where(.accordion > details) {
     display: grid;
     flex: 1 0 auto;
   }
 
-  :where(.accordion details:not(:last-child)) {
-    border-bottom: 1px solid var(--border);
-  }
-
-  :where(.accordion summary) {
-    --accordion-decoration-style: dotted;
-
+  :where(.accordion > details > summary) {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-block: var(--gap-sm);
-    font-weight: var(--weight-strong);
 
     transition: var(--default-transition);
-
-    text-decoration-line: var(--accordion-decoration-line);
-    text-decoration-color: var(--accordion-decoration-color);
-    text-underline-offset: var(--accordion-decoration-offset);
-    text-decoration-style: var(--accordion-decoration-style);
-    text-decoration-thickness: var(--accordion-decoration-thickness);
   }
 
-  :where(.accordion summary:hover) {
-    text-decoration-color: var(--accordion-decoration-color--hover);
-    text-underline-offset: var(--accordion-decoration-offset--hover);
-  }
-
-  :where(.accordion details[open] summary) {
-    text-decoration-color: var(--accordion-decoration-color--active);
-    text-underline-offset: var(--accordion-decoration-offset--active);
-  }
-
-  :where(.accordion summary > svg) {
+  :where(.accordion  summary > svg) {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -94,7 +61,7 @@
       var(--default-transition-timing-function);
   }
 
-  :where(.accordion details[open] summary > svg) {
+  :where(.accordion > details[open] > summary > svg) {
     transform: rotate(-180deg);
   }
 }

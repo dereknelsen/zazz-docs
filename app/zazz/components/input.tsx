@@ -25,8 +25,10 @@ const html = /* html */ `
     <div class="field">
       <label class="field__label" for="f-email">Email</label>
       <input class="input" id="f-email" name="email" type="email" inputmode="email" required placeholder="you@example.com" autocomplete="email" autocapitalize="off" spellcheck="false" enterkeyhint="next" aria-describedby="f-email-hint" />
-      <span class="field__hint" id="f-email-hint">We'll only use this to send receipts.</span>
-      <span class="field__error" role="alert">Please enter a valid email address.</span>
+      <div class="field__description">
+        <span class="field__hint" id="f-email-hint">We'll only use this to send receipts.</span>
+        <span class="field__error" role="alert">Please enter a valid email address.</span>
+      </div>
     </div>
     <div class="field">
       <label class="field__label" for="f-phone">Phone</label>

@@ -1,0 +1,90 @@
+@layer components {
+  /* ===========================================================================
+  MOBILE MENU — full-screen dialog with accordion-based nested navigation
+  - Composes .dialog[data-size="screen"] + .accordion for expand/collapse
+  - No JavaScript — Invoker Commands to open, native dialog close, native details
+  =========================================================================== */
+
+  :where(.mobile-menu) {
+    --mobile-menu-background: var(--background);
+    --mobile-menu-foreground: var(--foreground);
+
+    --dialog-background: var(--mobile-menu-background);
+    --dialog-foreground: var(--mobile-menu-foreground);
+
+    overflow: clip;
+  }
+
+
+  :where(.mobile-menu__viewport) {
+    display: grid;
+    position: relative;
+    grid-template-rows: auto 1fr auto;
+    overflow: clip;
+    align-items: start;
+    inline-size: 100%;
+    block-size: 100%;
+    max-block-size: 100svh;
+  }
+
+  :where(.mobile-menu__header) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: var(--gap-sm);
+    padding-block: var(--gap-xs);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background-color: var(--mobile-menu-background);
+    z-index: 1;
+  }
+
+  :where(.mobile-menu__body) {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: clip;
+    padding-inline: var(--gap-sm);
+    padding-block: var(--gap-sm);
+    max-block-size: 100%;
+    scrollbar-gutter: stable both-edges;
+  }
+
+  :where(.mobile-menu__footer) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+    padding: var(--gap-sm);
+    border-top: 1px solid var(--border);
+    position: sticky;
+    bottom: 0;
+    background-color: var(--mobile-menu-background);
+  }
+
+  /* Nested accordion inside mobile menu — tighter padding for sub-levels */
+  :where(.mobile-menu__body .accordion .accordion) {
+    padding-inline-start: var(--gap-sm);
+  }
+
+  :where(.mobile-menu__body .accordion details:not(:last-child)) {
+    border-bottom-color: var(--border);
+  }
+
+  /* ===========================================================================
+  MOBILE MENU SLIDE DOWN ANIMATION
+  =========================================================================== */
+
+  /* Slide-right: accordion-style block-size reveal on the viewport (not scaleY). */
+  :where(.mobile-menu[data-animation="slide-right"]) {
+    --default-transition-duration: 500ms;
+    --dialog-starting-opacity: 1;
+    --dialog-starting-scale: 1;
+    --dialog-starting-translate: -100%, 0, 0;
+    --dialog-translate: 0, 0, 0;
+
+    overflow: clip;
+    transform-origin: left center;
+  }
+
+}

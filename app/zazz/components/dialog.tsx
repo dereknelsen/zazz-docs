@@ -6,7 +6,7 @@
   Closing:   closedby="any" (backdrop click) + button[command="close"]
 
   Sizes (data-size attribute on .dialog):
-    (none)    — Default width: var(--article) ≈ 40rem
+    none    — Default width: var(--article) ≈ 40rem
     "large"   — Width: var(--container) ≈ 80rem
     "screen"  — Full viewport minus gap-md margins
 

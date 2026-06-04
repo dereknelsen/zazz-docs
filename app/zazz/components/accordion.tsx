@@ -26,7 +26,7 @@
 const html = /* html */ `
 <!-- Accordion START -->
 <div class="accordion">
-  <details>
+  <details class="border-b">
     <summary>
       What is an accordion?
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
@@ -43,7 +43,7 @@ const html = /* html */ `
       </p>
     </div>
   </details>
-  <details>
+  <details class="border-b">
     <summary>
       How does an accordion work?
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">

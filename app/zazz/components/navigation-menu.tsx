@@ -44,11 +44,11 @@
     "end"             — right edge aligns to trigger end
 
   Variant (data-variant on .navigation-menu__popover):
-    (none)    — top-level panel, opens downward from the trigger
+    none    — top-level panel, opens downward from the trigger
     "submenu" — nested submenu, opens to the inline-end (right) of its row
 
   Panel layout (data-layout on .navigation-menu__viewport):
-    (none)     — single-column list of links
+    none     — single-column list of links
     "featured" — two columns: featured callout + link list
 
   Chevron: rotates 180° while the item's popover is open, via :has() — no JS.
@@ -266,8 +266,8 @@ const html = /* html */ `
           <div class="grid" style="min-height: 16rem;">
           <div class="flex flex-col gap-px p-xs">
             <!-- Tabs vertical START -->
-              <div class="tabs h-full grid grid-cols-4 gap-xs" data-direction="vertical">
-                <div class="tabs__list h-full" role="tablist">
+              <div class="tabs h-full flex flex-col xs:grid xs:grid-cols-2 md:grid-cols-4 gap-sm" data-direction="vertical">
+                <div class="tabs__list w-full xs:w-auto xs:col-span-2 md:col-span-1 md:h-full grid sm:flex flex-col" role="tablist">
                   <div class="tabs__indicator" aria-hidden="true"></div>
 
                   <input type="radio" name="tabs-megamenu-group-1" id="tab-megamenu-1" checked />
@@ -289,8 +289,7 @@ const html = /* html */ `
                   </label>
                 </div>
 
-                <div class="tabs__panel size-full col-span-3">
-                  <div class="grid grid-cols-3 gap-xs">
+                <div class="tabs__panel flex flex-col xs:grid xs:grid-cols-subgrid xs:col-span-2 md:col-span-3 gap-sm">
                     <div class="grid gap-px">
                       <span class="text-eyebrow text-muted-foreground pt-xs pb-xs">Dresses</span>
                       <a href="#" class="navigation-menu__link flex-1">
@@ -350,11 +349,9 @@ const html = /* html */ `
                         <span class="text-sm text-muted-foreground">Seasonal styles for dress-up moments.</span>
                       </a>
                     </div>
-                  </div>
                 </div>
 
-                <div class="tabs__panel size-full col-span-3">
-                  <div class="grid grid-cols-3 gap-xs">
+                <div class="tabs__panel flex flex-col xs:grid xs:grid-cols-subgrid xs:col-span-2 md:col-span-3 gap-sm">
                     <div class="grid gap-px">
                       <span class="text-eyebrow text-muted-foreground pt-xs pb-xs">Shirts</span>
                       <a href="#" class="navigation-menu__link flex-1">
@@ -414,11 +411,9 @@ const html = /* html */ `
                         <span class="text-sm text-muted-foreground">Belts, wallets, and winter essentials.</span>
                       </a>
                     </div>
-                  </div>
                 </div>
 
-                <div class="tabs__panel size-full col-span-3">
-                  <div class="grid grid-cols-3 gap-xs">
+                <div class="tabs__panel flex flex-col xs:grid xs:grid-cols-subgrid xs:col-span-2 md:col-span-3 gap-sm">
                     <div class="grid gap-px">
                       <span class="text-eyebrow text-muted-foreground pt-xs pb-xs">Bedding</span>
                       <a href="#" class="navigation-menu__link flex-1">
@@ -478,7 +473,6 @@ const html = /* html */ `
                         <span class="text-sm text-muted-foreground">Prints, frames, and statement mirrors.</span>
                       </a>
                     </div>
-                  </div>
                 </div>
               <!-- Tabs vertical END -->
             </div>
@@ -487,7 +481,6 @@ const html = /* html */ `
       </div>
     </li>
 
-      <!-- Plain top-level link — no popover -->
       <li class="navigation-menu__item ml-auto">
         <!-- Form dialog START -->
         <button class="button" type="button" data-variant="ghost" command="show-modal" commandfor="form-sign-in-1">
@@ -508,8 +501,10 @@ const html = /* html */ `
                     <div class="field">
                       <label class="field__label" for="fd-email">Email</label>
                       <input class="input" id="fd-email" name="email" type="email" inputmode="email" required placeholder="you@example.com" autocomplete="email" aria-describedby="fd-email-hint" />
-                      <span class="field__hint" id="fd-email-hint">We'll only use this to send receipts.</span>
-                      <span class="field__error" role="alert">Please enter a valid email address.</span>
+                      <div class="field__description">
+                        <span class="field__hint" id="fd-email-hint">We'll only use this to send receipts.</span>
+                        <span class="field__error" role="alert">Please enter a valid email address.</span>
+                      </div>
                     </div>
 
                     <!-- Password START -->
@@ -544,7 +539,9 @@ const html = /* html */ `
                           </button>
                         </span>
                       </label>
-                      <span class="field__error" role="alert">Incorrect email or password.</span>
+                      <div class="field__description">
+                        <span class="field__error" role="alert">Incorrect email or password.</span>
+                      </div>
                       <span class="sr-only" id="f-login-password-warning">Warning: showing the password makes it visible to anyone near your screen.</span>
                     </div>
                     <!-- Password END -->
@@ -581,5 +578,10 @@ const html = /* html */ `
 `;
 
 export function NavigationMenu() {
-  return <div style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: html }} />;
+  return (
+    <div
+      style={{ display: "contents" }}
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
 }

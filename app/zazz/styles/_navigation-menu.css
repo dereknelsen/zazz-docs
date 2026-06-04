@@ -197,8 +197,7 @@
   MEGAMENU ANIMATION
   =========================================================================== */
 
-  /* Slide-down: accordion-style block-size reveal on the viewport (not scaleY).
-     Popover keeps overflow:visible so box-shadow is never clipped. */
+  /* Slide-down: accordion-style block-size reveal on the viewport (not scaleY). */
   :where(.navigation-menu__popover[data-size="screen"][data-animation="slide-down"]) {
     --popover-starting-scale: 1;
   }

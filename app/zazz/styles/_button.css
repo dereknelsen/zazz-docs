@@ -31,7 +31,7 @@
 
     --button-icon-size: var(--step-4);
 
-    --button-shadow: var(--shadow-none);
+    --button-shadow: none;
 
     --button-decoration-line: var(--decoration-line);
     --button-decoration-color: var(--decoration-color);
@@ -51,10 +51,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--button-gap);
+    column-gap: var(--button-gap);
     flex-shrink: 0;
 
-    block-size: var(--button-height);
+    min-block-size: var(--button-height);
     min-inline-size: max-content;
     padding-inline: var(--button-padding);
 
@@ -148,7 +148,7 @@
     --button-border--hover: 1px solid transparent;
     --button-border--active: 1px solid transparent;
 
-    --button-shadow: var(--shadow-none);
+    --button-shadow: none;
   }
 
   :where(.button[data-variant="muted"]) {
@@ -164,7 +164,7 @@
     --button-border--hover: 1px solid transparent;
     --button-border--active: 1px solid transparent;
 
-    --button-shadow: var(--shadow-none);
+    --button-shadow: none;
   }
 
   :where(.button[data-variant="ghost"]) {
@@ -180,7 +180,7 @@
     --button-border--hover: 1px solid transparent;
     --button-border--active: 1px solid transparent;
 
-    --button-shadow: var(--shadow-none);
+    --button-shadow: none;
   }
 
   :where(.button[data-variant="destructive"]) {
@@ -198,7 +198,7 @@
     --button-border--hover: 1px solid var(--destructive);
     --button-border--active: 1px solid var(--destructive);
 
-    --button-shadow: var(--shadow-none);
+    --button-shadow: none;
   }
 
   :where(.button[data-variant="link"]) {
@@ -214,7 +214,7 @@
     --button-padding: 0;
     --button-radius: 0;
 
-    --button-shadow: var(--shadow-none);
+    --button-shadow: none;
 
     border: none;
     text-decoration-line: var(--button-decoration-line);

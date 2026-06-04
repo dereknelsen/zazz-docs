@@ -270,7 +270,7 @@ export function generateThemeCSS(theme: ThemeConfig): string {
   out.push(`  --focus-ring: ${effects.focusRing};`);
   out.push("");
   out.push("  /* shadows */");
-  out.push(`  --shadow-none: ${effects.shadows.none};`);
+  out.push(`  none: ${effects.shadows.none};`);
   for (const k of ["xs", "sm", "md", "lg", "xl"] as const) {
     out.push(`  --shadow-${k}:\n    ${effects.shadows[k]};`);
   }

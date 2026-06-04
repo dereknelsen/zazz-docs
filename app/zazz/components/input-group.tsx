@@ -39,7 +39,9 @@ const html = /* html */ `
           </button>
         </span>
       </label>
-      <span class="field__hint" id="f-search-hint">Search across every page in the docs.</span>
+      <div class="field__description">
+        <span class="field__hint" id="f-search-hint">Search across every page in the docs.</span>
+      </div>
     </div>
   </form>
 
@@ -55,8 +57,10 @@ const html = /* html */ `
           <button class="button" data-variant="primary" data-size="sm" type="submit">Apply</button>
         </span>
       </label>
-      <span class="field__hint" id="f-url-hint">Where people can find you online.</span>
-      <span class="field__error" role="alert">Enter a valid URL, e.g. zazz.design.</span>
+      <div class="field__description">
+        <span class="field__hint" id="f-url-hint">Where people can find you online.</span>
+        <span class="field__error" role="alert">Enter a valid URL, e.g. zazz.design.</span>
+      </div>
     </div>
   </form>
 
@@ -71,7 +75,9 @@ const html = /* html */ `
           </button>
         </span>
       </label>
-      <span class="field__hint" id="f-prompt-hint">Enter to send · Shift + Enter for a new line.</span>
+      <div class="field__description">
+        <span class="field__hint" id="f-prompt-hint">Enter to send · Shift + Enter for a new line.</span>
+      </div>
     </div>
   </form>
 </div>

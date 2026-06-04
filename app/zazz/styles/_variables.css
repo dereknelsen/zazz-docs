@@ -186,9 +186,9 @@
     --tracking-eyebrow: 0.1em;
 
     /* line-height — not in Figma (variable limits) */
-    --leading-display: 0.85;
-    --leading-h1: 0.9;
-    --leading-h2: 0.9;
+    --leading-display: 0.95;
+    --leading-h1: 0.95;
+    --leading-h2: 0.95;
     --leading-h3: 1;
     --leading-h4: 1;
     --leading-h5: 1;
@@ -317,7 +317,7 @@
     --ring: color-mix(in oklch, var(--ring-color) var(--ring-opacity), transparent);
 
     /* shadows */
-    --shadow-none: 0px 0px 0px 0px oklch(from var(--black) l c h / 0);
+    none: 0px 0px 0px 0px oklch(from var(--black) l c h / 0);
     --shadow-xs:
       0 8px 2px 0 oklch(from var(--black) l c h / 0),
       0 5px 2px 0 oklch(from var(--black) l c h / 0.01),
@@ -371,6 +371,7 @@
       0.994 68.8%,
       1
     );
+    --bezier-easing: cubic-bezier(0.17, 0.84, 0.44, 1);
     --spring-duration: 0.333s;
 
     /* Fallback to easeOutQuart for browsers that don't support spring easing */
@@ -378,7 +379,7 @@
       text-underline-offset, text-decoration-color, box-shadow, background-color, border-color,
       opacity, color, fill, stroke, transform, translate, scale, rotate, filter,
       -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
-    --default-transition-timing-function: var(--spring-easing, cubic-bezier(0.17, 0.84, 0.44, 1));
+    --default-transition-timing-function: var(--spring-easing, var(--bezier-easing));
     --default-transition-duration: var(--spring-duration, 0.333s);
     --default-transition:
       text-underline-offset var(--default-transition-duration)

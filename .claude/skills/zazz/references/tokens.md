@@ -488,7 +488,7 @@ Components keep a transparent outline at rest and switch only the color on focus
 Each is a stack of 5 entries with increasing offset and decreasing alpha. Colors derive from `oklch(from var(--black) l c h / α)` so they read correctly on light and dark surfaces.
 
 ```css
---shadow-none: 0px 0px 0px 0px oklch(from var(--black) l c h / 0);
+none: 0px 0px 0px 0px oklch(from var(--black) l c h / 0);
 --shadow-xs: /* very subtle, for borders that want a slight lift */;
 --shadow-sm: /* resting buttons, hover affordances */;
 --shadow-md: /* cards, dropdowns, popovers */;

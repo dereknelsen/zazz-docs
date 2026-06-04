@@ -99,12 +99,14 @@ export default function PasswordGroupDefault() {
             </button>
           </span>
         </label>
-        <span className="field__hint" id="pw-preview-hint">
-          Use eight or more characters.
-        </span>
-        <span className="field__error" role="alert">
-          Password must be at least 8 characters.
-        </span>
+        <div className="field__description">
+          <span className="field__hint" id="pw-preview-hint">
+            Use eight or more characters.
+          </span>
+          <span className="field__error" role="alert">
+            Password must be at least 8 characters.
+          </span>
+        </div>
         <span className="sr-only" id="pw-preview-warning">
           Warning: showing the password makes it visible to anyone near your screen.
         </span>

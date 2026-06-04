@@ -4,6 +4,7 @@ import { Button } from "@/app/zazz/components/button";
 import { Dialog } from "@/app/zazz/components/dialog";
 import { Popover } from "@/app/zazz/components/dropdown";
 import { NavigationMenu } from "@/app/zazz/components/navigation-menu";
+import { MobileMenu } from "@/app/zazz/components/mobile-menu";
 import { redirect } from "next/navigation";
 import { DialogForm } from "@/app/zazz/components/dialog-form";
 import { DialogAlert } from "@/app/zazz/components/dialog-alert";
@@ -27,9 +28,14 @@ if (isProduction) {
 export default function DebugPage() {
   return (
     <main className="flex flex-col w-full">
-      <section className="grid py-xl">
+      <section className="hidden md:grid py-xl">
         <div className="container grid">
           <NavigationMenu />
+        </div>
+      </section>
+      <section className="grid md:hidden py-xl">
+        <div className="container grid">
+          <MobileMenu />
         </div>
       </section>
       <section className="grid py-xl border-t">

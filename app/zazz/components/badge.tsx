@@ -7,14 +7,14 @@
   Height: --step-5 (1.25rem). Font: --font-size-xs. Radius: --radius-sm.
 
   Variants (data-variant attribute):
-    (none)    — Default: card background, border, foreground text
+    none    — Default: card background, border, foreground text
     "primary" — Primary brand color background, white text
     "muted"   — Muted/subtle background, no visible border
     "ghost"   — Transparent until hover (reveals muted fill)
     "link"    — No background, underline text decoration, no height constraint
 
   Sizes (data-size attribute):
-    (none)    — Standard height (--step-5), inline padding (--step-2)
+    none    — Standard height (--step-5), inline padding (--step-2)
     "icon"    — Square (height × height), no padding, centers child SVG
 
   Icons:

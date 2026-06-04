@@ -35,7 +35,7 @@ If you find yourself fighting one of these rules, that's a signal to step back a
 | **Spacing**    | Semantic gaps (xs–xl) and a numeric step scale.                      | `--gap-xs`, `--gap-sm`, `--gap-md`, `--gap-lg`, `--gap-xl`; `--step-px`, `--step-1` … `--step-96`           |
 | **Radius**     | Semantic scale; components alias it via a local prop.                | `--radius-xs`–`--radius-xl`, `--radius-none`, `--radius-full`, `--radius-multiplier`; utilities `rounded-*` |
 | **Layout**     | Self-padding container widths + breakpoint constants.                | `--container`, `--article`, `--screen-xs`–`--screen-xl`, classes `.container`, `.article`                   |
-| **Effects**    | Shadows for elevation, an outline focus ring for accessibility.      | `--shadow-xs`–`--shadow-xl`, `--shadow-none`, `--ring`, `--ring-size`, `--ring-style`, `--ring-offset`      |
+| **Effects**    | Shadows for elevation, an outline focus ring for accessibility.      | `--shadow-xs`–`--shadow-xl`, `none`, `--ring`, `--ring-size`, `--ring-style`, `--ring-offset`      |
 
 Alongside the eight, a small **Animations/motion** group ships too — `--spring-easing`, `--spring-duration`, and the `--default-transition` bundle that components use for hover/open transitions. And the cascade is organized into four layers, declared once in `index.css`: `@layer variables, reset, components, utilities` (the `components` layer is where the shipped component styles live, between reset and utilities).
 
@@ -440,11 +440,11 @@ Two groups: shadows for elevation, focus rings for accessibility.
 
 ### Shadows
 
-Six levels (`--shadow-none`, `--shadow-xs`, `--shadow-sm`, `--shadow-md`, `--shadow-lg`, `--shadow-xl`), each a stack of multiple `box-shadow` entries with decreasing opacity and increasing offset for a natural falloff.
+Six levels (`none`, `--shadow-xs`, `--shadow-sm`, `--shadow-md`, `--shadow-lg`, `--shadow-xl`), each a stack of multiple `box-shadow` entries with decreasing opacity and increasing offset for a natural falloff.
 
 | Level           | Use for                                                                       |
 | --------------- | ----------------------------------------------------------------------------- |
-| `--shadow-none` | Explicit "no shadow" for components that toggle elevation on/off              |
+| `none` | Explicit "no shadow" for components that toggle elevation on/off              |
 | `--shadow-xs`   | Borders that want a slight lift                                               |
 | `--shadow-sm`   | Resting buttons, hover affordances                                            |
 | `--shadow-md`   | Cards, dropdowns, popovers                                                    |

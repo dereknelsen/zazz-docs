@@ -1378,11 +1378,6 @@
   inherits: true;
 }
 
-@property --shadow-none {
-  syntax: "*";
-  inherits: true;
-}
-
 @property --shadow-sm {
   syntax: "*";
   inherits: true;
@@ -1419,6 +1414,18 @@
 @property --default-transition-timing-function {
   syntax: "*";
   inherits: true;
+}
+
+@property --reveal-duration {
+    syntax: "<time>";
+    inherits: true;
+    initial-value: 900ms;
+}
+
+@property --reveal-wait {
+    syntax: "<time>";
+    inherits: true;
+    initial-value: 0ms;
 }
 
 @property --spring-duration {

@@ -7,7 +7,7 @@ description: Layered shadow utilities for elevation.
 
 | Class         | Value                                                       |
 | ------------- | ----------------------------------------------------------- |
-| `shadow-none` | `box-shadow: var(--shadow-none); /* 0 0 0 0 transparent */` |
+| `shadow-none` | `box-shadow: none; /* 0 0 0 0 transparent */` |
 | `shadow-xs`   | `box-shadow: var(--shadow-xs);`                             |
 | `shadow-sm`   | `box-shadow: var(--shadow-sm);`                             |
 | `shadow-md`   | `box-shadow: var(--shadow-md);`                             |
@@ -124,7 +124,7 @@ Each shadow stacks five layers with decreasing opacity and increasing offset, pr
 Each shadow is declared as five comma-separated layers. Each layer is `offset-x offset-y blur spread color`.
 
 ```css
---shadow-none: 0px 0px 0px 0px oklch(from var(--black) l c h / 0);
+none: 0px 0px 0px 0px oklch(from var(--black) l c h / 0);
 
 --shadow-xs:
   0 8px 2px 0 oklch(from var(--black) l c h / 0), 0 5px 2px 0 oklch(from var(--black) l c h / 0.01),

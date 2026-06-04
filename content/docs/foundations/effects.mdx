@@ -14,7 +14,7 @@ Effects are the visual signal that something has depth or that a user is interac
 Six shadow tokens, layered for soft falloff.
 
 ```css
---shadow-none: 0px 0px 0px 0px oklch(from var(--black) l c h / 0);
+none: 0px 0px 0px 0px oklch(from var(--black) l c h / 0);
 
 --shadow-xs:
   0 8px 2px 0 oklch(from var(--black) l c h / 0), 0 5px 2px 0 oklch(from var(--black) l c h / 0.01),
@@ -68,7 +68,7 @@ Apply a shadow directly with a utility: `shadow-none`, `shadow-xs`, `shadow-sm`,
 
 Levels by intent:
 
-- **`--shadow-none`.** Explicit "no shadow," for components that toggle elevation on and off.
+- **`none`.** Explicit "no shadow," for components that toggle elevation on and off.
 - **`--shadow-xs`.** Borders that need a slight lift.
 - **`--shadow-sm`.** Resting buttons, hover affordances.
 - **`--shadow-md`.** Cards, dropdowns, popovers.

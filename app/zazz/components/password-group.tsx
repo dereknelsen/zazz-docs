@@ -56,8 +56,10 @@ const html = /* html */ `
             </button>
           </span>
         </label>
-        <span class="field__hint" id="f-login-password-hint">Use eight or more characters.</span>
-        <span class="field__error" role="alert">Password must be at least 8 characters.</span>
+        <div class="field__description">
+          <span class="field__hint" id="f-login-password-hint">Use eight or more characters.</span>
+          <span class="field__error" role="alert">Password must be at least 8 characters.</span>
+        </div>
         <span class="sr-only" id="f-login-password-warning">Warning: showing the password makes it visible to anyone near your screen.</span>
       </div>
   </form>

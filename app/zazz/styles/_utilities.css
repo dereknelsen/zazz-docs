@@ -3316,4 +3316,612 @@
   :where(.transition-discrete) {
     transition-behavior: allow-discrete;
   }
+
+  /* ===========================================================================
+  HOVER STATE UTILITIES
+  =========================================================================== */
+
+  /* -- hover: text color (theme) -- */
+
+  :where(.hover\:text-background:hover) {
+    color: var(--background);
+  }
+
+  :where(.hover\:text-foreground:hover) {
+    color: var(--foreground);
+  }
+
+  :where(.hover\:text-card:hover) {
+    color: var(--card);
+  }
+
+  :where(.hover\:text-card-foreground:hover) {
+    color: var(--card-foreground);
+  }
+
+  :where(.hover\:text-input:hover) {
+    color: var(--input);
+  }
+
+  :where(.hover\:text-input-foreground:hover) {
+    color: var(--input-foreground);
+  }
+
+  :where(.hover\:text-muted:hover) {
+    color: var(--muted);
+  }
+
+  :where(.hover\:text-muted-foreground:hover) {
+    color: var(--muted-foreground);
+  }
+
+  :where(.hover\:text-faded:hover) {
+    color: var(--faded);
+  }
+
+  :where(.hover\:text-faded-foreground:hover) {
+    color: var(--faded-foreground);
+  }
+
+  :where(.hover\:text-primary:hover) {
+    color: var(--primary);
+  }
+
+  :where(.hover\:text-primary-foreground:hover) {
+    color: var(--primary-foreground);
+  }
+
+  :where(.hover\:text-secondary:hover) {
+    color: var(--secondary);
+  }
+
+  :where(.hover\:text-secondary-foreground:hover) {
+    color: var(--secondary-foreground);
+  }
+
+  :where(.hover\:text-tertiary:hover) {
+    color: var(--tertiary);
+  }
+
+  :where(.hover\:text-tertiary-foreground:hover) {
+    color: var(--tertiary-foreground);
+  }
+
+  :where(.hover\:text-info:hover) {
+    color: var(--info);
+  }
+
+  :where(.hover\:text-info-foreground:hover) {
+    color: var(--info-foreground);
+  }
+
+  :where(.hover\:text-success:hover) {
+    color: var(--success);
+  }
+
+  :where(.hover\:text-success-foreground:hover) {
+    color: var(--success-foreground);
+  }
+
+  :where(.hover\:text-warning:hover) {
+    color: var(--warning);
+  }
+
+  :where(.hover\:text-warning-foreground:hover) {
+    color: var(--warning-foreground);
+  }
+
+  :where(.hover\:text-destructive:hover) {
+    color: var(--destructive);
+  }
+
+  :where(.hover\:text-destructive-foreground:hover) {
+    color: var(--destructive-foreground);
+  }
+
+  /* -- hover: background color (theme) -- */
+
+  :where(.hover\:bg-background:hover) {
+    background-color: var(--background);
+  }
+
+  :where(.hover\:bg-foreground:hover) {
+    background-color: var(--foreground);
+  }
+
+  :where(.hover\:bg-card:hover) {
+    background-color: var(--card);
+  }
+
+  :where(.hover\:bg-card-foreground:hover) {
+    background-color: var(--card-foreground);
+  }
+
+  :where(.hover\:bg-input:hover) {
+    background-color: var(--input);
+  }
+
+  :where(.hover\:bg-input-foreground:hover) {
+    background-color: var(--input-foreground);
+  }
+
+  :where(.hover\:bg-muted:hover) {
+    background-color: var(--muted);
+  }
+
+  :where(.hover\:bg-muted-foreground:hover) {
+    background-color: var(--muted-foreground);
+  }
+
+  :where(.hover\:bg-faded:hover) {
+    background-color: var(--faded);
+  }
+
+  :where(.hover\:bg-faded-foreground:hover) {
+    background-color: var(--faded-foreground);
+  }
+
+  :where(.hover\:bg-primary:hover) {
+    background-color: var(--primary);
+  }
+
+  :where(.hover\:bg-primary-foreground:hover) {
+    background-color: var(--primary-foreground);
+  }
+
+  :where(.hover\:bg-secondary:hover) {
+    background-color: var(--secondary);
+  }
+
+  :where(.hover\:bg-secondary-foreground:hover) {
+    background-color: var(--secondary-foreground);
+  }
+
+  :where(.hover\:bg-tertiary:hover) {
+    background-color: var(--tertiary);
+  }
+
+  :where(.hover\:bg-tertiary-foreground:hover) {
+    background-color: var(--tertiary-foreground);
+  }
+
+  :where(.hover\:bg-info:hover) {
+    background-color: var(--info);
+  }
+
+  :where(.hover\:bg-info-foreground:hover) {
+    background-color: var(--info-foreground);
+  }
+
+  :where(.hover\:bg-success:hover) {
+    background-color: var(--success);
+  }
+
+  :where(.hover\:bg-success-foreground:hover) {
+    background-color: var(--success-foreground);
+  }
+
+  :where(.hover\:bg-warning:hover) {
+    background-color: var(--warning);
+  }
+
+  :where(.hover\:bg-warning-foreground:hover) {
+    background-color: var(--warning-foreground);
+  }
+
+  :where(.hover\:bg-destructive:hover) {
+    background-color: var(--destructive);
+  }
+
+  :where(.hover\:bg-destructive-foreground:hover) {
+    background-color: var(--destructive-foreground);
+  }
+
+  /* -- hover: border color (theme) -- */
+
+  :where(.hover\:border-primary:hover) {
+    --border-color: var(--primary);
+  }
+
+  :where(.hover\:border-secondary:hover) {
+    --border-color: var(--secondary);
+  }
+
+  :where(.hover\:border-tertiary:hover) {
+    --border-color: var(--tertiary);
+  }
+
+  :where(.hover\:border-muted:hover) {
+    --border-color: var(--muted);
+  }
+
+  :where(.hover\:border-faded:hover) {
+    --border-color: var(--faded);
+  }
+
+  :where(.hover\:border-info:hover) {
+    --border-color: var(--info);
+  }
+
+  :where(.hover\:border-success:hover) {
+    --border-color: var(--success);
+  }
+
+  :where(.hover\:border-warning:hover) {
+    --border-color: var(--warning);
+  }
+
+  :where(.hover\:border-destructive:hover) {
+    --border-color: var(--destructive);
+  }
+
+  /* -- hover: opacity -- */
+
+  :where(.hover\:opacity-0:hover) {
+    opacity: 0;
+  }
+
+  :where(.hover\:opacity-5:hover) {
+    opacity: 0.05;
+  }
+
+  :where(.hover\:opacity-10:hover) {
+    opacity: 0.1;
+  }
+
+  :where(.hover\:opacity-15:hover) {
+    opacity: 0.15;
+  }
+
+  :where(.hover\:opacity-20:hover) {
+    opacity: 0.2;
+  }
+
+  :where(.hover\:opacity-25:hover) {
+    opacity: 0.25;
+  }
+
+  :where(.hover\:opacity-30:hover) {
+    opacity: 0.3;
+  }
+
+  :where(.hover\:opacity-40:hover) {
+    opacity: 0.4;
+  }
+
+  :where(.hover\:opacity-50:hover) {
+    opacity: 0.5;
+  }
+
+  :where(.hover\:opacity-60:hover) {
+    opacity: 0.6;
+  }
+
+  :where(.hover\:opacity-70:hover) {
+    opacity: 0.7;
+  }
+
+  :where(.hover\:opacity-75:hover) {
+    opacity: 0.75;
+  }
+
+  :where(.hover\:opacity-80:hover) {
+    opacity: 0.8;
+  }
+
+  :where(.hover\:opacity-90:hover) {
+    opacity: 0.9;
+  }
+
+  :where(.hover\:opacity-95:hover) {
+    opacity: 0.95;
+  }
+
+  :where(.hover\:opacity-100:hover) {
+    opacity: 1;
+  }
+
+  /* ===========================================================================
+  ACTIVE STATE UTILITIES
+  =========================================================================== */
+
+  /* -- active: text color (theme) -- */
+
+  :where(.active\:text-background:active) {
+    color: var(--background);
+  }
+
+  :where(.active\:text-foreground:active) {
+    color: var(--foreground);
+  }
+
+  :where(.active\:text-card:active) {
+    color: var(--card);
+  }
+
+  :where(.active\:text-card-foreground:active) {
+    color: var(--card-foreground);
+  }
+
+  :where(.active\:text-input:active) {
+    color: var(--input);
+  }
+
+  :where(.active\:text-input-foreground:active) {
+    color: var(--input-foreground);
+  }
+
+  :where(.active\:text-muted:active) {
+    color: var(--muted);
+  }
+
+  :where(.active\:text-muted-foreground:active) {
+    color: var(--muted-foreground);
+  }
+
+  :where(.active\:text-faded:active) {
+    color: var(--faded);
+  }
+
+  :where(.active\:text-faded-foreground:active) {
+    color: var(--faded-foreground);
+  }
+
+  :where(.active\:text-primary:active) {
+    color: var(--primary);
+  }
+
+  :where(.active\:text-primary-foreground:active) {
+    color: var(--primary-foreground);
+  }
+
+  :where(.active\:text-secondary:active) {
+    color: var(--secondary);
+  }
+
+  :where(.active\:text-secondary-foreground:active) {
+    color: var(--secondary-foreground);
+  }
+
+  :where(.active\:text-tertiary:active) {
+    color: var(--tertiary);
+  }
+
+  :where(.active\:text-tertiary-foreground:active) {
+    color: var(--tertiary-foreground);
+  }
+
+  :where(.active\:text-info:active) {
+    color: var(--info);
+  }
+
+  :where(.active\:text-info-foreground:active) {
+    color: var(--info-foreground);
+  }
+
+  :where(.active\:text-success:active) {
+    color: var(--success);
+  }
+
+  :where(.active\:text-success-foreground:active) {
+    color: var(--success-foreground);
+  }
+
+  :where(.active\:text-warning:active) {
+    color: var(--warning);
+  }
+
+  :where(.active\:text-warning-foreground:active) {
+    color: var(--warning-foreground);
+  }
+
+  :where(.active\:text-destructive:active) {
+    color: var(--destructive);
+  }
+
+  :where(.active\:text-destructive-foreground:active) {
+    color: var(--destructive-foreground);
+  }
+
+  /* -- active: background color (theme) -- */
+
+  :where(.active\:bg-background:active) {
+    background-color: var(--background);
+  }
+
+  :where(.active\:bg-foreground:active) {
+    background-color: var(--foreground);
+  }
+
+  :where(.active\:bg-card:active) {
+    background-color: var(--card);
+  }
+
+  :where(.active\:bg-card-foreground:active) {
+    background-color: var(--card-foreground);
+  }
+
+  :where(.active\:bg-input:active) {
+    background-color: var(--input);
+  }
+
+  :where(.active\:bg-input-foreground:active) {
+    background-color: var(--input-foreground);
+  }
+
+  :where(.active\:bg-muted:active) {
+    background-color: var(--muted);
+  }
+
+  :where(.active\:bg-muted-foreground:active) {
+    background-color: var(--muted-foreground);
+  }
+
+  :where(.active\:bg-faded:active) {
+    background-color: var(--faded);
+  }
+
+  :where(.active\:bg-faded-foreground:active) {
+    background-color: var(--faded-foreground);
+  }
+
+  :where(.active\:bg-primary:active) {
+    background-color: var(--primary);
+  }
+
+  :where(.active\:bg-primary-foreground:active) {
+    background-color: var(--primary-foreground);
+  }
+
+  :where(.active\:bg-secondary:active) {
+    background-color: var(--secondary);
+  }
+
+  :where(.active\:bg-secondary-foreground:active) {
+    background-color: var(--secondary-foreground);
+  }
+
+  :where(.active\:bg-tertiary:active) {
+    background-color: var(--tertiary);
+  }
+
+  :where(.active\:bg-tertiary-foreground:active) {
+    background-color: var(--tertiary-foreground);
+  }
+
+  :where(.active\:bg-info:active) {
+    background-color: var(--info);
+  }
+
+  :where(.active\:bg-info-foreground:active) {
+    background-color: var(--info-foreground);
+  }
+
+  :where(.active\:bg-success:active) {
+    background-color: var(--success);
+  }
+
+  :where(.active\:bg-success-foreground:active) {
+    background-color: var(--success-foreground);
+  }
+
+  :where(.active\:bg-warning:active) {
+    background-color: var(--warning);
+  }
+
+  :where(.active\:bg-warning-foreground:active) {
+    background-color: var(--warning-foreground);
+  }
+
+  :where(.active\:bg-destructive:active) {
+    background-color: var(--destructive);
+  }
+
+  :where(.active\:bg-destructive-foreground:active) {
+    background-color: var(--destructive-foreground);
+  }
+
+  /* -- active: border color (theme) -- */
+
+  :where(.active\:border-primary:active) {
+    --border-color: var(--primary);
+  }
+
+  :where(.active\:border-secondary:active) {
+    --border-color: var(--secondary);
+  }
+
+  :where(.active\:border-tertiary:active) {
+    --border-color: var(--tertiary);
+  }
+
+  :where(.active\:border-muted:active) {
+    --border-color: var(--muted);
+  }
+
+  :where(.active\:border-faded:active) {
+    --border-color: var(--faded);
+  }
+
+  :where(.active\:border-info:active) {
+    --border-color: var(--info);
+  }
+
+  :where(.active\:border-success:active) {
+    --border-color: var(--success);
+  }
+
+  :where(.active\:border-warning:active) {
+    --border-color: var(--warning);
+  }
+
+  :where(.active\:border-destructive:active) {
+    --border-color: var(--destructive);
+  }
+
+  /* -- active: opacity -- */
+
+  :where(.active\:opacity-0:active) {
+    opacity: 0;
+  }
+
+  :where(.active\:opacity-5:active) {
+    opacity: 0.05;
+  }
+
+  :where(.active\:opacity-10:active) {
+    opacity: 0.1;
+  }
+
+  :where(.active\:opacity-15:active) {
+    opacity: 0.15;
+  }
+
+  :where(.active\:opacity-20:active) {
+    opacity: 0.2;
+  }
+
+  :where(.active\:opacity-25:active) {
+    opacity: 0.25;
+  }
+
+  :where(.active\:opacity-30:active) {
+    opacity: 0.3;
+  }
+
+  :where(.active\:opacity-40:active) {
+    opacity: 0.4;
+  }
+
+  :where(.active\:opacity-50:active) {
+    opacity: 0.5;
+  }
+
+  :where(.active\:opacity-60:active) {
+    opacity: 0.6;
+  }
+
+  :where(.active\:opacity-70:active) {
+    opacity: 0.7;
+  }
+
+  :where(.active\:opacity-75:active) {
+    opacity: 0.75;
+  }
+
+  :where(.active\:opacity-80:active) {
+    opacity: 0.8;
+  }
+
+  :where(.active\:opacity-90:active) {
+    opacity: 0.9;
+  }
+
+  :where(.active\:opacity-95:active) {
+    opacity: 0.95;
+  }
+
+  :where(.active\:opacity-100:active) {
+    opacity: 1;
+  }
 }

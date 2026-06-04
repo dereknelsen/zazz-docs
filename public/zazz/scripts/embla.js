@@ -101,11 +101,15 @@ const addDotBtnsAndClickHandlers = (emblaApi, dotsNode) => {
  * Discovers carousel elements via [data-embla="root"] and configures them
  * based on their data attributes.
  */
-function initEmblaCarousels() {
-  // Find all carousel root elements on the page
-  const emblaRoots = document.querySelectorAll('[data-embla="root"]');
+function initEmblaCarousels(scope) {
+  // Find carousel roots within a scope (defaults to full document)
+  const root = scope || document;
+  const emblaRoots = root.querySelectorAll('[data-embla="root"]');
 
   emblaRoots.forEach(function (emblaNode) {
+    // Skip already-initialized carousels
+    if (emblaNode.hasAttribute("data-embla-init")) return;
+    emblaNode.setAttribute("data-embla-init", "");
     /* =========================================================================
             DOM ELEMENT DISCOVERY
             Find all carousel-related elements within this carousel instance
@@ -178,6 +182,9 @@ function initEmblaCarousels() {
     // Create the Embla carousel instance
     const emblaApi = EmblaCarousel(emblaViewportNode, apiOptions, plugins);
 
+    // Store reference on the DOM node for external access
+    emblaNode._emblaApi = emblaApi;
+
     // Bind previous button if it exists
     if (emblaPrevButtonNode) {
       emblaPrevButtonNode.addEventListener(
@@ -203,17 +210,95 @@ function initEmblaCarousels() {
   });
 }
 
+/* ===========================================================================
+    DIALOG OPEN OBSERVER
+    Re-initializes Embla carousels inside dialogs when they open.
+    Dialogs are display:none until opened, so Embla can't measure the viewport
+    at page load. This observer catches the `open` attribute being added and
+    initializes any un-initialized carousels inside.
+    =========================================================================== */
+
+function observeDialogOpen() {
+  const observer = new MutationObserver(function (mutations) {
+    for (const mutation of mutations) {
+      if (
+        mutation.type === "attributes" &&
+        mutation.attributeName === "open" &&
+        mutation.target.tagName === "DIALOG" &&
+        mutation.target.hasAttribute("open")
+      ) {
+        const dialog = mutation.target;
+        initEmblaCarousels(dialog);
+
+        // Scroll to stored start index if set by [data-embla-start] click
+        const roots = dialog.querySelectorAll('[data-embla="root"]');
+        roots.forEach(function (root) {
+          const startIndex = root.getAttribute("data-embla-start-index");
+          if (startIndex != null && root._emblaApi) {
+            root._emblaApi.scrollTo(Number(startIndex), true);
+            root.removeAttribute("data-embla-start-index");
+          }
+        });
+      }
+    }
+  });
+
+  observer.observe(document.body, {
+    attributes: true,
+    attributeFilter: ["open"],
+    subtree: true,
+  });
+}
+
 const EmblaInit = {
   init: initEmblaCarousels,
   addDotBtnsAndClickHandlers,
 };
 
+/* ===========================================================================
+    START INDEX CONTROL — [data-embla-start]
+    Clicking an element with data-embla-start="N" stores that index on the
+    target carousel (found via commandfor → dialog → [data-embla="root"]).
+    The dialog open observer then scrolls to it on open.
+    =========================================================================== */
+
+function initEmblaStartLinks() {
+  document.addEventListener("click", function (e) {
+    const trigger = e.target.closest("[data-embla-start]");
+    if (!trigger) return;
+
+    const index = trigger.getAttribute("data-embla-start");
+    const dialogId = trigger.getAttribute("commandfor");
+    if (!dialogId) return;
+
+    const dialog = document.getElementById(dialogId);
+    if (!dialog) return;
+
+    const root = dialog.querySelector('[data-embla="root"]');
+    if (!root) return;
+
+    // If carousel is already initialized (dialog already open), scroll directly
+    if (root._emblaApi) {
+      root._emblaApi.scrollTo(Number(index), true);
+    } else {
+      // Store for the dialog open observer to pick up
+      root.setAttribute("data-embla-start-index", index);
+    }
+  });
+}
+
 // Auto-initialize when DOM is ready (only in browser environment)
 if (typeof window !== "undefined" && typeof document !== "undefined") {
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initEmblaCarousels);
+    document.addEventListener("DOMContentLoaded", function () {
+      initEmblaCarousels();
+      observeDialogOpen();
+      initEmblaStartLinks();
+    });
   } else {
     initEmblaCarousels();
+    observeDialogOpen();
+    initEmblaStartLinks();
   }
 }
 

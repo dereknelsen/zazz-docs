@@ -20,7 +20,7 @@
     --dialog-starting-translate: 0, 0, 0;
     --dialog-translate: 0, 0, 0;
     --dialog-starting-backdrop-color: var(--shade-none);
-    --dialog-backdrop-color: var(--shade-800);
+    --dialog-backdrop-color: var(--shade-900);
     --dialog-transition-duration: var(--default-transition-duration);
     --dialog-transition-timing-function: var(--default-transition-timing-function);
     --dialog-backdrop-transition-duration: calc(var(--dialog-transition-duration) - 100ms);

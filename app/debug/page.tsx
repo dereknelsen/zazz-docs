@@ -1,3 +1,5 @@
+import Script from "next/script";
+
 import { Accordion } from "@/app/zazz/components/accordion";
 import { Badge } from "@/app/zazz/components/badge";
 import { Button } from "@/app/zazz/components/button";
@@ -18,6 +20,7 @@ import { Checkbox } from "@/app/zazz/components/checkbox";
 import { Switch } from "@/app/zazz/components/switch";
 import { Radio } from "@/app/zazz/components/radio";
 import { Prose } from "@/app/zazz/components/prose";
+import { Lightbox } from "@/app/zazz/components/lightbox";
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -27,6 +30,7 @@ if (isProduction) {
 
 export default function DebugPage() {
   return (
+    <>
     <main className="flex flex-col w-full">
       <section className="hidden md:grid py-xl">
         <div className="container grid">
@@ -36,6 +40,11 @@ export default function DebugPage() {
       <section className="grid md:hidden py-xl">
         <div className="container grid">
           <MobileMenu />
+        </div>
+      </section>
+      <section className="grid py-xl border-t">
+        <div className="article grid">
+          <Lightbox />
         </div>
       </section>
       <section className="grid py-xl border-t">
@@ -93,5 +102,18 @@ export default function DebugPage() {
         </div>
       </section>
     </main>
+
+    {/* Embla Carousel Scripts */}
+    <Script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js" />
+    <Script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js" />
+    <Script src="https://unpkg.com/embla-carousel-auto-scroll/embla-carousel-auto-scroll.umd.js" />
+    <Script src="https://unpkg.com/embla-carousel-class-names/embla-carousel-class-names.umd.js" />
+    <Script src="https://unpkg.com/embla-carousel-ssr/embla-carousel-ssr.umd.js" />
+
+    {/* Zazz Scripts */}
+    <Script src="/zazz/scripts/reveal.js" strategy="beforeInteractive" />
+    <Script src="/zazz/scripts/utils.js" />
+    <Script src="/zazz/scripts/embla.js" />
+    </>
   );
 }

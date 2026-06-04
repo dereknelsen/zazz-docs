@@ -1,0 +1,153 @@
+@layer components {
+  /* ===========================================================================
+  LIGHTBOX — image gallery with fullscreen dialog slideshow
+  - Trigger wraps thumbnail <img> in a button with command="show-modal".
+  - Opens fullscreen dialog with Embla carousel for swiping between images.
+  - No JavaScript required for open/close — uses Invoker Commands API.
+  =========================================================================== */
+
+  /* ---------------------------------------------------------------------------
+  GALLERY GRID — .lightbox
+  --------------------------------------------------------------------------- */
+
+  :where(.lightbox) {
+    --lightbox-columns: 3;
+    --lightbox-gap: var(--gap-xs);
+    --lightbox-radius: var(--radius-md);
+    --lightbox-slide-radius: var(--radius-lg);
+
+    display: grid;
+    grid-template-columns: repeat(var(--lightbox-columns), 1fr);
+    gap: var(--lightbox-gap);
+  }
+
+  :where(.lightbox[data-columns="1"]) { --lightbox-columns: 1; }
+  :where(.lightbox[data-columns="2"]) { --lightbox-columns: 2; }
+  :where(.lightbox[data-columns="4"]) { --lightbox-columns: 4; }
+  :where(.lightbox[data-columns="5"]) { --lightbox-columns: 5; }
+
+  /* ---------------------------------------------------------------------------
+  TRIGGER — .lightbox__trigger
+  --------------------------------------------------------------------------- */
+
+  :where(.lightbox__trigger) {
+    appearance: none;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    cursor: zoom-in;
+    border-radius: var(--lightbox-radius);
+    overflow: hidden;
+    display: block;
+    line-height: 0;
+  }
+
+  :where(.lightbox__trigger img) {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    border-radius: var(--lightbox-radius);
+    transition: scale var(--default-transition-duration) var(--default-transition-timing-function);
+  }
+
+  :where(.lightbox__trigger:hover img) {
+    scale: 1.03;
+  }
+
+  :where(.lightbox__trigger:focus-visible) {
+    outline: 2px solid var(--ring-color);
+    outline-offset: 2px;
+  }
+
+  /* ---------------------------------------------------------------------------
+  DIALOG — .lightbox__dialog (fullscreen dark overlay)
+  --------------------------------------------------------------------------- */
+
+  :where(.lightbox__dialog) {
+    --dialog-background: transparent;
+   
+  }
+
+  :where(.lightbox__dialog .dialog__content) {
+    max-block-size: 100svh;
+    block-size: 100svh;
+    overflow: clip;
+  }
+
+  /* ---------------------------------------------------------------------------
+  SLIDE — .lightbox__slide
+  --------------------------------------------------------------------------- */
+
+  :where(.lightbox__slide) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    block-size: 100svh;
+    padding: var(--gap-md);
+  }
+
+  :where(.lightbox__slide img) {
+    max-inline-size: 100%;
+    max-block-size: 100%;
+    object-fit: contain;
+    border: 1px solid var(--tint-50);
+    border-radius: var(--lightbox-slide-radius);
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  /* ---------------------------------------------------------------------------
+  NAV BUTTONS — .lightbox__prev / .lightbox__next (icon-size .button)
+  --------------------------------------------------------------------------- */
+
+  :where(.lightbox__prev, .lightbox__next) {
+    position: absolute;
+    top: 50%;
+    translate: 0 -50%;
+    z-index: 5;
+    color: white;
+  }
+
+  :where(.lightbox__prev) {
+    left: var(--gap-sm);
+  }
+
+  :where(.lightbox__next) {
+    right: var(--gap-sm);
+  }
+
+  /* ---------------------------------------------------------------------------
+  CLOSE BUTTON — top-right, white on dark
+  --------------------------------------------------------------------------- */
+
+  :where(.lightbox__close) {
+    position: absolute;
+    top: var(--gap-sm);
+    right: var(--gap-sm);
+    z-index: 10;
+    color: white;
+    opacity: 0.7;
+    transition: opacity var(--default-transition-duration) var(--default-transition-timing-function);
+  }
+
+  :where(.lightbox__close:hover) {
+    opacity: 1;
+  }
+
+  /* ---------------------------------------------------------------------------
+  COUNTER — slide count indicator
+  --------------------------------------------------------------------------- */
+
+  :where(.lightbox__counter) {
+    position: absolute;
+    bottom: var(--gap-sm);
+    left: 50%;
+    translate: -50% 0;
+    color: white;
+    opacity: 0.7;
+    font-size: var(--font-size-sm);
+    font-variant-numeric: tabular-nums;
+    pointer-events: none;
+  }
+}

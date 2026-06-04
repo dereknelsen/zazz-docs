@@ -19,5 +19,6 @@ import "./_password-group.css";
 import "./_radio.css";
 import "./_tabs.css";
 import "./_embla.css";
+import "./_lightbox.css";
 import "./_reveal.css";
 import "./_utilities.css";

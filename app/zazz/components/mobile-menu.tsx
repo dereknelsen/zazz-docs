@@ -24,8 +24,6 @@
   ─────────────────────────────────────────────────────────────────────────────
 */
 
-const chevronDown = /* html */ `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="208 96 128 176 48 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>`;
-
 const html = /* html */ `
 <!-- Mobile Menu START -->
 <button class="button" data-size="icon" type="button" command="show-modal" commandfor="mobile-menu-1" aria-label="Open menu">
@@ -48,7 +46,7 @@ const html = /* html */ `
         <details>
           <summary class="button" data-variant="ghost">
             Platform
-            ${chevronDown}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="208 96 128 176 48 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
           </summary>
           <div class="flex flex-col pb-sm">
             <a href="#" class="button flex flex-col items-start py-xs" data-variant="ghost">
@@ -74,7 +72,7 @@ const html = /* html */ `
         <details>
           <summary class="button" data-variant="ghost">
             Resources
-            ${chevronDown}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="208 96 128 176 48 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
           </summary>
           <div class="flex flex-col pb-sm">
             <a href="#" class="button flex flex-col items-start py-xs" data-variant="ghost">
@@ -96,7 +94,7 @@ const html = /* html */ `
         <details>
           <summary class="button" data-variant="ghost">
             Products
-            ${chevronDown}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="208 96 128 176 48 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
           </summary>
           <div class="flex flex-col pb-sm">
             <div class="accordion">
@@ -105,7 +103,7 @@ const html = /* html */ `
               <details>
                 <summary class="button" data-variant="ghost">
                   Design
-                  ${chevronDown}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="208 96 128 176 48 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
                 </summary>
                 <div class="flex flex-col pb-sm">
                   <a href="#" class="button flex flex-col items-start py-xs" data-variant="ghost">
@@ -131,7 +129,7 @@ const html = /* html */ `
               <details>
                 <summary class="button" data-variant="ghost">
                   Development
-                  ${chevronDown}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="208 96 128 176 48 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
                 </summary>
                 <div class="flex flex-col pb-sm">
                   <a href="#" class="button flex flex-col items-start py-xs" data-variant="ghost">
@@ -157,7 +155,7 @@ const html = /* html */ `
               <details>
                 <summary class="button" data-variant="ghost">
                   Content
-                  ${chevronDown}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="208 96 128 176 48 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
                 </summary>
                 <div class="flex flex-col pb-sm">
                   <a href="#" class="button flex flex-col items-start py-xs" data-variant="ghost">
@@ -183,7 +181,7 @@ const html = /* html */ `
         <details>
           <summary class="button" data-variant="ghost">
             Shop
-            ${chevronDown}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="208 96 128 176 48 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
           </summary>
           <div class="flex flex-col pb-sm">
             <div class="accordion">
@@ -192,7 +190,7 @@ const html = /* html */ `
               <details>
                 <summary class="button" data-variant="ghost">
                   Women
-                  ${chevronDown}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="208 96 128 176 48 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
                 </summary>
                 <div class="flex flex-col pb-sm pl-sm">
                   <span class="text-eyebrow text-muted-foreground my-xs">Dresses</span>
@@ -243,7 +241,7 @@ const html = /* html */ `
               <details>
                 <summary class="button" data-variant="ghost">
                   Men
-                  ${chevronDown}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="208 96 128 176 48 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
                 </summary>
                 <div class="flex flex-col pb-sm pl-sm">
                   <span class="text-eyebrow text-muted-foreground my-xs">Shirts</span>
@@ -294,7 +292,7 @@ const html = /* html */ `
               <details>
                 <summary class="button" data-variant="ghost">
                   Home
-                  ${chevronDown}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="208 96 128 176 48 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
                 </summary>
                 <div class="flex flex-col pb-sm pl-sm">
                   <span class="text-eyebrow text-muted-foreground my-xs">Bedding</span>

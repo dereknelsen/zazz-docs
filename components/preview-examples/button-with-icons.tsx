@@ -18,17 +18,13 @@ function ArrowRight() {
 export default function ButtonWithIcons() {
   return (
     <div className="flex flex-wrap items-center gap-sm">
-      <a className="button button-primary" href="#">
-        <span className="button-text">Start free trial</span>
-        <span className="button-icon">
-          <ArrowRight />
-        </span>
+      <a className="button" data-variant="primary" href="#">
+        Start free trial
+        <ArrowRight />
       </a>
       <a className="button" href="#">
-        <span className="button-icon">
-          <ArrowRight />
-        </span>
-        <span className="button-text">Read more</span>
+        <ArrowRight />
+        Read more
       </a>
     </div>
   );

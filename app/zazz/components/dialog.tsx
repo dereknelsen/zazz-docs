@@ -40,18 +40,13 @@ const html = /* html */ `
 <dialog id="dialog-1" class="dialog" closedby="any">
   <div class="dialog__content">
     <header class="dialog__header">
-      <h1 class="text-lg weight-strong">Dialog title</h1>
-      <p class="text-muted-foreground">Dialog description goes here.</p>
+      <h2 class="text-lg font-heading weight-strong">Dialog title</h2>
+      <p class="text-muted-foreground"> This dialog was opened using an
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API" target="_blank" class="text-link">invoker command</a>.</p>
     </header>
-    <div class="dialog__body text-prose">
+    <div class="dialog__body">
       <p>
-        This dialog was opened using an
-        <a href="https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API" target="_blank" class="text-link">invoker command</a>.
-      </p>
-      <p>
-        Set the size of the dialog with the <code>data-size</code> attribute.
-        <code>&lt;dialog class="dialog" data-size="large"&gt;</code>
-        <code>&lt;dialog class="dialog" data-size="screen"&gt;</code>
+        Set the size of the dialog with the <code>data-size</code> attribute. Use <code>data-size="large"</code> or <code>data-size="screen"</code> to change the size of the dialog.
       </p>
     </div>
   </div>

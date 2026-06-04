@@ -10,75 +10,80 @@ A radio is one of a set of mutually exclusive options. Picking one deselects the
 <ComponentPreview name="radio-group" />
 
 ```html
-<label class="radio-group">
-  <input type="radio" name="plan" value="starter" class="radio" />
-  <span class="form-label">Starter</span>
-</label>
-
-<label class="radio-group">
-  <input type="radio" name="plan" value="pro" class="radio" />
-  <span class="form-label">Pro</span>
-</label>
-```
-
-Radios in the same group share a `name` attribute. The browser handles the mutual exclusion.
-
-## Tokens
-
-| Property       | Token / value                                                              |
-| -------------- | -------------------------------------------------------------------------- |
-| Width / height | `--step-4`                                                                 |
-| Border         | `1px solid var(--border)` (unchecked), `5px solid --primary` (checked)     |
-| Radius         | `--radius-full`                                                            |
-| Background     | `--input` (unchecked), `--background` (checked, with thick primary border) |
-| Group gap      | `--gap-xs`                                                                 |
-| Focus ring     | `--focus-ring`                                                             |
-
-The checked appearance uses a `5px` border that visually shrinks the background, creating a centered dot effect without an inner element.
-
-## States
-
-- **Unchecked.** Border `--border`, background `--input`.
-- **Checked.** Border thickens to 5px `--primary`. Background switches to `--background` so the visible center reads as the page surface.
-- **Focus.** Focus ring outlines the input.
-- **Disabled.** Set `disabled` on the input.
-
-## Composing a group
-
-```html
-<fieldset class="form-group">
-  <legend class="form-label">Plan</legend>
-  <label class="radio-group">
-    <input type="radio" name="plan" value="starter" class="radio" />
-    <span>Starter</span>
+<fieldset class="radio-group">
+  <legend>Plan</legend>
+  <label class="field">
+    <input class="radio" type="radio" name="plan" value="starter" />
+    <span class="field__label">Starter</span>
   </label>
-  <label class="radio-group">
-    <input type="radio" name="plan" value="pro" class="radio" />
-    <span>Pro</span>
-  </label>
-  <label class="radio-group">
-    <input type="radio" name="plan" value="team" class="radio" />
-    <span>Team</span>
+  <label class="field">
+    <input class="radio" type="radio" name="plan" value="pro" />
+    <span class="field__label">Pro</span>
   </label>
 </fieldset>
 ```
 
-`<fieldset>` and `<legend>` give the group an accessible name. The shared `name="plan"` keeps the radios mutually exclusive.
+`.radio-group` is a `<fieldset>` that shares layout with `.field-group` (see `_fields.css`). Each option is a `<label class="field" >` pairing a `.radio` input with a `.field__label`. Radios in the same group share a `name` attribute, and the browser handles the mutual exclusion.
+
+## Tokens
+
+| Property       | Token / value                                                |
+| -------------- | ------------------------------------------------------------ |
+| Width / height | `--step-4_5`                                                 |
+| Border         | `1px solid var(--border)` (unchecked), `--primary` (checked) |
+| Radius         | `--radius-full`                                              |
+| Background     | `--input` (unchecked), `--primary` (checked)                 |
+| Checked dot    | `radial-gradient` in `--primary-foreground`                  |
+| Inline gap     | `--step-2` (via `.field[]`)                                  |
+| Group gap      | `--step-1_5` (via `.radio-group`)                            |
+| Focus ring     | `--ring` outline (`:focus-visible`)                          |
+
+The checked appearance fills the circle with `--primary` and paints the inner dot with a `radial-gradient` in `--primary-foreground`, so the dot tracks the theme rather than relying on color alone.
+
+## States
+
+- **Unchecked.** Border `--border`, background `--input`.
+- **Hover.** Border lifts to `--primary`.
+- **Checked.** Border and background switch to `--primary`; a `--primary-foreground` dot appears via `radial-gradient`.
+- **Focus.** The focus ring is a `:focus-visible` outline (`outline-color: var(--ring)`).
+- **Disabled.** Set `disabled` on the input. The shared disabled state applies `opacity: 0.5` and `cursor: not-allowed`.
+
+## Composing a group
+
+```html
+<fieldset class="radio-group">
+  <legend>Plan</legend>
+  <label class="field">
+    <input class="radio" type="radio" name="plan" value="starter" />
+    <span class="field__label">Starter</span>
+  </label>
+  <label class="field">
+    <input class="radio" type="radio" name="plan" value="pro" />
+    <span class="field__label">Pro</span>
+  </label>
+  <label class="field">
+    <input class="radio" type="radio" name="plan" value="team" />
+    <span class="field__label">Team</span>
+  </label>
+</fieldset>
+```
+
+The `<fieldset class="radio-group">` with an optional `<legend>` gives the group an accessible name. The shared `name="plan"` keeps the radios mutually exclusive.
 
 ## Accessibility
 
-- Always wrap each radio in a `<label>` so clicking the label selects the option.
-- Group related radios in `<fieldset>` with a `<legend>` describing what the choice is for.
+- Wrap each radio in a `<label class="field" >` so clicking the label selects the option.
+- Group related radios in a `<fieldset class="radio-group">` with a `<legend>` describing what the choice is for.
 - Sharing a `name` attribute is what makes radios mutually exclusive. The browser also handles keyboard navigation (`Arrow` to move between options, `Space` to select).
 - For a required radio group, use `required` on at least one input in the group.
 
 ## Cross-platform
 
-| Platform       | Reference                                                              |
-| -------------- | ---------------------------------------------------------------------- |
-| Figma          | No Figma component (representative mockup only).                       |
-| Webflow        | `radio` class on the `<input>`. Group wrapper is `radio-group`.        |
-| CSS / Tailwind | The same class after [installing utilities.css](/docs/quickstart/css). |
+| Platform       | Reference                                                                                               |
+| -------------- | ------------------------------------------------------------------------------------------------------- |
+| Figma          | No Figma component (representative mockup only).                                                        |
+| Webflow        | `radio` class on the `<input>`, each in a `field` block with ``; the group is a `radio-group` fieldset. |
+| CSS / Tailwind | The same classes after [installing utilities.css](/docs/quickstart/css).                                |
 
 ## Where to next
 
@@ -86,7 +91,7 @@ The checked appearance uses a `5px` border that visually shrinks the background,
   <Card
     title="Checkbox"
     href="/docs/primitives/checkbox"
-    description="The multi-select sibling. Same wrapper pattern."
+    description="The multi-select sibling. Same field wrapper pattern."
   />
   <Card
     title="Select"

@@ -63,7 +63,7 @@
 
 @layer components {
   :where(.dialog) {
-    --dialog-width: var(--article);
+    --dialog-width: min(24rem, 100% - var(--gap-md) * 2);
     --dialog-background: var(--card);
     --dialog-foreground: var(--card-foreground);
 
@@ -79,7 +79,11 @@
     isolation: isolate;
   }
 
-  :where(.dialog[data-size="large"]) {
+  :where(.dialog[data-size="article"]) {
+    --dialog-width: var(--article);
+  }
+
+  :where(.dialog[data-size="container"]) {
     --dialog-width: var(--container);
   }
 
@@ -125,7 +129,6 @@
 
   :where(.dialog__footer) {
     block-size: fit-content;
-    align-self: flex-end;
     position: sticky;
     bottom: 0;
     display: flex;

@@ -112,15 +112,33 @@
   }
 
   :where(.text-prose a, .text-link) {
+    --link-decoration-line: var(--decoration-line);
+    --link-decoration-color: var(--decoration-color);
+    --link-decoration-color--hover: var(--decoration-color--hover);
+    --link-decoration-color--active: var(--decoration-color--active);
+    --link-decoration-style: var(--decoration-style);
+    --link-decoration-thickness: var(--decoration-thickness);
+    --link-decoration-offset: var(--decoration-offset);
+    --link-decoration-offset--hover: var(--decoration-offset--hover);
+    --link-decoration-offset--active: var(--decoration-offset--active);
+
     color: var(--primary);
-    text-underline-offset: 1px;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
+    text-decoration-line: var(--link-decoration-line);
+    text-decoration-style: var(--link-decoration-style);
+    text-decoration-color: var(--link-decoration-color);
+    text-underline-offset: var(--link-decoration-offset);
+    text-decoration-thickness: var(--link-decoration-thickness);
     transition: var(--default-transition);
   }
 
   :where(.text-prose a:hover, .text-link:hover) {
-    text-underline-offset: 2px;
+    text-decoration-color: var(--link-decoration-color--hover);
+    text-underline-offset: var(--link-decoration-offset--hover);
+  }
+
+  :where(.text-prose a:active, .text-link:active) {
+    text-decoration-color: var(--link-decoration-color--active);
+    text-underline-offset: var(--link-decoration-offset--active);
   }
 
   :where(.text-prose) {

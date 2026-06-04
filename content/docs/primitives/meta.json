@@ -2,6 +2,7 @@
   "title": "Primitives",
   "pages": [
     "index",
+    "accordion",
     "avatar",
     "badge",
     "button",
@@ -9,12 +10,16 @@
     "carousel",
     "checkbox",
     "dialog",
+    "dropdown",
     "input",
     "motion",
+    "navigation-menu",
+    "password-group",
     "radio",
     "select",
     "slider",
     "switch",
+    "tabs",
     "textarea"
   ]
 }

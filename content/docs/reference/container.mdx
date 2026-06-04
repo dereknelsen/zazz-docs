@@ -46,23 +46,49 @@ What the `min()` does:
 
 ## Container queries
 
-The `container: <name> / inline-size` declaration registers each as a container query context. Child elements can respond to the container's width:
+The `container: <name> / inline-size` declaration registers each as a container query context. Child elements can respond to the container's width.
+
+### Breakpoint utilities
+
+Zazz ships prefixed utilities that apply when the nearest inline-size container is **wider than** a `--screen-*` token:
+
+| Prefix | Token        | Threshold |
+| ------ | ------------ | --------- |
+| `xs:`  | `--screen-xs` | 40rem    |
+| `sm:`  | `--screen-sm` | 48rem    |
+| `md:`  | `--screen-md` | 64rem    |
+| `lg:`  | `--screen-lg` | 80rem    |
+| `xl:`  | `--screen-xl` | 96rem    |
+
+```html
+<section class="container">
+  <div class="flex flex-col gap-md sm:flex-row">
+    <aside class="hidden sm:block">Shows when container &gt; 48rem</aside>
+    <main class="col-span-12 md:col-span-8">…</main>
+  </div>
+</section>
+```
+
+See [Display](/docs/reference/display), [Flexbox](/docs/reference/flexbox), and [Grid](/docs/reference/grid) for the full class lists (`{bp}:hidden`, `{bp}:flex-row`, `{bp}:col-span-*`, etc.).
+
+### Custom `@container` rules
 
 ```css
-@container container (min-width: 48rem) {
+/* Custom rules may use var(--screen-*) where your bundler allows it */
+@container (width > 48rem) {
   .feature {
     grid-template-columns: 1fr 1fr;
   }
 }
 
-@container article (min-width: 36rem) {
+@container article (width > 40rem) {
   .quote {
     font-size: var(--font-size-h4);
   }
 }
 ```
 
-The container name (`container`, `article`) matches the class. Use `inline-size` to query width without including height.
+Unnamed queries match any inline-size ancestor (including `section` from the reset). Named queries (`container`, `article`) scope to that wrapper only.
 
 ## Adding container sizes
 

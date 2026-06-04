@@ -10,7 +10,9 @@ export default function CardBasic() {
       </div>
       <div className="card__content">
         <div className="card__tags">
-          <span className="badge badge-link">Field notes</span>
+          <span className="badge" data-variant="link">
+            Field notes
+          </span>
         </div>
         <div className="card__body">
           <span className="card__title-link">
@@ -33,7 +35,9 @@ export default function CardBasic() {
               </span>
             </div>
           </div>
-          <span className="card__button button button-muted">Read article</span>
+          <span className="card__button button" data-variant="muted">
+            Read article
+          </span>
         </div>
       </div>
     </a>

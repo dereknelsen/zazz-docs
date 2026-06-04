@@ -5,23 +5,23 @@ description: Utilities for setting the border radius of an element.
 
 ## Class reference
 
-| Class         | Properties                                                       |
-| ------------- | ---------------------------------------------------------------- |
-| `radius-none` | `border-radius: var(--radius-none); /* 0 */`                     |
-| `radius-xs`   | `border-radius: var(--radius-xs);   /* step-1   × multiplier */` |
-| `radius-sm`   | `border-radius: var(--radius-sm);   /* step-1.5 × multiplier */` |
-| `radius-md`   | `border-radius: var(--radius-md);   /* step-2   × multiplier */` |
-| `radius-lg`   | `border-radius: var(--radius-lg);   /* step-4   × multiplier */` |
-| `radius-xl`   | `border-radius: var(--radius-xl);   /* step-7   × multiplier */` |
-| `radius-full` | `border-radius: var(--radius-full); /* 9999rem, capsule */`      |
+| Class          | Properties                                                       |
+| -------------- | ---------------------------------------------------------------- |
+| `rounded-0`    | `border-radius: 0;`                                              |
+| `rounded-xs`   | `border-radius: var(--radius-xs);   /* step-1   × multiplier */` |
+| `rounded-sm`   | `border-radius: var(--radius-sm);   /* step-1.5 × multiplier */` |
+| `rounded-md`   | `border-radius: var(--radius-md);   /* step-2.5 × multiplier */` |
+| `rounded-lg`   | `border-radius: var(--radius-lg);   /* step-4   × multiplier */` |
+| `rounded-xl`   | `border-radius: var(--radius-xl);   /* step-7   × multiplier */` |
+| `rounded-full` | `border-radius: var(--radius-full); /* 9999rem, capsule */`      |
 
 ## Examples
 
 ```html
-<div class="radius-md p-md" style="background: var(--card)">A card with medium radius.</div>
+<div class="rounded-md p-md" style="background: var(--card)">A card with medium radius.</div>
 
 <button
-  class="radius-full px-lg py-sm"
+  class="rounded-full px-lg py-sm"
   style="background: var(--primary); color: var(--primary-foreground)"
 >
   Pill button
@@ -92,7 +92,11 @@ At default `--spacing-interval: 0.25rem` and `--radius-multiplier: 1`:
     </span>
   </div>
   <div
-    style={{ aspectRatio: "1 / 1", background: "oklch(0.511 0.23 276.97)", borderRadius: "0.5rem" }}
+    style={{
+      aspectRatio: "1 / 1",
+      background: "oklch(0.511 0.23 276.97)",
+      borderRadius: "0.625rem",
+    }}
   >
     <span
       style={{
@@ -103,7 +107,7 @@ At default `--spacing-interval: 0.25rem` and `--radius-multiplier: 1`:
         color: "var(--fd-muted-foreground)",
       }}
     >
-      md · 8px
+      md · 10px
     </span>
   </div>
   <div
@@ -172,22 +176,18 @@ At default `--spacing-interval: 0.25rem` and `--radius-multiplier: 1`:
   --radius-none: 0rem;
   --radius-xs: calc(var(--step-1) * var(--radius-multiplier));
   --radius-sm: calc(var(--step-1_5) * var(--radius-multiplier));
-  --radius-md: calc(var(--step-2) * var(--radius-multiplier));
+  --radius-md: calc(var(--step-2_5) * var(--radius-multiplier));
   --radius-lg: calc(var(--step-4) * var(--radius-multiplier));
   --radius-xl: calc(var(--step-7) * var(--radius-multiplier));
   --radius-full: 9999rem;
-
-  /* primitive aliases */
-  --radius-button: var(--radius-md);
-  --radius-input: var(--radius-md);
-  --radius-badge: var(--radius-full);
-  --radius-card: var(--radius-lg);
 }
 ```
 
+There are **no** primitive radius aliases (`--radius-button`, `--radius-input`, `--radius-badge`, `--radius-card` no longer exist). Each component reaches the semantic scale through a **local** custom property instead — `_button.css` declares `--button-radius: var(--radius-md)`, `_badge.css` declares `--badge-radius: var(--radius-sm)`, the form controls share `--field-radius: var(--radius-md)`, and `_dialog.css` uses `--radius-lg` directly.
+
 ## Customizing
 
-Adjust `--radius-multiplier` to sharpen or round every radius globally:
+Adjust `--radius-multiplier` to sharpen or round every radius globally (it doesn't affect `--radius-none` or `--radius-full`):
 
 ```css
 .architectural {
@@ -198,12 +198,12 @@ Adjust `--radius-multiplier` to sharpen or round every radius globally:
 } /* rounder */
 ```
 
-Retune individual primitives independently:
+Retune a single component by overriding its local radius prop, or point it at a different step on the semantic scale:
 
 ```css
-:root {
-  --radius-button: var(--radius-full); /* every button capsule */
+.button {
+  --button-radius: var(--radius-full); /* every button a capsule */
 }
 ```
 
-See [Foundations → Radius](/docs/foundations/radius) for the nested-radius math and the primitive layer's design rationale.
+See [Foundations → Radius](/docs/foundations/radius) for the nested-radius math and the local-prop design rationale.

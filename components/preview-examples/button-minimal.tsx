@@ -19,25 +19,35 @@ function MenuIcon() {
 export default function ButtonMinimal() {
   return (
     <div className="flex flex-wrap items-center gap-sm">
-      <button type="button" className="button button-minimal" aria-label="Open menu">
-        <span className="button-icon">
-          <MenuIcon />
-        </span>
+      <button type="button" className="button" data-size="icon" aria-label="Open menu">
+        <MenuIcon />
       </button>
-      <button type="button" className="button button-primary button-minimal" aria-label="Open menu">
-        <span className="button-icon">
-          <MenuIcon />
-        </span>
+      <button
+        type="button"
+        className="button"
+        data-variant="primary"
+        data-size="icon"
+        aria-label="Open menu"
+      >
+        <MenuIcon />
       </button>
-      <button type="button" className="button button-muted button-minimal" aria-label="Open menu">
-        <span className="button-icon">
-          <MenuIcon />
-        </span>
+      <button
+        type="button"
+        className="button"
+        data-variant="muted"
+        data-size="icon"
+        aria-label="Open menu"
+      >
+        <MenuIcon />
       </button>
-      <button type="button" className="button button-ghost button-minimal" aria-label="Open menu">
-        <span className="button-icon">
-          <MenuIcon />
-        </span>
+      <button
+        type="button"
+        className="button"
+        data-variant="ghost"
+        data-size="icon"
+        aria-label="Open menu"
+      >
+        <MenuIcon />
       </button>
     </div>
   );

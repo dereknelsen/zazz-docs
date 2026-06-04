@@ -57,9 +57,9 @@ Zazz layers tokens so a single change propagates instead of replicating across f
 ```css
 :root {
   --color-text: var(--neutral-950);
-  --gap-md: calc(var(--step-4) * var(--spacing-interval));
-  --radius-xs: calc(2px * var(--radius-multiplier));
-  --shadow-md: 0 4px 8px oklch(from var(--neutral-950) l c h / 0.08);
+  --gap-md: var(--step-6);
+  --radius-xs: calc(var(--step-1) * var(--radius-multiplier));
+  --shadow-md: 0 4px 8px oklch(from var(--black) l c h / 0.08);
 }
 ```
 
@@ -120,7 +120,7 @@ Each collection is a category page.
   <Card
     title="Radius"
     href="/docs/foundations/radius"
-    description="Multiplier, semantic, and primitive-specific radii."
+    description="Multiplier, semantic scale, and per-component radii."
   />
   <Card
     title="Layout"

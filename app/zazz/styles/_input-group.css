@@ -11,22 +11,36 @@
     toolbar above or below it.
   - Composition: .input-group > [.input | .textarea] + .input-group__addon
     where an addon may hold .input-group__text, an <svg>, <kbd>, or .button.
-  - Shares the --field-* tokens (height, radius, surface) defined in _form.css.
+  - The shell is a <label> for click-to-focus, but it is NOT the field's label.
+    Wrap it in a .field with a real .field__label[for] (and optional .field__hint
+    / .field__error) so the control is named by visible text, never by a legend.
+  - Shares the --field-* tokens (height, radius, surface) defined in _fields.css.
   =========================================================================== */
 
   :where(.input-group) {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--step-1);
+    --input-group-display: flex;
+    --input-group-wrap: wrap;
+    --input-group-align: center;
+    --input-group-gap: var(--step-1);
+    --input-group-inline-size: 100%;
+    --input-group-min-block-size: var(--field-height);
+    --input-group-padding: 0;
+    --input-group-cursor: text;
+    --input-group-text-color: var(--muted-foreground);
+    --input-group-text-weight: var(--weight-strong);
+    --input-group-text-size: var(--font-size-sm);
 
-    inline-size: 100%;
-    min-block-size: var(--field-height);
-    padding: 0;
+    display: var(--input-group-display);
+    flex-wrap: var(--input-group-wrap);
+    align-items: var(--input-group-align);
+    gap: var(--input-group-gap);
+    inline-size: var(--input-group-inline-size);
+    min-block-size: var(--input-group-min-block-size);
+    padding: var(--input-group-padding);
 
     /* The shell is a <label>: clicking a non-interactive addon focuses the
        nested control, so the whole field reads as one clickable target. */
-    cursor: text;
+    cursor: var(--input-group-cursor);
 
     color: var(--field-foreground);
     background-color: var(--field-background);
@@ -40,10 +54,12 @@
   }
 
   :where(.input-group:hover) {
+    background-color: var(--field-background--hover);
     border-color: var(--field-border--hover);
   }
 
   :where(.input-group:focus-within) {
+    background-color: var(--field-background--focus);
     border-color: var(--field-border--focus);
     outline-color: var(--ring);
   }
@@ -61,6 +77,22 @@
   :where(.input-group .input) {
     block-size: 100%;
     padding-inline: 0;
+  }
+
+  /* Restore the control's own inline padding on whichever edge has no addon, so
+     text never sits flush against the shell. An addon already supplies the
+     spacing on its side; block-* addons take their own row and don't count here.
+     (Default/no-data-align addons are inline-start.) */
+  :where(
+    .input-group:not(
+        :has(.input-group__addon:not([data-align]), .input-group__addon[data-align="inline-start"])
+      ) .input
+  ) {
+    padding-inline-start: var(--field-padding);
+  }
+
+  :where(.input-group:not(:has(.input-group__addon[data-align="inline-end"])) .input) {
+    padding-inline-end: var(--field-padding);
   }
 
   /* A textarea claims the full width; addons stack above/below via block-* */
@@ -120,8 +152,9 @@
     align-items: center;
     gap: var(--gap-xs);
     padding-inline: var(--field-addon-padding);
-    font-size: var(--font-size-sm);
-    color: var(--muted-foreground);
+    font-size: var(--input-group-text-size);
+    font-weight: var(--input-group-text-weight);
+    color: var(--input-group-text-color);
     min-inline-size: max-content;
   }
 
@@ -134,5 +167,9 @@
   :where(.input-group .button) {
     flex-shrink: 0;
     border-radius: var(--field-button-radius);
+  }
+
+  :where(.field:has(:user-invalid)) .input-group__text {
+    --input-group-text-color: var(--destructive);
   }
 }

@@ -10,75 +10,67 @@ A switch is the right control when a setting takes effect immediately on toggle:
 <ComponentPreview name="switch-default" />
 
 ```html
-<label class="switch-base">
-  <input type="checkbox" class="switch" />
-  <div class="switch-toggle"></div>
+<label class="field">
+  <input type="checkbox" role="switch" />
+  <span class="field__label">Enable notifications</span>
 </label>
 ```
 
-The switch is built from a native `<input type="checkbox">` (so it behaves like a checkbox semantically and submits as a form value), restyled as a horizontal track + sliding toggle.
-
-## Anatomy
-
-| Part       | Class           | Notes                                                                                      |
-| ---------- | --------------- | ------------------------------------------------------------------------------------------ |
-| Wrapper    | `switch-base`   | Sets dimensions (width `--step-8`, height `--step-4`) and positioning.                     |
-| Input      | `switch`        | The native checkbox, absolutely positioned to fill the wrapper. Controls the visual state. |
-| Toggle dot | `switch-toggle` | The circular indicator that slides between off and on positions.                           |
+The switch is a native `<input type="checkbox">` with `role="switch"` — so it behaves like a checkbox semantically and submits as a form value, but announces as a switch. The reset (`appearance: none`) redraws it as a pill track with a sliding thumb. **No class is needed on the input.** Wrap it in a `<label class="field" >` to sit the control beside its `.field__label`.
 
 ## Tokens
 
-| Property               | Token / value            |
-| ---------------------- | ------------------------ |
-| Track width            | `--step-8`               |
-| Track height           | `--step-4`               |
-| Track border (off)     | `1px solid var(--muted)` |
-| Track background (off) | `--muted`                |
-| Track border (on)      | `--primary`              |
-| Track background (on)  | `--primary`              |
-| Toggle width           | `--step-3`               |
-| Toggle radius          | `--radius-full`          |
-| Toggle background      | `--background`           |
-| Toggle shadow          | `--shadow-xs`            |
-| Toggle transition      | `transform 0.2s ease`    |
-| Focus ring             | `--focus-ring`           |
+| Property               | Token / value                       |
+| ---------------------- | ----------------------------------- |
+| Track width            | `--step-9`                          |
+| Track height           | `--step-5`                          |
+| Track background (off) | `--muted`                           |
+| Track background (on)  | `--primary`                         |
+| Thumb size             | `--step-5`                          |
+| Thumb background       | `--white`                           |
+| Track radius           | `--radius-full`                     |
+| Inline gap             | `--step-2` (`.field[]`)             |
+| Focus ring             | `--ring` outline (`:focus-visible`) |
 
-The toggle slides via CSS transform when the input's checked state changes. Add a JavaScript class or use the `:checked` selector with a sibling combinator to wire the translation.
+The thumb is a `::after` pseudo on the wrapping `<label>`, positioned over the track and slid with `translate` when the input is `:checked`. Pseudo-elements on replaced inputs are unreliable, so the label carries the knob.
 
 ## States
 
-- **Off.** Track is `--muted`, toggle sits at the left.
-- **On.** Track becomes `--primary`, toggle slides to the right.
-- **Focus.** Focus ring outlines the track.
-- **Disabled.** Set `disabled` on the input. Pointer events drop; the visual stays in the disabled-tinted state.
+- **Off.** Track is `--muted`, thumb sits at the left.
+- **On.** Track becomes `--primary`, thumb slides to the right (`:checked`).
+- **Focus.** The focus ring is a `:focus-visible` outline (`outline-color: var(--ring)`).
+- **Disabled.** Set `disabled` on the input. The shared disabled state applies `opacity: 0.5` and `cursor: not-allowed`.
 
 ## Composing in a form
 
 ```html
-<div class="switch-group">
-  <label class="switch-base">
-    <input type="checkbox" class="switch" />
-    <div class="switch-toggle"></div>
+<div class="flex flex-col gap-xs">
+  <label class="field">
+    <input type="checkbox" role="switch" />
+    <span class="field__label">Email notifications</span>
   </label>
-  <label class="form-label">Enable notifications</label>
+  <label class="field">
+    <input type="checkbox" role="switch" checked />
+    <span class="field__label">Two-factor authentication</span>
+  </label>
 </div>
 ```
 
-`switch-group` is the horizontal flex wrapper that puts the switch next to its label with `--gap-xs`.
+Each switch is its own `.field` row; stack them in a flex column for a settings list.
 
 ## Accessibility
 
-- The control is semantically a checkbox. Screen readers announce it as "checkbox, checked/unchecked," not "switch." If the role-as-switch matters (some screen readers handle it differently), add `role="switch"` to the input. Only do this after you've verified the announcement is clearer.
+- `role="switch"` makes screen readers announce the control as a switch (on/off) rather than a checkbox (checked/unchecked). It remains a native checkbox underneath, so keyboard interaction (Space toggles) and form submission are unchanged.
 - The label must convey what the switch controls. Bad: "Notifications." Better: "Enable email notifications." The user should know what happens when they flip it.
 - Switches that take effect immediately don't need a save button. If the switch sits inside a form that requires submission, make that clear in the form's helper text.
 
 ## Cross-platform
 
-| Platform       | Reference                                                                                          |
-| -------------- | -------------------------------------------------------------------------------------------------- |
-| Figma          | No Figma component (representative mockup only).                                                   |
-| Webflow        | `switch` class on the `<input>`, wrapped in `switch-base` with `switch-toggle` and `switch-group`. |
-| CSS / Tailwind | The same classes after [installing utilities.css](/docs/quickstart/css).                           |
+| Platform       | Reference                                                                                                 |
+| -------------- | --------------------------------------------------------------------------------------------------------- |
+| Figma          | No Figma component (representative mockup only).                                                          |
+| Webflow        | Bare `<input type="checkbox" role="switch">` (no class), in a `field` block with ``and a`field\_\_label`. |
+| CSS / Tailwind | Styled automatically after [installing reset.css](/docs/quickstart/css).                                  |
 
 ## Where to next
 
@@ -91,6 +83,6 @@ The toggle slides via CSS transform when the input's checked state changes. Add 
   <Card
     title="Foundations / Effects"
     href="/docs/foundations/effects"
-    description="The toggle uses `--shadow-xs` for its slight lift."
+    description="The focus ring uses the `--ring` outline tokens."
   />
 </Cards>

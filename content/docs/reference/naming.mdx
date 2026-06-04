@@ -12,7 +12,7 @@ Zazz CSS custom properties don't carry a `--zazz-*` prefix. The variable is just
 ```css
 --primary: var(--primary-600);
 --gap-md: var(--step-6);
---radius-md: calc(var(--step-2) * var(--radius-multiplier));
+--radius-md: calc(var(--step-2_5) * var(--radius-multiplier));
 ```
 
 The reasoning: tokens describe roles, not products. `--primary` reads as a brand color anywhere; `--zazz-primary` reads as a vendor-locked thing. If your project later replaces Zazz with something else, the variable name doesn't need to change.
@@ -25,21 +25,23 @@ This applies at every layer:
 
 - **Color scales**: `primary`, `secondary`, `tertiary`. Not `indigo`, `orange`, `rose`.
 - **Spacing**: `gap-md`, `step-4`. Not `medium-gap`, `four-pixel-grid`.
-- **Radius**: `radius-md`, `radius-button`. Not `small-corner`, `button-rounded`.
-- **Shadow**: `shadow-md`, `shadow-popover`. Not `medium-shadow`, `dropdown-shadow`.
+- **Radius**: `radius-md`, `button-radius`. Not `small-corner`, `button-rounded`.
+- **Shadow**: `shadow-md`. Not `medium-shadow`, `dropdown-shadow`.
 
-## Semantic / scale / primitive layering
+## Modifier / scale / semantic layering
 
 Tokens come in tiers. Names reflect the tier:
 
-| Tier      | Naming                    | Example                                     |
-| --------- | ------------------------- | ------------------------------------------- |
-| Modifier  | `--{property}-{modifier}` | `--spacing-interval`, `--radius-multiplier` |
-| Scale     | `--{property}-{step}`     | `--step-4`, `--primary-600`                 |
-| Semantic  | `--{role}-{size?}`        | `--gap-md`, `--background`, `--destructive` |
-| Primitive | `--{role}-{primitive}`    | `--radius-button`, `--shadow-popover`       |
+| Tier            | Naming                    | Example                                     |
+| --------------- | ------------------------- | ------------------------------------------- |
+| Modifier        | `--{property}-{modifier}` | `--spacing-interval`, `--radius-multiplier` |
+| Scale           | `--{property}-{step}`     | `--step-4`, `--primary-600`                 |
+| Semantic        | `--{role}-{size?}`        | `--gap-md`, `--background`, `--destructive` |
+| Component-local | `--{component}-{role}`    | `--button-radius`, `--field-radius`         |
 
-Higher tiers reference lower ones via `var()`. Components consume semantic and primitive tokens; they don't reach into scales or modifiers directly.
+Higher tiers reference lower ones via `var()`. Components consume semantic tokens; they don't reach into scales or modifiers directly.
+
+Rather than ship global primitive aliases like `--radius-button`, a component declares its **own** local custom property that aliases a semantic token — e.g. `_button.css` declares `--button-radius: var(--radius-md)`, `_badge.css` declares `--badge-radius: var(--radius-sm)`. Retune one component by overriding its local prop; the semantic scale stays the shared source of truth.
 
 ## Foreground pairs
 
@@ -56,7 +58,7 @@ For every color token that's used as a _background_, there's a paired `*-foregro
 Components reach for the pair together:
 
 ```css
-.primary-button {
+.button[data-variant="primary"] {
   background: var(--primary);
   color: var(--primary-foreground);
 }
@@ -90,13 +92,13 @@ Eleven color steps give enough range for surface, text, accent, hover, and activ
 
 ## Utility classes mirror variables
 
-A utility class named `gap-md` consumes `--gap-md`. A class named `radius-lg` consumes `--radius-lg`. The pattern is one-to-one. Knowing one tells you the other.
+A utility class named `gap-md` consumes `--gap-md`. A class named `rounded-lg` consumes `--radius-lg`. The pattern is one-to-one. Knowing one tells you the other.
 
 ```css
 :where(.gap-md) {
   gap: var(--gap-md);
 }
-:where(.radius-lg) {
+:where(.rounded-lg) {
   border-radius: var(--radius-lg);
 }
 :where(.text-h1) {

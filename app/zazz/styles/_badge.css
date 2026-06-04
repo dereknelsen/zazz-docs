@@ -4,6 +4,9 @@
   =========================================================================== */
 
   :where(.badge) {
+    --badge-ring-color: var(--ring-color);
+    --badge-ring-opacity: 0%;
+
     --badge-background: var(--background);
     --badge-background--hover: var(--muted);
     --badge-background--active: oklch(from var(--muted) l c h / calc(alpha - 0.02));
@@ -22,6 +25,16 @@
     --badge-radius: var(--radius-sm);
 
     --badge-icon-size: var(--step-3);
+
+    --badge-decoration-line: var(--decoration-line);
+    --badge-decoration-color: var(--decoration-color);
+    --badge-decoration-color--hover: var(--decoration-color--hover);
+    --badge-decoration-color--active: var(--decoration-color--active);
+    --badge-decoration-style: var(--decoration-style);
+    --badge-decoration-thickness: var(--decoration-thickness);
+    --badge-decoration-offset: var(--decoration-offset);
+    --badge-decoration-offset--hover: var(--decoration-offset--hover);
+    --badge-decoration-offset--active: var(--decoration-offset--active);
 
     font-family: var(--font-body);
     font-size: var(--font-size-xs);
@@ -47,7 +60,8 @@
     cursor: default;
     text-decoration: none;
 
-    outline: var(--ring-size) var(--ring-style) oklch(from var(--ring) l c h / 0);
+    outline: var(--ring-size) var(--ring-style)
+      color-mix(in oklch, var(--badge-ring-color) var(--badge-ring-opacity), transparent);
     outline-offset: var(--ring-offset);
 
     transition: var(--default-transition);
@@ -77,7 +91,7 @@
   }
 
   :where(button.badge:focus-visible, a[href].badge:focus-visible) {
-    outline-color: var(--ring);
+    outline-color: color-mix(in oklch, var(--badge-ring-color) var(--ring-opacity), transparent);
   }
 
   :where(
@@ -126,9 +140,9 @@
     --badge-foreground--hover: var(--primary-foreground);
     --badge-foreground--active: var(--primary-foreground);
 
-    --badge-border: var(--badge-background);
-    --badge-border--hover: var(--badge-background--hover);
-    --badge-border--active: var(--badge-background--active);
+    --badge-border: 1px solid transparent;
+    --badge-border--hover: 1px solid transparent;
+    --badge-border--active: 1px solid transparent;
   }
 
   :where(.badge[data-variant="muted"]) {
@@ -140,9 +154,9 @@
     --badge-foreground--hover: var(--foreground);
     --badge-foreground--active: var(--foreground);
 
-    --badge-border: var(--muted);
-    --badge-border--hover: var(--muted);
-    --badge-border--active: var(--muted);
+    --badge-border: 1px solid transparent;
+    --badge-border--hover: 1px solid transparent;
+    --badge-border--active: 1px solid transparent;
   }
 
   :where(.badge[data-variant="ghost"]) {
@@ -154,9 +168,9 @@
     --badge-foreground--hover: var(--foreground);
     --badge-foreground--active: var(--foreground);
 
-    --badge-border: transparent;
-    --badge-border--hover: transparent;
-    --badge-border--active: transparent;
+    --badge-border: 1px solid transparent;
+    --badge-border--hover: 1px solid transparent;
+    --badge-border--active: 1px solid transparent;
   }
 
   :where(.badge[data-variant="link"]) {
@@ -171,19 +185,21 @@
     --badge-radius: 0;
 
     border: none;
-    text-decoration: underline;
-    text-underline-offset: var(--decoration-offset);
-    text-decoration-style: var(--decoration-style);
-    text-decoration-thickness: var(--decoration-thickness);
+    text-decoration-line: var(--badge-decoration-line);
+    text-decoration-style: var(--badge-decoration-style);
+    text-decoration-color: var(--badge-decoration-color);
+    text-underline-offset: var(--badge-decoration-offset);
+    text-decoration-thickness: var(--badge-decoration-thickness);
   }
 
   :where(button.badge[data-variant="link"]:hover, a[href].badge[data-variant="link"]:hover) {
-    text-underline-offset: var(--decoration-offset--hover);
+    text-decoration-color: var(--badge-decoration-color--hover);
+    text-underline-offset: var(--badge-decoration-offset--hover);
   }
 
   :where(button.badge[data-variant="link"]:active, a[href].badge[data-variant="link"]:active) {
-    transform: none;
-    text-underline-offset: var(--decoration-offset--active);
+    text-decoration-color: var(--badge-decoration-color--active);
+    text-underline-offset: var(--badge-decoration-offset--active);
   }
 
   /* ===========================================================================

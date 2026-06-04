@@ -21,13 +21,13 @@ Three families of composed styles, applied via class:
 
 Each style composes five tokens at once. The composition for `text-h2`, for example:
 
-| Layer    | Token              | Value                                                    |
-| -------- | ------------------ | -------------------------------------------------------- |
-| Family   | `--font-heading`   | `Geist`                                                  |
-| Size     | `--font-size-h2`   | `clamp(2.986rem, calc(2.6093rem + 1.5068vi), 3.8147rem)` |
-| Weight   | `--weight-heading` | `600`                                                    |
-| Leading  | `--leading-h2`     | `1`                                                      |
-| Tracking | `--tracking-h2`    | `-0.025em`                                               |
+| Layer    | Token              | Value                                               |
+| -------- | ------------------ | --------------------------------------------------- |
+| Family   | `--font-heading`   | `Geist`                                             |
+| Size     | `--font-size-h2`   | `clamp(2.0273rem, 1.2148rem + 3.2498vi, 3.8147rem)` |
+| Weight   | `--weight-heading` | `600`                                               |
+| Leading  | `--leading-h2`     | `1`                                                 |
+| Tracking | `--tracking-h2`    | `-0.025em`                                          |
 
 In markup:
 
@@ -80,32 +80,32 @@ Or directly in component CSS, when you're composing a custom element and want to
 Three families:
 
 ```css
---font-body: Geist, Verdana, sans-serif;
---font-heading: Geist, Verdana, sans-serif;
---font-mono: "Geist Mono", "Palatino Linotype", sans-serif;
+--font-body: var(--font-geist-sans);
+--font-heading: var(--font-geist-sans);
+--font-mono: var(--font-geist-mono);
 ```
 
-The defaults set Geist as both the heading and body family. A single typeface for everything keeps a surface calm and is the most common pattern in modern marketing sites. Override `--font-heading` to introduce contrast (a display serif for headlines, say) without touching anything else. The composed styles pick up the change automatically.
+The family tokens point at framework-injected font variables (`--font-geist-sans`, `--font-geist-mono`), with Geist set as both the heading and body family. A single typeface for everything keeps a surface calm and is the most common pattern in modern marketing sites. Override `--font-heading` to introduce contrast (a display serif for headlines, say) without touching anything else. The composed styles pick up the change automatically.
 
 ## Font size
 
 Sizes use `clamp()` for fluid scaling between mobile and desktop. Headlines breathe at full width and stay readable on small screens without media-query plumbing.
 
 ```css
---font-size-display: clamp(4.2998rem, calc(3.545rem + 3.0194vi), 5.9605rem);
---font-size-h1: clamp(3.5832rem, calc(3.0445rem + 2.1549vi), 4.7684rem);
---font-size-h2: clamp(2.986rem, calc(2.6093rem + 1.5068vi), 3.8147rem);
---font-size-h3: clamp(2.4883rem, calc(2.2322rem + 1.0244vi), 3.0518rem);
---font-size-h4: clamp(2.0736rem, calc(1.9064rem + 0.6687vi), 2.4414rem);
---font-size-h5: clamp(1.728rem, calc(1.6257rem + 0.4093vi), 1.9531rem);
---font-size-h6: clamp(1.44rem, calc(1.3843rem + 0.2227vi), 1.5625rem);
+--font-size-display: clamp(2.5658rem, 1.0227rem + 6.1721vi, 5.9605rem);
+--font-size-h1: clamp(2.2807rem, 1.1499rem + 4.523vi, 4.7684rem);
+--font-size-h2: clamp(2.0273rem, 1.2148rem + 3.2498vi, 3.8147rem);
+--font-size-h3: clamp(1.802rem, 1.234rem + 2.2722vi, 3.0518rem);
+--font-size-h4: clamp(1.6018rem, 1.2202rem + 1.5265vi, 2.4414rem);
+--font-size-h5: clamp(1.4238rem, 1.1832rem + 0.9624vi, 1.9531rem);
+--font-size-h6: clamp(1.2656rem, 1.1307rem + 0.5398vi, 1.5625rem);
 
---font-size-xl: clamp(1.44rem, calc(1.3843rem + 0.2227vi), 1.5625rem);
---font-size-lg: clamp(1.2rem, calc(1.1773rem + 0.0909vi), 1.25rem);
---font-size-md: clamp(1rem, calc(1rem + 0vi), 1rem);
---font-size-sm: clamp(0.8rem, calc(0.8485rem + 0.0606vi), 0.8333rem);
---font-size-xs: clamp(0.64rem, calc(0.7192rem + 0.099vi), 0.6944rem);
---font-size-eyebrow: clamp(0.64rem, calc(0.7192rem + 0.099vi), 0.6944rem);
+--font-size-xl: clamp(1.2656rem, 1.1307rem + 0.5398vi, 1.5625rem);
+--font-size-lg: clamp(1.125rem, 1.0682rem + 0.2273vi, 1.25rem);
+--font-size-md: clamp(1rem, 1rem + 0vi, 1rem);
+--font-size-sm: clamp(0.8rem, 0.9293rem + -0.1616vi, 0.8889rem);
+--font-size-xs: clamp(0.64rem, 0.8584rem + -0.273vi, 0.7901rem);
+--font-size-eyebrow: clamp(0.512rem, 0.609rem + -0.1213vi, 0.5787rem);
 ```
 
 The values come from Figma's Desktop and Mobile breakpoint pairs. What looks right on a 1440px mockup translates to a `clamp()` that hits the same target at desktop width and the mobile equivalent at narrow widths. The `vi` unit (viewport inline progress) handles the interpolation.
@@ -119,14 +119,14 @@ Five role-based weights. No raw numbers in component CSS, just the role.
 ```css
 --weight-body: 400;
 --weight-heading: 600;
---weight-strong: 600;
+--weight-strong: 500;
 --weight-mono: 400;
---weight-eyebrow: 500;
+--weight-eyebrow: 600;
 ```
 
 Role-based weights survive a font swap. A rebrand that moves from a 400/700 family to a 300/600 one is one variable change per weight; components referencing `var(--weight-strong)` follow automatically; components hardcoded to `font-weight: 700` don't.
 
-The reset wires `<strong>` to the strong-weight token, so inline emphasis tracks the system. `--weight-strong` matches `--weight-heading` by default. Change `--weight-strong` to introduce a contrast between headings and inline emphasis.
+The reset wires `<strong>` to the strong-weight token, so inline emphasis tracks the system. `--weight-strong` (`500`) sits one notch below `--weight-heading` (`600`) by default, so inline emphasis reads as a medium weight rather than a full heading weight. Change `--weight-strong` to widen or close that contrast.
 
 ## Letter spacing
 
@@ -138,7 +138,7 @@ Tracking tightens as type gets bigger. A small detail that's easy to miss when s
 --tracking-h2: -0.025em;
 --tracking-h3: -0.02em;
 --tracking-h4: -0.01em;
---tracking-h5: -0.005em;
+--tracking-h5: -0.025em;
 --tracking-h6: -0.0025em;
 
 --tracking-xl: 0em;

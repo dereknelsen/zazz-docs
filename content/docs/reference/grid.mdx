@@ -7,14 +7,27 @@ description: Utilities for grid template columns and item placement.
 
 ### Columns
 
-| Class         | Property                                |
-| ------------- | --------------------------------------- |
-| `grid-cols-1` | `grid-template-columns: 1fr`            |
-| `grid-cols-2` | `grid-template-columns: repeat(2, 1fr)` |
-| `grid-cols-3` | `grid-template-columns: repeat(3, 1fr)` |
-| `grid-cols-4` | `grid-template-columns: repeat(4, 1fr)` |
-| `grid-cols-5` | `grid-template-columns: repeat(5, 1fr)` |
-| `grid-cols-6` | `grid-template-columns: repeat(6, 1fr)` |
+| Class         | Property                                      |
+| ------------- | --------------------------------------------- |
+| `grid-cols-1` | `grid-auto-flow: row; repeat(1, minmax(0, 1fr))` |
+| `grid-cols-2` | `grid-auto-flow: row; repeat(2, minmax(0, 1fr))` |
+| `grid-cols-3` | `grid-auto-flow: row; repeat(3, minmax(0, 1fr))` |
+| `grid-cols-4` | `grid-auto-flow: row; repeat(4, minmax(0, 1fr))` |
+| `grid-cols-5` | `grid-auto-flow: row; repeat(5, minmax(0, 1fr))` |
+| `grid-cols-6` | `grid-auto-flow: row; repeat(6, minmax(0, 1fr))` |
+
+### Column span
+
+| Class        | Property                         |
+| ------------ | -------------------------------- |
+| `col-span-1` | `grid-column: span 1 / span 1` |
+| `col-span-2` | `grid-column: span 2 / span 2` |
+| …            | …                                |
+| `col-span-12`| `grid-column: span 12 / span 12` |
+
+### Container breakpoints
+
+When the nearest inline-size container is wider than `--screen-*`, `{bp}:col-span-{n}` sets the same span as `col-span-{n}` (see [Display → Container breakpoints](/docs/reference/display#container-breakpoints)). Prefixes: `xs:` … `xl:` for `n` = 1–12.
 
 ### Place items
 
@@ -46,23 +59,18 @@ description: Utilities for grid template columns and item placement.
 
 ### Responsive feature grid
 
-For columns that change at breakpoints, write the property directly:
+Prefer placing the grid inside `.container` or `.article`. Use container breakpoint utilities (`sm:`, `md:`, …) on children so layout follows the **wrapper** width, not the viewport:
 
-```css
-.features {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--gap-md);
-
-  @media (min-width: 48rem) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (min-width: 64rem) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
+```html
+<section class="container">
+  <div class="grid grid-cols-3 gap-md">
+    <article class="col-span-3 md:col-span-2">Main — full width until container &gt; 64rem</article>
+    <aside class="col-span-3 md:col-span-1">Aside</aside>
+  </div>
+</section>
 ```
+
+For named containers or one-off rules, write `@container` in CSS — e.g. `@container (width > var(--screen-sm))`.
 
 ## Gap
 
@@ -70,7 +78,25 @@ For columns that change at breakpoints, write the property directly:
 
 ## Track sizing
 
-The default utilities use `1fr` tracks (equal width). For mixed-width grids (a fixed sidebar and a flexible main, for example), write the property directly:
+Each `grid-cols-*` utility sets `grid-auto-flow: row` and `N` equal `1fr` tracks. Items fill left to right, then wrap to the next row. `minmax(0, 1fr)` lets tracks shrink with the container instead of blowing out on long content.
+
+### Container-responsive columns
+
+With `grid-flow-row`, `grid-cols-2` … `grid-cols-12` use `repeat(auto-fill, …)` and a gap-aware track minimum: `max(--grid-col-min, (100% - (N - 1) × --grid-gap) / N)`. Default `--grid-col-min` is `min(100%, 20ch)` so columns drop on narrow containers. Do not use `min-content` for `--grid-col-min` — `auto-fill` track sizing does not read child intrinsic widths (and [`.field`](/docs/primitives/input) / `.input` intentionally use `inline-size: 100%` to fill each cell).
+
+Pair with [`gap-*`](/docs/reference/gap) so `--grid-gap` matches the grid’s `gap`. Override `--grid-col-min` on the grid for a different floor (e.g. `var(--step-48)`).
+
+```html
+<div class="container">
+  <div class="grid grid-flow-row grid-cols-3 gap-md">
+    <!-- up to 3 columns; fewer when content or width requires it -->
+  </div>
+</div>
+```
+
+Built-in utilities use unnamed `@container (width > var(--screen-*))` against the nearest inline-size ancestor. For named contexts only, use one condition per at-rule — e.g. `@container container (width > var(--screen-sm))` — not comma-separated preludes.
+
+For mixed-width grids (a fixed sidebar and a flexible main, for example), write the property directly:
 
 ```css
 .layout {

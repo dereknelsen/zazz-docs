@@ -3,7 +3,7 @@
   TEXTAREA — .textarea (auto-sizing)
   - field-sizing: content grows the box with the text; height clamps between
     5 and 12 lines, then scrolls.
-  - Shares the --field-* tokens defined in _form.css so it matches .input /
+  - Shares the --field-* tokens defined in _fields.css so it matches .input /
     .select / .button.
   =========================================================================== */
 
@@ -32,9 +32,11 @@
 
   :where(.textarea:hover) {
     border-color: var(--field-border--hover);
+    background-color: var(--field-background--hover);
   }
 
   :where(.textarea:focus-visible) {
+    background-color: var(--field-background--focus);
     border-color: var(--field-border--focus);
     outline-color: var(--ring);
   }

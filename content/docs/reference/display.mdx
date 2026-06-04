@@ -15,6 +15,39 @@ description: Utilities for setting the display type of an element.
 | `inline-flex`  | `display: inline-flex`  |
 | `grid`         | `display: grid`         |
 
+### Visibility
+
+| Class       | Property              |
+| ----------- | --------------------- |
+| `visible`   | `visibility: visible` |
+| `invisible` | `visibility: hidden`  |
+
+`hidden` removes the element from layout (`display: none`). `invisible` keeps layout space but hides visually.
+
+### Container breakpoints
+
+Prefix utilities apply when the **nearest** ancestor with `container-type: inline-size` is wider than the matching `--screen-*` threshold (not the viewport). Built-in rules use the same rem values as the tokens. Requires a container context — `.container`, `.article`, or semantic `section` / `article` from the reset.
+
+| Prefix | Container wider than |
+| ------ | -------------------- |
+| `xs:`  | `--screen-xs` (40rem) |
+| `sm:`  | `--screen-sm` (48rem) |
+| `md:`  | `--screen-md` (64rem) |
+| `lg:`  | `--screen-lg` (80rem) |
+| `xl:`  | `--screen-xl` (96rem) |
+
+| Class (per prefix) | Property        |
+| ------------------ | --------------- |
+| `{bp}:hidden`      | `display: none` |
+| `{bp}:block`       | `display: block` |
+| `{bp}:flex`        | `display: flex` |
+| `{bp}:inline-flex` | `display: inline-flex` |
+| `{bp}:grid`        | `display: grid` |
+| `{bp}:visible`     | `visibility: visible` |
+| `{bp}:invisible`   | `visibility: hidden` |
+
+Example: `sm:block` → `display: block` when the container is wider than 48rem.
+
 ## Examples
 
 ```html
@@ -36,6 +69,15 @@ description: Utilities for setting the display type of an element.
 </div>
 ```
 
+### Container-responsive display
+
+```html
+<section class="container">
+  <aside class="hidden sm:block">Sidebar when the container is wider than 48rem.</aside>
+  <main class="flex flex-col gap-md md:flex-row">…</main>
+</section>
+```
+
 ## Hiding accessibly
 
-Use `hidden` to remove an element from layout and the accessibility tree. For visual-only hiding that keeps the content available to screen readers, use [`sr-only`](/docs/reference/screen-readers) instead.
+Use `hidden` to remove an element from layout and the accessibility tree. For visual-only hiding that keeps the content available to screen readers, use [`sr-only`](/docs/reference/screen-readers) instead. Use `invisible` when you need to preserve layout space; use `{bp}:invisible` for the same behavior at a container breakpoint.

@@ -1,9 +1,9 @@
 ---
 title: Input
-description: Single-line text entry. Default plus icon-leading and icon-trailing variants.
+description: Single-line text entry. One class for every text-like type, plus input-group composition for icons and addons.
 ---
 
-A text input is a single-line field for free-form entry. Zazz styles the native `<input>` element and adds wrappers for leading and trailing icons. Inputs and buttons share the same height (`--step-9`) and corner radius (`--radius-input`) so they line up cleanly in forms.
+A text input is a single-line field for free-form entry. Zazz styles the native `<input>` element with a single `.input` class that covers every text-like type — `text`, `email`, `tel`, `url`, `search`, `password`, `number`, `date`, and more. The `type` only swaps the keyboard or picker; the box is identical. Inputs and buttons share the same height (`--field-height`, which resolves to `--step-8`) and corner radius (`--field-radius`, which resolves to `--radius-md`) so they line up cleanly in forms.
 
 ## Default
 
@@ -16,116 +16,114 @@ A text input is a single-line field for free-form entry. Zazz styles the native 
 | Token      | Value                                                                 |
 | ---------- | --------------------------------------------------------------------- |
 | Width      | `100%`                                                                |
-| Height     | `--step-9`                                                            |
-| Min width  | `--step-48`                                                           |
-| Padding    | `0 --step-2_5`                                                        |
-| Border     | `1px solid var(--border)`                                             |
-| Radius     | `--radius-input` (defaults to `--radius-md`)                          |
-| Background | `--input`                                                             |
-| Color      | `--input-foreground`                                                  |
-| Font       | `--font-size-md`, weight `--weight-body`                              |
-| Hover      | Border color shifts to `--primary`                                    |
+| Height     | `--field-height` (`--step-8`)                                         |
+| Padding    | `0 --field-padding` (`--step-2_5`)                                    |
+| Border     | `1px solid var(--field-border)` (defaults to `--border`)              |
+| Radius     | `--field-radius` (defaults to `--radius-md`)                          |
+| Background | `--field-background` (`--input`)                                      |
+| Color      | `--field-foreground` (`--input-foreground`)                           |
+| Font       | `--font-size-sm`                                                      |
+| Hover      | Border color shifts to `--field-border--hover`                        |
 | Focus      | Border `--primary`, plus the [focus ring](/docs/reference/focus-ring) |
 
 ## With a leading icon
 
-Wrap the input in `input-wrapper` and add the icon inside. Apply `pl-input` to the input to make room.
+To attach an icon, wrap the control in an `.input-group` — a single bordered shell that fuses the input with addons. The shell is authored as a `<label>` so clicking a non-interactive addon focuses the control, and `:focus-within` lifts the whole field while the nested input goes borderless and transparent. Addons come **after** the control in the DOM; `data-align` positions them. The default alignment, `inline-start`, places the addon visually before the control.
 
 <ComponentPreview name="input-icon-leading" />
 
 ```html
-<div class="input-wrapper">
-  <div class="input-icon input-icon-start">
-    <span class="input-icon"><!-- menu icon --></span>
-  </div>
-  <input class="pl-input input" type="text" placeholder="Placeholder" />
-</div>
+<label class="input-group">
+  <input class="input" type="text" placeholder="Placeholder" />
+  <span class="input-group__addon">
+    <svg><!-- menu icon --></svg>
+  </span>
+</label>
 ```
 
-`pl-input` adds `padding-left: var(--step-8)` so the icon doesn't overlap the text.
-
 ## With a trailing icon
+
+Set `data-align="inline-end"` on the addon to place it after the control.
 
 <ComponentPreview name="input-icon-trailing" />
 
 ```html
-<div class="input-wrapper">
-  <input class="pr-input input" type="search" placeholder="Search…" />
-  <div class="input-icon input-icon-right">
-    <span class="input-icon"><!-- search icon --></span>
-  </div>
-</div>
+<label class="input-group">
+  <input class="input" type="search" placeholder="Search…" aria-label="Search" />
+  <span class="input-group__addon" data-align="inline-end">
+    <svg><!-- search icon --></svg>
+  </span>
+</label>
 ```
-
-`pr-input` adds `padding-right: var(--step-8)`.
 
 ## Anatomy
 
-| Part           | Class                                  | Notes                                                                                    |
-| -------------- | -------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Wrapper        | `input-wrapper`                        | Optional, required only when adding icons. Position context for absolute icons.          |
-| Input          | `input`                                | The `<input>` element. Apply `pl-input` or `pr-input` modifier when an icon sits inside. |
-| Icon container | `input-icon-start`, `input-icon-right` | Absolute-positioned wrapper that anchors the icon to the left or right edge.             |
-| Icon           | `input-icon`                           | The icon itself. Width `--step-4_5`, square aspect.                                      |
+| Part  | Class                | Notes                                                                                                |
+| ----- | -------------------- | ---------------------------------------------------------------------------------------------------- |
+| Shell | `input-group`        | Optional, required only when adding addons. A `<label>` whose `:focus-within` lifts the whole field. |
+| Input | `input`              | The `<input>` element. Inside a group it sheds its own border and background.                        |
+| Addon | `input-group__addon` | Holds an `<svg>`, a `.button`, `<kbd>`, or `.input-group__text`. `data-align` positions it.          |
+| Text  | `input-group__text`  | Inline text for units, protocols, or handles (`https://`, `USD`, `@user`).                           |
+
+Addon alignment via `data-align`: `inline-start` (default), `inline-end`, `block-start`, and `block-end`. The `block-*` values span a full-width row — that's how a textarea grows a toolbar above or below it.
 
 ## Form composition
 
-Inside a form, pair each input with a label and wrap them in `form-group`. Use `form-row` to lay out fields side by side.
+Wrap each input in a `.field` with a `.field__label`. The `.field` is a grid that stacks the label (row 1), the control (row 2), and any `.field__hint` / `.field__error` (shared row 3). Add `.field__hint` for muted helper copy and `.field__error` for the destructive-themed validation message.
 
 ```html
-<div class="form-group">
-  <label class="form-label" for="email">Email</label>
-  <input class="input" id="email" type="email" placeholder="you@example.com" />
-</div>
-
-<div class="form-row">
-  <div class="form-group">
-    <label class="form-label" for="first">First name</label>
-    <input class="input" id="first" type="text" />
-  </div>
-  <div class="form-group">
-    <label class="form-label" for="last">Last name</label>
-    <input class="input" id="last" type="text" />
-  </div>
+<div class="field">
+  <label class="field__label" for="email">Email</label>
+  <input
+    class="input"
+    id="email"
+    type="email"
+    required
+    placeholder="you@example.com"
+    aria-describedby="email-hint"
+  />
+  <span class="field__hint" id="email-hint">We'll only use this to send receipts.</span>
+  <span class="field__error" role="alert">Please enter a valid email address.</span>
 </div>
 ```
 
 ## States
 
 - **Default.** Border `--border`, background `--input`.
-- **Hover.** Border lifts to `--primary` to signal interactivity.
-- **Focus.** Border stays `--primary`; `box-shadow: var(--focus-ring)` outlines the field via the `.ring` utility class.
-- **Disabled.** Set `disabled` on the input. Pointer events and contrast drop.
-- **Invalid.** Pair with `form-error` (in `form-row`) for the destructive-themed error message.
+- **Hover.** Border lifts to `--field-border--hover` to signal interactivity.
+- **Focus.** Border switches to `--primary`; the focus ring is a `:focus-visible` **outline** (`outline-color: var(--ring)`), offset by `--ring-offset`. Modern outlines follow the border radius, so the ring hugs the field's rounded corners.
+- **Disabled.** Set `disabled` on the input. The shared disabled state applies `opacity: 0.5` and `cursor: not-allowed`.
+- **Invalid.** Validation hangs off `:user-invalid`, so the border, ring, and label only turn `--destructive` — and the `.field__error` reveals while the `.field__hint` hides — _after_ the user commits a value (blur or submit), never while typing.
 
 ## Tokens summary
 
-| Property          | Token                                           |
-| ----------------- | ----------------------------------------------- |
-| Height            | `--step-9`                                      |
-| Padding (inline)  | `--step-2_5`                                    |
-| Border            | `--border` (default), `--primary` (hover/focus) |
-| Radius            | `--radius-input`                                |
-| Background        | `--input`                                       |
-| Foreground        | `--input-foreground`                            |
-| Icon size         | `--step-4_5`                                    |
-| Icon-side padding | `--step-8` (via `pl-input` / `pr-input`)        |
-| Focus ring        | `--focus-ring`                                  |
+| Property         | Token                                                               |
+| ---------------- | ------------------------------------------------------------------- |
+| Height           | `--field-height` (`--step-8`)                                       |
+| Padding (inline) | `--field-padding` (`--step-2_5`)                                    |
+| Border           | `--field-border` (`--border`), `--primary` (focus)                  |
+| Radius           | `--field-radius` (`--radius-md`)                                    |
+| Background       | `--field-background` (`--input`)                                    |
+| Foreground       | `--field-foreground` (`--input-foreground`)                         |
+| Icon size        | `--field-icon-size` (`--step-4`)                                    |
+| Focus ring       | `--ring` outline (`--ring-size` / `--ring-style` / `--ring-offset`) |
+
+To retune the radius for the whole form family, override `--field-radius` (declared in `_fields.css`), or shift everything with `--radius-multiplier`.
 
 ## Accessibility
 
-- Every input needs a `<label class="form-label">` that's either visible or screen-reader-only via [`sr-only`](/docs/reference/screen-readers).
+- Every input needs a `<label class="field__label">` that's either visible or screen-reader-only via [`sr-only`](/docs/reference/screen-readers).
 - The `placeholder` is not a label substitute. Use it for examples or hints; the label still needs to be there.
 - For icon-only signaling (search icon, success indicator), the icon should be decorative (`aria-hidden="true"`). The input itself carries the accessible name from its label.
 - Required fields should use `required` and a visible cue in the label (an asterisk or "required" text).
 
 ## Cross-platform
 
-| Platform       | Reference                                                                        |
-| -------------- | -------------------------------------------------------------------------------- |
-| Figma          | `Zazz v0.4.4 → Input` (component_set with icon variants)                         |
-| Webflow        | `input` class + optional `input-wrapper`, `input-icon-*`, `pl-input`, `pr-input` |
-| CSS / Tailwind | The same classes after [installing utilities.css](/docs/quickstart/css)          |
+| Platform       | Reference                                                                 |
+| -------------- | ------------------------------------------------------------------------- |
+| Figma          | `Zazz v0.4.4 → Input` (component_set with icon variants)                  |
+| Webflow        | `input` class, with optional `input-group` shell and `input-group__addon` |
+| CSS / Tailwind | The same classes after [installing utilities.css](/docs/quickstart/css)   |
 
 ## Where to next
 
@@ -143,6 +141,6 @@ Inside a form, pair each input with a label and wrap them in `form-group`. Use `
   <Card
     title="Foundations / Radius"
     href="/docs/foundations/radius"
-    description="`--radius-input` controls every input's corner shape."
+    description="`--field-radius` controls every form control's corner shape."
   />
 </Cards>

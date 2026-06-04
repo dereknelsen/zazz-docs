@@ -235,7 +235,7 @@ Don't write `font-weight: 700`. Write `font-weight: var(--weight-strong)`. A reb
 | `--weight-heading` | 600     | Headings                       |
 | `--weight-strong`  | 500     | `<strong>` and inline emphasis |
 | `--weight-mono`    | 400     | Code, monospaced labels        |
-| `--weight-eyebrow` | 500     | Eyebrow labels                 |
+| `--weight-eyebrow` | 600     | Eyebrow labels                 |
 
 ### Paragraph rhythm — use `.text-prose`
 
@@ -361,7 +361,7 @@ This keeps the win condition the same — retune a button's corners by overridin
 
 ### Utility classes
 
-`rounded-none`, `rounded-xs`, `rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-full` — note the **`rounded-*`** prefix (Tailwind-style), each sets `border-radius` to the matching token.
+`rounded-0`, `rounded-xs`, `rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-full` — note the **`rounded-*`** prefix (Tailwind-style); each sets `border-radius` to the matching token (`rounded-0` sets a literal `0`).
 
 ### Nested radius rule of thumb
 
@@ -530,6 +530,8 @@ Naming:
 - `block__element` — a part of the block (`card__title`, `dialog__footer`)
 - `[data-variant="…"]` / `[data-size="…"]` — variants (`data-variant="primary"`, **not** `button-primary` or `card--featured`)
 
+**Prefer clarity over brevity. Spell names out in full; don't abbreviate.** `navigation-menu__submenu`, not `navigation-menu__sub`; `card__description`, not `card__desc`; `accordion__trigger`, not `accordion__trg`. A class name is read far more often than it's typed, and an unambiguous name that mirrors the part it styles is worth more than the handful of characters an abbreviation saves. The same goes for variant values (`data-variant="submenu"`, not `"sub"`) and local custom properties (`--navigation-menu-submenu-trigger`, not `--nav-sub-trg`). Only use an abbreviation when it's the term the domain itself uses (`nav`, `id`, `url`).
+
 ### Theme a component with local custom properties
 
 The shipped components don't hard-code colors into their rules — they declare local `--component-*` props off theme roles, then a `[data-variant]` block re-points those locals. This is the pattern to copy: the base rule stays untouched, and a variant is just a short list of variable swaps.
@@ -563,9 +565,9 @@ Keep utilities doing what utilities do well (spacing, type, radius, display) and
 
 ## Primitives
 
-Zazz ships **eight example components** under `app/zazz/components/`, each paired with a stylesheet in `app/zazz/styles/`: **Accordion, Badge, Button, Dialog, Dropdown, Navigation menu, Section, and the Form family** (`.input`, `.textarea`, `.select`, `.input-group`, `.field`, checkbox, switch, `.radio`). They are **suggestions for how to build common components on Zazz tokens** — not a packaged library you must adopt wholesale. Notably, they're dependency-free: native HTML and modern platform APIs (Popover API, CSS anchor positioning, Invoker Commands, native `<dialog>`/`<details>`, the customizable `<select>` (`appearance: base-select`), `field-sizing: content`, `:has()`, `:user-invalid`) carry all behavior, so most work with **zero JavaScript**.
+Zazz ships **nine example components** under `app/zazz/components/`, each paired with a stylesheet in `app/zazz/styles/`: **Accordion, Badge, Button, Dialog, Dropdown, Navigation menu, Section, Tabs, and the Form family** (`.input`, `.textarea`, `.select`, `.input-group`, `.password-group`, `.field`, checkbox, switch, `.radio`). They are **suggestions for how to build common components on Zazz tokens** — not a packaged library you must adopt wholesale. Notably, they're dependency-free: native HTML and modern platform APIs (Popover API, CSS anchor positioning, Invoker Commands, native `<dialog>`/`<details>`, the customizable `<select>` (`appearance: base-select`), `field-sizing: content`, grouped radios + CSS `order` for tabs, `:has()`, `:user-invalid`) carry all behavior, so most work with **zero JavaScript**.
 
-They share one pattern — block class + `:where()` zero specificity + local `--component-*` props defaulting to theme tokens + `[data-variant]`/`[data-size]` variants + the `--ring*` focus outline. The form controls add a shared `--field-*` token set (in `_form.css`) so `.input`, `.textarea`, `.select`, and `.input-group` read as one family, a `.field` wrapper for label/control/hint/error layout, and validation that surfaces only on `:user-invalid` (after blur/submit, never while typing).
+They share one pattern — block class + `:where()` zero specificity + local `--component-*` props defaulting to theme tokens + `[data-variant]`/`[data-size]` variants + the `--ring*` focus outline. The form controls add a shared `--field-*` token set (in `_fields.css`) so `.input`, `.textarea`, `.select`, `.input-group`, and `.password-group` read as one family, a `.field` wrapper for label/control/hint/error layout, and validation that surfaces only on `:user-invalid` (after blur/submit, never while typing).
 
 When asked to build a component:
 

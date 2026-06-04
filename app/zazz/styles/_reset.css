@@ -48,6 +48,9 @@
     overflow-x: clip;
     overflow-y: auto;
     scroll-behavior: smooth;
+    font-size: var(--font-size-md);
+    line-height: var(--leading-md);
+    letter-spacing: var(--tracking-md);
   }
 
   :where(:focus-visible) {
@@ -233,13 +236,25 @@
     block-size: auto;
   }
 
-  /* Custom text selection styling */
+  /* Custom text selection styling — the tinted background is safe everywhere
+     (relative oklch is Baseline). contrast-color() is Chromium-only, so it is
+     gated: without it the selection keeps its inherited text color, which stays
+     legible against a 30%-opacity tint in both light and dark modes. */
   ::selection {
-    /* Ensure text is always legible on the primary color at 30% opacity + the background color */
-    color: contrast-color(
-      color-mix(in oklab, var(--background) 50%, oklch(from var(--primary) calc(l + 0.1) c h / 0.3))
-    );
     background-color: oklch(from var(--primary) calc(l + 0.1) c h / 0.3);
+  }
+
+  @supports (color: contrast-color(white)) {
+    ::selection {
+      /* Ensure text is always legible on the primary color at 30% opacity + the background color */
+      color: contrast-color(
+        color-mix(
+          in oklch,
+          var(--background) 50%,
+          oklch(from var(--primary) calc(l + 0.1) c h / 0.3)
+        )
+      );
+    }
   }
 
   /* ===========================================================================
@@ -295,6 +310,13 @@
     -webkit-appearance: none;
   }
 
+  /* Suppress the browser's built-in password reveal / clear glyphs (Edge/IE) so
+     they never double up with the Zazz .password__toggle button. */
+  ::-ms-reveal,
+  ::-ms-clear {
+    display: none;
+  }
+
   ::-webkit-date-and-time-value {
     min-height: 1lh;
     text-align: inherit;
@@ -340,56 +362,82 @@
   }
 
   ::placeholder {
-    opacity: 1;
+    --placeholder-color: var(--muted-foreground);
+    color: var(--placeholder-color);
   }
 
-  @supports (not (-webkit-appearance: -apple-pay-button)) or (contain-intrinsic-size: 1px) {
-    ::placeholder {
-      color: color-mix(in oklab, currentcolor 50%, transparent);
-    }
-  }
-
-  /* Range input styling */
+  /* Range input (slider) — appearance: none redraws the track + thumb from theme
+     tokens. The active region is NOT filled (parity across engines); add a paint
+     via JS if a filled track is needed. The thumb is centered on the track with a
+     calc'd negative margin so retuning either size keeps it aligned. */
   :where(input[type="range"]) {
+    --range-track-height: var(--step-2);
+    --range-track-background: var(--muted);
+    --range-track-border: 1px solid var(--muted);
+    --range-track-radius: var(--radius-full);
+    --range-thumb-size: var(--step-3_5);
+    --range-thumb-background: var(--background);
+    --range-thumb-border: 1px solid var(--primary);
+    --range-thumb-radius: var(--radius-full);
+    --range-thumb-offset: calc((var(--range-track-height) - var(--range-thumb-size)) / 2);
+
     -webkit-appearance: none;
     appearance: none;
     inline-size: 100%;
+    background: transparent;
+    cursor: pointer;
+
+    outline: var(--ring-size) var(--ring-style) oklch(from var(--ring) l c h / 0);
+    outline-offset: var(--ring-offset);
+
+    transition: var(--default-transition);
   }
 
   :where(input[type="range"])::-webkit-slider-runnable-track {
-    block-size: 0.5rem;
+    block-size: var(--range-track-height);
     inline-size: 100%;
-    background: var(--muted);
-    border: 1px solid var(--muted);
-    border-radius: var(--radius-full);
+    background: var(--range-track-background);
+    border: var(--range-track-border);
+    border-radius: var(--range-track-radius);
   }
 
   :where(input[type="range"])::-moz-range-track {
-    block-size: 0.5rem;
+    block-size: var(--range-track-height);
     inline-size: 100%;
-    background: var(--muted);
-    border-radius: var(--radius-full);
+    background: var(--range-track-background);
+    border: var(--range-track-border);
+    border-radius: var(--range-track-radius);
   }
 
   :where(input[type="range"])::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    margin-top: -0.25rem;
-    inline-size: 0.875rem;
-    block-size: 0.875rem;
-    background-color: var(--background);
-    border-radius: var(--radius-full);
-    border: 1px solid var(--primary);
+    margin-block-start: var(--range-thumb-offset);
+    inline-size: var(--range-thumb-size);
+    block-size: var(--range-thumb-size);
+    background-color: var(--range-thumb-background);
+    border: var(--range-thumb-border);
+    border-radius: var(--range-thumb-radius);
+    transition: var(--default-transition);
   }
 
   :where(input[type="range"])::-moz-range-thumb {
     appearance: none;
-    margin-top: -0.25rem;
-    inline-size: 0.875rem;
-    block-size: 0.875rem;
-    background-color: var(--background);
-    border-radius: var(--radius-full);
-    border: 1px solid var(--primary);
+    inline-size: var(--range-thumb-size);
+    block-size: var(--range-thumb-size);
+    background-color: var(--range-thumb-background);
+    border: var(--range-thumb-border);
+    border-radius: var(--range-thumb-radius);
+    transition: var(--default-transition);
+  }
+
+  :where(input[type="range"]:focus-visible) {
+    outline-color: var(--ring);
+  }
+
+  :where(input[type="range"]:disabled) {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   /* Checkbox — appearance: none redraws the native control from theme tokens.
@@ -402,11 +450,12 @@
     --checkbox-background-checked: var(--primary);
     --checkbox-border-checked: var(--primary);
     --checkbox-radius: var(--radius-xs);
-    --checkbox-icon-size: 90%;
     /* @see https://www.svgbackgrounds.com/tools/svg-to-css/
     ** Set to Legacy / URL Wrapper to update icon */
-    --checkbox-checkmark-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'/%3E%3Cpolyline points='40 144 96 200 224 72' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3C/svg%3E");
-    --checkbox-indeterminate-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'/%3E%3Cline x1='40' y1='128' x2='216' y2='128' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3C/svg%3E");
+    --checkbox-checkmark-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'/%3E%3Cpolyline points='40 144 96 200 224 72' fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'/%3E%3C/svg%3E");
+    --checkbox-checkmark-size: var(--step-3);
+    --checkbox-indeterminate-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'/%3E%3Cline x1='40' y1='128' x2='216' y2='128' fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'/%3E%3C/svg%3E");
+    --checkbox-indeterminate-size: var(--step-3);
 
     appearance: none;
     flex-shrink: 0;
@@ -416,10 +465,6 @@
     background-color: var(--checkbox-background);
     border: 1px solid var(--checkbox-border);
     border-radius: var(--checkbox-radius);
-
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: var(--checkbox-icon-size);
 
     cursor: pointer;
 
@@ -443,39 +488,77 @@
   ) {
     background-color: var(--checkbox-background-checked);
     border-color: var(--checkbox-border-checked);
+    background-repeat: no-repeat;
+    background-position: center;
   }
 
   :where(input[type="checkbox"]:not([role="switch"]):checked) {
     background-image: var(--checkbox-checkmark-mask);
+    background-size: var(--checkbox-checkmark-size);
   }
 
   :where(input[type="checkbox"]:not([role="switch"]):indeterminate) {
     background-image: var(--checkbox-indeterminate-mask);
+    background-size: var(--checkbox-indeterminate-size);
   }
 
-  /* Switch — pill track with a sliding knob via radial-gradient background-position.
-     No pseudo-elements (unreliable on replaced inputs). */
-  :where(input[role="switch"]) {
-    --switch-track-width: var(--step-9);
-    --switch-track-height: var(--step-5);
+  /* Switch — pill track on the input, thumb on the wrapping label::after
+     (pseudo-elements on replaced inputs are unreliable). */
+  :where(label:has(> input[role="switch"]), input[role="switch"]) {
+    --switch-track-width: var(--step-8);
+    --switch-track-padding: var(--step-0_5);
+    --switch-track-height: calc(var(--switch-track-width) / 2 + var(--switch-track-padding));
     --switch-thumb: var(--white);
-    --switch-thumb-size: var(--step-5);
+    --switch-thumb-size: calc((var(--switch-track-width) / 2) - var(--switch-track-padding));
+    --switch-thumb-shadow: var(--shadow-xs);
     --switch-track-background: var(--muted);
     --switch-track-background-hover: oklch(from var(--muted) l c h / calc(alpha + 0.04));
     --switch-track-background-checked: var(--primary);
     --switch-track-background-checked-hover: oklch(from var(--primary) l c h / 0.9);
     --switch-radius: var(--radius-full);
+  }
 
+  :where(label:has(> input[role="switch"])) {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset-block-start: 50%;
+      inset-inline-start: 0;
+      inline-size: var(--switch-thumb-size);
+      block-size: var(--switch-thumb-size);
+      border-radius: var(--radius-full);
+      background-color: var(--switch-thumb);
+      box-shadow: var(--switch-thumb-shadow);
+      pointer-events: none;
+      translate: var(--switch-track-padding) -50%;
+      transition: translate var(--default-transition-duration)
+        var(--default-transition-timing-function);
+      z-index: 1;
+    }
+
+    &:has(> input[role="switch"]:checked)::after {
+      translate: calc(var(--switch-track-padding) + var(--switch-thumb-size)) -50%;
+    }
+  }
+
+  :where(label:has(> input[role="switch"]:disabled)) {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  :where(label:has(> input[role="switch"]:disabled) > input[role="switch"]) {
+    opacity: 1;
+  }
+
+  :where(input[role="switch"]) {
     appearance: none;
     flex-shrink: 0;
     inline-size: var(--switch-track-width);
     block-size: var(--switch-track-height);
 
     background-color: var(--switch-track-background);
-    background-image: radial-gradient(circle, var(--switch-thumb) 0 40%, transparent 42%);
-    background-repeat: no-repeat;
-    background-position: left center;
-    background-size: var(--switch-thumb-size) 100%;
 
     border-radius: var(--switch-radius);
     cursor: pointer;
@@ -483,10 +566,7 @@
     outline: var(--ring-size) var(--ring-style) oklch(from var(--ring) l c h / 0);
     outline-offset: var(--ring-offset);
 
-    transition:
-      var(--default-transition),
-      background-position var(--default-transition-duration)
-        var(--default-transition-timing-function);
+    transition: var(--default-transition);
   }
 
   :where(input[role="switch"]:hover) {
@@ -495,7 +575,6 @@
 
   :where(input[role="switch"]:checked) {
     background-color: var(--switch-track-background-checked);
-    background-position: right center;
   }
 
   :where(input[role="switch"]:hover:checked) {
@@ -517,16 +596,9 @@
     background-position: right center;
   }
 
-  /* Allow customized select options */
-  :where(select),
   ::picker(select) {
-    appearance: base-select;
     padding: unset;
     margin: unset;
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    background-repeat: no-repeat;
   }
 
   /* Native <select> internals (::picker panel, <option>, ::picker-icon) live in
@@ -549,39 +621,56 @@
 
   :where([popover]) {
     --popover-starting-scale: 0.98;
+    --popover-starting-translate: 0, 0, 0;
+    --popover-starting-opacity: 0;
     --popover-scale: 1;
+    --popover-translate: 0, 0, 0;
+    --popover-opacity: 1;
     --popover-origin: bottom center;
     --popover-margin-block: var(--step-1_5);
     --popover-margin-inline: 0;
     --popover-position-area: block-end inline-start;
     --popover-position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
 
-    margin-block: var(--popover-margin-block);
-    margin-inline: var(--popover-margin-inline);
-    inset: auto;
-    position: fixed;
-    position-area: var(--popover-position-area);
-    position-try-fallbacks: var(--popover-position-try-fallbacks);
     transform-origin: var(--popover-origin);
-    opacity: 0;
-    transform: scale(var(--popover-starting-scale));
+    opacity: var(--popover-starting-opacity);
+    transform: scale(var(--popover-starting-scale)) translate3d(var(--popover-starting-translate));
     transition:
       opacity var(--default-transition-duration) var(--default-transition-timing-function),
       transform var(--default-transition-duration) var(--default-transition-timing-function),
+      padding var(--default-transition-duration) var(--default-transition-timing-function),
+      block-size var(--default-transition-duration) var(--default-transition-timing-function),
+      inline-size var(--default-transition-duration) var(--default-transition-timing-function),
       overlay var(--default-transition-duration) var(--default-transition-timing-function)
         allow-discrete,
       display var(--default-transition-duration) var(--default-transition-timing-function)
         allow-discrete;
   }
 
+  /* Anchor positioning tethers the popover to its trigger and lets the browser
+     flip it away from viewport edges (Chromium 125+ today). It is gated behind
+     @supports so browsers without anchor positioning (Firefox, Safari) keep the
+     UA-centered popover (inset: 0 + margin: auto) instead of a mispositioned
+     top-left box. Detection key is anchor-name — the entry property of the API. */
+  @supports (anchor-name: --zazz) {
+    :where([popover]) {
+      position: fixed;
+      inset: auto;
+      margin-block: var(--popover-margin-block);
+      margin-inline: var(--popover-margin-inline);
+      position-area: var(--popover-position-area);
+      position-try-fallbacks: var(--popover-position-try-fallbacks);
+    }
+  }
+
   :where([popover]:popover-open) {
     display: grid;
-    opacity: 1;
-    transform: scale(var(--popover-scale));
+    opacity: var(--popover-opacity);
+    transform: scale(var(--popover-scale)) translate3d(var(--popover-translate));
 
     @starting-style {
-      opacity: 0;
-      transform: scale(var(--popover-starting-scale));
+      opacity: var(--popover-starting-opacity);
+      transform: scale(var(--popover-starting-scale)) translate3d(var(--popover-starting-translate));
     }
   }
 

@@ -14,6 +14,15 @@ description: Utilities for flex container direction, alignment, and child sizing
 | `flex-col`         | `flex-direction: column`         |
 | `flex-col-reverse` | `flex-direction: column-reverse` |
 
+### Container breakpoints
+
+When the nearest inline-size container is wider than `--screen-*`, these apply (see [Display → Container breakpoints](/docs/reference/display#container-breakpoints)):
+
+| Class (per prefix) | Property              |
+| ------------------ | --------------------- |
+| `{bp}:flex-row`    | `flex-direction: row` |
+| `{bp}:flex-col`    | `flex-direction: column` |
+
 ### Align items
 
 | Class           | Property               |
@@ -70,6 +79,16 @@ description: Utilities for flex container direction, alignment, and child sizing
   <p>Second.</p>
   <p>Third.</p>
 </div>
+```
+
+### Container-responsive direction
+
+```html
+<section class="container">
+  <div class="flex flex-col gap-md sm:flex-row">
+    <div class="flex-1">Stacks in a narrow container; row when wider than 48rem.</div>
+  </div>
+</section>
 ```
 
 ### Push apart

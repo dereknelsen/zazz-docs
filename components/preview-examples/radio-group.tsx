@@ -1,18 +1,19 @@
 export default function RadioGroup() {
   return (
-    <div className="flex flex-col gap-xs">
-      <label className="radio-group">
+    <fieldset className="radio-group">
+      <legend className="text-eyebrow text-muted-foreground">Options</legend>
+      <label className="field">
         <input className="radio" type="radio" name="zazz-preview-radio" defaultChecked />
-        <span className="form-label">Option A</span>
+        <span className="field__label">Option A</span>
       </label>
-      <label className="radio-group">
+      <label className="field">
         <input className="radio" type="radio" name="zazz-preview-radio" />
-        <span className="form-label">Option B</span>
+        <span className="field__label">Option B</span>
       </label>
-      <label className="radio-group">
+      <label className="field">
         <input className="radio" type="radio" name="zazz-preview-radio" />
-        <span className="form-label">Option C</span>
+        <span className="field__label">Option C</span>
       </label>
-    </div>
+    </fieldset>
   );
 }

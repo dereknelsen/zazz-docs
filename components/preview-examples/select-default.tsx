@@ -1,6 +1,9 @@
 export default function SelectDefault() {
   return (
     <select className="select" defaultValue="">
+      <button>
+        <selectedcontent></selectedcontent>
+      </button>
       <option value="" disabled>
         Select one…
       </option>

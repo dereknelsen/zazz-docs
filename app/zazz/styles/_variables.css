@@ -1,3 +1,4 @@
+/* Token values — @property registrations live in _properties.css (style() queries). */
 @layer variables {
   :root {
     /* Enable light/dark mode */
@@ -7,45 +8,46 @@
     interpolate-size: allow-keywords;
 
     /* ==========================================================================
-    * 1. Theme — light/dark modes; background–foreground roles
+    * 1. Theme — light/dark via light-dark(); follows color-scheme (system + .dark)
     * ========================================================================== */
 
     /* base */
-    --background: var(--neutral-50);
-    --foreground: var(--neutral-900);
-    --border: var(--neutral-200);
-    --border-foreground: var(--tint-950);
-    --card: var(--white);
-    --card-foreground: var(--neutral-900);
-    --input: var(--neutral-50);
-    --input-foreground: var(--neutral-900);
+    --background: light-dark(var(--white), var(--neutral-950));
+    --foreground: light-dark(var(--neutral-900), var(--white));
+    --border: light-dark(var(--neutral-100), var(--neutral-800));
+    --border-foreground: light-dark(var(--tint-950), var(--tint-100));
+    --card: light-dark(var(--white), var(--neutral-900));
+    --card-foreground: light-dark(var(--neutral-900), var(--white));
+    --input: light-dark(var(--neutral-50), var(--tint-50));
+    --input-foreground: light-dark(var(--neutral-900), var(--white));
 
     /* overlay */
-    --muted: var(--shade-50);
-    --muted-foreground: var(--shade-600);
-    --faded: var(--tint-100);
-    --faded-foreground: var(--tint-600);
+    --muted: light-dark(var(--shade-50), var(--tint-50));
+    --muted-foreground: light-dark(var(--shade-600), var(--tint-600));
+    --faded: light-dark(var(--tint-100), var(--shade-100));
+    --faded-foreground: light-dark(var(--tint-600), var(--shade-600));
 
     /* brand */
-    --primary: var(--primary-600);
-    --primary-foreground: var(--white);
-    --secondary: var(--secondary-600);
-    --secondary-foreground: var(--white);
-    --tertiary: var(--tertiary-500);
-    --tertiary-foreground: var(--white);
+    --primary: light-dark(var(--primary-600), var(--primary-500));
+    --primary-foreground: light-dark(var(--white), var(--white));
+    --secondary: light-dark(var(--secondary-600), var(--secondary-500));
+    --secondary-foreground: light-dark(var(--white), var(--white));
+    --tertiary: light-dark(var(--tertiary-500), var(--tertiary-400));
+    --tertiary-foreground: light-dark(var(--white), var(--white));
 
     /* status */
-    --info: oklch(0.5876 0.1389 241.97);
-    --info-foreground: var(--white);
-    --success: oklch(0.596 0.1274 163.23);
-    --success-foreground: var(--white);
-    --warning: oklch(0.6658 0.1574 58.32);
-    --warning-foreground: var(--white);
-    --destructive: oklch(0.5771 0.2152 27.33);
-    --destructive-foreground: var(--white);
+    --info: light-dark(oklch(0.5876 0.1389 241.97), oklch(0.5 0.1193 242.75));
+    --info-foreground: light-dark(var(--white), var(--white));
+    --success: light-dark(oklch(0.596 0.1274 163.23), oklch(0.5081 0.1049 165.61));
+    --success-foreground: light-dark(var(--white), var(--white));
+    --warning: light-dark(oklch(0.6658 0.1574 58.32), oklch(0.5553 0.1455 49));
+    --warning-foreground: light-dark(var(--white), var(--white));
+    --destructive: light-dark(oklch(0.5771 0.2152 27.33), oklch(0.5054 0.1905 27.52));
+    --destructive-foreground: light-dark(var(--white), var(--white));
 
     /* ==========================================================================
     * 2. Corporate — brand color scales (50–950)
+    * @link https://www.tints.dev/palette/v1:cHJpbWFyeXw0RjQ2RTV8NjAwfHB8MHwwfC0yfDEwM3xtfnNlY29uZGFyeXxERTQ5MTd8NjAwfHB8MHwwfDJ8MTAyfG1-dGVydGlhcnl8RTUzNzVCfDUwMHxwfDB8MHwxfDEwM3xtfm5ldXRyYWx8ODg4ODkwfDUwMHxwfDB8MHwxfDEwM3xt
     * ========================================================================== */
 
     /* primary */
@@ -89,14 +91,15 @@
 
     /* ==========================================================================
     * 3. Grayscale — neutrals, shade (dim), tint (fade)
+    * @link https://www.tints.dev/palette/v1:cHJpbWFyeXw0RjQ2RTV8NjAwfHB8MHwwfC0yfDEwM3xtfnNlY29uZGFyeXxERTQ5MTd8NjAwfHB8MHwwfDJ8MTAyfG1-dGVydGlhcnl8RTUzNzVCfDUwMHxwfDB8MHwxfDEwM3xtfm5ldXRyYWx8ODg4ODkwfDUwMHxwfDB8MHwxfDEwM3xt
     * ========================================================================== */
 
     /* neutral */
-    --white: white;
-    --neutral-50: oklch(0.9911 0 0);
-    --neutral-100: oklch(0.9581 0 0);
+    --white: oklch(1 0 0);
+    --neutral-50: oklch(0.973 0.001 287.31);
+    --neutral-100: oklch(0.949 0.001 287.28);
     --neutral-200: oklch(0.871 0.004 286.58);
-    --neutral-300: oklch(0.794 0.007 286.38);
+    --neutral-300: oklch(0.784 0.007 286.38);
     --neutral-400: oklch(0.708 0.009 286.28);
     --neutral-500: oklch(0.629 0.012 286.12);
     --neutral-600: oklch(0.535 0.015 285.91);
@@ -104,7 +107,7 @@
     --neutral-800: oklch(0.336 0.014 285.66);
     --neutral-900: oklch(0.241 0.009 285.7);
     --neutral-950: oklch(0.198 0.008 285.68);
-    --black: black;
+    --black: oklch(0 0 0);
 
     /* shade — darkened overlays (derived from neutral-950) */
     --shade-none: oklch(from var(--neutral-950) l c h / 0);
@@ -146,7 +149,7 @@
     --font-mono: var(--font-geist-mono);
 
     /* font-size — fluid clamp() */
-    --font-size-eyebrow: clamp(0.64rem, 0.8584rem + -0.273vi, 0.7901rem);
+    --font-size-eyebrow: clamp(0.512rem, 0.609rem + -0.1213vi, 0.5787rem);
     --font-size-xs: clamp(0.64rem, 0.8584rem + -0.273vi, 0.7901rem);
     --font-size-sm: clamp(0.8rem, 0.9293rem + -0.1616vi, 0.8889rem);
     --font-size-md: clamp(1rem, 1rem + 0vi, 1rem);
@@ -165,7 +168,7 @@
     --weight-heading: 600;
     --weight-strong: 500;
     --weight-mono: 400;
-    --weight-eyebrow: 500;
+    --weight-eyebrow: 600;
 
     /* letter-spacing */
     --tracking-display: -0.025em;
@@ -180,7 +183,7 @@
     --tracking-md: 0em;
     --tracking-sm: 0em;
     --tracking-xs: 0em;
-    --tracking-eyebrow: 0.12em;
+    --tracking-eyebrow: 0.1em;
 
     /* line-height — not in Figma (variable limits) */
     --leading-display: 1;
@@ -279,7 +282,7 @@
     --radius-xs: calc(var(--step-1) * var(--radius-multiplier));
     --radius-sm: calc(var(--step-1_5) * var(--radius-multiplier));
     --radius-md: calc(var(--step-2_5) * var(--radius-multiplier));
-    --radius-lg: calc(var(--step-4) * var(--radius-multiplier));
+    --radius-lg: calc(var(--step-5) * var(--radius-multiplier));
     --radius-xl: calc(var(--step-7) * var(--radius-multiplier));
     --radius-full: 9999rem;
 
@@ -302,11 +305,14 @@
     * 8. Effects — shadows, focus rings
     * ========================================================================== */
 
-    /* states - focus rings/outlines */
-    --ring: var(--primary);
+    /* states - focus rings/outlines
+     * Override --ring-color (not --ring) per variant/context; --ring recomputes via color-mix. */
+    --ring-color: var(--primary);
+    --ring-opacity: 25%;
     --ring-style: solid;
     --ring-size: 2px;
     --ring-offset: 1px;
+    --ring: color-mix(in oklch, var(--ring-color) var(--ring-opacity), transparent);
 
     /* shadows */
     --shadow-none: 0px 0px 0px 0px oklch(from var(--black) l c h / 0);
@@ -398,87 +404,26 @@
       overlay var(--default-transition-duration) var(--default-transition-timing-function),
       pointer-events var(--default-transition-duration) var(--default-transition-timing-function);
 
+    --decoration-line: underline;
+    --decoration-color: currentColor;
+    --decoration-color--hover: currentColor;
+    --decoration-color--active: currentColor;
     --decoration-style: solid;
     --decoration-thickness: 1px;
-    --decoration-offset: 1px;
-    --decoration-offset--hover: 2px;
-    --decoration-offset--active: 1px;
+    --decoration-offset: 2px;
+    --decoration-offset--hover: 3px;
+    --decoration-offset--active: 2px;
   }
 
-  /* ==========================================================================
-* 10. Dark Mode
-* ========================================================================== */
-  :is(.dark, .dark *) {
-    /* base - dark */
-    --background: var(--neutral-950);
-    --foreground: var(--white);
-    --border: var(--neutral-800);
-    --border-foreground: var(--tint-100);
-    --card: var(--neutral-900);
-    --card-foreground: var(--white);
-    --input: var(--tint-50);
-    --input-foreground: var(--white);
-
-    /* overlay - dark */
-    --muted: var(--tint-50);
-    --muted-foreground: var(--tint-600);
-    --faded: var(--shade-100);
-    --faded-foreground: var(--shade-600);
-
-    /* brand - dark */
-    --primary: var(--primary-500);
-    --primary-foreground: var(--white);
-    --secondary: var(--secondary-500);
-    --secondary-foreground: var(--white);
-    --tertiary: var(--tertiary-400);
-    --tertiary-foreground: var(--white);
-
-    /* status - dark */
-    --info: oklch(0.5 0.1193 242.75);
-    --info-foreground: var(--white);
-    --success: oklch(0.5081 0.1049 165.61);
-    --success-foreground: var(--white);
-    --warning: oklch(0.5553 0.1455 49);
-    --warning-foreground: var(--white);
-    --destructive: oklch(0.5054 0.1905 27.52);
-    --destructive-foreground: var(--white);
-  }
-
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-reduced-motion: reduce) {
     :root {
-      /* base - dark */
-      --background: var(--neutral-950);
-      --foreground: var(--white);
-      --border: var(--neutral-800);
-      --border-foreground: var(--tint-100);
-      --card: var(--neutral-900);
-      --card-foreground: var(--white);
-      --input: var(--tint-50);
-      --input-foreground: var(--white);
-
-      /* overlay - dark */
-      --muted: var(--tint-50);
-      --muted-foreground: var(--tint-600);
-      --faded: var(--shade-100);
-      --faded-foreground: var(--shade-600);
-
-      /* brand - dark */
-      --primary: var(--primary-500);
-      --primary-foreground: var(--white);
-      --secondary: var(--secondary-500);
-      --secondary-foreground: var(--white);
-      --tertiary: var(--tertiary-400);
-      --tertiary-foreground: var(--white);
-
-      /* status - dark */
-      --info: oklch(0.5 0.1193 242.75);
-      --info-foreground: var(--white);
-      --success: oklch(0.5081 0.1049 165.61);
-      --success-foreground: var(--white);
-      --warning: oklch(0.5553 0.1455 49);
-      --warning-foreground: var(--white);
-      --destructive: oklch(0.5054 0.1905 27.52);
-      --destructive-foreground: var(--white);
+      --default-transition-duration: 0s;
+      --default-transition-timing-function: ease-in-out;
     }
+  }
+
+  /* Manual dark mode — flips light-dark() theme tokens (system dark uses color-scheme on :root) */
+  .dark {
+    color-scheme: dark;
   }
 }

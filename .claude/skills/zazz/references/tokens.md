@@ -203,7 +203,7 @@ Use to **fade** whatever sits below lighter. Frosted glass, hover-lightens on da
 ### Fluid sizes (clamp from Mobile → Desktop, interpolating on `vi`)
 
 ```css
---font-size-eyebrow: clamp(0.64rem, 0.8584rem + -0.273vi, 0.7901rem); /* shares xs */
+--font-size-eyebrow: clamp(0.512rem, 0.609rem + -0.1213vi, 0.5787rem); /* smallest style */
 --font-size-xs: clamp(0.64rem, 0.8584rem + -0.273vi, 0.7901rem);
 --font-size-sm: clamp(0.8rem, 0.9293rem + -0.1616vi, 0.8889rem);
 --font-size-md: clamp(1rem, 1rem + 0vi, 1rem);
@@ -227,7 +227,7 @@ These are generated; don't hand-edit. Regenerate with the Utopia flow in `refere
 --weight-heading: 600;
 --weight-strong: 500;
 --weight-mono: 400;
---weight-eyebrow: 500;
+--weight-eyebrow: 600;
 ```
 
 ### Tracking (tightens as type grows)
@@ -417,7 +417,7 @@ There are **no** `--radius-button` / `--radius-card` / `--radius-input` / `--rad
 
 ### Utility classes
 
-`rounded-none`, `rounded-xs`, `rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-full` — note the `rounded-*` prefix (Tailwind-style), each setting `border-radius` to the matching token.
+`rounded-0`, `rounded-xs`, `rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-full` — note the `rounded-*` prefix (Tailwind-style); each sets `border-radius` to the matching token (`rounded-0` sets a literal `0`).
 
 ---
 

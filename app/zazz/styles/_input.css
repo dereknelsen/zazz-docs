@@ -3,7 +3,7 @@
   TEXT INPUTS — .input
   - One class for every text-like type (text, search, email, number, date, …);
     the type only changes the picker/keyboard, not the box.
-  - Shares the --field-* tokens defined in _form.css so it aligns with .select,
+  - Shares the --field-* tokens defined in _fields.css so it aligns with .select,
     .textarea, and .button.
   =========================================================================== */
 
@@ -29,9 +29,11 @@
 
   :where(.input:hover) {
     border-color: var(--field-border--hover);
+    background-color: var(--field-background--hover);
   }
 
-  :where(.input:focus-visible) {
+  :where(.input:focus-within) {
+    background-color: var(--field-background--focus);
     border-color: var(--field-border--focus);
     outline-color: var(--ring);
   }

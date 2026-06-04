@@ -49,7 +49,7 @@ Zazz's scale jumps by tens (`0, 10, 20, …, 50`) to leave room between for cust
 | `z-40` | Toasts, snackbars                    |
 | `z-50` | Modals, command palettes             |
 
-Native `<dialog>` elements set `z-index: 9999` via the [reset](app/zazz/reset.css) and sit above everything in the utility scale.
+Native `<dialog>` (when opened with `showModal()`) and `[popover]` elements render in the browser's top layer, so they sit above everything in the utility scale regardless of `z-index`. See [\_reset.css](app/zazz/styles/_reset.css) for their open/close wiring.
 
 ## Higher values
 

@@ -1,9 +1,9 @@
 ---
 title: Card
-description: A bordered surface that groups related content. Composes with everything.
+description: A bordered surface that groups related content. A pure composition pattern.
 ---
 
-A card holds related content as a single unit: an article preview, a feature description, a product tile. Zazz's card is a flexible container with named slots for figure, content, body, and footer. Build whatever the design calls for by composing those parts.
+A card holds related content as a single unit: an article preview, a feature description, a product tile. Zazz's card is a **composition pattern** — there is no `_card.css` partial and no packaged component. You build it from the `card` block class plus utilities and tokens: a `--card` surface, a `1px solid var(--border)`, `--radius-lg` corners, `--gap-md` padding, and a nested figure at `--radius-md`. Shadows come from the `.shadow-*` utilities, not baked into the card.
 
 <ComponentPreview name="card-basic" />
 
@@ -11,20 +11,20 @@ A card holds related content as a single unit: an article preview, a feature des
 
 ```html
 <a class="card" href="/article">
-  <a class="card__figure" href="/article">
+  <div class="card__figure">
     <img class="card__image" src="/cover.jpg" alt="" />
-  </a>
+  </div>
 
   <div class="card__content">
     <div class="card__tags">
-      <a class="badge badge-link" href="/category">Category</a>
-      <a class="badge badge-link" href="/tag">Tag</a>
+      <a class="badge" data-variant="link" href="/category">Category</a>
+      <a class="badge" data-variant="link" href="/tag">Tag</a>
     </div>
 
     <div class="card__body">
-      <a class="card__title-link" href="/article">
+      <span class="card__title-link">
         <h3 class="card__title text-h6">How quickly zebras jump</h3>
-      </a>
+      </span>
       <p class="card__description text-sm text-muted-foreground line-clamp-2">
         Short excerpt that wraps to two lines before truncating.
       </p>
@@ -32,13 +32,13 @@ A card holds related content as a single unit: an article preview, a feature des
 
     <div class="card__footer">
       <div class="avatar-author">
-        <div class="avatar"><img class="avatar__profile" src="/author.jpg" alt="" /></div>
+        <div class="avatar"><div class="avatar__initials">DN</div></div>
         <div class="avatar-author__info">
           <span class="avatar-author__name text-sm">Author name</span>
           <span class="avatar-author__description text-xs text-muted-foreground">15 Mar 2025</span>
         </div>
       </div>
-      <a class="card__button button button-muted" href="/article">Read article</a>
+      <span class="card__button button" data-variant="muted">Read article</span>
     </div>
   </div>
 </a>
@@ -46,43 +46,42 @@ A card holds related content as a single unit: an article preview, a feature des
 
 | Part        | Class               | Notes                                                                                                              |
 | ----------- | ------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| Root        | `card`              | The bordered surface. Width and height stretch to 100% of the container.                                           |
+| Root        | `card`              | The bordered surface. Add `--card` background, `1px solid var(--border)`, `--radius-lg`, and `--gap-md` padding.   |
 | Figure      | `card__figure`      | Optional media region. 3:2 aspect by default, `--radius-md` corners. Wrap in an anchor for click-through behavior. |
 | Image       | `card__image`       | Absolute-positioned fill inside `card__figure`.                                                                    |
-| Content     | `card__content`     | Padded text region. Stacks tags, body, and footer with `--gap-sm` between.                                         |
-| Tags        | `card__tags`        | Inline badges row with `--gap-xs`. Often holds `badge-link` variants.                                              |
-| Body        | `card__body`        | Title + description stack with `--gap-xs`.                                                                         |
+| Content     | `card__content`     | Padded text region. Stacks tags, body, and footer.                                                                 |
+| Tags        | `card__tags`        | Inline badges row. Often holds `data-variant="link"` badges.                                                       |
+| Body        | `card__body`        | Title + description stack.                                                                                         |
 | Title       | `card__title`       | Heading text. Apply a text style like `text-h6` separately.                                                        |
-| Title link  | `card__title-link`  | Anchor wrapping the title for click-through.                                                                       |
+| Title link  | `card__title-link`  | Wraps the title for click-through.                                                                                 |
 | Description | `card__description` | Short excerpt. Pair with `text-sm`, `text-muted-foreground`, and `line-clamp-2`.                                   |
 | Footer      | `card__footer`      | Author meta + CTA row. Wraps when narrow.                                                                          |
-| Footer CTA  | `card__button`      | The card's outbound action. Compose with `button button-muted` or another variant.                                 |
+| Footer CTA  | `card__button`      | The card's outbound action. Compose with `button` plus a `data-variant` (e.g. `muted`).                            |
 
 The root can be any clickable element (commonly an `<a>`) or a plain `<div>` when the card itself isn't a single click target.
 
 ## Tokens
 
-| Property       | Token / value                                                                      |
-| -------------- | ---------------------------------------------------------------------------------- |
-| Width / height | `100%` (fills parent)                                                              |
-| Radius         | `--radius-card` (defaults to `--radius-lg`)                                        |
-| Color          | `--card-foreground`                                                                |
-| Background     | None set on root. Add `background: var(--card)` if the card needs its own surface. |
-| Internal gap   | `--gap-sm` (content, footer), `--gap-xs` (tags, body)                              |
-| Figure aspect  | `3 / 2`, `--radius-md`                                                             |
-| Title size     | Whatever text style you apply (the demo uses `text-h6`)                            |
+| Property      | Token / value                                                                |
+| ------------- | ---------------------------------------------------------------------------- |
+| Radius        | `--radius-lg` (≈16px) — applied directly; there is no `--radius-card` token  |
+| Color         | `--card-foreground`                                                          |
+| Background    | `--card` (add `background: var(--card)` when the card needs its own surface) |
+| Border        | `1px solid var(--border)`                                                    |
+| Padding       | `--gap-md`                                                                   |
+| Figure aspect | `3 / 2`, `--radius-md` corners                                               |
+| Elevation     | A `.shadow-*` utility (`.shadow-md` is typical) — not baked into the card    |
+| Title size    | Whatever text style you apply (the demo uses `text-h6`)                      |
 
-The card root is borderless by default. Combine with `border: 1px solid var(--border)` and `background: var(--card)` when the card needs to read as a surface. Without those, the card sits flush with the parent.
+Because the card is a composition pattern, nothing is set on the `card` class by default. Combine `background: var(--card)`, `border: 1px solid var(--border)`, `--radius-lg`, `--gap-md` padding, and a `.shadow-*` utility to make it read as an elevated surface. Without those, the card sits flush with the parent.
 
 ## Composing
 
 Cards compose with primitives:
 
-- **Tags** are `badge-link` for clickable categories.
+- **Tags** are badges with `data-variant="link"` for clickable categories.
 - **Author meta** uses the [Avatar author composition](/docs/primitives/avatar#author-metadata-composition).
-- **CTA** is any [Button](/docs/primitives/button) variant via `card__button`.
-
-For a card with an explicit surface and shadow, add a class with `background`, `border`, and a `box-shadow` token at the root.
+- **CTA** is any [Button](/docs/primitives/button) variant via `card__button` (e.g. `button` with `data-variant="muted"`).
 
 ## Accessibility
 

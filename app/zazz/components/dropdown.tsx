@@ -33,64 +33,27 @@
   ─────────────────────────────────────────────────────────────────────────────
 */
 
-// The popover menu shared by every trigger below — raw HTML, no JS.
-const menu = /* html */ `
-<menu>
-  <li class="weight-strong text-eyebrow text-muted-foreground p-xs">Group 1</li>
-  <li><a href="#" class="button justify-start" data-variant="ghost">Link 1</a></li>
-  <li><a href="#" class="button justify-start" data-variant="ghost">Link 2</a></li>
-  <li><a href="#" class="button justify-start" data-variant="ghost">Link 3</a></li>
-  <hr class="my-xs" />
-  <li class="weight-strong text-eyebrow text-muted-foreground p-xs">Group 2</li>
-  <li><a href="#" class="button justify-start" data-variant="ghost">Link 4</a></li>
-  <li><a href="#" class="button justify-start" data-variant="ghost">Link 5</a></li>
-  <li><a href="#" class="button justify-start" data-variant="ghost">Link 6</a></li>
-</menu>
-`;
-
-// One dropdown: trigger button + anchored popover panel.
-const dropdown = (id: string, side: string, align: string, label: string) => /* html */ `
-<div class="dropdown">
-  <button class="button" type="button" popovertarget="${id}">${label}</button>
-  <div id="${id}" class="dropdown__popover" data-side="${side}" data-align="${align}" popover="auto">
-    ${menu}
-  </div>
-</div>
-`;
-
 // Markup is authored as raw HTML so the docs mirror the vanilla markup exactly.
 const html = /* html */ `
 <!-- Dropdown START -->
-<div class="flex flex-col gap-md">
-
-  <!-- bottom — panel below trigger -->
-  <div class="grid grid-cols-3 items-start gap-md">
-    ${dropdown("dropdown-bottom", "bottom", "start", "Bottom / start")}
-    ${dropdown("dropdown-bottom-center", "bottom", "center", "Bottom / center")}
-    ${dropdown("dropdown-bottom-end", "bottom", "end", "Bottom / end")}
+<div class="dropdown">
+  <button class="button" type="button" popovertarget="dropdown-1">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="40" y1="64" x2="216" y2="64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="40" y1="192" x2="216" y2="192" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+    <span>Menu</span>
+  </button>
+  <div id="dropdown-1" class="dropdown__popover" data-side="bottom" data-align="start" popover="auto">
+    <menu>
+      <li class="weight-strong text-eyebrow text-muted-foreground p-xs">Group 1</li>
+      <li><a href="#" class="button justify-start" data-variant="ghost">Link 1</a></li>
+      <li><a href="#" class="button justify-start" data-variant="ghost">Link 2</a></li>
+      <li><a href="#" class="button justify-start" data-variant="ghost">Link 3</a></li>
+      <hr class="my-xs" />
+      <li class="weight-strong text-eyebrow text-muted-foreground p-xs">Group 2</li>
+      <li><a href="#" class="button justify-start" data-variant="ghost">Link 4</a></li>
+      <li><a href="#" class="button justify-start" data-variant="ghost">Link 5</a></li>
+      <li><a href="#" class="button justify-start" data-variant="ghost">Link 6</a></li>
+    </menu>
   </div>
-
-  <!-- top — panel above trigger -->
-  <div class="grid grid-cols-3 items-start gap-md">
-    ${dropdown("dropdown-top", "top", "start", "Top / start")}
-    ${dropdown("dropdown-top-center", "top", "center", "Top / center")}
-    ${dropdown("dropdown-top-end", "top", "end", "Top / end")}
-  </div>
-
-  <!-- right — panel to the right of trigger -->
-  <div class="grid grid-cols-3 items-start gap-md">
-    ${dropdown("dropdown-right", "right", "start", "Right / start")}
-    ${dropdown("dropdown-right-center", "right", "center", "Right / center")}
-    ${dropdown("dropdown-right-end", "right", "end", "Right / end")}
-  </div>
-
-  <!-- left — panel to the left of trigger -->
-  <div class="grid grid-cols-3 items-start gap-md">
-    ${dropdown("dropdown-left", "left", "start", "Left / start")}
-    ${dropdown("dropdown-left-center", "left", "center", "Left / center")}
-    ${dropdown("dropdown-left-end", "left", "end", "Left / end")}
-  </div>
-
 </div>
 <!-- Dropdown END -->
 `;

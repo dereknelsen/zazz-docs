@@ -27,12 +27,14 @@ app/zazz/styles/
 ├── _dialog.css          # .dialog                                      → @layer components
 ├── _dropdown.css        # .dropdown                                    → @layer components
 ├── _navigation-menu.css # .navigation-menu                             → @layer components
-├── _form.css            # shared --field-* tokens, .field, validation  → @layer components
+├── _fields.css          # shared --field-* tokens, .field, validation  → @layer components
 ├── _input.css           # .input                                       → @layer components
 ├── _textarea.css        # .textarea                                    → @layer components
 ├── _select.css          # .select (+ ::picker styling)         → @layer reset + components
 ├── _input-group.css     # .input-group                                 → @layer components
+├── _password-group.css  # .password-group (reveal toggle)              → @layer components
 ├── _radio.css           # .radio / .radio-group                        → @layer components
+├── _tabs.css            # .tabs (segmented control)                    → @layer components
 └── load.ts              # JS/bundler entry — imports index.css then every partial
 ```
 
@@ -47,7 +49,7 @@ Two facts drive everything below:
 
 ## Vanilla / Astro / plain CSS
 
-The full framework. You get tokens, the reset, the eight example components (including the form controls), and the whole utility set — author markup with `text-*`, `p-md`, `.container`, `.button[data-variant]`, `.input`, etc.
+The full framework. You get tokens, the reset, the example components (including the form controls), and the whole utility set — author markup with `text-*`, `p-md`, `.container`, `.button[data-variant]`, `.input`, etc.
 
 ### Entry point — pick one
 
@@ -76,15 +78,17 @@ import "../zazz/styles/load.ts";
 @import "./zazz/styles/_dialog.css";
 @import "./zazz/styles/_dropdown.css";
 @import "./zazz/styles/_navigation-menu.css";
-@import "./zazz/styles/_form.css";
+@import "./zazz/styles/_fields.css";
 @import "./zazz/styles/_input.css";
 @import "./zazz/styles/_textarea.css";
 @import "./zazz/styles/_select.css";
 @import "./zazz/styles/_input-group.css";
+@import "./zazz/styles/_password-group.css";
 @import "./zazz/styles/_radio.css";
+@import "./zazz/styles/_tabs.css";
 ```
 
-Import only the component partials you actually use — they're independent. One caveat for the form set: `.input`, `.textarea`, `.select`, and `.input-group` share the `--field-*` tokens declared in `_form.css`, so import `_form.css` whenever you use any of them. (Checkbox and switch ride along in `_reset.css`.)
+Import only the component partials you actually use — they're independent. One caveat for the form set: `.input`, `.textarea`, `.select`, `.input-group`, and `.password-group` share the `--field-*` tokens declared in `_fields.css`, so import `_fields.css` whenever you use any of them. (Checkbox and switch ride along in `_reset.css`.)
 
 ### Where your own component CSS goes
 

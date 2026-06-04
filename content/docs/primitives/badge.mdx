@@ -5,85 +5,101 @@ description: Compact label for status, category, or count. Same variant set as b
 
 A badge is a small label attached to a piece of content. Use one when you need to call attention to category, status, count, or a tag value without the weight of a button.
 
-Badges share the button's variant vocabulary so the two compose visually. A primary badge on a primary button reads as a coherent system rather than two separate decisions.
+Badges share the button's variant vocabulary so the two compose visually. A primary badge on a primary button reads as a coherent system rather than two separate decisions. The badge is a gently-rounded chip (`--badge-radius` defaults to `--radius-sm`), not a capsule.
 
 ## Variants
 
-| Variant class   | Use for                                       | shadcn equivalent         |
-| --------------- | --------------------------------------------- | ------------------------- |
-| `badge`         | Default outlined treatment.                   | `badge` (outline)         |
-| `badge-primary` | "New," "Beta," "Live." Calls attention.       | `badge-primary` (default) |
-| `badge-muted`   | "Draft," "Archived." Soft, present-but-quiet. | `badge-secondary`         |
-| `badge-ghost`   | Inline metadata where a chip is too loud.     | `badge-ghost`             |
-| `badge-link`    | A badge that's also a link (`<a>` element).   | n/a                       |
+| Variant                  | Use for                                       | shadcn equivalent         |
+| ------------------------ | --------------------------------------------- | ------------------------- |
+| `badge` (no attribute)   | Default outlined treatment.                   | `badge` (outline)         |
+| `data-variant="primary"` | "New," "Beta," "Live." Calls attention.       | `badge-primary` (default) |
+| `data-variant="muted"`   | "Draft," "Archived." Soft, present-but-quiet. | `badge-secondary`         |
+| `data-variant="ghost"`   | Inline metadata where a chip is too loud.     | `badge-ghost`             |
+| `data-variant="link"`    | A badge that's also a link (`<a>` element).   | n/a                       |
+
+Like the button, variants are `data-variant` attributes, not modifier classes. A `data-variant="link"` badge drops to `--badge-radius: 0` and underlines its text.
 
 <ComponentPreview name="badge-variants" />
 
+```html
+<span class="badge">Category</span>
+<span class="badge" data-variant="primary">New</span>
+<span class="badge" data-variant="muted">Draft</span>
+<span class="badge" data-variant="ghost">Inline</span>
+<a class="badge" data-variant="link" href="/posts">Posts</a>
+```
+
 ## Icon-only
 
-The `badge-minimal` modifier makes a square icon-only badge. Useful for dots, status indicators, or kebab-menu triggers.
+Set `data-size="icon"` for a square icon-only badge. Useful for dots, status indicators, or kebab-menu triggers. Put the `<svg>` directly inside and add `aria-label` to the root. (The badge has only the `icon` size; the button additionally has `sm` and `icon-sm`.)
 
 <ComponentPreview name="badge-minimal" />
+
+```html
+<span class="badge" data-size="icon" aria-label="More actions">
+  <svg><!-- dots icon --></svg>
+</span>
+```
 
 ## Anatomy
 
 ```html
 <span class="badge">
-  <span class="badge-icon"><!-- optional leading icon --></span>
-  <span class="badge-label">Label</span>
-  <span class="badge-icon"><!-- optional trailing icon --></span>
+  <svg><!-- optional leading icon --></svg>
+  Label
+  <svg><!-- optional trailing icon --></svg>
 </span>
 ```
 
-| Part     | Class                                                       | Notes                                                    |
-| -------- | ----------------------------------------------------------- | -------------------------------------------------------- |
-| Root     | `badge`                                                     | A `<span>`, `<a>`, or `<button>` element. Required.      |
-| Variant  | `badge-primary`, `badge-muted`, `badge-ghost`, `badge-link` | Optional. Apply at most one.                             |
-| Modifier | `badge-minimal`                                             | Square icon-only treatment.                              |
-| Icon     | `badge-icon`                                                | One or two, leading and trailing as needed.              |
-| Label    | `badge-label`                                               | The visible text. Uses `--font-size-xs` for compactness. |
+| Part    | Selector                                     | Notes                                                  |
+| ------- | -------------------------------------------- | ------------------------------------------------------ |
+| Root    | `.badge`                                     | A `<span>`, `<a>`, or `<button>` element. Required.    |
+| Variant | `data-variant="primary\|muted\|ghost\|link"` | Optional. Omit for the default outlined treatment.     |
+| Size    | `data-size="icon"`                           | Optional. Square icon-only treatment.                  |
+| Icon    | `.badge > svg`                               | A direct-child SVG. Auto-sized to `--badge-icon-size`. |
+| Label   | bare text                                    | The visible text, no wrapper. Uses `--font-size-xs`.   |
 
 ## Tokens
 
-| Property             | Token / value                                                                                      |
-| -------------------- | -------------------------------------------------------------------------------------------------- |
-| Height               | `--step-6`                                                                                         |
-| Padding (inline)     | `--step-2`                                                                                         |
-| Gap                  | `--step-1_5`                                                                                       |
-| Border               | `1px solid var(--border)` (default), variant-dependent elsewhere                                   |
-| Radius               | `--radius-badge` (defaults to `--radius-full`, capsule)                                            |
-| Background (default) | transparent                                                                                        |
-| Background (primary) | `--primary` → text `--primary-foreground`                                                          |
-| Background (muted)   | `--muted` with `--faded` border → text `--foreground`                                              |
-| Background (ghost)   | transparent → hover paints `--muted`                                                               |
-| Background (link)    | transparent → hover sets text to `--primary`                                                       |
-| Font (root)          | family `--font-body`, size `--font-size-sm`, weight `--weight-body`, line-height `1`               |
-| Font (label)         | size `--font-size-xs`                                                                              |
-| Hover                | `--muted` background on default; opacity drop on primary and muted                                 |
-| Active               | `opacity: 0.8` (link also adds `text-decoration: underline`)                                       |
-| Focus-visible        | `box-shadow: var(--focus-ring)` (apply via the [`ring`](/docs/reference/focus-ring) utility class) |
+| Property             | Token / value                                                                                                        |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Height               | `--badge-height` (defaults to `--step-5`)                                                                            |
+| Padding (inline)     | `--badge-padding` (`--step-2`)                                                                                       |
+| Gap                  | `--badge-gap` (`--step-1`)                                                                                           |
+| Icon size            | `--badge-icon-size` (`--step-3`)                                                                                     |
+| Border               | `1px solid var(--border)` (default), variant-dependent elsewhere                                                     |
+| Radius               | `--badge-radius` (defaults to `--radius-sm`, a gentle chip)                                                          |
+| Background (default) | `--background`                                                                                                       |
+| Background (primary) | `--primary` → text `--primary-foreground`                                                                            |
+| Background (muted)   | `--muted`, no visible border → text `--foreground`                                                                   |
+| Background (ghost)   | transparent → hover paints `--muted`                                                                                 |
+| Background (link)    | no box, underlined → hover sets text to `--primary`                                                                  |
+| Font                 | family `--font-body`, size `--font-size-xs`, weight `--weight-strong`, line-height `1`                               |
+| Hover                | `--muted` background on default; opacity drop on primary                                                             |
+| Active               | active shade (link also bumps `text-underline-offset`)                                                               |
+| Focus-visible        | `outline-color: var(--ring)` (transparent outline held at rest; or the [`ring`](/docs/reference/focus-ring) utility) |
 
-Override `--radius-badge` to swap the default capsule shape for square chips (`--radius-sm`) or matched-to-button corners (`--radius-md`). See [Foundations → Radius](/docs/foundations/radius).
+The badge declares `--badge-radius: var(--radius-sm)` locally — there is no `--radius-badge` token. Override `--badge-radius` to make square chips (`--radius-none`), capsules (`--radius-full`), or matched-to-button corners (`--radius-md`). See [Foundations → Radius](/docs/foundations/radius).
 
 ## States
 
-Static badges don't carry interactive states. Clickable badges (root is `<a>` or `<button>`, often with `badge-link`) inherit the same hover, active, and focus-visible behavior as `button`.
+Interactive states (hover, active, focus-visible) apply **only** to `button.badge` and `a[href].badge`. A bare `<span class="badge">` is inert decoration. Clickable badges (root is `<a href>` or `<button>`) inherit the same hover, active, and focus-visible behavior as `button`.
 
 ## Accessibility
 
-- Static badges (decorative labels) don't need ARIA. Use plain `<span>`.
-- Clickable badges should be `<a>` (navigation) or `<button>` (action). Apply `badge-link` for the visual treatment.
+- Static badges (decorative labels) don't need ARIA. Use a plain `<span>` — it carries no interactive state.
+- Clickable badges should be `<a>` (navigation) or `<button>` (action). Use `data-variant="link"` for the text-style treatment.
 - A badge that conveys live status (e.g., "Live now") should sit inside a region with `aria-live="polite"` if it changes dynamically.
 - Color alone shouldn't carry meaning. Pair color with an icon or label for success/warning/error badges.
-- For `badge-minimal`, set `aria-label` on the root.
+- For `data-size="icon"`, set `aria-label` on the root.
 
 ## Cross-platform
 
-| Platform       | Reference                                                               |
-| -------------- | ----------------------------------------------------------------------- |
-| Figma          | `Zazz v0.4.4 → badge` (component_set)                                   |
-| Webflow        | `badge` class with `badge-{variant}` modifier                           |
-| CSS / Tailwind | The same classes after [installing utilities.css](/docs/quickstart/css) |
+| Platform       | Reference                                                                            |
+| -------------- | ------------------------------------------------------------------------------------ |
+| Figma          | `Zazz v0.4.4 → badge` (component_set)                                                |
+| Webflow        | `badge` class with `data-variant` / `data-size` attributes                           |
+| CSS / Tailwind | The same class and attributes after [installing utilities.css](/docs/quickstart/css) |
 
 ## Where to next
 
@@ -101,6 +117,6 @@ Static badges don't carry interactive states. Clickable badges (root is `<a>` or
   <Card
     title="Foundations / Radius"
     href="/docs/foundations/radius"
-    description="`--radius-badge` controls every badge's shape."
+    description="`--badge-radius` controls every badge's shape."
   />
 </Cards>

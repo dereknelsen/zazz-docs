@@ -15,32 +15,35 @@ A textarea is a multi-line input for free-form copy: messages, descriptions, com
 
 ## Tokens
 
-| Property     | Token / value                                                        |
-| ------------ | -------------------------------------------------------------------- |
-| Width        | `100%`                                                               |
-| Min height   | `--step-24`                                                          |
-| Min width    | `--step-48`                                                          |
-| Padding      | `--step-1_5` block, `--step-2_5` inline                              |
-| Border       | `1px solid var(--border)` (default), `--primary` (hover/focus)       |
-| Radius       | `--radius-input` (defaults to `--radius-md`)                         |
-| Background   | `--input`                                                            |
-| Color        | `--input-foreground`                                                 |
-| Font         | `--font-size-md`, line-height `--leading-md`, weight `--weight-body` |
-| Field sizing | `content` (auto-grows)                                               |
-| Focus ring   | `--focus-ring`                                                       |
+| Property     | Token / value                                                  |
+| ------------ | -------------------------------------------------------------- |
+| Width        | `100%`                                                         |
+| Min height   | `5lh`                                                          |
+| Max height   | `12lh`                                                         |
+| Padding      | `--field-padding` (`--step-2_5`)                               |
+| Border       | `1px solid var(--field-border)` (default), `--primary` (focus) |
+| Radius       | `--field-radius` (defaults to `--radius-md`)                   |
+| Background   | `--field-background` (`--input`)                               |
+| Color        | `--field-foreground` (`--input-foreground`)                    |
+| Font         | `--font-size-sm`, line-height `--leading-sm`                   |
+| Field sizing | `content` (auto-grows)                                         |
+| Resize       | `vertical`                                                     |
+| Focus ring   | `--ring` outline (`:focus-visible`)                            |
 
 ## Form composition
 
+Wrap the textarea in a `.field` with a `.field__label`. Add a `.field__hint` for helper copy or a `.field__error` for validation, both sharing the field's bottom row.
+
 ```html
-<div class="form-group">
-  <label class="form-label" for="message">Message</label>
+<div class="field">
+  <label class="field__label" for="message">Message</label>
   <textarea class="textarea" id="message" placeholder="Your message…"></textarea>
 </div>
 ```
 
 ## Auto-growing
 
-`field-sizing: content` makes the textarea grow vertically as the user types, capped only by viewport (or any `max-height` you set). It starts at `--step-24` (6rem at default interval) so an empty textarea has visible breathing room.
+`field-sizing: content` makes the textarea grow vertically as the user types. It clamps between `5lh` (its starting height, so an empty textarea has visible breathing room) and `12lh`, then scrolls. `resize: vertical` lets the user drag it taller within that range.
 
 To disable auto-grow, override the property:
 
@@ -54,10 +57,10 @@ To disable auto-grow, override the property:
 ## States
 
 - **Default.** Border `--border`, background `--input`.
-- **Hover.** Border lifts to `--primary`.
-- **Focus.** Border stays `--primary`; the [focus ring](/docs/reference/focus-ring) applies via `box-shadow: var(--focus-ring)`.
-- **Disabled.** Set the `disabled` attribute. Pointer events disable; contrast drops.
-- **Invalid.** Pair with `form-error` for the destructive-themed message.
+- **Hover.** Border lifts to `--field-border--hover`.
+- **Focus.** Border switches to `--primary`; the focus ring is a `:focus-visible` **outline** (`outline-color: var(--ring)`), which follows the field's rounded corners.
+- **Disabled.** Set the `disabled` attribute. The shared disabled state applies `opacity: 0.5` and `cursor: not-allowed`.
+- **Invalid.** Validation hangs off `:user-invalid`: the border, ring, and label turn `--destructive` and the `.field__error` reveals only after the user commits (blur or submit), never while typing.
 
 ## Accessibility
 

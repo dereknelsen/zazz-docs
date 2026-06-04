@@ -31,7 +31,7 @@ Base tokens cover the bedrock surfaces and the text that sits on them.
   background: var(--card);
   color: var(--card-foreground);
   border: 1px solid var(--border);
-  border-radius: var(--radius-card);
+  border-radius: var(--radius-lg);
 }
 ```
 
@@ -107,23 +107,19 @@ Zazz responds to both system preference and an explicit class.
 
 ```css
 :root {
-  /* light by default */
+  color-scheme: light dark;
+  --background: light-dark(var(--white), var(--neutral-950));
+  /* …other theme roles use light-dark(light, dark) */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* dark when the OS asks for it */
-  }
-}
-
-:is(.dark, .dark *) {
-  /* dark whenever .dark is on an ancestor */
+.dark {
+  color-scheme: dark; /* flips light-dark() tokens for this subtree */
 }
 ```
 
-Force a mode by adding `.dark` (or any class you wire up) anywhere up the tree: for an in-page theme switcher, a preview panel, or a section that overrides the system default.
+System dark mode follows `color-scheme` on `:root` (no duplicate `@media` overrides). Force dark by adding `.dark` on an ancestor.
 
-To add a new mode (high-contrast, brand-takeover, holiday), repeat the pattern: a new selector that re-points the same theme variables. Components never branch on mode; they consume theme tokens and trust them.
+To add a new mode (high-contrast, brand-takeover, holiday), add another `light-dark()` pair or a scoped `color-scheme` override. Components never branch on mode; they consume theme tokens and trust them.
 
 ## Beyond Tailwind and shadcn
 

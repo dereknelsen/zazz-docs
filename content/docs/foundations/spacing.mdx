@@ -129,12 +129,13 @@ When picking a step for a designer-facing spacing decision, ask whether the valu
 `--spacing-interval` is the lever that scales every gap, step, padding, and margin in the system.
 
 ```css
---spacing-interval: 0.25rem; /* 4px at default root font-size */
+/* @link https://utopia.fyi/clamp/calculator?a=400,1280,3.6—4 */
+--spacing-interval: clamp(0.225rem, 0.2136rem + 0.0455vw, 0.25rem); /* ≈ 3.6px → 4px */
 ```
 
-The default of `0.25rem` (4px) matches the base unit used by Tailwind, macOS, and most modern design systems. It gives a 4-pixel rhythm that aligns cleanly to a typical pixel grid.
+The interval is a fluid `clamp()`: it scales from roughly `3.6px` on narrow viewports up to `4px` (`0.25rem`) at the desktop cap, where it settles. That settled `4px` matches the base unit used by Tailwind, macOS, and most modern design systems, giving a 4-pixel rhythm that aligns cleanly to a typical pixel grid, while the lower bound tightens spacing slightly on small screens.
 
-Override it to retune the entire spatial system in one variable:
+Override it to retune the entire spatial system in one variable. You can drop the fluid clamp for a fixed interval if you don't want spacing to track viewport width:
 
 ```css
 :root {
@@ -148,7 +149,7 @@ Override it to retune the entire spatial system in one variable:
 
 Components don't care. They consume the tokens that resolve to multiples of the interval. The interval can also be scoped: set it on a section or page, not just `:root`, to retune one part of an app without affecting the rest.
 
-The interval is in `rem`, not `px`, so the spacing system scales with the user's root font size. A user who bumps their browser font size for accessibility gets bigger spacing too, automatically.
+The interval's bounds are in `rem`, not `px`, so the spacing system scales with the user's root font size. A user who bumps their browser font size for accessibility gets bigger spacing too, automatically.
 
 ## Where to next
 

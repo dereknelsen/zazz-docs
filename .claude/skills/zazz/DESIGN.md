@@ -108,8 +108,8 @@ typography:
     lineHeight: 1.5
   eyebrow:
     fontFamily: Geist, Verdana, sans-serif
-    fontSize: 0.69rem
-    fontWeight: 500
+    fontSize: 0.58rem
+    fontWeight: 600
     lineHeight: 1.2
     letterSpacing: 0.12em
   mono:
@@ -453,7 +453,7 @@ In code these point at `--font-geist-sans` / `--font-geist-mono` (supplied by th
 | `--weight-heading` | 600 (Semibold) | All headings, display       |
 | `--weight-strong`  | 500 (Medium)   | Bold/strong inline emphasis |
 | `--weight-mono`    | 400 (Regular)  | Monospace text              |
-| `--weight-eyebrow` | 500 (Medium)   | Eyebrow labels              |
+| `--weight-eyebrow` | 600 (Semibold) | Eyebrow labels              |
 
 ### Fluid Type Scale (Mobile → Desktop via `clamp()`)
 
@@ -473,7 +473,7 @@ Values below are the actual declarations from `_variables.css` (fluid `clamp()` 
 | `text-md`      | 1.00rem (static)  | `clamp(1rem, 1rem + 0vi, 1rem)`                     | 1.6     | 0         | Default body text                         |
 | `text-sm`      | 0.80rem → 0.89rem | `clamp(0.8rem, 0.9293rem + -0.1616vi, 0.8889rem)`   | 1.5     | 0         | Small UI labels                           |
 | `text-xs`      | 0.64rem → 0.79rem | `clamp(0.64rem, 0.8584rem + -0.273vi, 0.7901rem)`   | 1.5     | 0         | Captions, fine print                      |
-| `text-eyebrow` | 0.64rem → 0.79rem | `clamp(0.64rem, 0.8584rem + -0.273vi, 0.7901rem)`   | 1.2     | 0.12em    | Uppercase label, wide-tracked (shares xs) |
+| `text-eyebrow` | 0.51rem → 0.58rem | `clamp(0.512rem, 0.609rem + -0.1213vi, 0.5787rem)` | 1.2     | 0.12em    | Uppercase label, wide-tracked (smallest)  |
 
 Headings use `text-wrap: balance` and `font-optical-sizing: auto`. Body text uses `text-wrap: pretty`. The overall feel is tight-leading on large text, generous-leading on body. For long-form copy, wrap blocks in `.text-prose` — it gaps children with `--gap-sm` and applies per-style top margins (`--margin-*`) automatically.
 
@@ -488,11 +488,11 @@ Headings use `text-wrap: balance` and `font-optical-sizing: auto`. Body text use
 
 ## 4. Component Stylings
 
-Zazz ships **eight example components** (`app/zazz/components/` + matching `app/zazz/styles/_*.css`): **Accordion, Badge, Button, Dialog, Dropdown, Navigation menu, Section, and the Form family** (Input, Textarea, Select, Input-group, Checkbox, Switch, Radio). They're dependency-free — native HTML and platform APIs (Popover API, CSS anchor positioning, Invoker Commands, native `<dialog>`/`<details>`, customizable `<select>`, `field-sizing`, `:has()`, `:user-invalid`) carry behavior, so most work with **zero JavaScript**.
+Zazz ships **nine example components** (`app/zazz/components/` + matching `app/zazz/styles/_*.css`): **Accordion, Badge, Button, Dialog, Dropdown, Navigation menu, Section, Tabs, and the Form family** (Input, Textarea, Select, Input-group, Password-group, Checkbox, Switch, Radio). They're dependency-free — native HTML and platform APIs (Popover API, CSS anchor positioning, Invoker Commands, native `<dialog>`/`<details>`, customizable `<select>`, `field-sizing`, grouped radios + CSS `order` for tabs, `:has()`, `:user-invalid`) carry behavior, so most work with **zero JavaScript**.
 
 **Two conventions to internalize:**
 
-- **Variants are data attributes, not modifier classes.** `[data-variant="primary|muted|ghost|link"]`, `[data-size="icon"]` (and `[data-side]`/`[data-align]`/`[data-layout]` for the popover components). Write `class="button" data-variant="primary"` — never `button-primary`.
+- **Variants are data attributes, not modifier classes.** `[data-variant="primary|muted|ghost|link"]`, `[data-size="icon"]` (and `[data-side]`/`[data-align]`/`[data-variant]`/`[data-size]` for the popover components). Write `class="button" data-variant="primary"` — never `button-primary`.
 - **Theming hooks are local custom properties.** A component declares `--button-background`, `--button-radius`, etc. off theme roles, then a `[data-variant]` block re-points those locals. Retune by overriding the local prop. (This is also why there are no `--radius-button`/`--radius-card` primitive tokens — a component aliases the semantic scale itself, e.g. `--button-radius: var(--radius-md)`.)
 
 ### Buttons
@@ -532,7 +532,18 @@ Native `<dialog>` opened/closed via the **Invoker Commands API** (`button[comman
 Click-to-open panels on the **Popover API** + **CSS anchor positioning** (`anchor-name`/`anchor-scope` on the trigger, `position-anchor` + the shared `--popover-*` vars on the panel). Native light-dismiss; no JS.
 
 - **Dropdown** (`.dropdown` + `.dropdown__popover`): `data-side` (bottom/top/left/right) × `data-align` (start/center/end) place the panel; `position-try-fallbacks` flips it on overflow. Menu items are `.button[data-variant="ghost"]` with `justify-start`.
-- **Navigation menu** (`.navigation-menu` + `__list`/`__item`/`__trigger`/`__popover`): horizontal nav with rich panels. `data-layout="featured"` gives a two-column callout-plus-links mega-panel; the chevron rotates via `:has(... :popover-open)`. `data-size="full"` spans full width.
+- **Navigation menu** (`.navigation-menu` + `__container`/`__item`/`__trigger`/`__popover`/`__viewport`): horizontal nav with rich popover panels. The `__viewport` laid out with a grid plus a `__featured` callout gives a two-column mega-panel; the chevron rotates via `:has(… :popover-open)`. `data-size="container"` (or `root`/`screen`) widens the panel via `anchor-size()`; `data-variant="submenu"` opens a nested flyout to the side; `data-align` (`start`/`center`/`end`) sets inline alignment.
+- **Anchor-positioning fallback:** anchor positioning is Chromium-only today (no Firefox/Safari), so the panel's positioning (`inset`/`position-area`/`position-try-fallbacks` on `:where([popover])`) is gated behind `@supports (anchor-name: …)`. Without it the panel centers in the viewport via the UA default — it still opens, light-dismisses, and animates. Same pattern guards the Tabs sliding indicator (`_tabs.css`) and the Select picker width (`anchor-size()`). When you add an anchor-positioned rule, gate it and leave a usable ungated fallback.
+
+### Tabs
+
+Zero-JS tabs from grouped radio inputs, styled as a **segmented control**. A muted track (`.tabs__list[role="tablist"]`) holds the hidden radios + their `.tabs__label`s and one card pill (`.tabs__indicator`); the `.tabs__panel`s are **siblings after the track**. The shared `name` gives mutual exclusion + Arrow-key navigation natively.
+
+- **Track + sliding pill:** `.tabs__list` is a `position: relative` inline-flex muted track. The checked label exposes `anchor-name: --active-tab`; `.tabs__indicator` is absolutely positioned and reads it via `anchor()` insets, so the card pill sizes to and slides behind the active label (label backgrounds stay transparent — the pill is the fill).
+- **Anchor-positioning fallback:** the pill's `anchor()` insets are gated behind `@supports (anchor-name: …)`; where unsupported (Firefox/Safari) the pill is hidden and the checked label is painted directly (`--card` + `--shadow-xs`). Loses the slide, keeps the indication.
+- **State / reveal:** panels follow the track, so the Nth checked radio maps to the (N+1)th child of `.tabs` via a `:has(.tabs__list > input:nth-of-type(N):checked) > .tabs__panel:nth-child(N+1)` chain — **panel order must match radio order**, built-in up to 24 tabs.
+- **Focus:** each radio is hidden with `clip-path` (still focusable); its ring is surfaced via `input:focus-visible + label`.
+- **Locals on `.tabs`:** track (`--tabs-track-background` = `--muted`, `--tabs-track-padding`/`--tabs-track-gap`, `--tabs-track-radius`), pill (`--tabs-indicator-background` = `--card`, `--tabs-indicator-radius`, `--tabs-indicator-shadow`), labels (`--tabs-label-foreground` = `--muted-foreground`, `--tabs-label-foreground--hover`/`--active` = `--foreground`, `--tabs-label-padding`, `--tabs-label-height`), plus `--tabs-gap` between track and panel. A brand pill: `--tabs-indicator-background: var(--primary)` + `--tabs-label-foreground--active: var(--primary-foreground)`.
 
 ### Cards (composition pattern — not a shipped partial)
 
@@ -544,14 +555,15 @@ There's no `_card.css`; build a card from the block + utilities + tokens.
 
 ### Forms (shipped: `.input` · `.textarea` · `.select` · `.input-group` · checkbox · switch · `.radio`)
 
-A family of native form controls styled from Zazz tokens, split across `_form.css` (shared glue) and one file per control. No JS drives behavior — the browser handles validation, the customizable `<select>` picker, `field-sizing` growth, and checked/indeterminate states. **Shared `--field-*` tokens** (declared in `_form.css` on `.input, .textarea, .select, .input-group`) make a text input, dropdown, and message box read as one set; alias one local to retune them all: `--field-background` (= `--input`), `--field-foreground`, `--field-border` (= `--border`), `--field-border--hover` (border darkened 0.1 L), `--field-border--focus` (= `--primary`), `--field-radius` (= `--radius-md`), `--field-height` (= `--step-8`, matches the button), `--field-padding` (= `--step-2_5`), `--field-icon-size` (= `--step-4`).
+A family of native form controls styled from Zazz tokens, split across `_fields.css` (shared glue) and one file per control. No JS drives behavior — the browser handles validation, the customizable `<select>` picker, `field-sizing` growth, and checked/indeterminate states. **Shared `--field-*` tokens** (declared in `_fields.css` on `.input, .textarea, .select, .input-group, .password-group`) make a text input, dropdown, and message box read as one set; alias one local to retune them all: `--field-background` (= `--input`), `--field-foreground`, `--field-border` (= `--border`), `--field-border--hover` (border darkened 0.1 L), `--field-border--focus` (= `--primary`), `--field-radius` (= `--radius-md`), `--field-height` (= `--step-8`, matches the button), `--field-padding` (= `--step-2_5`), `--field-icon-size` (= `--step-4`).
 
-- **`.field` wrapper** — optional layout helper. A grid stacking `.field__label` (row 1), the control (row 2), and `.field__hint` / `.field__error` (shared row 3, so only the visible message takes space). `[data-inline]` switches to a row for checkbox/radio/switch (control beside its label).
+- **`.field` wrapper** — optional layout helper. A grid stacking `.field__label` (row 1), the control (row 2), and `.field__hint` / `.field__error` (shared row 3, so only the visible message takes space). `[data-direction="horizontal"]` switches to a row for checkbox/radio/switch (control beside its label).
 - **Validation via `:user-invalid`** — wrap a control in `.field` with a `.field__error`. The error reveals (and the hint hides) only after the user **commits** a value (blur/submit), never while typing. Invalid controls flip `--field-border`/`--ring`/label to `--destructive`. Hint↔error swap animates with `@starting-style` + `content-visibility` `allow-discrete`.
 - **`.input`** — one class for every text-like type (text, email, tel, url, search, password, number, date…); the `type` only swaps the keyboard/picker, the box is identical. Border transitions to `--primary` on hover/focus; outline ring on `:focus-visible` (see §5).
 - **`.textarea`** — auto-grows via `field-sizing: content`, clamped between `5lh` and `12lh`, then scrolls; `resize: vertical`.
 - **`.select`** — customizable `<select>` (`appearance: base-select`): a `<button><selectedcontent></selectedcontent></button>` trigger plus a styled `::picker(select)`, `<option>`s, `::picker-icon` (chevron, rotates on `:open`), and `::checkmark`. The picker is styled like the card popovers (`--card`, `--shadow-md`, anchored width); the checked option uses `--primary-100` fill + `--primary` text + strong weight (never color alone). Degrades to the native OS dropdown where unsupported.
 - **`.input-group`** — a shadcn-style bordered shell (authored as a `<label>`) fusing a control with addons; `:focus-within` lifts the whole shell while the nested control goes borderless/transparent so it reads as one field. Addons (`.input-group__addon`) come **after** the control in the DOM for predictable tab order and are positioned with `data-align`: `inline-start` (default) · `inline-end` · `block-start` · `block-end` (the `block-*` values span a full-width row — that's how a textarea grows a toolbar above or below it). `.input-group__text` holds units/protocols/handles ("https://", "USD", "@user"); embedded `.button`s pick up `--field-button-radius` (= `--radius-sm`).
+- **`.password-group`** — the same shell pattern specialized for a password field plus a reveal toggle. A `.password-group__toggle` (a ghost icon `.button` in an `inline-end` addon) swaps two icons (`.password-group__icon--show` / `--hide`) purely off its `aria-pressed` state; a small progressive-enhancement script flips the input `type` and keeps `aria-pressed` / `aria-label` in sync. Shares the `--field-*` tokens and `:user-invalid` validation with the rest of the family.
 - **Checkbox** (`input[type="checkbox"]:not([role="switch"])`, styled in `_reset.css`) — `appearance: none` redraws the box from `--checkbox-*` tokens; fills `--primary` with a check (`:checked`) or dash (`:indeterminate`) SVG mask. `indeterminate` has no HTML attribute — set it in JS (`el.indeterminate = true`).
 - **Switch** (`input[role="switch"]`, styled in `_reset.css`) — a pill track (`--muted` → `--primary` on `:checked`) with a `--white` thumb that slides; `--switch-*` tokens.
 - **`.radio`** (+ `.radio-group`) — `appearance: none` redraws the circle; the checked dot is a `radial-gradient` so it tracks `--primary-foreground`, not color alone. Group by shared `name`; `.radio-group` is a flex-column `<fieldset>` for an accessible labelled set.
@@ -730,7 +742,7 @@ Both self-pad — no extra wrapper div or `px-*` needed. Both register as contai
 | `--radius-xl`   | `--step-7` × multiplier   | ~28px       | Prominently rounded, statement surfaces        |
 | `--radius-full` | `9999rem`                 | Pill-shaped | Fully circular/capsular                        |
 
-Radius can be globally scaled via `--radius-multiplier` (default `1`). Computed sizes track the fluid spacing interval (values shown at the ~4px settled interval). Utility classes are `rounded-none` … `rounded-xl`, `rounded-full` (the `rounded-*` prefix). There are no `--radius-button`/`--radius-card`/`--radius-input`/`--radius-badge` aliases — components alias the scale via a local prop (e.g. `--button-radius: var(--radius-md)`).
+Radius can be globally scaled via `--radius-multiplier` (default `1`). Computed sizes track the fluid spacing interval (values shown at the ~4px settled interval). Utility classes are `rounded-0` … `rounded-xl`, `rounded-full` (the `rounded-*` prefix). There are no `--radius-button`/`--radius-card`/`--radius-input`/`--radius-badge` aliases — components alias the scale via a local prop (e.g. `--button-radius: var(--radius-md)`).
 
 ### Shadows & Elevation
 

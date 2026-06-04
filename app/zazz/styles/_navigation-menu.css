@@ -1,16 +1,41 @@
 @layer components {
   :where(.navigation-menu) {
+    --popover-background: transparent;
+    --popover-foreground: var(--card-foreground);
+    --popover-border: 1px solid transparent;
+
+    --popover-background: var(--card);
+    --popover-border: 1px solid var(--muted);
+    --popover-shadow: var(--shadow-md);
+
+    --popover-radius: var(--radius-md);
+    --popover-child-radius: var(--radius-sm);
+    --popover-gap: var(--step-1_5);
+    --popover-inline-size: min(var(--screen-xs), 100% - var(--gap-md));
+
+    --popover-viewport-display: grid;
+    --popover-viewport-align-items: stretch;
+    --popover-viewport-justify-items: stretch;
+    --popover-viewport-template-columns: 1fr;
+    --popover-viewport-gap: var(--step-1_5);
+    --popover-viewport-min-inline-size: var(--step-52);
+
+    --navigation-icon-transition: transform var(--default-transition-duration)
+      var(--default-transition-timing-function);
+    --navigation-icon-transform: rotate(-180deg);
+
     display: inline-flex;
     position: relative;
     anchor-name: --navigation-menu-root;
+    isolation: isolate;
   }
 
-  :where(.navigation-menu__list) {
+  :where(.navigation-menu__container) {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: var(--popover-gap);
-    anchor-name: --navigation-menu-list;
+    anchor-name: --navigation-menu-container;
   }
 
   /* Each item scopes its own anchor name so triggers can share one name */
@@ -27,8 +52,7 @@
   :where(.navigation-menu__trigger > svg) {
     inline-size: var(--step-3_5);
     block-size: var(--step-3_5);
-    transition: transform var(--default-transition-duration)
-      var(--default-transition-timing-function);
+    transition: var(--navigation-icon-transition);
   }
 
   :where(
@@ -36,7 +60,7 @@
       .navigation-menu__trigger
       > svg
   ) {
-    transform: rotate(180deg);
+    transform: var(--navigation-icon-transform);
   }
 
   /* ===========================================================================
@@ -45,23 +69,13 @@
 
   :where(.navigation-menu__popover) {
     position-anchor: --navigation-menu-trigger;
-    --popover-background: var(--card);
-    --popover-foreground: var(--card-foreground);
-    --popover-border: var(--border);
-    --popover-radius: var(--radius-md);
-    --popover-child-radius: var(--radius-sm);
-    --popover-shadow: var(--shadow-md);
-    --popover-gap: var(--step-1_5);
-    --popover-inline-size: min(var(--screen-xs), 100% - var(--gap-md));
-
     max-inline-size: var(--popover-inline-size);
 
     background-color: var(--popover-background);
     color: var(--popover-foreground);
-    border: 1px solid var(--popover-border);
+    border: var(--popover-border);
     border-radius: var(--popover-radius);
     box-shadow: var(--popover-shadow);
-    padding: var(--popover-gap);
     z-index: var(--popover-z-index);
 
     /* Default: open below the trigger, aligned to its start edge */
@@ -89,15 +103,66 @@
   }
 
   /* ===========================================================================
-  SIZING — target the list for full-width popovers (megamenu)
+  SUBMENU — categories inside a panel whose product lists fly out to the right.
+  Native nested popovers: each sub-trigger's popovertarget lives inside the parent
+  panel, so opening a submenu keeps the panel open (ancestor chain, no JS).
   =========================================================================== */
 
-  :where(.navigation-menu__popover[data-size="full"]) {
-    position-anchor: --navigation-menu-root;
-    --popover-inline-size: min(100% - var(--gap-md) * 2);
-    --popover-position-area: block-end span-all;
+  /* Each category scopes its own anchor so every sub-trigger reuses one name */
+  :where(.navigation-menu__submenu) {
+    anchor-scope: --navigation-menu-subtrigger;
+    position: relative;
+  }
 
-    inline-size: var(--popover-inline-size);
+  /* Category row — a full-width link row with a trailing caret */
+  :where(.navigation-menu__submenu-trigger) {
+    anchor-name: --navigation-menu-subtrigger;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-sm);
+    inline-size: 100%;
+    padding: var(--popover-gap);
+    border: 0;
+    border-radius: var(--popover-child-radius);
+    background-color: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+    transition: background-color var(--default-transition-duration)
+      var(--default-transition-timing-function);
+  }
+
+  /* Highlight the row on hover and while its submenu is open */
+  :where(.navigation-menu__submenu-trigger:hover),
+  :where(
+    .navigation-menu__submenu:has(.navigation-menu__popover[data-variant="submenu"]:popover-open)
+      .navigation-menu__submenu-trigger
+  ) {
+    background-color: var(--muted);
+  }
+
+  /* Caret points right — the direction the submenu opens */
+  :where(.navigation-menu__submenu-trigger > svg) {
+    inline-size: var(--step-3_5);
+    block-size: var(--step-3_5);
+    flex: none;
+    color: var(--muted-foreground);
+  }
+
+  /* Submenu (data-variant="submenu") inherits all base .navigation-menu__popover
+     styling; only the anchor and open direction differ — it flies out to the
+     inline-end edge, top-aligned, flipping leftward near the viewport's edge. */
+  :where(.navigation-menu__popover[data-variant="submenu"]) {
+    position-anchor: --navigation-menu-subtrigger;
+
+    --popover-position-area: inline-end span-block-start;
+    --popover-origin: left top;
+    --popover-margin-block: calc(var(--popover-gap) * -1);
+    --popover-margin-inline: var(--step-1_5);
+    --popover-position-try-fallbacks: flip-inline, flip-block, flip-inline flip-block;
   }
 
   /* ===========================================================================
@@ -105,41 +170,12 @@
   =========================================================================== */
 
   :where(.navigation-menu__viewport) {
-    display: grid;
-    min-inline-size: 20ch;
-  }
-
-  /* Rich, two-column panels: featured callout beside a list of links */
-  :where(.navigation-menu__viewport[data-layout="featured"]) {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--popover-gap);
-  }
-
-  /* Featured callout cell — spans the full height of the link column */
-  :where(.navigation-menu__featured) {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    grid-row-start: 1;
-    grid-row-end: -1;
-    padding: var(--gap-sm);
-    border-radius: var(--popover-child-radius);
-    text-decoration: none;
-    background-image: linear-gradient(
-      to bottom,
-      color-mix(in oklab, var(--primary) 8%, var(--muted)),
-      var(--muted)
-    );
-    transition: background-color var(--default-transition-duration)
-      var(--default-transition-timing-function);
-  }
-
-  :where(.navigation-menu__featured:hover) {
-    background-image: linear-gradient(
-      to bottom,
-      color-mix(in oklab, var(--primary) 14%, var(--muted)),
-      var(--muted)
-    );
+    display: var(--popover-viewport-display);
+    grid-template-columns: var(--popover-viewport-template-columns);
+    align-items: var(--popover-viewport-align-items);
+    justify-items: var(--popover-viewport-justify-items);
+    gap: var(--popover-viewport-gap);
+    min-inline-size: var(--popover-viewport-min-inline-size);
   }
 
   /* Rich link row: title + description, hover fills with muted */
@@ -155,5 +191,77 @@
 
   :where(.navigation-menu__link:hover) {
     background-color: var(--muted);
+  }
+
+  /* ===========================================================================
+  MEGAMENU ANIMATION
+  =========================================================================== */
+
+  /* Slide-down: accordion-style block-size reveal on the viewport (not scaleY).
+     Popover keeps overflow:visible so box-shadow is never clipped. */
+  :where(.navigation-menu__popover[data-size="screen"][data-animation="slide-down"]) {
+    --popover-starting-scale: 1;
+  }
+
+  :where(.navigation-menu__popover[data-animation="slide-down"] > .navigation-menu__viewport) {
+    overflow: clip;
+    block-size: 0;
+    transform: translateY(0.5rem);
+    transform-origin: top center;
+    transition:
+      block-size var(--default-transition-duration) var(--default-transition-timing-function),
+      transform var(--default-transition-duration) var(--default-transition-timing-function),
+      padding var(--default-transition-duration) var(--default-transition-timing-function);
+  }
+
+  :where(.navigation-menu__popover[data-animation="slide-down"]:popover-open) {
+    opacity: var(--popover-opacity);
+    transform: scale(var(--popover-scale)) translate3d(var(--popover-translate));
+
+    @starting-style {
+      opacity: var(--popover-starting-opacity);
+      transform: scale(var(--popover-starting-scale)) translate3d(var(--popover-starting-translate));
+    }
+  }
+
+  :where(
+    .navigation-menu__popover[data-animation="slide-down"]:popover-open .navigation-menu__viewport
+  ) {
+    block-size: auto;
+    transform: scale(1) translateY(0);
+
+    @starting-style {
+      block-size: 0;
+      transform: translateY(0.5rem);
+    }
+  }
+
+  /* ===========================================================================
+  SIZING VARIANTS
+  =========================================================================== */
+
+  :where(.navigation-menu__popover[data-size="container"]) {
+    position-anchor: --navigation-menu-container;
+    --popover-inline-size: anchor-size();
+    --popover-position-area: block-end span-all;
+
+    inline-size: var(--popover-inline-size);
+  }
+
+  :where(.navigation-menu__popover[data-size="root"]) {
+    position-anchor: --navigation-menu-root;
+    --popover-inline-size: anchor-size();
+    --popover-position-area: block-end span-all;
+
+    inline-size: var(--popover-inline-size);
+  }
+
+  :where(.navigation-menu__popover[data-size="screen"]) {
+    position-anchor: --navigation-menu-root;
+    --popover-inline-size: 100vi;
+    --popover-position-area: block-end span-all;
+    --popover-radius: 0;
+
+    inline-size: var(--popover-inline-size);
   }
 }

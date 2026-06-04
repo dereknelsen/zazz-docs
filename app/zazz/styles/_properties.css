@@ -1,0 +1,1433 @@
+/*
+ * @property registrations for Zazz design tokens (_variables.css).
+ * Enables container style() queries with typed comparison and range syntax.
+ * Theme roles use syntax "*" so light-dark() re-resolves under color-scheme overrides.
+ * @see https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Containment/Container_size_and_style_queries
+ */
+
+/* Theme */
+
+@property --background {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --border {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --border-foreground {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --card {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --card-foreground {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --destructive {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --destructive-foreground {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --faded {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --faded-foreground {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --foreground {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --info {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --info-foreground {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --input {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --input-foreground {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --muted {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --muted-foreground {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --primary {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --primary-foreground {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --secondary {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --secondary-foreground {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --success {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --success-foreground {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --tertiary {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --tertiary-foreground {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --warning {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --warning-foreground {
+  syntax: "*";
+  inherits: true;
+}
+
+/* Corporate */
+
+@property --primary-100 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --primary-200 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --primary-300 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --primary-400 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --primary-50 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --primary-500 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --primary-600 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --primary-700 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --primary-800 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --primary-900 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --primary-950 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --secondary-100 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --secondary-200 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --secondary-300 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --secondary-400 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --secondary-50 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --secondary-500 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --secondary-600 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --secondary-700 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --secondary-800 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --secondary-900 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --secondary-950 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tertiary-100 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tertiary-200 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tertiary-300 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tertiary-400 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tertiary-50 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tertiary-500 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tertiary-600 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tertiary-700 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tertiary-800 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tertiary-900 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tertiary-950 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+/* Grayscale */
+
+@property --black {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --neutral-100 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --neutral-200 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --neutral-300 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --neutral-400 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --neutral-50 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --neutral-500 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --neutral-600 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --neutral-700 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --neutral-800 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --neutral-900 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --neutral-950 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --shade-100 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --shade-200 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --shade-300 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --shade-400 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --shade-50 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --shade-500 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --shade-600 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --shade-700 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --shade-800 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --shade-900 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --shade-950 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --shade-full {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --shade-none {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tint-100 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tint-200 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tint-300 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tint-400 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tint-50 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tint-500 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tint-600 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tint-700 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tint-800 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tint-900 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tint-950 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tint-full {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --tint-none {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --white {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+/* Typography */
+
+@property --font-body {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --font-heading {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --font-mono {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --font-size-display {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --font-size-eyebrow {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --font-size-h1 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --font-size-h2 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --font-size-h3 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --font-size-h4 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --font-size-h5 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --font-size-h6 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --font-size-lg {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --font-size-md {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --font-size-sm {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --font-size-xl {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --font-size-xs {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --leading-display {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --leading-eyebrow {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --leading-h1 {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --leading-h2 {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --leading-h3 {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --leading-h4 {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --leading-h5 {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --leading-h6 {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --leading-lg {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --leading-md {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --leading-sm {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --leading-xl {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --leading-xs {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --margin-display {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --margin-eyebrow {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --margin-h1 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --margin-h2 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --margin-h3 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --margin-h4 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --margin-h5 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --margin-h6 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --margin-lg {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --margin-md {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --margin-sm {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --margin-xl {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --margin-xs {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --tracking-display {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --tracking-eyebrow {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --tracking-h1 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --tracking-h2 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --tracking-h3 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --tracking-h4 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --tracking-h5 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --tracking-h6 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --tracking-lg {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --tracking-md {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --tracking-sm {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --tracking-xl {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --tracking-xs {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --weight-body {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --weight-eyebrow {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --weight-heading {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --weight-mono {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --weight-strong {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+/* Spacing */
+
+@property --gap-lg {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --gap-md {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --gap-sm {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --gap-xl {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --gap-xs {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --spacing-interval {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-0_5 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-1 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-10 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-11 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-12 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-14 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-16 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-1_5 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-2 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-20 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-24 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-28 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-2_5 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-3 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-32 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-36 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-3_5 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-4 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-40 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-44 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-48 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-4_5 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-5 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-52 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-56 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-5_5 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-6 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-60 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-64 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-7 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-72 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-8 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-80 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-9 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-96 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-full {
+  syntax: "<length-percentage>";
+  inherits: true;
+  initial-value: 0%;
+}
+
+@property --step-px {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --step-px_5 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+/* Radius */
+
+@property --radius-full {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --radius-lg {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --radius-md {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --radius-multiplier {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --radius-none {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --radius-sm {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --radius-xl {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --radius-xs {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+/* Layout */
+@property --screen-lg {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --screen-md {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --screen-sm {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --screen-xl {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --screen-xs {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+/* Effects */
+
+@property --decoration-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --decoration-color--active {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --decoration-color--hover {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --decoration-line {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --decoration-offset {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --decoration-offset--active {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --decoration-offset--hover {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --decoration-style {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --decoration-thickness {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --ring {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --ring-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --ring-offset {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --ring-opacity {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 0%;
+}
+
+@property --ring-size {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --ring-style {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --shadow-lg {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --shadow-md {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --shadow-none {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --shadow-sm {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --shadow-xl {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --shadow-xs {
+  syntax: "*";
+  inherits: true;
+}
+
+/* Animations */
+
+@property --default-transition {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --default-transition-duration {
+  syntax: "<time>";
+  inherits: true;
+  initial-value: 0s;
+}
+
+@property --default-transition-property {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --default-transition-timing-function {
+  syntax: "*";
+  inherits: true;
+}
+
+@property --spring-duration {
+  syntax: "<time>";
+  inherits: true;
+  initial-value: 0s;
+}
+
+@property --spring-easing {
+  syntax: "*";
+  inherits: true;
+}

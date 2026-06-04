@@ -1,0 +1,108 @@
+---
+title: Dropdown
+description: A click-to-open menu anchored to its trigger. Popover API plus CSS anchor positioning, no JavaScript.
+---
+
+A dropdown is a menu of actions that opens from a trigger and dismisses on outside-click or `Esc`. Reach for one for overflow menus, account menus, and row-level action lists. Zazz builds it on the native **Popover API** for open/close and light-dismiss, and **CSS anchor positioning** to tether the panel to its trigger — so it needs **no JavaScript**.
+
+## Default
+
+<ComponentPreview name="dropdown-default" />
+
+```html
+<div class="dropdown">
+  <button class="button" type="button" popovertarget="menu-1">
+    <svg viewBox="0 0 256 256" aria-hidden="true"><!-- icon --></svg>
+    <span>Menu</span>
+  </button>
+
+  <div id="menu-1" class="dropdown__popover" data-side="bottom" data-align="start" popover="auto">
+    <menu>
+      <li class="weight-strong text-eyebrow text-muted-foreground p-xs">Account</li>
+      <li><a href="#" class="button justify-start" data-variant="ghost">Profile</a></li>
+      <li><a href="#" class="button justify-start" data-variant="ghost">Settings</a></li>
+      <hr class="my-xs" />
+      <li><a href="#" class="button justify-start" data-variant="ghost">Sign out</a></li>
+    </menu>
+  </div>
+</div>
+```
+
+## Anatomy
+
+The wrapper scopes the anchor, the trigger names it, and the panel reads it. The trigger is a plain [`.button`](/docs/primitives/button); the panel is a `[popover]` so the browser renders it in the top layer and handles light-dismiss.
+
+| Part      | Element                              | Role                                                              |
+| --------- | ----------------------------------- | ---------------------------------------------------------------- |
+| Root      | `<div class="dropdown">`            | Scopes `anchor-scope: --dropdown-trigger`                        |
+| Trigger   | `<button popovertarget="id">`       | Any `.button`; gets `anchor-name: --dropdown-trigger`            |
+| Panel     | `<div class="dropdown__popover">`   | `popover="auto"`; positioned against the trigger anchor          |
+| List      | `<menu>`                            | Native list of actions                                           |
+| Group     | `<li class="text-eyebrow …">`       | Optional section label                                           |
+| Item      | `<a class="button" data-variant="ghost">` | Full-width left-aligned row (`justify-start`)              |
+| Separator | `<hr class="my-xs">`                | Divider between groups                                           |
+
+Menu items are just ghost buttons with `justify-start`, so they inherit button states and focus for free. Inside the popover their radius drops to `--radius-sm` to nest cleanly.
+
+## Placement
+
+Two attributes on `.dropdown__popover` place the panel — `data-side` along the block/inline axis, `data-align` along the cross axis:
+
+| Attribute   | Values                                  | Default  |
+| ----------- | --------------------------------------- | -------- |
+| `data-side`  | `bottom` · `top` · `left` · `right`     | `bottom` |
+| `data-align` | `start` · `center` · `end`              | `start`  |
+
+That's twelve combinations. The reset also supplies `position-try-fallbacks`, so the panel flips to the opposite side if it would overflow the viewport.
+
+## Tokens
+
+The panel surface comes from the shared `--popover-*` locals (defined on `:where([popover])` in `_reset.css`):
+
+| Token               | Default       | Controls                       |
+| ------------------- | ------------- | ------------------------------ |
+| `--popover-background` | `--card`   | Panel fill                     |
+| `--popover-border`     | `--border` | Panel border                   |
+| `--popover-radius`     | `--radius-md` | Panel corner radius          |
+| `--popover-shadow`     | `--shadow-md` | Panel elevation              |
+| `--popover-padding`    | `--step-1_5` | Inset around the menu         |
+
+Open/close animation is the shared spring-eased popover transition from the reset; the dropdown only feeds it these variables.
+
+## States
+
+- **Closed.** The panel is `display: none` (popover default); only the trigger shows.
+- **Open.** Clicking the trigger toggles the popover; it animates in with spring easing and tethers to the trigger.
+- **Light-dismiss.** Click outside or press `Esc` to close — native popover behavior.
+- **Focus.** Trigger and items show the standard `--ring` outline on `:focus-visible`.
+
+> **Browser support.** The Popover API is Baseline, but **CSS anchor positioning** (the tether) ships in Chromium 125+ and not yet Firefox or Safari. The anchored layout in `:where([popover])` is gated behind `@supports`, so where it's missing the panel falls back to the UA-centered popover — it still opens, light-dismisses, and animates; it just isn't pinned to the trigger. See [Tabs → browser support](/docs/primitives/tabs) for the same pattern.
+
+## Accessibility
+
+- The trigger is a real `<button>`; `popovertarget` wires open/close without script and keeps it keyboard-operable.
+- Use `<menu>` / `<li>` for the action list so it's announced as a list; give the trigger an `aria-label` when it's icon-only.
+- The browser manages focus and `Esc`-to-close for the popover. For a true `role="menu"` widget with roving focus, layer the menu roles on top in an app — the visual layer doesn't depend on them.
+
+## Cross-platform
+
+| Platform       | Reference                                                                                                          |
+| -------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Figma          | No Figma component (representative mockup only).                                                                   |
+| Webflow        | `dropdown` block on the wrapper; a `.button` trigger with a `popovertarget` attribute and a `dropdown__popover`.   |
+| CSS / Tailwind | The same classes after [installing the styles](/docs/quickstart/css).                                              |
+
+## Where to next
+
+<Cards>
+  <Card
+    title="Navigation menu"
+    href="/docs/primitives/navigation-menu"
+    description="The same popover + anchor foundation, scaled up to rich nav panels."
+  />
+  <Card
+    title="Button"
+    href="/docs/primitives/button"
+    description="The trigger and menu items are both buttons. Variants and sizes here."
+  />
+</Cards>

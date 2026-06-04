@@ -1,65 +1,66 @@
 ---
 title: Checkbox
-description: Binary or tri-state selection. Styled native HTML control.
+description: Binary or tri-state selection. Styled native HTML control, no class needed.
 ---
 
-A checkbox is the standard control for binary or multi-select choices: terms acceptance, feature toggles, filter inclusion. Zazz styles the native `<input type="checkbox">` so the same accessibility, keyboard handling, and form submission you get from the browser is wrapped in a Zazz-themed appearance.
+A checkbox is the standard control for binary or multi-select choices: terms acceptance, feature toggles, filter inclusion. Zazz styles the native `<input type="checkbox">` directly in the reset (`appearance: none` redraws it from theme tokens) — so the same accessibility, keyboard handling, and form submission you get from the browser is wrapped in a Zazz-themed appearance. **No class is needed on the input.**
 
 ## Default
 
 <ComponentPreview name="checkbox-default" />
 
 ```html
-<label class="checkbox-group">
-  <input type="checkbox" class="checkbox" />
-  <span class="form-label">Checkbox label</span>
+<label class="field">
+  <input type="checkbox" />
+  <span class="field__label">I agree to the terms</span>
 </label>
 ```
 
-The `checkbox-group` wrapper sets up flex alignment with `--gap-xs` between the input and the label. The `checkbox` class applies Zazz styling on top of the native input.
+Wrap the checkbox in a `<label class="field" >`. The ``attribute lays the control out in a row beside its`.field\_\_label`, with `--step-2`between them. The input itself carries no class; the reset styles every`input[type="checkbox"]` that isn't a switch.
 
 ## Tokens
 
 | Property       | Token / value                                                |
 | -------------- | ------------------------------------------------------------ |
-| Width / height | `--step-4` (1rem)                                            |
+| Width / height | `--step-4_5`                                                 |
 | Border         | `1px solid var(--border)` (unchecked), `--primary` (checked) |
 | Radius         | `--radius-xs`                                                |
-| Background     | `--input` (unchecked), `--primary` (checked)                 |
-| Group gap      | `--gap-xs`                                                   |
-| Focus ring     | `--focus-ring`                                               |
+| Background     | `--input` (unchecked), `--primary` (checked / indeterminate) |
+| Inline gap     | `--step-2` (via `.field[]`)                                  |
+| Focus ring     | `--ring` outline (`:focus-visible`)                          |
 
-The checked state targets `input:checked`:
+The checked and indeterminate states fill `--primary` and layer a glyph (a check or a dash) via an SVG mask — never color alone:
 
 ```css
-.checkbox:checked {
-  border-color: var(--primary);
+input[type="checkbox"]:checked {
   background-color: var(--primary);
+  border-color: var(--primary);
+  background-image: var(--checkbox-checkmark-mask);
 }
 ```
 
 ## States
 
 - **Unchecked.** Border `--border`, background `--input`.
-- **Checked.** Border + background switch to `--primary`. A checkmark appears via background-image or a child SVG.
-- **Focus.** Focus ring outlines the input.
-- **Disabled.** Set `disabled` on the input. Pointer events drop; contrast lowers.
-- **Indeterminate.** Set via JavaScript: `input.indeterminate = true`. The checkbox shows a dash; styling matches checked.
+- **Checked.** Border + background switch to `--primary`; a checkmark SVG mask fills the box.
+- **Indeterminate.** Set via JavaScript — `input.indeterminate = true` (there is no HTML attribute for it). The box fills `--primary` and shows a dash glyph.
+- **Focus.** The focus ring is a `:focus-visible` outline (`outline-color: var(--ring)`).
+- **Disabled.** Set `disabled` on the input. The shared disabled state applies `opacity: 0.5` and `cursor: not-allowed`.
 
 ## Accessibility
 
 - The native `<input type="checkbox">` handles keyboard interaction (Space toggles), screen reader announcement, and form submission automatically.
-- Wrap each checkbox in a `<label>` so clicking the label text toggles the input.
+- Wrap each checkbox in a `<label class="field" >` so clicking the label text toggles the input.
 - For a group of related checkboxes (filter options, multi-select), wrap the group in `<fieldset>` with a `<legend>` describing the group.
 - For required boolean inputs (terms acceptance), use `required` and `aria-describedby` if the label needs supplementary explanation.
 
 ## Cross-platform
 
-| Platform       | Reference                                                              |
-| -------------- | ---------------------------------------------------------------------- |
-| Figma          | No Figma component (representative mockup only).                       |
-| Webflow        | `checkbox` class on the `<input>`. Group wrapper is `checkbox-group`.  |
-| CSS / Tailwind | The same class after [installing utilities.css](/docs/quickstart/css). |
+| Platform       | Reference                                                                                           |
+| -------------- | --------------------------------------------------------------------------------------------------- |
+| Figma          | No Figma component (representative mockup only).                                                    |
+| Webflow        | Bare `<input type="checkbox">` (no class), wrapped in a `field` block with ``and a`field\_\_label`. |
+| CSS / Tailwind | Styled automatically after [installing reset.css](/docs/quickstart/css).                            |
 
 ## Where to next
 
@@ -67,7 +68,7 @@ The checked state targets `input:checked`:
   <Card
     title="Radio"
     href="/docs/primitives/radio"
-    description="The mutually-exclusive sibling. Same wrapper pattern."
+    description="The mutually-exclusive sibling. Same field wrapper pattern."
   />
   <Card
     title="Switch"

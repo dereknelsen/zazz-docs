@@ -879,6 +879,16 @@
     display: grid;
   }
 
+  /* Allows for stacking items on top of each other */
+  :where(.grid-area-pile) {
+    grid-template-areas: "pile";
+    place-items: center;
+
+    > * {
+      grid-area: pile;
+    }
+  }
+
   :where(.grid > *) {
     min-inline-size: 0;
   }
@@ -2845,6 +2855,7 @@
 
   /* Alternative: `max-w-screen-xs mx-auto w-full` */
   :where(.article) {
+    font-size: var(--font-size-md);
     inline-size: var(--article);
     margin-inline: auto;
     container: article / inline-size;

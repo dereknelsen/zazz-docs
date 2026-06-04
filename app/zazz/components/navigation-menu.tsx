@@ -77,7 +77,7 @@ const html = /* html */ `
          <div class="grid py-xs pl-xs">
             <a href="#" class="flex flex-col items-start justify-end bg-muted rounded-sm p-sm">
               <span class="text-eyebrow text-muted-foreground mb-xs">Featured</span>
-              <span class="text-md weight-strong">Zazz Platform</span>
+              <span class="text-md weight-strong">Platform</span>
               <span class="text-sm text-muted-foreground text-pretty">
                 Everything you need to design, build, and ship.
               </span>

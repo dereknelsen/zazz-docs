@@ -14,7 +14,7 @@ The files live at [app/zazz/styles/](app/zazz/styles/) in the Zazz repo:
 - [index.css](app/zazz/styles/index.css): the entry file. Contains **only** the layer declaration — `@layer variables, reset, components, utilities;` — which sets the cascade order.
 - [\_variables.css](app/zazz/styles/_variables.css): every Zazz token, organized into the collections → `@layer variables`
 - [\_reset.css](app/zazz/styles/_reset.css): box-sizing, element defaults, the focus ring, native dialog/popover enhancements → `@layer reset`
-- [\_typography.css](app/zazz/styles/_typography.css): the `text-*` and `.text-prose` type styles → `@layer utilities`
+- [\_typography.css](app/zazz/styles/_typography.css): the `text-*` and `.prose` type styles → `@layer utilities`
 - [\_utilities.css](app/zazz/styles/_utilities.css): color, display, flex, grid, spacing, size, radius, shadow, and layout utility classes → `@layer utilities`
 - one partial per component (`_badge.css`, `_button.css`, `_accordion.css`, `_dialog.css`, `_dropdown.css`, `_navigation-menu.css`, `_fields.css`, `_input.css`, `_textarea.css`, `_select.css`, `_input-group.css`, `_password-group.css`, `_radio.css`, `_tabs.css`) → `@layer components`. `_fields.css` carries the shared form glue (the `--field-*` tokens, `.field` wrapper, and validation).
 

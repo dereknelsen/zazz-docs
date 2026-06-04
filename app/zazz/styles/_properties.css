@@ -746,79 +746,79 @@
   initial-value: 0;
 }
 
-@property --margin-display {
+@property --paragraph-spacing-display {
   syntax: "<length>";
   inherits: true;
   initial-value: 0;
 }
 
-@property --margin-eyebrow {
+@property --paragraph-spacing-eyebrow {
   syntax: "<length>";
   inherits: true;
   initial-value: 0;
 }
 
-@property --margin-h1 {
+@property --paragraph-spacing-h1 {
   syntax: "<length>";
   inherits: true;
   initial-value: 0;
 }
 
-@property --margin-h2 {
+@property --paragraph-spacing-h2 {
   syntax: "<length>";
   inherits: true;
   initial-value: 0;
 }
 
-@property --margin-h3 {
+@property --paragraph-spacing-h3 {
   syntax: "<length>";
   inherits: true;
   initial-value: 0;
 }
 
-@property --margin-h4 {
+@property --paragraph-spacing-h4 {
   syntax: "<length>";
   inherits: true;
   initial-value: 0;
 }
 
-@property --margin-h5 {
+@property --paragraph-spacing-h5 {
   syntax: "<length>";
   inherits: true;
   initial-value: 0;
 }
 
-@property --margin-h6 {
+@property --paragraph-spacing-h6 {
   syntax: "<length>";
   inherits: true;
   initial-value: 0;
 }
 
-@property --margin-lg {
+@property --paragraph-spacing-lg {
   syntax: "<length>";
   inherits: true;
   initial-value: 0;
 }
 
-@property --margin-md {
+@property --paragraph-spacing-md {
   syntax: "<length>";
   inherits: true;
   initial-value: 0;
 }
 
-@property --margin-sm {
+@property --paragraph-spacing-sm {
   syntax: "<length>";
   inherits: true;
   initial-value: 0;
 }
 
-@property --margin-xl {
+@property --paragraph-spacing-xl {
   syntax: "<length>";
   inherits: true;
   initial-value: 0;
 }
 
-@property --margin-xs {
+@property --paragraph-spacing-xs {
   syntax: "<length>";
   inherits: true;
   initial-value: 0;

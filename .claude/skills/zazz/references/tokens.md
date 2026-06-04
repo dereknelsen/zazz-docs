@@ -286,24 +286,24 @@ These are generated; don't hand-edit. Regenerate with the Utopia flow in `refere
 
 Use these by default. Don't reassemble. `text-eyebrow` is also defined; `text-link` styles inline links (`--primary`, underline with animated offset).
 
-### Paragraph rhythm (`.text-prose` + `--margin-*`)
+### Paragraph rhythm (`.prose` + `--paragraph-spacing-*`)
 
-`.text-prose` is a flex-column container (`gap: var(--gap-sm)`) that also applies a per-style top margin to every non-first child, giving long-form copy correct vertical rhythm without per-element margins. It styles bare tags too (`.text-prose h2`, `.text-prose p`, `.text-prose a`, `.text-prose strong/em/img/figure`), so you can drop raw HTML inside it.
+`.prose` is a flex-column container (`gap: var(--gap-sm)`) that also applies a per-style top margin to every non-first child, giving long-form copy correct vertical rhythm without per-element margins. It styles bare tags too (`.prose h2`, `.prose p`, `.prose a`, `.prose strong/em/img/figure`), so you can drop raw HTML inside it.
 
 ```css
---margin-display: var(--step-4_5);
---margin-h1: var(--step-4_5);
---margin-h2: var(--step-4_5);
---margin-h3: var(--step-4_5);
---margin-h4: var(--step-3_5);
---margin-h5: var(--step-3_5);
---margin-h6: var(--step-3_5);
---margin-xl: var(--step-2_5);
---margin-lg: var(--step-2_5);
---margin-md: var(--step-2_5);
---margin-sm: var(--step-2);
---margin-xs: var(--step-1_5);
---margin-eyebrow: 0rem;
+--paragraph-spacing-display: var(--step-4_5);
+--paragraph-spacing-h1: var(--step-4_5);
+--paragraph-spacing-h2: var(--step-4_5);
+--paragraph-spacing-h3: var(--step-4_5);
+--paragraph-spacing-h4: var(--step-3_5);
+--paragraph-spacing-h5: var(--step-3_5);
+--paragraph-spacing-h6: var(--step-3_5);
+--paragraph-spacing-xl: var(--step-2_5);
+--paragraph-spacing-lg: var(--step-2_5);
+--paragraph-spacing-md: var(--step-2_5);
+--paragraph-spacing-sm: var(--step-2);
+--paragraph-spacing-xs: var(--step-1_5);
+--paragraph-spacing-eyebrow: 0rem;
 ```
 
 ---

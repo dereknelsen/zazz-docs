@@ -1,3 +1,218 @@
+@layer reset {
+  /* ===========================================================================
+  TYPOGRAPHY — base styles for text elements
+  =========================================================================== */
+
+  :where(figcaption) {
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    line-height: var(--leading-md);
+    font-weight: var(--weight-body);
+    letter-spacing: var(--tracking-md);
+    font-style: italic;
+  }
+}
+
+@layer components {
+  /* ===========================================================================
+  TYPOGRAPHY — prose component styles
+  =========================================================================== */
+
+  :where(.prose) {
+    gap: var(--gap-sm);
+    flex-direction: column;
+    display: flex;
+  }
+
+  :where(.prose h1) {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h1);
+    line-height: var(--leading-h1);
+    font-weight: var(--weight-heading);
+    letter-spacing: var(--tracking-h1);
+    text-wrap: balance;
+    font-optical-sizing: auto;
+  }
+
+  :where(.prose h2) {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h2);
+    line-height: var(--leading-h2);
+    font-weight: var(--weight-heading);
+    letter-spacing: var(--tracking-h2);
+    text-wrap: balance;
+    font-optical-sizing: auto;
+  }
+
+  :where(.prose h3) {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h3);
+    line-height: var(--leading-h3);
+    font-weight: var(--weight-heading);
+    letter-spacing: var(--tracking-h3);
+    text-wrap: balance;
+    font-optical-sizing: auto;
+  }
+
+  :where(.prose h4) {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h4);
+    line-height: var(--leading-h4);
+    font-weight: var(--weight-heading);
+    letter-spacing: var(--tracking-h4);
+    text-wrap: balance;
+    font-optical-sizing: auto;
+  }
+
+  :where(.prose h5) {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h5);
+    line-height: var(--leading-h5);
+    font-weight: var(--weight-heading);
+    letter-spacing: var(--tracking-h5);
+    text-wrap: balance;
+    font-optical-sizing: auto;
+  }
+
+  :where(.prose h6) {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h6);
+    line-height: var(--leading-h6);
+    font-weight: var(--weight-heading);
+    letter-spacing: var(--tracking-h6);
+    text-wrap: balance;
+    font-optical-sizing: auto;
+  }
+
+  :where(.prose p) {
+    font-size: var(--font-size-md);
+    line-height: var(--leading-md);
+    letter-spacing: var(--tracking-md);
+  }
+
+  :where(.prose a) {
+    --link-decoration-line: var(--decoration-line);
+    --link-decoration-color: var(--decoration-color);
+    --link-decoration-color--hover: var(--decoration-color--hover);
+    --link-decoration-color--active: var(--decoration-color--active);
+    --link-decoration-style: var(--decoration-style);
+    --link-decoration-thickness: var(--decoration-thickness);
+    --link-decoration-offset: var(--decoration-offset);
+    --link-decoration-offset--hover: var(--decoration-offset--hover);
+    --link-decoration-offset--active: var(--decoration-offset--active);
+
+    color: var(--primary);
+    text-decoration-line: var(--link-decoration-line);
+    text-decoration-style: var(--link-decoration-style);
+    text-decoration-color: var(--link-decoration-color);
+    text-underline-offset: var(--link-decoration-offset);
+    text-decoration-thickness: var(--link-decoration-thickness);
+    transition: var(--default-transition);
+  }
+
+  :where(.prose a:hover) {
+    text-decoration-color: var(--link-decoration-color--hover);
+    text-underline-offset: var(--link-decoration-offset--hover);
+  }
+
+  :where(.prose a:active) {
+    text-decoration-color: var(--link-decoration-color--active);
+    text-underline-offset: var(--link-decoration-offset--active);
+  }
+
+  :where(.prose strong, .prose b) {
+    font-weight: var(--weight-strong);
+  }
+
+  :where(.prose em, .prose i) {
+    font-style: italic;
+  }
+
+  :where(.prose figure) {
+    inline-size: 100%;
+    max-inline-size: 100%;
+    display: flex;
+  }
+
+  :where(.prose img) {
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+  }
+
+  /* ===========================================================================
+  PARAGRAPH RHYTHM — top margin on non-first blocks within .prose
+  =========================================================================== */
+
+  :where(.prose hgroup:not(:first-child)) {
+    font-size: var(--font-size-xl);
+    margin-block-start: var(--paragraph-spacing-xl);
+  }
+
+  :where(.prose .text-display:not(:first-child)) {
+    margin-block-start: var(--paragraph-spacing-display);
+  }
+
+  :where(.prose .text-h1:not(:first-child), .prose h1:not(:first-child)) {
+    margin-block-start: var(--paragraph-spacing-display);
+  }
+
+  :where(.prose .text-h2:not(:first-child), .prose h2:not(:first-child)) {
+    margin-block-start: var(--paragraph-spacing-h2);
+  }
+
+  :where(.prose .text-h3:not(:first-child), .prose h3:not(:first-child)) {
+    margin-block-start: var(--paragraph-spacing-h3);
+  }
+
+  :where(.prose .text-h4:not(:first-child), .prose h4:not(:first-child)) {
+    margin-block-start: var(--paragraph-spacing-h4);
+  }
+
+  :where(.prose .text-h5:not(:first-child), .prose h5:not(:first-child)) {
+    margin-block-start: var(--paragraph-spacing-h5);
+  }
+
+  :where(.prose .text-h6:not(:first-child), .prose h6:not(:first-child)) {
+    margin-block-start: var(--paragraph-spacing-h6);
+  }
+
+  :where(.prose .text-xl:not(:first-child)) {
+    margin-block-start: var(--paragraph-spacing-xl);
+  }
+
+  :where(.prose .text-lg:not(:first-child)) {
+    margin-block-start: var(--paragraph-spacing-lg);
+  }
+
+  :where(.prose .text-md:not(:first-child), .prose p:not(:first-child)) {
+    margin-block-start: var(--paragraph-spacing-md);
+  }
+
+  :where(.prose .text-sm:not(:first-child)) {
+    margin-block-start: var(--paragraph-spacing-sm);
+  }
+
+  :where(.prose .text-xs:not(:first-child)) {
+    margin-block-start: var(--paragraph-spacing-xs);
+  }
+
+  :where(.prose .text-eyebrow:not(:first-child)) {
+    margin-block-start: var(--paragraph-spacing-eyebrow);
+  }
+
+  :where(.prose .text-eyebrow + *) {
+    margin-block-start: 0;
+  }
+
+  :where(.prose hr:first-child) {
+    margin-block-end: calc(var(--gap-md) * var(--paragraph-spacing-multiplier));
+  }
+
+  :where(.prose hr:not(:first-child)) {
+    margin-block: calc(var(--gap-lg) * var(--paragraph-spacing-multiplier));
+  }
+}
+
 @layer utilities {
   /* ===========================================================================
   TYPOGRAPHY — fluid type scale utilities
@@ -13,7 +228,7 @@
     font-optical-sizing: auto;
   }
 
-  :where(.text-prose h1, .text-h1) {
+  :where(.text-h1) {
     font-family: var(--font-heading);
     font-size: var(--font-size-h1);
     line-height: var(--leading-h1);
@@ -23,7 +238,7 @@
     font-optical-sizing: auto;
   }
 
-  :where(.text-prose h2, .text-h2) {
+  :where(.text-h2) {
     font-family: var(--font-heading);
     font-size: var(--font-size-h2);
     line-height: var(--leading-h2);
@@ -33,7 +248,7 @@
     font-optical-sizing: auto;
   }
 
-  :where(.text-prose h3, .text-h3) {
+  :where(.text-h3) {
     font-family: var(--font-heading);
     font-size: var(--font-size-h3);
     line-height: var(--leading-h3);
@@ -43,7 +258,7 @@
     font-optical-sizing: auto;
   }
 
-  :where(.text-prose h4, .text-h4) {
+  :where(.text-h4) {
     font-family: var(--font-heading);
     font-size: var(--font-size-h4);
     line-height: var(--leading-h4);
@@ -53,7 +268,7 @@
     font-optical-sizing: auto;
   }
 
-  :where(.text-prose h5, .text-h5) {
+  :where(.text-h5) {
     font-family: var(--font-heading);
     font-size: var(--font-size-h5);
     line-height: var(--leading-h5);
@@ -63,7 +278,7 @@
     font-optical-sizing: auto;
   }
 
-  :where(.text-prose h6, .text-h6) {
+  :where(.text-h6) {
     font-family: var(--font-heading);
     font-size: var(--font-size-h6);
     line-height: var(--leading-h6);
@@ -85,7 +300,7 @@
     letter-spacing: var(--tracking-lg);
   }
 
-  :where(.text-prose p, .text-md) {
+  :where(.text-md) {
     font-size: var(--font-size-md);
     line-height: var(--leading-md);
     letter-spacing: var(--tracking-md);
@@ -111,7 +326,7 @@
     text-transform: uppercase;
   }
 
-  :where(.text-prose a, .text-link) {
+  :where(.text-link) {
     --link-decoration-line: var(--decoration-line);
     --link-decoration-color: var(--decoration-color);
     --link-decoration-color--hover: var(--decoration-color--hover);
@@ -131,20 +346,14 @@
     transition: var(--default-transition);
   }
 
-  :where(.text-prose a:hover, .text-link:hover) {
+  :where(.text-link:hover) {
     text-decoration-color: var(--link-decoration-color--hover);
     text-underline-offset: var(--link-decoration-offset--hover);
   }
 
-  :where(.text-prose a:active, .text-link:active) {
+  :where(.text-link:active) {
     text-decoration-color: var(--link-decoration-color--active);
     text-underline-offset: var(--link-decoration-offset--active);
-  }
-
-  :where(.text-prose) {
-    gap: var(--gap-sm);
-    flex-direction: column;
-    display: flex;
   }
 
   :where(.weight-body) {
@@ -155,7 +364,7 @@
     font-weight: var(--weight-heading);
   }
 
-  :where(.weight-strong, .text-prose strong, .text-prose b) {
+  :where(.weight-strong) {
     font-weight: var(--weight-strong);
   }
 
@@ -167,76 +376,7 @@
     font-weight: var(--weight-eyebrow);
   }
 
-  :where(.italic, .text-prose em, .text-prose i) {
+  :where(.italic) {
     font-style: italic;
-  }
-
-  :where(.text-prose figure) {
-    border-radius: var(--radius-md);
-    inline-size: 100%;
-    max-inline-size: 100%;
-    display: flex;
-    overflow: clip;
-  }
-
-  :where(.text-prose img) {
-    border-radius: var(--radius-md);
-    border: 1px solid var(--shade-50);
-  }
-
-  /* ===========================================================================
-  PARAGRAPH RHYTHM — top margin on non-first blocks within .text-prose
-  =========================================================================== */
-
-  :where(.text-prose .text-display:not(:first-child)) {
-    margin-block-start: var(--margin-display);
-  }
-
-  :where(.text-prose .text-h1:not(:first-child), .text-prose h1:not(:first-child)) {
-    margin-block-start: var(--margin-display);
-  }
-
-  :where(.text-prose .text-h2:not(:first-child), .text-prose h2:not(:first-child)) {
-    margin-block-start: var(--margin-h2);
-  }
-
-  :where(.text-prose .text-h3:not(:first-child), .text-prose h3:not(:first-child)) {
-    margin-block-start: var(--margin-h3);
-  }
-
-  :where(.text-prose .text-h4:not(:first-child), .text-prose h4:not(:first-child)) {
-    margin-block-start: var(--margin-h4);
-  }
-
-  :where(.text-prose .text-h5:not(:first-child), .text-prose h5:not(:first-child)) {
-    margin-block-start: var(--margin-h5);
-  }
-
-  :where(.text-prose .text-h6:not(:first-child), .text-prose h6:not(:first-child)) {
-    margin-block-start: var(--margin-h6);
-  }
-
-  :where(.text-prose .text-xl:not(:first-child)) {
-    margin-block-start: var(--margin-xl);
-  }
-
-  :where(.text-prose .text-lg:not(:first-child)) {
-    margin-block-start: var(--margin-lg);
-  }
-
-  :where(.text-prose .text-md:not(:first-child), .text-prose p:not(:first-child)) {
-    margin-block-start: var(--margin-md);
-  }
-
-  :where(.text-prose .text-sm:not(:first-child)) {
-    margin-block-start: var(--margin-sm);
-  }
-
-  :where(.text-prose .text-xs:not(:first-child)) {
-    margin-block-start: var(--margin-xs);
-  }
-
-  :where(.text-prose .text-eyebrow:not(:first-child)) {
-    margin-block-start: var(--margin-eyebrow);
   }
 }

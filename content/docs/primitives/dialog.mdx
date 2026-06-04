@@ -19,7 +19,7 @@ Use a dialog for confirmations, forms, and any modal interaction where the rest 
       <p class="text-muted-foreground">Optional supporting copy.</p>
     </header>
 
-    <div class="dialog__body text-prose">
+    <div class="dialog__body prose">
       <!-- Forms, content, anything -->
     </div>
   </div>
@@ -49,7 +49,7 @@ Use a dialog for confirmations, forms, and any modal interaction where the rest 
 | Root          | `dialog.dialog`             | The native `<dialog>` element. Needs an `id` for the invoker to target.                                                        |
 | Content       | `dialog__content`           | The scrolling region (`max-block-size: 100svh −` gaps). Wraps header + body.                                                   |
 | Header        | `dialog__header`            | Title + supporting copy. Padded with `--gap-sm`.                                                                               |
-| Body          | `dialog__body`              | Main content area, padded `--gap-sm` inline / `--gap-md` block. Pair with `text-prose` for long-form copy.                     |
+| Body          | `dialog__body`              | Main content area, padded `--gap-sm` inline / `--gap-md` block. Pair with `prose` for long-form copy.                     |
 | Footer        | `dialog__footer`            | Sticky bottom action bar with `border-top` and `--gap-xs` between actions. Sits outside `dialog__content`.                     |
 | Footer action | `button` (+ `data-variant`) | A footer action is a plain `button` with `command="close"` and `commandfor`. The primary action adds `data-variant="primary"`. |
 | Close button  | `dialog__close`             | Absolutely-positioned icon button (`button` with `data-variant="ghost"` `data-size="icon"`). Add `aria-label`.                 |

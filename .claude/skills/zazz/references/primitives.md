@@ -172,7 +172,7 @@ A modal on the native `<dialog>` element, opened and closed entirely through the
       <h2 class="text-lg font-heading weight-strong">Dialog title</h2>
       <p class="text-muted-foreground">Supporting copy.</p>
     </header>
-    <div class="dialog__body text-prose">
+    <div class="dialog__body prose">
       <p>Body content…</p>
     </div>
   </div>

@@ -1,7 +1,4 @@
-export function Section({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      {/*
+/*
   SECTION — Layout wrapper
   ─────────────────────────────────────────────────────────────────────────────
   Standard section wrapper pattern for page vertical rhythm.
@@ -24,10 +21,18 @@ export function Section({ children }: { children: React.ReactNode }) {
   Typical pattern: sections stack vertically with py-xl for generous rhythm,
   border-t between them, container/article for width constraint.
   ─────────────────────────────────────────────────────────────────────────────
-*/}
-      <section className="grid py-xl">
-        <div className="container flex flex-col">{children}</div>
+*/
+
+const html = /* html */ `
+    <!-- Prose START -->
+    <section className="grid py-xl">
+        <div className="container flex flex-col">
+         <!-- Content -->
+        </div>
       </section>
-    </>
-  );
+    <!-- Prose END -->
+`;
+
+export function Section() {
+  return <div style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: html }} />;
 }

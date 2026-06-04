@@ -171,13 +171,13 @@
     --weight-eyebrow: 600;
 
     /* letter-spacing */
-    --tracking-display: -0.025em;
-    --tracking-h1: -0.025em;
-    --tracking-h2: -0.025em;
-    --tracking-h3: -0.02em;
-    --tracking-h4: -0.01em;
+    --tracking-display: -0.1em;
+    --tracking-h1: -0.1em;
+    --tracking-h2: -0.075em;
+    --tracking-h3: -0.075em;
+    --tracking-h4: -0.04em;
     --tracking-h5: -0.025em;
-    --tracking-h6: -0.0025em;
+    --tracking-h6: -0.02em;
     --tracking-xl: 0em;
     --tracking-lg: 0em;
     --tracking-md: 0em;
@@ -186,13 +186,13 @@
     --tracking-eyebrow: 0.1em;
 
     /* line-height — not in Figma (variable limits) */
-    --leading-display: 1;
-    --leading-h1: 1;
-    --leading-h2: 1;
-    --leading-h3: 1.05;
-    --leading-h4: 1.05;
-    --leading-h5: 1.1;
-    --leading-h6: 1.1;
+    --leading-display: 0.85;
+    --leading-h1: 0.9;
+    --leading-h2: 0.9;
+    --leading-h3: 1;
+    --leading-h4: 1;
+    --leading-h5: 1;
+    --leading-h6: 1;
     --leading-xl: 1.5;
     --leading-lg: 1.5;
     --leading-md: 1.6;
@@ -201,19 +201,21 @@
     --leading-eyebrow: 1.2;
 
     /* paragraph-spacing */
-    --margin-display: var(--step-4_5);
-    --margin-h1: var(--step-4_5);
-    --margin-h2: var(--step-4_5);
-    --margin-h3: var(--step-4_5);
-    --margin-h4: var(--step-3_5);
-    --margin-h5: var(--step-3_5);
-    --margin-h6: var(--step-3_5);
-    --margin-xl: var(--step-2_5);
-    --margin-lg: var(--step-2_5);
-    --margin-md: var(--step-2_5);
-    --margin-sm: var(--step-2);
-    --margin-xs: var(--step-1_5);
-    --margin-eyebrow: 0;
+    --paragraph-spacing-multiplier: 1;
+
+    --paragraph-spacing-display: calc(1em * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-h1: calc(1em * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-h2: calc(1em * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-h3: calc(1em * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-h4: calc(1em * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-h5: calc(1em * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-h6: calc(1em * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-xl: calc(1em * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-lg: calc(0.5em * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-md: calc(0.5em * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-sm: calc(0.5em * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-xs: calc(0.25em * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-eyebrow: calc(1em * var(--paragraph-spacing-multiplier));
 
     /* ==========================================================================
     * 5. Spacing — interval modifier, semantic gaps, step scale
@@ -291,7 +293,7 @@
     * ========================================================================== */
 
     /* semantic */
-    --article: min(var(--screen-xs), 100% - var(--gap-md) * 2);
+    --article: min(66ch, 100% - var(--gap-md) * 2);
     --container: min(var(--screen-lg), 100% - var(--gap-md) * 2);
 
     /* breakpoints — for calcs and container queries, not @media */

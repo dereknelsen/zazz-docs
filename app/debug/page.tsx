@@ -16,6 +16,7 @@ import { Textarea } from "@/app/zazz/components/textarea";
 import { Checkbox } from "@/app/zazz/components/checkbox";
 import { Switch } from "@/app/zazz/components/switch";
 import { Radio } from "@/app/zazz/components/radio";
+import { Prose } from "@/app/zazz/components/prose";
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -78,6 +79,11 @@ export default function DebugPage() {
             <hr className="my-sm" />
             <Radio />
           </div>
+        </div>
+      </section>
+      <section className="grid py-xl border-t">
+        <div className="article grid">
+          <Prose />
         </div>
       </section>
     </main>

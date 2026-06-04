@@ -475,7 +475,7 @@ Values below are the actual declarations from `_variables.css` (fluid `clamp()` 
 | `text-xs`      | 0.64rem → 0.79rem | `clamp(0.64rem, 0.8584rem + -0.273vi, 0.7901rem)`   | 1.5     | 0         | Captions, fine print                      |
 | `text-eyebrow` | 0.51rem → 0.58rem | `clamp(0.512rem, 0.609rem + -0.1213vi, 0.5787rem)` | 1.2     | 0.12em    | Uppercase label, wide-tracked (smallest)  |
 
-Headings use `text-wrap: balance` and `font-optical-sizing: auto`. Body text uses `text-wrap: pretty`. The overall feel is tight-leading on large text, generous-leading on body. For long-form copy, wrap blocks in `.text-prose` — it gaps children with `--gap-sm` and applies per-style top margins (`--margin-*`) automatically.
+Headings use `text-wrap: balance` and `font-optical-sizing: auto`. Body text uses `text-wrap: pretty`. The overall feel is tight-leading on large text, generous-leading on body. For long-form copy, wrap blocks in `.prose` — it gaps children with `--gap-sm` and applies per-style top margins (`--paragraph-spacing-*`) automatically.
 
 ### Text Link
 

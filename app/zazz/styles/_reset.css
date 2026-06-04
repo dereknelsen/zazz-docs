@@ -32,7 +32,6 @@
   }
 
   :where(body) {
-    display: grid;
     font-optical-sizing: auto;
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
@@ -234,6 +233,11 @@
   :where(img, video) {
     max-inline-size: 100%;
     block-size: auto;
+  }
+
+  :where(figure) {
+    display: flex;
+    flex-direction: column;
   }
 
   /* Custom text selection styling — the tinted background is safe everywhere

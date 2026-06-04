@@ -237,19 +237,19 @@ Don't write `font-weight: 700`. Write `font-weight: var(--weight-strong)`. A reb
 | `--weight-mono`    | 400     | Code, monospaced labels        |
 | `--weight-eyebrow` | 600     | Eyebrow labels                 |
 
-### Paragraph rhythm — use `.text-prose`
+### Paragraph rhythm — use `.prose`
 
-For long-form copy, wrap it in `.text-prose` rather than hand-spacing paragraphs. It's a flex-column container (`gap: var(--gap-sm)`) that also applies a per-style top margin to every non-first child, drawn from the `--margin-*` tokens (`--margin-h2`, `--margin-md`, etc. — each keyed to a text style). It styles bare tags too, so you can drop raw HTML inside it:
+For long-form copy, wrap it in `.prose` rather than hand-spacing paragraphs. It's a flex-column container (`gap: var(--gap-sm)`) that also applies a per-style top margin to every non-first child, drawn from the `--paragraph-spacing-*` tokens (`--paragraph-spacing-h2`, `--paragraph-spacing-md`, etc. — each keyed to a text style). It styles bare tags too, so you can drop raw HTML inside it:
 
 ```html
-<div class="text-prose">
+<div class="prose">
   <h2 class="text-h2">Section</h2>
   <p>First paragraph — no top margin (it's first).</p>
-  <p>Second paragraph gets <code>--margin-md</code> above it automatically.</p>
+  <p>Second paragraph gets <code>--paragraph-spacing-md</code> above it automatically.</p>
 </div>
 ```
 
-The `--margin-*` scale is what to tune if you want tighter or looser rhythm — one edit, applied consistently across every prose block.
+The `--paragraph-spacing-*` scale is what to tune if you want tighter or looser rhythm — one edit, applied consistently across every prose block.
 
 ---
 

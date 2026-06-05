@@ -263,33 +263,33 @@ const html = /* html */ `
 
       <div id="nav-megamenu-1" class="navigation-menu__popover" popover="auto" data-size="container" data-animation="slide-down">
         <div class="navigation-menu__viewport">
-          <div class="grid" style="min-height: 16rem;">
+          <div class="grid" style="min-block-size: 16rem;">
           <div class="flex flex-col gap-px p-xs">
             <!-- Tabs vertical START -->
               <div class="tabs h-full flex flex-col xs:grid xs:grid-cols-2 md:grid-cols-4 gap-sm" data-direction="vertical">
                 <div class="tabs__list rounded-sm w-full xs:w-auto xs:col-span-2 md:col-span-1 md:h-full grid sm:flex flex-col" role="tablist">
                   <div class="tabs__indicator rounded-xs" aria-hidden="true"></div>
 
-                  <input type="radio" name="tabs-megamenu-group-1" id="tab-megamenu-1" checked />
+                  <input type="radio" role="tab" name="tabs-megamenu-group-1" id="tab-megamenu-1" checked />
                   <label for="tab-megamenu-1" class="tabs__label grid justify-start p-sm flex-1">
                     <span class="text-md weight-strong">Women</span>
                     <span class="text-sm weight-body text-muted-foreground">Dresses, tops, bottoms, and shoes.</span>
                   </label>
 
-                  <input type="radio" name="tabs-megamenu-group-1" id="tab-megamenu-2" />
+                  <input type="radio" role="tab" name="tabs-megamenu-group-1" id="tab-megamenu-2" />
                   <label for="tab-megamenu-2" class="tabs__label grid justify-start p-sm flex-1">
                     <span class="text-md weight-strong">Men</span>
                     <span class="text-sm weight-body text-muted-foreground">Shirts, pants, outerwear, and shoes.</span>
                   </label>
 
-                  <input type="radio" name="tabs-megamenu-group-1" id="tab-megamenu-3" />
+                  <input type="radio" role="tab" name="tabs-megamenu-group-1" id="tab-megamenu-3" />
                   <label for="tab-megamenu-3" class="tabs__label grid justify-start p-sm flex-1">
                     <span class="text-md weight-strong">Home</span>
                     <span class="text-sm weight-body text-muted-foreground">Bedding, kitchen, dining, and decor.</span>
                   </label>
                 </div>
 
-                <div class="tabs__panel flex flex-col xs:grid xs:grid-cols-subgrid xs:col-span-2 md:col-span-3 gap-sm">
+                <div class="tabs__panel flex flex-col xs:grid xs:grid-cols-subgrid xs:col-span-2 md:col-span-3 gap-sm" role="tabpanel">
                     <div class="grid gap-px">
                       <span class="text-eyebrow text-muted-foreground pt-xs pb-xs">Dresses</span>
                       <a href="#" class="navigation-menu__link flex-1">
@@ -351,7 +351,7 @@ const html = /* html */ `
                     </div>
                 </div>
 
-                <div class="tabs__panel flex flex-col xs:grid xs:grid-cols-subgrid xs:col-span-2 md:col-span-3 gap-sm">
+                <div class="tabs__panel flex flex-col xs:grid xs:grid-cols-subgrid xs:col-span-2 md:col-span-3 gap-sm" role="tabpanel">
                     <div class="grid gap-px">
                       <span class="text-eyebrow text-muted-foreground pt-xs pb-xs">Shirts</span>
                       <a href="#" class="navigation-menu__link flex-1">
@@ -413,7 +413,7 @@ const html = /* html */ `
                     </div>
                 </div>
 
-                <div class="tabs__panel flex flex-col xs:grid xs:grid-cols-subgrid xs:col-span-2 md:col-span-3 gap-sm">
+                <div class="tabs__panel flex flex-col xs:grid xs:grid-cols-subgrid xs:col-span-2 md:col-span-3 gap-sm" role="tabpanel">
                     <div class="grid gap-px">
                       <span class="text-eyebrow text-muted-foreground pt-xs pb-xs">Bedding</span>
                       <a href="#" class="navigation-menu__link flex-1">
@@ -488,13 +488,12 @@ const html = /* html */ `
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><line x1="24" y1="128" x2="136" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><polyline points="96 88 136 128 96 168" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><polyline points="136 40 200 40 200 216 136 216" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
         </button>
         <dialog id="form-sign-in-1" class="dialog" closedby="any">
-          <form method="dialog">
-            <div class="dialog__content">
-              <header class="dialog__header">
-                <h2 class="text-lg font-heading weight-strong">Sign in</h2>
-                <p class="text-muted-foreground">Enter your email and password to sign in.</p>
-              </header>
-              <div class="dialog__body flex flex-col gap-md">
+          <form method="dialog" class="dialog__content">
+            <header class="dialog__header">
+              <h2 class="text-lg font-heading weight-strong">Sign in</h2>
+              <p class="text-muted-foreground">Enter your email and password to sign in.</p>
+            </header>
+            <div class="dialog__body flex flex-col gap-md">
                 <fieldset class="field-group">
                   <legend class="sr-only">Sign in</legend>
                   <div class="grid gap-xs">
@@ -547,16 +546,14 @@ const html = /* html */ `
                     <!-- Password END -->
 
                   </div>
-
                 </fieldset>
-
-            </div>
-            <footer class="dialog__footer">
-              <button class="button" type="button" value="cancel" commandfor="form-sign-in-1" command="close">Cancel</button>
-              <button class="button" data-variant="primary" type="submit" value="save">Sign in</button>
-            </footer>
+                </div>
+                <footer class="dialog__footer">
+                  <button class="button" type="button" value="cancel" commandfor="form-sign-in-1" command="close">Cancel</button>
+                  <button class="button" data-variant="primary" type="submit" value="save">Sign in</button>
+                </footer>
           </form>
-          <button class="button absolute top-xs right-xs" data-size="icon" data-variant="ghost" type="button" commandfor="form-sign-in-1" command="close" aria-label="Close dialog">
+          <button class="button dialog__close" data-size="icon" data-variant="ghost" type="button" commandfor="form-sign-in-1" command="close" aria-label="Close dialog">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
               <rect width="256" height="256" fill="none" />
               <line x1="200" y1="56" x2="56" y2="200" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
@@ -578,10 +575,5 @@ const html = /* html */ `
 `;
 
 export function NavigationMenu() {
-  return (
-    <div
-      style={{ display: "contents" }}
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
-  );
+  return <div style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: html }} />;
 }

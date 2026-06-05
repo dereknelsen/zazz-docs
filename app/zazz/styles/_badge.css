@@ -211,5 +211,6 @@
     block-size: var(--badge-height);
     inline-size: var(--badge-height);
     padding: 0;
+    aspect-ratio: 1 / 1;
   }
 }

@@ -67,7 +67,8 @@
   /* Dialog backdrop with smooth fade transition */
   :where(dialog)::backdrop {
     background-color: var(--dialog-starting-backdrop-color);
-    transition: background-color var(--dialog-backdrop-transition-duration) var(--dialog-backdrop-transition-timing-function);
+    transition: background-color var(--dialog-backdrop-transition-duration)
+      var(--dialog-backdrop-transition-timing-function);
   }
 
   :where(dialog[open])::backdrop {
@@ -94,12 +95,25 @@
     color: var(--dialog-foreground);
     box-shadow: var(--dialog-shadow);
     border-radius: var(--dialog-radius);
-    
+
+    anchor-name: --dialog-root;
     container-type: inline-size;
     container-name: dialog;
     font-size: var(--font-size-md);
     overflow: clip;
     isolation: isolate;
+  }
+
+  :where(.dialog[open]) {
+    grid-template-rows: minmax(0, 1fr);
+    min-block-size: 0;
+  }
+
+  :where(.dialog__close) {
+    position: absolute;
+    top: var(--gap-xs);
+    right: var(--gap-xs);
+    z-index: 50;
   }
 
   :where(.dialog__close > svg) {
@@ -113,27 +127,40 @@
   }
 
   :where(.dialog__content) {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
     position: relative;
-    max-block-size: calc(100svh - 2 * var(--gap-md));
-    overflow-y: auto;
+    min-block-size: 0;
+    overflow: clip;
   }
 
   :where(.dialog__header) {
     display: flex;
     flex-direction: column;
     padding-inline: var(--gap-sm);
-    padding-top: var(--gap-sm);
+    padding-block-start: var(--gap-sm);
+  }
+
+  /* Sticky top edge */
+  :where(.dialog__header)::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 100%;
+    inline-size: 100%;
+    block-size: var(--gap-md);
+    background: linear-gradient(to top, transparent, var(--dialog-background));
   }
 
   :where(.dialog__body) {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+    display: grid;
     padding-inline: var(--gap-sm);
     padding-block: var(--gap-md);
+    min-block-size: 0;
     min-height: var(--gap-xl);
+    overflow-x: clip;
+    overflow-y: auto;
+    scrollbar-gutter: stable both-edges;
   }
 
   :where(.dialog__footer) {
@@ -142,6 +169,8 @@
     bottom: 0;
     display: flex;
     justify-content: flex-end;
+    align-self: end;
+    flex-shrink: 0;
     gap: var(--gap-xs);
     padding: var(--gap-sm);
     border-top: 1px solid var(--border);

@@ -9,7 +9,7 @@ export default function Layout({ children }: LayoutProps<"/docs">) {
       className={`${GeistSans.variable} ${GeistMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="flex flex-col min-h-screen">
+      <body>
         <RootProvider>{children}</RootProvider>
       </body>
     </html>

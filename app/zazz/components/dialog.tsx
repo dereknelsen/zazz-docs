@@ -49,12 +49,12 @@ const html = /* html */ `
         Set the size of the dialog with the <code>data-size</code> attribute. Use <code>data-size="large"</code> or <code>data-size="screen"</code> to change the size of the dialog.
       </p>
     </div>
+    <footer class="dialog__footer">
+      <button class="button" type="button" commandfor="dialog-1" command="close">Cancel</button>
+      <button class="button" data-variant="primary" commandfor="dialog-1" command="close">Accept</button>
+    </footer>
   </div>
-  <footer class="dialog__footer">
-    <button class="button" type="button" commandfor="dialog-1" command="close">Cancel</button>
-    <button class="button" data-variant="primary" commandfor="dialog-1" command="close">Accept</button>
-  </footer>
-  <button class="button absolute top-xs right-xs" data-size="icon" data-variant="ghost" type="button" commandfor="dialog-1" command="close">
+  <button class="button dialog__close" data-size="icon" data-variant="ghost" type="button" commandfor="dialog-1" command="close">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
       <rect width="256" height="256" fill="none" />
       <line x1="200" y1="56" x2="56" y2="200" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />

@@ -34,6 +34,7 @@ const html = /* html */ `
   <div class="flex items-center gap-sm">
     <a href="#" class="badge">Badge</a>
     <a href="#" class="badge" data-size="icon">
+      <span class="sr-only">Icon badge default</span>
       <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
         <rect width="256" height="256" fill="none" />
         <circle cx="128" cy="128" r="12" />
@@ -43,8 +44,9 @@ const html = /* html */ `
     </a>
   </div>
   <div class="flex items-center gap-sm">
-    <a href="#" class="badge" data-variant="primary">Badge</a>
+    <a href="#" class="badge" data-variant="primary">Primary</a>
     <a href="#" class="badge" data-variant="primary" data-size="icon">
+      <span class="sr-only">Icon badge primary</span>
       <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
         <rect width="256" height="256" fill="none" />
         <circle cx="128" cy="128" r="12" />
@@ -54,8 +56,9 @@ const html = /* html */ `
     </a>
   </div>
   <div class="flex items-center gap-sm">
-    <a href="#" class="badge" data-variant="muted">Badge</a>
+    <a href="#" class="badge" data-variant="muted">Muted</a>
     <a href="#" class="badge" data-variant="muted" data-size="icon">
+      <span class="sr-only">Icon badge muted</span>
       <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
         <rect width="256" height="256" fill="none" />
         <circle cx="128" cy="128" r="12" />
@@ -65,8 +68,9 @@ const html = /* html */ `
     </a>
   </div>
   <div class="flex items-center gap-sm">
-    <a href="#" class="badge" data-variant="ghost">Badge</a>
+    <a href="#" class="badge" data-variant="ghost">Ghost</a>
     <a href="#" class="badge" data-variant="ghost" data-size="icon">
+      <span class="sr-only">Icon badge ghost</span>
       <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
         <rect width="256" height="256" fill="none" />
         <circle cx="128" cy="128" r="12" />
@@ -76,8 +80,9 @@ const html = /* html */ `
     </a>
   </div>
   <div class="flex items-center gap-sm">
-    <a href="#" class="badge" data-variant="link">Badge</a>
+    <a href="#" class="badge" data-variant="link">Badge Link</a>
     <a href="#" class="badge" data-variant="link" data-size="icon">
+      <span class="sr-only">Icon badge link</span>
       <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
         <rect width="256" height="256" fill="none" />
         <circle cx="128" cy="128" r="12" />

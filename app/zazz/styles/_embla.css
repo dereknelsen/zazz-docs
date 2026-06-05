@@ -24,15 +24,3 @@
   flex: 0 0 100%;
   min-width: 0;
 }
-
-body:not(.webpage) [data-embla="viewport"] {
-  overflow: auto;
-}
-
-body:not(.webpage) [data-embla="container"] {
-  scroll-snap-type: x mandatory;
-}
-
-body:not(.webpage) [data-embla="slide"] {
-  scroll-snap-align: start;
-}

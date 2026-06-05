@@ -51,6 +51,10 @@
     padding: var(--tabs-track-padding);
     border-radius: var(--tabs-track-radius);
     background-color: var(--tabs-track-background);
+
+    /* Scoped so .tabs__indicator can resolve --active-tab even when an ancestor
+       (e.g. .navigation-menu__item) sets anchor-scope to its own trigger name. */
+    anchor-scope: --active-tab;
   }
 
   :where(.tabs__indicator) {
@@ -109,10 +113,13 @@
     background-color: var(--tabs-label-background--hover);
   }
 
-  :where(.tabs__list .tabs__label:active),
-  :where(.tabs__list input[type="radio"]:checked + .tabs__label) {
+  :where(.tabs__list .tabs__label:active) {
     color: var(--tabs-label-foreground--active);
     background-color: var(--tabs-label-background--active);
+  }
+
+  :where(.tabs__list input[type="radio"]:checked + .tabs__label) {
+    color: var(--tabs-label-foreground--active);
     anchor-name: --active-tab;
   }
 
@@ -127,7 +134,9 @@
   /* ===========================================================================
   INDICATOR POSITIONING — anchor positioning (Chromium 125+) with a paint
   fallback. The pill sizes itself from the checked label via anchor() insets;
-  the checked label exposes itself as --active-tab. Where anchor positioning is
+  the checked label exposes itself as --active-tab. .tabs__list sets
+  anchor-scope: --active-tab so the pill still resolves inside scoped ancestors
+  (navigation menu items scope their trigger name). Where anchor positioning is
   unavailable (Firefox, Safari) the anchor() insets would be invalid and the
   pill would collapse to nothing — leaving the active tab with no affordance, as
   its label background is transparent by design. So in the fallback we hide the
@@ -143,6 +152,10 @@
       right: calc(anchor(--active-tab right) + var(--tabs-indicator-inset));
       bottom: calc(anchor(--active-tab bottom) + var(--tabs-indicator-inset));
     }
+
+    :where(.tabs__list input[type="radio"]:checked + .tabs__label) {
+      background-color: var(--tabs-label-background--active);
+    }
   }
 
   @supports not (anchor-name: --active-tab) {
@@ -151,6 +164,7 @@
     }
 
     :where(.tabs__list input[type="radio"]:checked + .tabs__label) {
+      border-radius: var(--tabs-indicator-radius);
       background-color: var(--tabs-indicator-background);
       box-shadow: var(--tabs-indicator-shadow);
     }

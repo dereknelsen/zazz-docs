@@ -14,6 +14,7 @@ import "./_fields.css";
 import "./_input.css";
 import "./_textarea.css";
 import "./_select.css";
+import "./_switch.css";
 import "./_input-group.css";
 import "./_password-group.css";
 import "./_radio.css";

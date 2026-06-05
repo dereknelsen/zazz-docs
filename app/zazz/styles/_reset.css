@@ -22,7 +22,6 @@
     -webkit-text-size-adjust: 100%;
     background-color: var(--background);
     -webkit-tap-highlight-color: transparent;
-    overflow: clip;
   }
 
   :where(:host) {
@@ -32,14 +31,14 @@
   }
 
   :where(body) {
+    display: flex;
+    flex-direction: column;
     font-optical-sizing: auto;
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     text-wrap: pretty;
-    display: flex;
-    flex-direction: column;
     color: var(--foreground);
     background-color: var(--background);
     block-size: 100svh;
@@ -318,6 +317,10 @@
     -webkit-appearance: none;
   }
 
+  ::-webkit-details-marker {
+    display: none;
+  }
+
   ::-webkit-search-cancel-button {
     --search-cancel-display: block;
     --search-cancel-color: currentColor;
@@ -338,7 +341,7 @@
       opacity var(--default-transition-duration) var(--default-transition-timing-function),
       display var(--default-transition-duration) var(--default-transition-timing-function)
         allow-discrete;
-    
+
     mask: var(--search-cancel-mask) no-repeat center / var(--search-cancel-icon-size);
     background-size: var(--search-cancel-icon-size);
     background-color: var(--search-cancel-color);
@@ -349,9 +352,6 @@
   ::-webkit-search-cancel-button:is(:hover) {
     opacity: 0.5;
   }
-
-
-  
 
   /* Suppress the browser's built-in password reveal / clear glyphs (Edge/IE) so
      they never double up with the Zazz .password__toggle button. */
@@ -545,89 +545,6 @@
     background-size: var(--checkbox-indeterminate-size);
   }
 
-  /* Switch — pill track on the input, thumb on the wrapping label::after
-     (pseudo-elements on replaced inputs are unreliable). */
-  :where(label:has(> input[role="switch"]), input[role="switch"]) {
-    --switch-track-width: var(--step-8);
-    --switch-track-padding: var(--step-0_5);
-    --switch-track-height: calc(var(--switch-track-width) / 2 + var(--switch-track-padding));
-    --switch-thumb: var(--white);
-    --switch-thumb-size: calc((var(--switch-track-width) / 2) - var(--switch-track-padding));
-    --switch-thumb-shadow: var(--shadow-xs);
-    --switch-track-background: var(--muted);
-    --switch-track-background-hover: oklch(from var(--muted) l c h / calc(alpha + 0.04));
-    --switch-track-background-checked: var(--primary);
-    --switch-track-background-checked-hover: oklch(from var(--primary) l c h / 0.9);
-    --switch-radius: var(--radius-full);
-  }
-
-  :where(label:has(> input[role="switch"])) {
-    position: relative;
-
-    &::after {
-      content: "";
-      position: absolute;
-      inset-block-start: 50%;
-      inset-inline-start: 0;
-      inline-size: var(--switch-thumb-size);
-      block-size: var(--switch-thumb-size);
-      border-radius: var(--radius-full);
-      background-color: var(--switch-thumb);
-      box-shadow: var(--switch-thumb-shadow);
-      pointer-events: none;
-      translate: var(--switch-track-padding) -50%;
-      transition: translate var(--default-transition-duration)
-        var(--default-transition-timing-function);
-      z-index: 1;
-    }
-
-    &:has(> input[role="switch"]:checked)::after {
-      translate: calc(var(--switch-track-padding) + var(--switch-thumb-size)) -50%;
-    }
-  }
-
-  :where(label:has(> input[role="switch"]:disabled)) {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  :where(label:has(> input[role="switch"]:disabled) > input[role="switch"]) {
-    opacity: 1;
-  }
-
-  :where(input[role="switch"]) {
-    appearance: none;
-    flex-shrink: 0;
-    inline-size: var(--switch-track-width);
-    block-size: var(--switch-track-height);
-
-    background-color: var(--switch-track-background);
-
-    border-radius: var(--switch-radius);
-    cursor: pointer;
-
-    outline: var(--ring-size) var(--ring-style) oklch(from var(--ring) l c h / 0);
-    outline-offset: var(--ring-offset);
-
-    transition: var(--default-transition);
-  }
-
-  :where(input[role="switch"]:hover) {
-    background-color: var(--switch-track-background-hover);
-  }
-
-  :where(input[role="switch"]:checked) {
-    background-color: var(--switch-track-background-checked);
-  }
-
-  :where(input[role="switch"]:hover:checked) {
-    background-color: var(--switch-track-background-checked-hover);
-  }
-
-  :where(input[role="switch"]:focus-visible) {
-    outline-color: var(--ring);
-  }
-
   :where(select) {
     font-size: unset;
     padding: unset;
@@ -653,7 +570,7 @@
     padding: unset;
     text-align: inherit;
     background-color: unset;
-      }
+  }
 
   /* ===========================================================================
   POPOVER ELEMENT ENHANCEMENTS

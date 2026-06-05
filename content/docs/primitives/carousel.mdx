@@ -144,7 +144,8 @@ Only include the plugin bundles you actually use.
 - Prev and next buttons need an `aria-label` since they are typically icon-only.
 - Each dot button should have an `aria-label` (e.g., "Go to slide 2"). The library does not set this; author it on the template dot or update it during clone.
 - The carousel itself is a region of related content. Wrap it in a `<section aria-roledescription="carousel" aria-label="...">` when the surrounding context doesn't already describe it.
-- Embla handles keyboard focus on the viewport and respects `prefers-reduced-motion` for its scroll animations.
+- Arrow keys are wired by the Zazz carousel script: `ArrowLeft` / `ArrowRight` scroll when focus is inside the carousel, or when it lives in an open `<dialog>` (e.g. lightbox). Opt out with `data-embla-keyboard="false"`.
+- Embla respects `prefers-reduced-motion` for its scroll animations.
 
 ## Cross-platform
 

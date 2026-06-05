@@ -2,16 +2,44 @@
 
 /* ===========================================================================
 Documentation:
-    @see https://www.embla-carousel.com/api/options/#reference
-    @see https://www.embla-carousel.com/plugins/autoplay/#options
-    @see https://www.embla-carousel.com/plugins/auto-scroll/#options
-    @see https://www.embla-carousel.com/plugins/class-names/#options
+    @see https://www.embla-carousel.com/docs/api/options#reference
+    @see https://www.embla-carousel.com/docs/plugins/autoplay#options
+    @see https://www.embla-carousel.com/docs/plugins/auto-scroll#options
+    @see https://www.embla-carousel.com/docs/plugins/class-names#options
     @see https://www.embla-carousel.com/docs/plugins/ssr#options
 
-    
-    Example usage:
+    STRUCTURE (data-embla="<role>"):
+    - data-embla="root"      Carousel container; holds all config attributes
+    - data-embla="viewport"  Visible window (required)
+    - data-embla="container" Slides flex track
+    - data-embla="slide"     Individual slide
+    - data-embla="prev"      Previous button (optional)
+    - data-embla="next"      Next button (optional)
+    - data-embla="dots"      Dot pagination container (optional)
+    - data-embla="dot"       Template dot, automatically cloned per slide (optional)
+
+    LIFECYCLE & DIALOG START INDEX:
+    - data-embla-init        Set by script when a carousel is initialized
+    - data-embla-start       On a trigger; slide index to open to (pairs with commandfor)
+    - data-embla-start-index Set on root by script; consumed when dialog opens
+    - data-embla-keyboard    Set to "false" to disable ArrowLeft/ArrowRight navigation
+
+    CONFIGURATION (on data-embla="root"):
+    - data-embla-*              Core Embla options
+    - data-embla-autoplay       Enable autoplay plugin (defaults)
+    - data-embla-autoplay-*     Autoplay plugin options
+    - data-embla-autoscroll     Enable auto scroll plugin (defaults)
+    - data-embla-autoscroll-*   Auto scroll plugin options
+    - data-embla-classnames     Enable class names plugin (defaults)
+    - data-embla-classnames-*   Class names plugin options (snapped, inview, draggable, dragging, loop)
+
+    Examples:
+    @example data-embla-loop="true"
     @example data-embla-align="start"
-    @example data-embla-autoplay-delay="3000"
+    @example data-embla-autoplay data-embla-autoplay-delay="3000"
+    @example data-embla-autoscroll data-embla-autoscroll-speed="2"
+    @example data-embla-classnames
+    @example data-embla-classnames-snapped="is-snapped"
     ============================================================================= */
 
 /* ===========================================================================
@@ -89,7 +117,7 @@ const addDotBtnsAndClickHandlers = (emblaApi, dotsNode) => {
   return () => {
     dotsNode.innerHTML = "";
   };
-}
+};
 
 /* ===========================================================================
     CAROUSEL INITIALIZATION
@@ -109,21 +137,28 @@ function initEmblaCarousels(scope) {
   emblaRoots.forEach(function (emblaNode) {
     // Skip already-initialized carousels
     if (emblaNode.hasAttribute("data-embla-init")) return;
+
+    // Defer init inside closed dialogs — viewport has no measurable size until open
+    if (emblaNode.closest("dialog:not([open])")) return;
+
     emblaNode.setAttribute("data-embla-init", "");
     /* =========================================================================
             DOM ELEMENT DISCOVERY
             Find all carousel-related elements within this carousel instance
             ========================================================================= */
 
-    const emblaViewportNode = emblaNode.querySelector(
-      '[data-embla="viewport"]',
-    );
+    const emblaViewportNode = emblaNode.querySelector('[data-embla="viewport"]');
     const emblaPrevButtonNode = emblaNode.querySelector('[data-embla="prev"]');
     const emblaNextButtonNode = emblaNode.querySelector('[data-embla="next"]');
     const emblaDotsNode = emblaNode.querySelector('[data-embla="dots"]');
 
     // Viewport is required - skip this carousel if not found
     if (!emblaViewportNode) return;
+
+    // Make viewport keyboard-focusable unless author set tabindex
+    if (!emblaViewportNode.hasAttribute("tabindex")) {
+      emblaViewportNode.setAttribute("tabindex", "0");
+    }
 
     /* =========================================================================
             CONFIGURATION PARSING
@@ -133,44 +168,49 @@ function initEmblaCarousels(scope) {
     // Parse core Embla options (align, loop, etc.)
     const apiOptions = Utils.parseDataAttributes(emblaNode, "data-embla-");
 
-    // Remove plugin-specific options from core API options
-    ["autoplay", "autoscroll", "classnames", "name"].forEach((key) => {
-      delete apiOptions[key];
+    // Keep plugin keys out of core Embla options (including prefixed leaks like autoplayDelay)
+    Object.keys(apiOptions).forEach(function (key) {
+      if (
+        key === "name" ||
+        key === "keyboard" ||
+        key === "autoplay" ||
+        key === "autoscroll" ||
+        key === "classnames" ||
+        key.startsWith("autoplay") ||
+        key.startsWith("autoscroll") ||
+        key.startsWith("classnames")
+      ) {
+        delete apiOptions[key];
+      }
     });
 
     // Parse plugin-specific options
-    const autoplayOptions = Utils.parseDataAttributes(
-      emblaNode,
-      "data-embla-autoplay-",
-    );
-    const autoscrollOptions = Utils.parseDataAttributes(
-      emblaNode,
-      "data-embla-autoscroll-",
-    );
-    const classnamesOptions = Utils.parseDataAttributes(
-      emblaNode,
-      "data-embla-classnames-",
-    );
+    const autoplayOptions = Utils.parseDataAttributes(emblaNode, "data-embla-autoplay-");
+    const autoscrollOptions = Utils.parseDataAttributes(emblaNode, "data-embla-autoscroll-");
+    const classnamesOptions = Utils.parseDataAttributes(emblaNode, "data-embla-classnames-");
 
     /* =========================================================================
             PLUGIN INITIALIZATION
-            Conditionally initialize plugins based on available options
+            Enable via bare flag (data-embla-autoplay) or any data-embla-<plugin>-* option
             ========================================================================= */
 
     const plugins = [];
 
-    // Add Autoplay plugin if options are provided
-    if (Object.keys(autoplayOptions).length > 0) {
+    if (emblaNode.hasAttribute("data-embla-autoplay") || Object.keys(autoplayOptions).length > 0) {
       plugins.push(EmblaCarouselAutoplay(autoplayOptions));
     }
 
-    // Add Auto Scroll plugin if options are provided
-    if (Object.keys(autoscrollOptions).length > 0) {
+    if (
+      emblaNode.hasAttribute("data-embla-autoscroll") ||
+      Object.keys(autoscrollOptions).length > 0
+    ) {
       plugins.push(EmblaCarouselAutoScroll(autoscrollOptions));
     }
 
-    // Add Class Names plugin if options are provided
-    if (Object.keys(classnamesOptions).length > 0) {
+    if (
+      emblaNode.hasAttribute("data-embla-classnames") ||
+      Object.keys(classnamesOptions).length > 0
+    ) {
       plugins.push(EmblaCarouselClassNames(classnamesOptions));
     }
 
@@ -187,20 +227,12 @@ function initEmblaCarousels(scope) {
 
     // Bind previous button if it exists
     if (emblaPrevButtonNode) {
-      emblaPrevButtonNode.addEventListener(
-        "click",
-        () => emblaApi.scrollPrev(),
-        false,
-      );
+      emblaPrevButtonNode.addEventListener("click", () => emblaApi.scrollPrev(), false);
     }
 
     // Bind next button if it exists
     if (emblaNextButtonNode) {
-      emblaNextButtonNode.addEventListener(
-        "click",
-        () => emblaApi.scrollNext(),
-        false,
-      );
+      emblaNextButtonNode.addEventListener("click", () => emblaApi.scrollNext(), false);
     }
 
     // Initialize dot navigation if dots container exists
@@ -238,6 +270,8 @@ function observeDialogOpen() {
             root._emblaApi.scrollTo(Number(startIndex), true);
             root.removeAttribute("data-embla-start-index");
           }
+
+          root.querySelector('[data-embla="viewport"]')?.focus({ preventScroll: true });
         });
       }
     }
@@ -247,6 +281,57 @@ function observeDialogOpen() {
     attributes: true,
     attributeFilter: ["open"],
     subtree: true,
+  });
+}
+
+/* ===========================================================================
+    KEYBOARD NAVIGATION
+    Embla is headless — arrow keys are not built in. ArrowLeft/ArrowRight scroll
+    when focus is inside a carousel, or when the carousel lives in an open dialog
+    (e.g. lightbox). Opt out per carousel with data-embla-keyboard="false".
+    =========================================================================== */
+
+function getActiveEmblaRoot() {
+  const openDialog = document.querySelector("dialog[open]");
+  if (openDialog) {
+    const dialogRoot = openDialog.querySelector('[data-embla="root"][data-embla-init]');
+    if (dialogRoot?._emblaApi && dialogRoot.getAttribute("data-embla-keyboard") !== "false") {
+      return dialogRoot;
+    }
+  }
+
+  const focusedRoot = document.activeElement?.closest('[data-embla="root"][data-embla-init]');
+  if (focusedRoot?._emblaApi && focusedRoot.getAttribute("data-embla-keyboard") !== "false") {
+    return focusedRoot;
+  }
+
+  return null;
+}
+
+function initEmblaKeyboardNav() {
+  if (initEmblaKeyboardNav._bound) return;
+  initEmblaKeyboardNav._bound = true;
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    if (e.defaultPrevented) return;
+
+    const target = e.target;
+    if (
+      target instanceof HTMLInputElement ||
+      target instanceof HTMLTextAreaElement ||
+      target instanceof HTMLSelectElement ||
+      target.isContentEditable
+    ) {
+      return;
+    }
+
+    const root = getActiveEmblaRoot();
+    if (!root) return;
+
+    e.preventDefault();
+    if (e.key === "ArrowLeft") root._emblaApi.scrollPrev();
+    else root._emblaApi.scrollNext();
   });
 }
 
@@ -294,11 +379,13 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
       initEmblaCarousels();
       observeDialogOpen();
       initEmblaStartLinks();
+      initEmblaKeyboardNav();
     });
   } else {
     initEmblaCarousels();
     observeDialogOpen();
     initEmblaStartLinks();
+    initEmblaKeyboardNav();
   }
 }
 
@@ -312,42 +399,3 @@ if (typeof module !== "undefined" && module.exports) {
 } else if (typeof window !== "undefined") {
   window.EmblaInit = EmblaInit;
 }
-
-/* ===========================================================================
-    HTML STRUCTURE REFERENCE
-    
-    <div data-embla="root" data-embla-loop="true" data-embla-autoplay-delay="3000">
-        <div data-embla="viewport">
-        <div data-embla="container">
-            <div data-embla="slide">Slide 1</div>
-            <div data-embla="slide">Slide 2</div>
-            <div data-embla="slide">Slide 3</div>
-        </div>
-        </div>
-        
-        <!-- Navigation Controls (Optional) -->
-        <button data-embla="prev">Previous</button>
-        <button data-embla="next">Next</button>
-        
-        <!-- Dot Navigation (Optional) -->
-        <div data-embla="dots">
-        <button data-embla="dot"></button> <!-- Template dot -->
-        </div>
-    </div>
-    
-    DATA ATTRIBUTES:
-    - data-embla="root"     : Carousel container
-    - data-embla="viewport" : Visible area (required)
-    - data-embla="container": Slides container
-    - data-embla="slide"    : Individual slide
-    - data-embla="prev"     : Previous button
-    - data-embla="next"     : Next button
-    - data-embla="dots"     : Dots container
-    - data-embla="dot"      : Template dot (cloned for each slide)
-    
-    CONFIGURATION:
-    - data-embla-*          : Core carousel options
-    - data-embla-autoplay-* : Autoplay plugin options
-    - data-embla-autoscroll-*: Auto scroll plugin options
-    - data-embla-classnames-*: Class names plugin options
-    =========================================================================== */

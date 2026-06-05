@@ -23,33 +23,33 @@ const html = /* html */ `
   <div class="tabs__list" role="tablist">
     <div class="tabs__indicator" aria-hidden="true"></div>
 
-    <input type="radio" name="tabs-group-1" id="tab-1" checked />
+    <input type="radio" role="tab" name="tabs-group-1" id="tab-1" checked />
     <label for="tab-1" class="tabs__label">
       <span class="tabs__label-text">Account</span>
     </label>
 
-    <input type="radio" name="tabs-group-1" id="tab-2" />
+    <input type="radio" role="tab" name="tabs-group-1" id="tab-2" />
     <label for="tab-2" class="tabs__label">
       <span class="tabs__label-text">Billing</span>
     </label>
 
-    <input type="radio" name="tabs-group-1" id="tab-3" />
+    <input type="radio" role="tab" name="tabs-group-1" id="tab-3" />
     <label for="tab-3" class="tabs__label">
       <span class="tabs__label-text">Notifications</span>
     </label>
   </div>
 
-  <div class="tabs__panel border rounded-md p-md w-full">
+  <div class="tabs__panel border rounded-md p-md w-full" role="tabpanel">
     <h2 class="text-h6">Account</h2>
     <p class="text-muted-foreground mt-xs">Manage your profile, email, and password.</p>
   </div>
 
-  <div class="tabs__panel border rounded-md p-md w-full">
+  <div class="tabs__panel border rounded-md p-md w-full" role="tabpanel">
     <h2 class="text-h6">Billing</h2>
     <p class="text-muted-foreground mt-xs">Review invoices and update your payment method.</p>
   </div>
 
-  <div class="tabs__panel border rounded-md p-md w-full">
+  <div class="tabs__panel border rounded-md p-md w-full" role="tabpanel">
     <h2 class="text-h6">Notifications</h2>
     <p class="text-muted-foreground mt-xs">Choose what we email you about and how often.</p>
   </div>
@@ -63,33 +63,33 @@ const html = /* html */ `
   <div class="tabs__list" role="tablist">
     <div class="tabs__indicator" aria-hidden="true"></div>
 
-    <input type="radio" name="tabs-group-2" id="tab-vertical-1" checked />
+    <input type="radio" role="tab" name="tabs-group-2" id="tab-vertical-1" checked />
     <label for="tab-vertical-1" class="tabs__label">
       <span class="tabs__label-text">Account</span>
     </label>
 
-    <input type="radio" name="tabs-group-2" id="tab-vertical-2" />
+    <input type="radio" role="tab" name="tabs-group-2" id="tab-vertical-2" />
     <label for="tab-vertical-2" class="tabs__label">
       <span class="tabs__label-text">Billing</span>
     </label>
 
-    <input type="radio" name="tabs-group-2" id="tab-vertical-3" />
+    <input type="radio" role="tab" name="tabs-group-2" id="tab-vertical-3" />
     <label for="tab-vertical-3" class="tabs__label">
       <span class="tabs__label-text">Notifications</span>
     </label>
   </div>
 
-  <div class="tabs__panel border rounded-md p-md w-full">
+  <div class="tabs__panel border rounded-md p-md w-full" role="tabpanel">
     <h2 class="text-h6">Account</h2>
     <p class="text-muted-foreground mt-xs">Manage your profile, email, and password.</p>
   </div>
 
-  <div class="tabs__panel border rounded-md p-md w-full">
+  <div class="tabs__panel border rounded-md p-md w-full" role="tabpanel">
     <h2 class="text-h6">Billing</h2>
     <p class="text-muted-foreground mt-xs">Review invoices and update your payment method.</p>
   </div>
 
-  <div class="tabs__panel border rounded-md p-md w-full">
+  <div class="tabs__panel border rounded-md p-md w-full" role="tabpanel">
     <h2 class="text-h6">Notifications</h2>
     <p class="text-muted-foreground mt-xs">Choose what we email you about and how often.</p>
   </div>

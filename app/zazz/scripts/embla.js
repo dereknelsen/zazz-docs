@@ -109,6 +109,10 @@ function initEmblaCarousels(scope) {
   emblaRoots.forEach(function (emblaNode) {
     // Skip already-initialized carousels
     if (emblaNode.hasAttribute("data-embla-init")) return;
+
+    // Defer init inside closed dialogs — viewport has no measurable size until open
+    if (emblaNode.closest("dialog:not([open])")) return;
+
     emblaNode.setAttribute("data-embla-init", "");
     /* =========================================================================
             DOM ELEMENT DISCOVERY
@@ -125,6 +129,11 @@ function initEmblaCarousels(scope) {
     // Viewport is required - skip this carousel if not found
     if (!emblaViewportNode) return;
 
+    // Make viewport keyboard-focusable unless author set tabindex
+    if (!emblaViewportNode.hasAttribute("tabindex")) {
+      emblaViewportNode.setAttribute("tabindex", "0");
+    }
+
     /* =========================================================================
             CONFIGURATION PARSING
             Extract options from data attributes for core API and plugins
@@ -133,9 +142,20 @@ function initEmblaCarousels(scope) {
     // Parse core Embla options (align, loop, etc.)
     const apiOptions = Utils.parseDataAttributes(emblaNode, "data-embla-");
 
-    // Remove plugin-specific options from core API options
-    ["autoplay", "autoscroll", "classnames", "name"].forEach((key) => {
-      delete apiOptions[key];
+    // Keep plugin keys out of core Embla options (including prefixed leaks like autoplayDelay)
+    Object.keys(apiOptions).forEach(function (key) {
+      if (
+        key === "name" ||
+        key === "keyboard" ||
+        key === "autoplay" ||
+        key === "autoscroll" ||
+        key === "classnames" ||
+        key.startsWith("autoplay") ||
+        key.startsWith("autoscroll") ||
+        key.startsWith("classnames")
+      ) {
+        delete apiOptions[key];
+      }
     });
 
     // Parse plugin-specific options
@@ -154,23 +174,20 @@ function initEmblaCarousels(scope) {
 
     /* =========================================================================
             PLUGIN INITIALIZATION
-            Conditionally initialize plugins based on available options
+            Enable via bare flag (data-embla-autoplay) or any data-embla-<plugin>-* option
             ========================================================================= */
 
     const plugins = [];
 
-    // Add Autoplay plugin if options are provided
-    if (Object.keys(autoplayOptions).length > 0) {
+    if (emblaNode.hasAttribute("data-embla-autoplay") || Object.keys(autoplayOptions).length > 0) {
       plugins.push(EmblaCarouselAutoplay(autoplayOptions));
     }
 
-    // Add Auto Scroll plugin if options are provided
-    if (Object.keys(autoscrollOptions).length > 0) {
+    if (emblaNode.hasAttribute("data-embla-autoscroll") || Object.keys(autoscrollOptions).length > 0) {
       plugins.push(EmblaCarouselAutoScroll(autoscrollOptions));
     }
 
-    // Add Class Names plugin if options are provided
-    if (Object.keys(classnamesOptions).length > 0) {
+    if (emblaNode.hasAttribute("data-embla-classnames") || Object.keys(classnamesOptions).length > 0) {
       plugins.push(EmblaCarouselClassNames(classnamesOptions));
     }
 
@@ -238,6 +255,8 @@ function observeDialogOpen() {
             root._emblaApi.scrollTo(Number(startIndex), true);
             root.removeAttribute("data-embla-start-index");
           }
+
+          root.querySelector('[data-embla="viewport"]')?.focus({ preventScroll: true });
         });
       }
     }
@@ -247,6 +266,57 @@ function observeDialogOpen() {
     attributes: true,
     attributeFilter: ["open"],
     subtree: true,
+  });
+}
+
+/* ===========================================================================
+    KEYBOARD NAVIGATION
+    Embla is headless — arrow keys are not built in. ArrowLeft/ArrowRight scroll
+    when focus is inside a carousel, or when the carousel lives in an open dialog
+    (e.g. lightbox). Opt out per carousel with data-embla-keyboard="false".
+    =========================================================================== */
+
+function getActiveEmblaRoot() {
+  const openDialog = document.querySelector("dialog[open]");
+  if (openDialog) {
+    const dialogRoot = openDialog.querySelector('[data-embla="root"][data-embla-init]');
+    if (dialogRoot?._emblaApi && dialogRoot.getAttribute("data-embla-keyboard") !== "false") {
+      return dialogRoot;
+    }
+  }
+
+  const focusedRoot = document.activeElement?.closest('[data-embla="root"][data-embla-init]');
+  if (focusedRoot?._emblaApi && focusedRoot.getAttribute("data-embla-keyboard") !== "false") {
+    return focusedRoot;
+  }
+
+  return null;
+}
+
+function initEmblaKeyboardNav() {
+  if (initEmblaKeyboardNav._bound) return;
+  initEmblaKeyboardNav._bound = true;
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    if (e.defaultPrevented) return;
+
+    const target = e.target;
+    if (
+      target instanceof HTMLInputElement ||
+      target instanceof HTMLTextAreaElement ||
+      target instanceof HTMLSelectElement ||
+      target.isContentEditable
+    ) {
+      return;
+    }
+
+    const root = getActiveEmblaRoot();
+    if (!root) return;
+
+    e.preventDefault();
+    if (e.key === "ArrowLeft") root._emblaApi.scrollPrev();
+    else root._emblaApi.scrollNext();
   });
 }
 
@@ -294,11 +364,13 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
       initEmblaCarousels();
       observeDialogOpen();
       initEmblaStartLinks();
+      initEmblaKeyboardNav();
     });
   } else {
     initEmblaCarousels();
     observeDialogOpen();
     initEmblaStartLinks();
+    initEmblaKeyboardNav();
   }
 }
 

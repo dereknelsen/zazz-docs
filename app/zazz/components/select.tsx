@@ -23,10 +23,14 @@ const html = /* html */ `
       <button>
         <selectedcontent></selectedcontent>
       </button>
-      <option value="recent" selected>Most recent</option>
-      <option value="popular">Most popular</option>
-      <option value="price-asc">Price: low to high</option>
-      <option value="price-desc">Price: high to low</option>
+      <!-- Keep label in optgroup as a fallback -->
+      <optgroup class="grid gap-px" label="Sort by">
+        <legend class="text-eyebrow text-muted-foreground p-xs">Sort by</legend>
+        <option value="recent" selected>Most recent</option>
+        <option value="popular">Most popular</option>
+        <option value="price-asc">Price: low to high</option>
+        <option value="price-desc">Price: high to low</option>
+      </optgroup>
     </select>
   </div>
 </form>

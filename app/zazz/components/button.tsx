@@ -30,6 +30,7 @@ const html = /* html */ `
   <div class="flex items-center gap-sm">
     <button class="button">Button</button>
     <button class="button" data-size="icon">
+      <span class="sr-only">Icon button default</span>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
         <rect width="256" height="256" fill="none" />
         <line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
@@ -39,8 +40,9 @@ const html = /* html */ `
     </button>
   </div>
   <div class="flex items-center gap-sm">
-    <button class="button" data-variant="primary">Button</button>
+    <button class="button" data-variant="primary">Primary</button>
     <button class="button" data-variant="primary" data-size="icon">
+      <span class="sr-only">Icon button primary</span>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
         <rect width="256" height="256" fill="none" />
         <line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
@@ -50,8 +52,9 @@ const html = /* html */ `
     </button>
   </div>
   <div class="flex items-center gap-sm">
-    <button class="button" data-variant="muted">Button</button>
+    <button class="button" data-variant="muted">Muted</button>
     <button class="button" data-variant="muted" data-size="icon">
+      <span class="sr-only">Icon button muted</span>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
         <rect width="256" height="256" fill="none" />
         <line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
@@ -61,8 +64,9 @@ const html = /* html */ `
     </button>
   </div>
   <div class="flex items-center gap-sm">
-    <button class="button" data-variant="ghost">Button</button>
+    <button class="button" data-variant="ghost">Ghost</button>
     <button class="button" data-variant="ghost" data-size="icon">
+      <span class="sr-only">Icon button ghost</span>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
         <rect width="256" height="256" fill="none" />
         <line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
@@ -72,8 +76,9 @@ const html = /* html */ `
     </button>
   </div>
   <div class="flex items-center gap-sm">
-    <button class="button" data-variant="destructive">Button</button>
+    <button class="button" data-variant="destructive">Destructive</button>
     <button class="button" data-variant="destructive" data-size="icon">
+      <span class="sr-only">Icon button destructive</span>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
         <rect width="256" height="256" fill="none" />
         <line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
@@ -83,8 +88,9 @@ const html = /* html */ `
     </button>
   </div>
   <div class="flex items-center gap-sm">
-    <button class="button" data-variant="link">Button</button>
+    <button class="button" data-variant="link">Button Link</button>
     <button class="button" data-variant="link" data-size="icon">
+      <span class="sr-only">Icon button link</span>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
         <rect width="256" height="256" fill="none" />
         <line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />

@@ -35,8 +35,8 @@ const html = /* html */ `
       <input class="input" id="f-phone" name="phone" type="tel" inputmode="tel" placeholder="+1 (555) 012-3456" autocomplete="tel" enterkeyhint="next" />
     </div>
     <div class="field">
-      <label class="field__label" for="f-date">Date</label>
-      <input class="input" id="f-date" name="date" type="date" inputmode="none" autocomplete="off" />
+      <label class="field__label" for="f-date">Datetime</label>
+      <input class="input" id="f-date" name="date" type="datetime-local" inputmode="none" autocomplete="off" />
     </div>
   </div>
 </form>

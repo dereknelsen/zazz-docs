@@ -248,6 +248,7 @@
     block-size: var(--button-height);
     inline-size: var(--button-height);
     padding: 0;
+    aspect-ratio: 1 / 1;
   }
 
   :where(.button[data-size="icon-sm"]) {
@@ -258,6 +259,7 @@
     block-size: var(--button-height);
     inline-size: var(--button-height);
     padding: 0;
+    aspect-ratio: 1 / 1;
   }
 
   /* ===========================================================================

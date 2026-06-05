@@ -1,7 +1,7 @@
 /* Token values — @property registrations live in _properties.css (style() queries). */
 @layer variables {
   :root {
-    /* Enable light/dark mode */
+    /* Enable light/dark mode - make sure to redeclare dark mode tokens on .dark at the bottom of the file */
     color-scheme: light dark;
 
     /* Enable discrete value animations, e.g. block-size: auto; */
@@ -425,8 +425,39 @@
     }
   }
 
-  /* Manual dark mode — flips light-dark() theme tokens (system dark uses color-scheme on :root) */
+  /*
+   * Manual dark mode — re-declare theme tokens on .dark so light-dark() resolves
+   * with color-scheme: dark. Tokens defined only on :root inherit as computed
+   * light values; setting color-scheme on descendants alone does not flip them.
+   */
   .dark {
     color-scheme: dark;
+
+    --background: var(--neutral-900);
+    --foreground: var(--white);
+    --border: var(--tint-100);
+    --border-foreground: var(--shade-500);
+    --card: var(--neutral-950);
+    --card-foreground: var(--white);
+    --input: var(--tint-50);
+    --input-foreground: var(--white);
+    --muted: var(--tint-50);
+    --muted-foreground: var(--tint-600);
+    --faded: var(--shade-100);
+    --faded-foreground: var(--shade-600);
+    --primary: var(--primary-500);
+    --primary-foreground: var(--white);
+    --secondary: var(--secondary-500);
+    --secondary-foreground: var(--white);
+    --tertiary: var(--tertiary-400);
+    --tertiary-foreground: var(--white);
+    --info: oklch(0.5 0.1193 242.75);
+    --info-foreground: var(--white);
+    --success: oklch(0.5081 0.1049 165.61);
+    --success-foreground: var(--white);
+    --warning: oklch(0.5553 0.1455 49);
+    --warning-foreground: var(--white);
+    --destructive: oklch(0.5054 0.1905 27.52);
+    --destructive-foreground: var(--white);
   }
 }

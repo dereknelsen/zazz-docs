@@ -111,7 +111,7 @@ const dialogSlidesMarkup = slides.map(dialogSlide).join("");
 
 const thumbsPrevButton = /* html */ `
   <button
-    class="lightbox__thumbs-prev button"
+    class="lightbox__thumbs-prev button text-muted-foreground hover:text-foreground"
     data-size="icon-sm"
     data-variant="ghost"
     data-embla="prev"
@@ -126,7 +126,7 @@ const thumbsPrevButton = /* html */ `
 
 const thumbsNextButton = /* html */ `
   <button
-    class="lightbox__thumbs-next button"
+    class="lightbox__thumbs-next button text-muted-foreground hover:text-foreground"
     data-size="icon-sm"
     data-variant="ghost"
     data-embla="next"
@@ -152,7 +152,7 @@ const html = /* html */ `
 <!-- Lightbox START -->
 <div class="lightbox">
   <div class="lightbox__gallery">
-    <div class="lightbox__stage" data-embla="root" data-embla-classnames>
+    <div class="lightbox__stage" data-embla="root" data-embla-loop="true" data-embla-classnames>
       <div data-embla="viewport">
         <div data-embla="container">
           ${gallerySlidesMarkup}
@@ -161,6 +161,7 @@ const html = /* html */ `
       <div
         class="lightbox__thumbs"
         data-embla="thumbs"
+        data-embla-loop="true"
         data-embla-thumbs-contain-scroll="keepSnaps"
         data-embla-thumbs-drag-free="true"
       >

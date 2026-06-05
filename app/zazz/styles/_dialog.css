@@ -23,6 +23,8 @@
     --dialog-backdrop-color: var(--shade-900);
     --dialog-transition-duration: var(--default-transition-duration);
     --dialog-transition-timing-function: var(--default-transition-timing-function);
+    --dialog-transition-starting-delay: 0ms;
+    --dialog-transition-delay: 150ms;
     --dialog-backdrop-transition-duration: calc(var(--dialog-transition-duration) - 100ms);
     --dialog-backdrop-transition-timing-function: ease;
     --dialog-shadow: var(--shadow-lg);
@@ -44,14 +46,17 @@
         allow-discrete,
       display var(--dialog-transition-duration) var(--dialog-transition-timing-function)
         allow-discrete;
+    transition-delay: var(--dialog-transition-starting-delay);
   }
 
   :where(dialog[open]) {
     display: var(--dialog-display);
     transform: translate3d(var(--dialog-translate)) scale(var(--dialog-scale));
     opacity: var(--dialog-opacity);
+    transition-delay: var(--dialog-transition-delay);
 
     @starting-style {
+      transition-delay: var(--dialog-transition-starting-delay);
       transform: translate3d(var(--dialog-starting-translate)) scale(var(--dialog-starting-scale));
       opacity: var(--dialog-starting-opacity);
     }

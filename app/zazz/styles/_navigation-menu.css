@@ -50,8 +50,8 @@
 
   /* Chevron points down by default, flips up while its popover is open (no JS) */
   :where(.navigation-menu__trigger > svg) {
-    inline-size: var(--step-3_5);
-    block-size: var(--step-3_5);
+    inline-size: var(--gap-sm);
+    block-size: var(--gap-sm);
     transition: var(--navigation-icon-transition);
   }
 
@@ -146,9 +146,9 @@
 
   /* Caret points right — the direction the submenu opens */
   :where(.navigation-menu__submenu-trigger > svg) {
-    inline-size: var(--step-3_5);
-    block-size: var(--step-3_5);
-    flex: none;
+    inline-size: var(--gap-sm);
+    block-size: var(--gap-sm);
+    flex: 0 0 auto;
     color: var(--muted-foreground);
   }
 
@@ -160,7 +160,7 @@
 
     --popover-position-area: inline-end span-block-start;
     --popover-origin: left top;
-    --popover-margin-block: calc(var(--popover-gap) * -1);
+    --popover-margin-block: 0;
     --popover-margin-inline: var(--step-1_5);
     --popover-position-try-fallbacks: flip-inline, flip-block, flip-inline flip-block;
   }

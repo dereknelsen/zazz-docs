@@ -27,7 +27,7 @@ const html = /* html */ `
 <!-- Accordion START -->
 <div class="accordion">
   <details class="border-b">
-    <summary class="weight-strong">
+    <summary class="weight-strong hover:text-muted-foreground">
       What is an accordion?
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
         <rect width="256" height="256" fill="none" />
@@ -44,7 +44,7 @@ const html = /* html */ `
     </div>
   </details>
   <details class="border-b">
-    <summary class="weight-strong">
+    <summary class="weight-strong hover:text-muted-foreground">
       How does an accordion work?
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
         <rect width="256" height="256" fill="none" />
@@ -61,7 +61,7 @@ const html = /* html */ `
     </div>
   </details>
   <details>
-    <summary class="weight-strong">
+    <summary class="weight-strong hover:text-muted-foreground">
       Why use an accordion?
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
         <rect width="256" height="256" fill="none" />

@@ -310,7 +310,7 @@
     /* states - focus rings/outlines
      * Override --ring-color (not --ring) per variant/context; --ring recomputes via color-mix. */
     --ring-color: var(--primary);
-    --ring-opacity: 25%;
+    --ring-opacity: 30%;
     --ring-style: solid;
     --ring-size: 2px;
     --ring-offset: 1px;

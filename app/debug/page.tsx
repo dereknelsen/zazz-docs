@@ -32,12 +32,12 @@ export default function DebugPage() {
   return (
     <>
     <main className="flex flex-col w-full">
-      <section className="hidden md:grid py-xl">
+      <section className="hidden md:grid py-md">
         <div className="container grid">
           <NavigationMenu />
         </div>
       </section>
-      <section className="grid md:hidden py-xl">
+      <section className="grid md:hidden py-md">
         <div className="container grid">
           <MobileMenu />
         </div>

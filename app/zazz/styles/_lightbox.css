@@ -11,8 +11,6 @@
   --------------------------------------------------------------------------- */
 
   :where(.lightbox) {
-    --lightbox-columns: 3;
-    --lightbox-gap: var(--gap-xs);
     --lightbox-radius: var(--radius-md);
     --lightbox-slide-radius: var(--radius-lg);
 
@@ -21,10 +19,6 @@
     gap: var(--lightbox-gap);
   }
 
-  :where(.lightbox[data-columns="1"]) { --lightbox-columns: 1; }
-  :where(.lightbox[data-columns="2"]) { --lightbox-columns: 2; }
-  :where(.lightbox[data-columns="4"]) { --lightbox-columns: 4; }
-  :where(.lightbox[data-columns="5"]) { --lightbox-columns: 5; }
 
   /* ---------------------------------------------------------------------------
   TRIGGER — .lightbox__trigger
@@ -56,8 +50,9 @@
   }
 
   :where(.lightbox__trigger:focus-visible) {
-    outline: 2px solid var(--ring-color);
-    outline-offset: 2px;
+    outline: var(--ring-size) var(--ring-style)
+      color-mix(in oklch, var(--ring-color) var(--ring-opacity), transparent);
+    outline-offset: var(--ring-offset);
   }
 
   /* ---------------------------------------------------------------------------
@@ -66,6 +61,7 @@
 
   :where(.lightbox__dialog) {
     --dialog-background: transparent;
+    overflow: clip;
    
   }
 
@@ -88,10 +84,10 @@
   }
 
   :where(.lightbox__slide img) {
-    max-inline-size: 100%;
+    inline-size: auto;
     max-block-size: 100%;
     object-fit: contain;
-    border: 1px solid var(--tint-50);
+    border: 1px solid var(--tint-100);
     border-radius: var(--lightbox-slide-radius);
     user-select: none;
     -webkit-user-drag: none;
@@ -106,15 +102,15 @@
     top: 50%;
     translate: 0 -50%;
     z-index: 5;
-    color: white;
+    color: var(--white);
   }
 
   :where(.lightbox__prev) {
-    left: var(--gap-sm);
+    left: var(--gap-md);
   }
 
   :where(.lightbox__next) {
-    right: var(--gap-sm);
+    right: var(--gap-md);
   }
 
   /* ---------------------------------------------------------------------------
@@ -126,7 +122,7 @@
     top: var(--gap-sm);
     right: var(--gap-sm);
     z-index: 10;
-    color: white;
+    color: var(--white);
     opacity: 0.7;
     transition: opacity var(--default-transition-duration) var(--default-transition-timing-function);
   }
@@ -144,7 +140,7 @@
     bottom: var(--gap-sm);
     left: 50%;
     translate: -50% 0;
-    color: white;
+    color: var(--white);
     opacity: 0.7;
     font-size: var(--font-size-sm);
     font-variant-numeric: tabular-nums;

@@ -873,7 +873,7 @@
 
   /* Grid utilities */
   :where(.grid) {
-    --grid-col-min: min(100%, 24ch);
+    --grid-col-min: min(100%, 20ch);
     display: grid;
   }
 
@@ -998,7 +998,7 @@
           100%,
           max(
             var(--grid-col-min),
-            max(0%, calc((100% - (var(--grid-cols, 1) - 1) * var(--grid-gap)) / var(--grid-cols, 1)))
+            max(0%, calc((100% - (var(--grid-cols, 1) - 1) * var(--grid-gap, 0px)) / var(--grid-cols, 1)))
           )
         ),
         1fr

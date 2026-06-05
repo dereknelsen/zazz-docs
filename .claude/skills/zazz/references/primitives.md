@@ -204,10 +204,10 @@ A modal on the native `<dialog>` element, opened and closed entirely through the
 ```
 
 - **Open / close:** `button[command="show-modal"][commandfor="id"]` opens; `command="close"` closes; `closedby="any"` enables backdrop-click dismissal. The browser handles focus trapping and `Esc`.
-- **Sizes** (`data-size` on `.dialog`): none → `--article` (~40rem); `large` → `--container` (~80rem); `screen` → viewport minus `--gap-md` on each axis.
+- **Sizes** (`data-size` on `.dialog`): none → `min(50ch, 100% - var(--gap-md) * 2)` (character-based default); `article` → `--article` (~40rem); `container` → `--container` (~80rem); `screen` → full viewport (`100vi × 100svh`, no radius, no shadow).
 - **Anatomy:** `.dialog__content` scrolls (`max-block-size: 100svh − gaps`); `.dialog__header` and `.dialog__body` pad with `--gap-sm` / `--gap-md`; `.dialog__footer` is a sticky bottom bar with `border-top` and `--gap-xs` between actions.
 - **Surface:** `--card` background, `--card-foreground`, `--shadow-md`, `--radius-lg`, `overflow: clip`.
-- **Backdrop:** styled in `_reset.css` — animates from `--shade-none` to **`--shade-800`**. Shade is deliberate so the backdrop dims in _both_ modes (`--muted` would lighten the page in dark mode). Entry/exit use spring easing via `@starting-style`.
+- **Backdrop:** styled in `_dialog.css` reset layer — animates from `--shade-none` to **`--shade-900`**. Shade is deliberate so the backdrop dims in _both_ modes (`--muted` would lighten the page in dark mode). Entry/exit use spring easing via `@starting-style`.
 
 ---
 
@@ -304,7 +304,7 @@ Also gated for the same reason: **`contrast-color()`** in the `::selection` rule
 An image gallery grid that opens a fullscreen dialog slideshow. Thumbnails live in a CSS Grid; clicking one opens a `<dialog>` containing an Embla Carousel. No JavaScript for modal open/close — Invoker Commands only. The carousel auto-initializes via data attributes.
 
 ```html
-<div class="lightbox" data-columns="3">
+<div class="lightbox grid grid-cols-3 gap-xs">
   <button class="lightbox__trigger" type="button" command="show-modal" commandfor="lightbox-1" data-embla-start="0">
     <img src="thumb-1.jpg" alt="Mountain landscape" loading="lazy" />
   </button>
@@ -334,13 +334,13 @@ An image gallery grid that opens a fullscreen dialog slideshow. Thumbnails live 
 </div>
 ```
 
-- **Grid:** `.lightbox` is a CSS Grid; column count via `data-columns="1|2|3|4|5"` (default 3). Gap `--lightbox-gap` (default `--gap-xs`).
+- **Grid:** `.lightbox` sets `display: grid`. Use utility classes for columns and gap (`grid grid-cols-3 gap-xs`). No `data-columns` attribute.
 - **Triggers:** each `.lightbox__trigger` is a `<button>` wrapping a thumbnail `<img>`. `cursor: zoom-in`, subtle `scale(1.03)` on hover, overflow hidden with `--lightbox-radius` (`--radius-md`).
 - **Starting slide:** `data-embla-start="N"` on the trigger tells the carousel which slide index to jump to on open.
 - **Dialog:** `.lightbox__dialog` extends `.dialog[data-size="screen"]` with `--dialog-background: transparent` for a dark fullscreen overlay. `closedby="any"` for backdrop dismiss.
-- **Slides:** each `.lightbox__slide` is a full-viewport flex center with `padding: var(--gap-md)`. Images use `object-fit: contain`, a subtle `--tint-50` border, and `--lightbox-slide-radius` (`--radius-lg`).
-- **Nav buttons:** `.lightbox__prev` / `.lightbox__next` — absolutely positioned ghost icon buttons at `left/right: var(--gap-sm)`, white, wired to Embla via `data-embla="prev|next"`.
-- **Close:** `.lightbox__close` — top-right ghost icon button, `command="close"`.
+- **Slides:** each `.lightbox__slide` is a full-viewport flex center with `padding: var(--gap-md)`. Images use `object-fit: contain`, `inline-size: auto`, a subtle `--tint-100` border, and `--lightbox-slide-radius` (`--radius-lg`).
+- **Nav buttons:** `.lightbox__prev` / `.lightbox__next` — absolutely positioned ghost icon buttons at `left/right: var(--gap-md)`, `color: var(--white)`, wired to Embla via `data-embla="prev|next"`.
+- **Close:** `.lightbox__close` — top-right ghost icon button, `command="close"`, `color: var(--white)`.
 - **Counter (optional):** `.lightbox__counter` — bottom-center slide count indicator, white, `tabular-nums`.
 
 ---

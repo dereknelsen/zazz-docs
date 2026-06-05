@@ -5,10 +5,14 @@
 
 [data-embla="root"] {
   position: relative;
+  isolation: isolate;
+  contain: paint layout;
 }
 
 [data-embla="viewport"] {
-  overflow: hidden;
+  overflow: clip;
+  max-block-size: 100%;
+  max-inline-size: 100%;
 }
 
 [data-embla="container"] {
@@ -31,44 +35,4 @@ body:not(.webpage) [data-embla="container"] {
 
 body:not(.webpage) [data-embla="slide"] {
   scroll-snap-align: start;
-}
-
-:where(.embla-nav-btn) {
-  position: absolute;
-  top: 50%;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  border-radius: var(--radius-full);
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--foreground);
-  opacity: 0.7;
-  padding: 0;
-  transition: opacity var(--spring-duration) var(--spring-easing);
-  transform: translateY(-50%);
-}
-
-:where(.embla-nav-btn:hover) {
-  opacity: 1;
-}
-
-:where(.embla-nav-btn--prev) {
-  left: calc(-1 * var(--step-12));
-}
-
-:where(.embla-nav-btn--next) {
-  right: calc(-1 * var(--step-12));
-}
-
-:where(.embla-nav-btn svg) {
-  color: var(--border);
-  width: 3rem;
-  height: 3rem;
-  flex-shrink: 0;
-  aspect-ratio: 1 / 1;
 }

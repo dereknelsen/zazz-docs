@@ -86,21 +86,23 @@ The browser handles the backdrop, focus trap, and `Esc`-to-close. Zazz's reset a
 
 Set `data-size` on the `.dialog` to change its width:
 
-| `data-size` | Width                                  |
-| ----------- | -------------------------------------- |
-| none      | `--article` (≈40rem)                   |
-| `large`     | `--container` (≈80rem)                 |
-| `screen`    | Viewport minus `--gap-md` on each axis |
+| `data-size`   | Width                                                      |
+| ------------- | ---------------------------------------------------------- |
+| none          | `min(50ch, 100% - var(--gap-md) * 2)` — character-based   |
+| `article`     | `--article` (≈40rem)                                       |
+| `container`   | `--container` (≈80rem)                                     |
+| `screen`      | Full viewport (`100vi × 100svh`), no radius, no shadow     |
 
 ```html
-<dialog class="dialog" data-size="large" closedby="any"><!-- … --></dialog>
+<dialog class="dialog" data-size="article" closedby="any"><!-- … --></dialog>
+<dialog class="dialog" data-size="container" closedby="any"><!-- … --></dialog>
 <dialog class="dialog" data-size="screen" closedby="any"><!-- … --></dialog>
 ```
 
 ## What the reset adds
 
 - Spring-eased opacity + scale transitions (`0.98` → `1`) on open and close, via `@starting-style` and the `--default-transition` easing/duration.
-- A backdrop that animates from `--shade-none` to `--shade-800`. It's a **shade** deliberately, so the backdrop dims the page in **both** light and dark modes (`--muted` would lighten the page in dark mode).
+- A backdrop that animates from `--shade-none` to `--shade-900`. It's a **shade** deliberately, so the backdrop dims the page in **both** light and dark modes (`--muted` would lighten the page in dark mode).
 - Scrollbar gutter handling while a dialog is open.
 
 ## Tokens
@@ -114,9 +116,9 @@ Set `data-size` on the `.dialog` to change its width:
 | Header padding  | `--gap-sm`                                                                |
 | Body padding    | `--gap-sm` inline, `--gap-md` block                                       |
 | Footer          | `border-top: 1px solid var(--border)`, `--gap-xs` between actions, sticky |
-| Backdrop        | `--shade-none` → `--shade-800` (fades in)                                 |
+| Backdrop        | `--shade-none` → `--shade-900` (fades in)                                 |
 | Open transition | `--default-transition` easing + duration (set in reset)                   |
-| Default width   | `--article`                                                               |
+| Default width   | `min(50ch, 100% - var(--gap-md) * 2)`                                     |
 
 ## Accessibility
 

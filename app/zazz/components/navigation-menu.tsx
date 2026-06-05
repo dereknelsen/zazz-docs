@@ -267,8 +267,8 @@ const html = /* html */ `
           <div class="flex flex-col gap-px p-xs">
             <!-- Tabs vertical START -->
               <div class="tabs h-full flex flex-col xs:grid xs:grid-cols-2 md:grid-cols-4 gap-sm" data-direction="vertical">
-                <div class="tabs__list w-full xs:w-auto xs:col-span-2 md:col-span-1 md:h-full grid sm:flex flex-col" role="tablist">
-                  <div class="tabs__indicator" aria-hidden="true"></div>
+                <div class="tabs__list rounded-sm w-full xs:w-auto xs:col-span-2 md:col-span-1 md:h-full grid sm:flex flex-col" role="tablist">
+                  <div class="tabs__indicator rounded-xs" aria-hidden="true"></div>
 
                   <input type="radio" name="tabs-megamenu-group-1" id="tab-megamenu-1" checked />
                   <label for="tab-megamenu-1" class="tabs__label grid justify-start p-sm flex-1">

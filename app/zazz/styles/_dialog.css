@@ -28,10 +28,12 @@
     --dialog-backdrop-transition-duration: calc(var(--dialog-transition-duration) - 100ms);
     --dialog-backdrop-transition-timing-function: ease;
     --dialog-shadow: var(--shadow-lg);
+    --dialog-border: 1px solid var(--border);
 
     margin: auto;
     max-inline-size: calc(100% - var(--gap-md));
     max-block-size: calc(100% - var(--gap-md));
+    border: var(--dialog-border);
     contain: layout style;
     opacity: var(--dialog-starting-opacity);
     box-shadow: var(--dialog-shadow);

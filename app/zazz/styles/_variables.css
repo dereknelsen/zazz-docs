@@ -12,11 +12,11 @@
     * ========================================================================== */
 
     /* base */
-    --background: light-dark(var(--white), var(--neutral-950));
+    --background: light-dark(var(--white), var(--neutral-900));
     --foreground: light-dark(var(--neutral-900), var(--white));
-    --border: light-dark(var(--neutral-100), var(--neutral-800));
-    --border-foreground: light-dark(var(--tint-950), var(--tint-100));
-    --card: light-dark(var(--white), var(--neutral-900));
+    --border: light-dark(var(--neutral-100), var(--tint-100));
+    --border-foreground: light-dark(var(--tint-950), var(--shade-500));
+    --card: light-dark(var(--white), var(--neutral-950));
     --card-foreground: light-dark(var(--neutral-900), var(--white));
     --input: light-dark(var(--neutral-50), var(--tint-50));
     --input-foreground: light-dark(var(--neutral-900), var(--white));

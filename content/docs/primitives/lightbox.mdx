@@ -12,7 +12,7 @@ Use it for image galleries, portfolio grids, product photo sets, and any "click 
 ## Anatomy
 
 ```html
-<div class="lightbox" data-columns="3">
+<div class="lightbox grid grid-cols-3 gap-xs">
   <button class="lightbox__trigger" type="button" command="show-modal" commandfor="lightbox-1" data-embla-start="0">
     <img src="thumb-1.jpg" alt="Description" loading="lazy" />
   </button>
@@ -50,7 +50,7 @@ Use it for image galleries, portfolio grids, product photo sets, and any "click 
 
 | Part                  | Selector                | Notes                                                                 |
 | --------------------- | ----------------------- | --------------------------------------------------------------------- |
-| Gallery grid          | `.lightbox`             | CSS Grid container. Column count via `data-columns`.                  |
+| Gallery grid          | `.lightbox`             | Base display grid. Use utility classes for columns and gap.           |
 | Trigger               | `.lightbox__trigger`    | Button wrapping a thumbnail. Opens the dialog via Invoker Commands.   |
 | Dialog                | `.lightbox__dialog`     | Fullscreen dark overlay. Extends `.dialog[data-size="screen"]`.       |
 | Slide                 | `.lightbox__slide`      | Flexbox center for one full-size image. Also an Embla slide.          |
@@ -60,17 +60,17 @@ Use it for image galleries, portfolio grids, product photo sets, and any "click 
 
 ## Configuration
 
-### Gallery columns
+### Gallery columns and gap
 
-Set `data-columns` on `.lightbox` to control the grid:
+Use grid utility classes on `.lightbox` to control columns and gap:
 
 ```html
-<div class="lightbox" data-columns="2">…</div>
-<div class="lightbox" data-columns="4">…</div>
-<div class="lightbox" data-columns="5">…</div>
+<div class="lightbox grid grid-cols-2 gap-xs">…</div>
+<div class="lightbox grid grid-cols-4 gap-sm">…</div>
+<div class="lightbox grid grid-cols-5 gap-xs">…</div>
 ```
 
-Default is 3 columns. Available: `1`, `2`, `3` (default), `4`, `5`.
+The component no longer uses `data-columns` — standard grid utilities (`grid-cols-*`, `gap-*`) give you full control.
 
 ### Starting slide
 
@@ -92,15 +92,15 @@ The Embla root accepts standard carousel data attributes:
 
 ## Tokens consumed
 
-| Token                        | Use                                     |
-| ---------------------------- | --------------------------------------- |
-| `--lightbox-columns`         | Grid column count (local prop)          |
-| `--lightbox-gap`             | Grid gap (defaults to `--gap-xs`)       |
-| `--lightbox-radius`          | Thumbnail corner radius (`--radius-md`) |
-| `--lightbox-slide-radius`    | Fullscreen image radius (`--radius-lg`) |
-| `--gap-sm`                   | Nav/close button offset from edges      |
-| `--tint-50`                  | Subtle border on fullscreen images      |
-| `--default-transition-*`     | Hover scale animation on thumbnails     |
+| Token                        | Use                                          |
+| ---------------------------- | -------------------------------------------- |
+| `--lightbox-radius`          | Thumbnail corner radius (`--radius-md`)      |
+| `--lightbox-slide-radius`    | Fullscreen image radius (`--radius-lg`)      |
+| `--gap-md`                   | Nav button offset from edges, slide padding  |
+| `--gap-sm`                   | Close button offset from edges               |
+| `--tint-100`                 | Subtle border on fullscreen images           |
+| `--default-transition-*`     | Hover scale animation on thumbnails          |
+| `--ring-color` / `--ring-opacity` | Focus-visible ring via `color-mix`      |
 
 ## States
 

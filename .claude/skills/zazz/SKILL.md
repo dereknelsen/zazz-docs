@@ -90,7 +90,7 @@ The order in which to consider tokens:
 2. **You need a specific brand step that doesn't have a theme role** → use a **Corporate** scale step (`--primary-100` as a subtle background tint, `--secondary-900` for a deep accent panel). Still mode-aware in the sense that you're choosing the same step in both modes — verify it reads well in both.
 3. **You need an exact, opaque gray** → use a **Neutral** step (`--neutral-200` for a static divider, `--neutral-700` for low-emphasis text on a known background).
 4. **You need transparency over whatever sits below** → use **Shade** (dims, use over light or imagery) or **Tint** (fades, use over dark). Examples:
-   - Modal backdrop that dims content underneath, in both light and dark modes → `--shade-800`. Using `--muted` here would be wrong: in light mode `--muted` is `--shade-50` (way too subtle for a backdrop); in dark mode it flips to `--tint-50` and _lightens_ the page instead of dimming.
+   - Modal backdrop that dims content underneath, in both light and dark modes → `--shade-900`. Using `--muted` here would be wrong: in light mode `--muted` is `--shade-50` (way too subtle for a backdrop); in dark mode it flips to `--tint-50` and _lightens_ the page instead of dimming.
    - Frosted-glass overlay over a dark hero image → `--tint-200`.
    - Hover state on a card that needs to read as "slightly darker, regardless of card color" → `--shade-50`.
 
@@ -115,7 +115,7 @@ The shade and tint scales are the ones that throw people off. A quick reference 
 
 | Need                                     | Token                                                                 | Why                                                                      |
 | ---------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| Dim a modal backdrop in both modes       | `--shade-800` (or `--shade-700`)                                      | Shade dims regardless of mode; the overlay always darkens what's behind. |
+| Dim a modal backdrop in both modes       | `--shade-900` (or `--shade-800`)                                      | Shade dims regardless of mode; the overlay always darkens what's behind. |
 | Soft hover on a light card               | `--shade-50` or `--shade-100`                                         | Subtle, mode-agnostic darken.                                            |
 | Frosted highlight band on a dark hero    | `--tint-100`                                                          | Fades the surface lighter without committing to a specific gray.         |
 | Text on a border (outlined ghost button) | `--border-foreground` (theme)                                         | Theme handles this directly — don't reach for `--tint-950` yourself.     |
@@ -654,7 +654,7 @@ The same names exist in every environment. The first decision is which of two in
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: var(--shade-800); /* NOT --muted — shade dims in both modes */
+  background: var(--shade-900); /* NOT --muted — shade dims in both modes */
   z-index: 40;
 }
 
@@ -696,7 +696,7 @@ No `padding-global` wrapper. The `.container` self-pads via `min()`.
 
 | Mistake                                                                 | Why it's wrong                                                                          | Do instead                                              |
 | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| `background: var(--muted)` for a modal backdrop                         | `--muted` is `--shade-50` in light but `--tint-50` in dark — it _lightens_ in dark mode | `background: var(--shade-800)`                          |
+| `background: var(--muted)` for a modal backdrop                         | `--muted` is `--shade-50` in light but `--tint-50` in dark — it _lightens_ in dark mode | `background: var(--shade-900)`                          |
 | `class="text-2xl font-bold leading-tight tracking-tight"` for a heading | Recreates `text-h2` poorly and drifts the system                                        | `class="text-h2"`                                       |
 | Wrapping `.container` in a padding div                                  | Doubles up; container already self-pads                                                 | Apply `.container` directly to your inner element       |
 | `gap: 12px`                                                             | Hardcodes a value that should track the spacing system                                  | `gap: var(--step-3)` (escape hatch) or pick a `--gap-*` |

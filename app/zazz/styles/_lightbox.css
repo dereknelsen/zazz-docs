@@ -61,6 +61,7 @@
 
   :where(.lightbox__dialog) {
     --dialog-background: transparent;
+    --dialog-border: none;
     overflow: clip;
    
   }
@@ -100,8 +101,8 @@
   :where(.lightbox__prev, .lightbox__next) {
     position: absolute;
     top: 50%;
-    translate: 0 -50%;
-    z-index: 5;
+    transform: translateY(-50%);
+    z-index: 50;
     color: var(--white);
   }
 

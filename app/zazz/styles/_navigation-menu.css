@@ -1,14 +1,7 @@
 @layer components {
-  :where(.navigation-menu) {
-    --popover-background: transparent;
-    --popover-foreground: var(--card-foreground);
-    --popover-border: 1px solid transparent;
-
-    --popover-background: var(--card);
-    --popover-border: 1px solid var(--muted);
+  .navigation-menu {
     --popover-shadow: var(--shadow-md);
 
-    --popover-radius: var(--radius-md);
     --popover-child-radius: var(--radius-sm);
     --popover-gap: var(--step-1_5);
     --popover-inline-size: min(var(--screen-xs), 100% - var(--gap-md));
@@ -30,7 +23,7 @@
     isolation: isolate;
   }
 
-  :where(.navigation-menu__container) {
+  .navigation-menu__container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -39,27 +32,25 @@
   }
 
   /* Each item scopes its own anchor name so triggers can share one name */
-  :where(.navigation-menu__item) {
+  .navigation-menu__item {
     anchor-scope: --navigation-menu-trigger;
     position: relative;
   }
 
-  :where(.navigation-menu__trigger) {
+  .navigation-menu__trigger {
     anchor-name: --navigation-menu-trigger;
   }
 
   /* Chevron points down by default, flips up while its popover is open (no JS) */
-  :where(.navigation-menu__trigger > svg) {
+  .navigation-menu__trigger > svg {
     inline-size: var(--gap-sm);
     block-size: var(--gap-sm);
     transition: var(--navigation-icon-transition);
   }
 
-  :where(
-    .navigation-menu__item:has(.navigation-menu__popover:popover-open)
-      .navigation-menu__trigger
-      > svg
-  ) {
+  .navigation-menu__item:has(.navigation-menu__popover:where(:popover-open, .\:popover-open))
+    .navigation-menu__trigger
+    > svg {
     transform: var(--navigation-icon-transform);
   }
 
@@ -67,16 +58,9 @@
   POPOVER — shares the --popover-* vars consumed by :where([popover]) in _reset.css
   =========================================================================== */
 
-  :where(.navigation-menu__popover) {
+  .navigation-menu__popover {
     position-anchor: --navigation-menu-trigger;
     max-inline-size: var(--popover-inline-size);
-
-    background-color: var(--popover-background);
-    color: var(--popover-foreground);
-    border: var(--popover-border);
-    border-radius: var(--popover-radius);
-    box-shadow: var(--popover-shadow);
-    z-index: var(--popover-z-index);
 
     /* Default: open below the trigger, aligned to its start edge */
     --popover-position-area: block-end span-inline-end;
@@ -84,7 +68,7 @@
     --popover-margin-block: var(--step-1_5);
   }
 
-  :where(.navigation-menu__popover .button) {
+  .navigation-menu__popover .button {
     --button-radius: var(--radius-xs);
   }
 
@@ -92,12 +76,12 @@
   ALIGNMENT — nav menus only open downward, so just align along the inline axis
   =========================================================================== */
 
-  :where(.navigation-menu__popover[data-align="center"]) {
+  .navigation-menu__popover[data-align="center"] {
     --popover-position-area: block-end span-all;
     --popover-origin: top center;
   }
 
-  :where(.navigation-menu__popover[data-align="end"]) {
+  .navigation-menu__popover[data-align="end"] {
     --popover-position-area: block-end span-inline-start;
     --popover-origin: top right;
   }
@@ -109,13 +93,13 @@
   =========================================================================== */
 
   /* Each category scopes its own anchor so every sub-trigger reuses one name */
-  :where(.navigation-menu__submenu) {
+  .navigation-menu__submenu {
     anchor-scope: --navigation-menu-subtrigger;
     position: relative;
   }
 
   /* Category row — a full-width link row with a trailing caret */
-  :where(.navigation-menu__submenu-trigger) {
+  .navigation-menu__submenu-trigger {
     anchor-name: --navigation-menu-subtrigger;
 
     display: flex;
@@ -126,26 +110,23 @@
     padding: var(--popover-gap);
     border: 0;
     border-radius: var(--popover-child-radius);
-    background-color: transparent;
     color: inherit;
     font: inherit;
     text-align: start;
     cursor: pointer;
-    transition: background-color var(--default-transition-duration)
-      var(--default-transition-timing-function);
   }
 
   /* Highlight the row on hover and while its submenu is open */
-  :where(.navigation-menu__submenu-trigger:hover),
-  :where(
-    .navigation-menu__submenu:has(.navigation-menu__popover[data-variant="submenu"]:popover-open)
-      .navigation-menu__submenu-trigger
-  ) {
+  .navigation-menu__submenu-trigger:hover,
+  .navigation-menu__submenu:has(
+      .navigation-menu__popover[data-variant="submenu"]:where(:popover-open, .\:popover-open)
+    )
+    .navigation-menu__submenu-trigger {
     background-color: var(--muted);
   }
 
   /* Caret points right — the direction the submenu opens */
-  :where(.navigation-menu__submenu-trigger > svg) {
+  .navigation-menu__submenu-trigger > svg {
     inline-size: var(--gap-sm);
     block-size: var(--gap-sm);
     flex: 0 0 auto;
@@ -155,7 +136,7 @@
   /* Submenu (data-variant="submenu") inherits all base .navigation-menu__popover
      styling; only the anchor and open direction differ — it flies out to the
      inline-end edge, top-aligned, flipping leftward near the viewport's edge. */
-  :where(.navigation-menu__popover[data-variant="submenu"]) {
+  .navigation-menu__popover[data-variant="submenu"] {
     position-anchor: --navigation-menu-subtrigger;
 
     --popover-position-area: inline-end span-block-start;
@@ -169,7 +150,7 @@
   PANEL CONTENT
   =========================================================================== */
 
-  :where(.navigation-menu__viewport) {
+  .navigation-menu__viewport {
     display: var(--popover-viewport-display);
     grid-template-columns: var(--popover-viewport-template-columns);
     align-items: var(--popover-viewport-align-items);
@@ -179,7 +160,7 @@
   }
 
   /* Rich link row: title + description, hover fills with muted */
-  :where(.navigation-menu__link) {
+  .navigation-menu__link {
     display: flex;
     flex-direction: column;
     padding: var(--popover-gap);
@@ -189,7 +170,7 @@
       var(--default-transition-timing-function);
   }
 
-  :where(.navigation-menu__link:hover) {
+  .navigation-menu__link:hover {
     background-color: var(--muted);
   }
 
@@ -198,11 +179,11 @@
   =========================================================================== */
 
   /* Slide-down: accordion-style block-size reveal on the viewport (not scaleY). */
-  :where(.navigation-menu__popover[data-size="screen"][data-animation="slide-down"]) {
+  .navigation-menu__popover[data-size="screen"][data-animation="slide-down"] {
     --popover-starting-scale: 1;
   }
 
-  :where(.navigation-menu__popover[data-animation="slide-down"] > .navigation-menu__viewport) {
+  .navigation-menu__popover[data-animation="slide-down"] > .navigation-menu__viewport {
     overflow: clip;
     block-size: 0;
     transform: translateY(0.5rem);
@@ -213,7 +194,7 @@
       padding var(--default-transition-duration) var(--default-transition-timing-function);
   }
 
-  :where(.navigation-menu__popover[data-animation="slide-down"]:popover-open) {
+  .navigation-menu__popover[data-animation="slide-down"]:where(:popover-open, .\:popover-open) {
     opacity: var(--popover-opacity);
     transform: scale(var(--popover-scale)) translate3d(var(--popover-translate));
 
@@ -223,9 +204,8 @@
     }
   }
 
-  :where(
-    .navigation-menu__popover[data-animation="slide-down"]:popover-open .navigation-menu__viewport
-  ) {
+  .navigation-menu__popover[data-animation="slide-down"]:where(:popover-open, .\:popover-open)
+    .navigation-menu__viewport {
     block-size: auto;
     transform: scale(1) translateY(0);
 
@@ -239,7 +219,7 @@
   SIZING VARIANTS
   =========================================================================== */
 
-  :where(.navigation-menu__popover[data-size="container"]) {
+  .navigation-menu__popover[data-size="container"] {
     position-anchor: --navigation-menu-container;
     --popover-inline-size: anchor-size();
     --popover-position-area: block-end span-all;
@@ -247,7 +227,7 @@
     inline-size: var(--popover-inline-size);
   }
 
-  :where(.navigation-menu__popover[data-size="root"]) {
+  .navigation-menu__popover[data-size="root"] {
     position-anchor: --navigation-menu-root;
     --popover-inline-size: anchor-size();
     --popover-position-area: block-end span-all;
@@ -255,11 +235,10 @@
     inline-size: var(--popover-inline-size);
   }
 
-  :where(.navigation-menu__popover[data-size="screen"]) {
+  .navigation-menu__popover[data-size="screen"] {
     position-anchor: --navigation-menu-root;
     --popover-inline-size: 100vi;
     --popover-position-area: block-end span-all;
-    --popover-radius: 0;
 
     inline-size: var(--popover-inline-size);
   }

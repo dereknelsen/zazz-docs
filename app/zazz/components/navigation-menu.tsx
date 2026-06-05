@@ -75,7 +75,7 @@ const html = /* html */ `
       <div id="nav-dropdown-1" class="navigation-menu__popover" popover="auto" data-animation="slide-down">
         <div class="navigation-menu__viewport grid grid-cols-3">
          <div class="grid py-xs pl-xs">
-            <a href="#" class="flex flex-col items-start justify-end bg-muted rounded-sm p-sm">
+            <a href="#" class="flex flex-col items-start justify-end bg-muted transition hover:opacity-80 active:opacity-70 rounded-sm p-sm">
               <span class="text-eyebrow text-muted-foreground mb-xs">Featured</span>
               <span class="text-md weight-strong">Platform</span>
               <span class="text-sm text-muted-foreground text-pretty">

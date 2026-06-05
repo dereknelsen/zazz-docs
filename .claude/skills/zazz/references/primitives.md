@@ -2,26 +2,26 @@
 
 Zazz ships **nine example components** under `app/zazz/components/` (each a `.tsx`) paired with a stylesheet under `app/zazz/styles/` (each a `_*.css` in `@layer components`):
 
-| Component       | Markup                | Stylesheet                                                                                                                           | Built on                                                                       |
-| --------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| Accordion       | `accordion.tsx`       | `_accordion.css`                                                                                                                     | native `<details>` / `<summary>`                                               |
-| Badge           | `badge.tsx`           | `_badge.css`                                                                                                                         | `<a>` / `<button>`                                                             |
-| Button          | `button.tsx`          | `_button.css`                                                                                                                        | `<button>` / `<a>`                                                             |
-| Dialog          | `dialog.tsx`          | `_dialog.css`                                                                                                                        | native `<dialog>` + Invoker Commands API                                       |
-| Dropdown        | `dropdown.tsx`        | `_dropdown.css`                                                                                                                      | Popover API + CSS anchor positioning                                           |
-| Lightbox        | `lightbox.tsx`        | `_lightbox.css` + `_embla.css`                                                                                                       | native `<dialog>` + Invoker Commands + Embla Carousel                          |
-| Mobile Menu     | `mobile-menu.tsx`     | `_mobile-menu.css`                                                                                                                   | native `<dialog>` + `<details>` accordion + Invoker Commands                   |
-| Navigation menu | `navigation-menu.tsx` | `_navigation-menu.css`                                                                                                               | Popover API + CSS anchor positioning                                           |
-| Section         | `section.tsx`         | — (utilities only)                                                                                                                   | layout wrapper                                                                 |
-| Tabs            | `tabs.tsx`            | `_tabs.css`                                                                                                                          | native `<input type="radio">` + CSS `order`                                    |
+| Component       | Markup                                                                                                                        | Stylesheet                                                                                                                                                     | Built on                                                                       |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Accordion       | `accordion.tsx`                                                                                                               | `_accordion.css`                                                                                                                                               | native `<details>` / `<summary>`                                               |
+| Badge           | `badge.tsx`                                                                                                                   | `_badge.css`                                                                                                                                                   | `<a>` / `<button>`                                                             |
+| Button          | `button.tsx`                                                                                                                  | `_button.css`                                                                                                                                                  | `<button>` / `<a>`                                                             |
+| Dialog          | `dialog.tsx`                                                                                                                  | `_dialog.css`                                                                                                                                                  | native `<dialog>` + Invoker Commands API                                       |
+| Dropdown        | `dropdown.tsx`                                                                                                                | `_dropdown.css`                                                                                                                                                | Popover API + CSS anchor positioning                                           |
+| Lightbox        | `lightbox.tsx`                                                                                                                | `_lightbox.css` + `_embla.css`                                                                                                                                 | native `<dialog>` + Invoker Commands + Embla Carousel                          |
+| Mobile Menu     | `mobile-menu.tsx`                                                                                                             | `_mobile-menu.css`                                                                                                                                             | native `<dialog>` + `<details>` accordion + Invoker Commands                   |
+| Navigation menu | `navigation-menu.tsx`                                                                                                         | `_navigation-menu.css`                                                                                                                                         | Popover API + CSS anchor positioning                                           |
+| Section         | `section.tsx`                                                                                                                 | — (utilities only)                                                                                                                                             | layout wrapper                                                                 |
+| Tabs            | `tabs.tsx`                                                                                                                    | `_tabs.css`                                                                                                                                                    | native `<input type="radio">` + CSS `order`                                    |
 | Form family     | `input.tsx`, `textarea.tsx`, `select.tsx`, `input-group.tsx`, `password-group.tsx`, `checkbox.tsx`, `radio.tsx`, `switch.tsx` | `_fields.css` + `_input.css` / `_textarea.css` / `_select.css` / `_input-group.css` / `_password-group.css` / `_radio.css` (checkbox & switch in `_reset.css`) | native form controls, customizable `<select>`, `field-sizing`, `:user-invalid` |
 
 Additionally, two shared behavior layers ship their own stylesheets:
 
-| Layer           | Stylesheet     | Script        | Purpose                                                         |
-| --------------- | -------------- | ------------- | --------------------------------------------------------------- |
-| Embla Carousel  | `_embla.css`   | `embla.js`    | Base carousel layout; auto-initializes via `[data-embla]` attrs |
-| Reveal (Motion) | `_reveal.css`  | `reveal.js`   | Scroll-triggered viewport entry animations via `[data-reveal]`  |
+| Layer           | Stylesheet    | Script      | Purpose                                                         |
+| --------------- | ------------- | ----------- | --------------------------------------------------------------- |
+| Embla Carousel  | `_embla.css`  | `embla.js`  | Base carousel layout; auto-initializes via `[data-embla]` attrs |
+| Reveal (Motion) | `_reveal.css` | `reveal.js` | Scroll-triggered viewport entry animations via `[data-reveal]`  |
 
 They are **examples, not a packaged library**. They show how to build common components on Zazz tokens using modern, dependency-free platform features. When you build in an existing component system (shadcn, Radix, your own framework), keep that system's architecture and _reskin it through Zazz tokens_ — don't fight it. When you build fresh, mirror these patterns for consistency.
 
@@ -35,14 +35,14 @@ Every component follows the same five conventions. Learn them once and all eight
 
 1. **A block class + BEM sub-elements.** `.button`, `.dialog` + `.dialog__header` / `.dialog__body` / `.dialog__footer`, `.navigation-menu` + `.navigation-menu__container` / `__item` / `__trigger` / `__popover`. Sub-elements are `block__element`; there are no `block--modifier` classes (see #3).
 
-2. **`:where()` for zero specificity.** Every rule is `:where(.button) { … }`. The component sits at specificity 0, so utilities (`p-md`, `text-h4`) and your own CSS always win without `!important`.
+2. **Cascade layers, not `:where()`, for overridability.** Component rules are written plain — `.button { … }` — inside `@layer components`. The layer (`@layer variables, reset, components, utilities`) is what lets utilities (`p-md`, `text-h4`) and your own CSS win without `!important`; natural specificity orders base < variant < state. `:where()` is reserved for the reset/utilities layers and for demoting `:has()`/descendant selectors. See [CONVENTIONS.md](../../../../app/zazz/styles/CONVENTIONS.md).
 
 3. **Variants and sizes are data attributes, not modifier classes.** `[data-variant="primary|muted|ghost|link"]`, `[data-size="sm|icon|icon-sm"]`, plus component-specific ones: `[data-side]`/`[data-align]` (dropdown), `[data-align]`/`[data-variant="submenu"]`/`[data-size]`/`[data-animation]` (navigation menu), `[data-size="large|screen"]` (dialog), `[data-direction="horizontal"]` (a `.field` with the control beside its label) and `[data-align]` (input-group addon placement). In markup: `class="button" data-variant="primary"` — **not** `class="button button-primary"`.
 
 4. **Local custom properties default to theme tokens, then re-point per variant.** Each component opens by declaring its own `--component-*` props off theme roles, then a `[data-variant]` rule swaps those locals. This keeps the base rule untouched and makes a variant a short list of variable reassignments:
 
    ```css
-   :where(.button) {
+   .button {
      --button-background: var(--background);
      --button-foreground: var(--foreground);
      --button-border: var(--border);
@@ -53,7 +53,7 @@ Every component follows the same five conventions. Learn them once and all eight
      border: 1px solid var(--button-border);
      border-radius: var(--button-radius);
    }
-   :where(.button[data-variant="primary"]) {
+   .button[data-variant="primary"] {
      --button-background: var(--primary);
      --button-foreground: var(--primary-foreground);
      --button-border: var(--button-background);
@@ -301,20 +301,62 @@ Also gated for the same reason: **`contrast-color()`** in the `::selection` rule
 
 ## Lightbox — `.lightbox`
 
-An image gallery grid that opens a fullscreen dialog slideshow. Thumbnails live in a CSS Grid; clicking one opens a `<dialog>` containing an Embla Carousel. No JavaScript for modal open/close — Invoker Commands only. The carousel auto-initializes via data attributes.
+A product-style image gallery with a main carousel, linked thumb strip, and fullscreen dialog slideshow. Clicking the main image opens the dialog at the current slide. No JavaScript for modal open/close — Invoker Commands only. Embla auto-initializes both carousels and syncs thumbs via `embla.js`.
 
 ```html
-<div class="lightbox grid grid-cols-3 gap-xs">
-  <button class="lightbox__trigger" type="button" command="show-modal" commandfor="lightbox-1" data-embla-start="0">
-    <img src="thumb-1.jpg" alt="Mountain landscape" loading="lazy" />
-  </button>
-  <button class="lightbox__trigger" type="button" command="show-modal" commandfor="lightbox-1" data-embla-start="1">
-    <img src="thumb-2.jpg" alt="Forest path" loading="lazy" />
-  </button>
+<div class="lightbox">
+  <div class="lightbox__gallery">
+    <div class="lightbox__stage" data-embla="root" data-embla-classnames>
+      <div data-embla="viewport">
+        <div data-embla="container">
+          <div class="lightbox__slide" data-embla="slide">
+            <img src="gallery-1.jpg" alt="Mountain landscape" loading="lazy" />
+          </div>
+          <div class="lightbox__slide" data-embla="slide">
+            <img src="gallery-2.jpg" alt="Forest path" loading="lazy" />
+          </div>
+        </div>
+      </div>
+      <button
+        class="lightbox__expand"
+        type="button"
+        command="show-modal"
+        commandfor="lightbox-1"
+        aria-label="View fullscreen"
+      ></button>
+      <div
+        class="lightbox__thumbs"
+        data-embla="thumbs"
+        data-embla-thumbs-contain-scroll="keepSnaps"
+        data-embla-thumbs-drag-free="true"
+      >
+        <div data-embla="viewport">
+          <div data-embla="container">
+            <button
+              type="button"
+              class="lightbox__thumb"
+              data-embla="slide"
+              aria-label="Show image 1"
+            >
+              <img src="thumb-1.jpg" alt="Mountain landscape" loading="lazy" />
+            </button>
+            <button
+              type="button"
+              class="lightbox__thumb"
+              data-embla="slide"
+              aria-label="Show image 2"
+            >
+              <img src="thumb-2.jpg" alt="Forest path" loading="lazy" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <dialog id="lightbox-1" class="lightbox__dialog dialog" data-size="screen" closedby="any">
+  <dialog id="lightbox-1" class="lightbox__dialog dialog dark" data-size="screen" closedby="any">
     <div class="dialog__content">
-      <div data-embla="root" data-embla-loop="true">
+      <div data-embla="root" data-embla-loop="true" data-embla-classnames>
         <div data-embla="viewport">
           <div data-embla="container">
             <div class="lightbox__slide" data-embla="slide">
@@ -325,23 +367,71 @@ An image gallery grid that opens a fullscreen dialog slideshow. Thumbnails live 
             </div>
           </div>
         </div>
-        <button class="lightbox__prev button" data-size="icon" data-variant="ghost" data-embla="prev" type="button" aria-label="Previous image"><svg>…</svg></button>
-        <button class="lightbox__next button" data-size="icon" data-variant="ghost" data-embla="next" type="button" aria-label="Next image"><svg>…</svg></button>
+        <button
+          class="lightbox__prev button"
+          data-size="icon"
+          data-variant="ghost"
+          data-embla="prev"
+          type="button"
+          aria-label="Previous image"
+        >
+          <svg>…</svg>
+        </button>
+        <button
+          class="lightbox__next button"
+          data-size="icon"
+          data-variant="ghost"
+          data-embla="next"
+          type="button"
+          aria-label="Next image"
+        >
+          <svg>…</svg>
+        </button>
+        <div
+          class="lightbox__thumbs"
+          data-embla="thumbs"
+          data-embla-thumbs-contain-scroll="keepSnaps"
+          data-embla-thumbs-drag-free="true"
+        >
+          <div data-embla="viewport">
+            <div data-embla="container">
+              <button
+                type="button"
+                class="lightbox__thumb"
+                data-embla="slide"
+                aria-label="Show image 1"
+              >
+                <img src="thumb-1.jpg" alt="Mountain landscape" loading="lazy" />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <button class="lightbox__close button" data-size="icon" data-variant="ghost" type="button" commandfor="lightbox-1" command="close" aria-label="Close lightbox"><svg>…</svg></button>
+    <button
+      class="lightbox__close button"
+      data-size="icon"
+      data-variant="ghost"
+      type="button"
+      commandfor="lightbox-1"
+      command="close"
+      aria-label="Close lightbox"
+    >
+      <svg>…</svg>
+    </button>
   </dialog>
 </div>
 ```
 
-- **Grid:** `.lightbox` sets `display: grid`. Use utility classes for columns and gap (`grid grid-cols-3 gap-xs`). No `data-columns` attribute.
-- **Triggers:** each `.lightbox__trigger` is a `<button>` wrapping a thumbnail `<img>`. `cursor: zoom-in`, subtle `scale(1.03)` on hover, overflow hidden with `--lightbox-radius` (`--radius-md`).
-- **Starting slide:** `data-embla-start="N"` on the trigger tells the carousel which slide index to jump to on open.
-- **Dialog:** `.lightbox__dialog` extends `.dialog[data-size="screen"]` with `--dialog-background: transparent` for a dark fullscreen overlay. `closedby="any"` for backdrop dismiss.
-- **Slides:** each `.lightbox__slide` is a full-viewport flex center with `padding: var(--gap-md)`. Images use `object-fit: contain`, `inline-size: auto`, a subtle `--tint-100` border, and `--lightbox-slide-radius` (`--radius-lg`).
-- **Nav buttons:** `.lightbox__prev` / `.lightbox__next` — absolutely positioned ghost icon buttons at `left/right: var(--gap-md)`, `color: var(--white)`, wired to Embla via `data-embla="prev|next"`.
-- **Close:** `.lightbox__close` — top-right ghost icon button, `command="close"`, `color: var(--white)`.
-- **Counter (optional):** `.lightbox__counter` — bottom-center slide count indicator, white, `tabular-nums`.
+- **Gallery:** `.lightbox__gallery` / `.lightbox__stage` — inline main carousel with `--lightbox-aspect-ratio` (default `1 / 1`). Thumbs navigate the gallery; no prev/next arrows on the inline stage.
+- **Expand:** `.lightbox__expand` — transparent overlay on the main viewport, `cursor: zoom-in`, `command="show-modal"`. `embla.js` reads the gallery's current slide index on click.
+- **Thumbs:** `.lightbox__thumbs[data-embla="thumbs"]` — linked Embla strip; `button.lightbox__thumb[data-embla="slide"]` per image. Active thumb gets `.is-active` and `aria-current="true"`. Options via `data-embla-thumbs-*` (defaults: `containScroll: keepSnaps`, `dragFree: true`).
+- **Explicit start index:** `data-embla-start="N"` on any trigger still works for fixed-index opens.
+- **Dialog:** `.lightbox__dialog` extends `.dialog[data-size="screen"].dark` with `--dialog-background: transparent`. Flex column layout: main carousel fills height, thumbs pinned to bottom.
+- **Slides:** dialog `.lightbox__slide` images use `object-fit: contain`, `--tint-100` border, enter animation via class-names plugin (`is-in-view.is-snapped`).
+- **Nav buttons:** `.lightbox__prev` / `.lightbox__next` — ghost icon buttons wired to Embla via `data-embla="prev|next"`.
+- **Close:** `.lightbox__close` — top-right, `command="close"`. On close, gallery syncs to the last dialog slide.
+- **Counter (optional):** `.lightbox__counter` — bottom-center slide count, `tabular-nums`.
 
 ---
 
@@ -350,15 +440,38 @@ An image gallery grid that opens a fullscreen dialog slideshow. Thumbnails live 
 A full-screen takeover navigation, composed from `.dialog[data-size="screen"]` and `.accordion`. No JavaScript — Invoker Commands opens, native dialog closes, `<details>` handles expand/collapse.
 
 ```html
-<button class="button" data-size="icon" type="button" command="show-modal" commandfor="mobile-menu-1" aria-label="Open menu">
+<button
+  class="button"
+  data-size="icon"
+  type="button"
+  command="show-modal"
+  commandfor="mobile-menu-1"
+  aria-label="Open menu"
+>
   <svg><!-- hamburger --></svg>
 </button>
 
-<dialog id="mobile-menu-1" class="dialog mobile-menu" data-size="screen" data-animation="slide-right" closedby="any">
+<dialog
+  id="mobile-menu-1"
+  class="dialog mobile-menu"
+  data-size="screen"
+  data-animation="slide-right"
+  closedby="any"
+>
   <div class="mobile-menu__viewport">
     <div class="mobile-menu__header">
       <span class="text-md weight-strong">Menu</span>
-      <button class="button" data-variant="ghost" data-size="icon" type="button" commandfor="mobile-menu-1" command="close" aria-label="Close menu"><svg>…</svg></button>
+      <button
+        class="button"
+        data-variant="ghost"
+        data-size="icon"
+        type="button"
+        commandfor="mobile-menu-1"
+        command="close"
+        aria-label="Close menu"
+      >
+        <svg>…</svg>
+      </button>
     </div>
 
     <div class="mobile-menu__body">
@@ -419,7 +532,11 @@ A set of native form controls styled from Zazz tokens. No JS drives behavior —
 `.input`, `.textarea`, `.select`, `.input-group`, and `.password-group` all open with the same locals (declared once in `_fields.css`) so a text input, a dropdown, and a message box read as one family — and overriding one local retunes the whole set:
 
 ```css
-:where(.input, .textarea, .select, .input-group, .password-group) {
+.input,
+.textarea,
+.select,
+.input-group,
+.password-group {
   --field-background: var(--input);
   --field-foreground: var(--input-foreground);
   --field-border: var(--border);
@@ -597,6 +714,6 @@ When asked for a tooltip, breadcrumb, toast, etc., follow the shared pattern abo
 3. **Right elevation.** `--shadow-xs` resting, `--shadow-md` floating (dropdowns/popovers), `--shadow-lg`/`xl` for the most-elevated surface. Spend shadows sparingly.
 4. **Right spacing & type.** `--gap-*` for padding/gaps (`--step-*` only for off-grid internals); `text-sm`/`text-h6` for titles, `text-md` for body.
 5. **Right focus & motion.** The `--ring*` outline on `:focus-visible`; `var(--default-transition)` (or duration/easing pair) for transitions.
-6. **Right structure.** Block class + `:where()`, BEM sub-elements, data-attribute variants, native HTML/platform features where they exist (Popover API for floating panels, `<dialog>` for modals, `<details>` for disclosure).
+6. **Right structure.** Block class in `@layer components` (plain selectors, no `:where()`), BEM sub-elements, data-attribute variants that re-point `--component-*` tokens, native HTML/platform features where they exist (Popover API for floating panels, `<dialog>` for modals, `<details>` for disclosure).
 
 In a component system (shadcn, Radix, etc.), let that system carry structure and behavior; Zazz owns the visual layer through tokens.

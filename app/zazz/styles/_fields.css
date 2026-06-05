@@ -15,13 +15,14 @@
   =========================================================================== */
 
   /* ---------------------------------------------------------------------------
-  SHARED FIELD TOKENS
+  SHARED FIELD TOKENS — Tier-3 shared family, owned here.
   - .input / .textarea / .select / .input-group all share the same surface
     treatment so a text input, a dropdown, and a message box read as one family.
     Each control aliases these locals so a single override retunes the whole set.
+  - Sibling control files only remap these --field-* tokens; this is the owner.
   --------------------------------------------------------------------------- */
 
-  :where(.input, .textarea, .select, .input-group, .password-group) {
+  .input, .textarea, .select, .input-group, .password-group {
     --field-background: var(--input);
     --field-background--hover: var(--input);
     --field-background--focus: var(--background);
@@ -48,18 +49,16 @@
   SHARED DISABLED STATE
   --------------------------------------------------------------------------- */
 
-  :where(
-    .input:disabled,
-    .textarea:disabled,
-    .select:disabled,
-    .input-file:disabled,
-    .input-color:disabled,
-    .input-group:disabled,
-    .password-group:disabled,
-    input[type="checkbox"]:disabled,
-    .radio:disabled,
-    .input-group:has(:disabled)
-  ) {
+  .input:disabled,
+  .textarea:disabled,
+  .select:disabled,
+  .input-file:disabled,
+  .input-color:disabled,
+  .input-group:disabled,
+  .password-group:disabled,
+  input[type="checkbox"]:disabled,
+  .radio:disabled,
+  .input-group:has(:disabled) {
     opacity: 0.5;
     cursor: not-allowed;
   }
@@ -70,7 +69,7 @@
     surface only after the user commits a value (blur/submit), never while typing.
   --------------------------------------------------------------------------- */
 
-  :where(.field) {
+  .field {
     --field-display: grid;
     --field-template-columns: 1fr;
     --field-gap: var(--step-1);
@@ -86,13 +85,13 @@
     inline-size: var(--field-inline-size);
   }
 
-  :where(.field > :not(.field__label):not(.field__description)) {
+  .field > :not(.field__label):not(.field__description) {
     grid-row: 2;
     grid-column: 1;
   }
 
   /* Label sits top-left above the control by default */
-  :where(.field__label) {
+  .field__label {
     grid-row: 1;
     grid-column: 1;
     align-self: start;
@@ -108,7 +107,7 @@
     The wrapper keeps a fixed block-size while the children crossfade inside it.
   --------------------------------------------------------------------------- */
 
-  :where(.field__description) {
+  .field__description {
     grid-row: 3;
     grid-column: 1;
     display: grid;
@@ -117,7 +116,7 @@
   }
 
   /* Hint and error stack in the same grid area — only one is visible at a time */
-  :where(.field__hint, .field__error) {
+  .field__hint, .field__error {
     grid-area: msg;
     display: inline-flex;
     transition:
@@ -126,14 +125,14 @@
       visibility var(--default-transition-duration) var(--default-transition-timing-function) allow-discrete;
   }
 
-  :where(.field__hint) {
+  .field__hint {
     color: var(--muted-foreground);
     opacity: 1;
     translate: var(--field-hint-translate);
     visibility: visible;
   }
 
-  :where(.field__error) {
+  .field__error {
     color: var(--destructive);
     opacity: 0;
     translate: var(--field-hint-starting-translate);
@@ -165,14 +164,12 @@
     }
   }
 
-  :where(
-    .input:user-invalid,
-    .textarea:user-invalid,
-    .select:user-invalid,
-    .input-file:user-invalid,
-    .input-group:has(:user-invalid),
-    .password-group:has(:user-invalid)
-  ) {
+  .input:user-invalid,
+  .textarea:user-invalid,
+  .select:user-invalid,
+  .input-file:user-invalid,
+  .input-group:has(:user-invalid),
+  .password-group:has(:user-invalid) {
     --field-background: color-mix(in oklch, var(--destructive) 5%, var(--input));
     --field-background--hover: color-mix(in oklch, var(--destructive) 10%, var(--input));
     --field-border: var(--destructive);
@@ -201,7 +198,7 @@
     .field__label instead, never lean on the legend as a stand-in label.
   --------------------------------------------------------------------------- */
 
-  :where(.field-group, .radio-group) {
+  .field-group, .radio-group {
     --field-group-display: grid;
     --field-group-border: 1px solid transparent;
     --field-group-background: transparent;
@@ -220,7 +217,7 @@
   }
 
   /* Legend reads as the group's label — same weight/size as a .field__label */
-  :where(.field-group > legend, .radio-group > legend) {
+  .field-group > legend, .radio-group > legend {
     padding: 0;
     margin-block: 0 var(--step-1_5);
     color: var(--field-label-color, inherit);
@@ -233,7 +230,7 @@
   =========================================================================== */
 
   /* Inline layout for checkbox/radio/switch: control beside its label */
-  :where(.field[data-direction="horizontal"]) {
+  .field[data-direction="horizontal"] {
     --field-horizontal-display: flex;
     --field-horizontal-flex-direction: row;
     --field-horizontal-align-items: center;

@@ -3,7 +3,7 @@
   BADGE
   =========================================================================== */
 
-  :where(.badge) {
+  .badge {
     --badge-ring-color: var(--ring-color);
     --badge-ring-opacity: 0%;
 
@@ -25,16 +25,6 @@
     --badge-radius: var(--radius-sm);
 
     --badge-icon-size: var(--step-3);
-
-    --badge-decoration-line: var(--decoration-line);
-    --badge-decoration-color: var(--decoration-color);
-    --badge-decoration-color--hover: var(--decoration-color--hover);
-    --badge-decoration-color--active: var(--decoration-color--active);
-    --badge-decoration-style: var(--decoration-style);
-    --badge-decoration-thickness: var(--decoration-thickness);
-    --badge-decoration-offset: var(--decoration-offset);
-    --badge-decoration-offset--hover: var(--decoration-offset--hover);
-    --badge-decoration-offset--active: var(--decoration-offset--active);
 
     font-family: var(--font-body);
     font-size: var(--font-size-xs);
@@ -70,7 +60,7 @@
     text-box: trim-both ex alphabetic;
   }
 
-  :where(a[href].badge) {
+  a[href].badge {
     cursor: pointer;
   }
 
@@ -78,38 +68,36 @@
   BADGE STATES
   =========================================================================== */
 
-  :where(button.badge:hover, a[href].badge:hover) {
+  button.badge:hover, a[href].badge:hover {
     color: var(--badge-foreground--hover);
     background-color: var(--badge-background--hover);
     border: var(--badge-border--hover);
   }
 
-  :where(button.badge:active, a[href].badge:active) {
+  button.badge:active, a[href].badge:active {
     color: var(--badge-foreground--active);
     background-color: var(--badge-background--active);
     border: var(--badge-border--active);
   }
 
-  :where(button.badge:focus-visible, a[href].badge:focus-visible) {
+  button.badge:focus-visible, a[href].badge:focus-visible {
     outline-color: color-mix(in oklch, var(--badge-ring-color) var(--ring-opacity), transparent);
   }
 
-  :where(
-    button.badge:disabled,
-    a[href].badge:disabled,
-    button.badge[aria-disabled="true"],
-    a[href].badge[aria-disabled="true"]
-  ) {
+  button.badge:disabled,
+  a[href].badge:disabled,
+  button.badge[aria-disabled="true"],
+  a[href].badge[aria-disabled="true"] {
     opacity: 0.5;
     cursor: not-allowed;
     pointer-events: none;
   }
 
-  :where(button.badge:disabled, a[href].badge:disabled) {
+  button.badge:disabled, a[href].badge:disabled {
     pointer-events: none;
   }
 
-  :where(button.badge[aria-busy="true"], a[href].badge[aria-busy="true"]) {
+  button.badge[aria-busy="true"], a[href].badge[aria-busy="true"] {
     cursor: progress;
   }
 
@@ -117,7 +105,7 @@
   BADGE ICONS
   =========================================================================== */
 
-  :where(.badge > svg) {
+  .badge > svg {
     inline-size: var(--badge-icon-size);
     block-size: var(--badge-icon-size);
     pointer-events: none;
@@ -131,7 +119,7 @@
   BADGE VARIANTS
   =========================================================================== */
 
-  :where(.badge[data-variant="primary"]) {
+  .badge[data-variant="primary"] {
     --badge-background: var(--primary);
     --badge-background--hover: oklch(from var(--primary) l c h / 0.9);
     --badge-background--active: oklch(from var(--primary) l c h / 0.8);
@@ -145,7 +133,7 @@
     --badge-border--active: 1px solid transparent;
   }
 
-  :where(.badge[data-variant="muted"]) {
+  .badge[data-variant="muted"] {
     --badge-background: var(--muted);
     --badge-background--hover: oklch(from var(--muted) l c h / calc(alpha - 0.02));
     --badge-background--active: var(--muted);
@@ -159,7 +147,7 @@
     --badge-border--active: 1px solid transparent;
   }
 
-  :where(.badge[data-variant="ghost"]) {
+  .badge[data-variant="ghost"] {
     --badge-background: transparent;
     --badge-background--hover: var(--muted);
     --badge-background--active: oklch(from var(--muted) l c h / calc(alpha - 0.02));
@@ -173,7 +161,7 @@
     --badge-border--active: 1px solid transparent;
   }
 
-  :where(.badge[data-variant="link"]) {
+  .badge[data-variant="link"] {
     --badge-background: transparent;
     --badge-background--hover: transparent;
     --badge-background--active: transparent;
@@ -185,28 +173,28 @@
     --badge-radius: 0;
 
     border: none;
-    text-decoration-line: var(--badge-decoration-line);
-    text-decoration-style: var(--badge-decoration-style);
-    text-decoration-color: var(--badge-decoration-color);
-    text-underline-offset: var(--badge-decoration-offset);
-    text-decoration-thickness: var(--badge-decoration-thickness);
+    text-decoration-line: var(--decoration-line);
+    text-decoration-style: var(--decoration-style);
+    text-decoration-color: var(--decoration-color);
+    text-underline-offset: var(--decoration-offset);
+    text-decoration-thickness: var(--decoration-thickness);
   }
 
-  :where(button.badge[data-variant="link"]:hover, a[href].badge[data-variant="link"]:hover) {
-    text-decoration-color: var(--badge-decoration-color--hover);
-    text-underline-offset: var(--badge-decoration-offset--hover);
+  button.badge[data-variant="link"]:hover, a[href].badge[data-variant="link"]:hover {
+    text-decoration-color: var(--decoration-color--hover);
+    text-underline-offset: var(--decoration-offset--hover);
   }
 
-  :where(button.badge[data-variant="link"]:active, a[href].badge[data-variant="link"]:active) {
-    text-decoration-color: var(--badge-decoration-color--active);
-    text-underline-offset: var(--badge-decoration-offset--active);
+  button.badge[data-variant="link"]:active, a[href].badge[data-variant="link"]:active {
+    text-decoration-color: var(--decoration-color--active);
+    text-underline-offset: var(--decoration-offset--active);
   }
 
   /* ===========================================================================
   BADGE SIZES
   =========================================================================== */
 
-  :where(.badge[data-size="icon"]) {
+  .badge[data-size="icon"] {
     justify-content: center;
     block-size: var(--badge-height);
     inline-size: var(--badge-height);

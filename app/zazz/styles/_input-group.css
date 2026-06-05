@@ -17,7 +17,7 @@
   - Shares the --field-* tokens (height, radius, surface) defined in _fields.css.
   =========================================================================== */
 
-  :where(.input-group) {
+  .input-group {
     --input-group-display: flex;
     --input-group-wrap: wrap;
     --input-group-align: center;
@@ -53,19 +53,19 @@
     transition: var(--default-transition);
   }
 
-  :where(.input-group:hover) {
+  .input-group:hover {
     background-color: var(--field-background--hover);
     border-color: var(--field-border--hover);
   }
 
-  :where(.input-group:focus-within) {
+  .input-group:focus-within {
     background-color: var(--field-background--focus);
     border-color: var(--field-border--focus);
     outline-color: var(--ring);
   }
 
   /* Nested control sheds its own chrome and fills the row */
-  :where(.input-group .input, .input-group .textarea) {
+  .input-group .input, .input-group .textarea {
     flex: 1;
     min-inline-size: 0;
     background-color: transparent;
@@ -74,7 +74,7 @@
     outline: none;
   }
 
-  :where(.input-group .input) {
+  .input-group .input {
     block-size: 100%;
     padding-inline: 0;
   }
@@ -83,20 +83,18 @@
      text never sits flush against the shell. An addon already supplies the
      spacing on its side; block-* addons take their own row and don't count here.
      (Default/no-data-align addons are inline-start.) */
-  :where(
-    .input-group:not(
+  .input-group:not(
         :has(.input-group__addon:not([data-align]), .input-group__addon[data-align="inline-start"])
-      ) .input
-  ) {
+      ) .input {
     padding-inline-start: var(--field-padding);
   }
 
-  :where(.input-group:not(:has(.input-group__addon[data-align="inline-end"])) .input) {
+  .input-group:not(:has(.input-group__addon[data-align="inline-end"])) .input {
     padding-inline-end: var(--field-padding);
   }
 
   /* A textarea claims the full width; addons stack above/below via block-* */
-  :where(.input-group .textarea) {
+  .input-group .textarea {
     flex-basis: 100%;
     min-block-size: 3lh;
     padding-inline: var(--step-2);
@@ -105,7 +103,7 @@
   }
 
   /* Addon — groups icons, text, kbd, or buttons together */
-  :where(.input-group__addon) {
+  .input-group__addon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -118,28 +116,28 @@
     padding-inline: var(--field-addon-padding);
   }
 
-  :where(.input-group__addon > svg) {
+  .input-group__addon > svg {
     inline-size: var(--field-icon-size);
     block-size: var(--field-icon-size);
   }
 
   /* Alignment — inline-start is the default (addon visually leads the control) */
-  :where(.input-group__addon:not([data-align]), .input-group__addon[data-align="inline-start"]) {
+  .input-group__addon:not([data-align]), .input-group__addon[data-align="inline-start"] {
     order: -1;
   }
 
-  :where(.input-group__addon[data-align="inline-end"]) {
+  .input-group__addon[data-align="inline-end"] {
     order: 1;
   }
 
-  :where(.input-group__addon[data-align="block-start"]) {
+  .input-group__addon[data-align="block-start"] {
     order: -2;
     flex-basis: 100%;
     padding-block: var(--field-addon-padding);
     align-items: flex-start;
   }
 
-  :where(.input-group__addon[data-align="block-end"]) {
+  .input-group__addon[data-align="block-end"] {
     order: 2;
     flex-basis: 100%;
     padding-block: var(--field-addon-padding);
@@ -147,7 +145,7 @@
   }
 
   /* Text addon — units, protocols, @handles ("https://", "USD", "@user") */
-  :where(.input-group__text) {
+  .input-group__text {
     display: inline-flex;
     align-items: center;
     gap: var(--gap-xs);
@@ -158,13 +156,13 @@
     min-inline-size: max-content;
   }
 
-  :where(.input-group__text > svg) {
+  .input-group__text > svg {
     inline-size: var(--field-icon-size);
     block-size: var(--field-icon-size);
   }
 
   /* Buttons embedded in a group shrink to nest cleanly inside the shell */
-  :where(.input-group .button) {
+  .input-group .button {
     flex-shrink: 0;
     border-radius: var(--field-button-radius);
   }

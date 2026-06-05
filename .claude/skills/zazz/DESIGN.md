@@ -143,7 +143,6 @@ spacing:
   24: 96px
 
 rounded:
-  none: 0px
   xs: 4px
   sm: 6px
   md: 10px
@@ -238,6 +237,7 @@ roundness: medium
 > **🎨 CRITICAL: Brand Customization**
 >
 > When a URL or brand instructions are provided alongside this file:
+>
 > 1. **Fetch the website** — extract the brand's color palette, logo, imagery style, and visual identity
 > 2. **Update the YAML frontmatter** — replace `colors`, `fonts`, and `roundness` values to match the brand as precisely as reasonable
 > 3. **Include the logo** in the header and footer of generated designs
@@ -258,8 +258,8 @@ Light mode feels like a premium catalog: crisp surfaces with photographic warmth
 | Archetype                  | Character                                                                                                       | Typical Clients                                                |
 | -------------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
 | **Industrial Distributor** | Function-first, catalog-dense, account-gated. Prominent search, minimal atmosphere. Speed and clarity dominate. | Packaging, safety, industrial supplies, janitorial, electrical |
-| **Lifestyle Brand**        | Balanced — product-forward with brand storytelling. Carousels, seasonal collections, aspirational photography.   | Lighting, furniture, home goods, apparel, building materials   |
-| **Editorial Studio**       | Gallery-like, story-driven, generous whitespace. Video heroes, craft narratives, asymmetric layouts.             | Artisan goods, luxury, design-forward manufacturers            |
+| **Lifestyle Brand**        | Balanced — product-forward with brand storytelling. Carousels, seasonal collections, aspirational photography.  | Lighting, furniture, home goods, apparel, building materials   |
+| **Editorial Studio**       | Gallery-like, story-driven, generous whitespace. Video heroes, craft narratives, asymmetric layouts.            | Artisan goods, luxury, design-forward manufacturers            |
 
 Default to **Lifestyle Brand** when unclear — it balances conversion with brand investment. Most B2B clients fall between Distributor and Lifestyle.
 
@@ -280,32 +280,33 @@ Default to **Lifestyle Brand** when unclear — it balances conversion with bran
 
 ### Theme (Mode-Aware Role Tokens)
 
-| Token                 | Role                                            | Light Character               | Dark Character              |
-| --------------------- | ----------------------------------------------- | ----------------------------- | --------------------------- |
-| `--background`        | Page surface                                    | Near-white (neutral-50)       | Blue-violet black           |
-| `--foreground`        | Default text                                    | Rich charcoal (neutral-900)   | Pure white                  |
-| `--border`            | 1px lines and dividers                          | Soft cool gray (neutral-200)  | Deep gray                   |
-| `--border-foreground` | Text on outlined/bordered elements              | Near-opaque white (tint-950)  | Subtle white (tint-100)     |
-| `--card`              | Card surface, elevated from background          | Pure white                    | Dark charcoal               |
-| `--card-foreground`   | Text on cards                                   | Rich charcoal                 | Pure white                  |
-| `--input`             | Input field background                          | Near-white (neutral-50)       | Barely-there tint (tint-50) |
-| `--input-foreground`  | Input text                                      | Rich charcoal                 | Pure white                  |
-| `--muted`             | Subtle dim — always darker than its surface     | shade-50                      | tint-50                     |
-| `--muted-foreground`  | De-emphasized text, helper copy                 | shade-600                     | tint-600                    |
-| `--faded`             | Subtle fade — always lighter than its surface   | tint-100                      | shade-100                   |
-| `--faded-foreground`  | Text on faded surfaces                          | tint-600                      | shade-600                   |
+| Token                 | Role                                          | Light Character              | Dark Character              |
+| --------------------- | --------------------------------------------- | ---------------------------- | --------------------------- |
+| `--background`        | Page surface                                  | Near-white (neutral-50)      | Blue-violet black           |
+| `--foreground`        | Default text                                  | Rich charcoal (neutral-900)  | Pure white                  |
+| `--border`            | 1px lines and dividers                        | Soft cool gray (neutral-200) | Deep gray                   |
+| `--border-foreground` | Text on outlined/bordered elements            | Near-opaque white (tint-950) | Subtle white (tint-100)     |
+| `--card`              | Card surface, elevated from background        | Pure white                   | Dark charcoal               |
+| `--card-foreground`   | Text on cards                                 | Rich charcoal                | Pure white                  |
+| `--input`             | Input field background                        | Near-white (neutral-50)      | Barely-there tint (tint-50) |
+| `--input-foreground`  | Input text                                    | Rich charcoal                | Pure white                  |
+| `--muted`             | Subtle dim — always darker than its surface   | shade-50                     | tint-50                     |
+| `--muted-foreground`  | De-emphasized text, helper copy               | shade-600                    | tint-600                    |
+| `--faded`             | Subtle fade — always lighter than its surface | tint-100                     | shade-100                   |
+| `--faded-foreground`  | Text on faded surfaces                        | tint-600                     | shade-600                   |
 
 ### Brand Colors
 
-| Token        | Light Step (600)                   | Dark Step (500)                    | Character                     |
-| ------------ | ---------------------------------- | ---------------------------------- | ----------------------------- |
-| `--primary`  | `oklch(0.511 0.23 276.97)` #4f46e5 | `oklch(0.593 0.193 280.79)` #6e68ec | Deep blue-violet brand anchor |
-| `--secondary`| `oklch(0.61 0.194 36.8)` #de4917   | `oklch(0.687 0.198 34.85)` #fc603a  | Warm burnt orange complement  |
-| `--tertiary` | `oklch(0.613 0.208 14.68)` #e5375b | `oklch(0.693 0.163 13.04)` #ef6b7f  | Vibrant rose-pink accent      |
+| Token         | Light Step (600)                   | Dark Step (500)                     | Character                     |
+| ------------- | ---------------------------------- | ----------------------------------- | ----------------------------- |
+| `--primary`   | `oklch(0.511 0.23 276.97)` #4f46e5 | `oklch(0.593 0.193 280.79)` #6e68ec | Deep blue-violet brand anchor |
+| `--secondary` | `oklch(0.61 0.194 36.8)` #de4917   | `oklch(0.687 0.198 34.85)` #fc603a  | Warm burnt orange complement  |
+| `--tertiary`  | `oklch(0.613 0.208 14.68)` #e5375b | `oklch(0.693 0.163 13.04)` #ef6b7f  | Vibrant rose-pink accent      |
 
 All brand foregrounds are white. Brand steps **lighter** in dark mode. Each has a full 50–950 OKLCH scale (see frontmatter).
 
 Key scale steps for context:
+
 - **-100**: Subtle background tint for sections
 - **-500**: Vivid mid-tone (dark mode default)
 - **-600**: Deep saturated (light mode default)
@@ -356,21 +357,21 @@ All status foregrounds are white. Status steps **darker** in dark mode (opposite
 
 All sizes are fluid via `clamp()`, scaling between mobile and desktop viewports.
 
-| Class          | Size (desktop) | Leading | Tracking  | Character                          |
-| -------------- | -------------- | ------- | --------- | ---------------------------------- |
-| `text-display` | 5.96rem        | 1       | -0.025em  | Massive hero statement             |
-| `text-h1`      | 4.77rem        | 1       | -0.025em  | Primary page heading               |
-| `text-h2`      | 3.81rem        | 1       | -0.025em  | Section heading                    |
-| `text-h3`      | 3.05rem        | 1.05    | -0.02em   | Subsection heading                 |
-| `text-h4`      | 2.44rem        | 1.05    | -0.01em   | Component heading                  |
-| `text-h5`      | 1.95rem        | 1.1     | -0.025em  | Small heading                      |
-| `text-h6`      | 1.56rem        | 1.1     | -0.0025em | Minor heading                      |
-| `text-xl`      | 1.56rem        | 1.5     | 0         | Large body / intro paragraph       |
-| `text-lg`      | 1.25rem        | 1.5     | 0         | Lead text                          |
-| `text-md`      | 1rem           | 1.6     | 0         | Default body text                  |
-| `text-sm`      | 0.89rem        | 1.5     | 0         | Small UI labels                    |
-| `text-xs`      | 0.79rem        | 1.5     | 0         | Captions, fine print               |
-| `text-eyebrow` | 0.58rem        | 1.2     | 0.12em    | Uppercase label, wide-tracked      |
+| Class          | Size (desktop) | Leading | Tracking  | Character                     |
+| -------------- | -------------- | ------- | --------- | ----------------------------- |
+| `text-display` | 5.96rem        | 1       | -0.025em  | Massive hero statement        |
+| `text-h1`      | 4.77rem        | 1       | -0.025em  | Primary page heading          |
+| `text-h2`      | 3.81rem        | 1       | -0.025em  | Section heading               |
+| `text-h3`      | 3.05rem        | 1.05    | -0.02em   | Subsection heading            |
+| `text-h4`      | 2.44rem        | 1.05    | -0.01em   | Component heading             |
+| `text-h5`      | 1.95rem        | 1.1     | -0.025em  | Small heading                 |
+| `text-h6`      | 1.56rem        | 1.1     | -0.0025em | Minor heading                 |
+| `text-xl`      | 1.56rem        | 1.5     | 0         | Large body / intro paragraph  |
+| `text-lg`      | 1.25rem        | 1.5     | 0         | Lead text                     |
+| `text-md`      | 1rem           | 1.6     | 0         | Default body text             |
+| `text-sm`      | 0.89rem        | 1.5     | 0         | Small UI labels               |
+| `text-xs`      | 0.79rem        | 1.5     | 0         | Captions, fine print          |
+| `text-eyebrow` | 0.58rem        | 1.2     | 0.12em    | Uppercase label, wide-tracked |
 
 Headings use `text-wrap: balance`. Body uses `text-wrap: pretty`. Tight-leading on large text, generous-leading on body.
 
@@ -383,6 +384,7 @@ Headings use `text-wrap: balance`. Body uses `text-wrap: pretty`. Tight-leading 
 ## 4. Component Stylings
 
 **Two conventions:**
+
 - **Variants are data attributes:** `class="button" data-variant="primary"` — never `button-primary`.
 - **Theming via local custom properties:** Components declare `--button-background`, `--button-radius`, etc. off theme roles. Variants re-point those locals.
 
@@ -441,15 +443,15 @@ Utility classes: `.gap-*`, `.p-*`, `.px-*`, `.py-*`, `.m-*`, `.mx-*`, `.my-*` at
 
 ### Radius
 
-| Token           | Computed    | Use For                     |
-| --------------- | ----------- | --------------------------- |
-| `--radius-none` | 0           | Sharp edges                 |
-| `--radius-xs`   | ~4px        | Subtle softening            |
-| `--radius-sm`   | ~6px        | Badges                      |
-| `--radius-md`   | ~10px       | Buttons, inputs             |
-| `--radius-lg`   | ~16px       | Cards, dialogs              |
-| `--radius-xl`   | ~28px       | Statement surfaces          |
-| `--radius-full` | Pill-shaped | Circular/capsular           |
+| Token           | Computed    | Use For            |
+| --------------- | ----------- | ------------------ |
+| `--radius-none` | 0           | Sharp edges        |
+| `--radius-xs`   | ~4px        | Subtle softening   |
+| `--radius-sm`   | ~6px        | Badges             |
+| `--radius-md`   | ~10px       | Buttons, inputs    |
+| `--radius-lg`   | ~16px       | Cards, dialogs     |
+| `--radius-xl`   | ~28px       | Statement surfaces |
+| `--radius-full` | Pill-shaped | Circular/capsular  |
 
 Utility classes: `rounded-0` through `rounded-xl`, `rounded-full`.
 
@@ -457,14 +459,14 @@ Utility classes: `rounded-0` through `rounded-xl`, `rounded-full`.
 
 Whisper-soft, multi-layered diffused shadows. Surfaces are flat by default — shadow is applied intentionally.
 
-| Token           | Character                              |
-| --------------- | -------------------------------------- |
-| `none` | Flat                                   |
-| `--shadow-xs`   | Barely perceptible resting shadow      |
-| `--shadow-sm`   | Gentle lift                            |
-| `--shadow-md`   | Clear elevation (modals, popovers)     |
-| `--shadow-lg`   | Strong floating presence               |
-| `--shadow-xl`   | Maximum drama (overlay-level)          |
+| Token         | Character                          |
+| ------------- | ---------------------------------- |
+| `none`        | Flat                               |
+| `--shadow-xs` | Barely perceptible resting shadow  |
+| `--shadow-sm` | Gentle lift                        |
+| `--shadow-md` | Clear elevation (modals, popovers) |
+| `--shadow-lg` | Strong floating presence           |
+| `--shadow-xl` | Maximum drama (overlay-level)      |
 
 ### Focus Ring
 

@@ -31,17 +31,17 @@
 }
 
 @layer components {
-  :where(.accordion) {
+  .accordion {
     display: grid;
     flex: 1;
   }
 
-  :where(.accordion > details) {
+  .accordion > details {
     display: grid;
     flex: 1 0 auto;
   }
 
-  :where(.accordion > details > summary) {
+  .accordion > details > summary {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -50,7 +50,7 @@
     transition: var(--default-transition);
   }
 
-  :where(.accordion  summary > svg) {
+  .accordion  summary > svg {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -61,7 +61,7 @@
       var(--default-transition-timing-function);
   }
 
-  :where(.accordion > details[open] > summary > svg) {
+  .accordion > details[open] > summary > svg {
     transform: rotate(-180deg);
   }
 }

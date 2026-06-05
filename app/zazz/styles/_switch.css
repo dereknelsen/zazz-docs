@@ -14,9 +14,9 @@
     --switch-thumb-translate: var(--switch-track-padding), -50%;
     --switch-thumb-scale: 1;
     --switch-track-background: var(--muted);
-    --switch-track-background-hover: oklch(from var(--muted) l c h / calc(alpha + 0.04));
-    --switch-track-background-checked: var(--primary);
-    --switch-track-background-checked-hover: oklch(from var(--primary) l c h / 0.9);
+    --switch-track-background--hover: oklch(from var(--muted) l c h / calc(alpha + 0.04));
+    --switch-track-background--checked: var(--primary);
+    --switch-track-background--checked-hover: oklch(from var(--primary) l c h / 0.9);
     --switch-radius: var(--radius-full);
   }
 
@@ -82,15 +82,15 @@
   }
 
   :where(input[role="switch"]:hover) {
-    background-color: var(--switch-track-background-hover);
+    background-color: var(--switch-track-background--hover);
   }
 
   :where(input[role="switch"]:checked) {
-    background-color: var(--switch-track-background-checked);
+    background-color: var(--switch-track-background--checked);
   }
 
   :where(input[role="switch"]:hover:checked) {
-    background-color: var(--switch-track-background-checked-hover);
+    background-color: var(--switch-track-background--checked-hover);
   }
 
   :where(input[role="switch"]:focus-visible) {

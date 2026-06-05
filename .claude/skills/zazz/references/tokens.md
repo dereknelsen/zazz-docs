@@ -400,7 +400,7 @@ Bump for rounder, drop for sharper. Doesn't affect `--radius-none` or `--radius-
 ### Semantic scale
 
 ```css
---radius-none: 0rem;
+--radius-0: 0rem;
 --radius-xs: calc(var(--step-1) * var(--radius-multiplier)); /* ~1× interval  */
 --radius-sm: calc(var(--step-1_5) * var(--radius-multiplier)); /* ~1.5× interval */
 --radius-md: calc(var(--step-2_5) * var(--radius-multiplier)); /* ~2.5× interval */
@@ -488,7 +488,6 @@ Components keep a transparent outline at rest and switch only the color on focus
 Each is a stack of 5 entries with increasing offset and decreasing alpha. Colors derive from `oklch(from var(--black) l c h / α)` so they read correctly on light and dark surfaces.
 
 ```css
-none: 0px 0px 0px 0px oklch(from var(--black) l c h / 0);
 --shadow-xs: /* very subtle, for borders that want a slight lift */;
 --shadow-sm: /* resting buttons, hover affordances */;
 --shadow-md: /* cards, dropdowns, popovers */;
@@ -551,7 +550,7 @@ Use `transition: var(--default-transition)` for the standard spring-eased bundle
 - **Aspect ratios:** `aspect-anamorphic` (2.39:1), `aspect-univisium` (2:1), `aspect-widescreen` (16:9), `aspect-landscape` (3:2), `aspect-portrait` (2:3), `aspect-square` (1:1)
 - **Object fit:** `object-{contain|cover|fill|none|scale-down}`
 - **Text helpers:** `uppercase`, `lowercase`, `capitalize`, `normal-case`, `text-pretty`, `text-balance`, `tabular-nums`, `italic`, `line-clamp-1` … `line-clamp-6`
-- **Transition:** `transition` (the `--default-transition` bundle), `transition-discrete`
+- **Transition:** `transition` (the `--default-transition` bundle)
 - **Accessibility:** `sr-only`
 - **Focus ring:** `ring` (transparent outline at rest, `--ring` color on `:focus-visible`)
 - **Layout widths:** `container`, `article`

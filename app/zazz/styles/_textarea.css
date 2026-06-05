@@ -7,7 +7,7 @@
     .select / .button.
   =========================================================================== */
 
-  :where(.textarea) {
+  .textarea {
     field-sizing: content;
     inline-size: 100%;
     min-inline-size: 0;
@@ -30,12 +30,12 @@
     transition: var(--default-transition);
   }
 
-  :where(.textarea:hover) {
+  .textarea:hover {
     border-color: var(--field-border--hover);
     background-color: var(--field-background--hover);
   }
 
-  :where(.textarea:focus-visible) {
+  .textarea:focus-visible {
     background-color: var(--field-background--focus);
     border-color: var(--field-border--focus);
     outline-color: var(--ring);

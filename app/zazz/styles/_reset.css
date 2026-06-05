@@ -122,7 +122,7 @@
     top: -0.5em;
   }
 
-  :where(abbr:where([title])) {
+  :where(abbr[title]) {
     -webkit-text-decoration: underline dotted;
     text-decoration: underline dotted;
   }
@@ -287,7 +287,7 @@
     opacity: 1;
   }
 
-  :where(button, input:where([type="button"], [type="reset"], [type="submit"])),
+  :where(button, input[type="button"], input[type="reset"], input[type="submit"]),
   ::file-selector-button {
     appearance: button;
   }
@@ -489,9 +489,9 @@
     --checkbox-size: var(--step-4_5);
     --checkbox-background: var(--input);
     --checkbox-border: var(--border);
-    --checkbox-border-hover: var(--primary);
-    --checkbox-background-checked: var(--primary);
-    --checkbox-border-checked: var(--primary);
+    --checkbox-border--hover: var(--primary);
+    --checkbox-background--checked: var(--primary);
+    --checkbox-border--checked: var(--primary);
     --checkbox-radius: var(--radius-xs);
     /* @see https://www.svgbackgrounds.com/tools/svg-to-css/
     ** Set to Legacy / URL Wrapper to update icon */
@@ -518,7 +518,7 @@
   }
 
   :where(input[type="checkbox"]:not([role="switch"]):hover) {
-    border-color: var(--checkbox-border-hover);
+    border-color: var(--checkbox-border--hover);
   }
 
   :where(input[type="checkbox"]:not([role="switch"]):focus-visible) {
@@ -529,8 +529,8 @@
     input[type="checkbox"]:not([role="switch"]):checked,
     input[type="checkbox"]:not([role="switch"]):indeterminate
   ) {
-    background-color: var(--checkbox-background-checked);
-    border-color: var(--checkbox-border-checked);
+    background-color: var(--checkbox-background--checked);
+    border-color: var(--checkbox-border--checked);
     background-repeat: no-repeat;
     background-position: center;
   }
@@ -580,6 +580,8 @@
   =========================================================================== */
 
   :where([popover]) {
+    --popover-radius: var(--radius-md);
+    --popover-shadow: var(--shadow-md);
     --popover-starting-scale: 0.98;
     --popover-starting-translate: 0, 0, 0;
     --popover-starting-opacity: 0;
@@ -591,9 +593,15 @@
     --popover-margin-inline: 0;
     --popover-position-area: block-end inline-start;
     --popover-position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
+    --popover-backdrop-filter: blur(4px);
 
+    align-content: start;
     transform-origin: var(--popover-origin);
+    border-radius: var(--popover-radius);
+    box-shadow: var(--popover-shadow);
     opacity: var(--popover-starting-opacity);
+    background-color: var(--popover);
+    backdrop-filter: var(--popover-backdrop-filter);
     transform: scale(var(--popover-starting-scale)) translate3d(var(--popover-starting-translate));
     transition:
       opacity var(--default-transition-duration) var(--default-transition-timing-function),
@@ -623,8 +631,9 @@
     }
   }
 
-  :where([popover]:popover-open) {
+  [popover]:where(:popover-open, .\:popover-open) {
     display: grid;
+    align-content: start;
     opacity: var(--popover-opacity);
     transform: scale(var(--popover-scale)) translate3d(var(--popover-translate));
 
@@ -646,7 +655,7 @@
   MISCELLANEOUS RESETS
   =========================================================================== */
 
-  :where([hidden]:where(:not([hidden="until-found"]))) {
+  :where([hidden]:not([hidden="until-found"])) {
     display: none !important;
   }
 }

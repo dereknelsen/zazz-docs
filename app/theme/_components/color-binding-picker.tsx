@@ -40,7 +40,7 @@ function previewColor(binding: string, theme: ThemeConfig): { color: string; has
   const [name, stop] = binding.split("-");
   if (name === "shade" || name === "tint") {
     const alphaMap: Record<string, number> = {
-      none: 0,
+      "0": 0,
       "50": 0.05,
       "100": 0.1,
       "200": 0.2,

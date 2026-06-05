@@ -19,14 +19,14 @@
     --dialog-scale: 1;
     --dialog-starting-translate: 0, 0, 0;
     --dialog-translate: 0, 0, 0;
-    --dialog-starting-backdrop-color: var(--shade-none);
-    --dialog-backdrop-color: var(--shade-900);
+    --dialog-backdrop-color: var(--shade-800);
     --dialog-transition-duration: var(--default-transition-duration);
     --dialog-transition-timing-function: var(--default-transition-timing-function);
     --dialog-transition-starting-delay: 0ms;
     --dialog-transition-delay: 150ms;
     --dialog-backdrop-transition-duration: calc(var(--dialog-transition-duration) - 100ms);
     --dialog-backdrop-transition-timing-function: ease;
+    --dialog-backdrop-blur: blur(4px);
     --dialog-shadow: var(--shadow-lg);
     --dialog-border: 1px solid var(--border);
 
@@ -52,7 +52,6 @@
   }
 
   :where(dialog[open]) {
-    display: var(--dialog-display);
     transform: translate3d(var(--dialog-translate)) scale(var(--dialog-scale));
     opacity: var(--dialog-opacity);
     transition-delay: var(--dialog-transition-delay);
@@ -66,22 +65,24 @@
 
   /* Dialog backdrop with smooth fade transition */
   :where(dialog)::backdrop {
-    background-color: var(--dialog-starting-backdrop-color);
-    transition: background-color var(--dialog-backdrop-transition-duration)
+    opacity: 0;
+    background-color: var(--dialog-backdrop-color);
+    backdrop-filter: var(--dialog-backdrop-blur);
+    transition: opacity var(--dialog-backdrop-transition-duration)
       var(--dialog-backdrop-transition-timing-function);
   }
 
   :where(dialog[open])::backdrop {
-    background-color: var(--dialog-backdrop-color);
+    opacity: 1;
 
     @starting-style {
-      background-color: var(--dialog-starting-backdrop-color);
+      opacity: 0;
     }
   }
 }
 
 @layer components {
-  :where(.dialog) {
+  .dialog {
     --dialog-width: min(50ch, 100% - var(--gap-md) * 2);
     --dialog-height: fit-content;
     --dialog-background: var(--card);
@@ -104,19 +105,19 @@
     isolation: isolate;
   }
 
-  :where(.dialog[open]) {
+  .dialog[open] {
     grid-template-rows: minmax(0, 1fr);
     min-block-size: 0;
   }
 
-  :where(.dialog__close) {
+  .dialog__close {
     position: absolute;
     top: var(--gap-xs);
     right: var(--gap-xs);
     z-index: 50;
   }
 
-  :where(.dialog__close > svg) {
+  .dialog__close > svg {
     inline-size: var(--step-4);
     block-size: var(--step-4);
     pointer-events: none;
@@ -126,15 +127,16 @@
     padding: 0;
   }
 
-  :where(.dialog__content) {
+  .dialog__content {
     display: grid;
+    align-self: center;
     grid-template-rows: auto minmax(0, 1fr) auto;
     position: relative;
     min-block-size: 0;
     overflow: clip;
   }
 
-  :where(.dialog__header) {
+  .dialog__header {
     display: flex;
     flex-direction: column;
     padding-inline: var(--gap-sm);
@@ -142,7 +144,7 @@
   }
 
   /* Sticky top edge */
-  :where(.dialog__header)::after {
+  .dialog__header::after {
     content: "";
     display: block;
     position: absolute;
@@ -152,18 +154,18 @@
     background: linear-gradient(to top, transparent, var(--dialog-background));
   }
 
-  :where(.dialog__body) {
+  .dialog__body {
     display: grid;
     padding-inline: var(--gap-sm);
     padding-block: var(--gap-md);
     min-block-size: 0;
-    min-height: var(--gap-xl);
+    min-block-size: var(--gap-xl);
     overflow-x: clip;
     overflow-y: auto;
     scrollbar-gutter: stable both-edges;
   }
 
-  :where(.dialog__footer) {
+  .dialog__footer {
     block-size: fit-content;
     position: sticky;
     bottom: 0;
@@ -177,15 +179,15 @@
     background-color: var(--dialog-background);
   }
 
-  :where(.dialog[data-size="article"]) {
+  .dialog[data-size="article"] {
     --dialog-width: var(--article);
   }
 
-  :where(.dialog[data-size="container"]) {
+  .dialog[data-size="container"] {
     --dialog-width: var(--container);
   }
 
-  :where(.dialog[data-size="screen"]) {
+  .dialog[data-size="screen"] {
     --dialog-width: 100vi;
     --dialog-height: 100svh;
     --dialog-radius: 0;

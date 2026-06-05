@@ -1,14 +1,18 @@
 @layer components {
-  :where(.dropdown) {
+  /* Tier-3 shared family: --popover-* is a shared vocabulary consumed by the base
+     :where([popover]) rule in _reset.css. .dropdown__popover and .navigation-menu
+     each set their own values under these identical names — same vocabulary, no
+     single owner; keep the names aligned across popover components. */
+  .dropdown {
     anchor-scope: --dropdown-trigger;
     display: inline-block;
   }
 
-  :where(.dropdown > [popovertarget]) {
+  .dropdown > [popovertarget] {
     anchor-name: --dropdown-trigger;
   }
 
-  :where(.dropdown__popover) {
+  .dropdown__popover {
     position-anchor: --dropdown-trigger;
     --popover-background: var(--popover);
     --popover-foreground: var(--popover-foreground);
@@ -30,7 +34,7 @@
     z-index: var(--popover-z-index);
   }
 
-  :where(.dropdown__popover .button) {
+  .dropdown__popover .button {
     --button-radius: var(--radius-sm);
   }
 
@@ -39,24 +43,22 @@
   =========================================================================== */
 
   /* bottom */
-  :where(
-    .dropdown__popover[data-side="bottom"]:not([data-align]),
-    .dropdown__popover[data-side="bottom"][data-align="start"]
-  ) {
+  .dropdown__popover[data-side="bottom"]:not([data-align]),
+  .dropdown__popover[data-side="bottom"][data-align="start"] {
     --popover-position-area: block-end span-inline-end;
     --popover-origin: bottom center;
     --popover-margin-block: var(--step-1_5);
     --popover-margin-inline: 0;
   }
 
-  :where(.dropdown__popover[data-side="bottom"][data-align="center"]) {
+  .dropdown__popover[data-side="bottom"][data-align="center"] {
     --popover-position-area: block-end span-all;
     --popover-origin: bottom center;
     --popover-margin-block: var(--step-1_5);
     --popover-margin-inline: 0;
   }
 
-  :where(.dropdown__popover[data-side="bottom"][data-align="end"]) {
+  .dropdown__popover[data-side="bottom"][data-align="end"] {
     --popover-position-area: block-end span-inline-start;
     --popover-origin: bottom center;
     --popover-margin-block: var(--step-1_5);
@@ -64,24 +66,22 @@
   }
 
   /* top */
-  :where(
-    .dropdown__popover[data-side="top"]:not([data-align]),
-    .dropdown__popover[data-side="top"][data-align="start"]
-  ) {
+  .dropdown__popover[data-side="top"]:not([data-align]),
+  .dropdown__popover[data-side="top"][data-align="start"] {
     --popover-position-area: block-start span-inline-end;
     --popover-origin: top center;
     --popover-margin-block: var(--step-1_5);
     --popover-margin-inline: 0;
   }
 
-  :where(.dropdown__popover[data-side="top"][data-align="center"]) {
+  .dropdown__popover[data-side="top"][data-align="center"] {
     --popover-position-area: block-start span-all;
     --popover-origin: top center;
     --popover-margin-block: var(--step-1_5);
     --popover-margin-inline: 0;
   }
 
-  :where(.dropdown__popover[data-side="top"][data-align="end"]) {
+  .dropdown__popover[data-side="top"][data-align="end"] {
     --popover-position-area: block-start span-inline-start;
     --popover-origin: top center;
     --popover-margin-block: var(--step-1_5);
@@ -89,24 +89,22 @@
   }
 
   /* right */
-  :where(
-    .dropdown__popover[data-side="right"]:not([data-align]),
-    .dropdown__popover[data-side="right"][data-align="start"]
-  ) {
+  .dropdown__popover[data-side="right"]:not([data-align]),
+  .dropdown__popover[data-side="right"][data-align="start"] {
     --popover-position-area: inline-end span-block-end;
     --popover-origin: top left;
     --popover-margin-block: 0;
     --popover-margin-inline: var(--step-1_5);
   }
 
-  :where(.dropdown__popover[data-side="right"][data-align="center"]) {
+  .dropdown__popover[data-side="right"][data-align="center"] {
     --popover-position-area: inline-end span-all;
     --popover-origin: center left;
     --popover-margin-block: 0;
     --popover-margin-inline: var(--step-1_5);
   }
 
-  :where(.dropdown__popover[data-side="right"][data-align="end"]) {
+  .dropdown__popover[data-side="right"][data-align="end"] {
     --popover-position-area: inline-end span-block-start;
     --popover-origin: bottom left;
     --popover-margin-block: 0;
@@ -114,24 +112,22 @@
   }
 
   /* left */
-  :where(
-    .dropdown__popover[data-side="left"]:not([data-align]),
-    .dropdown__popover[data-side="left"][data-align="start"]
-  ) {
+  .dropdown__popover[data-side="left"]:not([data-align]),
+  .dropdown__popover[data-side="left"][data-align="start"] {
     --popover-position-area: inline-start span-block-end;
     --popover-origin: top right;
     --popover-margin-block: 0;
     --popover-margin-inline: var(--step-1_5);
   }
 
-  :where(.dropdown__popover[data-side="left"][data-align="center"]) {
+  .dropdown__popover[data-side="left"][data-align="center"] {
     --popover-position-area: inline-start span-all;
     --popover-origin: center right;
     --popover-margin-block: 0;
     --popover-margin-inline: var(--step-1_5);
   }
 
-  :where(.dropdown__popover[data-side="left"][data-align="end"]) {
+  .dropdown__popover[data-side="left"][data-align="end"] {
     --popover-position-area: inline-start span-block-start;
     --popover-origin: bottom right;
     --popover-margin-block: 0;

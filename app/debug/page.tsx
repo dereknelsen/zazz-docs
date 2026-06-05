@@ -103,12 +103,39 @@ export default function DebugPage() {
         </section>
       </main>
 
+      {/* Popover polyfill */}
+      <Script
+        src="https://cdn.jsdelivr.net/npm/@oddbird/popover-polyfill@latest"
+        integrity="sha384-Gl/j23IcIIiDfqcDI5gpHCxd5EuslCYvs07HAw3KHGx5UcbxizoF/deDnkeEcFXW"
+        crossOrigin="anonymous"
+      />
+
       {/* Embla Carousel Scripts */}
-      <Script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js" />
-      <Script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js" />
-      <Script src="https://unpkg.com/embla-carousel-auto-scroll/embla-carousel-auto-scroll.umd.js" />
-      <Script src="https://unpkg.com/embla-carousel-class-names/embla-carousel-class-names.umd.js" />
-      <Script src="https://unpkg.com/embla-carousel-ssr/embla-carousel-ssr.umd.js" />
+      <Script
+        src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"
+        integrity="sha384-XGqLM9+dJ+PFOMZn6IuZgRRIoxcAT5fx4eIZCx7K3O2Dj5RA7EOlJ3yOS8Jd+kiY"
+        crossOrigin="anonymous"
+      />
+      <Script
+        src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"
+        integrity="sha384-rs7pDLCh+QtEjJg2VChAoKZHaaz7apuon6rM57E3FdzC83xaJH4n9mQZn4E2s3f4"
+        crossOrigin="anonymous"
+      />
+      <Script
+        src="https://unpkg.com/embla-carousel-auto-scroll/embla-carousel-auto-scroll.umd.js"
+        integrity="sha384-5x3y2MLuLA5c1LQceYM+lo59GGkQmLzQGzbuHhDUDbnOJkFeTl5jUSdBy3JehMcM"
+        crossOrigin="anonymous"
+      />
+      <Script
+        src="https://unpkg.com/embla-carousel-class-names/embla-carousel-class-names.umd.js"
+        integrity="sha384-nZNIZhV6WSQVCeWMj8JFfOgQZyzPoGSTh0eohtAOu5aluevIpIblZcupMSdl/EEH"
+        crossOrigin="anonymous"
+      />
+      <Script
+        src="https://unpkg.com/embla-carousel-ssr/embla-carousel-ssr.umd.js"
+        integrity="sha384-apu0WDHR0c+4Z5qNk7egPNoCxXkYq80e+Qh6xJ6f67S53mSyYdKE6tIeXxvKJ6x9"
+        crossOrigin="anonymous"
+      />
 
       {/* Zazz Scripts */}
       <Script src="/zazz/scripts/reveal.js" strategy="beforeInteractive" />

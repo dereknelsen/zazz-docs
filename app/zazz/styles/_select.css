@@ -60,14 +60,14 @@
     content: "";
     /* @see https://www.svgbackgrounds.com/tools/svg-to-css/
     ** Set to Legacy / URL Wrapper to update icon */
-    --picker-icon-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'/%3E%3Cpolyline points='80 176 128 224 176 176' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3Cpolyline points='80 80 128 32 176 80' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3C/svg%3E");
-    --picker-icon-size: var(--step-4);
-    --picker-icon-color: currentColor;
+    --select-picker-icon-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'/%3E%3Cpolyline points='80 176 128 224 176 176' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3Cpolyline points='80 80 128 32 176 80' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3C/svg%3E");
+    --select-picker-icon-size: var(--step-4);
+    --select-picker-icon-color: currentColor;
 
-    inline-size: var(--picker-icon-size);
-    block-size: var(--picker-icon-size);
-    background-color: var(--picker-icon-color);
-    mask: var(--picker-icon-mask) center / contain no-repeat;
+    inline-size: var(--select-picker-icon-size);
+    block-size: var(--select-picker-icon-size);
+    background-color: var(--select-picker-icon-color);
+    mask: var(--select-picker-icon-mask) center / contain no-repeat;
   }
 }
 
@@ -81,7 +81,7 @@
   - Shares the --field-* tokens defined in _fields.css.
   =========================================================================== */
 
-  :where(.select) {
+  .select {
     --select-padding-inline-start: var(--field-padding);
     --select-padding-inline-end: var(--step-2);
 
@@ -112,17 +112,17 @@
     transition: var(--default-transition);
   }
 
-  :where(.select:hover) {
+  .select:hover {
     border-color: var(--field-border--hover);
   }
 
-  :where(.select:focus-visible, .select:open) {
+  .select:focus-visible, .select:open {
     border-color: var(--field-border--focus);
     outline-color: var(--ring);
   }
 
   /* Trigger button child holds the (optional) leading icon + mirrored value */
-  :where(.select > button) {
+  .select > button {
     block-size: 100%;
     display: flex;
     flex: 1;
@@ -132,25 +132,25 @@
     overflow: hidden;
   }
 
-  :where(.select selectedcontent) {
+  .select selectedcontent {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   /* Icons anywhere in the control (trigger or options) size to the field icon */
-  :where(.select > button > svg, .select option > svg, .select selectedcontent > svg) {
+  .select > button > svg, .select option > svg, .select selectedcontent > svg {
     flex-shrink: 0;
     inline-size: var(--field-icon-size);
     block-size: var(--field-icon-size);
     color: var(--muted-foreground);
   }
 
-  :where(.select:open) {
+  .select:open {
     background-color: var(--field-background--focus);
   }
 
-  :where(.select:open)::picker-icon {
+  .select:open::picker-icon {
     transform: rotate(-180deg);
   }
 
@@ -159,7 +159,7 @@
      so it is gated. The fallback (max-content) only matters in the narrow case
      of a browser that supports customizable <select> (::picker) but not
      anchor-size — there the panel sizes to its content instead of stretching. */
-  :where(.select)::picker(select) {
+  .select::picker(select) {
     inline-size: max-content;
     padding: var(--step-1_5);
     margin-block: var(--step-1_5);
@@ -172,12 +172,12 @@
   }
 
   @supports (inline-size: anchor-size(width)) {
-    :where(.select)::picker(select) {
+    .select::picker(select) {
       inline-size: anchor-size(width);
     }
   }
 
-  :where(.select option) {
+  .select option {
     display: flex;
     align-items: center;
     gap: var(--field-gap);
@@ -190,16 +190,16 @@
     transition: var(--default-transition);
   }
 
-  :where(.select option:hover) {
+  .select option:hover {
     background-color: var(--muted);
   }
 
-  :where(.select option:checked) {
+  .select option:checked {
     background-color: color-mix(in srgb, var(--primary) 10%, var(--card));
     color: var(--primary);
   }
 
-  :where(.select option)::checkmark {
+  .select option::checkmark {
     order: 1;
     margin-inline-start: auto;
     color: currentcolor;

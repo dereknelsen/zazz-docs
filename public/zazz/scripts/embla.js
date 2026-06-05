@@ -17,6 +17,11 @@ Documentation:
     - data-embla="next"      Next button (optional)
     - data-embla="dots"      Dot pagination container (optional)
     - data-embla="dot"       Template dot, automatically cloned per slide (optional)
+    - data-embla="thumbs"    Linked thumbnail carousel container (optional)
+
+    THUMBNAIL NAVIGATION (on data-embla="thumbs"):
+    - data-embla-thumbs-*    Thumb carousel options (defaults: containScroll keepSnaps, dragFree true)
+    - Syncs with the main carousel in the same root; thumb click scrolls main, main select scrolls thumbs
 
     LIFECYCLE & DIALOG START INDEX:
     - data-embla-init        Set by script when a carousel is initialized
@@ -120,6 +125,53 @@ const addDotBtnsAndClickHandlers = (emblaApi, dotsNode) => {
 };
 
 /* ===========================================================================
+    THUMBNAIL NAVIGATION HELPER FUNCTIONS
+    Linked main + thumb carousels for gallery-style navigation
+    =========================================================================== */
+
+/**
+ * Adds click handlers on thumb slides to scroll the main carousel
+ *
+ * @param {EmblaCarouselType} emblaApiMain - Main carousel API instance
+ * @param {EmblaCarouselType} emblaApiThumb - Thumb carousel API instance
+ */
+const addThumbClickHandlers = (emblaApiMain, emblaApiThumb) => {
+  const slidesThumbs = emblaApiThumb.slideNodes();
+
+  slidesThumbs.forEach((slideNode, index) => {
+    slideNode.addEventListener("click", () => emblaApiMain.scrollTo(index), false);
+  });
+};
+
+/**
+ * Keeps thumb carousel and active state in sync with the main carousel
+ *
+ * @param {EmblaCarouselType} emblaApiMain - Main carousel API instance
+ * @param {EmblaCarouselType} emblaApiThumb - Thumb carousel API instance
+ */
+const addToggleThumbsActive = (emblaApiMain, emblaApiThumb) => {
+  const slidesThumbs = emblaApiThumb.slideNodes();
+
+  const toggleThumbBtnsActive = () => {
+    const selected = emblaApiMain.selectedScrollSnap();
+    emblaApiThumb.scrollTo(selected);
+
+    slidesThumbs.forEach((slideNode, idx) => {
+      const isActive = idx === selected;
+      slideNode.classList.toggle("is-active", isActive);
+      if (isActive) {
+        slideNode.setAttribute("aria-current", "true");
+      } else {
+        slideNode.removeAttribute("aria-current");
+      }
+    });
+  };
+
+  emblaApiMain.on("select", toggleThumbBtnsActive);
+  toggleThumbBtnsActive();
+};
+
+/* ===========================================================================
     CAROUSEL INITIALIZATION
     Main initialization logic for all Embla carousels on the page
     =========================================================================== */
@@ -147,7 +199,10 @@ function initEmblaCarousels(scope) {
             Find all carousel-related elements within this carousel instance
             ========================================================================= */
 
-    const emblaViewportNode = emblaNode.querySelector('[data-embla="viewport"]');
+    const emblaThumbsNode = emblaNode.querySelector('[data-embla="thumbs"]');
+    const emblaViewportNode = emblaThumbsNode
+      ? emblaNode.querySelector('[data-embla="viewport"]:not([data-embla="thumbs"] *)')
+      : emblaNode.querySelector('[data-embla="viewport"]');
     const emblaPrevButtonNode = emblaNode.querySelector('[data-embla="prev"]');
     const emblaNextButtonNode = emblaNode.querySelector('[data-embla="next"]');
     const emblaDotsNode = emblaNode.querySelector('[data-embla="dots"]');
@@ -238,6 +293,23 @@ function initEmblaCarousels(scope) {
     // Initialize dot navigation if dots container exists
     if (emblaDotsNode) {
       addDotBtnsAndClickHandlers(emblaApi, emblaDotsNode);
+    }
+
+    // Initialize linked thumbnail carousel if present
+    if (emblaThumbsNode) {
+      const emblaThumbsViewportNode = emblaThumbsNode.querySelector('[data-embla="viewport"]');
+      if (emblaThumbsViewportNode) {
+        const thumbDefaults = { containScroll: "keepSnaps", dragFree: true };
+        const thumbOptions = Utils.parseDataAttributes(emblaThumbsNode, "data-embla-thumbs-");
+        const emblaApiThumb = EmblaCarousel(emblaThumbsViewportNode, {
+          ...thumbDefaults,
+          ...thumbOptions,
+        });
+
+        emblaNode._emblaApiThumb = emblaApiThumb;
+        addThumbClickHandlers(emblaApi, emblaApiThumb);
+        addToggleThumbsActive(emblaApi, emblaApiThumb);
+      }
     }
   });
 }
@@ -338,6 +410,8 @@ function initEmblaKeyboardNav() {
 const EmblaInit = {
   init: initEmblaCarousels,
   addDotBtnsAndClickHandlers,
+  addThumbClickHandlers,
+  addToggleThumbsActive,
 };
 
 /* ===========================================================================
@@ -349,10 +423,17 @@ const EmblaInit = {
 
 function initEmblaStartLinks() {
   document.addEventListener("click", function (e) {
-    const trigger = e.target.closest("[data-embla-start]");
+    const trigger = e.target.closest("[data-embla-start], [data-embla='slide'][commandfor]");
     if (!trigger) return;
 
-    const index = trigger.getAttribute("data-embla-start");
+    let index = trigger.getAttribute("data-embla-start");
+    if (index == null && trigger.hasAttribute("commandfor")) {
+      const emblaRoot = trigger.closest('[data-embla="root"]');
+      if (emblaRoot?._emblaApi) {
+        index = String(emblaRoot._emblaApi.selectedScrollSnap());
+      }
+    }
+
     const dialogId = trigger.getAttribute("commandfor");
     if (!dialogId) return;
 
@@ -372,6 +453,32 @@ function initEmblaStartLinks() {
   });
 }
 
+/* ===========================================================================
+    LIGHTBOX CLOSE SYNC
+    When a lightbox dialog closes, sync the inline gallery to the last viewed slide
+    =========================================================================== */
+
+function initLightboxCloseSync() {
+  document.addEventListener(
+    "close",
+    function (e) {
+      const dialog = e.target;
+      if (!(dialog instanceof HTMLDialogElement)) return;
+      if (!dialog.classList.contains("lightbox__dialog")) return;
+
+      const lightbox = dialog.closest(".lightbox");
+      if (!lightbox) return;
+
+      const dialogRoot = dialog.querySelector('[data-embla="root"]');
+      const galleryRoot = lightbox.querySelector('.lightbox__gallery [data-embla="root"]');
+      if (!dialogRoot?._emblaApi || !galleryRoot?._emblaApi) return;
+
+      galleryRoot._emblaApi.scrollTo(dialogRoot._emblaApi.selectedScrollSnap());
+    },
+    true,
+  );
+}
+
 // Auto-initialize when DOM is ready (only in browser environment)
 if (typeof window !== "undefined" && typeof document !== "undefined") {
   if (document.readyState === "loading") {
@@ -380,12 +487,14 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
       observeDialogOpen();
       initEmblaStartLinks();
       initEmblaKeyboardNav();
+      initLightboxCloseSync();
     });
   } else {
     initEmblaCarousels();
     observeDialogOpen();
     initEmblaStartLinks();
     initEmblaKeyboardNav();
+    initLightboxCloseSync();
   }
 }
 

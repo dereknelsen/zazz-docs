@@ -233,7 +233,6 @@ export function generateThemeCSS(theme: ThemeConfig): string {
   out.push(`  --radius-multiplier: ${radius.multiplier};`);
   out.push("");
   out.push("  /* semantic */");
-  out.push(`  --radius-none: ${radius.semantic.none};`);
   out.push(`  --radius-xs: calc(${radius.semantic.xs} * var(--radius-multiplier));`);
   out.push(`  --radius-sm: calc(${radius.semantic.sm} * var(--radius-multiplier));`);
   out.push(`  --radius-md: calc(${radius.semantic.md} * var(--radius-multiplier));`);

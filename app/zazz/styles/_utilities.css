@@ -967,7 +967,6 @@
     grid-auto-flow: column;
   }
 
-
   /*
    * Equal columns; items fill across, then wrap to the next row.
    * auto-fill: track min is max(--grid-col-min, (100% - (N - 1) * column-gap) / N).
@@ -998,7 +997,10 @@
           100%,
           max(
             var(--grid-col-min),
-            max(0%, calc((100% - (var(--grid-cols, 1) - 1) * var(--grid-gap, 0px)) / var(--grid-cols, 1)))
+            max(
+              0%,
+              calc((100% - (var(--grid-cols, 1) - 1) * var(--grid-gap, 0px)) / var(--grid-cols, 1))
+            )
           )
         ),
         1fr
@@ -3309,12 +3311,21 @@
     outline-color: var(--primary);
   }
 
-  :where(.transition) {
-    transition: var(--default-transition);
+  :where(.transition-opacity) {
+    transition: opacity var(--default-transition-duration) var(--default-transition-timing-function);
   }
 
-  :where(.transition-discrete) {
-    transition-behavior: allow-discrete;
+  :where(.transition-transform) {
+    transition: transform var(--default-transition-duration)
+      var(--default-transition-timing-function);
+  }
+
+  :where(.transition-all) {
+    transition: all var(--default-transition-duration) var(--default-transition-timing-function);
+  }
+
+  :where(.transition) {
+    transition: var(--default-transition);
   }
 
   /* ===========================================================================

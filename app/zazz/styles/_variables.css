@@ -18,7 +18,7 @@
     --border-foreground: light-dark(var(--tint-950), var(--shade-500));
     --card: light-dark(var(--white), var(--neutral-950));
     --card-foreground: light-dark(var(--neutral-900), var(--white));
-    --popover: light-dark(var(--shade-950), var(--neutral-950));
+    --popover: light-dark(var(--shade-950), var(--shade-950));
     --popover-foreground: light-dark(var(--white), var(--white));
     --input: light-dark(var(--neutral-50), var(--tint-50));
     --input-foreground: light-dark(var(--neutral-900), var(--white));
@@ -319,7 +319,6 @@
     --ring: color-mix(in oklch, var(--ring-color) var(--ring-opacity), transparent);
 
     /* shadows */
-    none: 0px 0px 0px 0px oklch(from var(--black) l c h / 0);
     --shadow-xs:
       0 8px 2px 0 oklch(from var(--black) l c h / 0),
       0 5px 2px 0 oklch(from var(--black) l c h / 0.01),

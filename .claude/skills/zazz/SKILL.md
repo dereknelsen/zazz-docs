@@ -537,7 +537,7 @@ Naming:
 The shipped components don't hard-code colors into their rules — they declare local `--component-*` props off theme roles, then a `[data-variant]` block re-points those locals. This is the pattern to copy: the base rule stays untouched, and a variant is just a short list of variable swaps.
 
 ```css
-:where(.button) {
+.button {
   --button-background: var(--background);
   --button-foreground: var(--foreground);
   --button-border: var(--border);
@@ -545,12 +545,16 @@ The shipped components don't hard-code colors into their rules — they declare 
   color: var(--button-foreground);
   border: 1px solid var(--button-border);
 }
-:where(.button[data-variant="primary"]) {
+.button[data-variant="primary"] {
   --button-background: var(--primary);
   --button-foreground: var(--primary-foreground);
   --button-border: var(--button-background);
 }
 ```
+
+Component rules are written plain (no `:where()`): the cascade layers make them
+overridable, and natural specificity orders base < variant < state. See
+[../../../app/zazz/styles/CONVENTIONS.md](../../../app/zazz/styles/CONVENTIONS.md).
 
 Keep utilities doing what utilities do well (spacing, type, radius, display) and let the block class hold the bespoke (`card__title` setting `letter-spacing`, a `--card-*` local for a brand accent). Don't reach for a custom rule where a utility would have done it cleanly.
 
@@ -561,13 +565,37 @@ Keep utilities doing what utilities do well (spacing, type, radius, display) and
 - Sizes use t-shirt scale (`xs/sm/md/lg/xl`); numeric scales use Tailwind's `50..950`.
 - Utility class names mirror variables one-to-one: `gap-md` consumes `--gap-md`; `radius-lg` consumes `--radius-lg`.
 
+### Component CSS conventions
+
+The global tokens above are unprefixed (Tier 1). A component's **own** tokens are
+prefixed and live in the component file — they're its override API. The shipped
+component stylesheets follow a written standard; the essentials:
+
+- **Three token tiers.** Tier 1 global (`--primary`, `--gap-md`) in `_variables.css`;
+  Tier 2 component-local (`--button-background`, declared on the base rule, the
+  component's public override API); Tier 3 named shared families with one owner file
+  (`--field-*` → `_fields.css`, `--dialog-*` → `_dialog.css`, `--popover-*` shared
+  vocabulary). Don't alias a global into a local unless a variant actually overrides it.
+- **Naming.** `--<component>-<property>`, full words; sub-parts nest
+  (`--tabs-label-foreground`); pseudo-element parts stay under the prefix
+  (`--input-calendar-picker-size`). **State suffix is a double dash:**
+  `--switch-track-background--checked-hover`.
+- **`:where()` only where it works.** Cascade layers make components overridable, so
+  component rules are written plain and rely on natural specificity
+  (base < variant < state). Keep `:where()` in the reset/utilities layers and to demote
+  `:has()`/descendant selectors — not on every component rule.
+- **`data-*` for variants/state** (`data-variant`, `data-size`), utility classes for
+  one-off instance layout. Never a `.primary` modifier class alongside `data-variant`.
+
+Full standard with examples: [../../../app/zazz/styles/CONVENTIONS.md](../../../app/zazz/styles/CONVENTIONS.md).
+
 ---
 
 ## Primitives
 
 Zazz ships **eleven example components** under `app/zazz/components/`, each paired with a stylesheet in `app/zazz/styles/`: **Accordion, Badge, Button, Dialog, Dropdown, Lightbox, Mobile Menu, Navigation menu, Section, Tabs, and the Form family** (`.input`, `.textarea`, `.select`, `.input-group`, `.password-group`, `.field`, checkbox, switch, `.radio`). They are **suggestions for how to build common components on Zazz tokens** — not a packaged library you must adopt wholesale. Notably, they're dependency-free: native HTML and modern platform APIs (Popover API, CSS anchor positioning, Invoker Commands, native `<dialog>`/`<details>`, the customizable `<select>` (`appearance: base-select`), `field-sizing: content`, grouped radios + CSS `order` for tabs, `:has()`, `:user-invalid`) carry all behavior, so most work with **zero JavaScript**.
 
-They share one pattern — block class + `:where()` zero specificity + local `--component-*` props defaulting to theme tokens + `[data-variant]`/`[data-size]` variants + the `--ring*` focus outline. The form controls add a shared `--field-*` token set (in `_fields.css`) so `.input`, `.textarea`, `.select`, `.input-group`, and `.password-group` read as one family, a `.field` wrapper for label/control/hint/error layout, and validation that surfaces only on `:user-invalid` (after blur/submit, never while typing).
+They share one pattern — block class + local `--component-*` props defaulting to theme tokens + `[data-variant]`/`[data-size]` variants that only re-point those tokens + the `--ring*` focus outline. Precedence comes from natural specificity (base < variant < state), not `:where()`: cascade layers (`@layer variables, reset, components, utilities`) make components overridable, so component rules are written plain. `:where()` is reserved for the reset/utilities layers and for demoting `:has()`/descendant selectors. The form controls add a shared `--field-*` token set (in `_fields.css`) so `.input`, `.textarea`, `.select`, `.input-group`, and `.password-group` read as one family, a `.field` wrapper for label/control/hint/error layout, and validation that surfaces only on `:user-invalid` (after blur/submit, never while typing). **Full rules: [../../../app/zazz/styles/CONVENTIONS.md](../../../app/zazz/styles/CONVENTIONS.md).**
 
 When asked to build a component:
 

@@ -18,13 +18,13 @@
   TYPOGRAPHY — prose component styles
   =========================================================================== */
 
-  :where(.prose) {
+  .prose {
     gap: var(--gap-sm);
     flex-direction: column;
     display: flex;
   }
 
-  :where(.prose h1) {
+  .prose h1 {
     font-family: var(--font-heading);
     font-size: var(--font-size-h1);
     line-height: var(--leading-h1);
@@ -34,7 +34,7 @@
     font-optical-sizing: auto;
   }
 
-  :where(.prose h2) {
+  .prose h2 {
     font-family: var(--font-heading);
     font-size: var(--font-size-h2);
     line-height: var(--leading-h2);
@@ -44,7 +44,7 @@
     font-optical-sizing: auto;
   }
 
-  :where(.prose h3) {
+  .prose h3 {
     font-family: var(--font-heading);
     font-size: var(--font-size-h3);
     line-height: var(--leading-h3);
@@ -54,7 +54,7 @@
     font-optical-sizing: auto;
   }
 
-  :where(.prose h4) {
+  .prose h4 {
     font-family: var(--font-heading);
     font-size: var(--font-size-h4);
     line-height: var(--leading-h4);
@@ -64,7 +64,7 @@
     font-optical-sizing: auto;
   }
 
-  :where(.prose h5) {
+  .prose h5 {
     font-family: var(--font-heading);
     font-size: var(--font-size-h5);
     line-height: var(--leading-h5);
@@ -74,7 +74,7 @@
     font-optical-sizing: auto;
   }
 
-  :where(.prose h6) {
+  .prose h6 {
     font-family: var(--font-heading);
     font-size: var(--font-size-h6);
     line-height: var(--leading-h6);
@@ -84,57 +84,47 @@
     font-optical-sizing: auto;
   }
 
-  :where(.prose p) {
+  .prose p {
     font-size: var(--font-size-md);
     line-height: var(--leading-md);
     letter-spacing: var(--tracking-md);
   }
 
-  :where(.prose a) {
-    --link-decoration-line: var(--decoration-line);
-    --link-decoration-color: var(--decoration-color);
-    --link-decoration-color--hover: var(--decoration-color--hover);
-    --link-decoration-color--active: var(--decoration-color--active);
-    --link-decoration-style: var(--decoration-style);
-    --link-decoration-thickness: var(--decoration-thickness);
-    --link-decoration-offset: var(--decoration-offset);
-    --link-decoration-offset--hover: var(--decoration-offset--hover);
-    --link-decoration-offset--active: var(--decoration-offset--active);
-
+  .prose a {
     color: var(--primary);
-    text-decoration-line: var(--link-decoration-line);
-    text-decoration-style: var(--link-decoration-style);
-    text-decoration-color: var(--link-decoration-color);
-    text-underline-offset: var(--link-decoration-offset);
-    text-decoration-thickness: var(--link-decoration-thickness);
+    text-decoration-line: var(--decoration-line);
+    text-decoration-style: var(--decoration-style);
+    text-decoration-color: var(--decoration-color);
+    text-underline-offset: var(--decoration-offset);
+    text-decoration-thickness: var(--decoration-thickness);
     transition: var(--default-transition);
   }
 
-  :where(.prose a:hover) {
-    text-decoration-color: var(--link-decoration-color--hover);
-    text-underline-offset: var(--link-decoration-offset--hover);
+  .prose a:hover {
+    text-decoration-color: var(--decoration-color--hover);
+    text-underline-offset: var(--decoration-offset--hover);
   }
 
-  :where(.prose a:active) {
-    text-decoration-color: var(--link-decoration-color--active);
-    text-underline-offset: var(--link-decoration-offset--active);
+  .prose a:active {
+    text-decoration-color: var(--decoration-color--active);
+    text-underline-offset: var(--decoration-offset--active);
   }
 
-  :where(.prose strong, .prose b) {
+  .prose strong, .prose b {
     font-weight: var(--weight-strong);
   }
 
-  :where(.prose em, .prose i) {
+  .prose em, .prose i {
     font-style: italic;
   }
 
-  :where(.prose figure) {
+  .prose figure {
     inline-size: 100%;
     max-inline-size: 100%;
     display: flex;
   }
 
-  :where(.prose img) {
+  .prose img {
     border-radius: var(--radius-md);
     border: 1px solid var(--border);
   }
@@ -143,72 +133,72 @@
   PARAGRAPH RHYTHM — top margin on non-first blocks within .prose
   =========================================================================== */
 
-  :where(.prose hgroup:not(:first-child)) {
+  .prose hgroup:not(:first-child) {
     font-size: var(--font-size-xl);
     margin-block-start: var(--paragraph-spacing-xl);
   }
 
-  :where(.prose .text-display:not(:first-child)) {
+  .prose .text-display:not(:first-child) {
     margin-block-start: var(--paragraph-spacing-display);
   }
 
-  :where(.prose .text-h1:not(:first-child), .prose h1:not(:first-child)) {
+  .prose .text-h1:not(:first-child), .prose h1:not(:first-child) {
     margin-block-start: var(--paragraph-spacing-display);
   }
 
-  :where(.prose .text-h2:not(:first-child), .prose h2:not(:first-child)) {
+  .prose .text-h2:not(:first-child), .prose h2:not(:first-child) {
     margin-block-start: var(--paragraph-spacing-h2);
   }
 
-  :where(.prose .text-h3:not(:first-child), .prose h3:not(:first-child)) {
+  .prose .text-h3:not(:first-child), .prose h3:not(:first-child) {
     margin-block-start: var(--paragraph-spacing-h3);
   }
 
-  :where(.prose .text-h4:not(:first-child), .prose h4:not(:first-child)) {
+  .prose .text-h4:not(:first-child), .prose h4:not(:first-child) {
     margin-block-start: var(--paragraph-spacing-h4);
   }
 
-  :where(.prose .text-h5:not(:first-child), .prose h5:not(:first-child)) {
+  .prose .text-h5:not(:first-child), .prose h5:not(:first-child) {
     margin-block-start: var(--paragraph-spacing-h5);
   }
 
-  :where(.prose .text-h6:not(:first-child), .prose h6:not(:first-child)) {
+  .prose .text-h6:not(:first-child), .prose h6:not(:first-child) {
     margin-block-start: var(--paragraph-spacing-h6);
   }
 
-  :where(.prose .text-xl:not(:first-child)) {
+  .prose .text-xl:not(:first-child) {
     margin-block-start: var(--paragraph-spacing-xl);
   }
 
-  :where(.prose .text-lg:not(:first-child)) {
+  .prose .text-lg:not(:first-child) {
     margin-block-start: var(--paragraph-spacing-lg);
   }
 
-  :where(.prose .text-md:not(:first-child), .prose p:not(:first-child)) {
+  .prose .text-md:not(:first-child), .prose p:not(:first-child) {
     margin-block-start: var(--paragraph-spacing-md);
   }
 
-  :where(.prose .text-sm:not(:first-child)) {
+  .prose .text-sm:not(:first-child) {
     margin-block-start: var(--paragraph-spacing-sm);
   }
 
-  :where(.prose .text-xs:not(:first-child)) {
+  .prose .text-xs:not(:first-child) {
     margin-block-start: var(--paragraph-spacing-xs);
   }
 
-  :where(.prose .text-eyebrow:not(:first-child)) {
+  .prose .text-eyebrow:not(:first-child) {
     margin-block-start: var(--paragraph-spacing-eyebrow);
   }
 
-  :where(.prose .text-eyebrow + *) {
+  .prose .text-eyebrow + * {
     margin-block-start: 0;
   }
 
-  :where(.prose hr:first-child) {
+  .prose hr:first-child {
     margin-block-end: calc(var(--gap-md) * var(--paragraph-spacing-multiplier));
   }
 
-  :where(.prose hr:not(:first-child)) {
+  .prose hr:not(:first-child) {
     margin-block: calc(var(--gap-lg) * var(--paragraph-spacing-multiplier));
   }
 }
@@ -327,33 +317,23 @@
   }
 
   :where(.text-link) {
-    --link-decoration-line: var(--decoration-line);
-    --link-decoration-color: var(--decoration-color);
-    --link-decoration-color--hover: var(--decoration-color--hover);
-    --link-decoration-color--active: var(--decoration-color--active);
-    --link-decoration-style: var(--decoration-style);
-    --link-decoration-thickness: var(--decoration-thickness);
-    --link-decoration-offset: var(--decoration-offset);
-    --link-decoration-offset--hover: var(--decoration-offset--hover);
-    --link-decoration-offset--active: var(--decoration-offset--active);
-
     color: var(--primary);
-    text-decoration-line: var(--link-decoration-line);
-    text-decoration-style: var(--link-decoration-style);
-    text-decoration-color: var(--link-decoration-color);
-    text-underline-offset: var(--link-decoration-offset);
-    text-decoration-thickness: var(--link-decoration-thickness);
+    text-decoration-line: var(--decoration-line);
+    text-decoration-style: var(--decoration-style);
+    text-decoration-color: var(--decoration-color);
+    text-underline-offset: var(--decoration-offset);
+    text-decoration-thickness: var(--decoration-thickness);
     transition: var(--default-transition);
   }
 
   :where(.text-link:hover) {
-    text-decoration-color: var(--link-decoration-color--hover);
-    text-underline-offset: var(--link-decoration-offset--hover);
+    text-decoration-color: var(--decoration-color--hover);
+    text-underline-offset: var(--decoration-offset--hover);
   }
 
   :where(.text-link:active) {
-    text-decoration-color: var(--link-decoration-color--active);
-    text-underline-offset: var(--link-decoration-offset--active);
+    text-decoration-color: var(--decoration-color--active);
+    text-underline-offset: var(--decoration-offset--active);
   }
 
   :where(.weight-body) {

@@ -7,13 +7,13 @@
     accessible labelled set.
   =========================================================================== */
 
-  :where(.radio) {
-    --control-size: var(--step-4_5);
+  .radio {
+    --radio-size: var(--step-4_5);
 
     appearance: none;
     flex-shrink: 0;
-    inline-size: var(--control-size);
-    block-size: var(--control-size);
+    inline-size: var(--radio-size);
+    block-size: var(--radio-size);
 
     background-color: var(--input);
     border: 1px solid var(--border);
@@ -31,16 +31,16 @@
     transition: var(--default-transition);
   }
 
-  :where(.radio:hover) {
+  .radio:hover {
     border-color: var(--primary);
   }
 
-  :where(.radio:focus-visible) {
+  .radio:focus-visible {
     outline-color: var(--ring);
   }
 
   /* Checked fill + dot — tokenised via a gradient so it tracks --primary-foreground */
-  :where(.radio:checked) {
+  .radio:checked {
     background-color: var(--primary);
     border-color: var(--primary);
     background-image: radial-gradient(circle, var(--primary-foreground) 0 28%, transparent 30%);

@@ -3,7 +3,7 @@
   BUTTON
   =========================================================================== */
 
-  :where(.button) {
+  .button {
     --button-ring-color: var(--ring-color);
     --button-ring-opacity: 0%;
 
@@ -32,16 +32,6 @@
     --button-icon-size: var(--step-4);
 
     --button-shadow: none;
-
-    --button-decoration-line: var(--decoration-line);
-    --button-decoration-color: var(--decoration-color);
-    --button-decoration-color--hover: var(--decoration-color--hover);
-    --button-decoration-color--active: var(--decoration-color--active);
-    --button-decoration-style: var(--decoration-style);
-    --button-decoration-thickness: var(--decoration-thickness);
-    --button-decoration-offset: var(--decoration-offset);
-    --button-decoration-offset--hover: var(--decoration-offset--hover);
-    --button-decoration-offset--active: var(--decoration-offset--active);
 
     font-family: var(--button-font-family);
     font-size: var(--button-font-size);
@@ -79,7 +69,7 @@
     text-box: trim-both ex alphabetic;
   }
 
-  :where(a[href].button) {
+  a[href].button {
     cursor: pointer;
   }
 
@@ -87,33 +77,33 @@
   BUTTON STATES
   =========================================================================== */
 
-  :where(.button:hover) {
+  .button:hover {
     color: var(--button-foreground--hover);
     background-color: var(--button-background--hover);
     border: var(--button-border--hover);
   }
 
-  :where(.button:active) {
+  .button:active {
     color: var(--button-foreground--active);
     background-color: var(--button-background--active);
     border: var(--button-border--active);
   }
 
-  :where(.button:focus-visible) {
+  .button:focus-visible {
     outline-color: color-mix(in oklch, var(--button-ring-color) var(--ring-opacity), transparent);
   }
 
-  :where(.button:disabled, .button[aria-disabled="true"]) {
+  .button:disabled, .button[aria-disabled="true"] {
     opacity: 0.5;
     cursor: not-allowed;
     pointer-events: none;
   }
 
-  :where(.button:disabled) {
+  .button:disabled {
     pointer-events: none;
   }
 
-  :where(.button[aria-busy="true"]) {
+  .button[aria-busy="true"] {
     cursor: progress;
   }
 
@@ -121,7 +111,7 @@
   BUTTON ICONS
   =========================================================================== */
 
-  :where(.button > svg) {
+  .button > svg {
     inline-size: var(--button-icon-size);
     block-size: var(--button-icon-size);
     pointer-events: none;
@@ -135,7 +125,7 @@
   BUTTON VARIANTS
   =========================================================================== */
 
-  :where(.button[data-variant="primary"]) {
+  .button[data-variant="primary"] {
     --button-background: var(--primary);
     --button-background--hover: oklch(from var(--primary) l c h / 0.9);
     --button-background--active: oklch(from var(--primary) l c h / 0.8);
@@ -151,7 +141,7 @@
     --button-shadow: none;
   }
 
-  :where(.button[data-variant="muted"]) {
+  .button[data-variant="muted"] {
     --button-background: var(--muted);
     --button-background--hover: oklch(from var(--muted) l c h / calc(alpha - 0.02));
     --button-background--active: var(--muted);
@@ -167,7 +157,7 @@
     --button-shadow: none;
   }
 
-  :where(.button[data-variant="ghost"]) {
+  .button[data-variant="ghost"] {
     --button-background: transparent;
     --button-background--hover: var(--muted);
     --button-background--active: oklch(from var(--muted) l c h / calc(alpha - 0.02));
@@ -183,7 +173,7 @@
     --button-shadow: none;
   }
 
-  :where(.button[data-variant="destructive"]) {
+  .button[data-variant="destructive"] {
     --button-ring-color: var(--destructive);
 
     --button-background: var(--destructive);
@@ -201,7 +191,7 @@
     --button-shadow: none;
   }
 
-  :where(.button[data-variant="link"]) {
+  .button[data-variant="link"] {
     --button-background: transparent;
     --button-background--hover: transparent;
     --button-background--active: transparent;
@@ -217,41 +207,41 @@
     --button-shadow: none;
 
     border: none;
-    text-decoration-line: var(--button-decoration-line);
-    text-decoration-style: var(--button-decoration-style);
-    text-decoration-color: var(--button-decoration-color);
-    text-underline-offset: var(--button-decoration-offset);
-    text-decoration-thickness: var(--button-decoration-thickness);
+    text-decoration-line: var(--decoration-line);
+    text-decoration-style: var(--decoration-style);
+    text-decoration-color: var(--decoration-color);
+    text-underline-offset: var(--decoration-offset);
+    text-decoration-thickness: var(--decoration-thickness);
   }
 
-  :where(.button[data-variant="link"]:hover) {
-    text-decoration-color: var(--button-decoration-color--hover);
-    text-underline-offset: var(--button-decoration-offset--hover);
+  .button[data-variant="link"]:hover {
+    text-decoration-color: var(--decoration-color--hover);
+    text-underline-offset: var(--decoration-offset--hover);
   }
 
-  :where(.button[data-variant="link"]:active) {
-    text-decoration-color: var(--button-decoration-color--active);
-    text-underline-offset: var(--button-decoration-offset--active);
+  .button[data-variant="link"]:active {
+    text-decoration-color: var(--decoration-color--active);
+    text-underline-offset: var(--decoration-offset--active);
   }
 
   /* ===========================================================================
   BUTTON SIZES
   =========================================================================== */
 
-  :where(.button[data-size="sm"]) {
+  .button[data-size="sm"] {
     --button-height: var(--step-6);
     --button-padding: var(--step-2);
     --button-radius: var(--radius-sm);
   }
 
-  :where(.button[data-size="icon"]) {
+  .button[data-size="icon"] {
     block-size: var(--button-height);
     inline-size: var(--button-height);
     padding: 0;
     aspect-ratio: 1 / 1;
   }
 
-  :where(.button[data-size="icon-sm"]) {
+  .button[data-size="icon-sm"] {
     --button-height: var(--step-6);
     --button-padding: var(--step-2);
     --button-radius: var(--radius-sm);
@@ -266,25 +256,25 @@
   BUTTON KBD
   =========================================================================== */
 
-  :where(.button > kbd) {
+  .button > kbd {
     --kbd-inline-size: var(--step-4_5);
     --kbd-block-size: var(--step-4_5);
     --kbd-icon-size: var(--step-3);
   }
 
-  :where(.button:has(> kbd:last-child:not(:only-child))) {
+  .button:has(> kbd:last-child:not(:only-child)) {
     padding-inline-end: var(--step-1_5);
   }
 
-  :where(.button:has(> kbd:first-child:not(:only-child))) {
+  .button:has(> kbd:first-child:not(:only-child)) {
     padding-inline-start: var(--step-1_5);
   }
 
-  :where(.button[data-size="sm"]:has(> kbd:last-child:not(:only-child))) {
+  .button[data-size="sm"]:has(> kbd:last-child:not(:only-child)) {
     padding-inline-end: var(--step-0_5);
   }
 
-  :where(.button[data-size="sm"]:has(> kbd:first-child:not(:only-child))) {
+  .button[data-size="sm"]:has(> kbd:first-child:not(:only-child)) {
     padding-inline-start: var(--step-0_5);
   }
 }

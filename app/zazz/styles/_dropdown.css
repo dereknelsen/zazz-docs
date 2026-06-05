@@ -10,8 +10,8 @@
 
   :where(.dropdown__popover) {
     position-anchor: --dropdown-trigger;
-    --popover-background: var(--card);
-    --popover-foreground: var(--card-foreground);
+    --popover-background: var(--popover);
+    --popover-foreground: var(--popover-foreground);
     --popover-border: var(--border);
     --popover-border-foreground: var(--border-foreground);
     --popover-radius: var(--radius-md);

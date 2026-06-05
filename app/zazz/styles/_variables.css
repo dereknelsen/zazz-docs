@@ -18,6 +18,8 @@
     --border-foreground: light-dark(var(--tint-950), var(--shade-500));
     --card: light-dark(var(--white), var(--neutral-950));
     --card-foreground: light-dark(var(--neutral-900), var(--white));
+    --popover: light-dark(var(--shade-950), var(--neutral-950));
+    --popover-foreground: light-dark(var(--white), var(--white));
     --input: light-dark(var(--neutral-50), var(--tint-50));
     --input-foreground: light-dark(var(--neutral-900), var(--white));
 
@@ -430,6 +432,7 @@
    * with color-scheme: dark. Tokens defined only on :root inherit as computed
    * light values; setting color-scheme on descendants alone does not flip them.
    */
+  :where([popover]),
   .dark {
     color-scheme: dark;
 
@@ -441,6 +444,8 @@
     --card-foreground: var(--white);
     --input: var(--tint-50);
     --input-foreground: var(--white);
+    --popover: var(--shade-950);
+    --popover-foreground: var(--white);
     --muted: var(--tint-50);
     --muted-foreground: var(--tint-600);
     --faded: var(--shade-100);

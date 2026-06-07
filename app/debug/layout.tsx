@@ -1,4 +1,3 @@
-import "@/app/zazz/styles/load";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

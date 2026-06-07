@@ -10,9 +10,7 @@
     "postinstall": "fumadocs-mdx",
     "lint": "oxlint",
     "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check",
-    "zazz:dev": "vite --config app/zazz/vite.config.ts",
-    "zazz:build": "vite build --config app/zazz/vite.config.ts"
+    "fmt:check": "oxfmt --check"
   },
   "dependencies": {
     "@ai-sdk/react": "^3.0.184",

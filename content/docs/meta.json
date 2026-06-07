@@ -1,12 +1,5 @@
 {
   "pages": [
-    "index",
-    "philosophy",
-    "who-its-for",
-    "how-to-read-these-docs",
-    "quickstart",
-    "foundations",
-    "primitives",
-    "reference"
+    "index"
   ]
 }

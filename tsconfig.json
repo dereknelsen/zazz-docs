@@ -16,6 +16,7 @@
     "incremental": true,
     "paths": {
       "@/*": ["./*"],
+      "zazz/*": ["./zazz/*"],
       "collections/*": ["./.source/*"]
     },
     "plugins": [

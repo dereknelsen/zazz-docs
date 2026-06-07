@@ -1,0 +1,62 @@
+<nav class="navigation-menu">
+  <menu class="navigation-menu__container">
+    <li class="navigation-menu__item">
+      <button class="button navigation-menu__trigger" type="button" data-variant="ghost" popovertarget="nav-products">
+        Products
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" aria-hidden="true">
+          <rect width="256" height="256" fill="none" />
+          <polyline points="208 96 128 176 48 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+        </svg>
+      </button>
+      <div id="nav-products" class="navigation-menu__popover" popover="auto">
+        <div class="navigation-menu__viewport grid grid-cols-2 gap-sm">
+          <a href="#" class="navigation-menu__featured flex flex-col gap-xs p-md bg-muted">
+            <span class="text-eyebrow text-muted-foreground">Featured</span>
+            <span class="text-md weight-strong">Zazz Platform</span>
+            <span class="text-sm text-muted-foreground text-pretty">Design, build, and ship from one token set.</span>
+          </a>
+          <div class="grid">
+            <a href="#" class="navigation-menu__link">
+              <span class="text-sm weight-strong">Analytics</span>
+              <span class="text-sm text-muted-foreground">Real-time product insights.</span>
+            </a>
+            <a href="#" class="navigation-menu__link">
+              <span class="text-sm weight-strong">Automation</span>
+              <span class="text-sm text-muted-foreground">Workflows without the wiring.</span>
+            </a>
+            <a href="#" class="navigation-menu__link">
+              <span class="text-sm weight-strong">Reports</span>
+              <span class="text-sm text-muted-foreground">Share what the data says.</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="navigation-menu__item">
+      <button class="button navigation-menu__trigger" type="button" data-variant="ghost" popovertarget="nav-resources">
+        Resources
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" aria-hidden="true">
+          <rect width="256" height="256" fill="none" />
+          <polyline points="208 96 128 176 48 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+        </svg>
+      </button>
+      <div id="nav-resources" class="navigation-menu__popover" popover="auto">
+        <div class="navigation-menu__viewport grid">
+          <a href="#" class="navigation-menu__link">
+            <span class="text-sm weight-strong">Documentation</span>
+            <span class="text-sm text-muted-foreground">Guides and references.</span>
+          </a>
+          <a href="#" class="navigation-menu__link">
+            <span class="text-sm weight-strong">Changelog</span>
+            <span class="text-sm text-muted-foreground">What shipped recently.</span>
+          </a>
+        </div>
+      </div>
+    </li>
+
+    <li class="navigation-menu__item">
+      <a href="#" class="button" data-variant="ghost">Pricing</a>
+    </li>
+  </menu>
+</nav>

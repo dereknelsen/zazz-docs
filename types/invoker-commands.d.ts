@@ -14,9 +14,4 @@ declare module "react" {
     /** Native dialog dismiss behavior (HTML `closedby`) */
     closedby?: "any" | "closerequest" | "none";
   }
-
-  interface HTMLDivElement {
-    /** Popover target (HTML `popover`) */
-    popover?: "" | "auto" | "manual" | "hint";
-  }
 }

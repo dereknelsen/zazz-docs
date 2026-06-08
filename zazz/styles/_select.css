@@ -1,3 +1,15 @@
+/**
+ * _select.css — Select (.select on customizable <select>)
+ *
+ * @layer      variables, reset, components
+ * @requires   _layers.css, _variables.css, _fields.css, _reset.css
+ * @uses       appearance: base-select — customizable select (Chromium 135+ / Safari 17+)
+ * @uses       ::picker(select), ::picker-icon, selectedcontent, option::checkmark
+ * @uses       @starting-style + allow-discrete — picker open animation
+ * @uses       anchor-size(width) — match picker width to trigger (@supports gated)
+ * @uses       Degrades to native OS dropdown where base-select is unsupported
+ * @tokens     --select-* (@layer variables)
+ */
 @layer variables {
   :root {
     --select-padding-inline-start: var(--field-padding);

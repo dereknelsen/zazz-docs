@@ -1,3 +1,14 @@
+/**
+ * _typography.css — Prose (.prose) and figcaption reset
+ *
+ * @layer      variables, reset, components, utilities
+ * @requires   _layers.css, _variables.css, _reset.css (figcaption baseline)
+ * @uses       Fluid type scale — consumes --font-size-*, --leading-*,
+ *             --tracking-* from _variables.css (also exposes matching .text-*
+ *             utilities in this file)
+ * @uses       font-optical-sizing — heading optical size
+ * @tokens     --prose-* (@layer variables)
+ */
 @layer variables {
   :root {
     --prose-gap: var(--gap-sm);

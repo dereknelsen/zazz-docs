@@ -1,3 +1,11 @@
+/**
+ * _radio.css — Radio (.radio, .radio-group)
+ *
+ * @layer      variables, components
+ * @requires   _layers.css, _variables.css, _fields.css (.field-group layout)
+ * @uses       appearance: none — custom circle + radial-gradient dot when :checked
+ * @tokens     --radio-* (@layer variables)
+ */
 @layer variables {
   :root {
     --radio-size: var(--step-4_5);

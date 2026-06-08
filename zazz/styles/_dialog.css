@@ -1,3 +1,13 @@
+/**
+ * _dialog.css — Dialog (.dialog on native <dialog>)
+ *
+ * @layer      variables, reset, components
+ * @requires   _layers.css, _variables.css
+ * @uses       <dialog>, ::backdrop — native modal + backdrop
+ * @uses       @starting-style + allow-discrete — open/close opacity, transform, overlay
+ * @uses       anchor-name, container-type — layout hooks for sized variants
+ * @tokens     --dialog-* (@layer variables; sizing tokens in a second variables block)
+ */
 @layer variables {
   :root {
     --dialog-display: grid;
@@ -25,8 +35,7 @@
 @layer reset {
   /* ===========================================================================
   DIALOG — native <dialog> open/close animation, sizing, backdrop fade
-  - In the reset layer so the .dialog component styling below wins. Popover base
-    styling stays in _reset.css since it is a shared primitive.
+  - In the reset layer so the .dialog component styling below wins.
   =========================================================================== */
 
   /* Prevent body scroll when a dialog inside the preview is open */

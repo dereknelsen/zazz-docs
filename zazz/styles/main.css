@@ -1,0 +1,34 @@
+/**
+ * main.css — Plain-CSS entry point; @import bundle in cascade order.
+ *
+ * @layer      none
+ * @requires   all other stylesheets in this folder
+ * @see        CONVENTIONS.md — file anatomy & layer architecture
+ */
+
+@import "./_layers.css";
+@import "./_properties.css";
+@import "./_variables.css";
+@import "./_reset.css";
+@import "./_typography.css";
+@import "./_badge.css";
+@import "./_button.css";
+@import "./_accordion.css";
+@import "./_popover.css";
+@import "./_dialog.css";
+@import "./_dropdown.css";
+@import "./_navigation-menu.css";
+@import "./_mobile-menu.css";
+@import "./_fields.css";
+@import "./_input.css";
+@import "./_textarea.css";
+@import "./_select.css";
+@import "./_switch.css";
+@import "./_input-group.css";
+@import "./_password-group.css";
+@import "./_radio.css";
+@import "./_tabs.css";
+@import "./_embla.css";
+@import "./_lightbox.css";
+@import "./_reveal.css";
+@import "./_utilities.css";

@@ -1,3 +1,15 @@
+/**
+ * _tabs.css — Tabs (.tabs) — CSS-only radio tab panels
+ *
+ * @layer      variables, components
+ * @requires   _layers.css, _variables.css
+ * @uses       input[type="radio"] + :checked — panel visibility via :has() (no JS)
+ * @uses       anchor-name, position-anchor, anchor() — sliding indicator pill
+ *             (@supports gated; checked-label fallback paints card fill without pill)
+ * @uses       anchor-scope — isolates --active-tab inside nested menus
+ * @uses       text-box, color-mix() — label trim and focus ring
+ * @tokens     --tabs-* (@layer variables)
+ */
 @layer variables {
   :root {
     --tabs-gap: var(--gap-xs);

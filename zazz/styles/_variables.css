@@ -1,3 +1,18 @@
+/**
+ * _variables.css — Global design tokens (Tier 1).
+ *
+ * @layer      variables
+ * @requires   _layers.css, _properties.css
+ * @uses       light-dark() — theme roles follow color-scheme / .dark overrides
+ * @uses       oklch(from …) — shade/tint scales and shadow alphas
+ * @uses       color-mix() — focus ring (--ring)
+ * @uses       @view-transition { navigation: auto } — cross-document view transitions
+ * @uses       interpolate-size: allow-keywords — discrete block-size animations (details, etc.)
+ * @tokens     Global token tiers (the root override hooks) — Theme roles, brand
+ *             scales (50–950), grayscale/shade/tint, typography, spacing, radius,
+ *             layout, effects, animations. Re-declare any of these to re-skin the
+ *             whole system; see CONVENTIONS.md.
+ */
 /* Token values — @property registrations live in _properties.css (style() queries). */
 @layer variables {
   :root {
@@ -57,7 +72,7 @@
 
     /* ==========================================================================
     * 2. Corporate — brand color scales (50–950)
-    * @link https://www.tints.dev/palette/v1:cHJpbWFyeXw0RjQ2RTV8NjAwfHB8MHwwfC0yfDEwM3xtfnNlY29uZGFyeXxERTQ5MTd8NjAwfHB8MHwwfDJ8MTAyfG1-dGVydGlhcnl8RTUzNzVCfDUwMHxwfDB8MHwxfDEwM3xtfm5ldXRyYWx8ODg4ODkwfDUwMHxwfDB8MHwxfDEwM3xt
+    * @see https://www.tints.dev/palette/v1:cHJpbWFyeXw0RjQ2RTV8NjAwfHB8MHwwfC0yfDEwM3xtfnNlY29uZGFyeXxERTQ5MTd8NjAwfHB8MHwwfDJ8MTAyfG1-dGVydGlhcnl8RTUzNzVCfDUwMHxwfDB8MHwxfDEwM3xtfm5ldXRyYWx8ODg4ODkwfDUwMHxwfDB8MHwxfDEwM3xt
     * ========================================================================== */
 
     /* primary */
@@ -101,7 +116,7 @@
 
     /* ==========================================================================
     * 3. Grayscale — neutrals, shade (dim), tint (fade)
-    * @link https://www.tints.dev/palette/v1:cHJpbWFyeXw0RjQ2RTV8NjAwfHB8MHwwfC0yfDEwM3xtfnNlY29uZGFyeXxERTQ5MTd8NjAwfHB8MHwwfDJ8MTAyfG1-dGVydGlhcnl8RTUzNzVCfDUwMHxwfDB8MHwxfDEwM3xtfm5ldXRyYWx8ODg4ODkwfDUwMHxwfDB8MHwxfDEwM3xt
+    * @see https://www.tints.dev/palette/v1:cHJpbWFyeXw0RjQ2RTV8NjAwfHB8MHwwfC0yfDEwM3xtfnNlY29uZGFyeXxERTQ5MTd8NjAwfHB8MHwwfDJ8MTAyfG1-dGVydGlhcnl8RTUzNzVCfDUwMHxwfDB8MHwxfDEwM3xtfm5ldXRyYWx8ODg4ODkwfDUwMHxwfDB8MHwxfDEwM3xt
     * ========================================================================== */
 
     /* neutral */

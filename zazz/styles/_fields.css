@@ -1,3 +1,16 @@
+/**
+ * _fields.css — Shared form field family (Tier 3 owner for --field-*)
+ *
+ * @layer      variables, components
+ * @requires   _layers.css, _variables.css
+ * @uses       :user-invalid — validation after commit (not while typing)
+ * @uses       :has(:user-invalid) — label/hint/error crossfade
+ * @uses       @starting-style + visibility allow-discrete — hint ↔ error swap
+ * @uses       color-mix() — destructive field tint on invalid
+ * @tokens     --field-*, --field-group-* (Tier 3 owner; @layer variables)
+ * @consumedby _input.css, _textarea.css, _select.css, _input-group.css,
+ *             _password-group.css, _radio.css (.radio-group)
+ */
 @layer variables {
   :root {
     --field-background: var(--input);

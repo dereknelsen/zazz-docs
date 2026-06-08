@@ -1,3 +1,12 @@
+/**
+ * _button.css — Button (.button)
+ *
+ * @layer      variables, components
+ * @requires   _layers.css, _variables.css, _reset.css
+ * @uses       color-mix(), oklch(from …) — variant hover/active tints
+ * @uses       text-box — vertical trim (patchy browser support)
+ * @tokens     --button-* (@layer variables)
+ */
 @layer variables {
   :root {
     --button-ring-color: var(--ring-color);

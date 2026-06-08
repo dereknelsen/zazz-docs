@@ -1,3 +1,14 @@
+/**
+ * _lightbox.css — Lightbox gallery (.lightbox)
+ *
+ * @layer      variables, components
+ * @requires   _layers.css, _variables.css, _dialog.css, _embla.css, _button.css
+ * @uses       command="show-modal" — Invoker Commands open fullscreen dialog (no JS)
+ * @uses       @container — thumb column count at narrow widths
+ * @uses       @starting-style — dialog slide scale/opacity on snap
+ * @uses       Embla sync — requires zazz/scripts/embla.js for carousel behaviour
+ * @tokens     --lightbox-* (@layer variables)
+ */
 @layer variables {
   :root {
     --lightbox-aspect-ratio: 3 / 2;

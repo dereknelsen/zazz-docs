@@ -1,3 +1,14 @@
+/**
+ * _input-group.css — Input group (.input-group)
+ *
+ * @layer      variables, components
+ * @requires   _layers.css, _variables.css, _fields.css, _input.css,
+ *             _textarea.css, _button.css
+ * @uses       :focus-within — lifts shell ring/border as one field
+ * @uses       :has() — restore padding when addons absent; invalid text color
+ * @uses       data-align on .input-group__addon — inline-start/end, block-start/end
+ * @tokens     --input-group-* (@layer variables)
+ */
 @layer variables {
   :root {
     --input-group-display: flex;

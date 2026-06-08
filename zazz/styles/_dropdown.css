@@ -1,3 +1,13 @@
+/**
+ * _dropdown.css — Dropdown (.dropdown, .dropdown__popover)
+ *
+ * @layer      variables, components
+ * @requires   _layers.css, _variables.css, _popover.css, _button.css
+ * @uses       popovertarget + [popover] — inherits Popover API from _popover.css
+ * @uses       anchor-name, anchor-scope, position-anchor — tether menu to trigger
+ * @uses       data-side / data-align — maps to --popover-position-* in _popover.css
+ * @tokens     --dropdown-* (@layer variables)
+ */
 @layer variables {
   :root {
     --dropdown-button-radius: var(--radius-sm);

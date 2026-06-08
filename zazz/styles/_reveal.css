@@ -1,37 +1,43 @@
 /**
- * @version 0.1.0
- * @since 0.1.0
- * @description A lightweight, configurable animation system for scroll-based reveals.
- *              Focuses on viewport entry animations for single elements and
- *              direct children of stagger groups.
+ * _reveal.css — Scroll reveals ([data-reveal]) and page view transitions
  *
- * Usage:
- * 1. Single element animation:
- *    <div data-reveal="slide-up">Content</div>
+ * @layer      variables, utilities
+ * @requires   _layers.css, _variables.css, _reset.css ([data-transition-layer] names)
+ * @uses       ::view-transition-old/new — cross-document page transitions
+ * @uses       @view-transition — enabled in _variables.css
+ * @uses       prefers-reduced-reveal — custom media (not prefers-reduced-motion)
+ * @uses       Behaviour requires zazz/scripts/reveal.js (IntersectionObserver)
+ * @tokens     --reveal-global-*, --global-page-transition-* (@layer variables);
+ *             per-instance --reveal-* set from data-* attributes (typed in _properties.css)
+ * @version    0.1.0
+ * @since      0.1.0
  *
- * 2. Staggered children animation:
- *    <div data-reveal-each="fade" data-reveal-step="100">
- *      <div>Item 1</div> <!-- Animated -->
- *      <p>Item 2</p>   <!-- Animated -->
- *    </div>
+ * A lightweight, configurable animation system for scroll-based reveals. Focuses
+ * on viewport entry animations for single elements and direct children of stagger
+ * groups. Available animations: slide-up, slide-down, slide-left, slide-right,
+ * fade, grow, shrink.
  *
- * Available animations:
- * - slide-up, slide-down, slide-left, slide-right
- * - fade
- * - grow, shrink
+ * @example  Single element
+ *   <div data-reveal="slide-up">Content</div>
  *
- * Data attributes (on element with data-reveal or data-reveal-each):
- * - data-reveal="animation-name"         (for single elements)
- * - data-reveal-each="animation-name"    (for groups, applied to children)
- * - data-reveal-duration="300"           (in ms)
- * - data-reveal-wait="0"                 (in ms, base delay)
- * - data-reveal-step="80"                (in ms, stagger delay for groups)
- * - data-reveal-ease="ease-in-out"
- * - data-reveal-distance="2rem"          (translation distance)
- * - data-reveal-order="reversed"         (stagger order for groups)
- * - data-reveal-margin="0px"             (IntersectionObserver rootMargin)
- * - data-reveal-threshold="0.2"          (IntersectionObserver threshold)
- * - data-reveal-scale="0.5"              (Optional: Override initial scale - requires JS mod)
+ * @example  Staggered children — animation applied to each direct child
+ *   <div data-reveal-each="fade" data-reveal-step="100">
+ *     <div>Item 1</div>
+ *     <p>Item 2</p>
+ *   </div>
+ *
+ * Data attributes (on the element with data-reveal or data-reveal-each):
+ *   data-reveal="animation-name"        single elements
+ *   data-reveal-each="animation-name"   groups; applied to children
+ *   data-reveal-duration="300"          ms
+ *   data-reveal-wait="0"                ms, base delay
+ *   data-reveal-step="80"               ms, stagger delay for groups
+ *   data-reveal-ease="ease-in-out"
+ *   data-reveal-distance="2rem"         translation distance
+ *   data-reveal-order="reversed"        stagger order for groups
+ *   data-reveal-margin="0px"            IntersectionObserver rootMargin
+ *   data-reveal-threshold="0.2"         IntersectionObserver threshold
+ *   data-reveal-scale="0.5"             optional initial scale (requires JS mod)
  */
 
 @layer variables {
@@ -66,14 +72,14 @@
   }
 
   @keyframes global-page-transition--old {
-    to {
+    from {
       opacity: var(--global-page-transition-opacity--end);
       transform: translate3d(var(--global-page-transition-translate--end));
     }
   }
 
   @keyframes global-page-transition--new {
-    from {
+    to {
       opacity: var(--global-page-transition-opacity--start);
       transform: translate3d(var(--global-page-transition-translate--start));
     }

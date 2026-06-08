@@ -1,3 +1,17 @@
+/**
+ * _popover.css — Shared [popover] primitive (Tier 3 owner for --popover-*)
+ *
+ * @layer      variables, reset, components
+ * @requires   _layers.css, _variables.css (--popover, --popover-foreground)
+ * @uses       [popover], popovertarget, :popover-open — Popover API
+ *             (Chromium-first; polyfill may use .\:popover-open class)
+ * @uses       @starting-style + allow-discrete — enter/exit opacity/transform
+ * @uses       anchor-name, position-anchor, position-area, position-try-fallbacks —
+ *             anchor positioning (gated behind @supports; Firefox/Safari fall
+ *             back to UA-centered popover)
+ * @uses       backdrop-filter — popover surface blur
+ * @tokens     --popover-* (Tier 3 owner; @layer variables)
+ */
 @layer variables {
   :root {
     /* Styles */

@@ -1,58 +1,34 @@
 "use strict";
 
 /**
- * @version 0.1.0
- * @since 0.1.0
- * @description A lightweight, configurable animation system for scroll-based reveals
- * and staggered animations, focused on viewport entry.
+ * @fileoverview Scroll-based reveal animations.
+ * @description A lightweight, configurable animation system for scroll-based
+ * reveals and staggered animations, focused on viewport entry.
  *
- * Usage:
- * ```html
+ * @typedef {Object} RevealConfig
+ * @property {string} margin - Margin around the root (viewport) for IntersectionObserver.
+ * @property {number} threshold - Visibility threshold (0–1) to trigger animations.
+ * @property {number|string} duration - Default animation duration (ms number or CSS time string).
+ * @property {string} ease - Default animation timing function.
+ * @property {number} wait - Default base animation delay in milliseconds.
+ * @property {string} distance - Default translation distance for slide animations.
+ * @property {number} step - Default delay between staggered elements in milliseconds.
+ * @property {number} grow - Scale factor for grow animations (< 1).
+ * @property {number} shrink - Scale factor for shrink animations (> 1).
+ *
+ * @typedef {Object} RevealOptions
+ * @property {RevealConfig} [config] - Configuration options for the animation system.
+ *
+ * @example
  * <!-- Single element -->
  * <div data-reveal="slide-up" data-reveal-duration="300">Content</div>
  *
+ * @example
  * <!-- Stagger group (direct children are animated) -->
  * <div data-reveal-each="fade" data-reveal-step="100">
  *   <div>Item 1</div>
  *   <div>Item 2</div>
  * </div>
- * ```
- *
- * @typedef {Object} RevealConfig
- * @property {string} [margin="0px"] - Margin around the root (viewport) for intersection observer.
- * @property {number} [threshold=0.2] - Visibility threshold (0-1) to trigger animations.
- * @property {number} [duration=900] - Default animation duration in milliseconds.
- * @property {string} [ease="cubic-bezier(0.4, 0, 0.2, 1)"] - Default animation timing function.
- * @property {number} [wait=0] - Default base animation delay in milliseconds.
- * @property {string} [distance="4rem"] - Default translation distance for slide animations.
- * @property {number} [step=80] - Default delay between staggered elements in milliseconds.
- * @property {number} [grow=0.9] - Scale factor for grow animations (< 1).
- * @property {number} [shrink=1.1] - Scale factor for shrink animations (> 1).
- */
-
-/**
- * @typedef {Object} RevealOptions
- * @property {RevealConfig} [config] - Configuration options for the animation system.
- */
-
-/**
- * Reveal - Initializes viewport entry animations.
- *
- * @example
- * // Basic usage with defaults
- * const reveal = new Reveal();
- *
- * @example
- * // With custom configuration
- * const reveal = new Reveal({
- *   config: {
- *     duration: 600,
- *     ease: 'ease-in-out',
- *     threshold: 0.3,
- *     margin: '100px',
- *     step: 100
- *   }
- * });
  */
 
 const DEFAULT_DURATION = document.documentElement.style.getPropertyValue(
@@ -62,13 +38,31 @@ const DEFAULT_EASE = document.documentElement.style.getPropertyValue(
   "--default-transition-timing-function",
 );
 
+/**
+ * @class
+ * @description Initializes viewport entry animations.
+ *
+ * @example
+ * const reveal = new Reveal();
+ *
+ * @example
+ * const reveal = new Reveal({
+ *   config: {
+ *     duration: 600,
+ *     ease: "ease-in-out",
+ *     threshold: 0.3,
+ *     margin: "100px",
+ *     step: 100,
+ *   },
+ * });
+ */
 class Reveal {
   /** @type {RevealConfig} */
   static defaultConfig = {
     margin: "0px",
     threshold: 0.2,
-    duration: DEFAULT_DURATION.trim() || "900ms", // Fallback if CSS variable is empty
-    ease: DEFAULT_EASE.trim() || "cubic-bezier(0.4, 0, 0.2, 1)", // Fallback if CSS variable is empty
+    duration: DEFAULT_DURATION.trim() || "900ms",
+    ease: DEFAULT_EASE.trim() || "cubic-bezier(0.4, 0, 0.2, 1)",
     wait: 0,
     distance: "4rem",
     step: 80,
@@ -79,8 +73,12 @@ class Reveal {
   /** @type {Map<string, IntersectionObserver>} */
   #observers = new Map();
 
+  /** @type {RevealConfig} */
+  config;
+
   /**
-   * Creates a new Reveal instance.
+   * @description Creates a new Reveal instance.
+   *
    * @param {RevealOptions} [options={}] - Configuration options.
    */
   constructor(options = {}) {
@@ -89,53 +87,53 @@ class Reveal {
   }
 
   /**
-   * Gets or creates an IntersectionObserver for a given set of options.
+   * @description Gets or creates an IntersectionObserver for a given set of options.
+   *
    * @param {IntersectionObserverInit} options - Observer options.
    * @returns {IntersectionObserver} The observer instance.
-   * @private
    */
   #getObserver(options) {
     const optionsKey = JSON.stringify(options);
-    if (!this.#observers.has(optionsKey)) {
-      const observer = new IntersectionObserver((entries, obs) => {
+    let observer = this.#observers.get(optionsKey);
+    if (!observer) {
+      observer = new IntersectionObserver((entries, obs) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("in-viewport");
-            obs.unobserve(entry.target); // Stop observing once visible
+            obs.unobserve(entry.target);
           }
         });
       }, options);
       this.#observers.set(optionsKey, observer);
     }
-    return this.#observers.get(optionsKey);
+    return observer;
   }
 
   /**
-   * Gets IntersectionObserver options for an element.
+   * @description Gets IntersectionObserver options for an element.
+   *
    * @param {HTMLElement} element - The element to get options for.
    * @returns {IntersectionObserverInit} Observer configuration options.
-   * @private
    */
   #getElementObserverOptions(element) {
     const margin = element.dataset.revealMargin || this.config.margin;
     const threshold = parseFloat(
-      element.dataset.revealThreshold || this.config.threshold.toString(), // Ensure string for default
+      element.dataset.revealThreshold || this.config.threshold.toString(),
     );
     return {
       rootMargin: margin,
-      threshold: Math.min(Math.max(threshold, 0), 1), // Clamp between 0 and 1
+      threshold: Math.min(Math.max(threshold, 0), 1),
     };
   }
 
   /**
-   * Sets CSS custom properties on an element if the value is provided.
+   * @description Sets CSS custom properties on an element when a value is provided.
+   *
    * @param {HTMLElement} element - The element to set properties on.
-   * @param {Object.<string, string|number|null|undefined>} properties - Object of CSS custom properties.
-   * @private
+   * @param {Object.<string, string|number|null|undefined>} properties - CSS custom properties to set.
    */
   #setRevealProperties(element, properties) {
     Object.entries(properties).forEach(([key, value]) => {
-      // Only set if value is not null or undefined
       if (value !== null && value !== undefined) {
         element.style.setProperty(key, value.toString());
       }
@@ -143,44 +141,34 @@ class Reveal {
   }
 
   /**
-   * Configures stagger animation properties and observes child elements.
+   * @description Configures stagger animation properties and observes child elements.
+   *
    * @param {HTMLElement} groupElement - The parent stagger container.
-   * @private
    */
   #configureStaggerGroup(groupElement) {
     const dataset = groupElement.dataset;
     const groupOptions = this.#getElementObserverOptions(groupElement);
     const groupObserver = this.#getObserver(groupOptions);
 
-    // Use defaults from config, overridden by group's data attributes
     const groupProps = {
-      step: Math.max(
-        0,
-        parseInt(dataset.revealStep || this.config.step.toString(), 10) || 0,
-      ),
+      step: Math.max(0, parseInt(dataset.revealStep || this.config.step.toString(), 10) || 0),
       duration: dataset.revealDuration
         ? Math.max(0, parseInt(dataset.revealDuration, 10) || 0)
         : this.config.duration,
       ease: dataset.revealEase || this.config.ease,
-      baseWait: Math.max(
-        0,
-        parseInt(dataset.revealWait || this.config.wait.toString(), 10) || 0,
-      ),
+      baseWait: Math.max(0, parseInt(dataset.revealWait || this.config.wait.toString(), 10) || 0),
       distance: dataset.revealDistance || this.config.distance,
       order: dataset.revealOrder,
     };
 
     const childrenArray = Array.from(groupElement.children);
-    const sequence =
-      groupProps.order === "reversed" ? childrenArray.reverse() : childrenArray;
+    const sequence = groupProps.order === "reversed" ? childrenArray.reverse() : childrenArray;
 
     sequence.forEach((child, i) => {
-      if (!(child instanceof HTMLElement)) return; // Skip non-element nodes
+      if (!(child instanceof HTMLElement)) return;
 
-      // Calculate individual delay
       const calculatedWait = groupProps.baseWait + groupProps.step * i;
 
-      // Set properties on the child
       this.#setRevealProperties(child, {
         "--reveal-duration": `${groupProps.duration}ms`,
         "--reveal-ease": groupProps.ease,
@@ -189,22 +177,20 @@ class Reveal {
         "--reveal-scale": dataset.revealScale || null,
       });
 
-      // Observe the child
       groupObserver.observe(child);
     });
   }
 
   /**
-   * Configures animation properties for a single element and observes it.
+   * @description Configures animation properties for a single element and observes it.
+   *
    * @param {HTMLElement} element - The element to configure and observe.
-   * @private
    */
   #configureSingleElement(element) {
     const dataset = element.dataset;
     const elementOptions = this.#getElementObserverOptions(element);
     const elementObserver = this.#getObserver(elementOptions);
 
-    // Set properties only if explicitly defined on the element
     const elementDuration = dataset.revealDuration
       ? Math.max(0, parseInt(dataset.revealDuration, 10) || 0)
       : null;
@@ -224,47 +210,40 @@ class Reveal {
   }
 
   /**
-   * Initializes the animation system by setting up global CSS variables and
-   * configuring all animated elements.
-   * @private
+   * @description Initializes the animation system by setting global CSS variables
+   * and configuring all animated elements.
+   *
+   * @returns {void}
    */
   init() {
-    // Clear existing observers if re-initializing
     this.#observers.forEach((observer) => observer.disconnect());
     this.#observers.clear();
 
-    // Set global CSS variables on the root element
     const rootStyle = document.documentElement.style;
-    rootStyle.setProperty(
-      "--reveal-global-duration",
-      `${this.config.duration}ms`,
-    );
+    rootStyle.setProperty("--reveal-global-duration", `${this.config.duration}ms`);
     rootStyle.setProperty("--reveal-global-ease", this.config.ease);
     rootStyle.setProperty("--reveal-global-wait", `${this.config.wait}ms`);
     rootStyle.setProperty("--reveal-global-distance", this.config.distance);
     rootStyle.setProperty("--reveal-global-grow", this.config.grow.toString());
-    rootStyle.setProperty(
-      "--reveal-global-shrink",
-      this.config.shrink.toString(),
-    );
+    rootStyle.setProperty("--reveal-global-shrink", this.config.shrink.toString());
 
-    // Process single elements
-    document
-      .querySelectorAll("[data-reveal]")
-      .forEach((element) => this.#configureSingleElement(element));
+    document.querySelectorAll("[data-reveal]").forEach((element) => {
+      if (element instanceof HTMLElement) this.#configureSingleElement(element);
+    });
 
-    // Process stagger groups
-    document
-      .querySelectorAll("[data-reveal-each]")
-      .forEach((group) => this.#configureStaggerGroup(group));
+    document.querySelectorAll("[data-reveal-each]").forEach((group) => {
+      if (group instanceof HTMLElement) this.#configureStaggerGroup(group);
+    });
   }
 
   /**
-   * Reinitializes the animation system. Use this after dynamically adding
-   * new animated elements to the page. Disconnects old observers.
+   * @description Reinitializes the animation system after dynamically adding elements.
+   *
+   * Disconnects old observers and rescans the document.
+   *
+   * @returns {void}
    *
    * @example
-   * // After adding new content
    * container.innerHTML = newContent;
    * reveal.refresh();
    */
@@ -275,29 +254,35 @@ class Reveal {
 
 // Auto-initialize when DOM is ready (only in browser environment)
 if (typeof window !== "undefined" && typeof document !== "undefined") {
+  /** @type {Reveal | null | "disabled"} */
   let autoInstance = null;
 
   const autoInit = () => {
-    // Only auto-initialize if no manual instance exists
     if (!autoInstance) {
       autoInstance = new Reveal();
     }
   };
 
-  // Initialize when DOM is ready
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", autoInit);
   } else {
-    // DOM is already ready
     autoInit();
   }
 
-  // Expose method to disable auto-initialization
+  /**
+   * @description Prevents automatic initialization on DOM ready.
+   *
+   * @returns {void}
+   */
   Reveal.disableAutoInit = () => {
     autoInstance = "disabled";
   };
 
-  // Expose method to get auto instance
+  /**
+   * @description Returns the auto-initialized Reveal instance, if any.
+   *
+   * @returns {Reveal|null} The auto instance, or null when disabled or not yet created.
+   */
   Reveal.getAutoInstance = () => {
     return autoInstance === "disabled" ? null : autoInstance;
   };

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zazz Example Page</title>
+
+    <!-- Zazz styles -->
+    <link rel="stylesheet" href="../styles/main.css">
+
+    <!-- CDN scripts not recommended for production. If required to use a CDN, create a new SRI hash https://srihash.org/ -->
+    <script src="https://cdn.jsdelivr.net/npm/@oddbird/popover-polyfill@latest"
+        integrity="sha384-Gl/j23IcIIiDfqcDI5gpHCxd5EuslCYvs07HAw3KHGx5UcbxizoF/deDnkeEcFXW" crossOrigin="anonymous"
+        defer></script>
+    <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"
+        integrity="sha384-XGqLM9+dJ+PFOMZn6IuZgRRIoxcAT5fx4eIZCx7K3O2Dj5RA7EOlJ3yOS8Jd+kiY" crossOrigin="anonymous"
+        defer></script>
+    <script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"
+        integrity="sha384-rs7pDLCh+QtEjJg2VChAoKZHaaz7apuon6rM57E3FdzC83xaJH4n9mQZn4E2s3f4" crossOrigin="anonymous"
+        defer></script>
+    <script src="https://unpkg.com/embla-carousel-auto-scroll/embla-carousel-auto-scroll.umd.js"
+        integrity="sha384-5x3y2MLuLA5c1LQceYM+lo59GGkQmLzQGzbuHhDUDbnOJkFeTl5jUSdBy3JehMcM" crossOrigin="anonymous"
+        defer></script>
+    <script src="https://unpkg.com/embla-carousel-class-names/embla-carousel-class-names.umd.js"
+        integrity="sha384-nZNIZhV6WSQVCeWMj8JFfOgQZyzPoGSTh0eohtAOu5aluevIpIblZcupMSdl/EEH" crossOrigin="anonymous"
+        defer></script>
+    <script src="https://unpkg.com/embla-carousel-ssr/embla-carousel-ssr.umd.js"
+        integrity="sha384-apu0WDHR0c+4Z5qNk7egPNoCxXkYq80e+Qh6xJ6f67S53mSyYdKE6tIeXxvKJ6x9" crossOrigin="anonymous"
+        defer></script>
+
+    <!-- Zazz scripts -->
+    <script src="../scripts/navigation.js" defer></script>
+    <script src="../scripts/reveal.js" defer></script>
+    <script src="../scripts/utils.js" defer></script>
+    <script src="../scripts/embla.js" defer></script>
+</head>
+
+<body>
+    <header data-transition-layer="global-navigation">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Zazz Examples</h1>
+        <p>This is a test of the Zazz examples page.</p>
+    </main>
+    <footer data-transition-layer="global-footer">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </footer>
+</body>
+
+</html>

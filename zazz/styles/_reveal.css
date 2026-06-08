@@ -36,14 +36,20 @@
 
 @layer variables {
   :root {
+    /* Page reveal transitions/animations */
+    --global-page-transition-duration: var(--default-transition-duration);
+    --global-page-transition-ease: var(--default-transition-timing-function);
+    --global-page-transition-translate--start: 0, 0, 0;
+    --global-page-transition-translate--end: 0, 0, 0;
+    --global-page-transition-opacity--start: 0;
+    --global-page-transition-opacity--end: 1;
+
     --reveal-global-duration: var(--default-transition-duration);
     --reveal-global-ease: var(--default-transition-timing-function);
     --reveal-global-wait: 0ms;
     --reveal-global-distance: 3rem;
     --reveal-global-grow: 0.95;
-    /* Default initial scale for grow */
     --reveal-global-shrink: 1.05;
-    /* Default initial scale for shrink */
   }
 }
 
@@ -61,13 +67,15 @@
 
   @keyframes global-page-transition--old {
     to {
-      opacity: 0;
+      opacity: var(--global-page-transition-opacity--end);
+      transform: translate3d(var(--global-page-transition-translate--end));
     }
   }
 
   @keyframes global-page-transition--new {
     from {
-      opacity: 0;
+      opacity: var(--global-page-transition-opacity--start);
+      transform: translate3d(var(--global-page-transition-translate--start));
     }
   }
 

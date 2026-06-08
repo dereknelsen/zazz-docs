@@ -1,3 +1,22 @@
+@layer variables {
+  :root {
+    --input-group-display: flex;
+    --input-group-wrap: wrap;
+    --input-group-align: center;
+    --input-group-gap: var(--step-1);
+    --input-group-inline-size: 100%;
+    --input-group-min-block-size: var(--field-height);
+    --input-group-padding: 0;
+    --input-group-cursor: text;
+    --input-group-text-color: var(--muted-foreground);
+    --input-group-text-weight: var(--weight-strong);
+    --input-group-text-size: var(--font-size-sm);
+    --input-group-textarea-min-block-size: 3lh;
+    --input-group-textarea-padding-inline: var(--step-2);
+    --input-group-textarea-padding-block: var(--step-1_5);
+  }
+}
+
 @layer components {
   /* ===========================================================================
   INPUT GROUP — .input-group  (shadcn-style composition)
@@ -18,18 +37,6 @@
   =========================================================================== */
 
   .input-group {
-    --input-group-display: flex;
-    --input-group-wrap: wrap;
-    --input-group-align: center;
-    --input-group-gap: var(--step-1);
-    --input-group-inline-size: 100%;
-    --input-group-min-block-size: var(--field-height);
-    --input-group-padding: 0;
-    --input-group-cursor: text;
-    --input-group-text-color: var(--muted-foreground);
-    --input-group-text-weight: var(--weight-strong);
-    --input-group-text-size: var(--font-size-sm);
-
     display: var(--input-group-display);
     flex-wrap: var(--input-group-wrap);
     align-items: var(--input-group-align);
@@ -47,7 +54,7 @@
     border: 1px solid var(--field-border);
     border-radius: var(--field-radius);
 
-    outline: var(--ring-size) var(--ring-style) oklch(from var(--ring) l c h / 0);
+    outline: var(--ring-size) var(--ring-style) transparent;
     outline-offset: var(--ring-offset);
 
     transition: var(--default-transition);
@@ -65,7 +72,8 @@
   }
 
   /* Nested control sheds its own chrome and fills the row */
-  .input-group .input, .input-group .textarea {
+  .input-group .input,
+  .input-group .textarea {
     flex: 1;
     min-inline-size: 0;
     background-color: transparent;
@@ -84,8 +92,9 @@
      spacing on its side; block-* addons take their own row and don't count here.
      (Default/no-data-align addons are inline-start.) */
   .input-group:not(
-        :has(.input-group__addon:not([data-align]), .input-group__addon[data-align="inline-start"])
-      ) .input {
+      :has(.input-group__addon:not([data-align]), .input-group__addon[data-align="inline-start"])
+    )
+    .input {
     padding-inline-start: var(--field-padding);
   }
 
@@ -96,9 +105,9 @@
   /* A textarea claims the full width; addons stack above/below via block-* */
   .input-group .textarea {
     flex-basis: 100%;
-    min-block-size: 3lh;
-    padding-inline: var(--step-2);
-    padding-block: var(--step-1_5);
+    min-block-size: var(--input-group-textarea-min-block-size);
+    padding-inline: var(--input-group-textarea-padding-inline);
+    padding-block: var(--input-group-textarea-padding-block);
     resize: none;
   }
 
@@ -122,7 +131,8 @@
   }
 
   /* Alignment — inline-start is the default (addon visually leads the control) */
-  .input-group__addon:not([data-align]), .input-group__addon[data-align="inline-start"] {
+  .input-group__addon:not([data-align]),
+  .input-group__addon[data-align="inline-start"] {
     order: -1;
   }
 

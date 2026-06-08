@@ -1,13 +1,5 @@
-@layer components {
-  /* ===========================================================================
-  TABS — .tabs
-  .tabs__list — inline-flex muted track (fits tab row only; panels live outside).
-  .tabs__indicator — card pill anchored to checked label.
-  Panels — direct .tabs children after .tabs__list; order must match tab order.
-  Panel N is shown when the Nth radio in .tabs__list is checked (see rules below).
-  =========================================================================== */
-
-  .tabs {
+@layer variables {
+  :root {
     --tabs-gap: var(--gap-xs);
     --tabs-track-padding: var(--step-0_5);
     --tabs-track-radius: var(--radius-md);
@@ -36,7 +28,19 @@
     --tabs-label-min-height: var(--step-7);
     --tabs-label-ring-color: var(--ring-color);
     --tabs-label-ring-opacity: 0%;
+  }
+}
 
+@layer components {
+  /* ===========================================================================
+  TABS — .tabs
+  .tabs__list — inline-flex muted track (fits tab row only; panels live outside).
+  .tabs__indicator — card pill anchored to checked label.
+  Panels — direct .tabs children after .tabs__list; order must match tab order.
+  Panel N is shown when the Nth radio in .tabs__list is checked (see rules below).
+  =========================================================================== */
+
+  .tabs {
     display: flex;
     flex-direction: column;
     align-items: start;

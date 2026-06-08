@@ -1,3 +1,17 @@
+@layer variables {
+  :root {
+    --mobile-menu-background: var(--background);
+    --mobile-menu-foreground: var(--foreground);
+    --mobile-menu-header-padding-inline: var(--gap-sm);
+    --mobile-menu-header-padding-block: var(--gap-xs);
+    --mobile-menu-body-padding-inline: var(--gap-xs);
+    --mobile-menu-body-padding-block: var(--gap-md);
+    --mobile-menu-footer-padding: var(--gap-sm);
+    --mobile-menu-footer-gap: var(--gap-xs);
+    --mobile-menu-nested-accordion-padding-inline-start: var(--gap-sm);
+  }
+}
+
 @layer components {
   /* ===========================================================================
   MOBILE MENU — full-screen dialog with accordion-based nested navigation
@@ -8,9 +22,6 @@
   .mobile-menu {
     /* View transitions - keeps the menu stable when navigating between pages */
     view-transition-name: global-mobile-menu;
-
-    --mobile-menu-background: var(--background);
-    --mobile-menu-foreground: var(--foreground);
 
     --dialog-background: var(--mobile-menu-background);
     --dialog-foreground: var(--mobile-menu-foreground);
@@ -46,8 +57,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-inline: var(--gap-sm);
-    padding-block: var(--gap-xs);
+    padding-inline: var(--mobile-menu-header-padding-inline);
+    padding-block: var(--mobile-menu-header-padding-block);
     border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
@@ -60,8 +71,8 @@
     flex-direction: column;
     overflow-y: auto;
     overflow-x: clip;
-    padding-inline: var(--gap-xs);
-    padding-block: var(--gap-md);
+    padding-inline: var(--mobile-menu-body-padding-inline);
+    padding-block: var(--mobile-menu-body-padding-block);
     max-block-size: 100%;
     scrollbar-gutter: stable both-edges;
   }
@@ -69,8 +80,8 @@
   .mobile-menu__footer {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xs);
-    padding: var(--gap-sm);
+    gap: var(--mobile-menu-footer-gap);
+    padding: var(--mobile-menu-footer-padding);
     border-top: 1px solid var(--border);
     position: sticky;
     bottom: 0;
@@ -79,7 +90,7 @@
 
   /* Nested accordion inside mobile menu — tighter padding for sub-levels */
   .mobile-menu__body .accordion .accordion {
-    padding-inline-start: var(--gap-sm);
+    padding-inline-start: var(--mobile-menu-nested-accordion-padding-inline-start);
   }
 
   .mobile-menu__body .accordion details:not(:last-child) {
@@ -93,10 +104,10 @@
   /* Slide-right: accordion-style block-size reveal on the viewport (not scaleY). */
   .mobile-menu[data-animation="slide-right"] {
     --dialog-transition-duration: calc(var(--default-transition-duration) * 1.75);
-    --dialog-starting-opacity: 1;
-    --dialog-starting-scale: 1;
-    --dialog-starting-translate: -100%, 0, 0;
-    --dialog-translate: 0, 0, 0;
+    --dialog-opacity--start: 1;
+    --dialog-scale--start: 1;
+    --dialog-translate--start: -100%, 0, 0;
+    --dialog-translate--end: 0, 0, 0;
 
     overflow: clip;
     transform-origin: left center;

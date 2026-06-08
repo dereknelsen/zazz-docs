@@ -1,3 +1,13 @@
+@layer variables {
+  :root {
+    --prose-gap: var(--gap-sm);
+    --prose-figure-gap: var(--gap-xs);
+    --prose-img-radius: var(--radius-md);
+    --prose-img-border: 1px solid var(--border);
+    --prose-link-color: var(--primary);
+  }
+}
+
 @layer reset {
   /* ===========================================================================
   TYPOGRAPHY — base styles for text elements
@@ -19,7 +29,7 @@
   =========================================================================== */
 
   .prose {
-    gap: var(--gap-sm);
+    gap: var(--prose-gap);
     flex-direction: column;
     display: flex;
   }
@@ -91,7 +101,7 @@
   }
 
   .prose a {
-    color: var(--primary);
+    color: var(--prose-link-color);
     text-decoration-line: var(--decoration-line);
     text-decoration-style: var(--decoration-style);
     text-decoration-color: var(--decoration-color);
@@ -125,12 +135,12 @@
     max-inline-size: 100%;
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xs);
+    gap: var(--prose-figure-gap);
   }
 
   .prose img {
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border);
+    border-radius: var(--prose-img-radius);
+    border: var(--prose-img-border);
   }
 
   /* ===========================================================================

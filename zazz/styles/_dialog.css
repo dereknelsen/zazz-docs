@@ -1,3 +1,27 @@
+@layer variables {
+  :root {
+    --dialog-display: grid;
+    --dialog-backdrop-color: var(--shade-800);
+    --dialog-transition-duration: var(--default-transition-duration);
+    --dialog-transition-timing-function: var(--default-transition-timing-function);
+    --dialog-backdrop-transition-duration: calc(var(--dialog-transition-duration) - 100ms);
+    --dialog-backdrop-transition-timing-function: ease;
+    --dialog-backdrop-blur: blur(4px);
+    --dialog-shadow: var(--shadow-lg);
+    --dialog-border: 1px solid var(--border);
+
+    /* Reveal transitions/animations */
+    --dialog-opacity--start: 0;
+    --dialog-opacity--end: 1;
+    --dialog-scale--start: 0.98;
+    --dialog-scale--end: 1;
+    --dialog-translate--start: 0, 0, 0;
+    --dialog-translate--end: 0, 0, 0;
+    --dialog-transition-delay--start: 0ms;
+    --dialog-transition-delay--end: 150ms;
+  }
+}
+
 @layer reset {
   /* ===========================================================================
   DIALOG — native <dialog> open/close animation, sizing, backdrop fade
@@ -12,32 +36,14 @@
 
   /* Dialog animations with spring easing */
   :where(dialog) {
-    --dialog-display: grid;
-    --dialog-starting-opacity: 0;
-    --dialog-opacity: 1;
-    --dialog-starting-scale: 0.98;
-    --dialog-scale: 1;
-    --dialog-starting-translate: 0, 0, 0;
-    --dialog-translate: 0, 0, 0;
-    --dialog-backdrop-color: var(--shade-800);
-    --dialog-transition-duration: var(--default-transition-duration);
-    --dialog-transition-timing-function: var(--default-transition-timing-function);
-    --dialog-transition-starting-delay: 0ms;
-    --dialog-transition-delay: 150ms;
-    --dialog-backdrop-transition-duration: calc(var(--dialog-transition-duration) - 100ms);
-    --dialog-backdrop-transition-timing-function: ease;
-    --dialog-backdrop-blur: blur(4px);
-    --dialog-shadow: var(--shadow-lg);
-    --dialog-border: 1px solid var(--border);
-
     margin: auto;
     max-inline-size: calc(100% - var(--gap-md));
     max-block-size: calc(100% - var(--gap-md));
     border: var(--dialog-border);
     contain: layout style;
-    opacity: var(--dialog-starting-opacity);
+    opacity: var(--dialog-opacity--start);
     box-shadow: var(--dialog-shadow);
-    transform: translate3d(var(--dialog-starting-translate)) scale(var(--dialog-starting-scale));
+    transform: translate3d(var(--dialog-translate--start)) scale(var(--dialog-scale--start));
     transition:
       opacity var(--dialog-transition-duration) var(--dialog-transition-timing-function),
       transform var(--dialog-transition-duration) var(--dialog-transition-timing-function),
@@ -48,18 +54,18 @@
         allow-discrete,
       display var(--dialog-transition-duration) var(--dialog-transition-timing-function)
         allow-discrete;
-    transition-delay: var(--dialog-transition-starting-delay);
+    transition-delay: var(--dialog-transition-delay--start);
   }
 
   :where(dialog[open]) {
-    transform: translate3d(var(--dialog-translate)) scale(var(--dialog-scale));
-    opacity: var(--dialog-opacity);
-    transition-delay: var(--dialog-transition-delay);
+    transform: translate3d(var(--dialog-translate--end)) scale(var(--dialog-scale--end));
+    opacity: var(--dialog-opacity--end);
+    transition-delay: var(--dialog-transition-delay--end);
 
     @starting-style {
-      transition-delay: var(--dialog-transition-starting-delay);
-      transform: translate3d(var(--dialog-starting-translate)) scale(var(--dialog-starting-scale));
-      opacity: var(--dialog-starting-opacity);
+      transition-delay: var(--dialog-transition-delay--start);
+      transform: translate3d(var(--dialog-translate--start)) scale(var(--dialog-scale--start));
+      opacity: var(--dialog-opacity--start);
     }
   }
 
@@ -81,13 +87,19 @@
   }
 }
 
-@layer components {
-  .dialog {
+@layer variables {
+  :root {
     --dialog-width: min(50ch, 100% - var(--gap-md) * 2);
     --dialog-height: fit-content;
     --dialog-background: var(--card);
     --dialog-foreground: var(--card-foreground);
     --dialog-radius: var(--radius-lg);
+  }
+}
+
+@layer components {
+  .dialog {
+    /* Overrides reset-layer --dialog-shadow (reset > variables) */
     --dialog-shadow: var(--shadow-md);
 
     inline-size: var(--dialog-width);

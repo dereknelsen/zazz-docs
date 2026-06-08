@@ -1,3 +1,45 @@
+@layer variables {
+  :root {
+    --field-background: var(--input);
+    --field-background--hover: var(--input);
+    --field-background--focus: var(--background);
+
+    --field-foreground: var(--input-foreground);
+
+    --field-border: var(--border);
+    --field-border--hover: var(--primary);
+    --field-border--focus: var(--primary);
+
+    --field-label-color: inherit;
+    --field-ring-color: var(--ring-color);
+    --ring: color-mix(in oklch, var(--field-ring-color) var(--ring-opacity), transparent);
+    --field-radius: var(--radius-md);
+    --field-button-radius: var(--radius-sm);
+    --field-height: var(--step-8);
+    --field-padding: var(--step-2_5);
+    --field-addon-padding: var(--step-1);
+    --field-gap: var(--step-2);
+    --field-icon-size: var(--step-4);
+
+    --field-display: grid;
+    --field-template-columns: 1fr;
+    --field-align-self: flex-start;
+    --field-inline-size: 100%;
+
+    /* Reveal transitions/animations */
+    --field-hint-translate--start: 0 calc(var(--step-1) * -1);
+    --field-hint-translate--end: 0 0;
+
+    --field-group-display: grid;
+    --field-group-border: 1px solid transparent;
+    --field-group-background: transparent;
+    --field-group-padding: 0;
+    --field-group-margin: 0;
+    --field-group-gap: var(--gap-xs);
+    --field-group-radius: var(--radius-lg);
+  }
+}
+
 @layer components {
   /* ===========================================================================
   FORM — global form behaviour shared across every control
@@ -21,29 +63,6 @@
     Each control aliases these locals so a single override retunes the whole set.
   - Sibling control files only remap these --field-* tokens; this is the owner.
   --------------------------------------------------------------------------- */
-
-  .input, .textarea, .select, .input-group, .password-group {
-    --field-background: var(--input);
-    --field-background--hover: var(--input);
-    --field-background--focus: var(--background);
-
-    --field-foreground: var(--input-foreground);
-
-    --field-border: var(--border);
-    --field-border--hover: var(--primary);
-    --field-border--focus: var(--primary);
-
-    --field-label-color: inherit;
-    --field-ring-color: var(--ring-color);
-    --ring: color-mix(in oklch, var(--field-ring-color) var(--ring-opacity), transparent);
-    --field-radius: var(--radius-md);
-    --field-button-radius: var(--radius-sm);
-    --field-height: var(--step-8);
-    --field-padding: var(--step-2_5);
-    --field-addon-padding: var(--step-1);
-    --field-gap: var(--step-2);
-    --field-icon-size: var(--step-4);
-  }
 
   /* ---------------------------------------------------------------------------
   SHARED DISABLED STATE
@@ -70,13 +89,8 @@
   --------------------------------------------------------------------------- */
 
   .field {
-    --field-display: grid;
-    --field-template-columns: 1fr;
+    /* --field-gap differs from the control family default (step-2) */
     --field-gap: var(--step-1);
-    --field-align-self: flex-start;
-    --field-inline-size: 100%;
-    --field-hint-starting-translate: 0 calc(var(--step-1) * -1);
-    --field-hint-translate: 0 0;
 
     display: var(--field-display);
     grid-template-columns: var(--field-template-columns);
@@ -128,38 +142,38 @@
   .field__hint {
     color: var(--muted-foreground);
     opacity: 1;
-    translate: var(--field-hint-translate);
+    translate: var(--field-hint-translate--end);
     visibility: visible;
   }
 
   .field__error {
     color: var(--destructive);
     opacity: 0;
-    translate: var(--field-hint-starting-translate);
+    translate: var(--field-hint-translate--start);
     visibility: hidden;
   }
 
   /* After interaction: invalid controls turn destructive, reveal the error */
   :where(.field:has(:user-invalid)) .field__hint {
     opacity: 0;
-    translate: var(--field-hint-starting-translate);
+    translate: var(--field-hint-translate--start);
     visibility: hidden;
 
     @starting-style {
       opacity: 1;
-      translate: var(--field-hint-translate);
+      translate: var(--field-hint-translate--end);
       visibility: visible;
     }
   }
 
   :where(.field:has(:user-invalid)) .field__error {
     opacity: 1;
-    translate: var(--field-hint-translate);
+    translate: var(--field-hint-translate--end);
     visibility: visible;
 
     @starting-style {
       opacity: 0;
-      translate: var(--field-hint-starting-translate);
+      translate: var(--field-hint-translate--start);
       visibility: hidden;
     }
   }
@@ -199,14 +213,6 @@
   --------------------------------------------------------------------------- */
 
   .field-group, .radio-group {
-    --field-group-display: grid;
-    --field-group-border: 1px solid transparent;
-    --field-group-background: transparent;
-    --field-group-padding: 0;
-    --field-group-margin: 0;
-    --field-group-gap: var(--gap-xs);
-    --field-group-radius: var(--radius-lg);
-
     display: var(--field-group-display);
     background-color: var(--field-group-background);
     gap: var(--field-group-gap);

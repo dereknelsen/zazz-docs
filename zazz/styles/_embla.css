@@ -1,3 +1,11 @@
+@layer variables {
+  :root {
+    --embla-slide-basis: 100%;
+    --embla-slide-min-width: 0;
+    --embla-touch-action: pan-y pinch-zoom;
+  }
+}
+
 /* ===========================================================================
    EMBLA CAROUSEL STYLES
    - Documentation: https://www.embla-carousel.com/
@@ -17,12 +25,12 @@
 
   [data-embla="container"] {
     display: flex;
-    touch-action: pan-y pinch-zoom;
+    touch-action: var(--embla-touch-action);
   }
 
   [data-embla="slide"] {
-    flex: 0 0 100%;
-    min-width: 0;
+    flex: 0 0 var(--embla-slide-basis);
+    min-width: var(--embla-slide-min-width);
   }
 
   [data-embla="thumbs"] [data-embla="slide"] {

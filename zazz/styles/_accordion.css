@@ -1,3 +1,11 @@
+@layer variables {
+  :root {
+    --accordion-summary-padding-block: var(--gap-sm);
+    --accordion-icon-size: var(--step-4);
+    --accordion-icon-transform-open: rotate(-180deg);
+  }
+}
+
 @layer reset {
   /* ===========================================================================
   DETAILS & SUMMARY — native open/close transition + summary marker reset
@@ -45,23 +53,23 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-block: var(--gap-sm);
+    padding-block: var(--accordion-summary-padding-block);
 
     transition: var(--default-transition);
   }
 
-  .accordion  summary > svg {
+  .accordion summary > svg {
     display: flex;
     align-items: center;
     justify-content: center;
-    inline-size: var(--step-4);
-    block-size: var(--step-4);
+    inline-size: var(--accordion-icon-size);
+    block-size: var(--accordion-icon-size);
     pointer-events: none;
     transition: transform var(--default-transition-duration)
       var(--default-transition-timing-function);
   }
 
   .accordion > details[open] > summary > svg {
-    transform: rotate(-180deg);
+    transform: var(--accordion-icon-transform-open);
   }
 }

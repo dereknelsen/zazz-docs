@@ -1,48 +1,66 @@
+@layer variables {
+  :root {
+    --radio-size: var(--step-4_5);
+    --radio-background: var(--input);
+    --radio-background--checked: var(--primary);
+    --radio-border: var(--border);
+    --radio-border--hover: var(--primary);
+    --radio-border--checked: var(--primary);
+    --radio-radius: var(--radius-full);
+    --radio-background-size: 90%;
+    --radio-dot-foreground: var(--primary-foreground);
+    --radio-dot-inner-stop: 28%;
+    --radio-dot-outer-stop: 30%;
+    --radio-dot-gradient: radial-gradient(
+      circle,
+      var(--radio-dot-foreground) 0 var(--radio-dot-inner-stop),
+      transparent var(--radio-dot-outer-stop)
+    );
+  }
+}
+
 @layer components {
   /* ===========================================================================
   RADIO — .radio (+ .radio-group)
   - appearance: none redraws the circle from theme tokens; the checked dot is a
-    radial-gradient so it tracks --primary-foreground, not colour alone.
+    radial-gradient so it tracks --radio-dot-foreground, not colour alone.
   - Group by shared `name`; wrap in a <fieldset>/<legend> or .radio-group for an
     accessible labelled set.
   =========================================================================== */
 
   .radio {
-    --radio-size: var(--step-4_5);
-
     appearance: none;
     flex-shrink: 0;
     inline-size: var(--radio-size);
     block-size: var(--radio-size);
 
-    background-color: var(--input);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-full);
+    background-color: var(--radio-background);
+    border: 1px solid var(--radio-border);
+    border-radius: var(--radio-radius);
 
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 90%;
+    background-size: var(--radio-background-size);
 
     cursor: pointer;
 
-    outline: var(--ring-size) var(--ring-style) oklch(from var(--ring) l c h / 0);
+    outline: var(--ring-size) var(--ring-style) transparent;
     outline-offset: var(--ring-offset);
 
     transition: var(--default-transition);
   }
 
   .radio:hover {
-    border-color: var(--primary);
+    border-color: var(--radio-border--hover);
   }
 
   .radio:focus-visible {
     outline-color: var(--ring);
   }
 
-  /* Checked fill + dot — tokenised via a gradient so it tracks --primary-foreground */
   .radio:checked {
-    background-color: var(--primary);
-    border-color: var(--primary);
-    background-image: radial-gradient(circle, var(--primary-foreground) 0 28%, transparent 30%);
+    background-color: var(--radio-background--checked);
+    border-color: var(--radio-border--checked);
+    background-image: var(--radio-dot-gradient);
   }
 }

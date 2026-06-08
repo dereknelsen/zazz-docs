@@ -1,3 +1,14 @@
+@layer variables {
+  :root {
+    --select-padding-inline-start: var(--field-padding);
+    --select-padding-inline-end: var(--step-2);
+
+    /* Reveal transitions/animations */
+    --select-scale--start: 0.98;
+    --select-scale--end: 1;
+  }
+}
+
 @layer reset {
   /* ===========================================================================
   SELECT — native <select> internals (::picker, <option>, ::picker-icon)
@@ -13,11 +24,8 @@
   }
 
   :where(.select)::picker(select) {
-    --select-starting-scale: 0.98;
-    --select-scale: 1;
-
     opacity: 0;
-    transform: scale(var(--select-starting-scale));
+    transform: scale(var(--select-scale--start));
 
     transition:
       opacity var(--default-transition-duration) var(--default-transition-timing-function),
@@ -30,13 +38,13 @@
 
   :where(.select:open)::picker(select) {
     opacity: 1;
-    transform: scale(var(--select-scale));
+    transform: scale(var(--select-scale--end));
   }
 
   @starting-style {
     :where(.select:open)::picker(select) {
       opacity: 0;
-      transform: scale(var(--select-starting-scale));
+      transform: scale(var(--select-scale--start));
     }
   }
 
@@ -82,9 +90,6 @@
   =========================================================================== */
 
   .select {
-    --select-padding-inline-start: var(--field-padding);
-    --select-padding-inline-end: var(--step-2);
-
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -106,7 +111,7 @@
     border-radius: var(--field-radius);
     cursor: pointer;
 
-    outline: var(--ring-size) var(--ring-style) oklch(from var(--ring) l c h / 0);
+    outline: var(--ring-size) var(--ring-style) transparent;
     outline-offset: var(--ring-offset);
 
     transition: var(--default-transition);
@@ -116,7 +121,8 @@
     border-color: var(--field-border--hover);
   }
 
-  .select:focus-visible, .select:open {
+  .select:focus-visible,
+  .select:open {
     border-color: var(--field-border--focus);
     outline-color: var(--ring);
   }
@@ -139,7 +145,9 @@
   }
 
   /* Icons anywhere in the control (trigger or options) size to the field icon */
-  .select > button > svg, .select option > svg, .select selectedcontent > svg {
+  .select > button > svg,
+  .select option > svg,
+  .select selectedcontent > svg {
     flex-shrink: 0;
     inline-size: var(--field-icon-size);
     block-size: var(--field-icon-size);

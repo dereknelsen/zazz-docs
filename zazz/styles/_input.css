@@ -1,3 +1,22 @@
+@layer variables {
+  :root {
+    --input-inline-size: 100%;
+    --input-min-inline-size: 0;
+    --input-padding-inline-start: var(--field-padding);
+    --input-padding-inline-end: var(--field-padding);
+    --input-font-size: var(--font-size-sm);
+    --input-line-height: 1;
+    --input-border: 1px solid var(--field-border);
+    --input-border-radius: var(--field-radius);
+
+    --input-calendar-picker-color: currentColor;
+    --input-calendar-picker-icon-size: var(--step-4);
+    --input-calendar-picker-size: var(--step-6);
+    --input-calendar-picker-radius: var(--radius-sm);
+    --input-calendar-picker-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'/%3E%3Crect x='40' y='40' width='176' height='176' rx='8' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3Cline x1='176' y1='24' x2='176' y2='56' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3Cline x1='80' y1='24' x2='80' y2='56' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3Cline x1='40' y1='88' x2='216' y2='88' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3C/svg%3E");
+  }
+}
+
 @layer components {
   /* ===========================================================================
   TEXT INPUTS — .input
@@ -8,24 +27,21 @@
   =========================================================================== */
 
   .input {
-    --input-padding-inline-start: var(--field-padding);
-    --input-padding-inline-end: var(--field-padding);
-
-    inline-size: 100%;
-    min-inline-size: 0;
+    inline-size: var(--input-inline-size);
+    min-inline-size: var(--input-min-inline-size);
     block-size: var(--field-height);
     padding-inline-start: var(--input-padding-inline-start);
     padding-inline-end: var(--input-padding-inline-end);
 
-    font-size: var(--font-size-sm);
-    line-height: 1;
+    font-size: var(--input-font-size);
+    line-height: var(--input-line-height);
     color: var(--field-foreground);
     background-color: var(--field-background);
 
-    border: 1px solid var(--field-border);
-    border-radius: var(--field-radius);
+    border: var(--input-border);
+    border-radius: var(--input-border-radius);
 
-    outline: var(--ring-size) var(--ring-style) oklch(from var(--ring) l c h / 0);
+    outline: var(--ring-size) var(--ring-style) transparent;
     outline-offset: var(--ring-offset);
 
     transition: var(--default-transition);
@@ -42,20 +58,14 @@
     outline-color: var(--ring);
   }
 
-  .input[type="date"], .input[type="time"], .input[type="datetime-local"] {
+  .input[type="date"],
+  .input[type="time"],
+  .input[type="datetime-local"] {
     --input-padding-inline-end: var(--step-1_5);
   }
 
   /* Native date/time controls keep their picker indicator tinted to the text */
   .input::-webkit-calendar-picker-indicator {
-    /* @see https://www.svgbackgrounds.com/tools/svg-to-css/
-    ** Set to Legacy / URL Wrapper to update icon */
-    --input-calendar-picker-color: currentColor;
-    --input-calendar-picker-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'/%3E%3Crect x='40' y='40' width='176' height='176' rx='8' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3Cline x1='176' y1='24' x2='176' y2='56' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3Cline x1='80' y1='24' x2='80' y2='56' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3Cline x1='40' y1='88' x2='216' y2='88' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3C/svg%3E");
-    --input-calendar-picker-icon-size: var(--step-4);
-    --input-calendar-picker-size: var(--step-6);
-    --input-calendar-picker-radius: var(--radius-sm);
-
     cursor: pointer;
     -webkit-appearance: none;
 
@@ -70,7 +80,8 @@
       display var(--default-transition-duration) var(--default-transition-timing-function)
         allow-discrete;
 
-    mask: var(--input-calendar-picker-mask) no-repeat center / var(--input-calendar-picker-icon-size);
+    mask: var(--input-calendar-picker-mask) no-repeat center /
+      var(--input-calendar-picker-icon-size);
     background-size: var(--input-calendar-picker-icon-size);
     background-color: var(--input-calendar-picker-color);
     background-repeat: no-repeat;

@@ -1,9 +1,5 @@
-@layer components {
-  /* ===========================================================================
-  BADGE
-  =========================================================================== */
-
-  .badge {
+@layer variables {
+  :root {
     --badge-ring-color: var(--ring-color);
     --badge-ring-opacity: 0%;
 
@@ -25,7 +21,15 @@
     --badge-radius: var(--radius-sm);
 
     --badge-icon-size: var(--step-3);
+  }
+}
 
+@layer components {
+  /* ===========================================================================
+  BADGE
+  =========================================================================== */
+
+  .badge {
     font-family: var(--font-body);
     font-size: var(--font-size-xs);
     font-weight: var(--weight-strong);

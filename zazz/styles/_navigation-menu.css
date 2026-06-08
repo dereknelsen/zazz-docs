@@ -1,24 +1,37 @@
+@layer variables {
+  :root {
+    --navigation-icon-transition: transform var(--default-transition-duration)
+      var(--default-transition-timing-function);
+    --navigation-icon-transform: rotate(-180deg);
+
+    --navigation-popover-shadow: var(--shadow-md);
+    --navigation-popover-child-radius: var(--radius-sm);
+    --navigation-popover-gap: var(--step-1_5);
+    --navigation-popover-inline-size: min(var(--screen-xs), 100% - var(--gap-md));
+    --navigation-popover-viewport-display: grid;
+    --navigation-popover-viewport-align-items: stretch;
+    --navigation-popover-viewport-justify-items: stretch;
+    --navigation-popover-viewport-template-columns: 1fr;
+    --navigation-popover-viewport-gap: var(--step-1_5);
+    --navigation-popover-viewport-min-inline-size: var(--step-52);
+  }
+}
+
 @layer components {
   .navigation-menu {
     /* View transitions - keeps the header stable when navigating between pages */
     view-transition-name: global-navigation-menu;
 
-    --popover-shadow: var(--shadow-md);
-
-    --popover-child-radius: var(--radius-sm);
-    --popover-gap: var(--step-1_5);
-    --popover-inline-size: min(var(--screen-xs), 100% - var(--gap-md));
-
-    --popover-viewport-display: grid;
-    --popover-viewport-align-items: stretch;
-    --popover-viewport-justify-items: stretch;
-    --popover-viewport-template-columns: 1fr;
-    --popover-viewport-gap: var(--step-1_5);
-    --popover-viewport-min-inline-size: var(--step-52);
-
-    --navigation-icon-transition: transform var(--default-transition-duration)
-      var(--default-transition-timing-function);
-    --navigation-icon-transform: rotate(-180deg);
+    --popover-shadow: var(--navigation-popover-shadow);
+    --popover-child-radius: var(--navigation-popover-child-radius);
+    --popover-gap: var(--navigation-popover-gap);
+    --popover-inline-size: var(--navigation-popover-inline-size);
+    --popover-viewport-display: var(--navigation-popover-viewport-display);
+    --popover-viewport-align-items: var(--navigation-popover-viewport-align-items);
+    --popover-viewport-justify-items: var(--navigation-popover-viewport-justify-items);
+    --popover-viewport-template-columns: var(--navigation-popover-viewport-template-columns);
+    --popover-viewport-gap: var(--navigation-popover-viewport-gap);
+    --popover-viewport-min-inline-size: var(--navigation-popover-viewport-min-inline-size);
 
     display: inline-flex;
     position: relative;
@@ -58,12 +71,15 @@
   }
 
   /* ===========================================================================
-  POPOVER — shares the --popover-* vars consumed by :where([popover]) in _reset.css
+  POPOVER — inherits --popover-* from _popover.css; panel layout overrides here
   =========================================================================== */
 
   .navigation-menu__popover {
     position-anchor: --navigation-menu-trigger;
     max-inline-size: var(--popover-inline-size);
+
+    --popover-padding: 0;
+    --popover-min-inline-size: auto;
 
     /* Default: open below the trigger, aligned to its start edge */
     --popover-position-area: block-end span-inline-end;
@@ -183,7 +199,7 @@
 
   /* Slide-down: accordion-style block-size reveal on the viewport (not scaleY). */
   .navigation-menu__popover[data-size="screen"][data-animation="slide-down"] {
-    --popover-starting-scale: 1;
+    --popover-scale--start: 1;
   }
 
   .navigation-menu__popover[data-animation="slide-down"] > .navigation-menu__viewport {
@@ -198,12 +214,12 @@
   }
 
   .navigation-menu__popover[data-animation="slide-down"]:where(:popover-open, .\:popover-open) {
-    opacity: var(--popover-opacity);
-    transform: scale(var(--popover-scale)) translate3d(var(--popover-translate));
+    opacity: var(--popover-opacity--end);
+    transform: scale(var(--popover-scale--end)) translate3d(var(--popover-translate--end));
 
     @starting-style {
-      opacity: var(--popover-starting-opacity);
-      transform: scale(var(--popover-starting-scale)) translate3d(var(--popover-starting-translate));
+      opacity: var(--popover-opacity--start);
+      transform: scale(var(--popover-scale--start)) translate3d(var(--popover-translate--start));
     }
   }
 

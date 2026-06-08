@@ -1,9 +1,5 @@
-@layer components {
-  /* ===========================================================================
-  BUTTON
-  =========================================================================== */
-
-  .button {
+@layer variables {
+  :root {
     --button-ring-color: var(--ring-color);
     --button-ring-opacity: 0%;
 
@@ -32,7 +28,15 @@
     --button-icon-size: var(--step-4);
 
     --button-shadow: none;
+  }
+}
 
+@layer components {
+  /* ===========================================================================
+  BUTTON
+  =========================================================================== */
+
+  .button {
     font-family: var(--button-font-family);
     font-size: var(--button-font-size);
     font-weight: var(--button-font-weight);

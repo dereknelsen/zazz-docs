@@ -1,3 +1,26 @@
+@layer variables {
+  :root {
+    --lightbox-aspect-ratio: 3 / 2;
+    --lightbox-object-fit: cover;
+    --lightbox-radius: var(--radius-md);
+    --lightbox-slide-radius: var(--radius-lg);
+    --lightbox-thumb-radius: var(--radius-md);
+    --lightbox-thumb-size: var(--step-16);
+    --lightbox-thumb-border: var(--border);
+    --lightbox-thumb-border--active: var(--primary);
+    --lightbox-thumb-opacity: 0.5;
+    --lightbox-thumb-opacity--active: 1;
+    --lightbox-thumb-columns: 6;
+    --lightbox-img-border: 1px solid var(--faded);
+
+    /* Reveal transitions/animations */
+    --lightbox-slide-opacity--start: 0;
+    --lightbox-slide-opacity--end: 1;
+    --lightbox-slide-scale--start: 0.9;
+    --lightbox-slide-scale--end: 1;
+  }
+}
+
 @layer components {
   /* ===========================================================================
   LIGHTBOX — image gallery with fullscreen dialog slideshow
@@ -12,19 +35,6 @@
   --------------------------------------------------------------------------- */
 
   .lightbox {
-    --lightbox-aspect-ratio: 3 / 2;
-    --lightbox-object-fit: cover;
-    --lightbox-radius: var(--radius-md);
-    --lightbox-slide-radius: var(--radius-lg);
-    --lightbox-thumb-radius: var(--radius-md);
-    --lightbox-thumb-size: var(--step-16);
-    --lightbox-thumb-border: var(--border);
-    --lightbox-thumb-border--active: var(--primary);
-    --lightbox-thumb-opacity: 0.5;
-    --lightbox-thumb-opacity--active: 1;
-    --lightbox-thumb-columns: 6;
-    --lightbox-img-border: 1px solid var(--faded);
-
     display: flex;
     flex-direction: column;
   }
@@ -244,10 +254,6 @@
 
   .lightbox__dialog .lightbox__slide img {
     --lightbox-thumb-radius: var(--radius-xs);
-    --lightbox-slide-starting-opacity: 0;
-    --lightbox-slide-opacity: 1;
-    --lightbox-slide-starting-scale: 0.9;
-    --lightbox-slide-scale: 1;
 
     inline-size: auto;
     max-block-size: 100%;
@@ -259,18 +265,18 @@
     transition:
       opacity var(--default-transition-duration) var(--default-transition-timing-function),
       transform var(--default-transition-duration) var(--default-transition-timing-function);
-    opacity: var(--lightbox-slide-starting-opacity);
-    transform: scale(var(--lightbox-slide-starting-scale));
+    opacity: var(--lightbox-slide-opacity--start);
+    transform: scale(var(--lightbox-slide-scale--start));
     pointer-events: auto;
   }
 
   .lightbox__dialog .lightbox__slide.is-in-view.is-snapped img {
-    opacity: 1;
-    transform: scale(var(--lightbox-slide-scale));
+    opacity: var(--lightbox-slide-opacity--end);
+    transform: scale(var(--lightbox-slide-scale--end));
 
     @starting-style {
       opacity: 0;
-      transform: scale(var(--lightbox-slide-starting-scale));
+      transform: scale(var(--lightbox-slide-scale--start));
     }
   }
 

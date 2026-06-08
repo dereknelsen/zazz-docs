@@ -12,9 +12,9 @@
     --button-ring-color: var(--ring-color);
     --button-ring-opacity: 0%;
 
-    --button-font-family: var(--font-body);
+    --button-font-family: var(--font-family-body);
     --button-font-size: var(--font-size-sm);
-    --button-font-weight: var(--weight-strong);
+    --button-font-weight: var(--font-weight-strong);
     --button-line-height: 1;
 
     --button-background: var(--card);
@@ -106,7 +106,8 @@
     outline-color: color-mix(in oklch, var(--button-ring-color) var(--ring-opacity), transparent);
   }
 
-  .button:disabled, .button[aria-disabled="true"] {
+  .button:disabled,
+  .button[aria-disabled="true"] {
     opacity: 0.5;
     cursor: not-allowed;
     pointer-events: none;

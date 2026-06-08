@@ -20,7 +20,7 @@
     --input-group-padding: 0;
     --input-group-cursor: text;
     --input-group-text-color: var(--muted-foreground);
-    --input-group-text-weight: var(--weight-strong);
+    --input-group-text-weight: var(--font-weight-strong);
     --input-group-text-size: var(--font-size-sm);
     --input-group-textarea-min-block-size: 3lh;
     --input-group-textarea-padding-inline: var(--step-2);

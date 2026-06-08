@@ -6,16 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Zazz Example Page</title>
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Geist:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
     <!-- Zazz styles -->
     <link rel="stylesheet" href="../styles/main.css">
 
-    <!-- CDN scripts not recommended for production. If required to use a CDN, create a new SRI hash https://srihash.org/ -->
+    <!-- WARNING: CDN scripts not recommended for production.
+     If you need to use a CDN, create a new SRI hash (@see: https://srihash.org/)
+     and update the integrity attribute. -->
+
+    <!-- [Polyfill] Popover API (June 2026) - -->
     <script src="https://cdn.jsdelivr.net/npm/@oddbird/popover-polyfill@latest"
         integrity="sha384-Gl/j23IcIIiDfqcDI5gpHCxd5EuslCYvs07HAw3KHGx5UcbxizoF/deDnkeEcFXW" crossOrigin="anonymous"
         defer></script>
+
+    <!-- [Polyfill] Invokers/tooltip (June 2026) - -->
+    <script type="module" src="https://esm.sh/invokers/compatible"
+        integrity="sha384-fzLqSi8WSEqp/tW3neqEgzl53fvLw4u32RAvoNQSSSAfKGsOrfA2B49xhrObWFnr" crossorigin="anonymous"
+        defer></script>
+
+    <!-- Embla Carousel -->
     <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"
         integrity="sha384-XGqLM9+dJ+PFOMZn6IuZgRRIoxcAT5fx4eIZCx7K3O2Dj5RA7EOlJ3yOS8Jd+kiY" crossOrigin="anonymous"
         defer></script>
+
+    <!-- Embla Carousel Plugins -->
     <script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"
         integrity="sha384-rs7pDLCh+QtEjJg2VChAoKZHaaz7apuon6rM57E3FdzC83xaJH4n9mQZn4E2s3f4" crossOrigin="anonymous"
         defer></script>
@@ -38,17 +58,23 @@
 
 <body>
     <header data-transition-layer="global-navigation">
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
+        <nav class="container flex items-center justify-between py-md">
+            <h1 class="text-lg font-strong">ACME</h1>
+            <menu class="flex items-center gap-4">
+                <li><a class="button" data-variant="ghost" href="#">Home</a></li>
+                <li><a class="button" data-variant="ghost" href="#">About</a></li>
+                <li><a class="button" data-variant="ghost" href="#">Contact</a></li>
+            </menu>
         </nav>
     </header>
     <main>
-        <h1>Zazz Examples</h1>
-        <p>This is a test of the Zazz examples page.</p>
+        <section class="prose container">
+            <hgroup>
+                <span class="text-eyebrow">Heading 1</span>
+                <h1>How vexingly quick daft zebras jump.</h1>
+                <p class="text-xl text-muted-foreground">The Art of Typography</p>
+            </hgroup>
+        </section>
     </main>
     <footer data-transition-layer="global-footer">
         <nav>

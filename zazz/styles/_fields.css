@@ -124,7 +124,7 @@
     align-self: start;
     color: var(--field-label-color);
     font-size: var(--font-size-sm);
-    font-weight: var(--weight-strong);
+    font-weight: var(--font-weight-strong);
     text-align: start;
   }
 
@@ -143,13 +143,15 @@
   }
 
   /* Hint and error stack in the same grid area — only one is visible at a time */
-  .field__hint, .field__error {
+  .field__hint,
+  .field__error {
     grid-area: msg;
     display: inline-flex;
     transition:
       opacity var(--default-transition-duration) var(--default-transition-timing-function),
       translate var(--default-transition-duration) var(--default-transition-timing-function),
-      visibility var(--default-transition-duration) var(--default-transition-timing-function) allow-discrete;
+      visibility var(--default-transition-duration) var(--default-transition-timing-function)
+        allow-discrete;
   }
 
   .field__hint {
@@ -225,7 +227,8 @@
     .field__label instead, never lean on the legend as a stand-in label.
   --------------------------------------------------------------------------- */
 
-  .field-group, .radio-group {
+  .field-group,
+  .radio-group {
     display: var(--field-group-display);
     background-color: var(--field-group-background);
     gap: var(--field-group-gap);
@@ -236,12 +239,13 @@
   }
 
   /* Legend reads as the group's label — same weight/size as a .field__label */
-  .field-group > legend, .radio-group > legend {
+  .field-group > legend,
+  .radio-group > legend {
     padding: 0;
     margin-block: 0 var(--step-1_5);
     color: var(--field-label-color, inherit);
     font-size: var(--font-size-sm);
-    font-weight: var(--weight-strong);
+    font-weight: var(--font-weight-strong);
   }
 
   /* ===========================================================================

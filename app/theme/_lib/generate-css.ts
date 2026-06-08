@@ -164,9 +164,9 @@ export function generateThemeCSS(theme: ThemeConfig): string {
   out.push("  * ========================================================================== */");
   out.push("");
   out.push("  /* font-family */");
-  out.push(`  --font-body: ${typography.fonts.body};`);
-  out.push(`  --font-heading: ${typography.fonts.heading};`);
-  out.push(`  --font-mono: ${typography.fonts.mono};`);
+  out.push(`  --font-family-body: ${typography.fonts.body};`);
+  out.push(`  --font-family-heading: ${typography.fonts.heading};`);
+  out.push(`  --font-family-mono: ${typography.fonts.mono};`);
   out.push("");
   out.push("  /* font-size — fluid clamp() from Desktop/Mobile Figma values */");
   for (const name of FONT_SIZE_NAMES) {
@@ -174,11 +174,11 @@ export function generateThemeCSS(theme: ThemeConfig): string {
   }
   out.push("");
   out.push("  /* font-weight */");
-  out.push(`  --weight-body: ${typography.weights.body};`);
-  out.push(`  --weight-heading: ${typography.weights.heading};`);
-  out.push(`  --weight-strong: ${typography.weights.strong};`);
-  out.push(`  --weight-mono: ${typography.weights.mono};`);
-  out.push(`  --weight-eyebrow: ${typography.weights.eyebrow};`);
+  out.push(`  --font-weight-body: ${typography.weights.body};`);
+  out.push(`  --font-weight-heading: ${typography.weights.heading};`);
+  out.push(`  --font-weight-strong: ${typography.weights.strong};`);
+  out.push(`  --font-weight-mono: ${typography.weights.mono};`);
+  out.push(`  --font-weight-eyebrow: ${typography.weights.eyebrow};`);
   out.push("");
   out.push("  /* letter-spacing */");
   for (const name of FONT_SIZE_NAMES) {

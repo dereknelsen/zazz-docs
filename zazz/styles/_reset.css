@@ -35,7 +35,7 @@
   =========================================================================== */
 
   :where(html) {
-    font-family: var(--font-body, sans-serif);
+    font-family: var(--font-family-body, sans-serif);
     font-size: 16px;
     line-height: 1.5;
     tab-size: 4;
@@ -79,7 +79,7 @@
   }
 
   :where(b, strong) {
-    font-weight: var(--weight-strong);
+    font-weight: var(--font-weight-strong);
   }
 
   :where(main) {
@@ -181,7 +181,7 @@
   }
 
   :where(kbd) {
-    --kbd-font-family: var(--font-body);
+    --kbd-font-family: var(--font-family-body);
     --kbd-font-size: var(--font-size-sm);
     --kbd-line-height: 1;
     --kbd-display: inline-flex;

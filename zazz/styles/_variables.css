@@ -169,9 +169,17 @@
     * ========================================================================== */
 
     /* font-family */
-    --font-body: var(--font-geist-sans);
-    --font-heading: var(--font-geist-sans);
-    --font-mono: var(--font-geist-mono);
+    --font-sans:
+      "Geist", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol", "Noto Color Emoji";
+    --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    --font-mono:
+      "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+
+    /* semantic font-families */
+    --font-family-body: var(--font-sans);
+    --font-family-heading: var(--font-sans);
 
     /* font-size — fluid clamp() */
     --font-size-eyebrow: clamp(0.512rem, 0.609rem + -0.1213vi, 0.5787rem);
@@ -189,20 +197,20 @@
     --font-size-display: clamp(2.5658rem, 1.0227rem + 6.1721vi, 5.9605rem);
 
     /* font-weight */
-    --weight-body: 400;
-    --weight-heading: 600;
-    --weight-strong: 500;
-    --weight-mono: 400;
-    --weight-eyebrow: 600;
+    --font-weight-body: 400;
+    --font-weight-heading: 600;
+    --font-weight-strong: 500;
+    --font-weight-mono: 400;
+    --font-weight-eyebrow: 600;
 
     /* letter-spacing */
-    --tracking-display: -0.1em;
-    --tracking-h1: -0.1em;
-    --tracking-h2: -0.075em;
-    --tracking-h3: -0.075em;
-    --tracking-h4: -0.04em;
-    --tracking-h5: -0.025em;
-    --tracking-h6: -0.02em;
+    --tracking-display: -0.05em;
+    --tracking-h1: -0.05em;
+    --tracking-h2: -0.025em;
+    --tracking-h3: -0.025em;
+    --tracking-h4: -0.015em;
+    --tracking-h5: -0.01em;
+    --tracking-h6: -0.005em;
     --tracking-xl: 0em;
     --tracking-lg: 0em;
     --tracking-md: 0em;

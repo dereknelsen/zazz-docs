@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { Logo } from "@/components/logo";
 import ZazzLineartBg from "@/components/zazz-lineart-bg";
+import { cn } from "@/lib/cn";
 
 const links = [
   { label: "Read the docs", href: "/docs", external: false },
@@ -19,62 +21,109 @@ const links = [
   },
 ] as const;
 
-function Arrow() {
-  return (
-    <svg className="home__link-arrow" viewBox="0 0 14 14" fill="none" aria-hidden>
-      <path
-        d="M3.5 10.5L10.5 3.5M10.5 3.5H4.6M10.5 3.5V9.4"
-        stroke="currentColor"
-        strokeWidth="1.25"
-        strokeLinecap="square"
-      />
-    </svg>
-  );
-}
+const linkDelays = ["delay-300", "delay-500", "delay-500", "delay-700", "delay-700", "delay-1000"] as const;
+
+const linkClassName = cn(
+  "group inline-flex w-fit items-center gap-3.5 py-0.5 text-sm leading-tight tracking-tight",
+  "text-fd-foreground no-underline transition-colors duration-200 hover:text-fd-primary",
+  "focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-fd-ring focus-visible:ring-offset-4 focus-visible:outline-none",
+  "motion-safe:animate-fd-fade-in motion-safe:opacity-0 motion-reduce:opacity-100",
+);
+
+const fadeInClassName = cn(
+  "motion-safe:animate-fd-fade-in motion-safe:opacity-0 motion-reduce:opacity-100",
+);
 
 export default function HomePage() {
   return (
-    <div className="home">
-      <ZazzLineartBg className="home__bg" preserveAspectRatio="xMidYMid slice" aria-hidden />
+    <div className="relative isolate flex min-h-dvh w-full flex-col overflow-hidden bg-fd-background text-fd-foreground">
+      <ZazzLineartBg
+        className="pointer-events-none absolute inset-0 z-0 h-full w-full text-fd-foreground"
+        preserveAspectRatio="xMidYMid slice"
+        aria-hidden
+      />
 
-      <div className="home__inner">
-        <Logo variant="lockup" className="home__logo" />
+      <div className="relative z-10 grid min-h-dvh flex-1 grid-cols-2 gap-8 p-6 lg:gap-16 lg:p-16 max-md:grid-cols-1 max-md:gap-8">
+        <Logo
+          variant="lockup"
+          className={cn(
+            "col-start-1 row-start-1 h-auto w-28 justify-self-start self-start text-fd-foreground lg:w-36",
+            fadeInClassName,
+            "delay-100",
+          )}
+        />
 
-        <p className="home__meta">v0.4.4 · A design framework</p>
+        <p
+          className={cn(
+            "col-start-2 row-start-1 justify-self-end self-start font-mono text-xs tracking-widest text-fd-muted-foreground uppercase",
+            fadeInClassName,
+            "delay-200",
+            "max-md:col-start-1 max-md:row-start-2 max-md:justify-self-start",
+          )}
+        >
+          v0.4.4 · A design framework
+        </p>
 
-        <ul className="home__links">
-          {links.map((l) =>
-            l.external ? (
+        <div
+          className={cn(
+            "col-start-1 row-start-2 flex flex-col gap-3.5 self-end",
+            "max-md:col-start-1 max-md:row-start-3 max-md:self-start",
+          )}
+        >
+          {links.map((l, i) => {
+            const className = cn(linkClassName, linkDelays[i]);
+
+            return l.external ? (
               <a
                 key={l.label}
-                className="home__link"
+                className={className}
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Arrow />
+                <ArrowUpRight
+                  className="size-3.5 shrink-0 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  aria-hidden
+                />
                 <span>{l.label}</span>
               </a>
             ) : (
-              <Link key={l.label} className="home__link" href={l.href}>
-                <Arrow />
+              <Link key={l.label} className={className} href={l.href}>
+                <ArrowUpRight
+                  className="size-3.5 shrink-0 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  aria-hidden
+                />
                 <span>{l.label}</span>
               </Link>
-            ),
-          )}
-        </ul>
+            );
+          })}
+        </div>
 
-        <h1 className="home__title">
-          <span className="home__title-line">Zazz</span>
-          <span className="home__title-line">Design</span>
-          <span className="home__title-line">Framework</span>
+        <h1
+          className={cn(
+            "col-start-2 row-start-2 m-0 justify-self-end self-end text-right text-5xl leading-none font-bold tracking-tight text-fd-foreground sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl",
+            fadeInClassName,
+            "delay-200",
+            "max-md:col-start-1 max-md:row-start-4 max-md:justify-self-start max-md:self-end max-md:text-left",
+          )}
+        >
+          <span className="block">Zazz</span>
+          <span className="block">Design</span>
+          <span className="block">Framework</span>
         </h1>
 
-        <div className="home__footer">
+        <div
+          className={cn(
+            "col-span-full row-start-3 flex items-center justify-between gap-4 pt-4 font-mono text-xs tracking-widest text-fd-muted-foreground uppercase",
+            fadeInClassName,
+            "delay-700",
+            "max-md:col-start-1 max-md:row-start-5 max-md:flex-col max-md:items-start max-md:gap-2",
+          )}
+        >
           <span>
             Designed and maintained by{" "}
             <a
-              className="home__footer-link"
+              className="text-fd-foreground no-underline transition-opacity duration-200 hover:opacity-80"
               href="https://github.com/dereknelsen"
               target="_blank"
               rel="noopener noreferrer"

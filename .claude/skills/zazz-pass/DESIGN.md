@@ -338,20 +338,20 @@ All status foregrounds are white. Status steps **darker** in dark mode (opposite
 
 ### Font Families
 
-| Token            | Stack                                         | Role               |
-| ---------------- | --------------------------------------------- | ------------------ |
-| `--font-body`    | Geist, Verdana, sans-serif                    | Body copy, UI text |
-| `--font-heading` | Geist, Verdana, sans-serif                    | Headings, display  |
-| `--font-mono`    | "Geist Mono", "Palatino Linotype", sans-serif | Code, tabular data |
+| Token                   | Stack                                         | Role               |
+| ----------------------- | --------------------------------------------- | ------------------ |
+| `--font-family-body`    | Geist, Verdana, sans-serif                    | Body copy, UI text |
+| `--font-family-heading` | Geist, Verdana, sans-serif                    | Headings, display  |
+| `--font-family-mono`    | "Geist Mono", "Palatino Linotype", sans-serif | Code, tabular data |
 
 ### Weights
 
-| Token              | Value | Usage                       |
-| ------------------ | ----- | --------------------------- |
-| `--weight-body`    | 400   | All body text               |
-| `--weight-heading` | 600   | All headings, display       |
-| `--weight-strong`  | 500   | Bold/strong inline emphasis |
-| `--weight-eyebrow` | 600   | Eyebrow labels              |
+| Token                   | Value | Usage                       |
+| ----------------------- | ----- | --------------------------- |
+| `--font-weight-body`    | 400   | All body text               |
+| `--font-weight-heading` | 600   | All headings, display       |
+| `--font-weight-strong`  | 500   | Bold/strong inline emphasis |
+| `--font-weight-eyebrow` | 600   | Eyebrow labels              |
 
 ### Type Scale
 
@@ -394,7 +394,7 @@ Subtly rounded (`--radius-md`, ~10px). Fixed height (`--step-8`). Variants: **de
 
 ### Badges
 
-Gently rounded chips (`--radius-sm`, ~6px). Height `--step-5`. Same variant names as button. `--font-size-xs`, `--weight-strong`.
+Gently rounded chips (`--radius-sm`, ~6px). Height `--step-5`. Same variant names as button. `--font-size-xs`, `--font-weight-strong`.
 
 ### Dialog
 

@@ -6,6 +6,7 @@ import "./_typography.css";
 import "./_badge.css";
 import "./_button.css";
 import "./_accordion.css";
+import "./_popover.css";
 import "./_dialog.css";
 import "./_dropdown.css";
 import "./_navigation-menu.css";

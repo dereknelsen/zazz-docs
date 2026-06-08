@@ -6,6 +6,9 @@
   =========================================================================== */
 
   .mobile-menu {
+    /* View transitions - keeps the menu stable when navigating between pages */
+    view-transition-name: global-mobile-menu;
+
     --mobile-menu-background: var(--background);
     --mobile-menu-foreground: var(--foreground);
 
@@ -14,7 +17,6 @@
 
     overflow: clip;
   }
-
 
   .mobile-menu__viewport {
     display: grid;
@@ -39,8 +41,6 @@
       transform: scale(0.98) translateY(1rem);
     }
   }
-
-  
 
   .mobile-menu__header {
     display: flex;
@@ -101,5 +101,4 @@
     overflow: clip;
     transform-origin: left center;
   }
-
 }

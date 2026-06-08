@@ -1,5 +1,8 @@
 @layer components {
   .navigation-menu {
+    /* View transitions - keeps the header stable when navigating between pages */
+    view-transition-name: global-navigation-menu;
+
     --popover-shadow: var(--shadow-md);
 
     --popover-child-radius: var(--radius-sm);

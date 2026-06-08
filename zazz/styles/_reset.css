@@ -73,6 +73,9 @@
     min-height: 100svh;
     container-type: inline-size;
     container-name: main;
+
+    /* View transitions - Main content is isolated from the rest of the page and can be animated independently of, for example, the header or footer */
+    view-transition-name: global-main-content;
   }
 
   :where(header, footer, section, article) {

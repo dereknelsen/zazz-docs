@@ -1,4 +1,13 @@
-<label class="field">
-  <input type="checkbox" role="switch" checked />
-  <span class="field__label">Enable notifications</span>
-</label>
+<fieldset class="field-group">
+  <legend>Notifications</legend>
+  <div class="flex flex-col gap-xs">
+    <label class="field" data-direction="horizontal">
+      <input type="checkbox" role="switch" name="notifications-email" />
+      <span class="field__label">Email notifications</span>
+    </label>
+    <label class="field" data-direction="horizontal">
+      <input type="checkbox" role="switch" name="notifications-2fa" checked />
+      <span class="field__label">Two-factor authentication</span>
+    </label>
+  </div>
+</fieldset>

@@ -34,20 +34,41 @@
  * - data-reveal-scale="0.5"              (Optional: Override initial scale - requires JS mod)
  */
 
-@layer utilities {
-  /* --- Global Variables (Set by JS on :root) --- */
+@layer variables {
   :root {
-    --reveal-global-duration: var(--default-transition-duration, 900ms);
-    --reveal-global-ease: var(
-      --default-transition-timing-function,
-      cubic-bezier(0.4, 0, 0.2, 1)
-    );
+    --reveal-global-duration: var(--default-transition-duration);
+    --reveal-global-ease: var(--default-transition-timing-function);
     --reveal-global-wait: 0ms;
     --reveal-global-distance: 3rem;
     --reveal-global-grow: 0.95;
     /* Default initial scale for grow */
     --reveal-global-shrink: 1.05;
     /* Default initial scale for shrink */
+  }
+}
+
+@layer utilities {
+  /* View transitions - Main content is isolated from the rest of the page and can be animated independently of, for example, the header or footer */
+  ::view-transition-old(global-main-content) {
+    animation: global-page-transition--old var(--reveal-global-duration) var(--reveal-global-ease)
+      forwards;
+  }
+
+  ::view-transition-new(global-main-content) {
+    animation: global-page-transition--new var(--reveal-global-duration) var(--reveal-global-ease)
+      forwards;
+  }
+
+  @keyframes global-page-transition--old {
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes global-page-transition--new {
+    from {
+      opacity: 0;
+    }
   }
 
   /* --- Animation Styles --- */
@@ -56,16 +77,10 @@
       [data-reveal]:not([data-gjs-type]),
       [data-reveal-each]:not([data-gjs-type]) > *:not([data-gjs-type])
     ) {
-      --reveal-effective-duration: var(
-        --reveal-duration,
-        var(--reveal-global-duration)
-      );
+      --reveal-effective-duration: var(--reveal-duration, var(--reveal-global-duration));
       --reveal-effective-ease: var(--reveal-ease, var(--reveal-global-ease));
       --reveal-effective-wait: var(--reveal-wait, var(--reveal-global-wait));
-      --reveal-effective-distance: var(
-        --reveal-distance,
-        var(--reveal-global-distance)
-      );
+      --reveal-effective-distance: var(--reveal-distance, var(--reveal-global-distance));
       transition-timing-function: var(--reveal-effective-ease);
       transition-duration: var(--reveal-effective-duration);
       transition-delay: var(--reveal-effective-wait);
@@ -76,26 +91,22 @@
 
     /* Slide animations */
     [data-reveal="slide-up"]:not(:where(.in-viewport, [data-gjs-type])),
-    [data-reveal-each="slide-up"]
-      > *:not(:where(.in-viewport, [data-gjs-type])) {
+    [data-reveal-each="slide-up"] > *:not(:where(.in-viewport, [data-gjs-type])) {
       transform: translateY(var(--reveal-effective-distance));
     }
 
     [data-reveal="slide-down"]:not(:where(.in-viewport, [data-gjs-type])),
-    [data-reveal-each="slide-down"]
-      > *:not(:where(.in-viewport, [data-gjs-type])) {
+    [data-reveal-each="slide-down"] > *:not(:where(.in-viewport, [data-gjs-type])) {
       transform: translateY(calc(-1 * var(--reveal-effective-distance)));
     }
 
     [data-reveal="slide-left"]:not(:where(.in-viewport, [data-gjs-type])),
-    [data-reveal-each="slide-left"]
-      > *:not(:where(.in-viewport, [data-gjs-type])) {
+    [data-reveal-each="slide-left"] > *:not(:where(.in-viewport, [data-gjs-type])) {
       transform: translateX(var(--reveal-effective-distance));
     }
 
     [data-reveal="slide-right"]:not(:where(.in-viewport, [data-gjs-type])),
-    [data-reveal-each="slide-right"]
-      > *:not(:where(.in-viewport, [data-gjs-type])) {
+    [data-reveal-each="slide-right"] > *:not(:where(.in-viewport, [data-gjs-type])) {
       transform: translateX(calc(-1 * var(--reveal-effective-distance)));
     }
 

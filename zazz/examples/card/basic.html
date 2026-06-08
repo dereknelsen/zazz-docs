@@ -1,25 +1,32 @@
 <a class="card" href="#">
-  <div class="card__figure">
-    <img class="card__image" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=60" alt="" />
-  </div>
+  <figure class="card__figure">
+    <img class="card__image" width="300" height="200" loading="lazy"
+      src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=300&h=200&q=60"
+      alt="How quickly zebras jump" />
+    <figcaption class="sr-only">How quickly zebras jump</figcaption>
+  </figure>
   <div class="card__content">
     <div class="card__tags">
-      <span class="badge" data-variant="link">Field notes</span>
+      <span class="badge" data-variant="muted">Field notes</span>
     </div>
     <div class="card__body">
       <span class="card__title-link">
         <h3 class="card__title text-h6">How quickly zebras jump</h3>
       </span>
-      <p class="card__description text-sm text-muted-foreground line-clamp-2">Short excerpt that wraps to two lines before truncating. Demonstrates the default card composition.</p>
+      <p class="card__description text-sm text-muted-foreground line-clamp-2">Short excerpt that wraps to two lines
+        before truncating. Demonstrates the default card composition.</p>
     </div>
     <div class="card__footer">
       <div class="avatar-author">
-        <div class="avatar">
-          <div class="avatar__initials">DN</div>
-        </div>
+        <figure class="avatar">
+          <img class="avatar__profile" width="40" height="40" loading="lazy"
+            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=facearea&facepad=2&w=40&h=40&q=70"
+            alt="John Doe" />
+          <figcaption class="sr-only">John Doe</figcaption>
+        </figure>
         <div class="avatar-author__info">
-          <span class="avatar-author__name text-sm">Derek Nelsen</span>
-          <span class="avatar-author__description text-xs text-muted-foreground">15 Mar 2025</span>
+          <span class="avatar-author__name text-sm">John Doe</span>
+          <span class="avatar-author__description text-xs text-muted-foreground">Founder, ACME Inc.</span>
         </div>
       </div>
       <span class="card__button button" data-variant="muted">Read article</span>

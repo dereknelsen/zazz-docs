@@ -110,11 +110,13 @@
     text-underline-offset: var(--decoration-offset--active);
   }
 
-  .prose strong, .prose b {
+  .prose strong,
+  .prose b {
     font-weight: var(--weight-strong);
   }
 
-  .prose em, .prose i {
+  .prose em,
+  .prose i {
     font-style: italic;
   }
 
@@ -122,6 +124,8 @@
     inline-size: 100%;
     max-inline-size: 100%;
     display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
   }
 
   .prose img {
@@ -142,27 +146,33 @@
     margin-block-start: var(--paragraph-spacing-display);
   }
 
-  .prose .text-h1:not(:first-child), .prose h1:not(:first-child) {
+  .prose .text-h1:not(:first-child),
+  .prose h1:not(:first-child) {
     margin-block-start: var(--paragraph-spacing-display);
   }
 
-  .prose .text-h2:not(:first-child), .prose h2:not(:first-child) {
+  .prose .text-h2:not(:first-child),
+  .prose h2:not(:first-child) {
     margin-block-start: var(--paragraph-spacing-h2);
   }
 
-  .prose .text-h3:not(:first-child), .prose h3:not(:first-child) {
+  .prose .text-h3:not(:first-child),
+  .prose h3:not(:first-child) {
     margin-block-start: var(--paragraph-spacing-h3);
   }
 
-  .prose .text-h4:not(:first-child), .prose h4:not(:first-child) {
+  .prose .text-h4:not(:first-child),
+  .prose h4:not(:first-child) {
     margin-block-start: var(--paragraph-spacing-h4);
   }
 
-  .prose .text-h5:not(:first-child), .prose h5:not(:first-child) {
+  .prose .text-h5:not(:first-child),
+  .prose h5:not(:first-child) {
     margin-block-start: var(--paragraph-spacing-h5);
   }
 
-  .prose .text-h6:not(:first-child), .prose h6:not(:first-child) {
+  .prose .text-h6:not(:first-child),
+  .prose h6:not(:first-child) {
     margin-block-start: var(--paragraph-spacing-h6);
   }
 
@@ -174,7 +184,8 @@
     margin-block-start: var(--paragraph-spacing-lg);
   }
 
-  .prose .text-md:not(:first-child), .prose p:not(:first-child) {
+  .prose .text-md:not(:first-child),
+  .prose p:not(:first-child) {
     margin-block-start: var(--paragraph-spacing-md);
   }
 

@@ -106,12 +106,6 @@
   a[href].badge[aria-disabled="true"] {
     opacity: 0.5;
     cursor: not-allowed;
-    pointer-events: none;
-  }
-
-  button.badge:disabled,
-  a[href].badge:disabled {
-    pointer-events: none;
   }
 
   button.badge[aria-busy="true"],

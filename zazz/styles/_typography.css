@@ -3,9 +3,9 @@
  *
  * @layer      variables, reset, components, utilities
  * @requires   _layers.css, _variables.css, _reset.css (figcaption baseline)
- * @uses       Fluid type scale — consumes --font-size-*, --leading-*,
- *             --tracking-* from _variables.css (also exposes matching .text-*
- *             utilities in this file)
+ * @uses       Type tokens — consumes --font-family-*, --font-size-*,
+ *             --font-weight-*, --leading-*, --tracking-* from _variables.css;
+ *             exposes .text-* (scale) and Tailwind-style .font-* (weight) utilities
  * @uses       font-optical-sizing — heading optical size
  * @tokens     --prose-* (@layer variables)
  */
@@ -156,10 +156,6 @@
   PARAGRAPH RHYTHM — top margin on non-first blocks within .prose
   =========================================================================== */
 
-  :where(hgroup.prose) {
-    font-size: var(--font-size-xl);
-  }
-
   :where(.prose hgroup:not(:first-child)) {
     font-size: var(--font-size-xl);
     margin-block-start: var(--paragraph-spacing-xl);
@@ -228,11 +224,15 @@
   .prose .text-eyebrow + * {
     margin-block-start: 0;
   }
+
+  .prose .text-eyebrow:has(+ *) {
+    margin-block-end: var(--paragraph-spacing-eyebrow);
+  }
 }
 
 @layer utilities {
   /* ===========================================================================
-  TYPOGRAPHY — fluid type scale utilities
+  TYPOGRAPHY — type scale, weight & link utilities
   =========================================================================== */
 
   :where(.text-display) {
@@ -336,6 +336,7 @@
   }
 
   :where(.text-eyebrow) {
+    display: inline-flex;
     font-size: var(--font-size-eyebrow);
     line-height: var(--leading-eyebrow);
     font-weight: var(--font-weight-eyebrow);
@@ -401,11 +402,11 @@
   }
 
   /* Semantic font weights */
-  :where(.font-normal) {
+  :where(.font-body) {
     font-weight: var(--font-weight-body);
   }
 
-  :where(.font-title) {
+  :where(.font-heading) {
     font-weight: var(--font-weight-heading);
   }
 

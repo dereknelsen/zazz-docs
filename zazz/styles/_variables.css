@@ -182,9 +182,9 @@
     --font-family-heading: var(--font-sans);
 
     /* font-size — fluid clamp() */
-    --font-size-eyebrow: clamp(0.512rem, 0.609rem + -0.1213vi, 0.5787rem);
-    --font-size-xs: clamp(0.64rem, 0.8584rem + -0.273vi, 0.7901rem);
-    --font-size-sm: clamp(0.8rem, 0.9293rem + -0.1616vi, 0.8889rem);
+    --font-size-eyebrow: clamp(0.512rem, 0.609rem + 0.1213vi, 0.5787rem);
+    --font-size-xs: clamp(0.64rem, 0.8584rem + 0.273vi, 0.7901rem);
+    --font-size-sm: clamp(0.8rem, 0.9293rem + 0.1616vi, 0.8889rem);
     --font-size-md: clamp(1rem, 1rem + 0vi, 1rem);
     --font-size-lg: clamp(1.125rem, 1.0682rem + 0.2273vi, 1.25rem);
     --font-size-xl: clamp(1.2656rem, 1.1307rem + 0.5398vi, 1.5625rem);

@@ -46,13 +46,13 @@ without `!important`.
 
 A component file is written top-to-bottom in this order:
 
-| # | Section | Layer | Required? |
-|---|---------|-------|-----------|
-| 1 | CSSDoc header | — | always |
-| 2 | Component token hooks | `@layer variables` | when the component has tokens |
-| 3 | Native-element baselines | `@layer reset` | only if it redraws native UI |
-| 4 | Component rules | `@layer components` | the component itself |
-| 5 | Utility classes | `@layer utilities` | only if it ships utilities |
+| #   | Section                  | Layer               | Required?                     |
+| --- | ------------------------ | ------------------- | ----------------------------- |
+| 1   | CSSDoc header            | —                   | always                        |
+| 2   | Component token hooks    | `@layer variables`  | when the component has tokens |
+| 3   | Native-element baselines | `@layer reset`      | only if it redraws native UI  |
+| 4   | Component rules          | `@layer components` | the component itself          |
+| 5   | Utility classes          | `@layer utilities`  | only if it ships utilities    |
 
 ```css
 /**
@@ -81,7 +81,7 @@ The four layers, by responsibility:
 
 - **`variables`** — token declarations only (`:root { --x: … }`). Global tokens live in
   [`_variables.css`](./_variables.css); each component adds its own namespace here.
-- **`reset`** — native-element baselines and control internals that must *lose* to
+- **`reset`** — native-element baselines and control internals that must _lose_ to
   component rules (e.g. `::details-content` in [`_accordion.css`](./_accordion.css),
   the `::picker` chrome in [`_select.css`](./_select.css), the redrawn switch in
   [`_switch.css`](./_switch.css)). [`_reset.css`](./_reset.css) owns the global baseline.
@@ -99,21 +99,21 @@ column** (tag name padded to 11 chars + a space) so headers scan like a table.
 
 ### Tag reference
 
-| Tag           | Required | Meaning |
-|---------------|----------|---------|
-| *(summary)*   | yes | First line: `_file.css — Component (.selector)`. Kept verbatim. |
-| `@layer`      | yes | Cascade layers this file contributes to, in order: `variables, components`. |
-| `@requires`   | yes | Load-order dependencies — files that must load before this one. `none` for `_layers.css`. |
-| `@uses`       | — | One modern CSS API/feature per line, with an inline `— note`. Flag support caveats here. |
-| `@tokens`     | when owned | The token namespace this file exposes = its override hooks, e.g. `--button-* (@layer variables)`. |
-| `@consumedby` | when applicable | Reverse dependency — files that build on this one. |
-| `@see`        | — | External URL or cross-file reference. (Replaces the old block `@link`.) |
-| `@example`    | — | Usage markup. Used where authoring is non-obvious (`_reveal.css`). |
-| `@version` / `@since` | — | Optional, for versioned subsystems (`_reveal.css`). |
+| Tag                   | Required        | Meaning                                                                                           |
+| --------------------- | --------------- | ------------------------------------------------------------------------------------------------- |
+| _(summary)_           | yes             | First line: `_file.css — Component (.selector)`. Kept verbatim.                                   |
+| `@layer`              | yes             | Cascade layers this file contributes to, in order: `variables, components`.                       |
+| `@requires`           | yes             | Load-order dependencies — files that must load before this one. `none` for `_layers.css`.         |
+| `@uses`               | —               | One modern CSS API/feature per line, with an inline `— note`. Flag support caveats here.          |
+| `@tokens`             | when owned      | The token namespace this file exposes = its override hooks, e.g. `--button-* (@layer variables)`. |
+| `@consumedby`         | when applicable | Reverse dependency — files that build on this one.                                                |
+| `@see`                | —               | External URL or cross-file reference. (Replaces the old block `@link`.)                           |
+| `@example`            | —               | Usage markup. Used where authoring is non-obvious (`_reveal.css`).                                |
+| `@version` / `@since` | —               | Optional, for versioned subsystems (`_reveal.css`).                                               |
 
 ### Rules
 
-- **Open with `/**`** (two stars), close with ` */`. One space-star-space per line.
+- **Open with `/**`** (two stars), close with ` \*/`. One space-star-space per line.
 - **Summary line is verbatim** — don't reword existing component descriptions.
 - **`@requires`** is one comma-separated line; wrap long lists and indent the
   continuation to the value column. Always include `_layers.css` (every file needs the
@@ -157,7 +157,7 @@ Three comment styles, each with a job:
 75-column rule style:
 
 ```css
-  /* ===========================================================================
+/* ===========================================================================
   BUTTON VARIANTS
   =========================================================================== */
 ```
@@ -166,20 +166,20 @@ Three comment styles, each with a job:
 They group related hooks; they do **not** document individual tokens (the names do):
 
 ```css
-  :root {
-    /* surface */
-    --button-background: var(--card);
-    --button-background--hover: var(--muted);
-    /* metrics */
-    --button-height: var(--step-8);
-  }
+:root {
+  /* surface */
+  --button-background: var(--card);
+  --button-background--hover: var(--muted);
+  /* metrics */
+  --button-height: var(--step-8);
+}
 ```
 
-**Inline rule comments** explain intent — the *why*, not the *what* — above a
+**Inline rule comments** explain intent — the _why_, not the _what_ — above a
 declaration or rule. Reserve them for non-obvious choices (a fallback, a calc, a hack):
 
 ```css
-  /* Thumb centered on the track via a calc'd negative margin so retuning
+/* Thumb centered on the track via a calc'd negative margin so retuning
      either size keeps it aligned. */
 ```
 
@@ -196,12 +196,12 @@ without editing a single rule.
 Global tokens live in [`_variables.css`](./_variables.css) under `@layer variables`,
 organized in tiers (literal scales → semantic roles → component primitives):
 
-| Tier | Example | Where |
-|------|---------|-------|
-| Brand/literal scales | `--primary-600`, `--neutral-100`, `--shade-50` | `_variables.css` |
-| Semantic roles | `--background`, `--foreground`, `--primary`, `--muted`, `--border` | `_variables.css` |
-| Metrics & systems | `--step-*`, `--radius-*`, `--gap-*`, `--font-size-*`, `--shadow-*` | `_variables.css` |
-| **Component tokens** | `--button-background`, `--field-border`, `--dialog-radius` | each component file |
+| Tier                 | Example                                                                                                  | Where               |
+| -------------------- | -------------------------------------------------------------------------------------------------------- | ------------------- |
+| Brand/literal scales | `--primary-600`, `--neutral-100`, `--shade-50`                                                           | `_variables.css`    |
+| Semantic roles       | `--background`, `--foreground`, `--primary`, `--muted`, `--border`                                       | `_variables.css`    |
+| Metrics & systems    | `--step-*`, `--radius-*`, `--gap-*`, `--font-family-*`, `--font-size-*`, `--font-weight-*`, `--shadow-*` | `_variables.css`    |
+| **Component tokens** | `--button-background`, `--field-border`, `--dialog-radius`                                               | each component file |
 
 Selected tokens are also **registered as typed `@property`** in
 [`_properties.css`](./_properties.css) so they can be read by container `style()`
@@ -239,7 +239,7 @@ token values** — they never restate the rule:
 ```css
 @layer components {
   .button {
-    background-color: var(--button-background);   /* referenced once */
+    background-color: var(--button-background); /* referenced once */
   }
 
   /* a variant changes the value, not the rule */
@@ -264,12 +264,16 @@ Because rules resolve tokens lazily, an app can intervene at any of three scopes
 
 1. **Global** — redefine a semantic token in `_variables.css` (or on `:root` in app CSS):
    ```css
-   :root { --radius-md: 0; }        /* squares every component's medium radius */
+   :root {
+     --radius-md: 0;
+   } /* squares every component's medium radius */
    ```
 2. **Component default** — redefine a component token on `:root`/a scope to re-skin
    every instance of that component:
    ```css
-   :root { --button-radius: var(--radius-full); }   /* all buttons go pill-shaped */
+   :root {
+     --button-radius: var(--radius-full);
+   } /* all buttons go pill-shaped */
    ```
 3. **Instance** — set the token inline or via a variant/size attribute for a one-off:
    ```html
@@ -307,6 +311,12 @@ variables layer.
   without a replacement. Rings are built from `--ring-*` tokens.
 - **State exclusion**: express intent with `:not()` (`button:hover:not(:disabled)`)
   rather than order-dependent overrides.
+- **Utility names track Tailwind**: atomic utilities reuse Tailwind's vocabulary where
+  one exists — weights `.font-thin … .font-black` (plus semantic `.font-body` /
+  `.font-heading` / `.font-strong`), families `.font-sans` / `.font-serif` / `.font-mono`, sizes `.text-sm`,
+  etc. — so they read predictably to Tailwind users. Token names do **not** follow
+  Tailwind; they use the tiered `--font-family-*` / `--font-weight-*` (semantic) over
+  `--font-sans` / `--font-serif` / `--font-mono` (raw) scheme.
 
 ---
 
@@ -350,6 +360,7 @@ These deviate from the canonical shape on purpose — document the reason in-fil
     * @tokens     --<component>-* (@layer variables)
     */
    ```
+
 3. Declare the token hooks, each defaulting to a global token:
 
    ```css
@@ -363,6 +374,7 @@ These deviate from the canonical shape on purpose — document the reason in-fil
      }
    }
    ```
+
 4. Write the rules in `@layer components`, referencing each token once.
 5. Add variants/sizes as `[data-*]` selectors that **only reassign tokens**.
 6. If you read another component's tokens, add this file to that file's `@consumedby`.

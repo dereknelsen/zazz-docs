@@ -110,11 +110,6 @@
   .button[aria-disabled="true"] {
     opacity: 0.5;
     cursor: not-allowed;
-    pointer-events: none;
-  }
-
-  .button:disabled {
-    pointer-events: none;
   }
 
   .button[aria-busy="true"] {

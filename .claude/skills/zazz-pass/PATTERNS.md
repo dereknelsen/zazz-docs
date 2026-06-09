@@ -15,7 +15,7 @@ nouns:
 - "Contact us" — not "Contact Us"
 
 Only deviate when the user explicitly asks for a different case. (The all-caps look of an
-eyebrow comes from `.text-eyebrow`'s CSS `text-transform`, so you still *author* it in
+eyebrow comes from `.text-eyebrow`'s CSS `text-transform`, so you still _author_ it in
 sentence case — let the class do the uppercasing.)
 
 ## Page structure
@@ -93,7 +93,7 @@ Group an optional eyebrow, a heading, a subheading, and the call-to-action butto
 ```
 
 - Eyebrow → `.text-eyebrow`; heading → `.text-display` / `.text-h*`; subheading → `.text-xl
-  .text-muted-foreground`.
+.text-muted-foreground`.
 - Lead action `data-variant="primary"`, secondary `data-variant="ghost"`.
 
 ## Everything else

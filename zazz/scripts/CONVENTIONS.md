@@ -69,12 +69,12 @@ if (typeof module !== "undefined" && module.exports) {
 
 Use a named export object or class, then attach it via the universal export pattern above. This supports CommonJS, AMD, and browser globals.
 
-| File | Global | Export shape |
-| --- | --- | --- |
-| `utils.js` | `window.Utils` | `{ parseValue, parseDataAttributes }` |
-| `reveal.js` | `window.Reveal` | `Reveal` class |
-| `embla.js` | `window.EmblaInit` | `{ init, addDotBtnsAndClickHandlers, ... }` |
-| `navigation.js` | _(none)_ | Side-effect only; no export |
+| File            | Global             | Export shape                                |
+| --------------- | ------------------ | ------------------------------------------- |
+| `utils.js`      | `window.Utils`     | `{ parseValue, parseDataAttributes }`       |
+| `reveal.js`     | `window.Reveal`    | `Reveal` class                              |
+| `embla.js`      | `window.EmblaInit` | `{ init, addDotBtnsAndClickHandlers, ... }` |
+| `navigation.js` | _(none)_           | Side-effect only; no export                 |
 
 Document export objects with `@namespace` JSDoc and `@property` for each key.
 
@@ -113,12 +113,12 @@ Boolean flags can be bare attributes (`data-embla-autoplay`) or explicit values 
 
 Scripts declare dependencies via `<script>` tag order, not imports.
 
-| Script | Depends on | Notes |
-| --- | --- | --- |
-| `utils.js` | — | Load first; provides `window.Utils` |
-| `reveal.js` | — | Standalone |
-| `embla.js` | `utils.js`, Embla CDN libs | Requires Embla UMD bundles before this file |
-| `navigation.js` | — | App-level; not loaded in component preview iframes |
+| Script          | Depends on                 | Notes                                              |
+| --------------- | -------------------------- | -------------------------------------------------- |
+| `utils.js`      | —                          | Load first; provides `window.Utils`                |
+| `reveal.js`     | —                          | Standalone                                         |
+| `embla.js`      | `utils.js`, Embla CDN libs | Requires Embla UMD bundles before this file        |
+| `navigation.js` | —                          | App-level; not loaded in component preview iframes |
 
 When a script needs `Utils`, assume `window.Utils` is available — do not bundle or duplicate parsing logic.
 
@@ -179,19 +179,19 @@ For file-level blocks, `@fileoverview` comes first, then `@description`, then `@
 
 ### Required vs optional tags
 
-| Tag | Required on | Notes |
-| --- | --- | --- |
-| `@fileoverview` | Every file | Module-level summary |
-| `@description` | Every JSDoc block | One-line summary; extended prose below if needed |
-| `@param` | Functions with parameters | Include type and hyphen description |
-| `@returns` | Functions that return a value | Use `@returns {void}` for void functions when documenting public API |
-| `@private` | Non-exported helpers | Module-scoped functions not on the export object |
-| `@typedef` | Config/option objects | Pair with `@property` for each field |
-| `@property` | Typedef fields | Include type, optional default, hyphen description |
-| `@namespace` | Export objects (`Utils`, `EmblaInit`) | Document each exported key with `@property` |
-| `@see` | External references | MDN, library docs, related APIs |
-| `@example` | Usage demonstrations | Runnable code or HTML snippets |
-| `@class` | Classes | Optional; use with `@description` on the class block |
+| Tag             | Required on                           | Notes                                                                |
+| --------------- | ------------------------------------- | -------------------------------------------------------------------- |
+| `@fileoverview` | Every file                            | Module-level summary                                                 |
+| `@description`  | Every JSDoc block                     | One-line summary; extended prose below if needed                     |
+| `@param`        | Functions with parameters             | Include type and hyphen description                                  |
+| `@returns`      | Functions that return a value         | Use `@returns {void}` for void functions when documenting public API |
+| `@private`      | Non-exported helpers                  | Module-scoped functions not on the export object                     |
+| `@typedef`      | Config/option objects                 | Pair with `@property` for each field                                 |
+| `@property`     | Typedef fields                        | Include type, optional default, hyphen description                   |
+| `@namespace`    | Export objects (`Utils`, `EmblaInit`) | Document each exported key with `@property`                          |
+| `@see`          | External references                   | MDN, library docs, related APIs                                      |
+| `@example`      | Usage demonstrations                  | Runnable code or HTML snippets                                       |
+| `@class`        | Classes                               | Optional; use with `@description` on the class block                 |
 
 ### Section dividers
 

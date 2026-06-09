@@ -11,6 +11,8 @@
 @layer variables {
   :root {
     --dropdown-button-radius: var(--radius-sm);
+    --dropdown-min-inline-size: var(--step-52);
+    --dropdown-shadow: var(--shadow-sm);
   }
 }
 
@@ -32,6 +34,8 @@
 
   .dropdown__popover {
     position-anchor: --dropdown-trigger;
+    min-inline-size: var(--dropdown-min-inline-size);
+    box-shadow: var(--dropdown-shadow);
   }
 
   .dropdown__popover .button {

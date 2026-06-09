@@ -8,7 +8,10 @@ import { PreviewFrame } from "./preview-frame";
 interface PreviewProps {
   /** Example id like `button/variants` — reads zazz/components/button/variants.html. */
   src: string;
-  align?: "start" | "center";
+  /** Vertical placement of the demo. */
+  justify?: "start" | "center" | "end";
+  /** Horizontal placement of the demo. */
+  align?: "start" | "center" | "end";
   className?: string;
 }
 
@@ -18,7 +21,7 @@ interface PreviewProps {
  * from that one string: a live, isolated iframe preview and the exact code
  * block. No second copy can drift.
  */
-export function Preview({ src, align, className }: PreviewProps) {
+export function Preview({ src, justify, align, className }: PreviewProps) {
   const html = readExample(src);
 
   if (html == null) {
@@ -38,7 +41,8 @@ export function Preview({ src, align, className }: PreviewProps) {
           <PreviewFrame
             html={html}
             scripts={meta?.requiresScripts}
-            align={align ?? meta?.align ?? "start"}
+            justify={justify ?? meta?.justify ?? "center"}
+            align={align ?? meta?.align ?? "center"}
             minHeight={meta?.minHeight}
             title={meta?.title ?? src}
             styleHrefs={listStyleHrefs()}

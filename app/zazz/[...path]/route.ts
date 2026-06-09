@@ -25,10 +25,7 @@ const CONTENT_TYPES: Record<string, string> = {
   ".woff": "font/woff",
 };
 
-export async function GET(
-  _request: Request,
-  { params }: { params: Promise<{ path: string[] }> },
-) {
+export async function GET(_request: Request, { params }: { params: Promise<{ path: string[] }> }) {
   const { path: segments } = await params;
   const relative = segments.join("/");
   const ext = path.extname(relative).toLowerCase();

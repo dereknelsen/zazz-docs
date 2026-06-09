@@ -33,27 +33,87 @@
    @property is layer-independent. */
 
 /* padding (length only) */
-@property --_padding-inline-start { syntax: "<length-percentage>"; inherits: false; initial-value: 0; }
-@property --_padding-inline-end   { syntax: "<length-percentage>"; inherits: false; initial-value: 0; }
-@property --_padding-block-start  { syntax: "<length-percentage>"; inherits: false; initial-value: 0; }
-@property --_padding-block-end    { syntax: "<length-percentage>"; inherits: false; initial-value: 0; }
+@property --_padding-inline-start {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 0;
+}
+@property --_padding-inline-end {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 0;
+}
+@property --_padding-block-start {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 0;
+}
+@property --_padding-block-end {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 0;
+}
 
 /* margin (length or auto) */
-@property --_margin-inline-start { syntax: "<length-percentage> | auto"; inherits: false; initial-value: 0; }
-@property --_margin-inline-end   { syntax: "<length-percentage> | auto"; inherits: false; initial-value: 0; }
-@property --_margin-block-start  { syntax: "<length-percentage> | auto"; inherits: false; initial-value: 0; }
-@property --_margin-block-end    { syntax: "<length-percentage> | auto"; inherits: false; initial-value: 0; }
+@property --_margin-inline-start {
+  syntax: "<length-percentage> | auto";
+  inherits: false;
+  initial-value: 0;
+}
+@property --_margin-inline-end {
+  syntax: "<length-percentage> | auto";
+  inherits: false;
+  initial-value: 0;
+}
+@property --_margin-block-start {
+  syntax: "<length-percentage> | auto";
+  inherits: false;
+  initial-value: 0;
+}
+@property --_margin-block-end {
+  syntax: "<length-percentage> | auto";
+  inherits: false;
+  initial-value: 0;
+}
 
 /* border-radius (physical corners, shorthand order TL TR BR BL) */
-@property --_radius-top-left     { syntax: "<length-percentage>"; inherits: false; initial-value: 0; }
-@property --_radius-top-right    { syntax: "<length-percentage>"; inherits: false; initial-value: 0; }
-@property --_radius-bottom-right { syntax: "<length-percentage>"; inherits: false; initial-value: 0; }
-@property --_radius-bottom-left  { syntax: "<length-percentage>"; inherits: false; initial-value: 0; }
+@property --_radius-top-left {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 0;
+}
+@property --_radius-top-right {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 0;
+}
+@property --_radius-bottom-right {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 0;
+}
+@property --_radius-bottom-left {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 0;
+}
 
 /* color alpha — multiplied into each color token (default 1 = unchanged) */
-@property --_text-alpha       { syntax: "<number>"; inherits: false; initial-value: 1; }
-@property --_background-alpha { syntax: "<number>"; inherits: false; initial-value: 1; }
-@property --_border-alpha     { syntax: "<number>"; inherits: false; initial-value: 1; }
+@property --_text-alpha {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+@property --_background-alpha {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+@property --_border-alpha {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
 
 @layer utilities {
   /* ===========================================================================
@@ -457,11 +517,15 @@
   =========================================================================== */
 
   :where(.bg-background) {
-    background-color: oklch(from var(--background) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--background) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-foreground) {
-    background-color: oklch(from var(--foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-card) {
@@ -469,7 +533,9 @@
   }
 
   :where(.bg-card-foreground) {
-    background-color: oklch(from var(--card-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--card-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-border) {
@@ -477,7 +543,9 @@
   }
 
   :where(.bg-border-foreground) {
-    background-color: oklch(from var(--border-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--border-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-input) {
@@ -485,7 +553,9 @@
   }
 
   :where(.bg-input-foreground) {
-    background-color: oklch(from var(--input-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--input-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-muted) {
@@ -493,7 +563,9 @@
   }
 
   :where(.bg-muted-foreground) {
-    background-color: oklch(from var(--muted-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--muted-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-faded) {
@@ -501,7 +573,9 @@
   }
 
   :where(.bg-faded-foreground) {
-    background-color: oklch(from var(--faded-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--faded-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-primary) {
@@ -509,15 +583,21 @@
   }
 
   :where(.bg-primary-foreground) {
-    background-color: oklch(from var(--primary-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--primary-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-secondary) {
-    background-color: oklch(from var(--secondary) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-secondary-foreground) {
-    background-color: oklch(from var(--secondary-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-tertiary) {
@@ -525,7 +605,9 @@
   }
 
   :where(.bg-tertiary-foreground) {
-    background-color: oklch(from var(--tertiary-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tertiary-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-info) {
@@ -533,7 +615,9 @@
   }
 
   :where(.bg-info-foreground) {
-    background-color: oklch(from var(--info-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--info-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-success) {
@@ -541,7 +625,9 @@
   }
 
   :where(.bg-success-foreground) {
-    background-color: oklch(from var(--success-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--success-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-warning) {
@@ -549,147 +635,219 @@
   }
 
   :where(.bg-warning-foreground) {
-    background-color: oklch(from var(--warning-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--warning-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-destructive) {
-    background-color: oklch(from var(--destructive) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--destructive) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-destructive-foreground) {
-    background-color: oklch(from var(--destructive-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--destructive-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-primary-50) {
-    background-color: oklch(from var(--primary-50) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--primary-50) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-primary-100) {
-    background-color: oklch(from var(--primary-100) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--primary-100) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-primary-200) {
-    background-color: oklch(from var(--primary-200) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--primary-200) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-primary-300) {
-    background-color: oklch(from var(--primary-300) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--primary-300) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-primary-400) {
-    background-color: oklch(from var(--primary-400) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--primary-400) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-primary-500) {
-    background-color: oklch(from var(--primary-500) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--primary-500) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-primary-600) {
-    background-color: oklch(from var(--primary-600) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--primary-600) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-primary-700) {
-    background-color: oklch(from var(--primary-700) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--primary-700) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-primary-800) {
-    background-color: oklch(from var(--primary-800) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--primary-800) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-primary-900) {
-    background-color: oklch(from var(--primary-900) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--primary-900) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-primary-950) {
-    background-color: oklch(from var(--primary-950) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--primary-950) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-secondary-50) {
-    background-color: oklch(from var(--secondary-50) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary-50) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-secondary-100) {
-    background-color: oklch(from var(--secondary-100) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary-100) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-secondary-200) {
-    background-color: oklch(from var(--secondary-200) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary-200) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-secondary-300) {
-    background-color: oklch(from var(--secondary-300) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary-300) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-secondary-400) {
-    background-color: oklch(from var(--secondary-400) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary-400) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-secondary-500) {
-    background-color: oklch(from var(--secondary-500) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary-500) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-secondary-600) {
-    background-color: oklch(from var(--secondary-600) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary-600) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-secondary-700) {
-    background-color: oklch(from var(--secondary-700) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary-700) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-secondary-800) {
-    background-color: oklch(from var(--secondary-800) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary-800) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-secondary-900) {
-    background-color: oklch(from var(--secondary-900) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary-900) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-secondary-950) {
-    background-color: oklch(from var(--secondary-950) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary-950) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-tertiary-50) {
-    background-color: oklch(from var(--tertiary-50) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tertiary-50) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-tertiary-100) {
-    background-color: oklch(from var(--tertiary-100) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tertiary-100) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-tertiary-200) {
-    background-color: oklch(from var(--tertiary-200) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tertiary-200) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-tertiary-300) {
-    background-color: oklch(from var(--tertiary-300) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tertiary-300) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-tertiary-400) {
-    background-color: oklch(from var(--tertiary-400) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tertiary-400) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-tertiary-500) {
-    background-color: oklch(from var(--tertiary-500) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tertiary-500) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-tertiary-600) {
-    background-color: oklch(from var(--tertiary-600) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tertiary-600) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-tertiary-700) {
-    background-color: oklch(from var(--tertiary-700) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tertiary-700) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-tertiary-800) {
-    background-color: oklch(from var(--tertiary-800) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tertiary-800) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-tertiary-900) {
-    background-color: oklch(from var(--tertiary-900) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tertiary-900) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-tertiary-950) {
-    background-color: oklch(from var(--tertiary-950) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tertiary-950) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-white) {
@@ -697,47 +855,69 @@
   }
 
   :where(.bg-neutral-50) {
-    background-color: oklch(from var(--neutral-50) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--neutral-50) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-neutral-100) {
-    background-color: oklch(from var(--neutral-100) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--neutral-100) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-neutral-200) {
-    background-color: oklch(from var(--neutral-200) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--neutral-200) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-neutral-300) {
-    background-color: oklch(from var(--neutral-300) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--neutral-300) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-neutral-400) {
-    background-color: oklch(from var(--neutral-400) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--neutral-400) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-neutral-500) {
-    background-color: oklch(from var(--neutral-500) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--neutral-500) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-neutral-600) {
-    background-color: oklch(from var(--neutral-600) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--neutral-600) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-neutral-700) {
-    background-color: oklch(from var(--neutral-700) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--neutral-700) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-neutral-800) {
-    background-color: oklch(from var(--neutral-800) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--neutral-800) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-neutral-900) {
-    background-color: oklch(from var(--neutral-900) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--neutral-900) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-neutral-950) {
-    background-color: oklch(from var(--neutral-950) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--neutral-950) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-black) {
@@ -745,7 +925,9 @@
   }
 
   :where(.bg-shade-none) {
-    background-color: oklch(from var(--shade-none) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-none) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-50) {
@@ -753,51 +935,75 @@
   }
 
   :where(.bg-shade-100) {
-    background-color: oklch(from var(--shade-100) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-100) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-200) {
-    background-color: oklch(from var(--shade-200) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-200) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-300) {
-    background-color: oklch(from var(--shade-300) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-300) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-400) {
-    background-color: oklch(from var(--shade-400) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-400) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-500) {
-    background-color: oklch(from var(--shade-500) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-500) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-600) {
-    background-color: oklch(from var(--shade-600) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-600) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-700) {
-    background-color: oklch(from var(--shade-700) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-700) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-800) {
-    background-color: oklch(from var(--shade-800) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-800) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-900) {
-    background-color: oklch(from var(--shade-900) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-900) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-950) {
-    background-color: oklch(from var(--shade-950) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-950) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-full) {
-    background-color: oklch(from var(--shade-full) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-full) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-tint-none) {
-    background-color: oklch(from var(--tint-none) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tint-none) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-tint-50) {
@@ -845,7 +1051,17 @@
   }
 
   :where(.bg-tint-full) {
-    background-color: oklch(from var(--tint-full) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tint-full) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
+  }
+
+  :where(.bg-transparent) {
+    background-color: transparent;
+  }
+
+  :where(.bg-none) {
+    background: none;
   }
 
   /* ===========================================================================
@@ -4946,15 +5162,29 @@
      need to set vars. `m-<size>` substrings are safe here (unlike `p-<size>`,
      they don't collide with `gap-<size>`). */
   :where(
-    [class*="m-0"], [class*="m-xs"], [class*="m-sm"], [class*="m-md"], [class*="m-lg"],
-    [class*="m-xl"], [class*="mx-"], [class*="ml-"], [class*="mr-"]
+    [class*="m-0"],
+    [class*="m-xs"],
+    [class*="m-sm"],
+    [class*="m-md"],
+    [class*="m-lg"],
+    [class*="m-xl"],
+    [class*="mx-"],
+    [class*="ml-"],
+    [class*="mr-"]
   ) {
     margin-inline: var(--_margin-inline-start) var(--_margin-inline-end);
   }
 
   :where(
-    [class*="m-0"], [class*="m-xs"], [class*="m-sm"], [class*="m-md"], [class*="m-lg"],
-    [class*="m-xl"], [class*="my-"], [class*="mt-"], [class*="mb-"]
+    [class*="m-0"],
+    [class*="m-xs"],
+    [class*="m-sm"],
+    [class*="m-md"],
+    [class*="m-lg"],
+    [class*="m-xl"],
+    [class*="my-"],
+    [class*="mt-"],
+    [class*="mb-"]
   ) {
     margin-block: var(--_margin-block-start) var(--_margin-block-end);
   }
@@ -5361,29 +5591,61 @@
      affect that corner. A corner you don't touch is left intact (e.g.
      `rounded-b-0` flattens the bottom and keeps a component's top radius). */
   :where(
-    .rounded-0, .rounded-xs, .rounded-sm, .rounded-md, .rounded-lg, .rounded-xl, .rounded-full,
-    [class*="rounded-t-"], [class*="rounded-l-"], [class*="rounded-tl-"]
+    .rounded-0,
+    .rounded-xs,
+    .rounded-sm,
+    .rounded-md,
+    .rounded-lg,
+    .rounded-xl,
+    .rounded-full,
+    [class*="rounded-t-"],
+    [class*="rounded-l-"],
+    [class*="rounded-tl-"]
   ) {
     border-top-left-radius: var(--_radius-top-left);
   }
 
   :where(
-    .rounded-0, .rounded-xs, .rounded-sm, .rounded-md, .rounded-lg, .rounded-xl, .rounded-full,
-    [class*="rounded-t-"], [class*="rounded-r-"], [class*="rounded-tr-"]
+    .rounded-0,
+    .rounded-xs,
+    .rounded-sm,
+    .rounded-md,
+    .rounded-lg,
+    .rounded-xl,
+    .rounded-full,
+    [class*="rounded-t-"],
+    [class*="rounded-r-"],
+    [class*="rounded-tr-"]
   ) {
     border-top-right-radius: var(--_radius-top-right);
   }
 
   :where(
-    .rounded-0, .rounded-xs, .rounded-sm, .rounded-md, .rounded-lg, .rounded-xl, .rounded-full,
-    [class*="rounded-b-"], [class*="rounded-r-"], [class*="rounded-br-"]
+    .rounded-0,
+    .rounded-xs,
+    .rounded-sm,
+    .rounded-md,
+    .rounded-lg,
+    .rounded-xl,
+    .rounded-full,
+    [class*="rounded-b-"],
+    [class*="rounded-r-"],
+    [class*="rounded-br-"]
   ) {
     border-bottom-right-radius: var(--_radius-bottom-right);
   }
 
   :where(
-    .rounded-0, .rounded-xs, .rounded-sm, .rounded-md, .rounded-lg, .rounded-xl, .rounded-full,
-    [class*="rounded-b-"], [class*="rounded-l-"], [class*="rounded-bl-"]
+    .rounded-0,
+    .rounded-xs,
+    .rounded-sm,
+    .rounded-md,
+    .rounded-lg,
+    .rounded-xl,
+    .rounded-full,
+    [class*="rounded-b-"],
+    [class*="rounded-l-"],
+    [class*="rounded-bl-"]
   ) {
     border-bottom-left-radius: var(--_radius-bottom-left);
   }
@@ -5762,19 +6024,23 @@
   }
 
   :where(.border-l) {
-    border-left: 1px solid oklch(from var(--_border-color) l c h / calc(alpha * var(--_border-alpha, 1)));
+    border-left: 1px solid
+      oklch(from var(--_border-color) l c h / calc(alpha * var(--_border-alpha, 1)));
   }
 
   :where(.border-t) {
-    border-top: 1px solid oklch(from var(--_border-color) l c h / calc(alpha * var(--_border-alpha, 1)));
+    border-top: 1px solid
+      oklch(from var(--_border-color) l c h / calc(alpha * var(--_border-alpha, 1)));
   }
 
   :where(.border-r) {
-    border-right: 1px solid oklch(from var(--_border-color) l c h / calc(alpha * var(--_border-alpha, 1)));
+    border-right: 1px solid
+      oklch(from var(--_border-color) l c h / calc(alpha * var(--_border-alpha, 1)));
   }
 
   :where(.border-b) {
-    border-bottom: 1px solid oklch(from var(--_border-color) l c h / calc(alpha * var(--_border-alpha, 1)));
+    border-bottom: 1px solid
+      oklch(from var(--_border-color) l c h / calc(alpha * var(--_border-alpha, 1)));
   }
 
   :where(.border-dashed) {
@@ -5943,11 +6209,15 @@
   /* -- hover: background color (theme) -- */
 
   :where(.hover\:bg-background:hover) {
-    background-color: oklch(from var(--background) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--background) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-foreground:hover) {
-    background-color: oklch(from var(--foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-card:hover) {
@@ -5955,7 +6225,9 @@
   }
 
   :where(.hover\:bg-card-foreground:hover) {
-    background-color: oklch(from var(--card-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--card-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-input:hover) {
@@ -5963,7 +6235,9 @@
   }
 
   :where(.hover\:bg-input-foreground:hover) {
-    background-color: oklch(from var(--input-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--input-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-muted:hover) {
@@ -5971,7 +6245,9 @@
   }
 
   :where(.hover\:bg-muted-foreground:hover) {
-    background-color: oklch(from var(--muted-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--muted-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-faded:hover) {
@@ -5979,7 +6255,9 @@
   }
 
   :where(.hover\:bg-faded-foreground:hover) {
-    background-color: oklch(from var(--faded-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--faded-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-primary:hover) {
@@ -5987,15 +6265,21 @@
   }
 
   :where(.hover\:bg-primary-foreground:hover) {
-    background-color: oklch(from var(--primary-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--primary-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-secondary:hover) {
-    background-color: oklch(from var(--secondary) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-secondary-foreground:hover) {
-    background-color: oklch(from var(--secondary-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-tertiary:hover) {
@@ -6003,7 +6287,9 @@
   }
 
   :where(.hover\:bg-tertiary-foreground:hover) {
-    background-color: oklch(from var(--tertiary-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tertiary-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-info:hover) {
@@ -6011,7 +6297,9 @@
   }
 
   :where(.hover\:bg-info-foreground:hover) {
-    background-color: oklch(from var(--info-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--info-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-success:hover) {
@@ -6019,7 +6307,9 @@
   }
 
   :where(.hover\:bg-success-foreground:hover) {
-    background-color: oklch(from var(--success-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--success-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-warning:hover) {
@@ -6027,15 +6317,29 @@
   }
 
   :where(.hover\:bg-warning-foreground:hover) {
-    background-color: oklch(from var(--warning-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--warning-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-destructive:hover) {
-    background-color: oklch(from var(--destructive) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--destructive) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-destructive-foreground:hover) {
-    background-color: oklch(from var(--destructive-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--destructive-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
+  }
+
+  :where(.hover\:bg-transparent:hover) {
+    background-color: transparent;
+  }
+
+  :where(.hover\:bg-none:hover) {
+    background: none;
   }
 
   /* -- hover: border color (theme) -- */
@@ -6247,11 +6551,15 @@
   /* -- active: background color (theme) -- */
 
   :where(.active\:bg-background:active) {
-    background-color: oklch(from var(--background) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--background) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.active\:bg-foreground:active) {
-    background-color: oklch(from var(--foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.active\:bg-card:active) {
@@ -6259,7 +6567,9 @@
   }
 
   :where(.active\:bg-card-foreground:active) {
-    background-color: oklch(from var(--card-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--card-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.active\:bg-input:active) {
@@ -6267,7 +6577,9 @@
   }
 
   :where(.active\:bg-input-foreground:active) {
-    background-color: oklch(from var(--input-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--input-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.active\:bg-muted:active) {
@@ -6275,7 +6587,9 @@
   }
 
   :where(.active\:bg-muted-foreground:active) {
-    background-color: oklch(from var(--muted-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--muted-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.active\:bg-faded:active) {
@@ -6283,7 +6597,9 @@
   }
 
   :where(.active\:bg-faded-foreground:active) {
-    background-color: oklch(from var(--faded-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--faded-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.active\:bg-primary:active) {
@@ -6291,15 +6607,21 @@
   }
 
   :where(.active\:bg-primary-foreground:active) {
-    background-color: oklch(from var(--primary-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--primary-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.active\:bg-secondary:active) {
-    background-color: oklch(from var(--secondary) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.active\:bg-secondary-foreground:active) {
-    background-color: oklch(from var(--secondary-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.active\:bg-tertiary:active) {
@@ -6307,7 +6629,9 @@
   }
 
   :where(.active\:bg-tertiary-foreground:active) {
-    background-color: oklch(from var(--tertiary-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tertiary-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.active\:bg-info:active) {
@@ -6315,7 +6639,9 @@
   }
 
   :where(.active\:bg-info-foreground:active) {
-    background-color: oklch(from var(--info-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--info-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.active\:bg-success:active) {
@@ -6323,7 +6649,9 @@
   }
 
   :where(.active\:bg-success-foreground:active) {
-    background-color: oklch(from var(--success-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--success-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.active\:bg-warning:active) {
@@ -6331,15 +6659,29 @@
   }
 
   :where(.active\:bg-warning-foreground:active) {
-    background-color: oklch(from var(--warning-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--warning-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.active\:bg-destructive:active) {
-    background-color: oklch(from var(--destructive) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--destructive) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.active\:bg-destructive-foreground:active) {
-    background-color: oklch(from var(--destructive-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--destructive-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
+  }
+
+  :where(.active\:bg-transparent:active) {
+    background-color: transparent;
+  }
+
+  :where(.active\:bg-none:active) {
+    background: none;
   }
 
   /* -- active: border color (theme) -- */

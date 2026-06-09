@@ -17,8 +17,10 @@ export interface BuildPreviewOptions {
   html: string;
   /** Zazz scripts the example needs; their CDN deps are added automatically. */
   scripts?: ExampleScript[];
+  /** Vertical placement of the demo. */
+  justify?: "start" | "center" | "end";
   /** Horizontal placement of the demo. */
-  align?: "start" | "center";
+  align?: "start" | "center" | "end";
   /** Minimum body height in px — keeps overlays (dialogs/popovers) in view. */
   minHeight?: number;
   /**
@@ -41,6 +43,15 @@ const POLYFILLS = `
 <script src="https://cdn.jsdelivr.net/npm/@oddbird/popover-polyfill@latest" crossorigin="anonymous" defer></script>
 <script type="module" src="https://esm.sh/invokers/compatible" crossorigin="anonymous" defer></script>`;
 
+// Prevent any link from navigating away from the preview iframe.
+const BLOCK_NAVIGATION = `
+<script>
+document.addEventListener('click', function(e) {
+  var link = e.target.closest('a[href]');
+  if (link) e.preventDefault();
+}, true);
+</script>`;
+
 // Loaded only when an example needs Embla. Order matters: the UMD bundles attach globals
 // that embla.js reads, and all are `defer` so execution order follows document order.
 const EMBLA_CDN = [
@@ -57,6 +68,8 @@ export function buildPreviewDocument({
   html,
   scripts = [],
   minHeight = 0,
+  align = "center",
+  justify = "center",
   styleHrefs,
 }: BuildPreviewOptions): string {
   // Preload every sheet, then link them in cascade order — parallel fetch, no @import
@@ -78,11 +91,9 @@ export function buildPreviewDocument({
   if (needsEmbla) zazzScripts.push("/zazz/scripts/embla.js");
 
   const emblaCdn = needsEmbla ? EMBLA_CDN : "";
-  const scriptTags = zazzScripts
-    .map((src) => `<script src="${src}" defer></script>`)
-    .join("\n");
+  const scriptTags = zazzScripts.map((src) => `<script src="${src}" defer></script>`).join("\n");
 
-  return `<!doctype html>
+  return /* html */ `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -90,6 +101,7 @@ export function buildPreviewDocument({
 ${FONTS}
 ${styles}
 ${POLYFILLS}
+${BLOCK_NAVIGATION}
 ${emblaCdn}
 ${scriptTags}
 <style>
@@ -98,19 +110,20 @@ ${scriptTags}
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+    align-items: ${align};
+    justify-content: ${justify};
     gap: var(--gap-md);
+    padding: var(--gap-md);
     inline-size: 100%;
     block-size: 100%;
     min-block-size: ${minHeight}px;
   }
 </style>
 </head>
-<body>
-<div class="zazz-preview">
-${html}
-</div>
-</body>
+  <body>
+    <div class="zazz-preview">
+      ${html}
+    </div>
+  </body>
 </html>`;
 }

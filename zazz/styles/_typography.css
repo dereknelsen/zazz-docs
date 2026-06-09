@@ -146,6 +146,10 @@
     gap: var(--prose-figure-gap);
   }
 
+  :where(.prose figcaption) {
+    font-style: italic;
+  }
+
   :where(.prose img) {
     border-radius: var(--prose-img-radius);
     border: var(--prose-img-border);

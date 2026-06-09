@@ -283,22 +283,22 @@ Default to **Lifestyle Brand** when unclear — it balances conversion with bran
 
 ### Theme (Mode-Aware Role Tokens)
 
-| Token                 | Role                                          | Light Character              | Dark Character              |
-| --------------------- | --------------------------------------------- | ---------------------------- | --------------------------- |
-| `--background`        | Page surface                                  | White (--white)              | Blue-violet black           |
-| `--foreground`        | Default text                                  | Rich charcoal (neutral-900)  | Pure white                  |
-| `--border`            | 1px lines and dividers                        | Soft cool gray (neutral-100) | Deep gray                   |
-| `--border-foreground` | Text on outlined/bordered elements            | Near-opaque white (tint-950) | Subtle white (tint-100)     |
-| `--card`              | Card surface, elevated from background        | Pure white                   | Dark charcoal               |
-| `--card-foreground`   | Text on cards                                 | Rich charcoal                | Pure white                  |
-| `--popover`           | Popover / menu surface                        | Pure white                   | Near-black (shade-950)      |
-| `--popover-foreground`| Text on popovers and menus                    | Rich charcoal                | Pure white                  |
-| `--input`             | Input field background                        | Near-white (neutral-50)      | Barely-there tint (tint-50) |
-| `--input-foreground`  | Input text                                    | Rich charcoal                | Pure white                  |
-| `--muted`             | Subtle dim — always darker than its surface   | shade-50                     | tint-50                     |
-| `--muted-foreground`  | De-emphasized text, helper copy               | shade-600                    | tint-600                    |
-| `--faded`             | Subtle fade — always lighter than its surface | tint-100                     | shade-100                   |
-| `--faded-foreground`  | Text on faded surfaces                        | tint-600                     | shade-600                   |
+| Token                  | Role                                          | Light Character              | Dark Character              |
+| ---------------------- | --------------------------------------------- | ---------------------------- | --------------------------- |
+| `--background`         | Page surface                                  | White (--white)              | Blue-violet black           |
+| `--foreground`         | Default text                                  | Rich charcoal (neutral-900)  | Pure white                  |
+| `--border`             | 1px lines and dividers                        | Soft cool gray (neutral-100) | Deep gray                   |
+| `--border-foreground`  | Text on outlined/bordered elements            | Near-opaque white (tint-950) | Subtle white (tint-100)     |
+| `--card`               | Card surface, elevated from background        | Pure white                   | Dark charcoal               |
+| `--card-foreground`    | Text on cards                                 | Rich charcoal                | Pure white                  |
+| `--popover`            | Popover / menu surface                        | Pure white                   | Near-black (shade-950)      |
+| `--popover-foreground` | Text on popovers and menus                    | Rich charcoal                | Pure white                  |
+| `--input`              | Input field background                        | Near-white (neutral-50)      | Barely-there tint (tint-50) |
+| `--input-foreground`   | Input text                                    | Rich charcoal                | Pure white                  |
+| `--muted`              | Subtle dim — always darker than its surface   | shade-50                     | tint-50                     |
+| `--muted-foreground`   | De-emphasized text, helper copy               | shade-600                    | tint-600                    |
+| `--faded`              | Subtle fade — always lighter than its surface | tint-100                     | shade-100                   |
+| `--faded-foreground`   | Text on faded surfaces                        | tint-600                     | shade-600                   |
 
 ### Brand Colors
 
@@ -362,21 +362,21 @@ All status foregrounds are white. Status steps **darker** in dark mode (opposite
 
 All sizes are fluid via `clamp()`, scaling between mobile and desktop viewports.
 
-| Class          | Size (desktop) | Leading | Tracking  | Character                     |
-| -------------- | -------------- | ------- | --------- | ----------------------------- |
-| `text-display` | 5.96rem        | 0.95    | -0.05em   | Massive hero statement        |
-| `text-h1`      | 4.77rem        | 0.95    | -0.05em   | Primary page heading          |
-| `text-h2`      | 3.81rem        | 0.95    | -0.025em  | Section heading               |
-| `text-h3`      | 3.05rem        | 1       | -0.025em  | Subsection heading            |
-| `text-h4`      | 2.44rem        | 1       | -0.015em  | Component heading             |
-| `text-h5`      | 1.95rem        | 1       | -0.01em   | Small heading                 |
-| `text-h6`      | 1.56rem        | 1       | -0.005em  | Minor heading                 |
-| `text-xl`      | 1.56rem        | 1.5     | 0         | Large body / intro paragraph  |
-| `text-lg`      | 1.25rem        | 1.5     | 0         | Lead text                     |
-| `text-md`      | 1rem           | 1.6     | 0         | Default body text             |
-| `text-sm`      | 0.89rem        | 1.5     | 0         | Small UI labels               |
-| `text-xs`      | 0.79rem        | 1.5     | 0         | Captions, fine print          |
-| `text-eyebrow` | 0.58rem        | 1.2     | 0.1em     | Uppercase label, wide-tracked |
+| Class          | Size (desktop) | Leading | Tracking | Character                     |
+| -------------- | -------------- | ------- | -------- | ----------------------------- |
+| `text-display` | 5.96rem        | 0.95    | -0.05em  | Massive hero statement        |
+| `text-h1`      | 4.77rem        | 0.95    | -0.05em  | Primary page heading          |
+| `text-h2`      | 3.81rem        | 0.95    | -0.025em | Section heading               |
+| `text-h3`      | 3.05rem        | 1       | -0.025em | Subsection heading            |
+| `text-h4`      | 2.44rem        | 1       | -0.015em | Component heading             |
+| `text-h5`      | 1.95rem        | 1       | -0.01em  | Small heading                 |
+| `text-h6`      | 1.56rem        | 1       | -0.005em | Minor heading                 |
+| `text-xl`      | 1.56rem        | 1.5     | 0        | Large body / intro paragraph  |
+| `text-lg`      | 1.25rem        | 1.5     | 0        | Lead text                     |
+| `text-md`      | 1rem           | 1.6     | 0        | Default body text             |
+| `text-sm`      | 0.89rem        | 1.5     | 0        | Small UI labels               |
+| `text-xs`      | 0.79rem        | 1.5     | 0        | Captions, fine print          |
+| `text-eyebrow` | 0.58rem        | 1.2     | 0.1em    | Uppercase label, wide-tracked |
 
 Headings use `text-wrap: balance`. Body uses `text-wrap: pretty`. Tight-leading on large text, generous-leading on body.
 

@@ -13,8 +13,10 @@ export type ExampleScript = "embla" | "reveal";
 export interface ExampleMeta {
   /** Human label for the iframe `title` (a11y). */
   title?: string;
+  /** Vertical placement of the demo. */
+  justify?: "start" | "center" | "end";
   /** Horizontal placement of the demo within the preview frame. */
-  align?: "start" | "center";
+  align?: "start" | "center" | "end";
   /** Minimum iframe height in px — gives overlays/popovers room to render. */
   minHeight?: number;
   /** Zazz scripts to load (plus their CDN deps). Default: none. */
@@ -23,33 +25,35 @@ export interface ExampleMeta {
 
 const MANIFEST: Record<string, ExampleMeta> = {
   // Overlays — need vertical room so the popover/dialog/menu shows in-frame.
-  "tooltip/default": { align: "center", minHeight: 180 },
-  "tooltip/with-kbd": { align: "center", minHeight: 180 },
-  "tooltip/sides": { align: "center", minHeight: 260 },
-  "tooltip/disabled": { align: "center", minHeight: 180 },
-  "dialog/default": { align: "center", minHeight: 460 },
-  "dialog/with-form": { align: "center", minHeight: 460 },
-  "dialog/is-alert": { align: "center", minHeight: 460 },
-  "dropdown/default": { align: "center", minHeight: 320 },
-  "navigation-menu/default": { align: "center", minHeight: 380 },
-  "select/default": { align: "start", minHeight: 240 },
+  "tooltip/default": { minHeight: 180 },
+  "tooltip/with-kbd": { minHeight: 180 },
+  "tooltip/sides": { minHeight: 260 },
+  "tooltip/disabled": { minHeight: 180 },
+  "dialog/default": { minHeight: 500 },
+  "dialog/with-form": { minHeight: 800 },
+  "dialog/is-alert": { minHeight: 500 },
+  "dropdown/default": { align: "start", minHeight: 500 },
+  "navigation-menu/default": { align: "start", minHeight: 500 },
+  "select/default": { minHeight: 240 },
 
   // Carousel/lightbox — Embla (+ its CDN bundles) and the modal stage.
-  "carousel/default": { align: "start", minHeight: 380, requiresScripts: ["embla"] },
-  "lightbox/default": { align: "center", minHeight: 500, requiresScripts: ["embla"] },
+  "carousel/default": { minHeight: 460, requiresScripts: ["embla"] },
+  "lightbox/default": { minHeight: 640, requiresScripts: ["embla"] },
 
   // Showcase primitives — centered reads better than left-pinned.
-  "card/default": { align: "center", minHeight: 380 },
+  "card/default": { minHeight: 460 },
+  "prose/default": { minHeight: 500 },
   "breadcrumbs/default": { minHeight: 120 },
-  "avatar/default": { align: "center", minHeight: 160 },
-  "badge/variants": { align: "center" },
-  "badge/icon": { align: "center" },
-  "switch/default": { align: "center", minHeight: 140 },
-  "slider/default": { minHeight: 140 },
-  "checkbox/default": { minHeight: 140 },
-  "radio/default": { minHeight: 160 },
-  "accordion/default": { minHeight: 220 },
-  "tabs/default": { minHeight: 260 },
+  "avatar/default": { minHeight: 160 },
+  "accordion/default": { align: "start", minHeight: 460 },
+  "tabs/default": { minHeight: 460 },
+  "mobile-menu/default": { align: "start", justify: "start", minHeight: 500 },
+  
+  // Forms
+  "input/default": { align: "start", minHeight: 420 },
+  "input/icon-leading": { align: "start" },
+  "input/icon-trailing": { align: "start" },
+  "input-group/default": { align: "start", minHeight: 420 },
 };
 
 /** Returns presentation metadata for an example id, or `undefined` for defaults. */

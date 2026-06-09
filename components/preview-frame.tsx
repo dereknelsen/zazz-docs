@@ -1,13 +1,19 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { cn } from "@/lib/cn";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { buildPreviewDocument } from "@/lib/zazz-iframe";
 import type { ExampleScript } from "zazz/components/manifest";
+import { buttonVariants } from "./ui/button";
+import { ExpandIcon, XIcon } from "lucide-react";
 
 interface PreviewFrameProps {
   html: string;
   scripts?: ExampleScript[];
-  align?: "start" | "center";
+  /** Vertical placement of the demo. */
+  justify?: "start" | "center" | "end";
+  /** Horizontal placement of the demo. */
+  align?: "start" | "center" | "end";
   minHeight?: number;
   title?: string;
   styleHrefs?: string[];
@@ -22,18 +28,31 @@ interface PreviewFrameProps {
 export function PreviewFrame({
   html,
   scripts,
-  align = "start",
+  justify = "center",
+  align = "center",
   minHeight = 0,
   title = "Preview",
   styleHrefs,
 }: PreviewFrameProps) {
   const ref = useRef<HTMLIFrameElement>(null);
-  const [height, setHeight] = useState(minHeight || 160);
+  const [height, setHeight] = useState(minHeight || 260);
+  const [fullscreen, setFullscreen] = useState(false);
+
+  const toggleFullscreen = useCallback(() => setFullscreen((v) => !v), []);
 
   const srcDoc = useMemo(
-    () => buildPreviewDocument({ html, scripts, align, minHeight, styleHrefs }),
-    [html, scripts, align, minHeight, styleHrefs],
+    () => buildPreviewDocument({ html, scripts, justify, align, minHeight, styleHrefs }),
+    [html, scripts, justify, align, minHeight, styleHrefs],
   );
+
+  useEffect(() => {
+    if (!fullscreen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setFullscreen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [fullscreen]);
 
   useEffect(() => {
     const iframe = ref.current;
@@ -83,15 +102,48 @@ export function PreviewFrame({
     };
   }, [srcDoc, minHeight]);
 
-  return (
+  const iframeEl = (
     <iframe
       ref={ref}
       title={title}
       srcDoc={srcDoc}
-      loading="lazy"
+      loading="eager"
       sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals"
       className="block w-full"
-      style={{ height, colorScheme: "normal" }}
+      style={{ height: fullscreen ? "100%" : height, colorScheme: "normal" }}
     />
+  );
+
+  if (fullscreen) {
+    return (
+      <div className="fixed inset-0 z-50 flex flex-col bg-fd-background">
+        <button
+          type="button"
+          onClick={toggleFullscreen}
+          className={cn(buttonVariants({ variant: "outline", size: "sm" }), "absolute right-4 top-4 z-10 px-2 py-1 bg-fd-background shadow-xs")}
+          aria-label="Close fullscreen preview"
+        >
+          <XIcon className="size-3.5 " />
+          Close
+        </button>
+        <div className="flex-1 overflow-auto">{iframeEl}</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative">
+      <div className="absolute right-2 bottom-2 z-10">
+        <button
+          className={cn(buttonVariants({ variant: "outline", size: "sm" }), "px-2 py-1 bg-fd-background shadow-xs")}
+          onClick={toggleFullscreen}
+          aria-label="Expand preview fullscreen"
+        >
+          <ExpandIcon className="size-3.5 mr-1" />
+          Expand
+        </button>
+      </div>
+      {iframeEl}
+    </div>
   );
 }

@@ -24,16 +24,24 @@ invent or paste a second copy — read or fetch the real example and adapt it.
 ## How Zazz thinks (mental model)
 
 - **Cascade layers, not specificity.** Order is `@layer variables, reset, components,
-  utilities`. A utility wins over a component rule with no `!important`. Don't fight the
+utilities`. A utility wins over a component rule with no `!important`. Don't fight the
   cascade with selector tricks.
 - **Tokens are hooks.** Components read `var(--token)` and never hardcode; variants just
   reassign tokens (see `zazz/styles/_button.css`). You restyle by overriding tokens, not
   editing rules.
 - **`data-*` for variants** (shadcn-familiar): `data-variant`, `data-size`, `data-side`,
-  `data-align`, `data-direction`, `data-animation`. The **default** variant is the *absence*
+  `data-align`, `data-direction`, `data-animation`. The **default** variant is the _absence_
   of the attribute. Write `class="button" data-variant="primary"` — never `.button-primary`.
 - **Modern APIs do the work** (Popover, native `<dialog>`, Invoker Commands, anchor
   positioning, View Transitions, `<details>`). Polyfills are already loaded — preserve them.
+- **Composition variables** (`--_` prefix, `@property`-registered with `inherits: false`).
+  Padding, margin, and radius utilities use an internal "composing rule + setter" pattern:
+  one rule reads `--_padding-inline-start` etc. and the utility class just sets the var.
+  This means touching one axis/edge leaves others intact (e.g. `p-md pl-0` only zeros the
+  left). Color utilities use `--_text-alpha`, `--_background-alpha`, `--_border-alpha` for
+  per-channel opacity that doesn't bleed to children.
+- **State variants.** `hover\:` and `active\:` prefixes for text/bg/border colors and
+  opacity (e.g. `hover\:bg-primary`, `active\:opacity-80`). No JS needed.
 
 ## The golden rule: semantic first, specific as escape hatch
 
@@ -113,12 +121,12 @@ patterns live in `PATTERNS.md`.
 
 ## Reference index
 
-| Read | When |
-| --- | --- |
-| `references/tokens.md` | Choosing spacing, color, type, radius, shadow, or layout tokens/utilities |
-| `references/components.md` | Picking a component and its `data-*` API + docs link |
-| `references/apis.md` | Wiring popovers/dialogs/tooltips, carousels (`data-embla-*`), reveals (`data-reveal-*`) |
-| `DESIGN.md` | Brand colors, type scale, archetypes, motion, brand customization |
-| `PATTERNS.md` | Page structure, the sentence-case rule, heading-group + CTA composition |
-| `modern-web-guidance` skill | How a modern web API works + browser-support/fallbacks |
-| `/docs/components/{name}` or `zazz/components/{name}/*.html` | The canonical example markup (single source) |
+| Read                                                         | When                                                                                    |
+| ------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| `references/tokens.md`                                       | Choosing spacing, color, type, radius, shadow, or layout tokens/utilities               |
+| `references/components.md`                                   | Picking a component and its `data-*` API + docs link                                    |
+| `references/apis.md`                                         | Wiring popovers/dialogs/tooltips, carousels (`data-embla-*`), reveals (`data-reveal-*`) |
+| `DESIGN.md`                                                  | Brand colors, type scale, archetypes, motion, brand customization                       |
+| `PATTERNS.md`                                                | Page structure, the sentence-case rule, heading-group + CTA composition                 |
+| `modern-web-guidance` skill                                  | How a modern web API works + browser-support/fallbacks                                  |
+| `/docs/components/{name}` or `zazz/components/{name}/*.html` | The canonical example markup (single source)                                            |

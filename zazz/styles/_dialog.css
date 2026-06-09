@@ -11,12 +11,12 @@
 @layer variables {
   :root {
     --dialog-display: grid;
-    --dialog-backdrop-color: var(--shade-800);
+    --dialog-backdrop-color: var(--shade-900);
     --dialog-transition-duration: var(--default-transition-duration);
     --dialog-transition-timing-function: var(--default-transition-timing-function);
     --dialog-backdrop-transition-duration: calc(var(--dialog-transition-duration) - 100ms);
     --dialog-backdrop-transition-timing-function: ease;
-    --dialog-backdrop-blur: blur(4px);
+    --dialog-backdrop-blur: blur(5px);
     --dialog-shadow: var(--shadow-lg);
     --dialog-border: 1px solid var(--border);
 

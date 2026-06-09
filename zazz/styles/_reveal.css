@@ -60,28 +60,58 @@
 }
 
 @layer utilities {
-  /* View transitions - Main content is isolated from the rest of the page and can be animated independently of, for example, the header or footer */
-  ::view-transition-old(global-main-content) {
-    animation: global-page-transition--old var(--reveal-global-duration) var(--reveal-global-ease)
-      forwards;
+  /* View transitions — main is isolated from header/footer (see _reset.css view-transition-name) */
+  @media screen and (prefers-reduced-motion: no-preference) {
+    ::view-transition-old(global-main-content) {
+      animation: global-page-transition--old var(--global-page-transition-duration)
+        var(--global-page-transition-ease) both;
+    }
+
+    ::view-transition-new(global-main-content) {
+      animation: global-page-transition--new var(--global-page-transition-duration)
+        var(--global-page-transition-ease) both;
+    }
+
+    /* Persist shared chrome without cross-fading */
+    ::view-transition-old(global-navigation),
+    ::view-transition-new(global-navigation),
+    ::view-transition-old(global-footer),
+    ::view-transition-new(global-footer) {
+      animation: none;
+    }
   }
 
-  ::view-transition-new(global-main-content) {
-    animation: global-page-transition--new var(--reveal-global-duration) var(--reveal-global-ease)
-      forwards;
+  /* Stacking: keep header/footer snapshots above main so a taller main snapshot
+     (when page heights differ) can't paint over the chrome during the crossfade.
+     Group z-index applies regardless of motion preference. */
+  ::view-transition-group(global-main-content) {
+    z-index: 0;
+  }
+
+  ::view-transition-group(global-navigation),
+  ::view-transition-group(global-footer) {
+    z-index: 1;
   }
 
   @keyframes global-page-transition--old {
-    from {
-      opacity: var(--global-page-transition-opacity--end);
-      transform: translate3d(var(--global-page-transition-translate--end));
+    to {
+      opacity: var(--global-page-transition-opacity--start);
+      transform: translate3d(var(--global-page-transition-translate--start));
     }
   }
 
   @keyframes global-page-transition--new {
-    to {
+    from {
       opacity: var(--global-page-transition-opacity--start);
       transform: translate3d(var(--global-page-transition-translate--start));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+      animation: none !important;
     }
   }
 

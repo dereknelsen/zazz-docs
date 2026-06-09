@@ -65,6 +65,11 @@
     inline-size: 100vi;
     overflow-x: clip;
     overflow-y: auto;
+    /* Reserve the scrollbar gutter so main keeps the same width whether a page
+       scrolls or not. Without this, a tall page (scrollbar) and a short page (no
+       scrollbar) capture main at different widths, and the view-transition
+       snapshots mismatch — the edge overflow seen during the crossfade. */
+    scrollbar-gutter: stable;
     scroll-behavior: smooth;
     font-size: var(--font-size-md);
     line-height: var(--leading-md);
@@ -85,14 +90,16 @@
   :where(main) {
     /* Allow for more predictable z-indexing and spacing */
     display: flex;
-    z-index: isolate;
-    position: relative;
     flex-direction: column;
+    isolation: isolate;
+    position: relative;
 
-    /* Prevent floating footers */
-    min-height: 100svh;
+    /* Fill the flex body so the footer stays pinned to the bottom on short pages.
+       Keeps main's box consistent between pages so view-transition snapshots align. */
+    flex: 1 0 auto;
     container-type: inline-size;
     container-name: main;
+    overflow: clip;
   }
 
   :where(header, footer, section, article) {
@@ -612,7 +619,7 @@
   VIEW TRANSITION LAYERS
   =========================================================================== */
 
-  :where([data-transition-layer="global-main-content"]) {
+  :where(main) {
     /* View transitions - Main content is isolated from the rest of the page and can be animated independently of, for example, the header or footer */
     view-transition-name: global-main-content;
   }

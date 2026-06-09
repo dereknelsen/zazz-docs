@@ -54,6 +54,7 @@ interface NavigateEvent extends Event {
   canIntercept: boolean;
   hashChange: boolean;
   downloadRequest: unknown | null;
+  formData: FormData | null;
   destination: NavigationDestination;
   intercept(options: { handler: () => Promise<void> }): void;
   scroll(): void;
@@ -63,17 +64,23 @@ interface Navigation extends EventTarget {
   addEventListener(type: "navigate", listener: (event: NavigateEvent) => void): void;
 }
 
+interface RevealInstance {
+  init(): void;
+  refresh(): void;
+  config: object;
+}
+
+interface RevealConstructor {
+  new (options?: object): RevealInstance;
+  disableAutoInit(): void;
+  getAutoInstance(): RevealInstance | null;
+  defaultConfig: object;
+}
+
 interface Window {
   navigation: Navigation;
   Utils: UtilsNamespace;
-  // Runtime classes/objects assigned by reveal.js and embla.js — kept loose to avoid
-  // duplicating their full JSDoc-defined shapes here.
-  Reveal: {
-    new (options?: object): { init(): void; refresh(): void; config: object };
-    disableAutoInit(): void;
-    getAutoInstance(): unknown;
-    defaultConfig: object;
-  };
+  Reveal: RevealConstructor;
   EmblaInit: {
     init: (scope?: Document | Element) => void;
     addDotBtnsAndClickHandlers: (

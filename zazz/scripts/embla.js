@@ -170,6 +170,126 @@ const addToggleThumbsActive = (emblaApiMain, emblaApiThumb) => {
   toggleThumbBtnsActive();
 };
 
+// --- Drag-aware click suppression ---
+
+/**
+ * Deadline (ms, `performance.now()`) until which invoker `command` events are
+ * cancelled because a carousel drag just ended. Set by bindDragClickSuppression
+ * for command-bearing slides (the lightbox stage) and enforced by
+ * initCommandDragGuard. A bare `click` guard is not enough: the native /
+ * polyfilled invoker opens the dialog from its own `command` dispatch.
+ */
+let suppressCommandsUntil = 0;
+
+/**
+ * @description Suppresses click activation immediately after a drag gesture.
+ *
+ * This prevents click-style actions (invoker commands, thumb navigation clicks)
+ * from firing when the intent was dragging the carousel.
+ *
+ * @param {Element} root - Embla root/subtree to monitor.
+ * @param {EmblaCarouselType} emblaApi - Carousel instance tied to this root.
+ * @param {string} clickSelector - Click targets to suppress after dragging.
+ * @returns {void}
+ */
+function bindDragClickSuppression(root, emblaApi, clickSelector) {
+  const DRAG_THRESHOLD_PX = 6;
+  const SUPPRESS_WINDOW_MS = 250;
+  // Slides that open a dialog (command="show-modal") also need command suppression.
+  const guardsCommands = clickSelector.includes("commandfor");
+
+  let pointerDown = false;
+  let moved = false;
+  let startX = 0;
+  let startY = 0;
+  let suppressUntil = 0;
+
+  root.addEventListener(
+    "pointerdown",
+    (e) => {
+      if (!(e instanceof PointerEvent)) return;
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+
+      pointerDown = true;
+      moved = false;
+      startX = e.clientX;
+      startY = e.clientY;
+    },
+    { passive: true },
+  );
+
+  root.addEventListener(
+    "pointermove",
+    (e) => {
+      if (!pointerDown || !(e instanceof PointerEvent)) return;
+      if (moved) return;
+
+      const distance = Math.hypot(e.clientX - startX, e.clientY - startY);
+      if (distance >= DRAG_THRESHOLD_PX) moved = true;
+    },
+    { passive: true },
+  );
+
+  const finalizePointer = () => {
+    if (pointerDown && moved) {
+      suppressUntil = performance.now() + SUPPRESS_WINDOW_MS;
+      if (guardsCommands) suppressCommandsUntil = suppressUntil;
+    }
+    pointerDown = false;
+    moved = false;
+  };
+
+  root.addEventListener("pointerup", finalizePointer, { passive: true });
+  root.addEventListener("pointercancel", finalizePointer, { passive: true });
+  emblaApi.on("pointerUp", finalizePointer);
+
+  // Touch/trackpad drags can move with tiny deltas. Any Embla scroll while pointer
+  // is down should be treated as drag intent.
+  emblaApi.on("scroll", () => {
+    if (pointerDown) moved = true;
+  });
+
+  root.addEventListener(
+    "click",
+    (e) => {
+      if (performance.now() > suppressUntil) return;
+
+      const target = e.target instanceof Element ? e.target.closest(clickSelector) : null;
+      if (!target || !root.contains(target)) return;
+
+      e.preventDefault();
+      e.stopImmediatePropagation();
+    },
+    true,
+  );
+}
+
+let commandDragGuardBound = false;
+
+/**
+ * @description Cancels invoker `command` events fired right after a carousel drag.
+ *
+ * Lightbox stage slides carry `command="show-modal"`, so a drag would both scroll
+ * the carousel and open the dialog. The `command` event (native or polyfill) is
+ * the single point that runs the built-in command, and it is cancelable — so we
+ * preventDefault() it within the drag-suppress window. Bound once on `document` in
+ * the capture phase; `command` does not bubble, but capture still reaches it.
+ *
+ * @returns {void}
+ */
+function initCommandDragGuard() {
+  if (commandDragGuardBound) return;
+  commandDragGuardBound = true;
+
+  document.addEventListener(
+    "command",
+    (e) => {
+      if (e.cancelable && performance.now() <= suppressCommandsUntil) e.preventDefault();
+    },
+    true,
+  );
+}
+
 // --- Carousel initialization ---
 
 /**
@@ -265,6 +385,10 @@ function initEmblaCarousels(scope) {
       addDotBtnsAndClickHandlers(emblaApi, emblaDotsNode);
     }
 
+    if (emblaNode.classList.contains("lightbox__stage")) {
+      bindDragClickSuppression(emblaNode, emblaApi, ".lightbox__slide[commandfor]");
+    }
+
     if (emblaThumbsNode) {
       const emblaThumbsViewportNode = emblaThumbsNode.querySelector('[data-embla="viewport"]');
       if (emblaThumbsViewportNode) {
@@ -278,6 +402,8 @@ function initEmblaCarousels(scope) {
         emblaNode._emblaApiThumb = emblaApiThumb;
         addThumbClickHandlers(emblaApi, emblaApiThumb);
         addToggleThumbsActive(emblaApi, emblaApiThumb);
+
+        bindDragClickSuppression(emblaThumbsNode, emblaApiThumb, ".lightbox__thumb");
       }
     }
   });
@@ -491,6 +617,7 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
       initEmblaStartLinks();
       initEmblaKeyboardNav();
       initLightboxCloseSync();
+      initCommandDragGuard();
     });
   } else {
     initEmblaCarousels();
@@ -498,6 +625,7 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
     initEmblaStartLinks();
     initEmblaKeyboardNav();
     initLightboxCloseSync();
+    initCommandDragGuard();
   }
 }
 

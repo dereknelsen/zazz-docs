@@ -364,6 +364,22 @@
   TEXT FORMAT UTILITIES
   =========================================================================== */
 
+  :where(.text-center) {
+    text-align: center;
+  }
+
+  :where(.text-left) {
+    text-align: left;
+  }
+
+  :where(.text-right) {
+    text-align: right;
+  }
+
+  :where(.text-justify) {
+    text-align: justify;
+  }
+
   :where(.uppercase) {
     text-transform: uppercase;
   }

@@ -22,6 +22,8 @@
     --lightbox-thumb-opacity: 0.5;
     --lightbox-thumb-opacity--active: 1;
     --lightbox-thumb-columns: 6;
+    --lightbox-thumb-gap: var(--step-1_5);
+    --lightbox-thumb-aspect-ratio: 1 / 1;
     --lightbox-img-border: 1px solid var(--faded);
 
     /* Reveal transitions/animations */
@@ -29,6 +31,14 @@
     --lightbox-slide-opacity--end: 1;
     --lightbox-slide-scale--start: 0.9;
     --lightbox-slide-scale--end: 1;
+    --lightbox-img-scale--hover: 1.03;
+    --lightbox-img-filter--hover: brightness(1.2);
+    --lightbox-img-scale--active: 1;
+    --lightbox-img-filter--active: brightness(0.5);
+    --lightbox-img-transition-property: transform, filter;
+    --lightbox-img-transition-duration: calc(var(--default-transition-duration) * 3);
+    --lightbox-img-transition-timing-function: var(--default-transition-timing-function);
+    --lightbox-img-transition-delay: 0ms;
   }
 }
 
@@ -68,19 +78,20 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    gap: calc(var(--lightbox-thumb-gap) * 2);
   }
 
   .lightbox__stage > [data-embla="viewport"] {
-    border-radius: var(--lightbox-radius);
+    border-radius: var(--lightbox-slide-radius);
     background: var(--card);
   }
 
   .lightbox__stage > [data-embla="viewport"] > [data-embla="container"] {
-    gap: var(--gap-xs);
+    border-radius: var(--lightbox-slide-radius);
+    margin-inline-start: calc(var(--gap-sm) * -1);
   }
 
   .lightbox__stage .lightbox__slide {
-    aspect-ratio: var(--lightbox-aspect-ratio);
     appearance: none;
     border: none;
     background: none;
@@ -90,11 +101,21 @@
     justify-content: center;
     block-size: 100%;
     cursor: zoom-in;
+    overflow: clip;
+    padding-inline-start: var(--gap-sm);
+  }
+
+  .lightbox__stage .lightbox__content {
+    aspect-ratio: var(--lightbox-aspect-ratio);
+    inline-size: 100%;
+    block-size: 100%;
+    overflow: clip;
+    border-radius: var(--lightbox-slide-radius);
+    border: var(--lightbox-img-border);
   }
 
   .lightbox__stage .lightbox__slide:focus-visible {
-    outline: var(--ring-size) var(--ring-style)
-      color-mix(in oklch, var(--ring-color) var(--ring-opacity), transparent);
+    --ring-offset: 0;
   }
 
   .lightbox__stage .lightbox__slide img {
@@ -102,11 +123,25 @@
     inline-size: 100%;
     block-size: 100%;
     object-fit: var(--lightbox-object-fit);
-    border-radius: var(--lightbox-slide-radius);
-    border: var(--lightbox-img-border);
     user-select: none;
     -webkit-user-drag: none;
     pointer-events: none;
+    transition-property: var(--lightbox-img-transition-property);
+    transition-duration: var(--lightbox-img-transition-duration);
+    transition-timing-function: var(--lightbox-img-transition-timing-function);
+    transition-delay: var(--lightbox-img-transition-delay);
+    transform: scale(var(--lightbox-img-scale));
+    opacity: var(--lightbox-img-opacity);
+  }
+
+  .lightbox__stage .lightbox__slide:hover img {
+    transform: scale(var(--lightbox-img-scale--hover));
+    filter: var(--lightbox-img-filter--hover);
+  }
+
+  .lightbox__stage .lightbox__slide:active img {
+    transform: scale(var(--lightbox-img-scale--active));
+    filter: var(--lightbox-img-filter--active);
   }
 
   /* ---------------------------------------------------------------------------
@@ -121,12 +156,13 @@
   .lightbox__stage .lightbox__thumbs {
     display: flex;
     align-items: center;
-    gap: var(--gap-xs);
+    gap: var(--lightbox-thumb-gap);
   }
 
   .lightbox__stage .lightbox__thumbs [data-embla="viewport"] {
     flex: 1;
     min-inline-size: 0;
+    border-radius: var(--lightbox-thumb-radius);
   }
 
   .lightbox__thumbs-prev,
@@ -135,7 +171,7 @@
   }
 
   .lightbox__thumbs [data-embla="container"] {
-    margin-inline-start: calc(var(--step-1) * -1);
+    gap: var(--lightbox-thumb-gap);
   }
 
   /* Gallery thumbs: fill track evenly, centered, max 6 columns */
@@ -145,23 +181,20 @@
 
   .lightbox__stage .lightbox__thumb {
     max-inline-size: calc(
-      (100% - (var(--lightbox-thumb-columns) * var(--step-1))) / var(--lightbox-thumb-columns) +
-        var(--step-1)
+      (100% - (var(--lightbox-thumb-gap) * (var(--lightbox-thumb-columns) - 1))) /
+        var(--lightbox-thumb-columns)
     );
-    padding-block: var(--gap-xs);
   }
 
-  .lightbox__thumb {
+  .lightbox__thumb-content {
     appearance: none;
     cursor: pointer;
-    padding-inline-start: var(--step-1);
-  }
-
-  .lightbox__thumb img {
     border: var(--lightbox-img-border);
     border-radius: var(--lightbox-thumb-radius);
     overflow: clip;
-    aspect-ratio: 1 / 1;
+  }
+
+  .lightbox__thumb img {
     opacity: var(--lightbox-thumb-opacity);
     transition:
       opacity var(--default-transition-duration) var(--default-transition-timing-function),
@@ -177,12 +210,8 @@
   }
 
   .lightbox__thumb.is-active img {
-    transform: scale(1);
+    transform: scale(1.1);
     opacity: var(--lightbox-thumb-opacity--active);
-  }
-
-  .lightbox__thumb:not(.is-active) img {
-    transform: scale(0.95);
   }
 
   .lightbox__thumb:focus-visible {
@@ -192,7 +221,7 @@
   .lightbox__thumb:focus-visible img {
     transform: scale(1);
     outline: var(--ring-size) var(--ring-style)
-      color-mix(in oklch, var(--ring-color) 100%, transparent);
+      color-mix(in oklch, var(--ring-color) 100%, var(--ring));
   }
 
   /* ---------------------------------------------------------------------------
@@ -205,6 +234,7 @@
     --dialog-border: none;
     overflow: clip;
     pointer-events: none;
+    outline: none;
   }
 
   .lightbox__dialog .lightbox__thumb img {
@@ -228,13 +258,17 @@
     block-size: 100%;
   }
 
+  .lightbox__dialog [data-embla="viewport"] {
+    outline: none;
+  }
+
   .lightbox__dialog [data-embla="root"] > [data-embla="viewport"]:first-of-type {
     flex: 1;
     min-block-size: 0;
   }
 
   .lightbox__dialog .lightbox__thumbs {
-    flex-shrink: 0;
+    flex: 0;
     padding-block: var(--gap-sm);
     pointer-events: auto;
   }
@@ -263,14 +297,18 @@
     padding: var(--gap-md);
   }
 
+  .lightbox__dialog .lightbox__content {
+    border-radius: var(--lightbox-slide-radius);
+    border: var(--lightbox-img-border);
+    overflow: clip;
+  }
+
   .lightbox__dialog .lightbox__slide img {
     --lightbox-thumb-radius: var(--radius-xs);
 
     inline-size: auto;
     max-block-size: 100%;
     object-fit: contain;
-    border: var(--lightbox-img-border);
-    border-radius: var(--lightbox-slide-radius);
     user-select: none;
     -webkit-user-drag: none;
     transition:

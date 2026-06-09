@@ -152,6 +152,16 @@
     border: var(--prose-img-border);
   }
 
+  :where(.prose ul) {
+    list-style: disc;
+    padding-left: var(--gap-md);
+  }
+
+  :where(.prose ol) {
+    list-style: decimal;
+    padding-left: var(--gap-md);
+  }
+
   /* ===========================================================================
   PARAGRAPH RHYTHM — top margin on non-first blocks within .prose
   =========================================================================== */
@@ -159,6 +169,14 @@
   :where(.prose hgroup:not(:first-child)) {
     font-size: var(--font-size-xl);
     margin-block-start: var(--paragraph-spacing-xl);
+  }
+
+  :where(.prose ul:not(:first-child)) {
+    margin-block-start: var(--paragraph-spacing-md);
+  }
+
+  :where(.prose ol:not(:first-child)) {
+    margin-block-start: var(--paragraph-spacing-md);
   }
 
   :where(.prose .text-display:not(:first-child)) {

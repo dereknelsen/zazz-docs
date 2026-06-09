@@ -10,7 +10,7 @@
  */
 @layer variables {
   :root {
-    --embla-slide-basis: calc(100% - var(--gap, 0px));
+    --embla-slide-basis: calc(100% - var(--_gap, 0px));
     --embla-slide-min-width: 0;
     --embla-touch-action: pan-y pinch-zoom;
     --embla-cursor--grabbing: grabbing;
@@ -39,7 +39,7 @@
 
   [data-embla="container"] {
     display: flex;
-    gap: var(--gap, 0);
+    gap: var(--_gap, 0);
     touch-action: var(--embla-touch-action);
   }
 

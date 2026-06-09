@@ -1,0 +1,121 @@
+---
+name: zazz-pass
+description: >-
+  Build, style, and lay out web UI with the Zazz Design Framework — this repo's default design
+  system. Use this skill WHENEVER you create or modify any page, component, layout, or styling
+  here: buttons, badges, cards, dialogs, dropdowns, tooltips, tabs, accordions,
+  carousels/lightboxes, forms (inputs, selects, switches, sliders, checkboxes, radios),
+  navigation, heroes, sections. Also trigger for theming, dark mode, spacing/typography/color
+  decisions, "make it look good / on-brand," or anytime CSS variables, design tokens, or
+  semantic utility classes are involved. Zazz is zero-build, modern-web-API, semantic-token +
+  data-* driven — reach for it instead of hand-rolling CSS or pulling in Tailwind/shadcn.
+---
+
+# Zazz Design Framework
+
+Zazz is the default design system for this project — a zero-build, modern-web CSS/UI kit (a
+lightweight shadcn + Tailwind alternative that runs with **no build step**). Build with Zazz
+before reaching for any other styling approach.
+
+**Single source of truth:** each component's markup lives once, in
+`zazz/components/{name}/*.html`, surfaced on the docs site at `/docs/components/{name}`. Never
+invent or paste a second copy — read or fetch the real example and adapt it.
+
+## How Zazz thinks (mental model)
+
+- **Cascade layers, not specificity.** Order is `@layer variables, reset, components,
+  utilities`. A utility wins over a component rule with no `!important`. Don't fight the
+  cascade with selector tricks.
+- **Tokens are hooks.** Components read `var(--token)` and never hardcode; variants just
+  reassign tokens (see `zazz/styles/_button.css`). You restyle by overriding tokens, not
+  editing rules.
+- **`data-*` for variants** (shadcn-familiar): `data-variant`, `data-size`, `data-side`,
+  `data-align`, `data-direction`, `data-animation`. The **default** variant is the *absence*
+  of the attribute. Write `class="button" data-variant="primary"` — never `.button-primary`.
+- **Modern APIs do the work** (Popover, native `<dialog>`, Invoker Commands, anchor
+  positioning, View Transitions, `<details>`). Polyfills are already loaded — preserve them.
+
+## The golden rule: semantic first, specific as escape hatch
+
+Start at the most semantic layer; get specific only when nothing semantic fits. This is what
+keeps designs consistent and reusable — you compose from a shared vocabulary instead of
+writing net-new CSS every time.
+
+- **Spacing** → `--gap-*` (or `.gap-* .p-* .py-*` utilities) first; `--step-*` only when no
+  gap fits. Never a raw px/rem.
+- **Color** → theme **role** tokens (`--background`, `--foreground`, `--muted-foreground`,
+  `--primary`, `--border`, `--destructive`…) so light/dark swap for free; literal scales
+  (`--primary-600`, `--neutral-100`, `--shade-800`) only as a last resort.
+- **Type** → `text-*` classes (`text-h1`…`text-xs`, `text-eyebrow`). Never compose type from
+  separate size/weight/leading utilities.
+- **Reuse over new CSS.** Prefer an existing utility or primitive. Reaching for a brand-new
+  rule is a signal you skipped a semantic option — check `references/tokens.md` first.
+
+Full token map → **`references/tokens.md`**.
+
+## Customizing without editing source
+
+Tokens resolve lazily, so you can intervene at three scopes — pick the narrowest that works.
+**Do not edit `zazz/styles/` or `zazz/scripts/`** unless explicitly asked.
+
+1. **Global** — redefine a semantic token on `:root` (`--radius-md: 0` squares every medium
+   radius across the system).
+2. **Component default** — redefine a component token (`--button-radius: var(--radius-full)` →
+   all buttons go pill-shaped).
+3. **Instance** — set the token inline or via a `data-*` variant
+   (`style="--button-background: var(--secondary)"`).
+
+## Building with components
+
+1. Find the primitive in **`references/components.md`** (selector + `data-*` values + what
+   powers it + docs link).
+2. Get the real markup — fetch `/docs/components/{name}` or read
+   `zazz/components/{name}/*.html`. Adapt it; don't reinvent.
+3. Apply variants via `data-*`; set spacing/color/type via semantic tokens & `text-*` classes.
+4. Compose pages from `.container` / `.article` wrappers + flex/grid utilities.
+
+Forms share `--field-*` tokens and validate via `:user-invalid` (after blur/submit, never
+while typing). Cards and avatars are composition patterns (utilities + theme tokens), not
+dedicated CSS files.
+
+## Modern APIs & JS behaviors
+
+Author behavior in **HTML**; the scripts enhance markup. Embla carousels (`data-embla-*`) and
+scroll reveals (`data-reveal-*`) are fully markup-configured — don't touch the JS. Tooltips
+(`interestfor`), dialogs (`command`/`commandfor`), and popovers (`popovertarget`) use native
+invoker/popover APIs with polyfills already loaded.
+
+- Zazz hooks + the `data-embla-*` / `data-reveal-*` catalogs → **`references/apis.md`**.
+- How an API works + browser-support/fallbacks → the **`modern-web-guidance`** skill (first
+  stop for any new HTML/CSS/JS API question; training data on these goes stale fast).
+
+## Brand & design system
+
+**`DESIGN.md`** is the brand layer: color roles, the fluid type scale, the three site
+archetypes (Industrial Distributor / Lifestyle Brand / Editorial Studio), motion, and the
+"fetch a brand URL → update tokens" customization workflow. Read it when establishing or
+matching a brand. (Page-section and whole-page-type composition patterns will live in
+`PATTERNS.md` — planned, not yet authored.)
+
+## Do / Don't
+
+- **Do** use `var(--token)` and semantic utilities. **Don't** hardcode colors, spacing, radii,
+  or type.
+- **Do** write `data-variant="primary"`. **Don't** invent `.button-primary` classes.
+- **Do** let role tokens handle dark mode. **Don't** hand-write `.dark` overrides for
+  token-handled values.
+- **Do** reuse utilities/primitives. **Don't** add net-new CSS until you've ruled out a
+  semantic option.
+- **Do** preserve the loaded polyfills and modern-API markup. **Don't** edit `zazz/styles/` or
+  `zazz/scripts/` unless asked.
+
+## Reference index
+
+| Read | When |
+| --- | --- |
+| `references/tokens.md` | Choosing spacing, color, type, radius, shadow, or layout tokens/utilities |
+| `references/components.md` | Picking a component and its `data-*` API + docs link |
+| `references/apis.md` | Wiring popovers/dialogs/tooltips, carousels (`data-embla-*`), reveals (`data-reveal-*`) |
+| `DESIGN.md` | Brand colors, type scale, archetypes, motion, brand customization |
+| `modern-web-guidance` skill | How a modern web API works + browser-support/fallbacks |
+| `/docs/components/{name}` or `zazz/components/{name}/*.html` | The canonical example markup (single source) |

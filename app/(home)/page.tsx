@@ -21,19 +21,6 @@ const links = [
   },
 ] as const;
 
-const linkDelays = ["delay-300", "delay-500", "delay-500", "delay-700", "delay-700", "delay-1000"] as const;
-
-const linkClassName = cn(
-  "group inline-flex w-fit items-center gap-3.5 py-0.5 text-sm leading-tight tracking-tight",
-  "text-fd-foreground no-underline transition-colors duration-200 hover:text-fd-primary",
-  "focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-fd-ring focus-visible:ring-offset-4 focus-visible:outline-none",
-  "motion-safe:animate-fd-fade-in motion-safe:opacity-0 motion-reduce:opacity-100",
-);
-
-const fadeInClassName = cn(
-  "motion-safe:animate-fd-fade-in motion-safe:opacity-0 motion-reduce:opacity-100",
-);
-
 export default function HomePage() {
   return (
     <div className="relative isolate flex min-h-dvh w-full flex-col overflow-hidden bg-fd-background text-fd-foreground">
@@ -48,16 +35,12 @@ export default function HomePage() {
           variant="lockup"
           className={cn(
             "col-start-1 row-start-1 h-auto w-28 justify-self-start self-start text-fd-foreground lg:w-36",
-            fadeInClassName,
-            "delay-100",
           )}
         />
 
         <p
           className={cn(
             "col-start-2 row-start-1 justify-self-end self-start font-mono text-xs tracking-widest text-fd-muted-foreground uppercase",
-            fadeInClassName,
-            "delay-200",
             "max-md:col-start-1 max-md:row-start-2 max-md:justify-self-start",
           )}
         >
@@ -70,13 +53,15 @@ export default function HomePage() {
             "max-md:col-start-1 max-md:row-start-3 max-md:self-start",
           )}
         >
-          {links.map((l, i) => {
-            const className = cn(linkClassName, linkDelays[i]);
-
+          {links.map((l) => {
             return l.external ? (
               <a
                 key={l.label}
-                className={className}
+                className={cn(
+                  "group inline-flex w-fit items-center gap-3.5 py-0.5 text-sm leading-tight tracking-tight",
+                  "text-fd-foreground no-underline transition-colors duration-200 hover:text-fd-primary",
+                  "focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-fd-ring focus-visible:ring-offset-4 focus-visible:outline-none",
+                )}
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -88,7 +73,15 @@ export default function HomePage() {
                 <span>{l.label}</span>
               </a>
             ) : (
-              <Link key={l.label} className={className} href={l.href}>
+              <Link
+                key={l.label}
+                className={cn(
+                  "group inline-flex w-fit items-center gap-3.5 py-0.5 text-sm leading-tight tracking-tight",
+                  "text-fd-foreground no-underline transition-colors duration-200 hover:text-fd-primary",
+                  "focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-fd-ring focus-visible:ring-offset-4 focus-visible:outline-none",
+                )}
+                href={l.href}
+              >
                 <ArrowUpRight
                   className="size-3.5 shrink-0 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   aria-hidden
@@ -102,8 +95,6 @@ export default function HomePage() {
         <h1
           className={cn(
             "col-start-2 row-start-2 m-0 justify-self-end self-end text-right text-5xl leading-none font-bold tracking-tight text-fd-foreground sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl",
-            fadeInClassName,
-            "delay-200",
             "max-md:col-start-1 max-md:row-start-4 max-md:justify-self-start max-md:self-end max-md:text-left",
           )}
         >
@@ -115,8 +106,6 @@ export default function HomePage() {
         <div
           className={cn(
             "col-span-full row-start-3 flex items-center justify-between gap-4 pt-4 font-mono text-xs tracking-widest text-fd-muted-foreground uppercase",
-            fadeInClassName,
-            "delay-700",
             "max-md:col-start-1 max-md:row-start-5 max-md:flex-col max-md:items-start max-md:gap-2",
           )}
         >

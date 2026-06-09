@@ -2,20 +2,22 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { buildPreviewDocument } from "@/lib/zazz-iframe";
+import type { ExampleScript } from "zazz/components/manifest";
 
 interface PreviewFrameProps {
   html: string;
-  scripts?: string[];
+  scripts?: ExampleScript[];
   align?: "start" | "center";
   minHeight?: number;
   title?: string;
+  styleHrefs?: string[];
 }
 
 /**
- * Renders a Zazz example inside an isolated, same-origin iframe. The iframe is
- * the only place Zazz CSS loads on the docs site, so its reset/utilities stay
- * fully sandboxed from Tailwind + fumadocs. We sync two things across the
- * boundary: the iframe's height (to its content) and the site's light/dark mode.
+ * Renders a Zazz example inside an isolated, same-origin iframe. The iframe is the only
+ * place Zazz CSS loads on the docs site, so its reset/utilities stay fully sandboxed from
+ * Tailwind + fumadocs. We sync two things across the boundary: the iframe's height (to its
+ * content, floored at `minHeight`) and the site's light/dark mode.
  */
 export function PreviewFrame({
   html,
@@ -23,13 +25,14 @@ export function PreviewFrame({
   align = "start",
   minHeight = 0,
   title = "Preview",
+  styleHrefs,
 }: PreviewFrameProps) {
   const ref = useRef<HTMLIFrameElement>(null);
   const [height, setHeight] = useState(minHeight || 160);
 
   const srcDoc = useMemo(
-    () => buildPreviewDocument({ html, scripts, align }),
-    [html, scripts, align],
+    () => buildPreviewDocument({ html, scripts, align, minHeight, styleHrefs }),
+    [html, scripts, align, minHeight, styleHrefs],
   );
 
   useEffect(() => {

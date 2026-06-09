@@ -1,0 +1,27 @@
+{
+  "title": "Components",
+  "pages": [
+    "button",
+    "badge",
+    "avatar",
+    "card",
+    "prose",
+    "accordion",
+    "tabs",
+    "tooltip",
+    "dialog",
+    "dropdown",
+    "navigation-menu",
+    "lightbox",
+    "---Forms---",
+    "input",
+    "input-group",
+    "password-group",
+    "textarea",
+    "select",
+    "checkbox",
+    "radio",
+    "switch",
+    "slider"
+  ]
+}

@@ -13,7 +13,7 @@
  */
 
 @property --use-inverted-menu {
-  syntax: "true | false";
+  syntax: "*";
   inherits: true;
   initial-value: "true";
 }

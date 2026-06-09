@@ -13,7 +13,7 @@
     --page-transition-duration: var(--default-transition-duration);
     --page-transition-ease: var(--default-transition-timing-function);
     --page-transition-wait: 0ms;
-    --page-transition-origin: center center;
+    --page-transition-origin: center top;
     --page-transition-scale: 0.99;
     --page-transition-translate: 0, 0, 0;
     --page-transition-opacity: 0;
@@ -46,13 +46,8 @@
      (when page heights differ) can't paint over the chrome during the crossfade.
      Group z-index applies regardless of motion preference. */
   ::view-transition-group(global-main-content) {
-    z-index: 0;
+    overflow: clip;
     transform-origin: var(--page-transition-origin);
-  }
-
-  ::view-transition-group(global-navigation),
-  ::view-transition-group(global-footer) {
-    z-index: 1;
   }
 
   @keyframes global-page-transition--old {

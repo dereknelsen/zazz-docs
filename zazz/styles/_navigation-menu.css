@@ -19,13 +19,13 @@
 
     --navigation-popover-shadow: var(--shadow-md);
     --navigation-popover-child-radius: var(--radius-sm);
-    --navigation-popover-gap: var(--step-1_5);
+    --navigation-popover-gap: var(--step-1\.5);
     --navigation-popover-inline-size: min(var(--screen-xs), 100% - var(--gap-md));
     --navigation-popover-viewport-display: grid;
     --navigation-popover-viewport-align-items: stretch;
     --navigation-popover-viewport-justify-items: stretch;
     --navigation-popover-viewport-template-columns: 1fr;
-    --navigation-popover-viewport-gap: var(--step-1_5);
+    --navigation-popover-viewport-gap: var(--step-1\.5);
     --navigation-popover-viewport-min-inline-size: var(--step-52);
   }
 }
@@ -97,7 +97,7 @@
     /* Default: open below the trigger, aligned to its start edge */
     --popover-position-area: block-end span-inline-end;
     --popover-origin: top center;
-    --popover-margin-block: var(--step-1_5);
+    --popover-margin-block: var(--step-1\.5);
   }
 
   .navigation-menu__popover .button {
@@ -174,7 +174,7 @@
     --popover-position-area: inline-end span-block-start;
     --popover-origin: left top;
     --popover-margin-block: 0;
-    --popover-margin-inline: var(--step-1_5);
+    --popover-margin-inline: var(--step-1\.5);
     --popover-position-try-fallbacks: flip-inline, flip-block, flip-inline flip-block;
   }
 

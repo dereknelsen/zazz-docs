@@ -7,17 +7,21 @@ colorMode: light dark
 colors:
   # All values are OKLCH — the authoritative token format (HEX is imprecise for our scales).
   # Theme (light mode values shown, dark mode swaps automatically)
-  background: "oklch(0.9911 0 0)"
+  background: "oklch(1 0 0)"
   foreground: "oklch(0.241 0.009 285.7)"
-  border: "oklch(0.871 0.004 286.58)"
+  border: "oklch(0.949 0.001 287.28)"
   border-foreground: "oklch(1 0 0 / 0.95)"
   card: "oklch(1 0 0)"
   card-foreground: "oklch(0.241 0.009 285.7)"
-  input: "oklch(0.9911 0 0)"
+  popover: "oklch(1 0 0)"
+  popover-foreground: "oklch(0.241 0.009 285.7)"
+  input: "oklch(0.973 0.001 287.31)"
   input-foreground: "oklch(0.241 0.009 285.7)"
 
   # Overlay
+  muted: "oklch(0.198 0.008 285.68 / 0.05)"
   muted-foreground: "oklch(0.198 0.008 285.68 / 0.6)"
+  faded: "oklch(1 0 0 / 0.1)"
   faded-foreground: "oklch(1 0 0 / 0.6)"
 
   # Brand
@@ -43,44 +47,44 @@ typography:
     fontFamily: Geist, Verdana, sans-serif
     fontSize: 5.96rem
     fontWeight: 600
-    lineHeight: 1
-    letterSpacing: -0.025em
+    lineHeight: 0.95
+    letterSpacing: -0.05em
   h1:
     fontFamily: Geist, Verdana, sans-serif
     fontSize: 4.77rem
     fontWeight: 600
-    lineHeight: 1
-    letterSpacing: -0.025em
+    lineHeight: 0.95
+    letterSpacing: -0.05em
   h2:
     fontFamily: Geist, Verdana, sans-serif
     fontSize: 3.81rem
     fontWeight: 600
-    lineHeight: 1
+    lineHeight: 0.95
     letterSpacing: -0.025em
   h3:
     fontFamily: Geist, Verdana, sans-serif
     fontSize: 3.05rem
     fontWeight: 600
-    lineHeight: 1.05
-    letterSpacing: -0.02em
+    lineHeight: 1
+    letterSpacing: -0.025em
   h4:
     fontFamily: Geist, Verdana, sans-serif
     fontSize: 2.44rem
     fontWeight: 600
-    lineHeight: 1.05
-    letterSpacing: -0.01em
+    lineHeight: 1
+    letterSpacing: -0.015em
   h5:
     fontFamily: Geist, Verdana, sans-serif
     fontSize: 1.95rem
     fontWeight: 600
-    lineHeight: 1.1
-    letterSpacing: -0.025em
+    lineHeight: 1
+    letterSpacing: -0.01em
   h6:
     fontFamily: Geist, Verdana, sans-serif
     fontSize: 1.56rem
     fontWeight: 600
-    lineHeight: 1.1
-    letterSpacing: -0.0025em
+    lineHeight: 1
+    letterSpacing: -0.005em
   body-xl:
     fontFamily: Geist, Verdana, sans-serif
     fontSize: 1.56rem
@@ -98,12 +102,12 @@ typography:
     lineHeight: 1.6
   body-sm:
     fontFamily: Geist, Verdana, sans-serif
-    fontSize: 0.83rem
+    fontSize: 0.89rem
     fontWeight: 400
     lineHeight: 1.5
   body-xs:
     fontFamily: Geist, Verdana, sans-serif
-    fontSize: 0.69rem
+    fontSize: 0.79rem
     fontWeight: 400
     lineHeight: 1.5
   eyebrow:
@@ -111,7 +115,7 @@ typography:
     fontSize: 0.58rem
     fontWeight: 600
     lineHeight: 1.2
-    letterSpacing: 0.12em
+    letterSpacing: 0.1em
   mono:
     fontFamily: '"Geist Mono", "Palatino Linotype", sans-serif'
     fontSize: 1rem
@@ -146,24 +150,30 @@ rounded:
   xs: 4px
   sm: 6px
   md: 10px
-  lg: 16px
+  lg: 20px
   xl: 28px
   full: 9999px
 
 components:
+  # Variants below match the shipped `data-variant` values (no attribute = default).
+  button-default:
+    backgroundColor: "{colors.card}"
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.md}"
+    padding: 10px
   button-primary:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.primary-foreground}"
     rounded: "{rounded.md}"
     padding: 10px
-  button-secondary:
-    backgroundColor: "{colors.secondary}"
-    textColor: "{colors.secondary-foreground}"
+  button-muted:
+    backgroundColor: "{colors.muted}"
+    textColor: "{colors.foreground}"
     rounded: "{rounded.md}"
     padding: 10px
-  button-tertiary:
-    backgroundColor: "{colors.tertiary}"
-    textColor: "{colors.tertiary-foreground}"
+  button-ghost:
+    backgroundColor: transparent
+    textColor: "{colors.foreground}"
     rounded: "{rounded.md}"
     padding: 10px
   button-destructive:
@@ -171,21 +181,11 @@ components:
     textColor: "{colors.destructive-foreground}"
     rounded: "{rounded.md}"
     padding: 10px
-  button-default:
-    backgroundColor: "{colors.card}"
+  button-link:
+    backgroundColor: transparent
     textColor: "{colors.foreground}"
-    rounded: "{rounded.md}"
-    padding: 10px
-  button-ghost:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.muted-foreground}"
-    rounded: "{rounded.md}"
-    padding: 10px
-  button-outline:
-    backgroundColor: "{colors.foreground}"
-    textColor: "{colors.border-foreground}"
-    rounded: "{rounded.md}"
-    padding: 10px
+    rounded: 0px
+    padding: 0px
   card:
     backgroundColor: "{colors.card}"
     textColor: "{colors.card-foreground}"
@@ -201,31 +201,34 @@ components:
     textColor: "{colors.input-foreground}"
     rounded: "{rounded.md}"
     padding: 10px
+  # Badge ships primary/muted/ghost/link only — no destructive or status variants.
+  # Status badges (info/success/warning/destructive) are an instance override, e.g.
+  # style="--badge-background: var(--success); --badge-foreground: var(--success-foreground)".
   badge:
-    backgroundColor: "{colors.border}"
+    backgroundColor: "{colors.background}"
     textColor: "{colors.foreground}"
-    rounded: "{rounded.full}"
-    padding: 4px
-  badge-info:
-    backgroundColor: "{colors.info}"
-    textColor: "{colors.info-foreground}"
-    rounded: "{rounded.full}"
-    padding: 4px
-  badge-success:
-    backgroundColor: "{colors.success}"
-    textColor: "{colors.success-foreground}"
-    rounded: "{rounded.full}"
-    padding: 4px
-  badge-warning:
-    backgroundColor: "{colors.warning}"
-    textColor: "{colors.warning-foreground}"
-    rounded: "{rounded.full}"
-    padding: 4px
-  badge-destructive:
-    backgroundColor: "{colors.destructive}"
-    textColor: "{colors.destructive-foreground}"
-    rounded: "{rounded.full}"
-    padding: 4px
+    rounded: "{rounded.sm}"
+    padding: 8px
+  badge-primary:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.primary-foreground}"
+    rounded: "{rounded.sm}"
+    padding: 8px
+  badge-muted:
+    backgroundColor: "{colors.muted}"
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.sm}"
+    padding: 8px
+  badge-ghost:
+    backgroundColor: transparent
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.sm}"
+    padding: 8px
+  badge-link:
+    backgroundColor: transparent
+    textColor: "{colors.foreground}"
+    rounded: 0px
+    padding: 0px
 
 fonts:
   body: Geist, Verdana, sans-serif
@@ -282,12 +285,14 @@ Default to **Lifestyle Brand** when unclear — it balances conversion with bran
 
 | Token                 | Role                                          | Light Character              | Dark Character              |
 | --------------------- | --------------------------------------------- | ---------------------------- | --------------------------- |
-| `--background`        | Page surface                                  | Near-white (neutral-50)      | Blue-violet black           |
+| `--background`        | Page surface                                  | White (--white)              | Blue-violet black           |
 | `--foreground`        | Default text                                  | Rich charcoal (neutral-900)  | Pure white                  |
-| `--border`            | 1px lines and dividers                        | Soft cool gray (neutral-200) | Deep gray                   |
+| `--border`            | 1px lines and dividers                        | Soft cool gray (neutral-100) | Deep gray                   |
 | `--border-foreground` | Text on outlined/bordered elements            | Near-opaque white (tint-950) | Subtle white (tint-100)     |
 | `--card`              | Card surface, elevated from background        | Pure white                   | Dark charcoal               |
 | `--card-foreground`   | Text on cards                                 | Rich charcoal                | Pure white                  |
+| `--popover`           | Popover / menu surface                        | Pure white                   | Near-black (shade-950)      |
+| `--popover-foreground`| Text on popovers and menus                    | Rich charcoal                | Pure white                  |
 | `--input`             | Input field background                        | Near-white (neutral-50)      | Barely-there tint (tint-50) |
 | `--input-foreground`  | Input text                                    | Rich charcoal                | Pure white                  |
 | `--muted`             | Subtle dim — always darker than its surface   | shade-50                     | tint-50                     |
@@ -359,19 +364,19 @@ All sizes are fluid via `clamp()`, scaling between mobile and desktop viewports.
 
 | Class          | Size (desktop) | Leading | Tracking  | Character                     |
 | -------------- | -------------- | ------- | --------- | ----------------------------- |
-| `text-display` | 5.96rem        | 1       | -0.025em  | Massive hero statement        |
-| `text-h1`      | 4.77rem        | 1       | -0.025em  | Primary page heading          |
-| `text-h2`      | 3.81rem        | 1       | -0.025em  | Section heading               |
-| `text-h3`      | 3.05rem        | 1.05    | -0.02em   | Subsection heading            |
-| `text-h4`      | 2.44rem        | 1.05    | -0.01em   | Component heading             |
-| `text-h5`      | 1.95rem        | 1.1     | -0.025em  | Small heading                 |
-| `text-h6`      | 1.56rem        | 1.1     | -0.0025em | Minor heading                 |
+| `text-display` | 5.96rem        | 0.95    | -0.05em   | Massive hero statement        |
+| `text-h1`      | 4.77rem        | 0.95    | -0.05em   | Primary page heading          |
+| `text-h2`      | 3.81rem        | 0.95    | -0.025em  | Section heading               |
+| `text-h3`      | 3.05rem        | 1       | -0.025em  | Subsection heading            |
+| `text-h4`      | 2.44rem        | 1       | -0.015em  | Component heading             |
+| `text-h5`      | 1.95rem        | 1       | -0.01em   | Small heading                 |
+| `text-h6`      | 1.56rem        | 1       | -0.005em  | Minor heading                 |
 | `text-xl`      | 1.56rem        | 1.5     | 0         | Large body / intro paragraph  |
 | `text-lg`      | 1.25rem        | 1.5     | 0         | Lead text                     |
 | `text-md`      | 1rem           | 1.6     | 0         | Default body text             |
 | `text-sm`      | 0.89rem        | 1.5     | 0         | Small UI labels               |
 | `text-xs`      | 0.79rem        | 1.5     | 0         | Captions, fine print          |
-| `text-eyebrow` | 0.58rem        | 1.2     | 0.12em    | Uppercase label, wide-tracked |
+| `text-eyebrow` | 0.58rem        | 1.2     | 0.1em     | Uppercase label, wide-tracked |
 
 Headings use `text-wrap: balance`. Body uses `text-wrap: pretty`. Tight-leading on large text, generous-leading on body.
 
@@ -390,15 +395,15 @@ Headings use `text-wrap: balance`. Body uses `text-wrap: pretty`. Tight-leading 
 
 ### Buttons
 
-Subtly rounded (`--radius-md`, ~10px). Fixed height (`--step-8`). Variants: **default** (bordered, `--background`), **primary** (solid `--primary`), **muted** (`--muted` fill), **ghost** (transparent, hover reveals `--muted`), **link** (inline, underlined). Sizes: `sm`, `icon`, `icon-sm`.
+Subtly rounded (`--radius-md`, ~10px). Fixed height (`--step-8`). Variants (via `data-variant`): **default** (no attribute — bordered, `--background`), **primary** (solid `--primary`), **muted** (`--muted` fill), **ghost** (transparent, hover reveals `--muted`), **destructive** (solid `--destructive`), **link** (inline, underlined). Sizes (via `data-size`): `sm`, `icon`, `icon-sm`.
 
 ### Badges
 
-Gently rounded chips (`--radius-sm`, ~6px). Height `--step-5`. Same variant names as button. `--font-size-xs`, `--font-weight-strong`.
+Gently rounded chips (`--radius-sm`, ~6px). Height `--step-5`. Variants (via `data-variant`): `default`, `primary`, `muted`, `ghost`, `link` — note badge has **no** `destructive` variant. Size: `icon`. `--font-size-xs`, `--font-weight-strong`.
 
 ### Dialog
 
-Native `<dialog>` via Invoker Commands API. `--card` surface, `--shadow-md`, `--radius-lg`. Backdrop: `--shade-800`. Sizes: default (`--article`), `large` (`--container`), `screen`.
+Native `<dialog>` via Invoker Commands API. `--card` surface, `--shadow-md`, `--radius-lg`. Backdrop: `--shade-800`. Sizes (via `data-size`): `article` (default width), `container`, `screen`.
 
 ### Dropdown & Navigation Menu
 
@@ -425,7 +430,7 @@ Shared `--field-*` tokens unify `.input`, `.textarea`, `.select`, `.input-group`
 | Class        | Width                                  | Purpose                    |
 | ------------ | -------------------------------------- | -------------------------- |
 | `.container` | `min(80rem, 100% - var(--gap-md) * 2)` | Full-width content wrapper |
-| `.article`   | `min(40rem, 100% - var(--gap-md) * 2)` | Reading-width content      |
+| `.article`   | `min(66ch, 100% - var(--gap-md) * 2)`  | Reading-width content      |
 
 Both self-pad via `min()` — no wrapper div needed. Both register as container query containers.
 
@@ -441,6 +446,8 @@ Both self-pad via `min()` — no wrapper div needed. Both register as container 
 
 Utility classes: `.gap-*`, `.p-*`, `.px-*`, `.py-*`, `.m-*`, `.mx-*`, `.my-*` at each size (xs/sm/md/lg/xl).
 
+_Values shown throughout (spacing, radius, type sizes) are **desktop maximums**. Spacing and radius derive from `--spacing-interval` (`clamp(0.225rem, …, 0.25rem)`) and type from per-step `clamp()`s, so all three scale down fluidly on narrower viewports._
+
 ### Radius
 
 | Token           | Computed    | Use For            |
@@ -449,7 +456,7 @@ Utility classes: `.gap-*`, `.p-*`, `.px-*`, `.py-*`, `.m-*`, `.mx-*`, `.my-*` at
 | `--radius-xs`   | ~4px        | Subtle softening   |
 | `--radius-sm`   | ~6px        | Badges             |
 | `--radius-md`   | ~10px       | Buttons, inputs    |
-| `--radius-lg`   | ~16px       | Cards, dialogs     |
+| `--radius-lg`   | ~20px       | Cards, dialogs     |
 | `--radius-xl`   | ~28px       | Statement surfaces |
 | `--radius-full` | Pill-shaped | Circular/capsular  |
 
@@ -490,7 +497,7 @@ Spring easing (`--spring-easing`) with 0.333s duration. Fallback: `cubic-bezier(
 
 ## 6. Design Patterns
 
-For common page sections and composition guidance, see [PATTERNS.md](PATTERNS.md). It covers:
+For common page sections and composition guidance, see `PATTERNS.md` _(planned — not yet authored)_. It will cover:
 
 - Header & navigation patterns
 - Hero section variants (full-bleed, split, video, carousel, hotspot, search-first)
@@ -501,3 +508,7 @@ For common page sections and composition guidance, see [PATTERNS.md](PATTERNS.md
 - B2B-specific patterns (quote request, trade program, audience segmentation)
 - CTA banners, showroom/location, footer variants
 - Section rhythm guidelines by archetype
+- **Page-structure outlines per page type**: eCommerce Landing/Home, Product Listing &
+  Search (PLP), Product Details (PDP), plus Category/Collection, Cart, Checkout,
+  Account/Orders, and B2B quote-request pages — top-to-bottom section skeletons keyed to
+  the three archetypes (Industrial Distributor / Lifestyle Brand / Editorial Studio)

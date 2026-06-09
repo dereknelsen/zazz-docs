@@ -179,7 +179,7 @@ They group related hooks; they do **not** document individual tokens (the names 
 declaration or rule. Reserve them for non-obvious choices (a fallback, a calc, a hack):
 
 ```css
-/* Thumb centered on the track via a calc'd negative margin so retuning
+/* thumbnail centered on the track via a calc'd negative margin so retuning
      either size keeps it aligned. */
 ```
 

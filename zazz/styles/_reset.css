@@ -202,7 +202,7 @@
     --kbd-color: var(--muted-foreground);
     --kbd-inline-size: var(--step-5);
     --kbd-block-size: var(--step-5);
-    --kbd-icon-size: var(--step-3_5);
+    --kbd-icon-size: var(--step-3\.5);
     --kbd-gap: var(--step-1);
 
     font-family: var(--kbd-font-family);
@@ -261,6 +261,11 @@
   }
 
   :where(img, video) {
+    /* Placeholder for lazy loading */
+    background-color: var(--background);
+    background-image: linear-gradient(var(--muted), var(--muted));
+
+    /* Ensure the image is responsive */
     max-inline-size: 100%;
     block-size: auto;
   }
@@ -436,20 +441,20 @@
     color: var(--placeholder-color);
   }
 
-  /* Range input (slider) — appearance: none redraws the track + thumb from theme
+  /* Range input (slider) — appearance: none redraws the track + thumbnail from theme
      tokens. The active region is NOT filled (parity across engines); add a paint
-     via JS if a filled track is needed. The thumb is centered on the track with a
+     via JS if a filled track is needed. The thumbnail is centered on the track with a
      calc'd negative margin so retuning either size keeps it aligned. */
   :where(input[type="range"]) {
     --range-track-height: var(--step-2);
     --range-track-background: var(--muted);
     --range-track-border: 1px solid var(--muted);
     --range-track-radius: var(--radius-full);
-    --range-thumb-size: var(--step-3_5);
-    --range-thumb-background: var(--background);
-    --range-thumb-border: 1px solid var(--primary);
-    --range-thumb-radius: var(--radius-full);
-    --range-thumb-offset: calc((var(--range-track-height) - var(--range-thumb-size)) / 2);
+    --range-thumbnail-size: var(--step-3\.5);
+    --range-thumbnail-background: var(--background);
+    --range-thumbnail-border: 1px solid var(--primary);
+    --range-thumbnail-radius: var(--radius-full);
+    --range-thumbnail-offset: calc((var(--range-track-height) - var(--range-thumbnail-size)) / 2);
 
     -webkit-appearance: none;
     appearance: none;
@@ -479,25 +484,25 @@
     border-radius: var(--range-track-radius);
   }
 
-  :where(input[type="range"])::-webkit-slider-thumb {
+  :where(input[type="range"])::-webkit-slider-thumbnail {
     -webkit-appearance: none;
     appearance: none;
-    margin-block-start: var(--range-thumb-offset);
-    inline-size: var(--range-thumb-size);
-    block-size: var(--range-thumb-size);
-    background-color: var(--range-thumb-background);
-    border: var(--range-thumb-border);
-    border-radius: var(--range-thumb-radius);
+    margin-block-start: var(--range-thumbnail-offset);
+    inline-size: var(--range-thumbnail-size);
+    block-size: var(--range-thumbnail-size);
+    background-color: var(--range-thumbnail-background);
+    border: var(--range-thumbnail-border);
+    border-radius: var(--range-thumbnail-radius);
     transition: var(--default-transition);
   }
 
-  :where(input[type="range"])::-moz-range-thumb {
+  :where(input[type="range"])::-moz-range-thumbnail {
     appearance: none;
-    inline-size: var(--range-thumb-size);
-    block-size: var(--range-thumb-size);
-    background-color: var(--range-thumb-background);
-    border: var(--range-thumb-border);
-    border-radius: var(--range-thumb-radius);
+    inline-size: var(--range-thumbnail-size);
+    block-size: var(--range-thumbnail-size);
+    background-color: var(--range-thumbnail-background);
+    border: var(--range-thumbnail-border);
+    border-radius: var(--range-thumbnail-radius);
     transition: var(--default-transition);
   }
 
@@ -513,7 +518,7 @@
   /* Checkbox — appearance: none redraws the native control from theme tokens.
      Checked/indeterminate fill with --primary and layer a glyph (never colour alone). */
   :where(input[type="checkbox"]:not([role="switch"])) {
-    --checkbox-size: var(--step-4_5);
+    --checkbox-size: var(--step-4\.5);
     --checkbox-background: var(--input);
     --checkbox-border: var(--border);
     --checkbox-border--hover: var(--primary);

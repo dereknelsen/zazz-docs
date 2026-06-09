@@ -1,0 +1,16 @@
+---
+title: Card
+description: A composition pattern for product and content cards built from theme tokens and utilities.
+---
+
+A card is a composition, not a single primitive — compose the `.card__*` parts with theme
+tokens (`--card`, `--border`, `--radius-lg`) and utility classes. Drop a `.badge`, `.text-*`
+classes, and a figure inside.
+
+## Basic
+
+<Preview src="card/basic" />
+
+Build cards from `--card` / `--card-foreground` on a `1px solid var(--border)` surface, with
+`--radius-lg` corners and `--gap-md` padding. The figure uses `--radius-md` and a 3/2 aspect
+ratio.

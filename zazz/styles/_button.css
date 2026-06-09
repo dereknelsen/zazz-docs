@@ -30,7 +30,7 @@
     --button-border--active: 1px solid var(--border);
 
     --button-gap: var(--step-1);
-    --button-padding: var(--step-2_5);
+    --button-padding: var(--step-2\.5);
     --button-height: var(--step-8);
     --button-radius: var(--radius-md);
 
@@ -266,24 +266,24 @@
   =========================================================================== */
 
   .button > kbd {
-    --kbd-inline-size: var(--step-4_5);
-    --kbd-block-size: var(--step-4_5);
+    --kbd-inline-size: var(--step-4\.5);
+    --kbd-block-size: var(--step-4\.5);
     --kbd-icon-size: var(--step-3);
   }
 
   .button:has(> kbd:last-child:not(:only-child)) {
-    padding-inline-end: var(--step-1_5);
+    padding-inline-end: var(--step-1\.5);
   }
 
   .button:has(> kbd:first-child:not(:only-child)) {
-    padding-inline-start: var(--step-1_5);
+    padding-inline-start: var(--step-1\.5);
   }
 
   .button[data-size="sm"]:has(> kbd:last-child:not(:only-child)) {
-    padding-inline-end: var(--step-0_5);
+    padding-inline-end: var(--step-0\.5);
   }
 
   .button[data-size="sm"]:has(> kbd:first-child:not(:only-child)) {
-    padding-inline-start: var(--step-0_5);
+    padding-inline-start: var(--step-0\.5);
   }
 }

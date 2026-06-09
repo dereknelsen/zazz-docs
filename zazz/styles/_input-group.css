@@ -24,7 +24,7 @@
     --input-group-text-size: var(--font-size-sm);
     --input-group-textarea-min-block-size: 3lh;
     --input-group-textarea-padding-inline: var(--step-2);
-    --input-group-textarea-padding-block: var(--step-1_5);
+    --input-group-textarea-padding-block: var(--step-1\.5);
   }
 }
 

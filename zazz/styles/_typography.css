@@ -30,7 +30,6 @@
     line-height: var(--leading-md);
     font-weight: var(--font-weight-body);
     letter-spacing: var(--tracking-md);
-    font-style: italic;
   }
 }
 

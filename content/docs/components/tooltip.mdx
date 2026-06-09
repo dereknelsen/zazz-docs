@@ -1,0 +1,32 @@
+---
+title: Tooltip
+description: Hover and focus hints built on the Popover API and Interest Invokers with anchor positioning.
+---
+
+A tooltip pairs a trigger with a `.tooltip__content` hint (`popover="hint"`). Wire them with
+`interestfor` on the trigger — hover, focus, and long-press are handled for you, ARIA
+included. Position the hint with `data-side` and `data-align`.
+
+## Default
+
+<Preview src="tooltip/default" />
+
+## With keyboard shortcut
+
+<Preview src="tooltip/with-kbd" />
+
+## Sides
+
+<Preview src="tooltip/sides" />
+
+## Disabled trigger
+
+<Preview src="tooltip/disabled" />
+
+## API
+
+| Attribute     | Where               | Values                           |
+| ------------- | ------------------- | -------------------------------- |
+| `interestfor` | trigger             | id of the `.tooltip__content`    |
+| `data-side`   | `.tooltip__content` | `top`, `bottom`, `left`, `right` |
+| `data-align`  | `.tooltip__content` | `start`, `center`, `end`         |

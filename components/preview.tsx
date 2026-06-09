@@ -1,4 +1,4 @@
-import { readExample } from "@/lib/zazz-assets";
+import { readExample, listStyleHrefs } from "@/lib/zazz-assets";
 import { getExampleMeta } from "zazz/components/manifest";
 import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
 import { cn } from "@/lib/cn";
@@ -41,6 +41,7 @@ export function Preview({ src, align, className }: PreviewProps) {
             align={align ?? meta?.align ?? "start"}
             minHeight={meta?.minHeight}
             title={meta?.title ?? src}
+            styleHrefs={listStyleHrefs()}
           />
         </div>
       </Tab>

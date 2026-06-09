@@ -4,15 +4,15 @@
  * @layer      variables, components
  * @requires   _layers.css, _variables.css
  * @uses       data-embla attributes — layout hooks only; behaviour from zazz/scripts/embla.js
+ * @uses       container-type on viewport — basis-* / sm:basis-* utils query embla-viewport width
  * @tokens     --embla-* (@layer variables)
  * @consumedby _lightbox.css
  */
 @layer variables {
   :root {
-    --embla-slide-basis: 100%;
+    --embla-slide-basis: calc(100% - var(--gap, 0px));
     --embla-slide-min-width: 0;
     --embla-touch-action: pan-y pinch-zoom;
-    --embla-cursor: grab;
     --embla-cursor--grabbing: grabbing;
   }
 }
@@ -22,14 +22,13 @@
    - Documentation: https://www.embla-carousel.com/
    =========================================================================== */
 @layer components {
-  :where(body:has([data-embla="viewport"].is-dragging) *) {
+  :is(body:has([data-embla="viewport"].is-dragging) *) {
     cursor: var(--embla-cursor--grabbing);
   }
 
   [data-embla="root"] {
     position: relative;
     isolation: isolate;
-    contain: paint layout;
   }
 
   [data-embla="viewport"] {
@@ -40,16 +39,16 @@
 
   [data-embla="container"] {
     display: flex;
+    gap: var(--gap, 0);
     touch-action: var(--embla-touch-action);
   }
 
   [data-embla="slide"] {
     flex: 0 0 var(--embla-slide-basis);
     min-width: var(--embla-slide-min-width);
-    cursor: var(--embla-cursor);
   }
 
-  [data-embla="thumbs"] [data-embla="slide"] {
+  [data-embla="thumbnails"] [data-embla="slide"] {
     flex: 0 0 auto;
   }
 }

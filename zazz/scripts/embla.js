@@ -13,10 +13,10 @@
  * - `slide` — Individual slide
  * - `prev` / `next` — Navigation buttons (optional)
  * - `dots` / `dot` — Dot pagination container and template dot (optional)
- * - `thumbs` — Linked thumbnail carousel container (optional)
+ * - `thumbnails` — Linked thumbnail carousel container (optional)
  *
- * Thumbnail navigation (on `data-embla="thumbs"`):
- * - `data-embla-thumbs-*` — Thumb carousel options (defaults: containScroll keepSnaps, dragFree true)
+ * Thumbnail navigation (on `data-embla="thumbnails"`):
+ * - `data-embla-thumbnails-*` — thumbnail carousel options (defaults: containScroll keepSnaps, dragFree true)
  * - Syncs with the main carousel in the same root
  *
  * Lifecycle and dialog start index:
@@ -51,6 +51,20 @@
  *
  * @example
  * data-embla-classnames data-embla-classnames-snapped="is-snapped"
+ *
+ * @example Barebones carousel (4 text slides; auto-inits on DOMContentLoaded):
+ * <div data-embla="root">
+ *   <div data-embla="viewport">
+ *     <div data-embla="container">
+ *       <div data-embla="slide">Slide 1</div>
+ *       <div data-embla="slide">Slide 2</div>
+ *       <div data-embla="slide">Slide 3</div>
+ *       <div data-embla="slide">Slide 4</div>
+ *     </div>
+ *   </div>
+ *   <button type="button" data-embla="prev">Prev</button>
+ *   <button type="button" data-embla="next">Next</button>
+ * </div>
  */
 
 // --- Dot navigation ---
@@ -124,30 +138,30 @@ const addDotBtnsAndClickHandlers = (emblaApi, dotsNode) => {
 // --- Thumbnail navigation ---
 
 /**
- * @description Adds click handlers on thumb slides to scroll the main carousel.
+ * @description Adds click handlers on thumbnail slides to scroll the main carousel.
  *
  * @param {EmblaCarouselType} emblaApiMain - Main carousel API instance.
- * @param {EmblaCarouselType} emblaApiThumb - Thumb carousel API instance.
+ * @param {EmblaCarouselType} emblaApiThumb - thumbnail carousel API instance.
  */
 const addThumbClickHandlers = (emblaApiMain, emblaApiThumb) => {
-  const slidesThumbs = emblaApiThumb.slideNodes();
+  const slidesthumbnails = emblaApiThumb.slideNodes();
 
-  slidesThumbs.forEach((/** @type {HTMLElement} */ slideNode, /** @type {number} */ index) => {
+  slidesthumbnails.forEach((/** @type {HTMLElement} */ slideNode, /** @type {number} */ index) => {
     slideNode.addEventListener("click", () => emblaApiMain.scrollTo(index), false);
   });
 };
 
 /**
- * @description Keeps the thumb carousel and active state in sync with the main carousel.
+ * @description Keeps the thumbnail carousel and active state in sync with the main carousel.
  *
  * @param {EmblaCarouselType} emblaApiMain - Main carousel API instance.
- * @param {EmblaCarouselType} emblaApiThumb - Thumb carousel API instance.
+ * @param {EmblaCarouselType} emblaApiThumb - thumbnail carousel API instance.
  */
-const addToggleThumbsActive = (emblaApiMain, emblaApiThumb) => {
-  const slidesThumbs = emblaApiThumb.slideNodes();
+const addTogglethumbnailsActive = (emblaApiMain, emblaApiThumb) => {
+  const slidesthumbnails = emblaApiThumb.slideNodes();
 
   /**
-   * @description Scrolls thumbs to the selected snap and toggles active classes.
+   * @description Scrolls thumbnails to the selected snap and toggles active classes.
    *
    * @private
    */
@@ -155,7 +169,7 @@ const addToggleThumbsActive = (emblaApiMain, emblaApiThumb) => {
     const selected = emblaApiMain.selectedScrollSnap();
     emblaApiThumb.scrollTo(selected);
 
-    slidesThumbs.forEach((/** @type {HTMLElement} */ slideNode, /** @type {number} */ idx) => {
+    slidesthumbnails.forEach((/** @type {HTMLElement} */ slideNode, /** @type {number} */ idx) => {
       const isActive = idx === selected;
       slideNode.classList.toggle("is-active", isActive);
       if (isActive) {
@@ -184,7 +198,7 @@ let suppressCommandsUntil = 0;
 /**
  * @description Suppresses click activation immediately after a drag gesture.
  *
- * This prevents click-style actions (invoker commands, thumb navigation clicks)
+ * This prevents click-style actions (invoker commands, thumbnail navigation clicks)
  * from firing when the intent was dragging the carousel.
  *
  * @param {Element} root - Embla root/subtree to monitor.
@@ -333,9 +347,9 @@ function initEmblaCarousels(scope) {
 
     emblaNode.setAttribute("data-embla-init", "");
 
-    const emblaThumbsNode = emblaNode.querySelector('[data-embla="thumbs"]');
-    const emblaViewportNode = emblaThumbsNode
-      ? emblaNode.querySelector('[data-embla="viewport"]:not([data-embla="thumbs"] *)')
+    const emblathumbnailsNode = emblaNode.querySelector('[data-embla="thumbnails"]');
+    const emblaViewportNode = emblathumbnailsNode
+      ? emblaNode.querySelector('[data-embla="viewport"]:not([data-embla="thumbnails"] *)')
       : emblaNode.querySelector('[data-embla="viewport"]');
     const emblaPrevButtonNode = emblaNode.querySelector('[data-embla="prev"]');
     const emblaNextButtonNode = emblaNode.querySelector('[data-embla="next"]');
@@ -411,21 +425,25 @@ function initEmblaCarousels(scope) {
       });
     }
 
-    if (emblaThumbsNode) {
-      const emblaThumbsViewportNode = emblaThumbsNode.querySelector('[data-embla="viewport"]');
-      if (emblaThumbsViewportNode) {
+    if (emblathumbnailsNode) {
+      const emblathumbnailsViewportNode =
+        emblathumbnailsNode.querySelector('[data-embla="viewport"]');
+      if (emblathumbnailsViewportNode) {
         const thumbDefaults = { containScroll: "keepSnaps", dragFree: true };
-        const thumbOptions = Utils.parseDataAttributes(emblaThumbsNode, "data-embla-thumbs-");
-        const emblaApiThumb = EmblaCarousel(emblaThumbsViewportNode, {
+        const thumbOptions = Utils.parseDataAttributes(
+          emblathumbnailsNode,
+          "data-embla-thumbnails-",
+        );
+        const emblaApiThumb = EmblaCarousel(emblathumbnailsViewportNode, {
           ...thumbDefaults,
           ...thumbOptions,
         });
 
         emblaNode._emblaApiThumb = emblaApiThumb;
         addThumbClickHandlers(emblaApi, emblaApiThumb);
-        addToggleThumbsActive(emblaApi, emblaApiThumb);
+        addTogglethumbnailsActive(emblaApi, emblaApiThumb);
 
-        bindDragClickSuppression(emblaThumbsNode, emblaApiThumb, ".lightbox__thumb");
+        bindDragClickSuppression(emblathumbnailsNode, emblaApiThumb, ".lightbox__thumbnail");
       }
     }
   });
@@ -549,14 +567,14 @@ const initEmblaKeyboardNav = function () {
  *
  * @property {typeof initEmblaCarousels} init - Initializes all carousels within a scope.
  * @property {typeof addDotBtnsAndClickHandlers} addDotBtnsAndClickHandlers - Wires dot pagination.
- * @property {typeof addThumbClickHandlers} addThumbClickHandlers - Wires thumb click handlers.
- * @property {typeof addToggleThumbsActive} addToggleThumbsActive - Syncs thumb active state.
+ * @property {typeof addThumbClickHandlers} addThumbClickHandlers - Wires thumbnail click handlers.
+ * @property {typeof addTogglethumbnailsActive} addTogglethumbnailsActive - Syncs thumbnail active state.
  */
 const EmblaInit = {
   init: initEmblaCarousels,
   addDotBtnsAndClickHandlers,
   addThumbClickHandlers,
-  addToggleThumbsActive,
+  addTogglethumbnailsActive,
 };
 
 // --- Start index control ---

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zazz Example Page</title>
+    <title>Zazz Example Page | Home</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,8 +13,72 @@
         href="https://fonts.googleapis.com/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Geist:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
 
-    <!-- Zazz styles -->
-    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Preload all stylesheets -->
+    <link rel="preload" href="../styles/_layers.css" as="style">
+    <link rel="preload" href="../styles/_properties.css" as="style">
+    <link rel="preload" href="../styles/_variables.css" as="style">
+    <link rel="preload" href="../styles/_reset.css" as="style">
+    <link rel="preload" href="../styles/_page-transitions.css" as="style">
+    <link rel="preload" href="../styles/_typography.css" as="style">
+    <link rel="preload" href="../styles/_badge.css" as="style">
+    <link rel="preload" href="../styles/_button.css" as="style">
+    <link rel="preload" href="../styles/_accordion.css" as="style">
+    <link rel="preload" href="../styles/_popover.css" as="style">
+    <link rel="preload" href="../styles/_tooltip.css" as="style">
+    <link rel="preload" href="../styles/_dialog.css" as="style">
+    <link rel="preload" href="../styles/_dropdown.css" as="style">
+    <link rel="preload" href="../styles/_navigation-menu.css" as="style">
+    <link rel="preload" href="../styles/_mobile-menu.css" as="style">
+    <link rel="preload" href="../styles/_fields.css" as="style">
+    <link rel="preload" href="../styles/_input.css" as="style">
+    <link rel="preload" href="../styles/_textarea.css" as="style">
+    <link rel="preload" href="../styles/_select.css" as="style">
+    <link rel="preload" href="../styles/_switch.css" as="style">
+    <link rel="preload" href="../styles/_input-group.css" as="style">
+    <link rel="preload" href="../styles/_password-group.css" as="style">
+    <link rel="preload" href="../styles/_radio.css" as="style">
+    <link rel="preload" href="../styles/_tabs.css" as="style">
+    <link rel="preload" href="../styles/_embla.css" as="style">
+    <link rel="preload" href="../styles/_lightbox.css" as="style">
+    <link rel="preload" href="../styles/_reveal.css" as="style">
+    <link rel="preload" href="../styles/_utilities.css" as="style">
+
+    <!-- Link all stylesheets -->
+    <link rel="stylesheet" href="../styles/_layers.css">
+    <link rel="stylesheet" href="../styles/_properties.css">
+    <link rel="stylesheet" href="../styles/_variables.css">
+    <link rel="stylesheet" href="../styles/_reset.css">
+    <link rel="stylesheet" href="../styles/_page-transitions.css">
+    <link rel="stylesheet" href="../styles/_typography.css">
+    <link rel="stylesheet" href="../styles/_badge.css">
+    <link rel="stylesheet" href="../styles/_button.css">
+    <link rel="stylesheet" href="../styles/_accordion.css">
+    <link rel="stylesheet" href="../styles/_popover.css">
+    <link rel="stylesheet" href="../styles/_tooltip.css">
+    <link rel="stylesheet" href="../styles/_dialog.css">
+    <link rel="stylesheet" href="../styles/_dropdown.css">
+    <link rel="stylesheet" href="../styles/_navigation-menu.css">
+    <link rel="stylesheet" href="../styles/_mobile-menu.css">
+    <link rel="stylesheet" href="../styles/_fields.css">
+    <link rel="stylesheet" href="../styles/_input.css">
+    <link rel="stylesheet" href="../styles/_textarea.css">
+    <link rel="stylesheet" href="../styles/_select.css">
+    <link rel="stylesheet" href="../styles/_switch.css">
+    <link rel="stylesheet" href="../styles/_input-group.css">
+    <link rel="stylesheet" href="../styles/_password-group.css">
+    <link rel="stylesheet" href="../styles/_radio.css">
+    <link rel="stylesheet" href="../styles/_tabs.css">
+    <link rel="stylesheet" href="../styles/_embla.css">
+    <link rel="stylesheet" href="../styles/_lightbox.css">
+    <link rel="stylesheet" href="../styles/_reveal.css">
+    <link rel="stylesheet" href="../styles/_utilities.css">
+
+    <!-- Preload critical js -->
+    <link rel="preload" href="../scripts/navigation.js" as="script">
+    <link rel="preload" href="../scripts/reveal.js" as="script">
+
+    <!-- Prefetching related pages -->
+    <link rel="prefetch" href="products.html">
 
     <!-- WARNING: CDN scripts not recommended for production.
      If you need to use a CDN, create a new SRI hash (@see: https://srihash.org/)
@@ -56,75 +120,192 @@
     <script src="../scripts/embla.js" defer></script>
 </head>
 
-<body>
-    <header data-transition-layer="global-navigation">
-        <nav class="container py-md">
-            <menu class="flex gap-sm">
-                <li><a class="button" data-variant="link" href="index.html">Home</a></li>
-                <li><a class="button" data-variant="link" href="products.html">Products</a></li>
-            </menu>
-        </nav>
+<body class="bg-background">
+    <header class="z-50" data-transition-layer="global-navigation">
+        <div class="container py-lg flex items-center justify-between">
+            <a href="index.html" class="text-h6 font-black">
+                ACME Inc.
+            </a>
+            <nav>
+                <menu class="flex gap-sm">
+                    <li><a class="button" data-variant="ghost" href="index.html">Home</a></li>
+                    <li><a class="button" href="products.html">Products</a></li>
+                </menu>
+            </nav>
+        </div>
     </header>
     <main>
-        <section class="article py-xl">
-            <article class="prose">
-                <hgroup>
-                    <span class="text-eyebrow">Heading 1</span>
-                    <h1>How vexingly quick daft zebras jump.</h1>
-                    <p class="text-xl text-muted-foreground">The Art of Typography</p>
+        <section class="container py-xl">
+            <div class="grid md:grid-cols-2 gap-lg items-center">
+                <hgroup class="flex flex-col gap-sm text-center md:text-left">
+                    <h1 class="text-display">The Art of Typography</h1>
+                    <p class="text-xl text-muted-foreground">How vexingly quick daft zebras jump.</p>
+                    <div class="flex mt-sm justify-center md:justify-start">
+                        <a class="button" data-variant="primary" href="products.html">View Products</a>
+                    </div>
                 </hgroup>
-                <hgroup>
-                    <span class="text-eyebrow">Heading 2</span>
-                    <h2>How vexingly quick daft zebras jump.</h2>
-                </hgroup>
-                <hgroup>
-                    <span class="text-eyebrow">Heading 3</span>
-                    <h3>How vexingly quick daft zebras jump.</h3>
-                </hgroup>
-                <hgroup>
-                    <span class="text-eyebrow">Heading 4</span>
-                    <h4>How vexingly quick daft zebras jump.</h4>
-                </hgroup>
-                <hgroup>
-                    <span class="text-eyebrow">Heading 5</span>
-                    <h5>How vexingly quick daft zebras jump.</h5>
-                </hgroup>
-                <hgroup>
-                    <span class="text-eyebrow">Heading 6</span>
-                    <h6>How vexingly quick daft zebras jump.</h6>
-                </hgroup>
-                <hr />
-                <p class="text-xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit
-                    amet ipsum
-                    mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis
-                    dolor.</p>
-                <p class="text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit
-                    amet ipsum
-                    mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis
-                    dolor.</p>
-                <p class="text-md">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit
-                    amet ipsum
-                    mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis
-                    dolor.</p>
-                <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit
-                    amet ipsum
-                    mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis
-                    dolor.</p>
-                <p class="text-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit
-                    amet ipsum
-                    mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis
-                    dolor.</p>
-                <hr />
-                <figure>
-                    <img sizes="auto" loading="lazy" width="800" height="400" src="https://placehold.co/800x400"
+                <figure class="grid gap-xs">
+                    <img class="size-full object-cover rounded-lg" sizes="auto" loading="eager" width="800" height="640"
+                        src="https://placehold.co/800x640"
                         alt="Placeholder demonstrating figure and image styling within prose" />
-                    <figcaption>Figure 1: A placeholder image styled with .prose</figcaption>
                 </figure>
-            </article>
+            </div>
+        </section>
+        <section class="container py-xl">
+
+            <div data-embla="root" data-embla-loop="true" data-embla-classnames>
+
+                <div class="flex items-end justify-between gap-md flex-wrap pb-lg">
+                    <h2 class="text-h5 font-heading">Featured Articles</h2>
+                    <div class="flex md:hidden gap-xs">
+                        <button type="button" class="button" data-size="icon" data-variant="muted" data-embla="prev">
+                            <svg class="size-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"
+                                aria-hidden="true">
+                                <rect width="256" height="256" fill="none" />
+                                <polyline points="160 208 80 128 160 48" fill="none" stroke="currentColor"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="14" />
+                            </svg>
+                        </button>
+                        <button type="button" class="button" data-size="icon" data-variant="muted" data-embla="next">
+                            <svg class="size-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"
+                                aria-hidden="true">
+                                <rect width="256" height="256" fill="none" />
+                                <polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="14" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div data-embla="viewport">
+                    <div data-embla="container" class="-ml-sm">
+                        <!-- Card START -->
+                        <a data-embla="slide" class="basis-full xs:basis-1/2 sm:basis-1/3 md:basis-1/4 cursor-pointer"
+                            href="#">
+                            <div class="grid gap-sm bg-card text-card-foreground overflow-clip pl-sm">
+                                <figure class="aspect-landscape rounded-md overflow-clip">
+                                    <img class="size-full object-cover hover:opacity-70 transition-opacity" width="300"
+                                        height="200" loading="lazy"
+                                        src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=300&h=200&q=60"
+                                        alt="Zebras grazing at dawn on the savanna" />
+                                </figure>
+                                <div class="grid gap-sm">
+                                    <div class="flex items-center gap-xs">
+                                        <span class="badge" data-variant="muted">Field notes</span>
+                                    </div>
+                                    <hgroup class="grid gap-xs">
+                                        <h3 class="text-lg font-heading">How quickly zebras jump</h3>
+                                        <p class="text-sm text-muted-foreground line-clamp-2">Striped coats and sudden
+                                            bursts of
+                                            speed help herds evade predators when the grasslands go quiet at dusk.</p>
+                                    </hgroup>
+                                    <footer class="grid gap-sm">
+                                        <div class="text-link">Read
+                                            article</div>
+                                    </footer>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- Card END -->
+
+                        <!-- Card START -->
+                        <a data-embla="slide" class="basis-full xs:basis-1/2 sm:basis-1/3 md:basis-1/4 cursor-pointer"
+                            href="#">
+                            <div class="grid gap-sm bg-card text-card-foreground overflow-clip pl-sm">
+                                <figure class="aspect-landscape rounded-md overflow-clip">
+                                    <img class="size-full object-cover hover:opacity-70 transition-opacity" width="300"
+                                        height="200" loading="lazy"
+                                        src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?auto=format&fit=crop&w=300&h=200&q=60"
+                                        alt="A lion resting in tall golden grass" />
+                                </figure>
+                                <div class="grid gap-sm">
+                                    <div class="flex items-center gap-xs">
+                                        <span class="badge" data-variant="muted">Wildlife</span>
+                                    </div>
+                                    <hgroup class="grid gap-xs">
+                                        <h3 class="text-lg font-heading">Lions at golden hour</h3>
+                                        <p class="text-sm text-muted-foreground line-clamp-2">Warm light and long
+                                            shadows
+                                            make
+                                            dawn patrols the best time to photograph big cats on the open plain.</p>
+                                    </hgroup>
+                                    <footer class="grid gap-sm">
+                                        <div class="text-link">View
+                                            gallery</div>
+                                    </footer>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- Card END -->
+
+                        <!-- Card START -->
+                        <a data-embla="slide" class="basis-full xs:basis-1/2 sm:basis-1/3 md:basis-1/4 cursor-pointer"
+                            href="#">
+                            <div class="grid gap-sm bg-card text-card-foreground overflow-clip pl-sm">
+                                <figure class="aspect-landscape rounded-md overflow-clip">
+                                    <img class="size-full object-cover hover:opacity-70 transition-opacity" width="300"
+                                        height="200" loading="lazy"
+                                        src="https://images.unsplash.com/photo-1511735111819-9a3f7709049c?auto=format&fit=crop&w=300&h=200&q=60"
+                                        alt="Elephants crossing a dusty riverbed" />
+                                </figure>
+                                <div class="grid gap-sm">
+                                    <div class="flex items-center gap-xs">
+                                        <span class="badge" data-variant="muted">Research</span>
+                                    </div>
+                                    <hgroup class="grid gap-xs">
+                                        <h3 class="text-lg font-heading">Migration patterns decoded</h3>
+                                        <p class="text-sm text-muted-foreground line-clamp-2">Satellite collars reveal
+                                            ancient
+                                            routes herds still follow each dry season across the floodplain.</p>
+                                    </hgroup>
+                                    <footer class="grid gap-sm">
+                                        <div class="text-link">See the
+                                            data</div>
+                                    </footer>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- Card END -->
+
+                        <!-- Card START -->
+                        <a data-embla="slide" class="basis-full xs:basis-1/2 sm:basis-1/3 md:basis-1/4 cursor-pointer"
+                            href="#">
+                            <div class="grid gap-sm bg-card text-card-foreground overflow-clip pl-sm">
+                                <figure class="aspect-landscape rounded-md overflow-clip">
+                                    <img class="size-full object-cover hover:opacity-70 transition-opacity" width="300"
+                                        height="200" loading="lazy"
+                                        src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=300&h=200&q=60"
+                                        alt="Misty highland valley at sunrise" />
+                                </figure>
+                                <div class="grid gap-sm">
+                                    <div class="flex items-center gap-xs">
+                                        <span class="badge" data-variant="muted">Conservation</span>
+                                    </div>
+                                    <hgroup class="grid gap-xs">
+                                        <h3 class="text-lg font-heading">Rewilding the highlands</h3>
+                                        <p class="text-sm text-muted-foreground line-clamp-2">Community nurseries are
+                                            planting
+                                            native grasses and bringing endemic songbirds back to the ridgeline.</p>
+                                    </hgroup>
+                                    <footer class="grid gap-sm">
+                                        <div class="text-link">Get
+                                            started</div>
+                                    </footer>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- Card END -->
+                    </div>
+                </div>
+
+            </div>
         </section>
     </main>
-    <footer class="border-t bg-background z-20" data-transition-layer="global-footer">
-        <nav class="container py-xl">
+    <footer data-transition-layer="global-footer">
+        <nav class="container py-xl grid grid-cols-2 md:grid-cols-4 gap-md">
+            <div class="text-h6 font-black">
+                ACME Inc.
+            </div>
             <menu class="flex gap-sm">
                 <li><a class="button" data-variant="link" href="index.html">Home</a></li>
                 <li><a class="button" data-variant="link" href="products.html">Products</a></li>

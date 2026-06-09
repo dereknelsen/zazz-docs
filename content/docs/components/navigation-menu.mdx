@@ -1,0 +1,22 @@
+---
+title: Navigation menu
+description: Mega-menu navigation with popover panels, submenus, and anchor positioning.
+---
+
+The navigation menu pairs triggers (`popovertarget`) with `.navigation-menu__popover` panels.
+Panels can hold a `__viewport` grid and a `__featured` callout, nest as submenus, and animate
+in.
+
+## Default
+
+<Preview src="navigation-menu/default" />
+
+## API
+
+| Attribute        | Where                       | Values                        |
+| ---------------- | --------------------------- | ----------------------------- |
+| `popovertarget`  | trigger                     | id of the panel               |
+| `data-align`     | `.navigation-menu__popover` | `center`, `end`               |
+| `data-variant`   | `.navigation-menu__popover` | `submenu`                     |
+| `data-size`      | `.navigation-menu__popover` | `root`, `container`, `screen` |
+| `data-animation` | `.navigation-menu__popover` | `slide-down`                  |

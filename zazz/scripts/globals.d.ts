@@ -36,7 +36,7 @@ declare const Utils: UtilsNamespace;
 interface Element {
   /** @internal Set by embla.js on carousel root elements. */
   _emblaApi?: EmblaCarouselType;
-  /** @internal Set by embla.js when a thumb carousel is linked. */
+  /** @internal Set by embla.js when a thumbnail carousel is linked. */
   _emblaApiThumb?: EmblaCarouselType;
 }
 
@@ -91,7 +91,7 @@ interface Window {
       emblaApiMain: EmblaCarouselType,
       emblaApiThumb: EmblaCarouselType,
     ) => void;
-    addToggleThumbsActive: (
+    addTogglethumbnailsActive: (
       emblaApiMain: EmblaCarouselType,
       emblaApiThumb: EmblaCarouselType,
     ) => void;

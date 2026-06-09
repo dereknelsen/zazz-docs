@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { listExamples, readExample } from "@/lib/zazz-assets";
+import { listExamples, readExample, listStyleHrefs } from "@/lib/zazz-assets";
 import { getExampleMeta } from "zazz/components/manifest";
 import { PreviewFrame } from "@/components/preview-frame";
 
@@ -14,6 +14,7 @@ export default function DebugPage() {
   if (isProduction) redirect("/docs");
 
   const examples = listExamples();
+  const styleHrefs = listStyleHrefs();
 
   return (
     <main style={{ maxWidth: "60rem", margin: "0 auto", padding: "2rem 1.5rem" }}>
@@ -42,6 +43,7 @@ export default function DebugPage() {
                   align={meta?.align ?? "start"}
                   minHeight={meta?.minHeight}
                   title={src}
+                  styleHrefs={styleHrefs}
                 />
               </div>
             </section>

@@ -4,20 +4,20 @@
  * @layer      variables, reset
  * @requires   _layers.css, _variables.css
  * @uses       appearance: none on input[role="switch"]
- * @uses       label:has(> input[role="switch"])::after — thumb drawn on label (no JS)
+ * @uses       label:has(> input[role="switch"])::after — thumbnail drawn on label (no JS)
  * @uses       oklch(from …) — checked/hover track tints
  * @tokens     --switch-* (@layer variables; consumed in @layer reset)
  */
 @layer variables {
   :root {
     --switch-track-width: var(--step-7);
-    --switch-track-padding: var(--step-0_5);
+    --switch-track-padding: var(--step-0\.5);
     --switch-track-height: calc(var(--switch-track-width) / 2 + var(--switch-track-padding));
-    --switch-thumb: var(--white);
-    --switch-thumb-size: calc((var(--switch-track-width) / 2) - var(--switch-track-padding));
-    --switch-thumb-shadow: var(--shadow-xs);
-    --switch-thumb-translate: var(--switch-track-padding), -50%;
-    --switch-thumb-scale: 1;
+    --switch-thumbnail: var(--white);
+    --switch-thumbnail-size: calc((var(--switch-track-width) / 2) - var(--switch-track-padding));
+    --switch-thumbnail-shadow: var(--shadow-xs);
+    --switch-thumbnail-translate: var(--switch-track-padding), -50%;
+    --switch-thumbnail-scale: 1;
     --switch-track-background: var(--muted);
     --switch-track-background--hover: oklch(from var(--muted) l c h / calc(alpha + 0.04));
     --switch-track-background--checked: var(--primary);
@@ -40,13 +40,13 @@
       position: absolute;
       inset-block-start: 50%;
       inset-inline-start: 0;
-      inline-size: var(--switch-thumb-size);
-      block-size: var(--switch-thumb-size);
+      inline-size: var(--switch-thumbnail-size);
+      block-size: var(--switch-thumbnail-size);
       border-radius: var(--radius-full);
-      background-color: var(--switch-thumb);
-      box-shadow: var(--switch-thumb-shadow);
+      background-color: var(--switch-thumbnail);
+      box-shadow: var(--switch-thumbnail-shadow);
       pointer-events: none;
-      transform: translate(var(--switch-thumb-translate)) scale(var(--switch-thumb-scale));
+      transform: translate(var(--switch-thumbnail-translate)) scale(var(--switch-thumbnail-scale));
       transition:
         box-shadow var(--default-transition-duration) var(--default-transition-timing-function),
         transform var(--default-transition-duration) var(--default-transition-timing-function);
@@ -54,16 +54,17 @@
     }
 
     &:has(> input[role="switch"]:checked)::after {
-      --switch-thumb-translate: calc(var(--switch-track-padding) + var(--switch-thumb-size)), -50%;
+      --switch-thumbnail-translate:
+        calc(var(--switch-track-padding) + var(--switch-thumbnail-size)), -50%;
     }
 
     &:has(> input[role="switch"]:hover):after {
-      --switch-thumb-scale: 1.1;
+      --switch-thumbnail-scale: 1.1;
     }
 
     &:has(> input[role="switch"]:active):after {
-      --switch-thumb-shadow: none;
-      --switch-thumb-scale: 0.98;
+      --switch-thumbnail-shadow: none;
+      --switch-thumbnail-scale: 0.98;
     }
   }
 

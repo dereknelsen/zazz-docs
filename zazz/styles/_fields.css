@@ -29,7 +29,7 @@
     --field-radius: var(--radius-md);
     --field-button-radius: var(--radius-sm);
     --field-height: var(--step-8);
-    --field-padding: var(--step-2_5);
+    --field-padding: var(--step-2\.5);
     --field-addon-padding: var(--step-1);
     --field-gap: var(--step-2);
     --field-icon-size: var(--step-4);
@@ -242,7 +242,7 @@
   .field-group > legend,
   .radio-group > legend {
     padding: 0;
-    margin-block: 0 var(--step-1_5);
+    margin-block: 0 var(--step-1\.5);
     color: var(--field-label-color, inherit);
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-strong);

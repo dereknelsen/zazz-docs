@@ -56,7 +56,6 @@ const EMBLA_CDN = [
 export function buildPreviewDocument({
   html,
   scripts = [],
-  align = "start",
   minHeight = 0,
   styleHrefs,
 }: BuildPreviewOptions): string {
@@ -102,7 +101,7 @@ ${scriptTags}
     align-items: center;
     justify-content: center;
     gap: var(--gap-md);
-    padding: var(--gap-lg);
+    inline-size: 100%;
     block-size: 100%;
     min-block-size: ${minHeight}px;
   }

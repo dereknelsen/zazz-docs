@@ -12,6 +12,11 @@
     --badge-ring-color: var(--ring-color);
     --badge-ring-opacity: 0%;
 
+    --button-font-family: var(--font-family-body);
+    --button-font-size: var(--font-size-xs);
+    --button-font-weight: var(--font-weight-strong);
+    --button-line-height: 1;
+
     --badge-background: var(--background);
     --badge-background--hover: var(--muted);
     --badge-background--active: oklch(from var(--muted) l c h / calc(alpha - 0.02));
@@ -26,10 +31,12 @@
 
     --badge-gap: var(--step-1);
     --badge-padding: var(--step-1_5);
-    --badge-height: var(--step-5);
+    --badge-height: var(--step-5_5);
     --badge-radius: var(--radius-sm);
 
     --badge-icon-size: var(--step-3);
+
+    --badge-shadow: none;
   }
 }
 
@@ -39,10 +46,10 @@
   =========================================================================== */
 
   .badge {
-    font-family: var(--font-family-body);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-strong);
-    line-height: 1;
+    font-family: var(--button-font-family);
+    font-size: var(--button-font-size);
+    font-weight: var(--button-font-weight);
+    line-height: var(--button-line-height);
 
     display: flex;
     align-items: center;
@@ -60,6 +67,8 @@
     color: var(--badge-foreground);
     background-color: var(--badge-background);
 
+    box-shadow: var(--badge-shadow);
+
     cursor: default;
     text-decoration: none;
 
@@ -73,7 +82,7 @@
     text-box: trim-both ex alphabetic;
   }
 
-  a[href].badge {
+  a[href].badge:not(:disabled, [aria-disabled="true"]) {
     cursor: pointer;
   }
 
@@ -81,31 +90,34 @@
   BADGE STATES
   =========================================================================== */
 
-  button.badge:hover,
-  a[href].badge:hover {
+  button.badge:hover:not(:disabled, [aria-disabled="true"]),
+  a[href].badge:hover:not(:disabled, [aria-disabled="true"]) {
     color: var(--badge-foreground--hover);
     background-color: var(--badge-background--hover);
     border: var(--badge-border--hover);
   }
 
-  button.badge:active,
-  a[href].badge:active {
+  button.badge:active:not(:disabled, [aria-disabled="true"]),
+  a[href].badge:active:not(:disabled, [aria-disabled="true"]) {
     color: var(--badge-foreground--active);
     background-color: var(--badge-background--active);
     border: var(--badge-border--active);
   }
 
-  button.badge:focus-visible,
-  a[href].badge:focus-visible {
+  button.badge:focus-visible:hover:not(:disabled, [aria-disabled="true"]),
+  a[href].badge:focus-visible:hover:not(:disabled, [aria-disabled="true"]) {
     outline-color: color-mix(in oklch, var(--badge-ring-color) var(--ring-opacity), transparent);
   }
 
-  button.badge:disabled,
-  a[href].badge:disabled,
-  button.badge[aria-disabled="true"],
-  a[href].badge[aria-disabled="true"] {
+  :is(button.badge:disabled, a[href].badge:disabled),
+  :is(button.badge[aria-disabled="true"], a[href].badge[aria-disabled="true"]) {
+    --badge-foreground: var(--muted-foreground);
+    --badge-background: var(--muted);
+    --badge-shadow: none;
+
+    cursor: default;
     opacity: 0.5;
-    cursor: not-allowed;
+    outline: none;
   }
 
   button.badge[aria-busy="true"],
@@ -177,14 +189,22 @@
     --badge-background: transparent;
     --badge-background--hover: transparent;
     --badge-background--active: transparent;
+
     --badge-foreground: var(--foreground);
     --badge-foreground--hover: var(--primary);
     --badge-foreground--active: oklch(from var(--primary) l c h / 0.8);
+
+    --badge-border: none;
+    --badge-border--hover: none;
+    --badge-border--active: none;
+
     --badge-height: fit-content;
     --badge-padding: 0;
     --badge-radius: 0;
 
-    border: none;
+
+    --badge-shadow: none;
+
     text-decoration-line: var(--decoration-line);
     text-decoration-style: var(--decoration-style);
     text-decoration-color: var(--decoration-color);
@@ -192,14 +212,14 @@
     text-decoration-thickness: var(--decoration-thickness);
   }
 
-  button.badge[data-variant="link"]:hover,
-  a[href].badge[data-variant="link"]:hover {
+  button.badge[data-variant="link"]:hover:not(:disabled, [aria-disabled="true"]),
+  a[href].badge[data-variant="link"]:hover:not(:disabled, [aria-disabled="true"]) {
     text-decoration-color: var(--decoration-color--hover);
     text-underline-offset: var(--decoration-offset--hover);
   }
 
-  button.badge[data-variant="link"]:active,
-  a[href].badge[data-variant="link"]:active {
+  button.badge[data-variant="link"]:active:not(:disabled, [aria-disabled="true"]),
+  a[href].badge[data-variant="link"]:active:not(:disabled, [aria-disabled="true"]) {
     text-decoration-color: var(--decoration-color--active);
     text-underline-offset: var(--decoration-offset--active);
   }
@@ -209,7 +229,6 @@
   =========================================================================== */
 
   .badge[data-size="icon"] {
-    justify-content: center;
     block-size: var(--badge-height);
     inline-size: var(--badge-height);
     padding: 0;

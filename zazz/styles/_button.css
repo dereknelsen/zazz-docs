@@ -82,7 +82,7 @@
     text-box: trim-both ex alphabetic;
   }
 
-  a[href].button {
+  a[href].button:not(:disabled, [aria-disabled="true"]) {
     cursor: pointer;
   }
 
@@ -90,26 +90,30 @@
   BUTTON STATES
   =========================================================================== */
 
-  .button:hover {
+  .button:hover:not(:disabled, [aria-disabled="true"]) {
     color: var(--button-foreground--hover);
     background-color: var(--button-background--hover);
     border: var(--button-border--hover);
   }
 
-  .button:active {
+  .button:active:not(:disabled, [aria-disabled="true"]) {
     color: var(--button-foreground--active);
     background-color: var(--button-background--active);
     border: var(--button-border--active);
   }
 
-  .button:focus-visible {
+  .button:focus-visible:not(:disabled, [aria-disabled="true"]) {
     outline-color: color-mix(in oklch, var(--button-ring-color) var(--ring-opacity), transparent);
   }
 
-  .button:disabled,
-  .button[aria-disabled="true"] {
+  :is(.button:disabled, .button[aria-disabled="true"]) {
+    --button-foreground: var(--muted-foreground);
+    --button-background: var(--muted);
+    --button-shadow: none;
+
+    cursor: default;
     opacity: 0.5;
-    cursor: not-allowed;
+    outline: none;
   }
 
   .button[aria-busy="true"] {
@@ -223,12 +227,14 @@
     text-decoration-thickness: var(--decoration-thickness);
   }
 
-  .button[data-variant="link"]:hover {
+  .button[data-variant="link"]:hover:not(:disabled, [aria-disabled="true"]) {
+    border: none;
     text-decoration-color: var(--decoration-color--hover);
     text-underline-offset: var(--decoration-offset--hover);
   }
 
-  .button[data-variant="link"]:active {
+  .button[data-variant="link"]:active:not(:disabled, [aria-disabled="true"]) {
+    border: none;
     text-decoration-color: var(--decoration-color--active);
     text-underline-offset: var(--decoration-offset--active);
   }

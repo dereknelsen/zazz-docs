@@ -25,12 +25,12 @@
   @media screen and (prefers-reduced-motion: no-preference) {
     ::view-transition-old(global-main-content) {
       animation: global-page-transition--old var(--page-transition-duration)
-        var(--page-transition-ease) var(--page-transition-wait) both;
+        var(--page-transition-ease) var(--page-transition-wait) forwards;
     }
 
     ::view-transition-new(global-main-content) {
       animation: global-page-transition--new var(--page-transition-duration)
-        var(--page-transition-ease) var(--page-transition-wait) both;
+        var(--page-transition-ease) var(--page-transition-wait) forwards;
     }
 
     /* Persist shared chrome without cross-fading */

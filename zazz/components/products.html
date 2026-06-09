@@ -121,8 +121,8 @@
 </head>
 
 <body class="bg-background">
-    <header class="z-50" data-transition-layer="global-navigation">
-        <div class="container py-lg flex items-center justify-between">
+    <header class="border-b" data-transition-layer="global-navigation">
+        <div class="container py-md flex items-center justify-between">
             <a href="index.html" class="text-h6 font-black">
                 ACME Inc.
             </a>
@@ -135,8 +135,20 @@
         </div>
     </header>
     <main>
-        <section class="py-xl">
+        <section class="pb-xl">
+            <div class="container py-lg">
+                <nav class="flex items-center gap-xs">
+                    <menu class="flex items-center gap-xs">
+                        <li><a class="button" data-variant="link" href="index.html">Home</a></li>
+                        <li><span class="text-muted-foreground opacity-50">/</span></li>
+                        <li>
+                            <div class="button" data-variant="link" aria-disabled="true">Product name</div>
+                        </li>
+                    </menu>
+                </nav>
+            </div>
             <div class="container grid md:grid-cols-2 gap-lg">
+
                 <div class="lightbox">
                     <div class="lightbox__gallery">
                         <div class="lightbox__stage" data-embla="root" data-embla-loop="true" data-embla-classnames>
@@ -204,9 +216,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="lightbox__thumbnails" data-embla-classnames data-embla="thumbnails"
-                                data-embla-loop="true" data-embla-thumbnails-contain-scroll="keepSnaps"
-                                data-embla-thumbnails-drag-free="true">
+                            <div class="lightbox__thumbnails" data-embla="thumbnails" data-embla-loop="true">
                                 <button
                                     class="lightbox__thumbnails-prev button text-muted-foreground hover:text-foreground"
                                     data-size="icon-sm" data-variant="ghost" data-embla="prev" type="button"
@@ -381,9 +391,7 @@
                                             stroke-linecap="round" stroke-linejoin="round" stroke-width="14" />
                                     </svg>
                                 </button>
-                                <div class="lightbox__thumbnails" data-embla-classnames data-embla="thumbnails"
-                                    data-embla-thumbnails-contain-scroll="keepSnaps"
-                                    data-embla-thumbnails-drag-free="true">
+                                <div class="lightbox__thumbnails" data-embla="thumbnails">
                                     <div data-embla="viewport">
                                         <div data-embla="container">
                                             <button type="button" class="lightbox__thumbnail" data-embla="slide"
@@ -467,8 +475,9 @@
                     </dialog>
                 </div>
 
+
                 <hgroup class="flex flex-col gap-xs prose">
-                    <h2 class="text-h6">Product name</h2>
+                    <h2 class="text-h4">Product name</h2>
                     <p>Product description</p>
                     <ul>
                         <li>Feature 1</li>
@@ -479,7 +488,7 @@
             </div>
         </section>
     </main>
-    <footer data-transition-layer="global-footer">
+    <footer class="border-t" data-transition-layer="global-footer">
         <nav class="container py-xl grid grid-cols-2 md:grid-cols-4 gap-md">
             <div class="text-h6 font-black">
                 ACME Inc.

@@ -55,6 +55,14 @@
     color: var(--card-foreground);
   }
 
+  :where(.text-border) {
+    color: var(--border);
+  }
+
+  :where(.text-border-foreground) {
+    color: var(--border-foreground);
+  }
+
   :where(.text-input) {
     color: var(--input);
   }

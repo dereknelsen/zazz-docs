@@ -121,8 +121,8 @@
 </head>
 
 <body class="bg-background">
-    <header class="z-50" data-transition-layer="global-navigation">
-        <div class="container py-lg flex items-center justify-between">
+    <header class="border-b" data-transition-layer="global-navigation">
+        <div class="container py-md flex items-center justify-between">
             <a href="index.html" class="text-h6 font-black">
                 ACME Inc.
             </a>
@@ -144,10 +144,11 @@
                         <a class="button" data-variant="primary" href="products.html">View Products</a>
                     </div>
                 </hgroup>
-                <figure class="grid gap-xs">
-                    <img class="size-full object-cover rounded-lg" sizes="auto" loading="eager" width="800" height="640"
-                        src="https://placehold.co/800x640"
-                        alt="Placeholder demonstrating figure and image styling within prose" />
+                <figure class="grid gap-xs rounded-lg overflow-clip">
+                    <img sizes="(max-width: 40rem) 100vw, 800px"
+                        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop" srcset="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=456&h=342&fit=crop 456w,
+                                https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop 800w"
+                        alt="Mountain landscape" loading="eager" width="800" height="600" />
                 </figure>
             </div>
         </section>
@@ -301,7 +302,7 @@
             </div>
         </section>
     </main>
-    <footer data-transition-layer="global-footer">
+    <footer class="border-t" data-transition-layer="global-footer">
         <nav class="container py-xl grid grid-cols-2 md:grid-cols-4 gap-md">
             <div class="text-h6 font-black">
                 ACME Inc.

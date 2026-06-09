@@ -1,0 +1,33 @@
+---
+title: Carousel
+description: A draggable, looping content carousel powered by Embla and configured entirely through data-embla attributes.
+---
+
+A carousel is an Embla slider you compose in markup: a `data-embla="root"` wrapper holds the
+`viewport` → `container` → `slide` structure plus optional `prev`/`next` buttons, and each
+slide sets its own responsive width with `basis-*` utilities
+(`basis-full xs:basis-1/2 sm:basis-1/3 md:basis-1/4`). Looping, dragging, and snapping all
+come from `data-embla-*` options — there is no JavaScript to write. It needs the Embla
+scripts, which this preview loads automatically.
+
+## Default
+
+<Preview src="carousel/default" />
+
+## API
+
+Mark up the roles with `data-embla`, and put options on the root.
+
+| Attribute                             | Where | Purpose                                         |
+| ------------------------------------- | ----- | ----------------------------------------------- |
+| `data-embla="root"`                   | root  | Carousel container; holds all options           |
+| `data-embla="viewport"`               | child | The visible window (required)                   |
+| `data-embla="container"`              | child | The flex track of slides                        |
+| `data-embla="slide"`                  | child | Each slide — set width with `basis-*` utilities |
+| `data-embla="prev"` / `"next"`        | child | Navigation buttons                              |
+| `data-embla-loop`                     | root  | `"true"` to wrap around                         |
+| `data-embla-align`                    | root  | `start`, `center`, `end`                        |
+| `data-embla-autoplay` / `-autoscroll` | root  | Plugins (with their `-*` options)               |
+
+The lightbox is built on the same Embla roles plus a fullscreen `<dialog>` and a thumb
+strip — see [Lightbox](/docs/components/lightbox).

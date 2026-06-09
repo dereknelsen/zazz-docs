@@ -1,21 +1,19 @@
-<a class="bg-card text-card-foreground grid" href="#">
-  <figure class="card__figure">
-    <img class="card__image" width="300" height="200" loading="lazy"
+<a class="grid max-w-screen-xs bg-card text-card-foreground border rounded-lg overflow-clip" href="#">
+  <figure class="aspect-landscape overflow-clip">
+    <img class="size-full object-cover hover:opacity-70 transition-opacity" width="300" height="200" loading="lazy"
       src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=300&h=200&q=60"
       alt="How quickly zebras jump" />
   </figure>
-  <div class="card__content">
-    <div class="card__tags">
+  <div class="grid gap-sm p-md">
+    <div class="flex items-center gap-xs">
       <span class="badge" data-variant="muted">Field notes</span>
     </div>
-    <div class="card__body">
-      <span class="card__title-link">
-        <h3 class="card__title text-h6">How quickly zebras jump</h3>
-      </span>
-      <p class="card__description text-sm text-muted-foreground line-clamp-2">Short excerpt that wraps to two lines
+    <hgroup class="grid gap-xs">
+      <h3 class="text-h6 font-heading">How quickly zebras jump</h3>
+      <p class="text-sm text-muted-foreground line-clamp-2">Short excerpt that wraps to two lines
         before truncating. Demonstrates the default card composition.</p>
-    </div>
-    <div class="card__footer">
+    </hgroup>
+    <footer class="flex items-center justify-between gap-sm">
       <div class="flex items-center gap-xs">
         <figure class="grid grid-area-pile size-8 border rounded-full overflow-clip" role="img"
           aria-labelledby="avatar-jd-caption">
@@ -33,7 +31,7 @@
           <span class="text-xs text-muted-foreground">Founder, ACME Inc.</span>
         </div>
       </div>
-      <span class="card__button button" data-variant="muted">Read article</span>
-    </div>
+      <span class="button" data-variant="muted">Read article</span>
+    </footer>
   </div>
 </a>

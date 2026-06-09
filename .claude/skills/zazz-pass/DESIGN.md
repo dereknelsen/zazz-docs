@@ -497,18 +497,13 @@ Spring easing (`--spring-easing`) with 0.333s duration. Fallback: `cubic-bezier(
 
 ## 6. Design Patterns
 
-For common page sections and composition guidance, see `PATTERNS.md` _(planned — not yet authored)_. It will cover:
+See [`PATTERNS.md`](PATTERNS.md) for page-level structure and house style. It currently covers:
 
-- Header & navigation patterns
-- Hero section variants (full-bleed, split, video, carousel, hotspot, search-first)
-- Product category layouts (carousel, bento grid, grid, banner stack, tabbed)
-- Featured products, bestsellers, new arrivals, sale sections
-- Trust signals & social proof
-- Brand story, values, sub-brand showcases
-- B2B-specific patterns (quote request, trade program, audience segmentation)
-- CTA banners, showroom/location, footer variants
-- Section rhythm guidelines by archetype
-- **Page-structure outlines per page type**: eCommerce Landing/Home, Product Listing &
-  Search (PLP), Product Details (PDP), plus Category/Collection, Cart, Checkout,
-  Account/Orders, and B2B quote-request pages — top-to-bottom section skeletons keyed to
-  the three archetypes (Industrial Distributor / Lifestyle Brand / Editorial Studio)
+- **Sentence case everywhere** — the default for all UI text unless the user asks otherwise
+- **Page structure** — header (logo + desktop/mobile nav), `<main>` sections, footer
+- **Heading group with CTAs** — eyebrow + heading + subheading + action buttons
+
+Most other patterns fall out of the primitives and components directly (browse them at
+`/docs/components`). A broader section library (hero variants, product grids, trust signals)
+and whole **page-type outlines** (eCommerce landing, PLP, PDP, cart, checkout, account, B2B
+quote) keyed to the archetypes are a planned future addition.

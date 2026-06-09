@@ -35,10 +35,12 @@ const MANIFEST: Record<string, ExampleMeta> = {
   "select/default": { align: "start", minHeight: 240 },
 
   // Carousel/lightbox — Embla (+ its CDN bundles) and the modal stage.
+  "carousel/default": { align: "start", minHeight: 380, requiresScripts: ["embla"] },
   "lightbox/default": { align: "center", minHeight: 500, requiresScripts: ["embla"] },
 
   // Showcase primitives — centered reads better than left-pinned.
-  "card/basic": { align: "center", minHeight: 380 },
+  "card/default": { align: "center", minHeight: 380 },
+  "breadcrumbs/default": { minHeight: 120 },
   "avatar/default": { align: "center", minHeight: 160 },
   "badge/variants": { align: "center" },
   "badge/icon": { align: "center" },

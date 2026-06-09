@@ -1,0 +1,12 @@
+---
+title: Breadcrumbs
+description: A composition pattern for hierarchical navigation built from link buttons and separators.
+---
+
+Breadcrumbs are a composition, not a dedicated primitive — a `<nav>` wrapping a `<menu>` of
+link buttons (`.button[data-variant="link"]`) separated by muted `/` glyphs. Mark the current
+page with `aria-disabled="true"` so it reads as the active, non-interactive crumb.
+
+## Default
+
+<Preview src="breadcrumbs/default" />

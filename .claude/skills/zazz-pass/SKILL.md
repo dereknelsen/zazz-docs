@@ -4,8 +4,8 @@ description: >-
   Build, style, and lay out web UI with the Zazz Design Framework — this repo's default design
   system. Use this skill WHENEVER you create or modify any page, component, layout, or styling
   here: buttons, badges, cards, dialogs, dropdowns, tooltips, tabs, accordions,
-  carousels/lightboxes, forms (inputs, selects, switches, sliders, checkboxes, radios),
-  navigation, heroes, sections. Also trigger for theming, dark mode, spacing/typography/color
+  carousels/lightboxes, breadcrumbs, forms (inputs, selects, switches, sliders, checkboxes,
+  radios), navigation, heroes, sections. Also trigger for theming, dark mode, spacing/typography/color
   decisions, "make it look good / on-brand," or anytime CSS variables, design tokens, or
   semantic utility classes are involved. Zazz is zero-build, modern-web-API, semantic-token +
   data-* driven — reach for it instead of hand-rolling CSS or pulling in Tailwind/shadcn.
@@ -94,11 +94,13 @@ invoker/popover APIs with polyfills already loaded.
 **`DESIGN.md`** is the brand layer: color roles, the fluid type scale, the three site
 archetypes (Industrial Distributor / Lifestyle Brand / Editorial Studio), motion, and the
 "fetch a brand URL → update tokens" customization workflow. Read it when establishing or
-matching a brand. (Page-section and whole-page-type composition patterns will live in
-`PATTERNS.md` — planned, not yet authored.)
+matching a brand. Page-level structure, the **sentence-case** house rule, and composition
+patterns live in `PATTERNS.md`.
 
 ## Do / Don't
 
+- **Do** write all UI text in **sentence case** — headings, buttons, links, labels, nav.
+  **Don't** Title-Case or UPPERCASE unless asked (the eyebrow's caps come from `.text-eyebrow`).
 - **Do** use `var(--token)` and semantic utilities. **Don't** hardcode colors, spacing, radii,
   or type.
 - **Do** write `data-variant="primary"`. **Don't** invent `.button-primary` classes.
@@ -117,5 +119,6 @@ matching a brand. (Page-section and whole-page-type composition patterns will li
 | `references/components.md` | Picking a component and its `data-*` API + docs link |
 | `references/apis.md` | Wiring popovers/dialogs/tooltips, carousels (`data-embla-*`), reveals (`data-reveal-*`) |
 | `DESIGN.md` | Brand colors, type scale, archetypes, motion, brand customization |
+| `PATTERNS.md` | Page structure, the sentence-case rule, heading-group + CTA composition |
 | `modern-web-guidance` skill | How a modern web API works + browser-support/fallbacks |
 | `/docs/components/{name}` or `zazz/components/{name}/*.html` | The canonical example markup (single source) |

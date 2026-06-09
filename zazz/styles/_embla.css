@@ -48,7 +48,7 @@
     min-width: var(--embla-slide-min-width);
   }
 
-  [data-embla="thumbnails"] [data-embla="slide"] {
+  [data-embla="thumbs"] [data-embla="slide"] {
     flex: 0 0 auto;
   }
 }

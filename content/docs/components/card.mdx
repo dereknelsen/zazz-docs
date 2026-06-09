@@ -3,14 +3,14 @@ title: Card
 description: A composition pattern for product and content cards built from theme tokens and utilities.
 ---
 
-A card is a composition, not a single primitive — compose the `.card__*` parts with theme
-tokens (`--card`, `--border`, `--radius-lg`) and utility classes. Drop a `.badge`, `.text-*`
-classes, and a figure inside.
+A card is built entirely from utility classes — there is no `.card` primitive. Wrap a
+`bg-card text-card-foreground` surface in a `border rounded-lg overflow-clip` container, then
+compose a figure, a `.badge`, `text-*` content, and a footer with utilities and theme tokens.
 
-## Basic
+## Default
 
-<Preview src="card/basic" />
+<Preview src="card/default" />
 
-Build cards from `--card` / `--card-foreground` on a `1px solid var(--border)` surface, with
-`--radius-lg` corners and `--gap-md` padding. The figure uses `--radius-md` and a 3/2 aspect
-ratio.
+The default above uses a full-bleed `aspect-landscape` figure, `.p-md` / `.gap-sm` spacing,
+and an avatar plus a muted button in the footer — all reusing existing utilities, so dark mode
+and theming come for free.

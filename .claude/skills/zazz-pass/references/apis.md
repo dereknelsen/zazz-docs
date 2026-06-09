@@ -52,22 +52,22 @@ Put `data-reveal` on a single element, or `data-reveal-each` on a parent to stag
 Mark up roles with `data-embla="<role>"`; put all config on the **root**.
 
 **Roles:** `root` (config holder) · `viewport` (required) · `container` · `slide` · `prev` ·
-`next` · `dots` · `dot` (template, cloned per snap) · `thumbnails` (linked thumbnail carousel).
+`next` · `dots` · `dot` (template, cloned per snap) · `thumbs` (linked thumb carousel).
 
 **Config on `data-embla="root"`** (kebab-case → Embla options via `Utils.parseDataAttributes`):
 
-| Attribute                                           | Example                                              | Purpose                                                                       |
-| --------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------- |
-| any core Embla option                               | `data-embla-loop="true"`, `data-embla-align="start"` | passed straight to Embla                                                      |
-| `data-embla-keyboard`                               | `"false"`                                            | disable ArrowLeft/Right navigation                                            |
-| `data-embla-autoplay` / `data-embla-autoplay-*`     | `data-embla-autoplay-delay="3000"`                   | Autoplay plugin                                                               |
-| `data-embla-autoscroll` / `data-embla-autoscroll-*` | `data-embla-autoscroll-speed="2"`                    | AutoScroll plugin                                                             |
-| `data-embla-classnames` / `data-embla-classnames-*` | `data-embla-classnames-snapped="is-snapped"`         | ClassNames plugin                                                             |
-| `data-embla-thumbnails-*` (on `thumbnails`)         | `data-embla-thumbnails-contain-scroll="keepSnaps"`   | thumbnail carousel options (defaults: containScroll keepSnaps, dragFree true) |
-| `data-embla-start` (on a trigger w/ `commandfor`)   | `data-embla-start="2"`                               | open a dialog carousel at slide N                                             |
+| Attribute                                           | Example                                              | Purpose                                                                   |
+| --------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------- |
+| any core Embla option                               | `data-embla-loop="true"`, `data-embla-align="start"` | passed straight to Embla                                                  |
+| `data-embla-keyboard`                               | `"false"`                                            | disable ArrowLeft/Right navigation                                        |
+| `data-embla-autoplay` / `data-embla-autoplay-*`     | `data-embla-autoplay-delay="3000"`                   | Autoplay plugin                                                           |
+| `data-embla-autoscroll` / `data-embla-autoscroll-*` | `data-embla-autoscroll-speed="2"`                    | AutoScroll plugin                                                         |
+| `data-embla-classnames` / `data-embla-classnames-*` | `data-embla-classnames-snapped="is-snapped"`         | ClassNames plugin                                                         |
+| `data-embla-thumbs-*` (on `thumbs`)                 | `data-embla-thumbs-contain-scroll="keepSnaps"`       | thumb carousel options (defaults: containScroll keepSnaps, dragFree true) |
+| `data-embla-start` (on a trigger w/ `commandfor`)   | `data-embla-start="2"`                               | open a dialog carousel at slide N                                         |
 
 Script-managed (don't set by hand): `data-embla-init`, `data-embla-start-index`. The script
-adds `.is-active` to the current dot/thumbnail and stores `_emblaApi` on the root.
+adds `.is-active` to the current dot/thumb and stores `_emblaApi` on the root.
 
 ### Helpers and app glue
 

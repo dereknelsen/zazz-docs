@@ -65,8 +65,8 @@
                     </button>
                 </div>
             </div>
-            <div class="lightbox__thumbnails" data-embla="thumbnails" data-embla-loop="true">
-                <button class="lightbox__thumbnails-prev button text-muted-foreground hover:text-foreground"
+            <div class="lightbox__thumbs" data-embla="thumbs" data-embla-loop="true">
+                <button class="lightbox__thumbs-prev button text-muted-foreground hover:text-foreground"
                     data-size="icon-sm" data-variant="ghost" data-embla="prev" type="button"
                     aria-label="Previous image">
                     <svg class="size-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" aria-hidden="true">
@@ -77,8 +77,8 @@
                 </button>
                 <div data-embla="viewport">
                     <div data-embla="container">
-                        <button type="button" class="lightbox__thumbnail" data-embla="slide" aria-label="Show image 1">
-                            <figure class="lightbox__thumbnail-content">
+                        <button type="button" class="lightbox__thumb" data-embla="slide" aria-label="Show image 1">
+                            <figure class="lightbox__thumb-content">
                                 <img sizes="auto" loading="lazy" width="228" height="171"
                                     src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=228&h=171&fit=crop"
                                     srcset="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=228&h=171&fit=crop 228w,
@@ -86,8 +86,8 @@
                                     alt="Mountain landscape" loading="lazy" width="800" height="600" />
                             </figure>
                         </button>
-                        <button type="button" class="lightbox__thumbnail" data-embla="slide" aria-label="Show image 2">
-                            <figure class="lightbox__thumbnail-content">
+                        <button type="button" class="lightbox__thumb" data-embla="slide" aria-label="Show image 2">
+                            <figure class="lightbox__thumb-content">
                                 <img sizes="auto" loading="lazy" width="228" height="171"
                                     src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=228&h=171&fit=crop"
                                     srcset="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=228&h=171&fit=crop 228w,
@@ -95,8 +95,8 @@
                                     alt="Valley with sunlight" loading="lazy" width="800" height="600" />
                             </figure>
                         </button>
-                        <button type="button" class="lightbox__thumbnail" data-embla="slide" aria-label="Show image 3">
-                            <figure class="lightbox__thumbnail-content">
+                        <button type="button" class="lightbox__thumb" data-embla="slide" aria-label="Show image 3">
+                            <figure class="lightbox__thumb-content">
                                 <img sizes="auto" loading="lazy" width="228" height="171"
                                     src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=228&h=171&fit=crop"
                                     srcset="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=228&h=171&fit=crop 228w,
@@ -104,8 +104,8 @@
                                     alt="Forest path" loading="lazy" width="800" height="600" />
                             </figure>
                         </button>
-                        <button type="button" class="lightbox__thumbnail" data-embla="slide" aria-label="Show image 4">
-                            <figure class="lightbox__thumbnail-content">
+                        <button type="button" class="lightbox__thumb" data-embla="slide" aria-label="Show image 4">
+                            <figure class="lightbox__thumb-content">
                                 <img sizes="auto" loading="lazy" width="228" height="171"
                                     src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=228&h=171&fit=crop"
                                     srcset="https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=228&h=171&fit=crop 228w,
@@ -113,8 +113,8 @@
                                     alt="Waterfall in forest" loading="lazy" width="800" height="600" />
                             </figure>
                         </button>
-                        <button type="button" class="lightbox__thumbnail" data-embla="slide" aria-label="Show image 5">
-                            <figure class="lightbox__thumbnail-content">
+                        <button type="button" class="lightbox__thumb" data-embla="slide" aria-label="Show image 5">
+                            <figure class="lightbox__thumb-content">
                                 <img sizes="auto" loading="lazy" width="228" height="171"
                                     src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=228&h=171&fit=crop"
                                     srcset="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=228&h=171&fit=crop 228w,
@@ -122,8 +122,8 @@
                                     alt="Lake at sunset" loading="lazy" width="800" height="600" />
                             </figure>
                         </button>
-                        <button type="button" class="lightbox__thumbnail" data-embla="slide" aria-label="Show image 6">
-                            <figure class="lightbox__thumbnail-content">
+                        <button type="button" class="lightbox__thumb" data-embla="slide" aria-label="Show image 6">
+                            <figure class="lightbox__thumb-content">
                                 <img sizes="auto" loading="lazy" width="228" height="171"
                                     src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=228&h=171&fit=crop"
                                     srcset="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=228&h=171&fit=crop 228w,
@@ -133,7 +133,7 @@
                         </button>
                     </div>
                 </div>
-                <button class="lightbox__thumbnails-next button text-muted-foreground hover:text-foreground"
+                <button class="lightbox__thumbs-next button text-muted-foreground hover:text-foreground"
                     data-size="icon-sm" data-variant="ghost" data-embla="next" type="button" aria-label="Next image">
                     <svg class="size-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" aria-hidden="true">
                         <rect width="256" height="256" fill="none" />
@@ -222,12 +222,11 @@
                             stroke-linejoin="round" stroke-width="14" />
                     </svg>
                 </button>
-                <div class="lightbox__thumbnails" data-embla="thumbnails">
+                <div class="lightbox__thumbs" data-embla="thumbs">
                     <div data-embla="viewport">
                         <div data-embla="container">
-                            <button type="button" class="lightbox__thumbnail" data-embla="slide"
-                                aria-label="Show image 1">
-                                <figure class="lightbox__thumbnail-content">
+                            <button type="button" class="lightbox__thumb" data-embla="slide" aria-label="Show image 1">
+                                <figure class="lightbox__thumb-content">
                                     <img sizes="auto" loading="lazy" width="228" height="171"
                                         src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=228&h=171&fit=crop"
                                         srcset="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=228&h=171&fit=crop 228w,
@@ -235,9 +234,8 @@
                                         alt="Mountain landscape" loading="lazy" width="800" height="600" />
                                 </figure>
                             </button>
-                            <button type="button" class="lightbox__thumbnail" data-embla="slide"
-                                aria-label="Show image 2">
-                                <figure class="lightbox__thumbnail-content">
+                            <button type="button" class="lightbox__thumb" data-embla="slide" aria-label="Show image 2">
+                                <figure class="lightbox__thumb-content">
                                     <img sizes="auto" loading="lazy" width="228" height="171"
                                         src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=228&h=171&fit=crop"
                                         srcset="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=228&h=171&fit=crop 228w,
@@ -245,9 +243,8 @@
                                         alt="Valley with sunlight" loading="lazy" width="800" height="600" />
                                 </figure>
                             </button>
-                            <button type="button" class="lightbox__thumbnail" data-embla="slide"
-                                aria-label="Show image 3">
-                                <figure class="lightbox__thumbnail-content">
+                            <button type="button" class="lightbox__thumb" data-embla="slide" aria-label="Show image 3">
+                                <figure class="lightbox__thumb-content">
                                     <img sizes="auto" loading="lazy" width="228" height="171"
                                         src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=228&h=171&fit=crop"
                                         srcset="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=228&h=171&fit=crop 228w,
@@ -255,9 +252,8 @@
                                         alt="Forest path" loading="lazy" width="800" height="600" />
                                 </figure>
                             </button>
-                            <button type="button" class="lightbox__thumbnail" data-embla="slide"
-                                aria-label="Show image 4">
-                                <figure class="lightbox__thumbnail-content">
+                            <button type="button" class="lightbox__thumb" data-embla="slide" aria-label="Show image 4">
+                                <figure class="lightbox__thumb-content">
                                     <img sizes="auto" loading="lazy" width="228" height="171"
                                         src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=228&h=171&fit=crop"
                                         srcset="https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=228&h=171&fit=crop 228w,
@@ -265,9 +261,8 @@
                                         alt="Waterfall in forest" loading="lazy" width="800" height="600" />
                                 </figure>
                             </button>
-                            <button type="button" class="lightbox__thumbnail" data-embla="slide"
-                                aria-label="Show image 5">
-                                <figure class="lightbox__thumbnail-content">
+                            <button type="button" class="lightbox__thumb" data-embla="slide" aria-label="Show image 5">
+                                <figure class="lightbox__thumb-content">
                                     <img sizes="auto" loading="lazy" width="228" height="171"
                                         src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=228&h=171&fit=crop"
                                         srcset="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=228&h=171&fit=crop 228w,
@@ -275,9 +270,8 @@
                                         alt="Lake at sunset" loading="lazy" width="800" height="600" />
                                 </figure>
                             </button>
-                            <button type="button" class="lightbox__thumbnail" data-embla="slide"
-                                aria-label="Show image 6">
-                                <figure class="lightbox__thumbnail-content">
+                            <button type="button" class="lightbox__thumb" data-embla="slide" aria-label="Show image 6">
+                                <figure class="lightbox__thumb-content">
                                     <img sizes="auto" loading="lazy" width="228" height="171"
                                         src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=228&h=171&fit=crop"
                                         srcset="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=228&h=171&fit=crop 228w,

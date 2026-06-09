@@ -44,5 +44,6 @@ import "./_radio.css";
 import "./_tabs.css";
 import "./_embla.css";
 import "./_lightbox.css";
+import "./_page-transitions.css";
 import "./_reveal.css";
 import "./_utilities.css";

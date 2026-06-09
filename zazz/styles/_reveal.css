@@ -1,13 +1,11 @@
 /**
- * _reveal.css — Scroll reveals ([data-reveal]) and page view transitions
+ * _reveal.css — Scroll reveals ([data-reveal])
  *
  * @layer      variables, utilities
- * @requires   _layers.css, _variables.css, _reset.css ([data-transition-layer] names)
- * @uses       ::view-transition-old/new — cross-document page transitions
- * @uses       @view-transition — enabled in _variables.css
+ * @requires   _layers.css, _variables.css
  * @uses       prefers-reduced-reveal — custom media (not prefers-reduced-motion)
  * @uses       Behaviour requires zazz/scripts/reveal.js (IntersectionObserver)
- * @tokens     --reveal-global-*, --global-page-transition-* (@layer variables);
+ * @tokens     --reveal-global-* (@layer variables);
  *             per-instance --reveal-* set from data-* attributes (typed in _properties.css)
  * @version    0.1.0
  * @since      0.1.0
@@ -42,14 +40,6 @@
 
 @layer variables {
   :root {
-    /* Page reveal transitions/animations */
-    --global-page-transition-duration: var(--default-transition-duration);
-    --global-page-transition-ease: var(--default-transition-timing-function);
-    --global-page-transition-translate--start: 0, 0, 0;
-    --global-page-transition-translate--end: 0, 0, 0;
-    --global-page-transition-opacity--start: 0;
-    --global-page-transition-opacity--end: 1;
-
     --reveal-global-duration: var(--default-transition-duration);
     --reveal-global-ease: var(--default-transition-timing-function);
     --reveal-global-wait: 0ms;
@@ -60,61 +50,6 @@
 }
 
 @layer utilities {
-  /* View transitions — main is isolated from header/footer (see _reset.css view-transition-name) */
-  @media screen and (prefers-reduced-motion: no-preference) {
-    ::view-transition-old(global-main-content) {
-      animation: global-page-transition--old var(--global-page-transition-duration)
-        var(--global-page-transition-ease) both;
-    }
-
-    ::view-transition-new(global-main-content) {
-      animation: global-page-transition--new var(--global-page-transition-duration)
-        var(--global-page-transition-ease) both;
-    }
-
-    /* Persist shared chrome without cross-fading */
-    ::view-transition-old(global-navigation),
-    ::view-transition-new(global-navigation),
-    ::view-transition-old(global-footer),
-    ::view-transition-new(global-footer) {
-      animation: none;
-    }
-  }
-
-  /* Stacking: keep header/footer snapshots above main so a taller main snapshot
-     (when page heights differ) can't paint over the chrome during the crossfade.
-     Group z-index applies regardless of motion preference. */
-  ::view-transition-group(global-main-content) {
-    z-index: 0;
-  }
-
-  ::view-transition-group(global-navigation),
-  ::view-transition-group(global-footer) {
-    z-index: 1;
-  }
-
-  @keyframes global-page-transition--old {
-    to {
-      opacity: var(--global-page-transition-opacity--start);
-      transform: translate3d(var(--global-page-transition-translate--start));
-    }
-  }
-
-  @keyframes global-page-transition--new {
-    from {
-      opacity: var(--global-page-transition-opacity--start);
-      transform: translate3d(var(--global-page-transition-translate--start));
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    ::view-transition-group(*),
-    ::view-transition-old(*),
-    ::view-transition-new(*) {
-      animation: none !important;
-    }
-  }
-
   /* --- Animation Styles --- */
   @media screen and (prefers-reduced-reveal: no-preference) {
     :where(

@@ -10,6 +10,7 @@
 @import "./_properties.css";
 @import "./_variables.css";
 @import "./_reset.css";
+@import "./_page-transitions.css";
 @import "./_typography.css";
 @import "./_badge.css";
 @import "./_button.css";

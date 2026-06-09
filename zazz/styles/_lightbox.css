@@ -115,7 +115,7 @@
   }
 
   .lightbox__stage .lightbox__slide:focus-visible {
-    --ring-offset: 0;
+    outline: none;
   }
 
   .lightbox__stage .lightbox__slide img {
@@ -192,6 +192,11 @@
     border: var(--lightbox-img-border);
     border-radius: var(--lightbox-thumb-radius);
     overflow: clip;
+
+    outline: var(--ring-size) var(--ring-style) transparent;
+    outline-offset: calc(var(--ring-size) * -1);
+    transition: outline-color var(--default-transition-duration)
+      var(--default-transition-timing-function);
   }
 
   .lightbox__thumb img {
@@ -218,10 +223,12 @@
     outline: none;
   }
 
+  .lightbox__thumb:focus-visible .lightbox__thumb-content {
+    outline-color: var(--ring-color);
+  }
+
   .lightbox__thumb:focus-visible img {
     transform: scale(1);
-    outline: var(--ring-size) var(--ring-style)
-      color-mix(in oklch, var(--ring-color) 100%, var(--ring));
   }
 
   /* ---------------------------------------------------------------------------
@@ -283,6 +290,10 @@
     --lightbox-thumb-border--active: var(--ring);
     flex: 0 0 var(--lightbox-thumb-size);
     inline-size: var(--lightbox-thumb-size);
+  }
+
+  .lightbox__dialog .lightbox__thumb:focus-visible .lightbox__thumb-content {
+    outline-color: var(--foreground);
   }
 
   /* ---------------------------------------------------------------------------

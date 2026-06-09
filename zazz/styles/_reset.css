@@ -7,7 +7,7 @@
  * @uses       ::details-content — accordion open/close (see _accordion.css for .accordion)
  * @uses       container-type — layout containers on main, article, section
  * @uses       view-transition-name via [data-transition-layer] — global-main-content,
- *             global-navigation, global-footer (animated in _reveal.css)
+ *             global-navigation, global-footer (animated in _page-transitions.css)
  * @uses       text-box — vertical trim on headings
  * @uses       color-mix(), oklch(from …), contrast-color() — mark/highlight tints
  * @uses       Native checkbox/range/switch tokens — consumed by form controls;

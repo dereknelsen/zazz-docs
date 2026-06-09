@@ -190,10 +190,11 @@ let suppressCommandsUntil = 0;
  * @param {Element} root - Embla root/subtree to monitor.
  * @param {EmblaCarouselType} emblaApi - Carousel instance tied to this root.
  * @param {string} clickSelector - Click targets to suppress after dragging.
+ * @param {{ dragThresholdPx?: number }} [options] - Per-carousel drag tolerance.
  * @returns {void}
  */
-function bindDragClickSuppression(root, emblaApi, clickSelector) {
-  const DRAG_THRESHOLD_PX = 6;
+function bindDragClickSuppression(root, emblaApi, clickSelector, options = {}) {
+  const DRAG_THRESHOLD_PX = options.dragThresholdPx ?? 6;
   const SUPPRESS_WINDOW_MS = 250;
   // Slides that open a dialog (command="show-modal") also need command suppression.
   const guardsCommands = clickSelector.includes("commandfor");
@@ -202,7 +203,13 @@ function bindDragClickSuppression(root, emblaApi, clickSelector) {
   let moved = false;
   let startX = 0;
   let startY = 0;
+  let lastX = 0;
+  let lastY = 0;
+  let snapAtDown = 0;
   let suppressUntil = 0;
+
+  /** @returns {number} */
+  const pointerDistance = () => Math.hypot(lastX - startX, lastY - startY);
 
   root.addEventListener(
     "pointerdown",
@@ -214,6 +221,9 @@ function bindDragClickSuppression(root, emblaApi, clickSelector) {
       moved = false;
       startX = e.clientX;
       startY = e.clientY;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      snapAtDown = emblaApi.selectedScrollSnap();
     },
     { passive: true },
   );
@@ -222,10 +232,11 @@ function bindDragClickSuppression(root, emblaApi, clickSelector) {
     "pointermove",
     (e) => {
       if (!pointerDown || !(e instanceof PointerEvent)) return;
+      lastX = e.clientX;
+      lastY = e.clientY;
       if (moved) return;
 
-      const distance = Math.hypot(e.clientX - startX, e.clientY - startY);
-      if (distance >= DRAG_THRESHOLD_PX) moved = true;
+      if (pointerDistance() >= DRAG_THRESHOLD_PX) moved = true;
     },
     { passive: true },
   );
@@ -243,10 +254,19 @@ function bindDragClickSuppression(root, emblaApi, clickSelector) {
   root.addEventListener("pointercancel", finalizePointer, { passive: true });
   emblaApi.on("pointerUp", finalizePointer);
 
-  // Touch/trackpad drags can move with tiny deltas. Any Embla scroll while pointer
-  // is down should be treated as drag intent.
+  // Touch/trackpad drags can move with tiny deltas. Treat Embla scroll as drag intent,
+  // but lightbox openers need extra tolerance so minor carousel settle does not block clicks.
   emblaApi.on("scroll", () => {
-    if (pointerDown) moved = true;
+    if (!pointerDown) return;
+
+    if (guardsCommands) {
+      if (pointerDistance() >= DRAG_THRESHOLD_PX || emblaApi.selectedScrollSnap() !== snapAtDown) {
+        moved = true;
+      }
+      return;
+    }
+
+    moved = true;
   });
 
   root.addEventListener(
@@ -386,7 +406,9 @@ function initEmblaCarousels(scope) {
     }
 
     if (emblaNode.classList.contains("lightbox__stage")) {
-      bindDragClickSuppression(emblaNode, emblaApi, ".lightbox__slide[commandfor]");
+      bindDragClickSuppression(emblaNode, emblaApi, ".lightbox__slide[commandfor]", {
+        dragThresholdPx: 14,
+      });
     }
 
     if (emblaThumbsNode) {

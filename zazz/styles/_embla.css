@@ -12,6 +12,8 @@
     --embla-slide-basis: 100%;
     --embla-slide-min-width: 0;
     --embla-touch-action: pan-y pinch-zoom;
+    --embla-cursor: grab;
+    --embla-cursor--grabbing: grabbing;
   }
 }
 
@@ -20,6 +22,10 @@
    - Documentation: https://www.embla-carousel.com/
    =========================================================================== */
 @layer components {
+  :where(body:has([data-embla="viewport"].is-dragging) *) {
+    cursor: var(--embla-cursor--grabbing);
+  }
+
   [data-embla="root"] {
     position: relative;
     isolation: isolate;
@@ -40,6 +46,7 @@
   [data-embla="slide"] {
     flex: 0 0 var(--embla-slide-basis);
     min-width: var(--embla-slide-min-width);
+    cursor: var(--embla-cursor);
   }
 
   [data-embla="thumbs"] [data-embla="slide"] {

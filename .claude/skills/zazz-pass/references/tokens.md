@@ -23,8 +23,8 @@ Two rules govern every choice:
 
 - **Semantic gaps (use first):** `--gap-xs --gap-sm --gap-md --gap-lg --gap-xl`. These are
   the default for padding, margins, and `gap`.
-- **Step scale (escape hatch):** `--step-0\.5 --step-1 … --step-96`, plus `--step-px`,
-  `--step-0\.5px`, `--step-full`. Half-steps carry an escaped dot — write `var(--step-2\.5)` for 2.5×. Everything
+- **Step scale (escape hatch):** `--step-0_5 --step-1 … --step-96`, plus `--step-px`,
+  `--step-0_5px`, `--step-full`. Half-steps carry an escaped dot — write `var(--step-2_5)` for 2.5×. Everything
   derives from `--spacing-interval` (a fluid `clamp()`), so spacing scales with the viewport.
 - **Utilities (map to `--gap-*`, sizes xs/sm/md/lg/xl):** `.gap-*`,
   `.p-* .px-* .py-* .pt-* .pr-* .pb-* .pl-*`, `.m-* .mx-* .my-* …` (+ `.mx-auto`),

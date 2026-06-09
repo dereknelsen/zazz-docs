@@ -11,7 +11,7 @@
 @layer variables {
   :root {
     --switch-track-width: var(--step-7);
-    --switch-track-padding: var(--step-0\.5);
+    --switch-track-padding: var(--step-0_5);
     --switch-track-height: calc(var(--switch-track-width) / 2 + var(--switch-track-padding));
     --switch-thumb: var(--white);
     --switch-thumb-size: calc((var(--switch-track-width) / 2) - var(--switch-track-padding));

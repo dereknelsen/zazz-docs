@@ -8,7 +8,7 @@
  */
 @layer variables {
   :root {
-    --radio-size: var(--step-4\.5);
+    --radio-size: var(--step-4_5);
     --radio-background: var(--input);
     --radio-background--checked: var(--primary);
     --radio-border: var(--border);

@@ -22,7 +22,7 @@
     --lightbox-thumb-opacity: 0.5;
     --lightbox-thumb-opacity--active: 1;
     --lightbox-thumb-columns: 6;
-    --lightbox-thumb-gap: var(--step-1\.5);
+    --lightbox-thumb-gap: var(--step-1_5);
     --lightbox-thumb-aspect-ratio: 1 / 1;
     --lightbox-img-border: 1px solid var(--faded);
 

@@ -181,8 +181,8 @@
      anchor-size — there the panel sizes to its content instead of stretching. */
   .select::picker(select) {
     inline-size: max-content;
-    padding: var(--step-1\.5);
-    margin-block: var(--step-1\.5);
+    padding: var(--step-1_5);
+    margin-block: var(--step-1_5);
 
     background-color: var(--card);
     color: var(--card-foreground);
@@ -201,7 +201,7 @@
     display: flex;
     align-items: center;
     gap: var(--field-gap);
-    padding: var(--step-1\.5) var(--step-2);
+    padding: var(--step-1_5) var(--step-2);
 
     font-size: var(--font-size-sm);
     border-radius: var(--radius-sm);

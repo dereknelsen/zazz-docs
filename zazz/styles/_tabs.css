@@ -13,9 +13,9 @@
 @layer variables {
   :root {
     --tabs-gap: var(--gap-xs);
-    --tabs-track-padding: var(--step-0\.5);
+    --tabs-track-padding: var(--step-0_5);
     --tabs-track-radius: var(--radius-md);
-    --tabs-track-gap: var(--step-0\.5);
+    --tabs-track-gap: var(--step-0_5);
     --tabs-track-background: var(--muted);
 
     --tabs-indicator-background: var(--card);
@@ -36,7 +36,7 @@
     --tabs-label-foreground--hover: var(--foreground);
     --tabs-label-foreground--active: var(--foreground);
 
-    --tabs-label-padding: var(--step-2\.5);
+    --tabs-label-padding: var(--step-2_5);
     --tabs-label-min-height: var(--step-7);
     --tabs-label-ring-color: var(--ring-color);
     --tabs-label-ring-opacity: 0%;

@@ -83,8 +83,6 @@ export function buildPreviewDocument({
     .map((src) => `<script src="${src}" defer></script>`)
     .join("\n");
 
-  const justify = align === "center" ? "center" : "flex-start";
-
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -102,9 +100,10 @@ ${scriptTags}
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: ${justify};
+    justify-content: center;
     gap: var(--gap-md);
     padding: var(--gap-lg);
+    block-size: 100%;
     min-block-size: ${minHeight}px;
   }
 </style>

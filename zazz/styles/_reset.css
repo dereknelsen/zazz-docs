@@ -202,7 +202,7 @@
     --kbd-color: var(--muted-foreground);
     --kbd-inline-size: var(--step-5);
     --kbd-block-size: var(--step-5);
-    --kbd-icon-size: var(--step-3\.5);
+    --kbd-icon-size: var(--step-3_5);
     --kbd-gap: var(--step-1);
 
     font-family: var(--kbd-font-family);
@@ -450,7 +450,7 @@
     --range-track-background: var(--muted);
     --range-track-border: 1px solid var(--muted);
     --range-track-radius: var(--radius-full);
-    --range-thumb-size: var(--step-3\.5);
+    --range-thumb-size: var(--step-3_5);
     --range-thumb-background: var(--background);
     --range-thumb-border: 1px solid var(--primary);
     --range-thumb-radius: var(--radius-full);
@@ -518,7 +518,7 @@
   /* Checkbox — appearance: none redraws the native control from theme tokens.
      Checked/indeterminate fill with --primary and layer a glyph (never colour alone). */
   :where(input[type="checkbox"]:not([role="switch"])) {
-    --checkbox-size: var(--step-4\.5);
+    --checkbox-size: var(--step-4_5);
     --checkbox-background: var(--input);
     --checkbox-border: var(--border);
     --checkbox-border--hover: var(--primary);

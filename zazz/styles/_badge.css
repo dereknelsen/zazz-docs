@@ -25,7 +25,7 @@
     --badge-border--active: 1px solid var(--border);
 
     --badge-gap: var(--step-1);
-    --badge-padding: var(--step-2);
+    --badge-padding: var(--step-1_5);
     --badge-height: var(--step-5);
     --badge-radius: var(--radius-sm);
 

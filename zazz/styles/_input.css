@@ -70,7 +70,7 @@
   .input[type="date"],
   .input[type="time"],
   .input[type="datetime-local"] {
-    --input-padding-inline-end: var(--step-1\.5);
+    --input-padding-inline-end: var(--step-1_5);
   }
 
   /* Native date/time controls keep their picker indicator tinted to the text */

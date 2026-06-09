@@ -259,19 +259,19 @@
     --spacing-interval: clamp(0.225rem, 0.2136rem + 0.0455vw, 0.25rem);
 
     /* scale */
-    --step-0\.5px: 0.5px;
+    --step-0_5px: 0.5px;
     --step-px: 1px;
-    --step-0\.5: calc(var(--spacing-interval) / 2);
+    --step-0_5: calc(var(--spacing-interval) / 2);
     --step-1: var(--spacing-interval);
-    --step-1\.5: calc(var(--spacing-interval) * 1.5);
+    --step-1_5: calc(var(--spacing-interval) * 1.5);
     --step-2: calc(var(--spacing-interval) * 2);
-    --step-2\.5: calc(var(--spacing-interval) * 2.5);
+    --step-2_5: calc(var(--spacing-interval) * 2.5);
     --step-3: calc(var(--spacing-interval) * 3);
-    --step-3\.5: calc(var(--spacing-interval) * 3.5);
+    --step-3_5: calc(var(--spacing-interval) * 3.5);
     --step-4: calc(var(--spacing-interval) * 4);
-    --step-4\.5: calc(var(--spacing-interval) * 4.5);
+    --step-4_5: calc(var(--spacing-interval) * 4.5);
     --step-5: calc(var(--spacing-interval) * 5);
-    --step-5\.5: calc(var(--spacing-interval) * 5.5);
+    --step-5_5: calc(var(--spacing-interval) * 5.5);
     --step-6: calc(var(--spacing-interval) * 6);
     --step-7: calc(var(--spacing-interval) * 7);
     --step-8: calc(var(--spacing-interval) * 8);
@@ -315,8 +315,8 @@
     /* semantic */
     --radius-none: 0rem;
     --radius-xs: calc(var(--step-1) * var(--radius-multiplier));
-    --radius-sm: calc(var(--step-1\.5) * var(--radius-multiplier));
-    --radius-md: calc(var(--step-2\.5) * var(--radius-multiplier));
+    --radius-sm: calc(var(--step-1_5) * var(--radius-multiplier));
+    --radius-md: calc(var(--step-2_5) * var(--radius-multiplier));
     --radius-lg: calc(var(--step-5) * var(--radius-multiplier));
     --radius-xl: calc(var(--step-7) * var(--radius-multiplier));
     --radius-full: 9999rem;

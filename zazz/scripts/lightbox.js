@@ -1,0 +1,129 @@
+"use strict";
+
+/**
+ * @fileoverview `<media-lightbox>` — HTML web component for lightbox galleries.
+ * @description Light-DOM custom element that coordinates the two carousels in
+ * a lightbox: the inline gallery and the fullscreen `<dialog>` slideshow.
+ *
+ * Responsibilities:
+ * - On dialog open: initializes the dialog's `<embla-carousel>` (deferred
+ *   while the dialog was closed), jumps it to the gallery's current slide,
+ *   and focuses the viewport so keyboard navigation works immediately.
+ * - On dialog close: scrolls the inline gallery to the last viewed slide.
+ *
+ * Opening and closing the dialog itself needs no JavaScript — slides carry
+ * `command="show-modal"` / `command="close"` (Invoker Commands). Drag-aware
+ * click suppression on the stage and thumbs is wired by `initRoot` in
+ * embla.js (keyed on `.lightbox__stage` / thumbs markup).
+ *
+ * Load order: Embla CDN bundles → utils.js → embla.js → carousel.js → lightbox.js.
+ *
+ * @example
+ * <media-lightbox class="lightbox">
+ *   <div class="lightbox__gallery">
+ *     <embla-carousel class="lightbox__stage" data-embla-loop="true">…</embla-carousel>
+ *   </div>
+ *   <dialog class="lightbox__dialog dialog" closedby="any">
+ *     <embla-carousel data-embla-loop="true">…</embla-carousel>
+ *   </dialog>
+ * </media-lightbox>
+ */
+
+class MediaLightbox extends HTMLElement {
+  /** @type {AbortController|null} */
+  #controller = null;
+
+  /** @type {MutationObserver|null} */
+  #dialogObserver = null;
+
+  connectedCallback() {
+    if (this.#controller) return;
+
+    const dialog = this.querySelector("dialog");
+    if (!(dialog instanceof HTMLDialogElement)) return;
+
+    this.#controller = new AbortController();
+
+    dialog.addEventListener("close", () => this.#syncGalleryToDialog(dialog), {
+      signal: this.#controller.signal,
+    });
+
+    this.#dialogObserver = new MutationObserver(() => {
+      if (dialog.open) this.#onDialogOpen(dialog);
+    });
+    this.#dialogObserver.observe(dialog, { attributes: true, attributeFilter: ["open"] });
+  }
+
+  disconnectedCallback() {
+    this.#controller?.abort();
+    this.#controller = null;
+    this.#dialogObserver?.disconnect();
+    this.#dialogObserver = null;
+  }
+
+  /**
+   * @returns {Element|null} The inline gallery's carousel root.
+   */
+  #galleryRoot() {
+    return this.querySelector('.lightbox__gallery [data-embla="root"]');
+  }
+
+  /**
+   * @description Initializes the dialog carousel, opens it at the gallery's
+   * current slide, and moves focus to the slideshow viewport.
+   *
+   * @param {HTMLDialogElement} dialog - The lightbox dialog.
+   * @returns {void}
+   */
+  #onDialogOpen(dialog) {
+    const dialogRoot = dialog.querySelector('[data-embla="root"]');
+    if (!dialogRoot) return;
+
+    // <embla-carousel> defers init while its dialog is closed — init now.
+    // (This element connects before its children, so its observer fires first.)
+    const CarouselElement = window.EmblaCarouselElement;
+    if (CarouselElement && dialogRoot instanceof CarouselElement) {
+      dialogRoot.init();
+    }
+
+    const galleryApi = this.#galleryRoot()?._emblaApi;
+    if (dialogRoot._emblaApi && galleryApi) {
+      dialogRoot._emblaApi.scrollTo(galleryApi.selectedScrollSnap(), true);
+    }
+
+    const viewport = dialogRoot.querySelector('[data-embla="viewport"]');
+    if (viewport instanceof HTMLElement) {
+      viewport.focus({ preventScroll: true });
+    }
+  }
+
+  /**
+   * @description Scrolls the inline gallery to the slide last viewed in the dialog.
+   *
+   * @param {HTMLDialogElement} dialog - The lightbox dialog.
+   * @returns {void}
+   */
+  #syncGalleryToDialog(dialog) {
+    const dialogApi = dialog.querySelector('[data-embla="root"]')?._emblaApi;
+    const galleryApi = this.#galleryRoot()?._emblaApi;
+    if (dialogApi && galleryApi) {
+      galleryApi.scrollTo(dialogApi.selectedScrollSnap());
+    }
+  }
+}
+
+// Register the element (guarded against double script loads)
+if (typeof window !== "undefined" && !customElements.get("media-lightbox")) {
+  customElements.define("media-lightbox", MediaLightbox);
+}
+
+// Export for module environments or attach to window
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = MediaLightbox;
+} else if (typeof define === "function" && define.amd) {
+  define([], function () {
+    return MediaLightbox;
+  });
+} else if (typeof window !== "undefined") {
+  window.MediaLightbox = MediaLightbox;
+}

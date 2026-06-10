@@ -9,24 +9,42 @@ discovers and enhances markup; you rarely touch it.
 
 ## 1. Platform APIs and their markup hooks
 
-| API                                        | Used by                            | Markup hook                                                                                                                             | Polyfill                                |
-| ------------------------------------------ | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| Popover API                                | tooltip, dropdown, navigation-menu | `popover="auto"` / `popover="hint"`, `popovertarget="<id>"`, `:popover-open`                                                            | `@oddbird/popover-polyfill`             |
-| Invoker Commands                           | dialog, lightbox                   | `command="show-modal"` / `command="close"`, `commandfor="<id>"`                                                                         | `invokers/compatible`                   |
-| Interest Invokers                          | tooltip                            | `interestfor="<id>"` (hover/focus/long-press → hint, wires ARIA)                                                                        | `invokers/compatible`                   |
-| CSS Anchor Positioning                     | popover/tooltip placement          | `data-side`, `data-align` (drive `anchor-name` / `position-area`)                                                                       | `@supports`-gated; UA-centered fallback |
-| Native `<dialog>`                          | dialog, lightbox, mobile-menu      | `<dialog>`, `::backdrop`, `closedby="any"`                                                                                              | (via Invoker Commands polyfill)         |
-| Native `<details>`                         | accordion                          | `<details>`/`<summary>`, `::details-content`, `interpolate-size: allow-keywords`                                                        | —                                       |
+| API                                        | Used by                            | Markup hook                                                                                                           | Polyfill                                |
+| ------------------------------------------ | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| Popover API                                | tooltip, dropdown, navigation-menu | `popover="auto"` / `popover="hint"`, `popovertarget="<id>"`, `:popover-open`                                          | `@oddbird/popover-polyfill`             |
+| Invoker Commands                           | dialog, lightbox                   | `command="show-modal"` / `command="close"`, `commandfor="<id>"`                                                       | `invokers/compatible`                   |
+| Interest Invokers                          | tooltip                            | `interestfor="<id>"` (hover/focus/long-press → hint, wires ARIA)                                                      | `invokers/compatible`                   |
+| CSS Anchor Positioning                     | popover/tooltip placement          | `data-side`, `data-align` (drive `anchor-name` / `position-area`)                                                     | `@supports`-gated; UA-centered fallback |
+| Native `<dialog>`                          | dialog, lightbox, mobile-menu      | `<dialog>`, `::backdrop`, `closedby="any"`                                                                            | (via Invoker Commands polyfill)         |
+| Native `<details>`                         | accordion                          | `<details>`/`<summary>`, `::details-content`, `interpolate-size: allow-keywords`                                      | —                                       |
 | View Transitions                           | cross-page nav                     | `@view-transition { navigation: auto }`, `data-transition-layer="global-component"`, `document.startViewTransition()` | —                                       |
-| Navigation API                             | SPA-style nav                      | `navigation.js` (app-level; **not** loaded in preview iframes)                                                                          | falls back to full page load            |
-| `light-dark()` + container `style()` query | theming, dark mode, inverted menus | `.dark` class, `--use-inverted-menu: "true"` on `[popover]`                                                                             | —                                       |
-| IntersectionObserver                       | scroll reveals                     | `[data-reveal]` / `[data-reveal-each]` (via `reveal.js`)                                                                                | —                                       |
-| `:user-invalid` / `:has()`                 | form validation                    | surfaces error state after commit, not while typing                                                                                     | —                                       |
+| Navigation API                             | SPA-style nav                      | `navigation.js` (app-level; **not** loaded in preview iframes)                                                        | falls back to full page load            |
+| `light-dark()` + container `style()` query | theming, dark mode, inverted menus | `.dark` class, `--use-inverted-menu: "true"` on `[popover]`                                                           | —                                       |
+| IntersectionObserver                       | scroll reveals                     | `[data-reveal]` / `[data-reveal-each]` (via `reveal.js`)                                                              | —                                       |
+| `:user-invalid` / `:has()`                 | form validation                    | surfaces error state after commit, not while typing                                                                   | —                                       |
 
 ## 2. Zazz JS behaviors (data-attribute driven)
 
-Configure entirely in markup. Don't edit `zazz/scripts/`. Load order matters: `utils.js`
-first, then `reveal.js`, then Embla CDN bundles, then `embla.js`.
+Configure entirely in markup. Don't edit `zazz/scripts/` unless the task is explicitly about
+framework internals. Load order matters: standalone scripts can load directly; Embla-backed
+components load Embla CDN bundles, then `utils.js`, `embla.js`, and their web-component
+script(s).
+
+### Light-DOM web components
+
+These custom elements augment regular child markup; they do not use shadow DOM or templates,
+so existing Zazz classes and `data-*` hooks keep working.
+
+| Element            | Script        | Use for                                     | Notes                                                                                  |
+| ------------------ | ------------- | ------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `<embla-carousel>` | `carousel.js` | Component carousels and carousel roots      | The element is the Embla root; put `data-embla-*` options on it                        |
+| `<media-lightbox>` | `lightbox.js` | Inline gallery + fullscreen dialog lightbox | Coordinates gallery/dialog slide state; opening/closing still uses Invoker Commands    |
+| `<input-password>` | `password.js` | Password show/hide toggle                   | Wrap `.password-group`; optional `label-show` / `label-hide`; CSS swaps icons via ARIA |
+| `<tab-group>`      | `tabs.js`     | Radio-driven tabs with richer keyboard nav  | Carries `.tabs`; adds orientation-aware arrows, Home/End, and wrap-around              |
+
+Component preview iframes use `zazz/components/manifest.ts` to load scripts and expose a JS
+tab for these files. Custom elements are `display: inline` by default, so their component
+styles define the needed block/flex display.
 
 ### Reveal — `reveal.js` (`window.Reveal`)
 
@@ -49,12 +67,15 @@ Put `data-reveal` on a single element, or `data-reveal-each` on a parent to stag
 
 ### Embla carousel — `embla.js` (`window.EmblaInit`) — requires the Embla CDN UMD bundles
 
-Mark up roles with `data-embla="<role>"`; put all config on the **root**.
+For component markup, use `<embla-carousel>` as the root and put config on that element.
+Lower-level/legacy markup may still use `data-embla="root"`. In both cases, mark up child
+roles with `data-embla="<role>"`.
 
 **Roles:** `root` (config holder) · `viewport` (required) · `container` · `slide` · `prev` ·
 `next` · `dots` · `dot` (template, cloned per snap) · `thumbs` (linked thumb carousel).
 
-**Config on `data-embla="root"`** (kebab-case → Embla options via `Utils.parseDataAttributes`):
+**Config on `<embla-carousel>` or `data-embla="root"`** (kebab-case → Embla options via
+`Utils.parseDataAttributes`):
 
 | Attribute                                           | Example                                              | Purpose                                                                   |
 | --------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------- |
@@ -66,8 +87,10 @@ Mark up roles with `data-embla="<role>"`; put all config on the **root**.
 | `data-embla-thumbs-*` (on `thumbs`)                 | `data-embla-thumbs-contain-scroll="keepSnaps"`       | thumb carousel options (defaults: containScroll keepSnaps, dragFree true) |
 | `data-embla-start` (on a trigger w/ `commandfor`)   | `data-embla-start="2"`                               | open a dialog carousel at slide N                                         |
 
-Script-managed (don't set by hand): `data-embla-init`, `data-embla-start-index`. The script
-adds `.is-active` to the current dot/thumb and stores `_emblaApi` on the root.
+Script-managed (don't set by hand): `data-embla="root"` on `<embla-carousel>`,
+`data-embla-init`, `data-embla-start-index`. The script adds `.is-active` to the current
+dot/thumb and stores `_emblaApi` on the root. `<embla-carousel>` initializes on connect,
+defers while inside a closed `<dialog>`, and destroys its Embla instances on disconnect.
 
 ### Helpers and app glue
 
@@ -76,7 +99,8 @@ adds `.is-active` to the current dot/thumb and stores `_emblaApi` on the root.
   with zero JS.
 - **`navigation.js`** — intercepts same-origin navigations, swaps `<main>`, runs a View
   Transition, and refreshes Reveal/Embla. App-level only; the component preview iframes
-  deliberately omit it.
+  deliberately omit it. Custom elements initialize themselves when connected, so SPA swaps
+  do not need a separate init call for them.
 
 ## 3. Polyfills in the page head (keep these)
 

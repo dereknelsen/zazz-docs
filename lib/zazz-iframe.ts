@@ -81,7 +81,11 @@ export function buildPreviewDocument({
         styleHrefs.map((href) => `<link rel="stylesheet" href="${href}">`).join("\n")
       : `<link rel="stylesheet" href="/zazz/styles/main.css">`;
 
-  const needsEmbla = scripts.includes("embla");
+  const needsCarousel = scripts.includes("carousel") || scripts.includes("lightbox");
+  const needsEmbla = scripts.includes("embla") || needsCarousel;
+  const needsLightbox = scripts.includes("lightbox");
+  const needsPassword = scripts.includes("password");
+  const needsTabs = scripts.includes("tabs");
   const needsReveal = scripts.includes("reveal");
 
   // navigation.js is intentionally excluded — it hijacks navigation for the full app.
@@ -89,6 +93,10 @@ export function buildPreviewDocument({
   if (needsEmbla) zazzScripts.push("/zazz/scripts/utils.js"); // embla.js depends on Utils
   if (needsReveal) zazzScripts.push("/zazz/scripts/reveal.js"); // standalone
   if (needsEmbla) zazzScripts.push("/zazz/scripts/embla.js");
+  if (needsCarousel) zazzScripts.push("/zazz/scripts/carousel.js"); // <embla-carousel>, needs embla.js
+  if (needsLightbox) zazzScripts.push("/zazz/scripts/lightbox.js"); // <media-lightbox>, needs carousel.js
+  if (needsPassword) zazzScripts.push("/zazz/scripts/password.js"); // <input-password>, standalone
+  if (needsTabs) zazzScripts.push("/zazz/scripts/tabs.js"); // <tab-group>, standalone
 
   const emblaCdn = needsEmbla ? EMBLA_CDN : "";
   const scriptTags = zazzScripts.map((src) => `<script src="${src}" defer></script>`).join("\n");

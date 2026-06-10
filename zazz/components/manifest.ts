@@ -8,7 +8,7 @@
  * overlay has room inside the iframe, and `requiresScripts` for anything JS-driven.
  */
 
-export type ExampleScript = "embla" | "reveal";
+export type ExampleScript = "embla" | "reveal" | "carousel" | "lightbox" | "password" | "tabs";
 
 export interface ExampleMeta {
   /** Human label for the iframe `title` (a11y). */
@@ -33,12 +33,12 @@ const MANIFEST: Record<string, ExampleMeta> = {
   "dialog/with-form": { minHeight: 800 },
   "dialog/is-alert": { minHeight: 500 },
   "dropdown/default": { align: "start", minHeight: 500 },
-  "navigation-menu/default": { align: "start", minHeight: 500 },
+  "navigation-menu/default": { align: "start", minHeight: 500, requiresScripts: ["password"] },
   "select/default": { minHeight: 240 },
 
-  // Carousel/lightbox — Embla (+ its CDN bundles) and the modal stage.
-  "carousel/default": { minHeight: 460, requiresScripts: ["embla"] },
-  "lightbox/default": { minHeight: 640, requiresScripts: ["embla"] },
+  // Carousel/lightbox — web components pull in embla.js + the Embla CDN bundles.
+  "carousel/default": { minHeight: 460, requiresScripts: ["carousel"] },
+  "lightbox/default": { minHeight: 640, requiresScripts: ["lightbox"] },
 
   // Showcase primitives — centered reads better than left-pinned.
   "card/default": { minHeight: 460 },
@@ -46,14 +46,16 @@ const MANIFEST: Record<string, ExampleMeta> = {
   "breadcrumbs/default": { minHeight: 120 },
   "avatar/default": { minHeight: 160 },
   "accordion/default": { align: "start", minHeight: 460 },
-  "tabs/default": { minHeight: 460 },
+  "tabs/default": { minHeight: 460, requiresScripts: ["tabs"] },
   "mobile-menu/default": { align: "start", justify: "start", minHeight: 500 },
-  
+
   // Forms
   "input/default": { align: "start", minHeight: 420 },
   "input/icon-leading": { align: "start" },
   "input/icon-trailing": { align: "start" },
   "input-group/default": { align: "start", minHeight: 420 },
+  "input-group/password-group": { requiresScripts: ["password"] },
+  "password-group/default": { requiresScripts: ["password"] },
 };
 
 /** Returns presentation metadata for an example id, or `undefined` for defaults. */

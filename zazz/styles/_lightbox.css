@@ -2,7 +2,7 @@
  * _lightbox.css — Lightbox gallery (.lightbox)
  *
  * @layer      variables, components
- * @requires   _layers.css, _variables.css, _dialog.css, _embla.css, _button.css
+ * @requires   _layers.css, _variables.css, _dialog.css, _carousel.css, _button.css
  * @uses       command="show-modal" — Invoker Commands open fullscreen dialog (no JS)
  * @uses       @container — thumb column count at narrow widths
  * @uses       @starting-style — dialog slide scale/opacity on snap
@@ -106,16 +106,43 @@
   }
 
   .lightbox__stage .lightbox__content {
+    --_ring-width: 0px;
+
     aspect-ratio: var(--lightbox-aspect-ratio);
     inline-size: 100%;
     block-size: 100%;
     overflow: clip;
+    position: relative;
     border-radius: var(--lightbox-slide-radius);
     border: var(--lightbox-img-border);
+
+    /* transparent twin of the inset ring for forced-colors / high-contrast modes */
+    outline: var(--outline-width) var(--outline-style) transparent;
+    outline-offset: calc(var(--outline-width) * -1);
+  }
+
+  /* The inset ring paints on an overlay so it sits above the slide image (an
+     inset box-shadow on the figure itself would hide behind the img); the
+     ring width animates from 0 so the ring grows in smoothly on focus. */
+  .lightbox__stage .lightbox__content::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 var(--_ring-width) var(--ring-color);
+    transition: box-shadow var(--default-transition-duration)
+      var(--default-transition-timing-function);
   }
 
   .lightbox__stage .lightbox__slide:focus-visible {
     outline: none;
+  }
+
+  .lightbox__stage .lightbox__slide:focus-visible .lightbox__content {
+    --_ring-width: var(--ring-width);
+
+    outline-color: transparent;
   }
 
   .lightbox__stage .lightbox__slide img {
@@ -187,15 +214,31 @@
   }
 
   .lightbox__thumb-content {
+    --_ring-width: 0px;
+    --_ring: var(--ring-color);
+
     appearance: none;
     cursor: pointer;
+    position: relative;
     border: var(--lightbox-img-border);
     border-radius: var(--lightbox-thumb-radius);
     overflow: clip;
 
-    outline: var(--ring-size) var(--ring-style) transparent;
-    outline-offset: calc(var(--ring-size) * -1);
-    transition: outline-color var(--default-transition-duration)
+    /* transparent twin of the inset ring for forced-colors / high-contrast modes */
+    outline: var(--outline-width) var(--outline-style) transparent;
+    outline-offset: calc(var(--outline-width) * -1);
+  }
+
+  /* The inset ring paints on an overlay so it sits above the thumb image (an
+     inset box-shadow on the button itself would hide behind the img). */
+  .lightbox__thumb-content::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 var(--_ring-width) var(--_ring);
+    transition: box-shadow var(--default-transition-duration)
       var(--default-transition-timing-function);
   }
 
@@ -224,7 +267,9 @@
   }
 
   .lightbox__thumb:focus-visible .lightbox__thumb-content {
-    outline-color: var(--ring-color);
+    --_ring-width: var(--ring-width);
+
+    outline-color: transparent;
   }
 
   .lightbox__thumb:focus-visible img {
@@ -256,9 +301,10 @@
   }
 
   .lightbox__dialog [data-embla="root"] {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 1fr auto;
     block-size: 100%;
+    max-block-size: 100svh;
   }
 
   .lightbox__dialog [data-embla="container"] {
@@ -270,12 +316,10 @@
   }
 
   .lightbox__dialog [data-embla="root"] > [data-embla="viewport"]:first-of-type {
-    flex: 1;
     min-block-size: 0;
   }
 
   .lightbox__dialog .lightbox__thumbs {
-    flex: 0;
     padding-block: var(--gap-sm);
     pointer-events: auto;
   }
@@ -293,7 +337,7 @@
   }
 
   .lightbox__dialog .lightbox__thumb:focus-visible .lightbox__thumb-content {
-    outline-color: var(--foreground);
+    --_ring: var(--foreground);
   }
 
   /* ---------------------------------------------------------------------------
@@ -304,21 +348,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    block-size: 100%;
-    padding: var(--gap-md);
+    min-block-size: 0;
+    min-inline-size: 0;
+    padding: clamp(var(--gap-sm), 4vi, var(--gap-lg));
   }
 
   .lightbox__dialog .lightbox__content {
-    border-radius: var(--lightbox-slide-radius);
-    border: var(--lightbox-img-border);
-    overflow: clip;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    block-size: 100%;
+    inline-size: 100%;
+    min-block-size: 0;
+    min-inline-size: 0;
+    max-block-size: 100%;
+    max-inline-size: 100%;
   }
 
   .lightbox__dialog .lightbox__slide img {
     --lightbox-thumb-radius: var(--radius-xs);
 
-    inline-size: auto;
-    max-block-size: 100%;
+    border-radius: var(--lightbox-slide-radius);
+    border: var(--lightbox-img-border);
+    overflow: clip;
+    inline-size: 100%;
+    block-size: 100%;
+    max-block-size: fit-content;
+    max-inline-size: fit-content;
     object-fit: contain;
     user-select: none;
     -webkit-user-drag: none;

@@ -1,5 +1,5 @@
 /**
- * _embla.css — Embla carousel ([data-embla] hooks)
+ * _carousel.css — Embla carousel ([data-embla] hooks)
  *
  * @layer      variables, components
  * @requires   _layers.css, _variables.css
@@ -22,6 +22,12 @@
    - Documentation: https://www.embla-carousel.com/
    =========================================================================== */
 @layer components {
+  /* <embla-carousel> is a custom element (inline by default) that applies
+     data-embla="root" to itself — give it block flow like the legacy div. */
+  embla-carousel {
+    display: block;
+  }
+
   :is(body:has([data-embla="viewport"].is-dragging) *) {
     cursor: var(--embla-cursor--grabbing);
   }

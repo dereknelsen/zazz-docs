@@ -411,7 +411,7 @@ Popover API + CSS anchor positioning. Native light-dismiss. Dropdown items are `
 
 ### Tabs
 
-Zero-JS from grouped radio inputs. Segmented control with sliding card pill indicator. Panel order must match radio order.
+CSS-first grouped radio inputs wrapped in `<tab-group>`. Segmented control with sliding card pill indicator. Panel order must match radio order. The element adds orientation-aware arrow keys, Home/End, and wrap-around; radios still work without JS.
 
 ### Cards (composition pattern)
 
@@ -419,7 +419,7 @@ Zero-JS from grouped radio inputs. Segmented control with sliding card pill indi
 
 ### Forms
 
-Shared `--field-*` tokens unify `.input`, `.textarea`, `.select`, `.input-group`, `.password-group`. Validation via `:user-invalid` (surfaces after blur/submit, never while typing). `.field` wrapper for label/control/hint/error layout. Checkbox, switch, and radio are restyled native inputs.
+Shared `--field-*` tokens unify `.input`, `.textarea`, `.select`, `.input-group`, `.password-group`. Validation via `:user-invalid` (surfaces after blur/submit, never while typing). `.field` wrapper for label/control/hint/error layout. Password visibility uses `<input-password>` around `.password-group`; checkbox, switch, and radio are restyled native inputs.
 
 ---
 
@@ -477,7 +477,7 @@ Whisper-soft, multi-layered diffused shadows. Surfaces are flat by default — s
 
 ### Focus Ring
 
-Outline-based: `--ring` (= `--primary`), `--ring-size` (2px), `--ring-offset` (1px). Applied automatically to `:focus-visible`. Components keep transparent outline at rest.
+Box-shadow-based, Tailwind/shadcn-compatible: `--ring` (color, = `--primary` at `--ring-opacity`), `--ring-width` (2px), `--ring-offset-width` (1px), `--ring-offset-color` (= `--background`), composed via `--ring-offset-shadow` + `--ring-shadow` (`--shadow-ring`). Components keep a same-geometry transparent outline (`--outline-*`) so forced-colors/high-contrast modes still show focus.
 
 ### Animation
 

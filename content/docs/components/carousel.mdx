@@ -1,14 +1,18 @@
 ---
 title: Carousel
-description: A draggable, looping content carousel powered by Embla, configured with data-embla attributes.
+description: A draggable, looping Embla carousel wrapped in the embla-carousel web component.
 ---
 
-A carousel is an Embla slider you compose in markup: a `data-embla="root"` wrapper holds the
-`viewport` → `container` → `slide` structure plus optional `prev`/`next` buttons, and each
-slide sets its own responsive width with `basis-*` utilities
-(`basis-full xs:basis-1/2 sm:basis-1/3 md:basis-1/4`). Looping, dragging, and snapping are
-all set through `data-embla-*` options. No custom JavaScript needed. The preview loads the
-Embla scripts automatically.
+A carousel is an Embla slider wrapped in `<embla-carousel>`. The element is the carousel
+root: put Embla options such as `data-embla-loop` and `data-embla-classnames` on it, then
+compose the usual `viewport` → `container` → `slide` structure inside. Each slide sets its
+own responsive width with `basis-*` utilities
+(`basis-full xs:basis-1/2 sm:basis-1/3 md:basis-1/4`).
+
+`<embla-carousel>` uses light DOM, so the markup you write is the markup that gets styled.
+It initializes when connected, defers initialization while inside a closed `<dialog>`, and
+destroys its Embla instances if the element is removed. The preview loads the required
+scripts automatically; open the JS tab to inspect the custom element.
 
 ## Default
 
@@ -16,11 +20,11 @@ Embla scripts automatically.
 
 ## API
 
-Mark up the roles with `data-embla`, and put options on the root.
+Mark up the roles with `data-embla`, and put options on `<embla-carousel>`.
 
 | Attribute                             | Where | Purpose                                         |
 | ------------------------------------- | ----- | ----------------------------------------------- |
-| `data-embla="root"`                   | root  | Carousel container; holds all options           |
+| `<embla-carousel>`                    | root  | Carousel custom element; holds all options      |
 | `data-embla="viewport"`               | child | The visible window (required)                   |
 | `data-embla="container"`              | child | The flex track of slides                        |
 | `data-embla="slide"`                  | child | Each slide — set width with `basis-*` utilities |
@@ -28,6 +32,10 @@ Mark up the roles with `data-embla`, and put options on the root.
 | `data-embla-loop`                     | root  | `"true"` to wrap around                         |
 | `data-embla-align`                    | root  | `start`, `center`, `end`                        |
 | `data-embla-autoplay` / `-autoscroll` | root  | Plugins (with their `-*` options)               |
+
+Legacy `data-embla="root"` wrappers still work for lower-level Embla examples. Prefer
+`<embla-carousel>` for component examples and any markup that may be inserted or removed
+dynamically.
 
 The lightbox is built on the same Embla roles plus a fullscreen `<dialog>` and a thumb
 strip — see [Lightbox](/docs/components/lightbox).

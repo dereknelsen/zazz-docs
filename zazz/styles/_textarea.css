@@ -57,8 +57,15 @@
     border-radius: var(--textarea-border-radius);
     resize: var(--textarea-resize);
 
-    outline: var(--ring-size) var(--ring-style) transparent;
-    outline-offset: var(--ring-offset);
+    /* ring renders as box-shadow; transparent outline twin keeps focus visible
+       in forced-colors / high-contrast modes */
+    --_ring-offset-width: 0px;
+    --_ring-width: 0px;
+    box-shadow:
+      0 0 0 var(--_ring-offset-width) var(--ring-offset-color),
+      0 0 0 calc(var(--_ring-offset-width) + var(--_ring-width)) var(--ring);
+    outline: var(--outline-width) var(--outline-style) transparent;
+    outline-offset: var(--outline-offset);
 
     transition: var(--default-transition);
   }
@@ -71,6 +78,8 @@
   .textarea:focus-visible {
     background-color: var(--field-background--focus);
     border-color: var(--field-border--focus);
-    outline-color: var(--ring);
+    --_ring-offset-width: var(--ring-offset-width);
+    --_ring-width: var(--ring-width);
+    outline-color: transparent;
   }
 }

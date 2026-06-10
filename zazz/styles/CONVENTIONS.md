@@ -328,8 +328,13 @@ variables layer.
   (`:where(input[type="range"])`, `:where(.grid)`).
 - **Logical properties**: prefer `inline-size`/`block-size`,
   `padding-inline`/`margin-block`, `inset-inline-start` so components flip in RTL.
-- **Focus**: `:focus-visible` + `outline` + `outline-offset`, never `outline: none`
-  without a replacement. Rings are built from `--ring-*` tokens.
+- **Focus**: rings render as box-shadows from Tailwind/shadcn-compatible tokens —
+  `--ring` (color), `--ring-width`, `--ring-offset-width`, `--ring-offset-color`,
+  composed as `--ring-offset-shadow` + `--ring-shadow` (`--shadow-ring`) and layered
+  with the component's own shadow. Every shadow-ringed element also keeps a
+  same-geometry transparent outline (`--outline-width/style/offset`) so
+  forced-colors/high-contrast modes still show focus. Never `outline: none`
+  without a replacement.
 - **State exclusion**: express intent with `:not()` (`button:hover:not(:disabled)`)
   rather than order-dependent overrides.
 - **Utility names track Tailwind**: atomic utilities reuse Tailwind's vocabulary where
@@ -355,7 +360,7 @@ These deviate from the canonical shape on purpose — document the reason in-fil
   [`_tabs.css`](./_tabs.css), and [`_select.css`](./_select.css) gate anchor positioning
   / `base-select` behind `@supports` with a documented fallback. Always describe the
   fallback in the `@uses` note.
-- **Attribute-hook components** — [`_embla.css`](./_embla.css) and
+- **Attribute-hook components** — [`_carousel.css`](./_carousel.css) and
   [`_lightbox.css`](./_lightbox.css) style `[data-*]` hooks whose behaviour comes from
   `zazz/scripts/*.js`. Declare the JS dependency in a `@uses` line.
 - **Extended header** — [`_reveal.css`](./_reveal.css) keeps `@version`/`@since`/

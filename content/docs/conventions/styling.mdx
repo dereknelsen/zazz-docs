@@ -132,7 +132,7 @@ Rules reference a token **once**. Variants swap the token value — they never r
 - **Variants & sizes**: data attributes — `[data-variant="primary"]`, `[data-size="sm"]`, `[data-side]`, `[data-align]`.
 - **Zero specificity**: `:where()` wraps reset and utility selectors so they stay overridable.
 - **Logical properties**: `inline-size`/`block-size`, `padding-inline`/`margin-block` for RTL support.
-- **Focus**: `:focus-visible` + `outline` + `outline-offset`, never `outline: none` without a replacement.
+- **Focus**: rings render as box-shadows from Tailwind/shadcn-compatible tokens (`--ring`, `--ring-width`, `--ring-offset-width`, `--ring-offset-color`), composed with the component's own shadow; a same-geometry transparent outline (`--outline-*`) is kept for forced-colors modes. Never `outline: none` without a replacement.
 - **State exclusion**: `:not(:disabled)` over order-dependent overrides.
 
 ## Comment styles

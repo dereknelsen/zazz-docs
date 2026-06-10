@@ -1218,7 +1218,7 @@
 
   /* Grid utilities */
   :where(.grid) {
-    --_grid-col-min: min(100%, 20ch);
+    --_grid-col-min: min(25ch, 25vi);
     display: grid;
   }
 
@@ -4130,6 +4130,7 @@
   :where(.z-50) {
     z-index: 50;
   }
+  
 
   /* ===========================================================================
   OPACITY UTILITIES
@@ -4197,6 +4198,50 @@
 
   :where(.opacity-100) {
     opacity: 1;
+  }
+
+  /* ===========================================================================
+  SCALE UTILITIES
+  =========================================================================== */
+
+  :where(.scale-0) {
+    transform: scale(0);
+  }
+
+  :where(.scale-50) {
+    transform: scale(0.5);
+  }
+
+  :where(.scale-75) {
+    transform: scale(0.75);
+  }
+
+  :where(.scale-90) {
+    transform: scale(0.9);
+  }
+
+  :where(.scale-95) {
+    transform: scale(0.95);
+  }
+
+  :where(.scale-100) {
+    transform: scale(1);
+  }
+
+  :where(.scale-105) {
+    transform: scale(1.05);
+  }
+
+  :where(.scale-110) {
+    transform: scale(1.1);
+  }
+
+  :where(.scale-125) {
+    transform: scale(1.25);
+  }
+
+  :where(.scale-150) {
+    transform: scale(1.5);
   }
 
   /* ===========================================================================
@@ -6119,12 +6164,23 @@
   =========================================================================== */
 
   :where(.ring) {
-    outline: var(--ring-size) var(--ring-style) transparent;
-    outline-offset: var(--ring-offset);
+    --_ring-offset-width: 0px;
+    --_ring-width: 0px;
+
+    box-shadow:
+      0 0 0 var(--_ring-offset-width) var(--ring-offset-color),
+      0 0 0 calc(var(--_ring-offset-width) + var(--_ring-width)) var(--primary);
+
+    /* transparent twin of the ring for forced-colors / high-contrast modes */
+    outline: var(--outline-width) var(--outline-style) transparent;
+    outline-offset: var(--outline-offset);
   }
 
   :where(.ring:focus-visible) {
-    outline-color: var(--primary);
+    --_ring-offset-width: var(--ring-offset-width);
+    --_ring-width: var(--ring-width);
+
+    outline-color: transparent;
   }
 
   :where(.transition-opacity) {
@@ -6486,6 +6542,48 @@
     opacity: 1;
   }
 
+  /* -- hover: scale -- */
+
+  :where(.hover\:scale-0:hover) {
+    transform: scale(0);
+  }
+
+  :where(.hover\:scale-50:hover) {
+    transform: scale(0.5);
+  }
+
+  :where(.hover\:scale-75:hover) {
+    transform: scale(0.75);
+  }
+
+  :where(.hover\:scale-90:hover) {
+    transform: scale(0.9);
+  }
+
+  :where(.hover\:scale-95:hover) {
+    transform: scale(0.95);
+  }
+
+  :where(.hover\:scale-100:hover) {
+    transform: scale(1);
+  }
+
+  :where(.hover\:scale-105:hover) {
+    transform: scale(1.05);
+  }
+
+  :where(.hover\:scale-110:hover) {
+    transform: scale(1.1);
+  }
+
+  :where(.hover\:scale-125:hover) {
+    transform: scale(1.25);
+  }
+
+  :where(.hover\:scale-150:hover) {
+    transform: scale(1.5);
+  }
+
   /* ===========================================================================
   ACTIVE STATE UTILITIES
   =========================================================================== */
@@ -6826,5 +6924,47 @@
 
   :where(.active\:opacity-100:active) {
     opacity: 1;
+  }
+
+  /* -- active: scale -- */
+
+  :where(.active\:scale-0:active) {
+    transform: scale(0);
+  }
+
+  :where(.active\:scale-50:active) {
+    transform: scale(0.5);
+  }
+
+  :where(.active\:scale-75:active) {
+    transform: scale(0.75);
+  }
+
+  :where(.active\:scale-90:active) {
+    transform: scale(0.9);
+  }
+
+  :where(.active\:scale-95:active) {
+    transform: scale(0.95);
+  }
+
+  :where(.active\:scale-100:active) {
+    transform: scale(1);
+  }
+
+  :where(.active\:scale-105:active) {
+    transform: scale(1.05);
+  }
+
+  :where(.active\:scale-110:active) {
+    transform: scale(1.1);
+  }
+
+  :where(.active\:scale-125:active) {
+    transform: scale(1.25);
+  }
+
+  :where(.active\:scale-150:active) {
+    transform: scale(1.5);
   }
 }

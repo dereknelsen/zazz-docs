@@ -12,6 +12,7 @@ interface EmblaCarouselType {
   scrollNext(): void;
   slideNodes(): HTMLElement[];
   on(event: string, callback: () => void): EmblaCarouselType;
+  destroy(): void;
 }
 
 type EmblaPlugin = unknown;
@@ -77,12 +78,27 @@ interface RevealConstructor {
   defaultConfig: object;
 }
 
+/** Shape of the `<embla-carousel>` element class (defined in carousel.js). */
+declare class EmblaCarouselHostElement extends HTMLElement {
+  init(): void;
+  readonly api: EmblaCarouselType | null;
+}
+
 interface Window {
   navigation: Navigation;
   Utils: UtilsNamespace;
   Reveal: RevealConstructor;
+  /** Set by carousel.js — the `<embla-carousel>` element class. */
+  EmblaCarouselElement?: typeof EmblaCarouselHostElement;
+  /** Set by lightbox.js — the `<media-lightbox>` element class. */
+  MediaLightbox?: CustomElementConstructor;
+  /** Set by password.js — the `<input-password>` element class. */
+  InputPassword?: CustomElementConstructor;
+  /** Set by tabs.js — the `<tab-group>` element class. */
+  TabGroup?: CustomElementConstructor;
   EmblaInit: {
     init: (scope?: Document | Element) => void;
+    initRoot: (emblaNode: Element) => void;
     addDotBtnsAndClickHandlers: (
       emblaApi: EmblaCarouselType,
       dotsNode: Element,

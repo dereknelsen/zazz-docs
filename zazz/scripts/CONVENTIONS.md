@@ -6,9 +6,13 @@ This document defines how to write and structure Zazz vanilla JavaScript scripts
 
 Applies to all files in `zazz/scripts/`:
 
+- `carousel.js`
 - `embla.js`
+- `lightbox.js`
 - `navigation.js`
+- `password.js`
 - `reveal.js`
+- `tabs.js`
 - `utils.js`
 
 Scripts are served directly at `/zazz/scripts/*.js` — no bundler or transpiler. Write browser-native JavaScript that runs as-is in modern browsers.
@@ -69,12 +73,16 @@ if (typeof module !== "undefined" && module.exports) {
 
 Use a named export object or class, then attach it via the universal export pattern above. This supports CommonJS, AMD, and browser globals.
 
-| File            | Global             | Export shape                                |
-| --------------- | ------------------ | ------------------------------------------- |
-| `utils.js`      | `window.Utils`     | `{ parseValue, parseDataAttributes }`       |
-| `reveal.js`     | `window.Reveal`    | `Reveal` class                              |
-| `embla.js`      | `window.EmblaInit` | `{ init, addDotBtnsAndClickHandlers, ... }` |
-| `navigation.js` | _(none)_           | Side-effect only; no export                 |
+| File            | Global                        | Export shape                          |
+| --------------- | ----------------------------- | ------------------------------------- |
+| `utils.js`      | `window.Utils`                | `{ parseValue, parseDataAttributes }` |
+| `reveal.js`     | `window.Reveal`               | `Reveal` class                        |
+| `embla.js`      | `window.EmblaInit`            | `{ init, initRoot, ... }`             |
+| `carousel.js`   | `window.EmblaCarouselElement` | `<embla-carousel>` element class      |
+| `lightbox.js`   | `window.MediaLightbox`        | `<media-lightbox>` element class      |
+| `password.js`   | `window.InputPassword`        | `<input-password>` element class      |
+| `tabs.js`       | `window.TabGroup`             | `<tab-group>` element class           |
+| `navigation.js` | _(none)_                      | Side-effect only; no export           |
 
 Document export objects with `@namespace` JSDoc and `@property` for each key.
 
@@ -98,6 +106,19 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
 
 `Reveal` additionally exposes `Reveal.disableAutoInit()` and `Reveal.getAutoInstance()` for manual control.
 
+### HTML web components
+
+Interactive components ship as **light-DOM custom elements** that augment existing markup (carousel.js, lightbox.js, password.js, tabs.js). They follow the [HTML web components](https://adactio.com/journal/20618) approach — wrap or replace the component's root element, never replace its content.
+
+- **No shadow DOM, no templates.** Children are regular markup; all Zazz CSS applies unchanged.
+- **Element names describe the pattern, not the brand:** `embla-carousel`, `media-lightbox`, `input-password`, `tab-group`.
+- **Lifecycle, not load events.** Set up in `connectedCallback()`, tear down in `disconnectedCallback()`. Elements work when inserted dynamically — no auto-init block needed.
+- **Clean up with `AbortController`.** Bind listeners with `{ signal }` and abort on disconnect; disconnect `MutationObserver`s.
+- **Guard registration:** `if (!customElements.get("tag-name")) customElements.define(...)` so double script loads are safe.
+- **Custom elements are `display: inline` by default** — add a `display` rule in the component's stylesheet.
+- **Degrade gracefully.** Without JS the markup must still render sensibly (a password field stays masked; tabs keep native radio behavior).
+- Export the element class via the universal export block like any other script.
+
 ### Data-attribute configuration
 
 Component scripts read configuration from HTML data attributes rather than JS options objects.
@@ -118,6 +139,10 @@ Scripts declare dependencies via `<script>` tag order, not imports.
 | `utils.js`      | —                          | Load first; provides `window.Utils`                |
 | `reveal.js`     | —                          | Standalone                                         |
 | `embla.js`      | `utils.js`, Embla CDN libs | Requires Embla UMD bundles before this file        |
+| `carousel.js`   | `embla.js`                 | `<embla-carousel>` calls `EmblaInit.initRoot`      |
+| `lightbox.js`   | `carousel.js`              | `<media-lightbox>` coordinates carousel elements   |
+| `password.js`   | —                          | Standalone (`<input-password>`)                    |
+| `tabs.js`       | —                          | Standalone (`<tab-group>`)                         |
 | `navigation.js` | —                          | App-level; not loaded in component preview iframes |
 
 When a script needs `Utils`, assume `window.Utils` is available — do not bundle or duplicate parsing logic.

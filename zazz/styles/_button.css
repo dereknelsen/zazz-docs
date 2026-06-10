@@ -10,7 +10,6 @@
 @layer variables {
   :root {
     --button-ring-color: var(--ring-color);
-    --button-ring-opacity: 0%;
 
     --button-font-family: var(--font-family-body);
     --button-font-size: var(--font-size-sm);
@@ -36,7 +35,9 @@
 
     --button-icon-size: var(--step-4);
 
-    --button-shadow: none;
+    /* composes into the button's box-shadow list — use a transparent shadow,
+       never `none`, so the focus ring layers stay valid */
+    --button-shadow: 0 0 transparent;
   }
 }
 
@@ -67,14 +68,22 @@
     color: var(--button-foreground);
     background-color: var(--button-background);
 
-    box-shadow: var(--button-shadow);
+    /* ring renders as box-shadow so it composes with --button-shadow; the
+       ring widths animate from 0 so the ring grows in smoothly on focus */
+    --_ring-offset-width: 0px;
+    --_ring-width: 0px;
+    --_ring: color-mix(in oklch, var(--button-ring-color) var(--ring-opacity), transparent);
+    box-shadow:
+      0 0 0 var(--_ring-offset-width) var(--ring-offset-color),
+      0 0 0 calc(var(--_ring-offset-width) + var(--_ring-width)) var(--_ring),
+      var(--button-shadow);
 
     cursor: default;
     text-decoration: none;
 
-    outline: var(--ring-size) var(--ring-style)
-      color-mix(in oklch, var(--button-ring-color) var(--button-ring-opacity), transparent);
-    outline-offset: var(--ring-offset);
+    /* transparent twin of the ring for forced-colors / high-contrast modes */
+    outline: var(--outline-width) var(--outline-style) transparent;
+    outline-offset: var(--outline-offset);
 
     transition: var(--default-transition);
 
@@ -103,13 +112,16 @@
   }
 
   .button:focus-visible:not(:disabled, [aria-disabled="true"]) {
-    outline-color: color-mix(in oklch, var(--button-ring-color) var(--ring-opacity), transparent);
+    --_ring-offset-width: var(--ring-offset-width);
+    --_ring-width: var(--ring-width);
+
+    outline-color: transparent;
   }
 
   :is(.button:disabled, .button[aria-disabled="true"]) {
     --button-foreground: var(--muted-foreground);
     --button-background: var(--muted);
-    --button-shadow: none;
+    --button-shadow: 0 0 transparent;
     --decoration-line: none;
 
     cursor: default;
@@ -152,7 +164,7 @@
     --button-border--hover: 1px solid transparent;
     --button-border--active: 1px solid transparent;
 
-    --button-shadow: none;
+    --button-shadow: 0 0 transparent;
   }
 
   .button[data-variant="muted"] {
@@ -168,7 +180,7 @@
     --button-border--hover: 1px solid transparent;
     --button-border--active: 1px solid transparent;
 
-    --button-shadow: none;
+    --button-shadow: 0 0 transparent;
   }
 
   .button[data-variant="ghost"] {
@@ -184,7 +196,7 @@
     --button-border--hover: 1px solid transparent;
     --button-border--active: 1px solid transparent;
 
-    --button-shadow: none;
+    --button-shadow: 0 0 transparent;
   }
 
   .button[data-variant="destructive"] {
@@ -202,7 +214,7 @@
     --button-border--hover: 1px solid var(--destructive);
     --button-border--active: 1px solid var(--destructive);
 
-    --button-shadow: none;
+    --button-shadow: 0 0 transparent;
   }
 
   .button[data-variant="link"] {
@@ -222,7 +234,7 @@
     --button-padding: 0;
     --button-radius: 0;
 
-    --button-shadow: none;
+    --button-shadow: 0 0 transparent;
 
     text-decoration-line: var(--decoration-line);
     text-decoration-style: var(--decoration-style);

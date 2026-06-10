@@ -19,7 +19,8 @@ before reaching for any other styling approach.
 
 **Single source of truth:** each component's markup lives once, in
 `zazz/components/{name}/*.html`, surfaced on the docs site at `/docs/components/{name}`. Never
-invent or paste a second copy — read or fetch the real example and adapt it.
+invent or paste a second copy — read or fetch the real example and adapt it. Component docs
+previews also expose the matching CSS and, for web components, the matching JS tab.
 
 ## How Zazz thinks (mental model)
 
@@ -88,12 +89,16 @@ dedicated CSS files.
 
 ## Modern APIs & JS behaviors
 
-Author behavior in **HTML**; the scripts enhance markup. Embla carousels (`data-embla-*`) and
-scroll reveals (`data-reveal-*`) are fully markup-configured — don't touch the JS. Tooltips
-(`interestfor`), dialogs (`command`/`commandfor`), and popovers (`popovertarget`) use native
-invoker/popover APIs with polyfills already loaded.
+Author behavior in **HTML**; scripts enhance markup with light-DOM custom elements and
+data-attribute hooks. Use `<embla-carousel>` for component carousels, `<media-lightbox>` for
+lightboxes, `<input-password>` for password visibility toggles, and `<tab-group>` for
+orientation-aware tab keyboard navigation. Legacy lower-level Embla markup still uses
+`data-embla="root"`; scroll reveals use `data-reveal-*`. Tooltips (`interestfor`), dialogs
+(`command`/`commandfor`), and popovers (`popovertarget`) use native invoker/popover APIs with
+polyfills already loaded.
 
-- Zazz hooks + the `data-embla-*` / `data-reveal-*` catalogs → **`references/apis.md`**.
+- Zazz hooks, custom elements, and the `data-embla-*` / `data-reveal-*` catalogs →
+  **`references/apis.md`**.
 - How an API works + browser-support/fallbacks → the **`modern-web-guidance`** skill (first
   stop for any new HTML/CSS/JS API question; training data on these goes stale fast).
 
@@ -121,12 +126,12 @@ patterns live in `PATTERNS.md`.
 
 ## Reference index
 
-| Read                                                         | When                                                                                    |
-| ------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
-| `references/tokens.md`                                       | Choosing spacing, color, type, radius, shadow, or layout tokens/utilities               |
-| `references/components.md`                                   | Picking a component and its `data-*` API + docs link                                    |
-| `references/apis.md`                                         | Wiring popovers/dialogs/tooltips, carousels (`data-embla-*`), reveals (`data-reveal-*`) |
-| `DESIGN.md`                                                  | Brand colors, type scale, archetypes, motion, brand customization                       |
-| `PATTERNS.md`                                                | Page structure, the sentence-case rule, heading-group + CTA composition                 |
-| `modern-web-guidance` skill                                  | How a modern web API works + browser-support/fallbacks                                  |
-| `/docs/components/{name}` or `zazz/components/{name}/*.html` | The canonical example markup (single source)                                            |
+| Read                                                         | When                                                                                                     |
+| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
+| `references/tokens.md`                                       | Choosing spacing, color, type, radius, shadow, or layout tokens/utilities                                |
+| `references/components.md`                                   | Picking a component and its `data-*` API + docs link                                                     |
+| `references/apis.md`                                         | Wiring custom elements, popovers/dialogs/tooltips, carousels (`data-embla-*`), reveals (`data-reveal-*`) |
+| `DESIGN.md`                                                  | Brand colors, type scale, archetypes, motion, brand customization                                        |
+| `PATTERNS.md`                                                | Page structure, the sentence-case rule, heading-group + CTA composition                                  |
+| `modern-web-guidance` skill                                  | How a modern web API works + browser-support/fallbacks                                                   |
+| `/docs/components/{name}` or `zazz/components/{name}/*.html` | The canonical example markup (single source)                                                             |

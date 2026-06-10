@@ -340,19 +340,31 @@
     * 8. Effects — shadows, focus rings
     * ========================================================================== */
 
-    /* states - focus rings/outlines
+    /* states - focus rings
+     * Tailwind/shadcn-compatible ring tokens. The ring renders as a box-shadow:
+     * --ring-offset-shadow (a --ring-offset-width gap in --ring-offset-color) +
+     * --ring-shadow (a --ring-width band of --ring) — the same composition
+     * Tailwind's ring utilities use (--tw-ring-*), so values port 1:1.
      * Override --ring-color (not --ring) per variant/context; --ring recomputes via color-mix. */
     --ring-color: var(--primary);
     --ring-opacity: 70%;
-    --ring-style: solid;
-    --ring-size: 2px;
-    --ring-offset: 1px;
     --ring: color-mix(in oklch, var(--ring-color) var(--ring-opacity), transparent);
-    
+    --ring-width: 2px;
+    --ring-offset-width: 1px;
+    --ring-offset-color: var(--background);
+
+    /* outline twin — transparent outline matching the ring's geometry.
+     * Shadow-ringed elements keep it because forced-colors / high-contrast
+     * modes drop box-shadows but force outline-color, so focus stays visible. */
+    --outline-width: var(--ring-width);
+    --outline-style: solid;
+    --outline-offset: var(--ring-offset-width);
+
     /* shadows */
-    --shadow-ring:
-    0 0 0 var(--ring-offset) var(--background),
-      0 0 0 calc(var(--ring-offset) + var(--ring-size)) var(--ring);
+    --ring-offset-shadow: 0 0 0 var(--ring-offset-width) var(--ring-offset-color);
+    --ring-shadow: 0 0 0 calc(var(--ring-offset-width) + var(--ring-width)) var(--ring);
+    /* the composed focus ring (offset gap + ring band) for box-shadow lists */
+    --shadow-ring: var(--ring-offset-shadow), var(--ring-shadow);
 
     --shadow-xs:
       0 8px 2px 0 oklch(from var(--black) l c h / 0),

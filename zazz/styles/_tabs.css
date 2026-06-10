@@ -39,7 +39,6 @@
     --tabs-label-padding: var(--step-2_5);
     --tabs-label-min-height: var(--step-7);
     --tabs-label-ring-color: var(--ring-color);
-    --tabs-label-ring-opacity: 0%;
   }
 }
 
@@ -118,9 +117,19 @@
 
     border-radius: var(--tabs-indicator-radius);
 
-    outline: var(--ring-size) var(--ring-style)
-      color-mix(in oklch, var(--tabs-label-ring-color) var(--tabs-label-ring-opacity), transparent);
-    outline-offset: var(--ring-offset);
+    /* ring renders as box-shadow so it composes with the indicator shadow in
+       the no-anchor fallback below; the ring widths animate from 0 so the
+       ring grows in smoothly on focus */
+    --_ring-offset-width: 0px;
+    --_ring-width: 0px;
+    --_ring: color-mix(in oklch, var(--tabs-label-ring-color) var(--ring-opacity), transparent);
+    box-shadow:
+      0 0 0 var(--_ring-offset-width) var(--ring-offset-color),
+      0 0 0 calc(var(--_ring-offset-width) + var(--_ring-width)) var(--_ring);
+
+    /* transparent twin of the ring for forced-colors / high-contrast modes */
+    outline: var(--outline-width) var(--outline-style) transparent;
+    outline-offset: var(--outline-offset);
     transition: var(--default-transition);
   }
 
@@ -140,11 +149,10 @@
   }
 
   .tabs__list input[type="radio"]:focus-visible + .tabs__label {
-    outline-color: color-mix(
-      in oklch,
-      var(--tabs-label-ring-color) var(--ring-opacity),
-      transparent
-    );
+    --_ring-offset-width: var(--ring-offset-width);
+    --_ring-width: var(--ring-width);
+
+    outline-color: transparent;
   }
 
   /* ===========================================================================
@@ -182,7 +190,10 @@
     .tabs__list input[type="radio"]:checked + .tabs__label {
       border-radius: var(--tabs-indicator-radius);
       background-color: var(--tabs-indicator-background);
-      box-shadow: var(--tabs-indicator-shadow);
+      box-shadow:
+        0 0 0 var(--_ring-offset-width) var(--ring-offset-color),
+        0 0 0 calc(var(--_ring-offset-width) + var(--_ring-width)) var(--_ring),
+        var(--tabs-indicator-shadow);
     }
   }
 

@@ -30,9 +30,10 @@
     cursor: grab;
     border-radius: var(--range-track-radius);
 
-    outline: var(--ring-size) var(--ring-style)
-      color-mix(in oklch, var(--button-ring-color) var(--button-ring-opacity), transparent);
-    outline-offset: var(--ring-offset);
+    /* transparent outline keeps focus visible in forced-colors / high-contrast
+       modes; the visible focus ring lives on the thumb via --shadow-ring */
+    outline: var(--outline-width) var(--outline-style) transparent;
+    outline-offset: var(--outline-offset);
 
     transition: var(--default-transition);
   }

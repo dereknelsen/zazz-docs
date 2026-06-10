@@ -80,8 +80,8 @@
   }
 
   :where(:focus-visible) {
-    outline: var(--ring-size) var(--ring-style) var(--ring);
-    outline-offset: var(--ring-offset);
+    outline: var(--outline-width) var(--outline-style) var(--ring);
+    outline-offset: var(--outline-offset);
   }
 
   :where(b, strong) {

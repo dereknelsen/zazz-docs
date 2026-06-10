@@ -137,8 +137,11 @@ intentionally (**md** ≈ popovers/modals). Utilities: `.shadow-none|xs|sm|md|lg
 
 ## 8. Focus ring
 
-`--ring` (= `--primary` at `--ring-opacity` 30%), with `--ring-color`, `--ring-size` (2px),
-`--ring-offset` (1px), `--ring-style`. Applied automatically on `:focus-visible`. To recolor,
+Tailwind/shadcn-compatible: `--ring` (color, = `--ring-color` at `--ring-opacity`),
+`--ring-width` (2px), `--ring-offset-width` (1px), `--ring-offset-color` (= `--background`).
+Composed as `--ring-offset-shadow` + `--ring-shadow` (bundled as `--shadow-ring`) for
+box-shadow lists, layered with component shadows. A same-geometry transparent outline
+(`--outline-width/style/offset`) is kept for forced-colors/high-contrast modes. To recolor,
 override **`--ring-color`** (not `--ring` — it recomputes via `color-mix`). `.ring` opts an
 element in.
 

@@ -1,0 +1,117 @@
+"use strict";
+
+/**
+ * @fileoverview `<tab-group>` — HTML web component for keyboard-enhanced tabs.
+ * @description Light-DOM custom element that augments the CSS-only radio
+ * tabs pattern with orientation-aware arrow-key navigation. The element
+ * replaces the `.tabs` wrapper `<div>` and carries the same class, so all
+ * existing CSS (panel visibility via `:has()`, the anchor-positioned
+ * indicator) applies unchanged.
+ *
+ * Keyboard behavior on the focused tab radio:
+ * - Horizontal (default): ArrowLeft / ArrowRight move between tabs.
+ * - Vertical (`data-direction="vertical"`): ArrowUp / ArrowDown move between tabs.
+ * - Home / End jump to the first / last enabled tab.
+ * - Navigation wraps around and skips disabled tabs.
+ *
+ * Native radio-group arrow keys already provide a baseline without
+ * JavaScript; this element makes the keys match the tabs' visual
+ * orientation and adds Home/End + wrap-around.
+ *
+ * @example
+ * <tab-group class="tabs">
+ *   <div class="tabs__list" role="tablist">
+ *     <label class="tabs__tab"><input type="radio" name="tg" checked />One</label>
+ *     <label class="tabs__tab"><input type="radio" name="tg" />Two</label>
+ *   </div>
+ *   <div class="tabs__panel">…</div>
+ *   <div class="tabs__panel">…</div>
+ * </tab-group>
+ */
+
+class TabGroup extends HTMLElement {
+  /** @type {AbortController|null} */
+  #controller = null;
+
+  connectedCallback() {
+    if (this.#controller) return;
+    this.#controller = new AbortController();
+
+    this.addEventListener("keydown", (event) => this.#onKeydown(event), {
+      signal: this.#controller.signal,
+    });
+  }
+
+  disconnectedCallback() {
+    this.#controller?.abort();
+    this.#controller = null;
+  }
+
+  /**
+   * @description Handles arrow-key, Home, and End navigation between tab radios.
+   *
+   * @param {KeyboardEvent} event - The keydown event.
+   * @returns {void}
+   */
+  #onKeydown(event) {
+    const target = event.target;
+    if (!(target instanceof HTMLInputElement) || target.type !== "radio") return;
+
+    const list = target.closest('[role="tablist"], .tabs__list');
+    // Ignore radios that belong to a nested tab-group
+    if (!list || list.closest("tab-group") !== this) return;
+
+    const tabs = Array.from(list.querySelectorAll('input[type="radio"]'))
+      .filter((node) => node instanceof HTMLInputElement)
+      .filter((tab) => !tab.disabled);
+    if (tabs.length < 2) return;
+
+    const vertical = this.getAttribute("data-direction") === "vertical";
+    const prevKey = vertical ? "ArrowUp" : "ArrowLeft";
+    const nextKey = vertical ? "ArrowDown" : "ArrowRight";
+
+    const index = tabs.indexOf(target);
+    if (index === -1) return;
+
+    let nextIndex;
+    switch (event.key) {
+      case prevKey:
+        nextIndex = (index - 1 + tabs.length) % tabs.length;
+        break;
+      case nextKey:
+        nextIndex = (index + 1) % tabs.length;
+        break;
+      case "Home":
+        nextIndex = 0;
+        break;
+      case "End":
+        nextIndex = tabs.length - 1;
+        break;
+      default:
+        return;
+    }
+
+    event.preventDefault();
+
+    const tab = tabs[nextIndex];
+    tab.checked = true;
+    tab.focus();
+    tab.dispatchEvent(new Event("change", { bubbles: true }));
+  }
+}
+
+// Register the element (guarded against double script loads)
+if (typeof window !== "undefined" && !customElements.get("tab-group")) {
+  customElements.define("tab-group", TabGroup);
+}
+
+// Export for module environments or attach to window
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = TabGroup;
+} else if (typeof define === "function" && define.amd) {
+  define([], function () {
+    return TabGroup;
+  });
+} else if (typeof window !== "undefined") {
+  window.TabGroup = TabGroup;
+}

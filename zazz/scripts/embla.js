@@ -327,10 +327,130 @@ function initCommandDragGuard() {
 // --- Carousel initialization ---
 
 /**
+ * @description Initializes a single Embla carousel root.
+ *
+ * Configures the carousel from its `data-embla-*` attributes, wires navigation
+ * (prev/next, dots, thumbs), and stores the API on `root._emblaApi`. Idempotent:
+ * skips roots that are already initialized or inside a closed dialog (no
+ * measurable viewport until open).
+ *
+ * Called by `initEmblaCarousels()` for legacy `data-embla="root"` markup and by
+ * the `<embla-carousel>` web component (zazz/scripts/carousel.js) on connect.
+ *
+ * @param {Element} emblaNode - The carousel root element.
+ * @returns {void}
+ */
+function initEmblaRoot(emblaNode) {
+  if (emblaNode.hasAttribute("data-embla-init")) return;
+
+  // Defer init inside closed dialogs — viewport has no measurable size until open
+  if (emblaNode.closest("dialog:not([open])")) return;
+
+  emblaNode.setAttribute("data-embla-init", "");
+
+  const emblathumbsNode = emblaNode.querySelector('[data-embla="thumbs"]');
+  const emblaViewportNode = emblathumbsNode
+    ? emblaNode.querySelector('[data-embla="viewport"]:not([data-embla="thumbs"] *)')
+    : emblaNode.querySelector('[data-embla="viewport"]');
+  const emblaPrevButtonNode = emblaNode.querySelector('[data-embla="prev"]');
+  const emblaNextButtonNode = emblaNode.querySelector('[data-embla="next"]');
+  const emblaDotsNode = emblaNode.querySelector('[data-embla="dots"]');
+
+  if (!emblaViewportNode) return;
+
+  if (!emblaViewportNode.hasAttribute("tabindex")) {
+    emblaViewportNode.setAttribute("tabindex", "0");
+  }
+
+  const apiOptions = Utils.parseDataAttributes(emblaNode, "data-embla-");
+
+  // Keep plugin keys out of core Embla options
+  Object.keys(apiOptions).forEach(function (key) {
+    if (
+      key === "name" ||
+      key === "keyboard" ||
+      key === "autoplay" ||
+      key === "autoscroll" ||
+      key === "classnames" ||
+      key.startsWith("autoplay") ||
+      key.startsWith("autoscroll") ||
+      key.startsWith("classnames")
+    ) {
+      delete apiOptions[key];
+    }
+  });
+
+  const autoplayOptions = Utils.parseDataAttributes(emblaNode, "data-embla-autoplay-");
+  const autoscrollOptions = Utils.parseDataAttributes(emblaNode, "data-embla-autoscroll-");
+  const classnamesOptions = Utils.parseDataAttributes(emblaNode, "data-embla-classnames-");
+
+  const plugins = [];
+
+  if (emblaNode.hasAttribute("data-embla-autoplay") || Object.keys(autoplayOptions).length > 0) {
+    plugins.push(EmblaCarouselAutoplay(autoplayOptions));
+  }
+
+  if (
+    emblaNode.hasAttribute("data-embla-autoscroll") ||
+    Object.keys(autoscrollOptions).length > 0
+  ) {
+    plugins.push(EmblaCarouselAutoScroll(autoscrollOptions));
+  }
+
+  if (
+    emblaNode.hasAttribute("data-embla-classnames") ||
+    Object.keys(classnamesOptions).length > 0
+  ) {
+    plugins.push(EmblaCarouselClassNames(classnamesOptions));
+  }
+
+  const emblaApi = EmblaCarousel(emblaViewportNode, apiOptions, plugins);
+
+  emblaNode._emblaApi = emblaApi;
+
+  if (emblaPrevButtonNode) {
+    emblaPrevButtonNode.addEventListener("click", () => emblaApi.scrollPrev(), false);
+  }
+
+  if (emblaNextButtonNode) {
+    emblaNextButtonNode.addEventListener("click", () => emblaApi.scrollNext(), false);
+  }
+
+  if (emblaDotsNode) {
+    addDotBtnsAndClickHandlers(emblaApi, emblaDotsNode);
+  }
+
+  if (emblaNode.classList.contains("lightbox__stage")) {
+    bindDragClickSuppression(emblaNode, emblaApi, ".lightbox__slide[commandfor]", {
+      dragThresholdPx: 14,
+    });
+  }
+
+  if (emblathumbsNode) {
+    const emblathumbsViewportNode = emblathumbsNode.querySelector('[data-embla="viewport"]');
+    if (emblathumbsViewportNode) {
+      const thumbDefaults = { containScroll: "keepSnaps", dragFree: true };
+      const thumbOptions = Utils.parseDataAttributes(emblathumbsNode, "data-embla-thumbs-");
+      const emblaApiThumb = EmblaCarousel(emblathumbsViewportNode, {
+        ...thumbDefaults,
+        ...thumbOptions,
+      });
+
+      emblaNode._emblaApiThumb = emblaApiThumb;
+      addThumbClickHandlers(emblaApi, emblaApiThumb);
+      addTogglethumbsActive(emblaApi, emblaApiThumb);
+
+      bindDragClickSuppression(emblathumbsNode, emblaApiThumb, ".lightbox__thumb");
+    }
+  }
+}
+
+/**
  * @description Initializes all Embla carousels within a scope.
  *
  * Discovers carousel elements via `[data-embla="root"]` and configures them
- * based on their data attributes.
+ * based on their data attributes. Roots managed by the `<embla-carousel>` web
+ * component are skipped — they initialize themselves via `connectedCallback()`.
  *
  * @param {Document|Element} [scope=document] - Root element to search within.
  * @returns {void}
@@ -340,108 +460,11 @@ function initEmblaCarousels(scope) {
   const emblaRoots = root.querySelectorAll('[data-embla="root"]');
 
   emblaRoots.forEach(function (emblaNode) {
-    if (emblaNode.hasAttribute("data-embla-init")) return;
+    // <embla-carousel> elements own their lifecycle (init on connect, destroy
+    // on disconnect) — double-initializing would leak a second Embla instance.
+    if (emblaNode.closest("embla-carousel")) return;
 
-    // Defer init inside closed dialogs — viewport has no measurable size until open
-    if (emblaNode.closest("dialog:not([open])")) return;
-
-    emblaNode.setAttribute("data-embla-init", "");
-
-    const emblathumbsNode = emblaNode.querySelector('[data-embla="thumbs"]');
-    const emblaViewportNode = emblathumbsNode
-      ? emblaNode.querySelector('[data-embla="viewport"]:not([data-embla="thumbs"] *)')
-      : emblaNode.querySelector('[data-embla="viewport"]');
-    const emblaPrevButtonNode = emblaNode.querySelector('[data-embla="prev"]');
-    const emblaNextButtonNode = emblaNode.querySelector('[data-embla="next"]');
-    const emblaDotsNode = emblaNode.querySelector('[data-embla="dots"]');
-
-    if (!emblaViewportNode) return;
-
-    if (!emblaViewportNode.hasAttribute("tabindex")) {
-      emblaViewportNode.setAttribute("tabindex", "0");
-    }
-
-    const apiOptions = Utils.parseDataAttributes(emblaNode, "data-embla-");
-
-    // Keep plugin keys out of core Embla options
-    Object.keys(apiOptions).forEach(function (key) {
-      if (
-        key === "name" ||
-        key === "keyboard" ||
-        key === "autoplay" ||
-        key === "autoscroll" ||
-        key === "classnames" ||
-        key.startsWith("autoplay") ||
-        key.startsWith("autoscroll") ||
-        key.startsWith("classnames")
-      ) {
-        delete apiOptions[key];
-      }
-    });
-
-    const autoplayOptions = Utils.parseDataAttributes(emblaNode, "data-embla-autoplay-");
-    const autoscrollOptions = Utils.parseDataAttributes(emblaNode, "data-embla-autoscroll-");
-    const classnamesOptions = Utils.parseDataAttributes(emblaNode, "data-embla-classnames-");
-
-    const plugins = [];
-
-    if (emblaNode.hasAttribute("data-embla-autoplay") || Object.keys(autoplayOptions).length > 0) {
-      plugins.push(EmblaCarouselAutoplay(autoplayOptions));
-    }
-
-    if (
-      emblaNode.hasAttribute("data-embla-autoscroll") ||
-      Object.keys(autoscrollOptions).length > 0
-    ) {
-      plugins.push(EmblaCarouselAutoScroll(autoscrollOptions));
-    }
-
-    if (
-      emblaNode.hasAttribute("data-embla-classnames") ||
-      Object.keys(classnamesOptions).length > 0
-    ) {
-      plugins.push(EmblaCarouselClassNames(classnamesOptions));
-    }
-
-    const emblaApi = EmblaCarousel(emblaViewportNode, apiOptions, plugins);
-
-    emblaNode._emblaApi = emblaApi;
-
-    if (emblaPrevButtonNode) {
-      emblaPrevButtonNode.addEventListener("click", () => emblaApi.scrollPrev(), false);
-    }
-
-    if (emblaNextButtonNode) {
-      emblaNextButtonNode.addEventListener("click", () => emblaApi.scrollNext(), false);
-    }
-
-    if (emblaDotsNode) {
-      addDotBtnsAndClickHandlers(emblaApi, emblaDotsNode);
-    }
-
-    if (emblaNode.classList.contains("lightbox__stage")) {
-      bindDragClickSuppression(emblaNode, emblaApi, ".lightbox__slide[commandfor]", {
-        dragThresholdPx: 14,
-      });
-    }
-
-    if (emblathumbsNode) {
-      const emblathumbsViewportNode = emblathumbsNode.querySelector('[data-embla="viewport"]');
-      if (emblathumbsViewportNode) {
-        const thumbDefaults = { containScroll: "keepSnaps", dragFree: true };
-        const thumbOptions = Utils.parseDataAttributes(emblathumbsNode, "data-embla-thumbs-");
-        const emblaApiThumb = EmblaCarousel(emblathumbsViewportNode, {
-          ...thumbDefaults,
-          ...thumbOptions,
-        });
-
-        emblaNode._emblaApiThumb = emblaApiThumb;
-        addThumbClickHandlers(emblaApi, emblaApiThumb);
-        addTogglethumbsActive(emblaApi, emblaApiThumb);
-
-        bindDragClickSuppression(emblathumbsNode, emblaApiThumb, ".lightbox__thumb");
-      }
-    }
+    initEmblaRoot(emblaNode);
   });
 }
 
@@ -562,12 +585,14 @@ const initEmblaKeyboardNav = function () {
  * @description Public API for Embla carousel initialization and helpers.
  *
  * @property {typeof initEmblaCarousels} init - Initializes all carousels within a scope.
+ * @property {typeof initEmblaRoot} initRoot - Initializes a single carousel root (used by `<embla-carousel>`).
  * @property {typeof addDotBtnsAndClickHandlers} addDotBtnsAndClickHandlers - Wires dot pagination.
  * @property {typeof addThumbClickHandlers} addThumbClickHandlers - Wires thumb click handlers.
  * @property {typeof addTogglethumbsActive} addTogglethumbsActive - Syncs thumb active state.
  */
 const EmblaInit = {
   init: initEmblaCarousels,
+  initRoot: initEmblaRoot,
   addDotBtnsAndClickHandlers,
   addThumbClickHandlers,
   addTogglethumbsActive,

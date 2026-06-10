@@ -1,6 +1,6 @@
-<div class="lightbox max-w-screen-xs mx-auto">
+<media-lightbox class="lightbox max-w-screen-xs mx-auto">
   <div class="lightbox__gallery">
-    <div class="lightbox__stage" data-embla="root" data-embla-loop="true" data-embla-classnames>
+    <embla-carousel class="lightbox__stage" data-embla-loop="true" data-embla-classnames>
       <div data-embla="viewport">
         <div data-embla="container">
           <button
@@ -337,7 +337,7 @@
           </svg>
         </button>
       </div>
-    </div>
+    </embla-carousel>
   </div>
 
   <dialog
@@ -347,7 +347,7 @@
     closedby="any"
   >
     <div class="dialog__content">
-      <div data-embla="root" data-embla-loop="true" data-embla-classnames>
+      <embla-carousel data-embla-loop="true" data-embla-classnames>
         <div data-embla="viewport">
           <div data-embla="container">
             <div class="lightbox__slide" data-embla="slide">
@@ -638,7 +638,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </embla-carousel>
     </div>
     <button
       class="lightbox__close button"
@@ -674,4 +674,4 @@
       </svg>
     </button>
   </dialog>
-</div>
+</media-lightbox>

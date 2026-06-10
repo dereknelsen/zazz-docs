@@ -3,9 +3,18 @@
 // the filesystem.
 import { readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
+import type { ExampleScript } from "zazz/components/manifest";
 
 const COMPONENTS_ROOT = path.join(process.cwd(), "zazz", "components");
 const STYLES_ROOT = path.join(process.cwd(), "zazz", "styles");
+const SCRIPTS_ROOT = path.join(process.cwd(), "zazz", "scripts");
+
+const WEB_COMPONENT_SCRIPT_FILES: Partial<Record<ExampleScript, string[]>> = {
+  carousel: ["carousel.js"],
+  lightbox: ["carousel.js", "lightbox.js"],
+  password: ["password.js"],
+  tabs: ["tabs.js"],
+};
 
 /**
  * Reads one vanilla-HTML example fragment from the centralized Zazz component
@@ -76,6 +85,34 @@ export function readComponentCss(src: string): string | null {
   } catch {
     return null;
   }
+}
+
+/**
+ * Reads the web-component scripts an example uses, based on its manifest metadata.
+ * Only custom-element scripts are shown here — shared runtime dependencies such as
+ * `utils.js`, `embla.js`, and CDN bundles are implementation details of the preview iframe.
+ */
+export function readComponentJs(scripts?: readonly ExampleScript[]): string | null {
+  if (!scripts?.length) return null;
+
+  const files = Array.from(
+    new Set(scripts.flatMap((script) => WEB_COMPONENT_SCRIPT_FILES[script] ?? [])),
+  );
+
+  if (files.length === 0) return null;
+
+  const blocks = files.flatMap((file) => {
+    const filePath = path.resolve(SCRIPTS_ROOT, file);
+    if (!filePath.startsWith(SCRIPTS_ROOT + path.sep)) return [];
+
+    try {
+      return [`// ${file}\n${readFileSync(filePath, "utf8").trim()}`];
+    } catch {
+      return [];
+    }
+  });
+
+  return blocks.length > 0 ? blocks.join("\n\n") : null;
 }
 
 let cachedStyleHrefs: string[] | null = null;

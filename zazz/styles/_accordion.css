@@ -65,7 +65,26 @@
     justify-content: space-between;
     padding-block: var(--accordion-summary-padding-block);
 
+    /* ring renders as box-shadow; the ring widths animate from 0 so the ring
+       grows in smoothly on focus */
+    --_ring-offset-width: 0px;
+    --_ring-width: 0px;
+    box-shadow:
+      0 0 0 var(--_ring-offset-width) var(--ring-offset-color),
+      0 0 0 calc(var(--_ring-offset-width) + var(--_ring-width)) var(--ring);
+
+    /* transparent twin of the ring for forced-colors / high-contrast modes */
+    outline: var(--outline-width) var(--outline-style) transparent;
+    outline-offset: var(--outline-offset);
+
     transition: var(--default-transition);
+  }
+
+  .accordion > details > summary:focus-visible {
+    --_ring-offset-width: var(--ring-offset-width);
+    --_ring-width: var(--ring-width);
+
+    outline-color: transparent;
   }
 
   .accordion summary > svg {

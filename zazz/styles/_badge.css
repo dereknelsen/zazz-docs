@@ -10,7 +10,6 @@
 @layer variables {
   :root {
     --badge-ring-color: var(--ring-color);
-    --badge-ring-opacity: 0%;
 
     --button-font-family: var(--font-family-body);
     --button-font-size: var(--font-size-xs);
@@ -36,7 +35,9 @@
 
     --badge-icon-size: var(--step-3);
 
-    --badge-shadow: none;
+    /* composes into the badge's box-shadow list — use a transparent shadow,
+       never `none`, so the focus ring layers stay valid */
+    --badge-shadow: 0 0 transparent;
   }
 }
 
@@ -67,14 +68,22 @@
     color: var(--badge-foreground);
     background-color: var(--badge-background);
 
-    box-shadow: var(--badge-shadow);
+    /* ring renders as box-shadow so it composes with --badge-shadow; the
+       ring widths animate from 0 so the ring grows in smoothly on focus */
+    --_ring-offset-width: 0px;
+    --_ring-width: 0px;
+    --_ring: color-mix(in oklch, var(--badge-ring-color) var(--ring-opacity), transparent);
+    box-shadow:
+      0 0 0 var(--_ring-offset-width) var(--ring-offset-color),
+      0 0 0 calc(var(--_ring-offset-width) + var(--_ring-width)) var(--_ring),
+      var(--badge-shadow);
 
     cursor: default;
     text-decoration: none;
 
-    outline: var(--ring-size) var(--ring-style)
-      color-mix(in oklch, var(--badge-ring-color) var(--badge-ring-opacity), transparent);
-    outline-offset: var(--ring-offset);
+    /* transparent twin of the ring for forced-colors / high-contrast modes */
+    outline: var(--outline-width) var(--outline-style) transparent;
+    outline-offset: var(--outline-offset);
 
     transition: var(--default-transition);
 
@@ -106,14 +115,17 @@
 
   button.badge:focus-visible:hover:not(:disabled, [aria-disabled="true"]),
   a[href].badge:focus-visible:hover:not(:disabled, [aria-disabled="true"]) {
-    outline-color: color-mix(in oklch, var(--badge-ring-color) var(--ring-opacity), transparent);
+    --_ring-offset-width: var(--ring-offset-width);
+    --_ring-width: var(--ring-width);
+
+    outline-color: transparent;
   }
 
   :is(button.badge:disabled, a[href].badge:disabled),
   :is(button.badge[aria-disabled="true"], a[href].badge[aria-disabled="true"]) {
     --badge-foreground: var(--muted-foreground);
     --badge-background: var(--muted);
-    --badge-shadow: none;
+    --badge-shadow: 0 0 transparent;
 
     cursor: default;
     opacity: 0.5;
@@ -202,7 +214,7 @@
     --badge-padding: 0;
     --badge-radius: 0;
 
-    --badge-shadow: none;
+    --badge-shadow: 0 0 transparent;
 
     text-decoration-line: var(--decoration-line);
     text-decoration-style: var(--decoration-style);

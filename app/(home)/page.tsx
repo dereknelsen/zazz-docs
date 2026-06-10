@@ -1,20 +1,23 @@
+import { cn } from "@/lib/cn";
 import Link from "next/link";
+import ZazzLineartBg from "@/components/zazz-lineart-bg";
+import { buttonVariants } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
 import { Logo } from "@/components/logo";
-import ZazzLineartBg from "@/components/zazz-lineart-bg";
-import { cn } from "@/lib/cn";
 
 const links = [
-  { label: "Read the docs", href: "/docs", external: false },
+  { label: "Read the docs", href: "/docs", external: false, main: true },
   {
     label: "Figma kit",
     href: "https://www.figma.com/community/file/1468718708506413296/zazz-v0-4-3",
     external: true,
+    main: false,
   },
   {
     label: "Webflow kit",
     href: "https://webflow.com/made-in-webflow/website/zazz-webflow-kit",
     external: true,
+    main: false,
   },
 ] as const;
 
@@ -47,12 +50,12 @@ export default function HomePage() {
             return l.external ? (
               <a
                 key={l.label}
-                className={cn(
+                className={l.main ? cn((buttonVariants({ variant: "primary" })), "w-fit pr-3 gap-3.5") : cn(
                   "opacity-60 hover:opacity-100",
-                  "group inline-flex w-fit items-center gap-3.5 py-0.5 text-sm leading-tight tracking-tight",
+                  "group inline-flex w-fit items-center gap-3.5 px-2 py-0.5 text-sm leading-tight tracking-tight",
                   "text-fd-foreground no-underline transition hover:text-fd-primary",
-                  "focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-fd-ring focus-visible:ring-offset-4 focus-visible:outline-none",
-                )}
+                  "focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-fd-ring focus-visible:ring-offset-4 focus-visible:outline-none",)
+                }
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -66,12 +69,12 @@ export default function HomePage() {
             ) : (
               <Link
                 key={l.label}
-                className={cn(
+                className={l.main ? cn((buttonVariants({ variant: "primary" })), "w-fit pr-3 gap-3.5") : cn(
                   "opacity-60 hover:opacity-100",
-                  "group inline-flex w-fit items-center gap-3.5 py-0.5 text-sm leading-tight tracking-tight",
+                  "group inline-flex w-fit items-center gap-3.5 px-2 py-0.5 text-sm leading-tight tracking-tight",
                   "text-fd-foreground no-underline transition hover:text-fd-primary",
-                  "focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-fd-ring focus-visible:ring-offset-4 focus-visible:outline-none",
-                )}
+                  "focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-fd-ring focus-visible:ring-offset-4 focus-visible:outline-none")
+                }
                 href={l.href}
               >
                 <ArrowUpRight

@@ -91,6 +91,7 @@
     text-box: trim-both ex alphabetic;
   }
 
+  a[href] .badge:not(:disabled, [aria-disabled="true"]),
   a[href].badge:not(:disabled, [aria-disabled="true"]) {
     cursor: pointer;
   }

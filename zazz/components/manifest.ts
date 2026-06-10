@@ -41,7 +41,8 @@ const MANIFEST: Record<string, ExampleMeta> = {
   "lightbox/default": { minHeight: 640, requiresScripts: ["lightbox"] },
 
   // Showcase primitives — centered reads better than left-pinned.
-  "card/default": { minHeight: 460 },
+  "card/default": { minHeight: 500 },
+  "card/subgrid": { minHeight: 500 },
   "prose/default": { minHeight: 500 },
   "breadcrumbs/default": { minHeight: 120 },
   "avatar/default": { minHeight: 160 },

@@ -110,6 +110,7 @@
     --button-foreground: var(--muted-foreground);
     --button-background: var(--muted);
     --button-shadow: none;
+    --decoration-line: none;
 
     cursor: default;
     opacity: 0.5;

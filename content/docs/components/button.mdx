@@ -4,9 +4,8 @@ description: Clickable actions and links with shadcn-style data-variant and data
 ---
 
 Buttons use the `.button` class on a `<button>` or `<a>`. Choose a variant with
-`data-variant` and a size with `data-size` — the **default** variant is simply the absence
-of the attribute. Colors come from theme role tokens, so light and dark modes are handled
-for you.
+`data-variant` and a size with `data-size`. The **default** variant is the absence
+of the attribute. Colors come from theme role tokens, so light/dark modes work automatically.
 
 ## Variants
 
@@ -32,5 +31,5 @@ Use `data-size="icon"` (or `icon-sm`) for square, label-free buttons.
 | `data-size`    | `sm`, `icon`, `icon-sm`                                             |
 
 Restyle every button by overriding its tokens (`--button-background`, `--button-radius`,
-`--button-height`, …) at `:root`, or a single instance inline — no need to touch
+`--button-height`, ...) at `:root`, or on a single instance inline. You never need to touch
 `zazz/styles/`.

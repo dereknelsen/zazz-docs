@@ -3,17 +3,18 @@
  *
  * @layer      reset
  * @requires   _layers.css, _properties.css, _variables.css
- * @uses       appearance: none — checkbox, range, select chevron reset
+ * @uses       appearance: none — select chevron reset
  * @uses       ::details-content — accordion open/close (see _accordion.css for .accordion)
  * @uses       container-type — layout containers on main, article, section
  * @uses       view-transition-name via [data-transition-layer] — global-main-content,
  *             global-navigation, global-footer (animated in _page-transitions.css)
  * @uses       text-box — vertical trim on headings
  * @uses       color-mix(), oklch(from …), contrast-color() — mark/highlight tints
- * @uses       Native checkbox/range/switch tokens — consumed by form controls;
- *             switch styling completed in _switch.css
  * @tokens     Native-control hooks declared per element — --code-*, --kbd-*,
- *             --range-*, --checkbox-*, --search-cancel-*, --placeholder-color
+ *             --search-cancel-*, --placeholder-color
+ *
+ * Note: Checkbox lives in _checkbox.css; range/slider in _slider.css;
+ *   switch in _switch.css.
  *
  * Note: <select> picker internals live in _select.css; popover in _popover.css;
  *   dialog in _dialog.css.
@@ -439,142 +440,6 @@
   ::placeholder {
     --placeholder-color: var(--muted-foreground);
     color: var(--placeholder-color);
-  }
-
-  /* Range input (slider) — appearance: none redraws the track + thumb from theme
-     tokens. The active region is NOT filled (parity across engines); add a paint
-     via JS if a filled track is needed. The thumb is centered on the track with a
-     calc'd negative margin so retuning either size keeps it aligned. */
-  :where(input[type="range"]) {
-    --range-track-height: var(--step-2);
-    --range-track-background: var(--muted);
-    --range-track-border: 1px solid var(--muted);
-    --range-track-radius: var(--radius-full);
-    --range-thumb-size: var(--step-3_5);
-    --range-thumb-background: var(--background);
-    --range-thumb-border: 1px solid var(--primary);
-    --range-thumb-radius: var(--radius-full);
-    --range-thumb-offset: calc((var(--range-track-height) - var(--range-thumb-size)) / 2);
-
-    -webkit-appearance: none;
-    appearance: none;
-    inline-size: 100%;
-    background: transparent;
-    cursor: pointer;
-
-    outline: var(--ring-size) var(--ring-style) transparent;
-    outline-offset: var(--ring-offset);
-
-    transition: var(--default-transition);
-  }
-
-  :where(input[type="range"])::-webkit-slider-runnable-track {
-    block-size: var(--range-track-height);
-    inline-size: 100%;
-    background: var(--range-track-background);
-    border: var(--range-track-border);
-    border-radius: var(--range-track-radius);
-  }
-
-  :where(input[type="range"])::-moz-range-track {
-    block-size: var(--range-track-height);
-    inline-size: 100%;
-    background: var(--range-track-background);
-    border: var(--range-track-border);
-    border-radius: var(--range-track-radius);
-  }
-
-  :where(input[type="range"])::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    margin-block-start: var(--range-thumb-offset);
-    inline-size: var(--range-thumb-size);
-    block-size: var(--range-thumb-size);
-    background-color: var(--range-thumb-background);
-    border: var(--range-thumb-border);
-    border-radius: var(--range-thumb-radius);
-    transition: var(--default-transition);
-  }
-
-  :where(input[type="range"])::-moz-range-thumb {
-    appearance: none;
-    inline-size: var(--range-thumb-size);
-    block-size: var(--range-thumb-size);
-    background-color: var(--range-thumb-background);
-    border: var(--range-thumb-border);
-    border-radius: var(--range-thumb-radius);
-    transition: var(--default-transition);
-  }
-
-  :where(input[type="range"]:focus-visible) {
-    outline-color: var(--ring);
-  }
-
-  :where(input[type="range"]:disabled) {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  /* Checkbox — appearance: none redraws the native control from theme tokens.
-     Checked/indeterminate fill with --primary and layer a glyph (never colour alone). */
-  :where(input[type="checkbox"]:not([role="switch"])) {
-    --checkbox-size: var(--step-4_5);
-    --checkbox-background: var(--input);
-    --checkbox-border: var(--border);
-    --checkbox-border--hover: var(--primary);
-    --checkbox-background--checked: var(--primary);
-    --checkbox-border--checked: var(--primary);
-    --checkbox-radius: var(--radius-xs);
-    /* @see https://www.svgbackgrounds.com/tools/svg-to-css/
-    ** Set to Legacy / URL Wrapper to update icon */
-    --checkbox-checkmark-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'/%3E%3Cpolyline points='40 144 96 200 224 72' fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'/%3E%3C/svg%3E");
-    --checkbox-checkmark-size: var(--step-3);
-    --checkbox-indeterminate-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'/%3E%3Cline x1='40' y1='128' x2='216' y2='128' fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'/%3E%3C/svg%3E");
-    --checkbox-indeterminate-size: var(--step-3);
-
-    appearance: none;
-    flex-shrink: 0;
-    inline-size: var(--checkbox-size);
-    block-size: var(--checkbox-size);
-
-    background-color: var(--checkbox-background);
-    border: 1px solid var(--checkbox-border);
-    border-radius: var(--checkbox-radius);
-
-    cursor: pointer;
-
-    outline: var(--ring-size) var(--ring-style) transparent;
-    outline-offset: var(--ring-offset);
-
-    transition: var(--default-transition);
-  }
-
-  :where(input[type="checkbox"]:not([role="switch"]):hover) {
-    border-color: var(--checkbox-border--hover);
-  }
-
-  :where(input[type="checkbox"]:not([role="switch"]):focus-visible) {
-    outline-color: var(--ring);
-  }
-
-  :where(
-    input[type="checkbox"]:not([role="switch"]):checked,
-    input[type="checkbox"]:not([role="switch"]):indeterminate
-  ) {
-    background-color: var(--checkbox-background--checked);
-    border-color: var(--checkbox-border--checked);
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-
-  :where(input[type="checkbox"]:not([role="switch"]):checked) {
-    background-image: var(--checkbox-checkmark-mask);
-    background-size: var(--checkbox-checkmark-size);
-  }
-
-  :where(input[type="checkbox"]:not([role="switch"]):indeterminate) {
-    background-image: var(--checkbox-indeterminate-mask);
-    background-size: var(--checkbox-indeterminate-size);
   }
 
   :where(select) {

@@ -4497,23 +4497,23 @@
   }
 
   :where(.w-xs) {
-    inline-size: var(--gap-xs);
+    inline-size: var(--step-8);
   }
 
   :where(.w-sm) {
-    inline-size: var(--gap-sm);
+    inline-size: var(--step-24);
   }
 
   :where(.w-md) {
-    inline-size: var(--gap-md);
+    inline-size: var(--step-56);
   }
 
   :where(.w-lg) {
-    inline-size: var(--gap-lg);
+    inline-size: var(--step-72);
   }
 
   :where(.w-xl) {
-    inline-size: var(--gap-xl);
+    inline-size: var(--step-96);
   }
 
   :where(.w-screen) {
@@ -4557,23 +4557,23 @@
   }
 
   :where(.h-xs) {
-    block-size: var(--gap-xs);
+    block-size: var(--step-8);
   }
 
   :where(.h-sm) {
-    block-size: var(--gap-sm);
+    block-size: var(--step-24);
   }
 
   :where(.h-md) {
-    block-size: var(--gap-md);
+    block-size: var(--step-56);
   }
 
   :where(.h-lg) {
-    block-size: var(--gap-lg);
+    block-size: var(--step-72);
   }
 
   :where(.h-xl) {
-    block-size: var(--gap-xl);
+    block-size: var(--step-96);
   }
 
   :where(.h-screen) {
@@ -4682,6 +4682,26 @@
     max-inline-size: 100%;
   }
 
+  :where(.max-w-xs) {
+    max-inline-size: var(--step-8);
+  }
+
+  :where(.max-w-sm) {
+    max-inline-size: var(--step-24);
+  }
+
+  :where(.max-w-md) {
+    max-inline-size: var(--step-56);
+  }
+
+  :where(.max-w-lg) {
+    max-inline-size: var(--step-72);
+  }
+
+  :where(.max-w-xl) {
+    max-inline-size: var(--step-96);
+  }
+
   :where(.max-w-screen) {
     max-inline-size: 100vi;
   }
@@ -4716,6 +4736,26 @@
 
   :where(.max-h-full) {
     max-block-size: 100%;
+  }
+
+  :where(.max-h-xs) {
+    max-block-size: var(--step-8);
+  }
+
+  :where(.max-h-sm) {
+    max-block-size: var(--step-24);
+  }
+
+  :where(.max-h-md) {
+    max-block-size: var(--step-56);
+  }
+
+  :where(.max-h-lg) {
+    max-block-size: var(--step-72);
+  }
+
+  :where(.max-h-xl) {
+    max-block-size: var(--step-96);
   }
 
   :where(.max-h-screen) {

@@ -25,6 +25,8 @@
 @import "./_input.css";
 @import "./_textarea.css";
 @import "./_select.css";
+@import "./_checkbox.css";
+@import "./_slider.css";
 @import "./_switch.css";
 @import "./_input-group.css";
 @import "./_password-group.css";

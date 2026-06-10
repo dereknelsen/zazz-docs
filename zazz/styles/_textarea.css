@@ -22,6 +22,15 @@
   }
 }
 
+@layer reset {
+  @media screen and (max-width: 40rem) {
+    :is(textarea) {
+      /* Ensure form controls are legible on smaller viewports and don't zoom in when focused */
+      font-size: 1rem !important;
+    }
+  }
+}
+
 @layer components {
   /* ===========================================================================
   TEXTAREA — .textarea (auto-sizing)

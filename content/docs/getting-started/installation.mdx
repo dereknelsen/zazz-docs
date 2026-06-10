@@ -1,0 +1,132 @@
+---
+title: Installation
+description: Add Zazz to any vanilla HTML project in under a minute. No build step required.
+---
+
+Zazz runs on plain CSS and native HTML APIs. No bundler, no framework, no package manager needed. Download the styles, link the stylesheet, write markup.
+
+## Download
+
+Grab the [`zazz/styles/`](https://github.com/dereknelsen/zazz-docs/tree/main/zazz/styles) folder from the repository and copy it into your project. That's your design system.
+
+You can clone the full repo and extract what you need:
+
+```bash
+git clone https://github.com/dereknelsen/zazz-docs.git
+cp -r zazz-docs/zazz/styles ./zazz/styles
+```
+
+<Callout>
+Only the `zazz/styles/` folder is required. The rest of the repository is documentation and examples.
+</Callout>
+
+## Link the stylesheet
+
+Add a single `<link>` to your HTML. Point it at `main.css` — it imports everything in the correct cascade order:
+
+```html
+<link rel="stylesheet" href="./zazz/styles/main.css" />
+```
+
+That's it. Every component, token, and utility is now available.
+
+### Individual imports for better performance
+
+For production sites, link each stylesheet individually and preload them. This eliminates the `@import` chain and lets the browser fetch all files in parallel:
+
+```html
+<!-- Preload critical stylesheets -->
+<link rel="preload" href="./zazz/styles/_layers.css" as="style" />
+<link rel="preload" href="./zazz/styles/_properties.css" as="style" />
+<link rel="preload" href="./zazz/styles/_variables.css" as="style" />
+<link rel="preload" href="./zazz/styles/_reset.css" as="style" />
+<link rel="preload" href="./zazz/styles/_utilities.css" as="style" />
+<!-- ...preload component stylesheets you use -->
+
+<!-- Link in cascade order -->
+<link rel="stylesheet" href="./zazz/styles/_layers.css" />
+<link rel="stylesheet" href="./zazz/styles/_properties.css" />
+<link rel="stylesheet" href="./zazz/styles/_variables.css" />
+<link rel="stylesheet" href="./zazz/styles/_reset.css" />
+<link rel="stylesheet" href="./zazz/styles/_button.css" />
+<!-- ...only the components you need -->
+<link rel="stylesheet" href="./zazz/styles/_utilities.css" />
+```
+
+<Callout>
+Load order matters. `_layers.css` must come first (it declares the cascade order), followed by `_properties.css`, `_variables.css`, and `_reset.css`. Component files come next in any order. `_utilities.css` should load last.
+</Callout>
+
+## Verify it works
+
+Create an HTML file and add a button:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./zazz/styles/main.css" />
+  <title>Zazz Test</title>
+</head>
+<body>
+  <button class="button" data-variant="primary">It works</button>
+</body>
+</html>
+```
+
+Open it in a browser. If you see a styled button, you're ready.
+
+## Project structure
+
+A typical project looks like this:
+
+```
+my-project/
+├── index.html
+├── zazz/
+│   └── styles/
+│       ├── main.css          ← entry point
+│       ├── _layers.css       ← cascade order (loads first)
+│       ├── _variables.css    ← global design tokens
+│       ├── _reset.css        ← element baselines
+│       ├── _utilities.css    ← atomic helper classes
+│       ├── _button.css       ← component styles
+│       └── ...
+└── your-styles.css           ← your overrides (optional)
+```
+
+## Customizing
+
+Override any token on `:root` in your own stylesheet. Load it after `main.css`:
+
+```html
+<link rel="stylesheet" href="./zazz/styles/main.css" />
+<link rel="stylesheet" href="./your-styles.css" />
+```
+
+```css
+/* your-styles.css */
+:root {
+  --primary: oklch(0.6 0.2 145);
+  --radius-md: 0;
+}
+```
+
+Every component that references `--primary` or `--radius-md` updates automatically.
+
+## Using with a bundler
+
+If you're using Vite, webpack, or esbuild, import `main.css` directly:
+
+```js
+import "./zazz/styles/main.css";
+```
+
+The `@import` statements resolve at build time. No additional configuration needed.
+
+## Next steps
+
+- Read [Concepts](/docs/getting-started/concepts) to understand how the layer system works.
+- Browse [Components](/docs/components) to see what's available.

@@ -1,11 +1,11 @@
 ---
 title: Mobile menu
-description: Full-screen slide-in navigation dialog with nested accordion sections, driven entirely by native HTML APIs.
+description: Full-screen slide-in navigation dialog with nested accordion sections, using native HTML APIs.
 ---
 
 The mobile menu composes a native `<dialog>` with nested `<details>` accordions. Open it with
 `command="show-modal"` and `commandfor="<id>"`, close with `command="close"` or light-dismiss
-via `closedby="any"`. No JavaScript wiring required.
+via `closedby="any"`. No JavaScript needed.
 
 Internally it uses `.dialog[data-size="screen"]` for full-viewport coverage and
 `data-animation="slide-right"` for the entrance transition.

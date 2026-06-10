@@ -1,4 +1,4 @@
-import { readExample, listStyleHrefs } from "@/lib/zazz-assets";
+import { readExample, readComponentCss, listStyleHrefs } from "@/lib/zazz-assets";
 import { getExampleMeta } from "zazz/components/manifest";
 import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
 import { cn } from "@/lib/cn";
@@ -33,9 +33,11 @@ export function Preview({ src, justify, align, className }: PreviewProps) {
   }
 
   const meta = getExampleMeta(src);
+  const css = readComponentCss(src);
+  const tabItems = css ? ["Preview", "HTML", "CSS"] : ["Preview", "HTML"];
 
   return (
-    <Tabs items={["Preview", "Code"]} className={cn("not-prose my-6", className)}>
+    <Tabs items={tabItems} className={cn("not-prose my-6", className)}>
       <Tab value="Preview">
         <div className="overflow-hidden rounded-md border bg-fd-background">
           <PreviewFrame
@@ -49,9 +51,14 @@ export function Preview({ src, justify, align, className }: PreviewProps) {
           />
         </div>
       </Tab>
-      <Tab value="Code">
+      <Tab value="HTML">
         <DynamicCodeBlock lang="html" code={html} />
       </Tab>
+      {css && (
+        <Tab value="CSS">
+          <DynamicCodeBlock lang="css" code={css} />
+        </Tab>
+      )}
     </Tabs>
   );
 }

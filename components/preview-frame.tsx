@@ -37,6 +37,7 @@ export function PreviewFrame({
   const ref = useRef<HTMLIFrameElement>(null);
   const [height, setHeight] = useState(minHeight || 260);
   const [fullscreen, setFullscreen] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const toggleFullscreen = useCallback(() => setFullscreen((v) => !v), []);
 
@@ -44,6 +45,11 @@ export function PreviewFrame({
     () => buildPreviewDocument({ html, scripts, justify, align, minHeight, styleHrefs }),
     [html, scripts, justify, align, minHeight, styleHrefs],
   );
+
+  // Reset loaded state when content changes.
+  useEffect(() => {
+    setLoaded(false);
+  }, [srcDoc]);
 
   useEffect(() => {
     if (!fullscreen) return;
@@ -62,7 +68,7 @@ export function PreviewFrame({
 
     const measure = () => {
       const doc = iframe.contentDocument;
-      if (!doc) return;
+      if (!doc?.documentElement) return;
       const measured = Math.ceil(doc.documentElement.scrollHeight);
       setHeight(Math.max(measured, minHeight));
     };
@@ -78,11 +84,31 @@ export function PreviewFrame({
       const doc = iframe.contentDocument;
       if (!doc) return;
       syncTheme();
-      measure();
+
+      // Wait for all stylesheets and fonts to finish loading before revealing.
+      const styleLinks = Array.from(doc.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]'));
+      const sheetPromises = styleLinks.map(
+        (link) =>
+          link.sheet
+            ? Promise.resolve()
+            : new Promise<void>((resolve) => {
+                link.addEventListener("load", () => resolve(), { once: true });
+                link.addEventListener("error", () => resolve(), { once: true });
+              }),
+      );
+
+      Promise.all([...sheetPromises, doc.fonts?.ready])
+        .then(() => {
+          measure();
+          setLoaded(true);
+        })
+        .catch(() => {
+          measure();
+          setLoaded(true);
+        });
+
       resizeObserver = new ResizeObserver(measure);
       resizeObserver.observe(doc.documentElement);
-      // Fonts load async (Geist via web font) and reflow the content.
-      doc.fonts?.ready.then(measure).catch(() => {});
     };
 
     iframe.addEventListener("load", onLoad);
@@ -114,6 +140,19 @@ export function PreviewFrame({
     />
   );
 
+  const loadingSkeleton = !loaded && (
+    <div className="absolute inset-0 z-[5] flex items-center justify-center bg-fd-background transition-opacity duration-300">
+      <div className="flex flex-col items-center gap-3">
+        <div className="flex gap-1.5">
+          <span className="inline-block size-2 animate-pulse rounded-full bg-fd-muted-foreground/40 [animation-delay:0ms]" />
+          <span className="inline-block size-2 animate-pulse rounded-full bg-fd-muted-foreground/40 [animation-delay:150ms]" />
+          <span className="inline-block size-2 animate-pulse rounded-full bg-fd-muted-foreground/40 [animation-delay:300ms]" />
+        </div>
+        <span className="text-xs text-fd-muted-foreground">Loading components…</span>
+      </div>
+    </div>
+  );
+
   if (fullscreen) {
     return (
       <div className="fixed inset-0 z-50 flex flex-col bg-fd-background">
@@ -126,13 +165,17 @@ export function PreviewFrame({
           <XIcon className="size-3.5 " />
           Close
         </button>
-        <div className="flex-1 overflow-auto">{iframeEl}</div>
+        <div className="relative flex-1 overflow-auto">
+          {loadingSkeleton}
+          {iframeEl}
+        </div>
       </div>
     );
   }
 
   return (
     <div className="relative">
+      {loadingSkeleton}
       <div className="absolute right-2 bottom-2 z-10">
         <button
           className={cn(buttonVariants({ variant: "outline", size: "sm" }), "px-2 py-1 bg-fd-background shadow-xs")}

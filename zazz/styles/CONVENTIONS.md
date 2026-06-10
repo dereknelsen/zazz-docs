@@ -35,14 +35,35 @@ Cascade order is declared once, in [`_layers.css`](./_layers.css), and must load
 @layer variables, reset, components, utilities;
 ```
 
-Load order lives in two parallel entry points. [`styles.ts`](./styles.ts) is the source
-of truth — a bundler entry (Vite/webpack/esbuild) whose `import` sequence defines the
-order and compiles the served `main.css` asset. [`main.css`](./main.css) is the
-plain-CSS entry for `<link rel="stylesheet">` setups: it `@import`s `_layers.css` first
+Load order lives in [`main.css`](./main.css): it `@import`s `_layers.css` first
 and then every component file in the same order. Everything slots into one of these four
 layers. Layering — not selector specificity or BEM — is how we control the cascade, so a
 plain `.button` rule in `components` can still be overridden by a `utilities` class
 without `!important`.
+
+For best performance, prefer individual `<link rel="stylesheet">` tags over a single
+`main.css` `@import` bundle. Browsers fetch `<link>` stylesheets in parallel, while
+`@import` chains are sequential. Pair each stylesheet with a `<link rel="preload">`
+hint so the browser begins downloading before it encounters the render-blocking
+`<link rel="stylesheet">`:
+
+```html
+<!-- Preload critical stylesheets -->
+<link rel="preload" href="../styles/_layers.css" as="style" />
+<link rel="preload" href="../styles/_properties.css" as="style" />
+<link rel="preload" href="../styles/_variables.css" as="style" />
+<link rel="preload" href="../styles/_reset.css" as="style" />
+<!-- … one per file, in cascade order -->
+
+<!-- Load stylesheets (order must match _layers.css) -->
+<link rel="stylesheet" href="../styles/_layers.css" />
+<link rel="stylesheet" href="../styles/_properties.css" />
+<link rel="stylesheet" href="../styles/_variables.css" />
+<link rel="stylesheet" href="../styles/_reset.css" />
+<!-- … remaining component files in the same order -->
+```
+
+See [`components/index.html`](../components/index.html) for a complete working example.
 
 A component file is written top-to-bottom in this order:
 
@@ -346,8 +367,7 @@ These deviate from the canonical shape on purpose — document the reason in-fil
 ## 8. Adding a new component
 
 1. Create `_<component>.css` and register it in load order (after anything it
-   `@requires`) — add the `import` to [`styles.ts`](./styles.ts) (the source of truth)
-   and the matching `@import` to [`main.css`](./main.css).
+   `@requires`) — add the `@import` to [`main.css`](./main.css).
 2. Start with the CSSDoc header skeleton:
 
    ```css

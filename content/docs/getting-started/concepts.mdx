@@ -1,0 +1,190 @@
+---
+title: Concepts
+description: How Zazz controls the cascade with layers, tokens, and conventions — no specificity wars, no build step.
+---
+
+Zazz replaces specificity-based CSS architecture with a four-layer cascade system. Understanding these layers is how you customize, extend, and maintain the system without fighting it.
+
+## The four cascade layers
+
+Every stylesheet in Zazz slots into one of four layers, declared once in `_layers.css`:
+
+```css
+@layer variables, reset, components, utilities;
+```
+
+Order matters. Later layers override earlier ones regardless of selector specificity. This eliminates the need for `!important`, BEM modifiers, or naming hacks:
+
+| Layer | Purpose | Example |
+|---|---|---|
+| `variables` | Token declarations only | `:root { --button-radius: var(--radius-md); }` |
+| `reset` | Native element baselines | `html`, `body`, `input`, `select` defaults |
+| `components` | Component rules | `.button`, `.dialog`, `.field` |
+| `utilities` | Atomic override classes | `.text-primary`, `.gap-md`, `.rounded-full` |
+
+A plain `.button` rule in `components` can be overridden by a utility class in `utilities` — no `!important` needed.
+
+## Core files
+
+Four files form the foundation. Every other file in the system depends on them.
+
+### `_layers.css`
+
+Declares the cascade order. Must load first. Contains a single line:
+
+```css
+@layer variables, reset, components, utilities;
+```
+
+### `_variables.css`
+
+All global design tokens live here, organized in tiers:
+
+| Tier | Examples | Role |
+|---|---|---|
+| Brand scales | `--primary-50` through `--primary-950` | Raw color palette |
+| Semantic roles | `--background`, `--foreground`, `--primary`, `--muted` | Theme-aware values via `light-dark()` |
+| Metrics & systems | `--step-*`, `--radius-*`, `--gap-*`, `--font-size-*`, `--shadow-*` | Spacing, sizing, effects |
+
+Semantic roles use `light-dark()` so dark mode works automatically via `color-scheme: light dark`:
+
+```css
+--background: light-dark(var(--white), var(--neutral-900));
+--foreground: light-dark(var(--neutral-900), var(--white));
+```
+
+Spacing uses a fluid interval that scales with viewport width:
+
+```css
+--spacing-interval: clamp(0.225rem, 0.2136rem + 0.0455vw, 0.25rem);
+--step-4: calc(var(--spacing-interval) * 4);
+--gap-md: var(--step-6);
+```
+
+### `_reset.css`
+
+Sets sane defaults for native HTML elements. Everything wrapped in `:where()` for zero specificity so component rules always win:
+
+- Universal box-sizing, margin, and padding reset
+- Body: flex column, font smoothing, scroll behavior, container queries
+- Typography: heading sizes, link colors, list styles
+- Forms: input appearance resets, placeholder colors
+- Media: responsive images and videos
+
+### `_utilities.css`
+
+Atomic classes for common overrides. All wrapped in `:where()` for zero specificity:
+
+- **Font**: `.font-sans`, `.font-serif`, `.font-mono`
+- **Text color**: `.text-primary`, `.text-muted-foreground`, `.text-destructive`
+- **Background**: `.bg-primary`, `.bg-muted`, `.bg-card`
+- **Spacing**: `.p-*`, `.m-*`, `.gap-*`
+- **Layout**: `.flex`, `.grid`, `.container`
+- **Radius**: `.rounded-sm`, `.rounded-md`, `.rounded-full`
+
+Utility names follow Tailwind vocabulary where one exists so they read predictably.
+
+## Component file anatomy
+
+Every component file follows the same structure:
+
+```css
+/**
+ * _button.css — Button (.button)
+ *
+ * @layer      variables, components
+ * @requires   _layers.css, _variables.css
+ * @tokens     --button-* (@layer variables)
+ */
+@layer variables {
+  :root {
+    --button-background: var(--card);
+    --button-background--hover: var(--muted);
+    --button-height: var(--step-8);
+    --button-radius: var(--radius-md);
+  }
+}
+
+@layer components {
+  .button {
+    background-color: var(--button-background);
+    border-radius: var(--button-radius);
+    block-size: var(--button-height);
+  }
+}
+```
+
+Key principles:
+
+1. **Tokens first, rules second.** The `@layer variables` block declares every customizable value.
+2. **Rules reference tokens once.** A property like `background-color` appears in one place.
+3. **Variants swap token values, not rules.** A `[data-variant="primary"]` selector reassigns `--button-background`, it doesn't restate the `background-color` declaration.
+
+## Token naming
+
+Component tokens follow a strict convention:
+
+- `--{component}-{property}` — the default value: `--button-background`, `--dialog-radius`
+- `--{component}-{property}--{state}` — state variation with double-dash: `--button-background--hover`, `--field-border--focus`
+
+## Variants and sizes
+
+Zazz uses data attributes instead of BEM modifier classes:
+
+```html
+<button class="button" data-variant="primary" data-size="sm">Save</button>
+```
+
+Attributes available per component:
+- `data-variant` — visual style (`primary`, `muted`, `ghost`, `destructive`)
+- `data-size` — dimensions (`sm`, `icon`, `icon-sm`)
+- `data-side` — directional placement
+- `data-align` — alignment
+
+The default variant is always the absence of the attribute.
+
+## Three override surfaces
+
+Because component rules resolve tokens lazily, you can intervene at three scopes without editing source files:
+
+### 1. Global — re-skin the entire system
+
+```css
+:root {
+  --radius-md: 0;         /* squares every component */
+  --primary: oklch(0.6 0.15 145);  /* new brand color everywhere */
+}
+```
+
+### 2. Component — restyle all instances of one component
+
+```css
+:root {
+  --button-radius: var(--radius-full);  /* all buttons go pill-shaped */
+}
+```
+
+### 3. Instance — one-off override
+
+```html
+<button class="button" style="--button-background: var(--secondary)">
+  One-off
+</button>
+```
+
+## Dark mode
+
+Dark mode works at three levels:
+
+1. **Automatic** — `color-scheme: light dark` on `:root` follows the system preference. Semantic tokens use `light-dark()` so they resolve without extra classes.
+2. **Manual** — Add a `.dark` class to re-declare tokens for forced dark mode.
+3. **Inverted surfaces** — Dark popovers/menus over a light page use container style queries: `@container style(--use-inverted-menu: "true")`.
+
+## Selector conventions
+
+- **Blocks**: `.component` (`.button`, `.dialog`)
+- **Elements**: `.component__part` (`.input-group__addon`)
+- **Zero specificity for overridables**: `:where()` wraps reset and utility selectors
+- **Logical properties**: `inline-size`/`block-size` over `width`/`height` for RTL support
+- **Focus**: `:focus-visible` with `--ring-*` tokens, never `outline: none` alone
+- **State exclusion**: `:not(:disabled)` over order-dependent overrides

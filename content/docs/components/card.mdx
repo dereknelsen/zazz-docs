@@ -1,9 +1,9 @@
 ---
 title: Card
-description: A composition pattern for product and content cards built from theme tokens and utilities.
+description: Product and content cards composed from theme tokens and utilities.
 ---
 
-A card is built entirely from utility classes — there is no `.card` primitive. Wrap a
+Cards are built from utility classes. There is no `.card` primitive. Wrap a
 `bg-card text-card-foreground` surface in a `border rounded-lg overflow-clip` container, then
 compose a figure, a `.badge`, `text-*` content, and a footer with utilities and theme tokens.
 
@@ -12,5 +12,5 @@ compose a figure, a `.badge`, `text-*` content, and a footer with utilities and 
 <Preview src="card/default" />
 
 The default above uses a full-bleed `aspect-landscape` figure, `.p-md` / `.gap-sm` spacing,
-and an avatar plus a muted button in the footer — all reusing existing utilities, so dark mode
-and theming come for free.
+and an avatar plus a muted button in the footer. Because it reuses existing utilities,
+dark mode and theming work out of the box.

@@ -59,6 +59,25 @@ export function listExamples(): string[] {
   return ids.filter((id) => id.includes("/")).sort();
 }
 
+/**
+ * Reads the component-specific CSS partial for a given example id.
+ * `src` is like `button/variants` → reads `zazz/styles/_button.css`.
+ *
+ * @returns the file contents, or `null` if no dedicated CSS file exists.
+ */
+export function readComponentCss(src: string): string | null {
+  const component = src.split("/")[0];
+  const filePath = path.resolve(STYLES_ROOT, `_${component}.css`);
+
+  if (!filePath.startsWith(STYLES_ROOT + path.sep)) return null;
+
+  try {
+    return readFileSync(filePath, "utf8").trim();
+  } catch {
+    return null;
+  }
+}
+
 let cachedStyleHrefs: string[] | null = null;
 
 /**

@@ -21,6 +21,7 @@
   }
 }
 
+
 @layer reset {
   /* ===========================================================================
   SELECT — native <select> internals (::picker, <option>, ::picker-icon)
@@ -29,6 +30,12 @@
   - Both the select and ::picker(select) need appearance: base-select before
     picker pseudo styles apply (MDN customizable select).
   =========================================================================== */
+  @media screen and (max-width: 40rem) {
+    :is(select) {
+      /* Ensure form controls are legible on smaller viewports and don't zoom in when focused */
+      font-size: 1rem !important;
+    }
+  }
 
   :where(.select),
   :where(.select)::picker(select) {

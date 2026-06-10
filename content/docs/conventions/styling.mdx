@@ -1,0 +1,182 @@
+---
+title: Styling
+description: How Zazz stylesheets are structured, documented, and layered — the rules that keep the cascade predictable.
+---
+
+Every stylesheet in `zazz/styles/` follows a strict anatomy. Understanding this structure is how you read, extend, and override components without fighting the cascade.
+
+## File anatomy
+
+A component file is written top-to-bottom in this order:
+
+| # | Section | Layer | Required? |
+|---|---|---|---|
+| 1 | CSSDoc header | — | always |
+| 2 | Component token hooks | `@layer variables` | when the component has tokens |
+| 3 | Native-element baselines | `@layer reset` | only if it redraws native UI |
+| 4 | Component rules | `@layer components` | the component itself |
+| 5 | Utility classes | `@layer utilities` | only if it ships utilities |
+
+```css
+/**
+ * _button.css — Button (.button)
+ *
+ * @layer      variables, components
+ * @requires   _layers.css, _variables.css, _reset.css
+ * @uses       color-mix(), oklch(from …) — variant hover/active tints
+ * @tokens     --button-* (@layer variables)
+ */
+@layer variables {
+  :root {
+    /* the component's override hooks */
+  }
+}
+
+@layer components {
+  .button {
+    /* rules that consume the hooks above */
+  }
+}
+```
+
+## CSSDoc headers
+
+Every `.css` file opens with a JSDoc-style block comment. A summary line comes first, then block tags:
+
+```css
+/**
+ * _fields.css — Shared form field family (Tier 3 owner for --field-*)
+ *
+ * @layer      variables, components
+ * @requires   _layers.css, _variables.css
+ * @uses       :user-invalid — validation after commit (not while typing)
+ * @uses       :has(:user-invalid) — label/hint/error crossfade
+ * @uses       @starting-style + visibility allow-discrete — hint ↔ error swap
+ * @tokens     --field-*, --field-group-* (Tier 3 owner; @layer variables)
+ * @consumedby _input.css, _textarea.css, _select.css, _input-group.css,
+ *             _password-group.css, _radio.css (.radio-group)
+ */
+```
+
+### Tag reference
+
+| Tag | Required | Meaning |
+|---|---|---|
+| _(summary)_ | yes | First line: `_file.css — Component (.selector)` |
+| `@layer` | yes | Cascade layers this file contributes to, in order |
+| `@requires` | yes | Files that must load before this one. `none` for `_layers.css` |
+| `@uses` | — | One modern CSS API/feature per line with support caveat |
+| `@tokens` | when owned | The token namespace this file exposes |
+| `@consumedby` | when applicable | Files that depend on this one |
+| `@see` | — | External URL or cross-file reference |
+| `@example` | — | Usage markup for non-obvious components |
+
+## Token naming
+
+Component tokens follow a strict naming convention:
+
+- `--{component}-{property}` — the default value: `--button-background`, `--dialog-radius`
+- `--{component}-{property}--{state}` — state variation with **double-dash** before the state: `--button-background--hover`, `--field-border--focus`
+
+### Tiered tokens
+
+Global tokens in `_variables.css` are organized in tiers:
+
+| Tier | Example | Where |
+|---|---|---|
+| Brand/literal scales | `--primary-600`, `--neutral-100` | `_variables.css` |
+| Semantic roles | `--background`, `--foreground`, `--primary`, `--muted` | `_variables.css` |
+| Metrics & systems | `--step-*`, `--radius-*`, `--gap-*`, `--font-size-*` | `_variables.css` |
+| Component tokens | `--button-background`, `--field-border`, `--dialog-radius` | each component file |
+
+### Local component tokens
+
+Every component declares a namespace in its own `@layer variables` block, defaulting to a global token:
+
+```css
+@layer variables {
+  :root {
+    /* surface */
+    --button-background: var(--card);
+    --button-background--hover: var(--muted);
+    /* metrics */
+    --button-height: var(--step-8);
+    --button-radius: var(--radius-md);
+  }
+}
+```
+
+Rules reference a token **once**. Variants swap the token value — they never restate the rule:
+
+```css
+@layer components {
+  .button {
+    background-color: var(--button-background);
+  }
+
+  .button[data-variant="primary"] {
+    --button-background: var(--primary);
+    --button-background--hover: oklch(from var(--primary) l c h / 0.9);
+  }
+
+  .button[data-size="sm"] {
+    --button-height: var(--step-6);
+    --button-radius: var(--radius-sm);
+  }
+}
+```
+
+## Selector conventions
+
+- **Blocks & elements**: `.component` and `.component__part` (`.input-group__addon`). No BEM modifier classes — use attributes.
+- **Variants & sizes**: data attributes — `[data-variant="primary"]`, `[data-size="sm"]`, `[data-side]`, `[data-align]`.
+- **Zero specificity**: `:where()` wraps reset and utility selectors so they stay overridable.
+- **Logical properties**: `inline-size`/`block-size`, `padding-inline`/`margin-block` for RTL support.
+- **Focus**: `:focus-visible` + `outline` + `outline-offset`, never `outline: none` without a replacement.
+- **State exclusion**: `:not(:disabled)` over order-dependent overrides.
+
+## Comment styles
+
+Three comment styles, each with a specific role:
+
+**Section banners** separate major regions inside a layer:
+
+```css
+/* ===========================================================================
+  BUTTON VARIANTS
+  =========================================================================== */
+```
+
+**Token group labels** group related hooks inside `@layer variables`:
+
+```css
+:root {
+  /* surface */
+  --button-background: var(--card);
+  --button-background--hover: var(--muted);
+  /* metrics */
+  --button-height: var(--step-8);
+}
+```
+
+**Inline rule comments** explain intent — the *why*, not the *what*:
+
+```css
+/* thumb centered on the track via a calc'd negative margin so retuning
+   either size keeps it aligned. */
+```
+
+## Dark mode
+
+- `color-scheme: light dark` on `:root` enables system dark mode; semantic tokens use `light-dark()` to resolve per-scheme.
+- A manual `.dark` class re-declares the same semantic tokens for forced dark mode.
+- Inverted surfaces (dark popovers over light page) flip via container style queries: `@container style(--use-inverted-menu: "true")`.
+
+## Allowed variations
+
+These deviate from the canonical shape on purpose — documented in-file:
+
+- **Split `@layer variables` blocks** — When a component has motion tokens and sizing tokens that read better separated.
+- **Component in `@layer reset`** — When redrawing native UI (e.g. `_switch.css` redraws `input[role="switch"]`).
+- **`@supports`-gated enhancement** — When anchor positioning or other cutting-edge APIs need a documented fallback.
+- **Attribute-hook components** — When styling depends on `[data-*]` attributes driven by JavaScript.

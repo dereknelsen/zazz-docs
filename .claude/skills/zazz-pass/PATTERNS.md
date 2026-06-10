@@ -64,8 +64,7 @@ nav is `flex sm:hidden` and opens a dialog (see the Dialog component / mobile-me
 </body>
 ```
 
-Add `data-transition-layer="global-navigation"` to the `<header>` and
-`data-transition-layer="global-footer"` to the `<footer>` to persist them across view
+Add `data-transition-layer="global-component"` to the `<header>` the `<footer>` to persist them across view
 transitions (see `references/apis.md`).
 
 ## Heading group with CTAs

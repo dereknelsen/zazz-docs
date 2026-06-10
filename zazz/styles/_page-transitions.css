@@ -23,21 +23,19 @@
 @layer utilities {
   /* View transitions — main is isolated from header/footer (see _reset.css view-transition-name) */
   @media screen and (prefers-reduced-motion: no-preference) {
-    ::view-transition-old(global-main-content) {
+    ::view-transition-old(main-content) {
       animation: global-page-transition--old var(--page-transition-duration)
         var(--page-transition-ease) var(--page-transition-wait) forwards;
     }
 
-    ::view-transition-new(global-main-content) {
+    ::view-transition-new(main-content) {
       animation: global-page-transition--new var(--page-transition-duration)
         var(--page-transition-ease) var(--page-transition-wait) forwards;
     }
 
     /* Persist shared chrome without cross-fading */
-    ::view-transition-old(global-navigation),
-    ::view-transition-new(global-navigation),
-    ::view-transition-old(global-footer),
-    ::view-transition-new(global-footer) {
+    ::view-transition-old(global-component),
+    ::view-transition-new(global-component) {
       animation: none;
     }
   }
@@ -45,7 +43,7 @@
   /* Stacking: keep header/footer snapshots above main so a taller main snapshot
      (when page heights differ) can't paint over the chrome during the crossfade.
      Group z-index applies regardless of motion preference. */
-  ::view-transition-group(global-main-content) {
+  ::view-transition-group(main-content) {
     overflow: clip;
     transform-origin: var(--page-transition-origin);
   }

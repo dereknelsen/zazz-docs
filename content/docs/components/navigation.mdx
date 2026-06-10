@@ -1,0 +1,91 @@
+---
+title: Navigation
+description: SPA-like page transitions using the Navigation API and View Transitions — instant content swaps with animated crossfades.
+---
+
+The navigation script intercepts same-origin page navigations and swaps `<main>` content without a full page reload. Combined with `_page-transitions.css`, this creates smooth, app-like transitions between pages.
+
+## How it works
+
+1. The script listens for the browser's `navigate` event via the [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API).
+2. For qualifying navigations (same-origin, no hash change, no form submission, no download), it intercepts the request.
+3. It fetches the destination page, extracts the new `<main>`, and replaces the current one.
+4. If the browser supports [View Transitions](https://developer.mozilla.org/en-US/docs/Web/API/Document/startViewTransition), the swap is animated.
+5. After the swap, Reveal and Embla are re-initialized on the new content.
+
+## Setup
+
+Include the script and the page transitions stylesheet:
+
+```html
+<link rel="stylesheet" href="./zazz/styles/_page-transitions.css" />
+<script src="./zazz/scripts/navigation.js"></script>
+```
+
+Mark your page landmarks with `data-transition-layer` so the view transition knows which elements to animate:
+
+```html
+<header data-transition-layer="global-component">...</header>
+<main>...</main>
+<footer data-transition-layer="global-component">...</footer>
+```
+
+## What gets transitioned
+
+| Layer | Behavior |
+|---|---|
+| `main-content` | Animated crossfade (old fades/scales out, new fades/scales in) |
+| `global-component` | Persists without animation |
+
+The header and footer stay in place while `<main>` content transitions. This keeps navigation chrome visually stable.
+
+## View Transition API
+
+The script uses `document.startViewTransition()` when available. The CSS in `_page-transitions.css` defines the animation:
+
+- **Old content** fades out and scales down slightly
+- **New content** fades in and scales up from slightly smaller
+
+The animation respects `prefers-reduced-motion` — when reduced motion is preferred, content swaps instantly without animation.
+
+### Customizing the transition
+
+Override the transition tokens on `:root`:
+
+```css
+:root {
+  --page-transition-duration: 400ms;
+  --page-transition-ease: ease-out;
+  --page-transition-scale: 0.98;
+  --page-transition-opacity: 0;
+}
+```
+
+## Graceful degradation
+
+- **No Navigation API:** The script checks for `"navigation" in window`. Browsers without support (Firefox as of 2025) fall through to normal full-page loads. A console warning is logged.
+- **No View Transitions:** When `document.startViewTransition` is unavailable, the DOM swap happens instantly without animation. The page still avoids a full reload.
+- **Fetch failure:** If the destination page can't be fetched, the script falls back to `location.assign()` for a standard navigation.
+- **Missing `<main>`:** If either the current or fetched page lacks a `<main>` element, the script falls back to a full page load.
+
+## After-swap hooks
+
+After replacing `<main>`, the script automatically:
+
+1. Updates `document.title` from the fetched page.
+2. Calls `e.scroll()` to restore scroll position.
+3. Calls `Reveal.getAutoInstance()?.refresh()` to discover new animated elements.
+4. Calls `EmblaInit.init(newMain)` to initialize carousels in the new content.
+5. Routes focus to the `<h1>` in the new main (or `<main>` itself) for accessibility.
+
+## What navigations are intercepted
+
+The script only intercepts navigations that are:
+
+- Same-origin (not external links)
+- Not hash-only changes (anchor links pass through)
+- Not download requests
+- Not form submissions
+- Interceptable (`e.canIntercept === true`)
+
+Everything else — external links, `target="_blank"`, downloads, form posts — behaves normally.

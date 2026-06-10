@@ -25,6 +25,11 @@
     "checkbox",
     "radio",
     "switch",
-    "slider"
+    "slider",
+    "---Scripts---",
+    "reveal",
+    "embla",
+    "navigation",
+    "utils"
   ]
 }

@@ -1,0 +1,138 @@
+---
+title: Page Structure
+description: How to structure HTML pages that use Zazz — load order, required elements, and the markup patterns that scripts and styles expect.
+---
+
+Zazz pages follow a consistent structure that scripts and styles depend on. Getting the load order right ensures cascade layers resolve correctly and scripts find the DOM elements they need.
+
+## Document skeleton
+
+A complete Zazz page includes:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Styles (cascade order matters) -->
+  <link rel="stylesheet" href="./zazz/styles/main.css" />
+
+  <!-- Optional: your overrides after Zazz -->
+  <link rel="stylesheet" href="./your-styles.css" />
+
+  <title>Page Title</title>
+</head>
+<body>
+  <header data-transition-layer="global-component">
+    <!-- Navigation -->
+  </header>
+
+  <main>
+    <!-- Page content -->
+  </main>
+
+  <footer data-transition-layer="global-component">
+    <!-- Footer -->
+  </footer>
+
+  <!-- Scripts (order matters for dependencies) -->
+  <script src="./zazz/scripts/utils.js"></script>
+  <script src="./zazz/scripts/reveal.js"></script>
+  <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+  <script src="./zazz/scripts/embla.js"></script>
+  <script src="./zazz/scripts/navigation.js"></script>
+</body>
+</html>
+```
+
+## Stylesheet load order
+
+Load order is critical. The cascade layer declaration must come first:
+
+1. `_layers.css` — declares `@layer variables, reset, components, utilities;`
+2. `_properties.css` — registered `@property` declarations
+3. `_variables.css` — global design tokens
+4. `_reset.css` — element baselines
+5. Component files — in any order
+6. `_utilities.css` — atomic override classes (load last)
+
+When using `main.css`, this order is handled automatically via `@import` chains. For production, link each stylesheet individually with preload hints for parallel fetching:
+
+```html
+<link rel="preload" href="./zazz/styles/_layers.css" as="style" />
+<link rel="preload" href="./zazz/styles/_properties.css" as="style" />
+<link rel="preload" href="./zazz/styles/_variables.css" as="style" />
+<link rel="preload" href="./zazz/styles/_reset.css" as="style" />
+
+<link rel="stylesheet" href="./zazz/styles/_layers.css" />
+<link rel="stylesheet" href="./zazz/styles/_properties.css" />
+<link rel="stylesheet" href="./zazz/styles/_variables.css" />
+<link rel="stylesheet" href="./zazz/styles/_reset.css" />
+<link rel="stylesheet" href="./zazz/styles/_button.css" />
+<!-- ...only the components you need -->
+<link rel="stylesheet" href="./zazz/styles/_utilities.css" />
+```
+
+## Script load order
+
+Scripts declare dependencies via `<script>` tag order. Load them at the end of `<body>`:
+
+1. `utils.js` — shared parsing utilities (load first)
+2. `reveal.js` — standalone, no dependencies
+3. Embla CDN bundles — UMD builds from unpkg/CDN
+4. `embla.js` — requires `utils.js` and Embla globals
+5. `navigation.js` — standalone, app-level (skip in component iframes)
+
+All scripts auto-initialize on `DOMContentLoaded`. No manual init calls needed for standard pages.
+
+## View transition layers
+
+For page transitions to work correctly (whether cross-document or SPA-style via `navigation.js`), mark your landmark elements with `data-transition-layer`:
+
+```html
+<header data-transition-layer="global-component">...</header>
+<main>...</main>
+<footer data-transition-layer="global-component">...</footer>
+```
+
+These map to `view-transition-name` values that `_page-transitions.css` uses to animate `<main>` content while keeping the header and footer static during navigations.
+
+## Variant and config attributes
+
+Components are configured entirely through HTML:
+
+```html
+<!-- Variants via data attributes -->
+<button class="button" data-variant="primary" data-size="sm">Save</button>
+
+<!-- Script behavior via data attributes -->
+<div data-reveal="slide-up" data-reveal-duration="300">Animated</div>
+
+<!-- Carousel via data attributes -->
+<div data-embla="root" data-embla-loop="true">
+  <div data-embla="viewport">
+    <div data-embla="container">
+      <div data-embla="slide">...</div>
+    </div>
+  </div>
+</div>
+```
+
+The principle: **markup drives behavior**. Authors configure in HTML; CSS and JavaScript discover and enhance.
+
+## Adding custom overrides
+
+Your stylesheet loads after `main.css` and can override any token:
+
+```css
+/* your-styles.css */
+:root {
+  --primary: oklch(0.6 0.2 145);
+  --radius-md: 0;
+  --button-radius: var(--radius-full);
+}
+```
+
+Never edit files inside `zazz/styles/`. The three override surfaces (global tokens, component tokens, instance inline styles) cover every customization need.

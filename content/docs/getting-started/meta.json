@@ -1,4 +1,4 @@
 {
   "title": "Getting Started",
-  "pages": ["installation", "concepts", "llms"]
+  "pages": ["installation", "concepts", "page-transitions", "llms"]
 }

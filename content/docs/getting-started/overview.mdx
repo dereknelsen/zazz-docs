@@ -1,5 +1,5 @@
 ---
-title: Concepts
+title: Overview
 description: How Zazz controls the cascade with layers, tokens, and conventions — no specificity wars, no build step.
 ---
 
@@ -84,18 +84,100 @@ Atomic classes for common overrides. All wrapped in `:where()` for zero specific
 
 Utility names follow Tailwind vocabulary where one exists so they read predictably.
 
-## Component file anatomy
+## Typography
 
-Every component file follows the same structure:
+Zazz ships a complete fluid type system — every size scales smoothly from mobile to desktop without breakpoints or media queries.
+
+### Font stacks
+
+Three font stacks cover all use cases:
 
 ```css
-/**
- * _button.css — Button (.button)
- *
- * @layer      variables, components
- * @requires   _layers.css, _variables.css
- * @tokens     --button-* (@layer variables)
- */
+--font-sans: "Geist", ui-sans-serif, system-ui, sans-serif, …;
+--font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+--font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, …;
+```
+
+Two semantic aliases let you swap heading or body typefaces in one place:
+
+```css
+--font-family-body: var(--font-sans);
+--font-family-heading: var(--font-sans);
+```
+
+### Type scale
+
+Font sizes use fluid `clamp()` values that interpolate between a minimum and maximum across viewport widths:
+
+| Token | Range |
+|---|---|
+| `--font-size-eyebrow` | 0.51 rem → 0.58 rem |
+| `--font-size-xs` | 0.58 rem → 0.64 rem |
+| `--font-size-sm` | 0.79 rem → 0.8 rem |
+| `--font-size-md` | 1 rem (static) |
+| `--font-size-lg` | 1.13 rem → 1.25 rem |
+| `--font-size-xl` | 1.27 rem → 1.56 rem |
+| `--font-size-h6` – `--font-size-h1` | 1.27 rem → 4.77 rem |
+| `--font-size-display` | 2.57 rem → 5.96 rem |
+
+The heading scale follows a modular ratio — each step roughly 1.25× the previous — so hierarchy is clear at any viewport.
+
+### Weight, tracking, and leading
+
+Each scale step has matching weight, letter-spacing, and line-height tokens:
+
+```css
+/* Weight */
+--font-weight-body: 400;
+--font-weight-heading: 600;
+--font-weight-strong: 500;
+--font-weight-eyebrow: 600;
+
+/* Letter spacing — tighter as size increases */
+--tracking-display: -0.05em;
+--tracking-h1: -0.05em;
+--tracking-h2: -0.025em;
+--tracking-md: 0em;
+--tracking-eyebrow: 0.1em;
+
+/* Line height — shorter for large text, roomier for body */
+--leading-display: 0.95;
+--leading-h1: 0.95;
+--leading-h3: 1;
+--leading-md: 1.6;
+```
+
+Large headings get tighter tracking and shorter leading so they look dense and intentional. Body text gets looser tracking and taller line-height for comfortable reading.
+
+### The `.prose` container
+
+Wrap long-form content in `.prose` to apply the full typographic rhythm automatically — heading sizes, paragraph spacing, link colors, and figure margins:
+
+```html
+<article class="prose">
+  <h1>Page title</h1>
+  <p>Body text gets proper measure and spacing.</p>
+</article>
+```
+
+Inside `.prose`, headings receive their matching `--font-size-h*`, `--leading-h*`, and `--tracking-h*` tokens. Paragraph spacing uses a configurable multiplier (`--paragraph-spacing-multiplier`) so you can tighten or loosen vertical rhythm globally.
+
+### Utility classes
+
+Apply type styles anywhere without `.prose`:
+
+```html
+<span class="text-display">Big launch headline</span>
+<p class="text-sm text-muted-foreground">Caption text</p>
+```
+
+Each `.text-{size}` class bundles the correct font-size, line-height, letter-spacing, and weight for that scale step.
+
+## Component tokens
+
+Every component declares its own token namespace in `@layer variables`, each defaulting to a global token:
+
+```css
 @layer variables {
   :root {
     --button-background: var(--card);
@@ -104,28 +186,9 @@ Every component file follows the same structure:
     --button-radius: var(--radius-md);
   }
 }
-
-@layer components {
-  .button {
-    background-color: var(--button-background);
-    border-radius: var(--button-radius);
-    block-size: var(--button-height);
-  }
-}
 ```
 
-Key principles:
-
-1. **Tokens first, rules second.** The `@layer variables` block declares every customizable value.
-2. **Rules reference tokens once.** A property like `background-color` appears in one place.
-3. **Variants swap token values, not rules.** A `[data-variant="primary"]` selector reassigns `--button-background`, it doesn't restate the `background-color` declaration.
-
-## Token naming
-
-Component tokens follow a strict convention:
-
-- `--{component}-{property}` — the default value: `--button-background`, `--dialog-radius`
-- `--{component}-{property}--{state}` — state variation with double-dash: `--button-background--hover`, `--field-border--focus`
+Component rules reference these tokens once. Variants and sizes reassign token values — they never restate the rule.
 
 ## Variants and sizes
 
@@ -180,11 +243,8 @@ Dark mode works at three levels:
 2. **Manual** — Add a `.dark` class to re-declare tokens for forced dark mode.
 3. **Inverted surfaces** — Dark popovers/menus over a light page use container style queries: `@container style(--use-inverted-menu: "true")`.
 
-## Selector conventions
+## Next steps
 
-- **Blocks**: `.component` (`.button`, `.dialog`)
-- **Elements**: `.component__part` (`.input-group__addon`)
-- **Zero specificity for overridables**: `:where()` wraps reset and utility selectors
-- **Logical properties**: `inline-size`/`block-size` over `width`/`height` for RTL support
-- **Focus**: `:focus-visible` with `--ring-*` tokens, never `outline: none` alone
-- **State exclusion**: `:not(:disabled)` over order-dependent overrides
+- Read [Conventions](/docs/conventions/styling) for detailed file anatomy, token naming, and selector rules.
+- Browse [Scripts](/docs/components/reveal) for scroll-based animations and carousel setup.
+- Explore [Components](/docs/components) to see what's available.

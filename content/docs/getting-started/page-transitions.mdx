@@ -1,0 +1,88 @@
+---
+title: Page Transitions
+description: SPA-like navigation with animated view transitions — instant content swaps that keep your site feeling like a native app.
+---
+
+Zazz includes built-in page transitions that make multi-page sites feel like single-page apps. When a visitor clicks a link, only the `<main>` content swaps — the header and footer stay in place, and a smooth crossfade animation bridges the old and new content.
+
+## Why page transitions?
+
+Traditional multi-page sites flash white between navigations. The browser tears down the entire DOM, re-fetches stylesheets, re-executes scripts, and re-paints from scratch. Users feel the seam.
+
+Zazz eliminates this with two complementary technologies:
+
+1. **The Navigation API** intercepts link clicks and replaces `<main>` content via `fetch()`, avoiding full page reloads.
+2. **The View Transitions API** wraps the DOM swap in a crossfade animation, making the change feel intentional rather than abrupt.
+
+The result: near-instant navigations with visual continuity, no framework required.
+
+## What users experience
+
+- Header and footer remain visually stable — no flicker, no repaint.
+- Page content fades and scales smoothly between states.
+- Browser back/forward buttons work normally with animated transitions.
+- Scroll position is restored correctly.
+- Focus moves to the new page's heading for screen reader users.
+
+## Enabling transitions
+
+Include the stylesheet and script:
+
+```html
+<link rel="stylesheet" href="./zazz/styles/_page-transitions.css" />
+<script src="./zazz/scripts/navigation.js"></script>
+```
+
+Mark your page landmarks:
+
+```html
+<header data-transition-layer="global-component">...</header>
+<main>...</main>
+<footer data-transition-layer="global-component">...</footer>
+```
+
+That's it. Every same-origin link on your site now transitions smoothly.
+
+## Customizing the animation
+
+The transition is controlled by CSS custom properties:
+
+```css
+:root {
+  --page-transition-duration: 900ms;
+  --page-transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --page-transition-scale: 0.99;
+  --page-transition-opacity: 0;
+}
+```
+
+| Token | Default | Effect |
+|---|---|---|
+| `--page-transition-duration` | `var(--default-transition-duration)` | How long the crossfade takes |
+| `--page-transition-ease` | `var(--default-transition-timing-function)` | Easing curve |
+| `--page-transition-scale` | `0.99` | Scale factor for the old/new content |
+| `--page-transition-opacity` | `0` | Target opacity for fading content |
+
+## Accessibility
+
+- Transitions respect `prefers-reduced-motion`. When reduced motion is preferred, content swaps instantly.
+- After each navigation, focus is routed to the `<h1>` in the new content (or `<main>` if no heading exists), ensuring screen reader users know the page changed.
+
+## Progressive enhancement
+
+Page transitions are entirely optional and degrade gracefully:
+
+- **Browsers without the Navigation API** (Firefox as of 2025) get standard full-page loads.
+- **Browsers without View Transitions** still get instant content swaps — just without the animation.
+- **JavaScript disabled** — normal link behavior, no degradation.
+
+Every page must work as a standalone document. The transitions are an enhancement layer, not a requirement.
+
+## Integration with other scripts
+
+After swapping content, the navigation script automatically re-initializes:
+
+- **Reveal** — rescans for `[data-reveal]` elements in the new `<main>`.
+- **Embla** — initializes any new carousels in the swapped content.
+
+No manual re-initialization needed on your part.

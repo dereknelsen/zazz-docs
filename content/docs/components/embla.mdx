@@ -1,0 +1,164 @@
+---
+title: Embla Carousel
+description: Data-attribute-driven carousel initialization built on Embla Carousel — with dots, thumbs, keyboard nav, and lightbox support.
+---
+
+Zazz wraps [Embla Carousel](https://www.embla-carousel.com/) with a declarative, data-attribute-driven initialization layer. No JavaScript configuration needed — markup drives everything.
+
+## How it works
+
+1. Structure your HTML with `data-embla` role attributes.
+2. The `embla.js` script discovers carousels, reads configuration from `data-embla-*` attributes, and initializes Embla instances.
+3. Navigation, dots, thumbnails, and keyboard handling are wired automatically.
+
+## Setup
+
+Include the Embla CDN bundles, utilities, and the init script:
+
+```html
+<script src="./zazz/scripts/utils.js"></script>
+<script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+<!-- Optional plugins -->
+<script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"></script>
+<script src="https://unpkg.com/embla-carousel-auto-scroll/embla-carousel-auto-scroll.umd.js"></script>
+<script src="https://unpkg.com/embla-carousel-class-names/embla-carousel-class-names.umd.js"></script>
+<script src="./zazz/scripts/embla.js"></script>
+```
+
+Carousels auto-initialize on `DOMContentLoaded`.
+
+## Basic markup
+
+```html
+<div data-embla="root">
+  <div data-embla="viewport">
+    <div data-embla="container">
+      <div data-embla="slide">Slide 1</div>
+      <div data-embla="slide">Slide 2</div>
+      <div data-embla="slide">Slide 3</div>
+    </div>
+  </div>
+  <button type="button" data-embla="prev">Prev</button>
+  <button type="button" data-embla="next">Next</button>
+</div>
+```
+
+### Structural roles
+
+| `data-embla` value | Role |
+|---|---|
+| `root` | Carousel container; holds all config attributes |
+| `viewport` | Visible window (required) |
+| `container` | Slides flex track |
+| `slide` | Individual slide |
+| `prev` / `next` | Navigation buttons (optional) |
+| `dots` / `dot` | Dot pagination container and template (optional) |
+| `thumbs` | Linked thumbnail carousel container (optional) |
+
+## Configuration
+
+All Embla core options can be set via data attributes on the `root` element:
+
+```html
+<div data-embla="root" data-embla-loop="true" data-embla-align="start">
+  ...
+</div>
+```
+
+Attributes are parsed by `Utils.parseDataAttributes()` — kebab-case converts to camelCase, values are type-coerced automatically.
+
+### Plugin configuration
+
+Enable plugins with bare attributes and configure with prefixed options:
+
+```html
+<!-- Autoplay with 3s delay -->
+<div data-embla="root" data-embla-autoplay data-embla-autoplay-delay="3000">
+
+<!-- Auto scroll at speed 2 -->
+<div data-embla="root" data-embla-autoscroll data-embla-autoscroll-speed="2">
+
+<!-- Class names with custom snapped class -->
+<div data-embla="root" data-embla-classnames data-embla-classnames-snapped="is-snapped">
+```
+
+| Plugin | Attribute prefix | CDN bundle required |
+|---|---|---|
+| Autoplay | `data-embla-autoplay-*` | `embla-carousel-autoplay` |
+| Auto Scroll | `data-embla-autoscroll-*` | `embla-carousel-auto-scroll` |
+| Class Names | `data-embla-classnames-*` | `embla-carousel-class-names` |
+
+## Dot navigation
+
+Add a dots container with a template dot element:
+
+```html
+<div data-embla="dots">
+  <button type="button" data-embla="dot"></button>
+</div>
+```
+
+The script clones the template dot for each slide and manages `.is-active` state.
+
+## Thumbnail navigation
+
+Nest a `data-embla="thumbs"` container inside the same root. It creates a synced secondary carousel:
+
+```html
+<div data-embla="root">
+  <div data-embla="viewport">
+    <div data-embla="container">
+      <div data-embla="slide">Full image 1</div>
+      <div data-embla="slide">Full image 2</div>
+    </div>
+  </div>
+
+  <div data-embla="thumbs">
+    <div data-embla="viewport">
+      <div data-embla="container">
+        <div data-embla="slide">Thumb 1</div>
+        <div data-embla="slide">Thumb 2</div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+Thumb options use the `data-embla-thumbs-*` prefix. Defaults: `containScroll: "keepSnaps"`, `dragFree: true`.
+
+## Keyboard navigation
+
+Arrow keys (`←` / `→`) scroll the active carousel. The "active" carousel is:
+
+1. A carousel inside an open `<dialog>`, or
+2. The carousel containing the focused element.
+
+Disable per-carousel with `data-embla-keyboard="false"`. Keyboard nav is skipped when focus is in form fields or contenteditable elements.
+
+## Dialog / lightbox integration
+
+Carousels inside `<dialog>` elements can't measure their viewport until the dialog opens. Zazz handles this automatically:
+
+- A `MutationObserver` watches for `open` attribute changes on dialogs.
+- When a dialog opens, uninitialized carousels inside it are initialized.
+- `data-embla-start` on a trigger element stores the slide index to open to.
+
+```html
+<button commandfor="gallery-dialog" data-embla-start="2">
+  Open at slide 3
+</button>
+```
+
+## Drag-aware click suppression
+
+When carousels contain clickable slides (e.g. lightbox triggers with `commandfor`), dragging is distinguished from clicking. After a drag gesture, clicks are suppressed for a short window to prevent accidental activation.
+
+## Re-initialization
+
+After SPA-style navigations or dynamic content insertion, call:
+
+```js
+EmblaInit.init(newContentElement);
+```
+
+The `navigation.js` script does this automatically after swapping `<main>` content. The `init()` function skips already-initialized carousels (`data-embla-init` attribute) and defers carousels inside closed dialogs.

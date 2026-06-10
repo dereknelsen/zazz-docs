@@ -1,0 +1,144 @@
+---
+title: Scripting
+description: How Zazz scripts are structured, documented, and initialized — vanilla JavaScript conventions for browser-native behavior.
+---
+
+Scripts in `zazz/scripts/` are served directly at `/zazz/scripts/*.js` — no bundler or transpiler. They run as browser-native JavaScript in modern browsers.
+
+## Philosophy
+
+- **Vanilla JS only.** No frameworks, no npm imports, no build step. Scripts may depend on globals loaded by prior `<script>` tags.
+- **HTML-first.** Markup and data attributes drive behavior. Authors configure components in HTML; scripts discover and enhance the DOM.
+- **Progressive enhancement.** Feature-detect APIs before use. When unsupported, degrade gracefully.
+- **Minimal surface area.** Export a small public API. Keep helpers private.
+
+## File structure
+
+Every script follows this layout:
+
+```js
+"use strict";
+
+/**
+ * @fileoverview Module title.
+ * @description What this module does.
+ */
+
+// Implementation
+
+// Auto-initialize when DOM is ready (only in browser environment)
+if (typeof window !== "undefined" && typeof document !== "undefined") {
+  // ...
+}
+
+// Export for module environments or attach to window
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = MyExport;
+} else if (typeof define === "function" && define.amd) {
+  define([], function () { return MyExport; });
+} else if (typeof window !== "undefined") {
+  window.MyExport = MyExport;
+}
+```
+
+## Module exports
+
+| File | Global | Export shape |
+|---|---|---|
+| `utils.js` | `window.Utils` | `{ parseValue, parseDataAttributes }` |
+| `reveal.js` | `window.Reveal` | `Reveal` class |
+| `embla.js` | `window.EmblaInit` | `{ init, addDotBtnsAndClickHandlers, … }` |
+| `navigation.js` | _(none)_ | Side-effect only; no export |
+
+## Auto-initialization
+
+Scripts that enhance the page on load use a guarded auto-init block:
+
+```js
+if (typeof window !== "undefined" && typeof document !== "undefined") {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+}
+```
+
+Initialization is **idempotent** — guarded with attributes (`data-embla-init`), flags, or instance checks so re-running is safe.
+
+## Data-attribute configuration
+
+Component scripts read configuration from HTML data attributes rather than JS options objects:
+
+- Use a consistent prefix per component: `data-embla-*`, `data-reveal-*`.
+- Parse attributes with `Utils.parseDataAttributes(node, "data-embla-")`.
+- Boolean flags can be bare attributes (`data-embla-autoplay`) or explicit values (`data-embla-keyboard="false"`).
+
+## Dependencies and load order
+
+Scripts declare dependencies via `<script>` tag order, not imports:
+
+| Script | Depends on | Notes |
+|---|---|---|
+| `utils.js` | — | Load first; provides `window.Utils` |
+| `reveal.js` | — | Standalone |
+| `embla.js` | `utils.js`, Embla CDN libs | Requires Embla UMD bundles before this file |
+| `navigation.js` | — | App-level; not loaded in component preview iframes |
+
+## DOM interaction patterns
+
+- **Query within scope.** Accept an optional root element so init can target a subtree.
+- **Early returns for guards.** Check required elements and skip gracefully.
+- **Store instances on DOM nodes** when external access is needed: `emblaNode._emblaApi = emblaApi`.
+- **Observe DOM changes** with `MutationObserver` for elements hidden at init time (closed dialogs).
+- **Delegate events** at `document` level when triggers can appear anywhere.
+- **Respect focus and input context.** Skip keyboard handlers in form fields or contenteditable.
+
+## Classes vs functions
+
+- Use a **class** when the module manages persistent instance state (`Reveal` with observers and config).
+- Use **functions** for stateless init and helpers (`initEmblaCarousels`, `parseValue`).
+- Use **private class fields** (`#observers`, `#getObserver`) for encapsulation.
+
+## JSDoc conventions
+
+Every JSDoc block must include `@description`. Tag order:
+
+```
+@description
+@param
+@returns
+@private
+@see
+@example
+```
+
+### Required tags
+
+| Tag | Required on |
+|---|---|
+| `@fileoverview` | Every file |
+| `@description` | Every JSDoc block |
+| `@param` | Functions with parameters |
+| `@returns` | Functions that return a value |
+| `@private` | Non-exported helpers |
+| `@typedef` | Config/option objects |
+| `@namespace` | Export objects (`Utils`, `EmblaInit`) |
+
+### Section dividers
+
+Use thin single-line markers to group related code:
+
+```js
+// --- Dot navigation ---
+```
+
+Do not use banner block comments (`/* ==== ... ==== */`).
+
+## Syntax and style
+
+- Double quotes for strings.
+- Semicolons required.
+- Optional chaining (`?.`) and nullish coalescing where they simplify guards.
+- No TypeScript source files — types live in JSDoc and `globals.d.ts`.
+- Type-checking enabled via `tsconfig.json` (`checkJs: true`).

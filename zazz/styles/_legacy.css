@@ -16,8 +16,8 @@
   Use this only to clear old declarations in opted-in regions.
   Do not put framework-to-Zazz translation rules here.
   =========================================================================== /
-@layer legacy {
   
+@layer legacy {
   @scope (html) to ([data-legacy-styles="true"] *) {
     :scope,
     :scope * {

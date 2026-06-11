@@ -118,7 +118,7 @@ ${scriptTags}
   })();
 </script>
 <style>
-  html, body { margin: 0; background: var(--background); color: var(--foreground); }
+  html, body { margin: 0; background: var(--background); color: var(--foreground); block-size: 100%; inline-size: 100%; overflow: clip; }
   .zazz-preview {
     box-sizing: border-box;
     display: flex;
@@ -130,6 +130,7 @@ ${scriptTags}
     inline-size: 100%;
     block-size: 100%;
     min-block-size: ${minHeight}px;
+    overflow: auto;
   }
 </style>
 </head>

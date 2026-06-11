@@ -1,6 +1,6 @@
 ---
 title: Scripting
-description: How Zazz scripts are structured, documented, and initialized — vanilla JavaScript conventions for browser-native behavior.
+description: How Zazz scripts are structured, documented, and initialized — the vanilla-JavaScript conventions behind every browser-native behavior.
 ---
 
 Scripts in `zazz/scripts/` are served directly at `/zazz/scripts/*.js` — no bundler or transpiler. They run as browser-native JavaScript in modern browsers.
@@ -84,6 +84,8 @@ Scripts declare dependencies via `<script>` tag order, not imports:
 | `reveal.js` | — | Standalone |
 | `embla.js` | `utils.js`, Embla CDN libs | Requires Embla UMD bundles before this file |
 | `navigation.js` | — | App-level; not loaded in component preview iframes |
+
+Where these tags go in the document, and in what order, is covered in [Structuring your head tag](/docs/core-files/head).
 
 ## DOM interaction patterns
 

@@ -72,10 +72,16 @@ export function listExamples(): string[] {
  * Reads the component-specific CSS partial for a given example id.
  * `src` is like `button/variants` → reads `zazz/styles/_button.css`.
  *
+ * The `utilities/*` namespace is intentionally skipped: a utility demo composes
+ * atomic classes rather than redrawing one component, so its "source" is the
+ * entire `_utilities.css` atomic layer (>100 KB). Dumping that into a CSS tab
+ * would bury the example, so utility previews show Preview + HTML only.
+ *
  * @returns the file contents, or `null` if no dedicated CSS file exists.
  */
 export function readComponentCss(src: string): string | null {
   const component = src.split("/")[0];
+  if (component === "utilities") return null;
   const filePath = path.resolve(STYLES_ROOT, `_${component}.css`);
 
   if (!filePath.startsWith(STYLES_ROOT + path.sep)) return null;
@@ -115,24 +121,3 @@ export function readComponentJs(scripts?: readonly ExampleScript[]): string | nu
   return blocks.length > 0 ? blocks.join("\n\n") : null;
 }
 
-let cachedStyleHrefs: string[] | null = null;
-
-/**
- * Returns the Zazz stylesheets in cascade order as `/zazz/styles/*.css` URLs, parsed from
- * `main.css`'s `@import` list — the single source of order. Previews link each file
- * individually (with preload hints) instead of loading the `main.css` bundle, so the
- * browser fetches all sheets in parallel rather than waterfalling import after import.
- */
-export function listStyleHrefs(): string[] {
-  if (cachedStyleHrefs) return cachedStyleHrefs;
-
-  const mainCss = readFileSync(path.join(STYLES_ROOT, "main.css"), "utf8");
-  const importRe = /@import\s+["']\.\/([^"']+\.css)["']/g;
-  const hrefs: string[] = [];
-  for (let m = importRe.exec(mainCss); m !== null; m = importRe.exec(mainCss)) {
-    hrefs.push(`/zazz/styles/${m[1]}`);
-  }
-
-  cachedStyleHrefs = hrefs;
-  return hrefs;
-}

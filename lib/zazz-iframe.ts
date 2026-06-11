@@ -6,10 +6,10 @@ import type { ExampleScript } from "zazz/components/manifest";
  * scripts, so the iframe is the *only* place Zazz CSS runs on the docs site — fully
  * sandboxed from Tailwind + fumadocs.
  *
- * Assets load by absolute URL from the `/zazz/*` route (see `app/zazz/[...path]/route.ts`)
- * rather than being inlined: `main.css` is an `@import` bundle, so it must be fetched as a
- * file for its relative `@import "./_*.css"` rules to resolve. Pure string building — safe
- * to run on the client.
+ * Styling loads as the single `main.css` bundle by absolute URL from the `/zazz/*` route
+ * (see `app/zazz/[...path]/route.ts`); its relative `@import "./_*.css"` rules resolve
+ * against that URL. One request to maintain — the server's brotli/gzip handles transfer
+ * size. Pure string building — safe to run on the client.
  */
 
 export interface BuildPreviewOptions {
@@ -23,13 +23,6 @@ export interface BuildPreviewOptions {
   align?: "start" | "center" | "end";
   /** Minimum body height in px — keeps overlays (dialogs/popovers) in view. */
   minHeight?: number;
-  /**
-   * Zazz stylesheet URLs in cascade order (from `listStyleHrefs`). Each is linked
-   * directly with a preload hint so the browser fetches them in parallel instead of
-   * waterfalling `main.css`'s `@import` chain. Falls back to the `main.css` bundle when
-   * omitted.
-   */
-  styleHrefs?: string[];
 }
 
 const FONTS = `
@@ -70,16 +63,11 @@ export function buildPreviewDocument({
   minHeight = 0,
   align = "center",
   justify = "center",
-  styleHrefs,
 }: BuildPreviewOptions): string {
-  // Preload every sheet, then link them in cascade order — parallel fetch, no @import
-  // waterfall. Fall back to the bundle if the ordered list wasn't provided.
-  const styles =
-    styleHrefs && styleHrefs.length > 0
-      ? styleHrefs.map((href) => `<link rel="preload" href="${href}" as="style">`).join("\n") +
-        "\n" +
-        styleHrefs.map((href) => `<link rel="stylesheet" href="${href}">`).join("\n")
-      : `<link rel="stylesheet" href="/zazz/styles/main.css">`;
+  // One bundle: main.css @imports every layer in cascade order. No separate preload —
+  // a same-document stylesheet link is already the highest-priority, render-blocking
+  // fetch; the server's brotli/gzip handles transfer size.
+  const styles = `<link rel="stylesheet" href="/zazz/styles/main.css">`;
 
   const needsCarousel = scripts.includes("carousel") || scripts.includes("lightbox");
   const needsEmbla = scripts.includes("embla") || needsCarousel;
@@ -106,12 +94,29 @@ export function buildPreviewDocument({
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 ${FONTS}
 ${styles}
 ${POLYFILLS}
 ${BLOCK_NAVIGATION}
 ${emblaCdn}
 ${scriptTags}
+<script>
+  /**
+   * Synchronizes the preview theme with the user's preference.
+   * - Reads "theme" from localStorage.
+   * - Falls back to "prefers-color-scheme: dark" media query if unset.
+   * - Applies the "dark" class to document.documentElement if theme is "dark".
+   * - Saves the resolved theme to localStorage for consistency.
+   * This block runs synchronously before dom load to prevent theme flash on load.
+   */
+  (() => {
+    const storedTheme = localStorage.getItem("theme");
+    const prefersDark = matchMedia("(prefers-color-scheme: dark)").matches;
+    const theme = storedTheme ?? (prefersDark ? "dark" : "light");
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  })();
+</script>
 <style>
   html, body { margin: 0; background: var(--background); color: var(--foreground); }
   .zazz-preview {

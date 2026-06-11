@@ -1,9 +1,9 @@
 ---
-title: Styling
-description: How Zazz stylesheets are structured, documented, and layered — the rules that keep the cascade predictable.
+title: File anatomy
+description: How every Zazz stylesheet is structured, documented, and layered — the rules that keep the cascade predictable when you read, extend, or override it.
 ---
 
-Every stylesheet in `zazz/styles/` follows a strict anatomy. Understanding this structure is how you read, extend, and override components without fighting the cascade.
+Every stylesheet in `zazz/styles/` follows the same anatomy. Learn it once and you can read any file, find the token you need to override, and extend a component without fighting the cascade.
 
 ## File anatomy
 
@@ -89,6 +89,8 @@ Global tokens in `_variables.css` are organized in tiers:
 | Metrics & systems | `--step-*`, `--radius-*`, `--gap-*`, `--font-size-*` | `_variables.css` |
 | Component tokens | `--button-background`, `--field-border`, `--dialog-radius` | each component file |
 
+The full map of which token to reach for, and when, lives in [Theme variables](/docs/core-concepts/theme-variables) and [Colors](/docs/core-concepts/colors).
+
 ### Local component tokens
 
 Every component declares a namespace in its own `@layer variables` block, defaulting to a global token:
@@ -168,15 +170,13 @@ Three comment styles, each with a specific role:
 
 ## Dark mode
 
-- `color-scheme: light dark` on `:root` enables system dark mode; semantic tokens use `light-dark()` to resolve per-scheme.
-- A manual `.dark` class re-declares the same semantic tokens for forced dark mode.
-- Inverted surfaces (dark popovers over light page) flip via container style queries: `@container style(--use-inverted-menu: "true")`.
+Dark mode is a token concern, not a per-file one. Components read role tokens (`--background`, `--foreground`, `--primary`…) that resolve through `light-dark()`, so a well-written file works in both modes without a single `.dark` override. See [Dark mode](/docs/core-concepts/dark-mode) for how the roles resolve and how to force a scheme.
 
 ## Allowed variations
 
 These deviate from the canonical shape on purpose — documented in-file:
 
 - **Split `@layer variables` blocks** — When a component has motion tokens and sizing tokens that read better separated.
-- **Component in `@layer reset`** — When redrawing native UI (e.g. `_switch.css` redraws `input[role="switch"]`).
+- **Component in `@layer reset`** — When redrawing native UI (e.g. `_switch.css` redraws `input[role="switch"]`). See [`_reset.css`](/docs/core-files/reset).
 - **`@supports`-gated enhancement** — When anchor positioning or other cutting-edge APIs need a documented fallback.
 - **Attribute-hook components** — When styling depends on `[data-*]` attributes driven by JavaScript.

@@ -1,0 +1,136 @@
+---
+title: Layout
+description: Display, position, overflow, z-index, aspect-ratio, object-fit, and order utilities — the box-level controls for how an element renders and sits in the flow.
+---
+
+Layout utilities control how a box renders and where it sits: its display mode, positioning,
+overflow, stacking, intrinsic ratio, and paint order. For the container/article wrappers and the
+breakpoint system, see [Responsive design](/docs/utilities/responsive-design).
+
+## Display
+
+| Class | Declaration |
+|---|---|
+| `block` | `display: block` |
+| `inline-block` | `display: inline-block` |
+| `inline` | `display: inline` |
+| `flex` | `display: flex` |
+| `inline-flex` | `display: inline-flex` |
+| `grid` | `display: grid` |
+| `hidden` | `display: none` |
+
+`flex` and `grid` are covered in depth in [Flexbox](/docs/utilities/flexbox) and
+[Grid](/docs/utilities/grid). `block`, `flex`, `inline-flex`, `grid`, and `hidden` are the
+display values that also have responsive variants ([Responsive design](/docs/utilities/responsive-design)).
+
+### Visibility
+
+`visibility` keeps an element's box (and its space) but toggles its paint — distinct from
+`hidden`, which removes the box entirely.
+
+| Class | Declaration |
+|---|---|
+| `visible` | `visibility: visible` |
+| `invisible` | `visibility: hidden` |
+
+## Position
+
+<Preview src="utilities/position" />
+
+| Class | Declaration |
+|---|---|
+| `static` | `position: static` |
+| `relative` | `position: relative` |
+| `absolute` | `position: absolute` |
+| `fixed` | `position: fixed` |
+| `sticky` | `position: sticky` |
+
+### Inset & edge offsets
+
+Offsets use the **semantic gap scale** (`--gap-xs` … `--gap-xl`), so a positioned element's
+offset matches the spacing rhythm of the rest of the page. `inset-*` sets all four edges at once.
+
+| Class | Declaration |
+|---|---|
+| `inset-0` | `top/right/bottom/left: 0` |
+| `inset-xs … inset-xl` | all four edges `= var(--gap-{size})` |
+| `top-xs … top-xl` | `top: var(--gap-{size})` |
+| `right-xs … right-xl` | `right: var(--gap-{size})` |
+| `bottom-xs … bottom-xl` | `bottom: var(--gap-{size})` |
+| `left-xs … left-xl` | `left: var(--gap-{size})` |
+
+```html
+<div class="relative">
+  <span class="absolute top-sm right-sm badge" data-variant="primary">New</span>
+</div>
+```
+
+## Overflow
+
+<Preview src="utilities/overflow" />
+
+| Class | Declaration |
+|---|---|
+| `overflow-visible` | `overflow: visible` |
+| `overflow-hidden` | `overflow: hidden` |
+| `overflow-clip` | `overflow: clip` |
+| `overflow-auto` | `overflow: auto` |
+| `overflow-x-auto` | `overflow-x: auto; overflow-y: clip` |
+| `overflow-y-auto` | `overflow-y: auto; overflow-x: clip` |
+| `no-scrollbar` | hides the scrollbar while keeping scroll (Firefox, IE, and `::-webkit-scrollbar`) |
+
+`no-scrollbar` is a modifier — pair it with one of the scrolling classes (e.g.
+`overflow-y-auto no-scrollbar`) when you want scroll without the visible track.
+
+## Z-index
+
+A small, intentional stacking scale plus an isolation helper. `z-isolate` creates a new stacking
+context (`isolation: isolate`) so a subtree's z-indexes can't escape it.
+
+| Class | Declaration |
+|---|---|
+| `z-isolate` | `isolation: isolate` |
+| `z-0` | `z-index: 0` |
+| `z-10` `z-20` `z-30` `z-40` `z-50` | `z-index: 10 … 50` |
+
+## Aspect ratio
+
+<Preview src="utilities/aspect-ratio" />
+
+Named ratios for media boxes — no custom values to remember.
+
+| Class | Ratio | Use |
+|---|---|---|
+| `aspect-square` | `1 / 1` | avatars, thumbnails |
+| `aspect-landscape` | `3 / 2` | photography |
+| `aspect-portrait` | `2 / 3` | portrait media |
+| `aspect-widescreen` | `16 / 9` | video |
+| `aspect-univisium` | `2 / 1` | wide editorial |
+| `aspect-anamorphic` | `2.39 / 1` | cinematic |
+
+## Object fit
+
+<Preview src="utilities/object-fit" />
+
+Controls how a replaced element (`<img>`, `<video>`) fills its box — pair with an
+[aspect ratio](#aspect-ratio) or explicit [size](/docs/utilities/sizing).
+
+| Class | Declaration |
+|---|---|
+| `object-contain` | `object-fit: contain` (fit inside, letterbox) |
+| `object-cover` | `object-fit: cover` (fill, crop) |
+| `object-fill` | `object-fit: fill` (stretch) |
+| `object-none` | `object-fit: none` (intrinsic size) |
+| `object-scale-down` | `object-fit: scale-down` |
+
+## Order
+
+<Preview src="utilities/order" />
+
+Reorder a flex or grid child visually without touching source order.
+
+| Class | Declaration |
+|---|---|
+| `order-first` | `order: -9999` |
+| `order-last` | `order: 9999` |
+| `order-none` | `order: 0` |

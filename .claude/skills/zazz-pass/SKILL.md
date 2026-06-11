@@ -41,8 +41,9 @@ utilities`. A utility wins over a component rule with no `!important`. Don't fig
   This means touching one axis/edge leaves others intact (e.g. `p-md pl-0` only zeros the
   left). Color utilities use `--_text-alpha`, `--_background-alpha`, `--_border-alpha` for
   per-channel opacity that doesn't bleed to children.
-- **State variants.** `hover\:` and `active\:` prefixes for text/bg/border colors and
-  opacity (e.g. `hover\:bg-primary`, `active\:opacity-80`). No JS needed.
+- **State variants.** `hover\:` prefix for text/bg/border colors, opacity, and scale
+  (e.g. `hover\:bg-primary`, `hover\:opacity-75`). No JS needed. For pressed/`:active`
+  feedback, write it in the component's own CSS — there are no `active\:` utilities.
 
 ## The golden rule: semantic first, specific as escape hatch
 

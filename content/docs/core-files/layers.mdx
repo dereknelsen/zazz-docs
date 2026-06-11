@@ -1,0 +1,54 @@
+---
+title: _layers.css
+description: One line of CSS that makes the whole system predictable — the cascade-layer order that lets utilities beat components without a single !important.
+---
+
+`_layers.css` is the smallest file in Zazz and the most important. It declares the order of the [cascade layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) every other stylesheet writes into — and that order, not selector specificity, decides which rule wins.
+
+```css
+@layer variables, reset, components, utilities;
+```
+
+That's the entire file. Because it must establish the order before any layer has content, it loads first — `main.css` `@import`s it ahead of everything else.
+
+## Why layers instead of specificity
+
+In ordinary CSS, the more specific selector wins. That's why you end up with `.card .button.is-primary` and the occasional `!important` — you're escalating specificity to override something.
+
+Cascade layers change the rule: **a later layer beats an earlier layer regardless of specificity.** A single-class utility in `utilities` overrides a multi-selector component rule in `components`, every time, with no specificity tricks.
+
+```html
+<!-- .button sets its own background in @layer components.
+     .bg-primary sets one in @layer utilities — and wins, cleanly. -->
+<button class="button bg-primary">Save</button>
+```
+
+This is the mechanism behind Zazz's [golden rule](/docs/core-concepts/utility-classes): compose with utilities and they always have the final say, so you rarely write custom CSS to override a component.
+
+## What lives in each layer
+
+| Layer | Holds | File |
+|---|---|---|
+| `variables` | Design tokens — the `:root` custom properties everything reads | [`_variables.css`](/docs/core-concepts/theme-variables) + each component's `@layer variables` block |
+| `reset` | Native-element baselines and re-skinned controls | [`_reset.css`](/docs/core-files/reset) |
+| `components` | The components themselves — `.button`, `.card`, `.input`… | each `_*.css` component file |
+| `utilities` | Atomic, single-purpose classes that win last | [`_utilities.css`](/docs/core-concepts/utility-classes) |
+
+`@property` registrations (in `_properties.css`) sit outside the layers — registration is layer-independent — but their tokens are consumed throughout.
+
+## Unlayered styles beat everything
+
+There's one level above all four layers: **unlayered CSS.** Any rule you write outside a `@layer` block overrides every layered rule, no matter how specific the layered selector is.
+
+```css
+/* No @layer wrapper — this beats Zazz's components AND utilities. */
+.button {
+  border-radius: 0;
+}
+```
+
+That makes unlayered CSS the ultimate escape hatch and an easy footgun. Prefer overriding a token, or adding your rule to the right layer, so you stay inside the system — see [Adding custom styles](/docs/core-concepts/custom-styles). Reach for unlayered CSS only when you deliberately want to trump everything.
+
+## Browser support
+
+Cascade layers are [Baseline](https://web.dev/baseline) and widely available — supported since 2022 across Chrome, Edge, Firefox, and Safari. No fallback is required.

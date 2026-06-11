@@ -37,7 +37,7 @@ Two rules govern every choice:
 - **Margin utilities:** `.m-0 .m-xs .m-sm .m-md .m-lg .m-xl`, axis `.mx-* .my-*` (+ `.mx-auto .my-auto`),
   physical sides `.mt-* .mr-* .mb-* .ml-*` (+ per-side `auto`).
 - **Negative margins:** `.-m-xs ..-m-xl`, `.-mx-* .-my-*`, `.-mt-* .-mr-* .-mb-* .-ml-*`
-  (same sizes xs–xl). Also available at responsive breakpoints (`xs:-m-xs` etc.).
+  (same sizes xs–xl). Base classes only — no responsive (`xs:`…) variants.
 - **Size utilities:** `.w-0 .w-px .w-auto .w-full .w-xs..xl .w-screen .w-screen-xs..xl`,
   `.h-0 .h-px .h-auto .h-full .h-xs..xl .h-screen .h-screen-xs..xl`,
   `.size-0 .size-auto .size-full .size-xs..xl .size-screen .size-screen-xs..xl`.
@@ -66,14 +66,17 @@ step) keeps both modes correct automatically.
 
 Reach here only when a role can't express it (a specific tint, a backdrop, a fixed accent).
 
-- **Scales 50–950:** `--primary-50…950` (same for `--secondary-*`, `--tertiary-*`,
+- **Scales 50–950 (tokens only):** `--primary-50…950` (same for `--secondary-*`, `--tertiary-*`,
   `--neutral-*`), plus `--white` / `--black`. Light theme binds primary/secondary at **600**,
-  tertiary at **500**; dark shifts lighter.
+  tertiary at **500**; dark shifts lighter. These have **no utility classes** — reach a fixed
+  shade via the token in custom CSS or inline (`style="color: var(--primary-600)"`).
 - **Overlays (alpha):** `--shade-50…950` / `--shade-full` (darken; from neutral-950 — use for
   backdrops, e.g. `--shade-800` for modal backdrops) and `--tint-50…950` / `--tint-full`
-  (lighten; from white). `*-none` = transparent.
-- **Utilities:** `.text-primary-600`, `.bg-neutral-100`, `.bg-shade-800`, `.bg-tint-*`,
-  `.text-white`, `.text-black`, `.bg-white`, `.bg-black`, `.bg-transparent`, `.bg-none`.
+  (lighten; from white). `*-none` = transparent. Overlays **do** ship `bg-*` utilities (the one
+  numeric color scale that does), since dimming a surface is common.
+- **Utilities:** `.bg-shade-*`, `.bg-tint-*`, `.text-white`, `.text-black`, `.bg-white`,
+  `.bg-black`, `.bg-transparent`, `.bg-none`. (Role tokens — §2 — cover the rest; numeric
+  `text-`/`bg-`/`border-` scale classes were removed in favor of the role-first model.)
 
 ## 4. Typography — use `text-*` classes; never compose from parts
 
@@ -112,8 +115,10 @@ intentionally (**md** ≈ popovers/modals). Utilities: `.shadow-none|xs|sm|md|lg
   `--screen-sm` 48rem, `--screen-md` 64rem, `--screen-lg` 80rem, `--screen-xl` 96rem.
 - **Responsive utilities are container-query prefixed:** `.xs:* .sm:* .md:* .lg:* .xl:*`
   (e.g. `.md:grid-cols-3`, `.lg:flex-row`) — they respond to the nearest container, not the
-  viewport. Available at each breakpoint: display, grid-cols, flex-direction, text-align,
-  items/justify/self/place alignment, visibility, col-span, basis, negative margins.
+  viewport. Available at each breakpoint: display, grid-cols, grid-rows, flex-direction,
+  text-align, align-items, justify-content, col-span, row-span, basis. (Less-toggled
+  families — align-self, justify-self, place-items, visibility, negative margins — ship
+  only as base classes, not per-breakpoint; apply them outside the responsive layer.)
 - **Display:** `.hidden .block .inline-block .inline .visible .invisible`.
 - **Flexbox:** `.flex .inline-flex`, direction `.flex-row .flex-row-reverse .flex-col
 .flex-col-reverse`, shorthand `.flex-1 .flex-auto .flex-initial .flex-none`, alignment
@@ -158,11 +163,10 @@ element in.
 
 Two separate systems — **element opacity** and **channel alpha**. Don't confuse them.
 
-- **Element opacity** (affects the whole element + children): `.opacity-0 .opacity-5 .opacity-10
-.opacity-15 .opacity-20 .opacity-25 .opacity-30 .opacity-40 .opacity-50 .opacity-60
-.opacity-70 .opacity-75 .opacity-80 .opacity-90 .opacity-95 .opacity-100`.
+- **Element opacity** (affects the whole element + children): quartile scale
+  `.opacity-0 .opacity-25 .opacity-50 .opacity-75 .opacity-100`.
 - **Color alpha** (dims only the color channel, not the element): `.bg-opacity-*`,
-  `.text-opacity-*`, `.border-opacity-*` — same 0–100 scale. Multiplied into the token's own
+  `.text-opacity-*`, `.border-opacity-*` — same quartile scale (0/25/50/75/100). Multiplied into the token's own
   alpha, so shade/tint/faded tokens keep their built-in translucency. Compose with any
   `text-`/`bg-`/`border-` color class. Backed by `@property`-registered `--_text-alpha`,
   `--_background-alpha`, `--_border-alpha` vars that don't inherit.
@@ -193,9 +197,10 @@ Two separate systems — **element opacity** and **channel alpha**. Don't confus
 
 ---
 
-## 14. State variants (hover / active)
+## 14. State variants (hover)
 
-Hover and active variants for color and opacity — use the backslash-colon prefix convention:
+Hover variants for color, opacity, and scale — use the backslash-colon prefix convention.
+(There are no `active:` variants; express pressed/active feedback in component CSS via `:active`.)
 
 - **Hover text:** `.hover\:text-{role}` (all theme roles: background, foreground, card,
   input, muted, faded, primary, secondary, tertiary, info, success, warning, destructive +
@@ -203,8 +208,8 @@ Hover and active variants for color and opacity — use the backslash-colon pref
 - **Hover background:** `.hover\:bg-{role}` (same roles + `transparent`, `none`).
 - **Hover border:** `.hover\:border-{color}` (primary, secondary, tertiary, muted, faded,
   info, success, warning, destructive).
-- **Hover opacity:** `.hover\:opacity-0..100`.
-- **Active** variants: same as hover but with `active\:` prefix (`:active` pseudo-class).
+- **Hover opacity:** `.hover\:opacity-{0,25,50,75,100}` (quartile).
+- **Hover scale:** `.hover\:scale-{0,50,75,90,95,100,105,110,125,150}`.
 
 ---
 

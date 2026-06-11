@@ -1,0 +1,58 @@
+---
+title: Hover states
+description: The hover variant utilities for color, opacity, and scale — pure-CSS interactive states with no JavaScript.
+---
+
+Color, opacity, and scale utilities ship `hover:` variants that apply on `:hover` — no JavaScript,
+no component code. Pair them with a [transition](/docs/utilities/effects#transitions) for a smooth
+change.
+
+```html
+<a href="#" class="text-muted-foreground hover:text-primary transition">Hover me</a>
+<img class="rounded-md transition hover:scale-105 hover:opacity-75" src="…" alt="…" />
+```
+
+<Callout type="info">
+In HTML the class name literally contains a colon — write `class="hover:bg-primary"`. The
+stylesheet escapes it as `.hover\:bg-primary` in the selector; you never type the backslash.
+</Callout>
+
+## Hover text color
+
+`hover:text-{role}` for every [text color role](/docs/utilities/text-color): `background`,
+`foreground`, `card`, `input`, `muted`, `faded`, `primary`, `secondary`, `tertiary`, `info`,
+`success`, `warning`, `destructive`, and each `-foreground` pair.
+
+```html
+<a class="text-foreground hover:text-primary transition">Link</a>
+```
+
+## Hover background
+
+`hover:bg-{role}` for every [background role](/docs/utilities/backgrounds), plus
+`hover:bg-transparent` and `hover:bg-none`.
+
+```html
+<button class="bg-card hover:bg-muted rounded-md p-sm transition">Row</button>
+```
+
+## Hover border
+
+`hover:border-{color}`: `primary`, `secondary`, `tertiary`, `muted`, `faded`, `info`, `success`,
+`warning`, `destructive`. Pair with a `border` class so there's a line to recolor.
+
+```html
+<div class="border hover:border-primary rounded-md p-md transition">Card</div>
+```
+
+## Hover opacity & scale
+
+| Family | Classes |
+|---|---|
+| Opacity | `hover:opacity-0` `hover:opacity-25` `hover:opacity-50` `hover:opacity-75` `hover:opacity-100` |
+| Scale | `hover:scale-0` `hover:scale-50` `hover:scale-75` `hover:scale-90` `hover:scale-95` `hover:scale-100` `hover:scale-105` `hover:scale-110` `hover:scale-125` `hover:scale-150` |
+
+<Callout type="warn">
+There are no `active:` (pressed) variants. Express `:active` / pressed feedback in the component's
+own CSS, not via utilities — see [Hover, focus, and other states](/docs/core-concepts/states).
+</Callout>

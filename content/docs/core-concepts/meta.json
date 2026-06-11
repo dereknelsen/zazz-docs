@@ -1,0 +1,12 @@
+{
+  "title": "Core concepts",
+  "pages": [
+    "utility-classes",
+    "states",
+    "responsive-design",
+    "dark-mode",
+    "theme-variables",
+    "colors",
+    "custom-styles"
+  ]
+}

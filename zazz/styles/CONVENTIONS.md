@@ -41,27 +41,18 @@ layers. Layering — not selector specificity or BEM — is how we control the c
 plain `.button` rule in `components` can still be overridden by a `utilities` class
 without `!important`.
 
-For best performance, prefer individual `<link rel="stylesheet">` tags over a single
-`main.css` `@import` bundle. Browsers fetch `<link>` stylesheets in parallel, while
-`@import` chains are sequential. Pair each stylesheet with a `<link rel="preload">`
-hint so the browser begins downloading before it encounters the render-blocking
-`<link rel="stylesheet">`:
+For loading, link the single `main.css` bundle — it `@import`s every layer in cascade order,
+so there's nothing to keep in sync. For transfer size, enable **brotli or gzip** on the server:
+CSS this regular compresses to ~10–15% of its raw size, which beats hand-splitting into parallel
+`<link>`s and adds no maintenance.
 
 ```html
-<!-- Preload critical stylesheets -->
-<link rel="preload" href="../styles/_layers.css" as="style" />
-<link rel="preload" href="../styles/_properties.css" as="style" />
-<link rel="preload" href="../styles/_variables.css" as="style" />
-<link rel="preload" href="../styles/_reset.css" as="style" />
-<!-- … one per file, in cascade order -->
-
-<!-- Load stylesheets (order must match _layers.css) -->
-<link rel="stylesheet" href="../styles/_layers.css" />
-<link rel="stylesheet" href="../styles/_properties.css" />
-<link rel="stylesheet" href="../styles/_variables.css" />
-<link rel="stylesheet" href="../styles/_reset.css" />
-<!-- … remaining component files in the same order -->
+<link rel="stylesheet" href="../styles/main.css" />
 ```
+
+Don't pair it with a `<link rel="preload" as="style">` for the same file — a same-document
+stylesheet link is already the highest-priority, render-blocking fetch, so the preload is
+redundant. (`preload` is for late-discovered resources like web fonts or JS-injected CSS.)
 
 See [`components/index.html`](../components/index.html) for a complete working example.
 
@@ -252,6 +243,45 @@ Naming convention:
   `--button-background--hover`, `--field-background--focus`,
   `--button-background--active`.
 
+### Public hooks vs. private internals
+
+A component file declares two kinds of custom property, and the distinction is
+load-bearing — don't blur them:
+
+| Kind                    | Looks like                                                   | Lives in                       | Declared on | Apps override? |
+| ----------------------- | ------------------------------------------------------------ | ------------------------------ | ----------- | -------------- |
+| **Public theming hook** | `--accordion-summary-padding-block` (unprefixed, namespaced) | `@layer variables`             | `:root`     | **yes** — the API |
+| **Private internal**    | `--_ring-width`, `--_ring` (leading `--_`)                   | the rule that uses it (`components`/`reset`) | the element | **no** — plumbing |
+
+**Public hooks** are the override API. They default to a global token, are read by the
+component (often on a descendant), and apps re-skin by reassigning them. Two rules keep
+them overridable:
+
+- **Declare them on `:root`, never on the element.** A custom property declared _directly
+  on_ an element — even via a zero-specificity `:where(details)` — beats a value
+  _inherited_ from `:root`, because inheritance only fills in when the element has no
+  declared value of its own. So `:where(details) { --accordion-summary-padding-block: … }`
+  would shadow an app's `:root { --accordion-summary-padding-block: … }` and silently kill
+  the "component default" override surface (redefine the token on `:root` to re-skin every
+  instance — see below). Locality is already covered: each component declares its hooks at
+  the top of its own file.
+- **Leave them unprefixed.** `--_` means _private_ (below); a hook is the opposite. It's
+  also a footgun — hooks are usually read on a descendant, so a hook registered
+  `@property … inherits: false` never reaches its consumer, and the `--_` family trends
+  toward non-inheriting registration.
+
+**Private internals** are transient plumbing — the ring widths flipped on `:focus-visible`
+(`--_ring-width`, `--_ring-offset-width`, `--_ring`), or a value composed and reused within
+one rule (`--details-content-transition`). They carry the `--_` prefix and are declared
+_inside the rule that consumes them_, in `@layer components` or `reset` — **never** in
+`@layer variables`. They aren't hooks; apps don't touch them. Scoping these to the element
+(or `:where(el)`) is correct precisely _because_ they aren't meant to be overridden from
+`:root`.
+
+Rule of thumb: if an app should be able to override it, it's an unprefixed `:root` hook in
+the variables layer; if it's plumbing the component sets for itself, it's a `--_` var next
+to the rule that reads it.
+
 ### Rules reference a token once; variants swap the token
 
 Component rules read the token a single time. Variants and sizes then only **reassign
@@ -366,6 +396,13 @@ These deviate from the canonical shape on purpose — document the reason in-fil
 - **Extended header** — [`_reveal.css`](./_reveal.css) keeps `@version`/`@since`/
   `@example` plus a data-attribute table because it is a configurable subsystem, not a
   single component.
+- **`--_` coordination var in `@layer variables`** — [`_utilities.css`](./_utilities.css)
+  declares `--_gap` on `:root` inside its variables block. It's the one `--_` var that lives
+  in a variables layer: an _inheriting_ coordination default (set on a container, read by
+  descendants for `gap`), left unregistered so default inheritance applies. The §5 rule
+  ("private internals live next to their rule, never in `@layer variables`") governs
+  component hooks; the utilities composition/coordination system is system plumbing, not a
+  component. Keep the in-file comment explaining the two `--_` kinds.
 
 ---
 

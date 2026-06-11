@@ -16,7 +16,6 @@ interface PreviewFrameProps {
   align?: "start" | "center" | "end";
   minHeight?: number;
   title?: string;
-  styleHrefs?: string[];
 }
 
 /**
@@ -32,7 +31,6 @@ export function PreviewFrame({
   align = "center",
   minHeight = 0,
   title = "Preview",
-  styleHrefs,
 }: PreviewFrameProps) {
   const ref = useRef<HTMLIFrameElement>(null);
   const [height, setHeight] = useState(minHeight || 260);
@@ -42,8 +40,8 @@ export function PreviewFrame({
   const toggleFullscreen = useCallback(() => setFullscreen((v) => !v), []);
 
   const srcDoc = useMemo(
-    () => buildPreviewDocument({ html, scripts, justify, align, minHeight, styleHrefs }),
-    [html, scripts, justify, align, minHeight, styleHrefs],
+    () => buildPreviewDocument({ html, scripts, justify, align, minHeight }),
+    [html, scripts, justify, align, minHeight],
   );
 
   // Reset loaded state when content changes.

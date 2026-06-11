@@ -6,11 +6,20 @@
  * @see        CONVENTIONS.md — file anatomy & layer architecture
  */
 
+/* Layer contract: must stay first. */
 @import "./_layers.css";
+
+/* Optional compatibility layer (disabled by default). */
 /* @import "./_legacy.css"; */
+
+/* Global foundation: typed properties + shared tokens. */
 @import "./_properties.css";
 @import "./_variables.css";
+
+/* Reset layer baseline (global native defaults). */
 @import "./_reset.css";
+
+/* Component files: most contribute variables/components (some also reset/utilities). */
 @import "./_page-transitions.css";
 @import "./_typography.css";
 @import "./_badge.css";
@@ -36,5 +45,9 @@
 @import "./_carousel.css";
 @import "./_lightbox.css";
 @import "./_reveal.css";
+
+/* Optional migrations layer (disabled by default). */
 /* @import "./_migrations.css"; */
+
+/* Utilities layer should remain last for intentional overrides. */
 @import "./_utilities.css";

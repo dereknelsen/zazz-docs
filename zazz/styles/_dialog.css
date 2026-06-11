@@ -6,9 +6,9 @@
  * @uses       <dialog>, ::backdrop — native modal + backdrop
  * @uses       @starting-style + allow-discrete — open/close opacity, transform, overlay
  * @uses       anchor-name, container-type — layout hooks for sized variants
- * @tokens     --dialog-* (@layer variables; sizing tokens in a second variables block)
+ * @tokens     --dialog-* (@layer zazz.variables; sizing tokens in a second variables block)
  */
-@layer variables {
+@layer zazz.variables {
   :root {
     --dialog-display: grid;
     --dialog-backdrop-color: var(--shade-900);
@@ -32,7 +32,7 @@
   }
 }
 
-@layer reset {
+@layer zazz.reset {
   /* ===========================================================================
   DIALOG — native <dialog> open/close animation, sizing, backdrop fade
   - In the reset layer so the .dialog component styling below wins.
@@ -96,7 +96,7 @@
   }
 }
 
-@layer variables {
+@layer zazz.variables {
   :root {
     --dialog-width: min(50ch, 100% - var(--gap-md) * 2);
     --dialog-height: fit-content;
@@ -106,7 +106,7 @@
   }
 }
 
-@layer components {
+@layer zazz.components {
   .dialog {
     /* Overrides reset-layer --dialog-shadow (reset > variables) */
     --dialog-shadow: var(--shadow-md);

@@ -8,9 +8,9 @@
  * @uses       @starting-style + allow-discrete — picker open animation
  * @uses       anchor-size(width) — match picker width to trigger (@supports gated)
  * @uses       Degrades to native OS dropdown where base-select is unsupported
- * @tokens     --select-* (@layer variables)
+ * @tokens     --select-* (@layer zazz.variables)
  */
-@layer variables {
+@layer zazz.variables {
   :root {
     --select-padding-inline-start: var(--field-padding);
     --select-padding-inline-end: var(--step-2);
@@ -22,7 +22,7 @@
 }
 
 
-@layer reset {
+@layer zazz.reset {
   /* ===========================================================================
   SELECT — native <select> internals (::picker, <option>, ::picker-icon)
   - In the reset layer so component overrides win; the plain appearance reset
@@ -98,7 +98,7 @@
   }
 }
 
-@layer components {
+@layer zazz.components {
   /* ===========================================================================
   SELECT — .select (customizable <select>, no JS)
   - appearance: base-select themes the trigger, picker, options, and arrow while

@@ -1,28 +1,40 @@
-
-
 /**
  * _legacy.css — Scoped legacy reset boundary
  *
- * @layer      legacy
+ * @layer      legacy, zazz
  * @requires   _layers.css
- * @uses       @scope — limits the reset to opted-in legacy regions only
- * @uses       all: revert-layer — strips pre-layered declarations in that region
+ * @uses       all: revert-layer — strips one layer without touching others
  * @see        _migrations.css — translate old system classes to Zazz tokens there
- * @example    <section data-legacy-styles="true">…legacy markup…</section>
+ * @example    <section data-legacy-css="none">…converted markup…</section>
+ * @example    <div data-legacy-css="only">…unconverted widget…</div>
  */
 
 /* ===========================================================================
   LEGACY RESET BASELINE
   Use this only to clear old declarations in opted-in regions.
   Do not put framework-to-Zazz translation rules here.
-  =========================================================================== /
-  
+  Put those in _migrations.css instead.
+
+  data-legacy-css="none" — strips the legacy layer from this subtree;
+                           Zazz applies, old CSS does not.
+  data-legacy-css="only" — strips the zazz layer from this subtree;
+                           old CSS applies, Zazz does not.
+  =========================================================================== */
+
 @layer legacy {
-  @scope (html) to ([data-legacy-styles="true"] *) {
-    :scope,
-    :scope * {
-      all: revert-layer;
-    }
+  :where(
+    [data-legacy-css="none"],
+    [data-legacy-css="none"] *
+  ) {
+    all: revert-layer;
   }
 }
-*/
+
+@layer zazz {
+  :where(
+    [data-legacy-css="only"],
+    [data-legacy-css="only"] *
+  ) {
+    all: revert-layer;
+  }
+}

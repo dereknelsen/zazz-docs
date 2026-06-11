@@ -19,7 +19,7 @@
  * Note: <select> picker internals live in _select.css; popover in _popover.css;
  *   dialog in _dialog.css.
  */
-@layer reset {
+@layer zazz.reset {
   /* ===========================================================================
   UNIVERSAL RESET — box model, margins, padding, borders
   =========================================================================== */
@@ -459,7 +459,7 @@
   }
 
   /* Native <select> internals (::picker panel, <option>, ::picker-icon) live in
-     _select.css under @layer reset to keep the select styling modular. */
+     _select.css under @layer zazz.reset to keep the select styling modular. */
 
   /* Button resets */
   :where(button) {

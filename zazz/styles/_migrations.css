@@ -1,7 +1,7 @@
 /**
  * _migrations.css — External system to Zazz token translations
  *
- * @layer      migrations
+ * @layer      zazz.migrations
  * @requires   _layers.css, _variables.css
  * @uses       token remapping — map old framework selectors to Zazz component hooks
  * @see        _legacy.css — optional scoped reset for legacy regions
@@ -19,12 +19,10 @@ Pattern:
 3) Let Zazz component rules consume the tokens.
 =========================================================================== */
 
-/* Example: Bootstrap semantic class -> Zazz button tokens. /
-@layer migrations {
-
+/* Example: Bootstrap semantic class -> Zazz button tokens. */
+@layer zazz.migrations {
 	.btn-primary {
 		--button-background: var(--primary);
 		--button-foreground: var(--primary-foreground);
 	}
 }
-*/

@@ -6,7 +6,11 @@ description: "One line of CSS that makes the whole system predictable: the casca
 `_layers.css` is the smallest file in Zazz and the most important. It declares the order of the [cascade layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) every other stylesheet writes into, and that order, not selector specificity, decides which rule wins.
 
 ```css
-@layer variables, reset, components, utilities;
+@layer legacy, zazz, overrides;
+
+@layer zazz {
+  @layer variables, reset, components, migrations, utilities;
+}
 ```
 
 That's the entire file. Because it must establish the order before any layer has content, it loads first; `main.css` `@import`s it ahead of everything else.
@@ -18,8 +22,8 @@ In ordinary CSS, the more specific selector wins. That's why you end up with `.c
 Cascade layers change the rule: **a later layer beats an earlier layer regardless of specificity.** A single-class utility in `utilities` overrides a multi-selector component rule in `components`, every time, with no specificity tricks.
 
 ```html
-<!-- .button sets its own background in @layer components.
-     .bg-primary sets one in @layer utilities — and wins, cleanly. -->
+<!-- .button sets its own background in @layer zazz.components.
+     .bg-primary sets one in @layer zazz.utilities — and wins, cleanly. -->
 <button class="button bg-primary">Save</button>
 ```
 
@@ -27,18 +31,23 @@ This is the mechanism behind Zazz's [golden rule](/docs/core-concepts/utility-cl
 
 ## What lives in each layer
 
+There are three top-level layers. The middle one, `zazz`, is itself subdivided:
+
 | Layer | Holds | File |
 |---|---|---|
-| `variables` | Design tokens — the `:root` custom properties everything reads | [`_variables.css`](/docs/core-concepts/theme-variables) + each component's `@layer variables` block |
-| `reset` | Native-element baselines and re-skinned controls | [`_reset.css`](/docs/core-files/reset) |
-| `components` | The components themselves — `.button`, `.card`, `.input`… | each `_*.css` component file |
-| `utilities` | Atomic, single-purpose classes that win last | [`_utilities.css`](/docs/core-concepts/utility-classes) |
+| `legacy` | Your existing (pre-Zazz) CSS, imported with `layer(legacy)`. Lowest priority; Zazz overrides it everywhere the two overlap. | your app's entry stylesheet |
+| `zazz.variables` | Design tokens — the `:root` custom properties everything reads | [`_variables.css`](/docs/core-concepts/theme-variables) + each component's `@layer zazz.variables` block |
+| `zazz.reset` | Native-element baselines and re-skinned controls | [`_reset.css`](/docs/core-files/reset) |
+| `zazz.components` | The components themselves — `.button`, `.card`, `.input`… | each `_*.css` component file |
+| `zazz.migrations` | Temporary shims that map old class names to Zazz tokens while you rewrite markup | [`_migrations.css`](/docs/core-files/migrations) |
+| `zazz.utilities` | Atomic, single-purpose classes that win last inside Zazz | [`_utilities.css`](/docs/core-concepts/utility-classes) |
+| `overrides` | Application rules that need to beat even Zazz utilities. Use sparingly. | your app's CSS |
 
 `@property` registrations (in `_properties.css`) sit outside the layers, since registration is layer-independent, but their tokens are consumed throughout.
 
 ## Unlayered styles beat everything
 
-There's one level above all four layers: **unlayered CSS.** Any rule you write outside a `@layer` block overrides every layered rule, no matter how specific the layered selector is.
+There's one level above all three layers: **unlayered CSS.** Any rule you write outside a `@layer` block overrides every layered rule, no matter how specific the layered selector is.
 
 ```css
 /* No @layer wrapper — this beats Zazz's components AND utilities. */
@@ -48,6 +57,53 @@ There's one level above all four layers: **unlayered CSS.** Any rule you write o
 ```
 
 That makes unlayered CSS the ultimate escape hatch and an easy footgun. Prefer overriding a token, or adding your rule to the right layer, so you stay inside the system. See [Adding custom styles](/docs/core-concepts/custom-styles). Reach for unlayered CSS only when you deliberately want to trump everything.
+
+## The `overrides` layer
+
+`@layer overrides` sits above `zazz` (including its utilities sublayer) but below unlayered CSS. It's the right place for application rules that need to beat Zazz utilities without going fully unlayered.
+
+```css
+@layer overrides {
+  /* beats everything in zazz, including utilities */
+  .button {
+    border-radius: 0;
+  }
+}
+```
+
+Reach for it when overriding a token isn't enough and you don't want the footgun of unlayered CSS.
+
+## Scoped isolation with `_legacy.css`
+
+`_legacy.css` is an optional file (disabled by default in `main.css`) that adds two attribute hooks for mixed codebases. Uncomment its import when you're migrating an existing project alongside Zazz:
+
+```css
+/* main.css — uncomment to enable */
+@import "./_legacy.css";
+```
+
+Once enabled, two `data-legacy-css` attributes control which layer applies to a subtree:
+
+| Attribute | Effect |
+|---|---|
+| `data-legacy-css="none"` | Strips the `legacy` layer from this element and its children. Zazz applies; your old CSS does not. Use on sections you've converted. |
+| `data-legacy-css="only"` | Strips the `zazz` layer from this element and its children. Your old CSS applies; Zazz does not. Use on sections you haven't touched yet. |
+
+Both use `:where()` for zero specificity and `all: revert-layer` rather than `all: revert`, so they're surgical: they remove one layer without disturbing the others.
+
+```html
+<!-- This section is converted — block legacy styles, keep Zazz -->
+<section data-legacy-css="none">
+  <button class="button" data-variant="primary">Save</button>
+</section>
+
+<!-- This widget is untouched — block Zazz, keep legacy -->
+<div data-legacy-css="only">
+  <div class="legacy-date-picker">...</div>
+</div>
+```
+
+For a full migration walkthrough, see [Migrating to Zazz](/docs/getting-started/migrating).
 
 ## Browser support
 

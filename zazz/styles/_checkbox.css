@@ -7,7 +7,7 @@
  * @uses       checked/indeterminate fill with --primary and layer a glyph (never colour alone)
  * @tokens     --checkbox-* (size, background, border, radius, checkmark-mask, indeterminate-mask)
  */
-@layer reset {
+@layer zazz.reset {
   :where(input[type="checkbox"]:not([role="switch"])) {
     --checkbox-size: var(--step-4_5);
     --checkbox-background: var(--input);

@@ -7,9 +7,9 @@
  * @uses       .tooltip__content — hint popover (light dismiss, auto-hides sibling hints)
  * @uses       anchor-name, position-anchor, position-area, position-try-fallbacks —
  *             explicit anchors for polyfill; data-side maps to --popover-position-*
- * @tokens     --tooltip-* (@layer variables)
+ * @tokens     --tooltip-* (@layer zazz.variables)
  */
-@layer variables {
+@layer zazz.variables {
   :root {
     --tooltip-background: var(--popover);
     --tooltip-foreground: var(--popover-foreground);
@@ -61,7 +61,7 @@
   }
 }
 
-@layer reset {
+@layer zazz.reset {
   /* ===========================================================================
   HINT POPOVER OVERRIDES
   - [popover] defaults in _popover.css target menus; hint tooltips need a compact
@@ -100,7 +100,7 @@
   }
 }
 
-@layer components {
+@layer zazz.components {
   /* ===========================================================================
   TOOLTIP — interestfor trigger + anchored hint popover
   - interestfor wires hover/focus/long-press to the hint popover and sets ARIA

@@ -14,7 +14,7 @@
  *             whole system; see CONVENTIONS.md.
  */
 /* Token values — @property registrations live in _properties.css (style() queries). */
-@layer variables {
+@layer zazz.variables {
   :root {
     /* Enable light/dark mode - make sure to redeclare dark mode tokens on .dark at the bottom of the file */
     color-scheme: light dark;

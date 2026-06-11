@@ -6,9 +6,9 @@
  * @uses       ::details-content — native open/close block-size transition (reset layer)
  * @uses       interpolate-size: allow-keywords — from _variables.css; required for
  *             block-size: 0 → auto transitions
- * @tokens     --accordion-* (@layer variables)
+ * @tokens     --accordion-* (@layer zazz.variables)
  */
-@layer variables {
+@layer zazz.variables {
   :root {
     --accordion-summary-padding-block: var(--gap-sm);
     --accordion-icon-size: var(--step-4);
@@ -16,7 +16,7 @@
   }
 }
 
-@layer reset {
+@layer zazz.reset {
   /* ===========================================================================
   DETAILS & SUMMARY — native open/close transition + summary marker reset
   - In the reset layer so the .accordion component styling below wins.
@@ -48,7 +48,7 @@
   }
 }
 
-@layer components {
+@layer zazz.components {
   .accordion {
     display: grid;
     flex: 1;

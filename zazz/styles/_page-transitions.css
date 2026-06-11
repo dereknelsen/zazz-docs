@@ -5,10 +5,10 @@
  * @requires   _layers.css, _variables.css, _reset.css ([data-transition-layer] names)
  * @uses       ::view-transition-old/new — cross-document page transitions
  * @uses       @view-transition — enabled in _variables.css
- * @tokens     --page-transition-* (@layer variables)
+ * @tokens     --page-transition-* (@layer zazz.variables)
  */
 
-@layer variables {
+@layer zazz.variables {
   :root {
     --page-transition-duration: var(--default-transition-duration);
     --page-transition-ease: var(--default-transition-timing-function);
@@ -20,7 +20,7 @@
   }
 }
 
-@layer utilities {
+@layer zazz.utilities {
   /* View transitions — main is isolated from header/footer (see _reset.css view-transition-name) */
   @media screen and (prefers-reduced-motion: no-preference) {
     ::view-transition-old(main-content) {

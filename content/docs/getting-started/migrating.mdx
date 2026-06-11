@@ -1,17 +1,15 @@
 ---
 title: Migrating to Zazz
-description: Adopt Zazz incrementally on top of an existing CSS codebase, using cascade layers, scoped resets, and @scope donut scoping so the two systems never fight while you migrate.
+description: Adopt Zazz incrementally on top of an existing CSS codebase, using cascade layers, data-legacy-css attributes, and optional @scope donut scoping so the two systems never fight while you migrate.
 ---
 
 You don't have to rewrite your CSS to start using Zazz. Because Zazz lives entirely in cascade
 layers and styles at zero specificity, you can drop it into an existing project and let it take
-over screen by screen. No big-bang rewrite, no `!important` war with your old styles. Three native
-CSS features do the work: cascade layers (`@layer`), `all: revert-layer`, and `@scope` with donut
-scoping.
+over screen by screen. No big-bang rewrite, no `!important` war with your old styles.
 
 ## The core problem: unlayered styles beat layered ones
 
-Zazz puts every rule inside a layer (`legacy, variables, reset, components, migrations, utilities`). The cascade has a
+Zazz puts every rule inside a layer (`legacy`, `zazz.*`, or `overrides`). The cascade has a
 rule that surprises people: **any unlayered author rule beats every layered rule, regardless of
 specificity.** Your existing CSS is almost certainly unlayered, so on its own it would override
 Zazz's components and utilities everywhere the two overlap.
@@ -26,7 +24,7 @@ your legacy CSS into the lowest layer:
 
 ```css
 /* entry.css - loaded before Zazz */
-@layer legacy, variables, reset, components, migrations, utilities;
+@layer legacy, zazz, overrides;
 
 @import "./legacy/app.css" layer(legacy);   /* old CSS → lowest priority */
 @import "./zazz/styles/main.css";            /* includes _legacy.css + _migrations.css */
@@ -38,12 +36,47 @@ systems style the same thing, Zazz wins; everywhere Zazz is silent, your old CSS
 day one, nothing visually breaks.
 
 <Callout>
-The `migrations` layer sits **above** Zazz's `reset` and `components` but **below** `utilities`.
-That ordering matters in Step 4: a translated class like `.btn-primary` must outrank the element baseline
-in `reset`, while Zazz utilities (`rounded-full`, `bg-primary`) must still override it.
+`zazz.migrations` sits above Zazz's `reset` and `components` sublayers but below `zazz.utilities`.
+That ordering matters in Step 5: a translated class like `.btn-primary` must outrank the element
+baseline in `reset`, while Zazz utilities (`rounded-full`, `bg-primary`) must still override it.
 </Callout>
 
-## Step 2: Bound where styles apply with `@scope`
+## Step 2: Isolate regions with `data-legacy-css`
+
+`_legacy.css` (disabled by default) adds two HTML attributes that let you opt any subtree into
+one system or the other without writing any CSS. Uncomment its import in `main.css`:
+
+```css
+/* main.css */
+@import "./_legacy.css"; /* remove the comment to enable */
+```
+
+Then use the attributes on any element:
+
+| Attribute | Effect |
+|---|---|
+| `data-legacy-css="none"` | Strips the `legacy` layer from this element and its children. Zazz applies; your old CSS does not. |
+| `data-legacy-css="only"` | Strips the `zazz` layer from this element and its children. Your old CSS applies; Zazz does not. |
+
+Both use `:where()` for zero specificity and `all: revert-layer` rather than `all: revert`, so
+they're surgical: they remove one layer without disturbing the others or the browser's defaults.
+
+```html
+<!-- This section is converted — stop legacy CSS from reaching in -->
+<section data-legacy-css="none">
+  <button class="button" data-variant="primary">Save</button>
+</section>
+
+<!-- This widget is untouched — stop Zazz from reaching in -->
+<div data-legacy-css="only">
+  <div class="legacy-date-picker">...</div>
+</div>
+```
+
+For most incremental migrations, this is all you need. If your legacy and Zazz regions are
+more deeply interleaved, `@scope` gives you finer control.
+
+## Step 3: Bound regions with `@scope` (for complex cases)
 
 `@scope` applies a block of rules to a region and, with a lower boundary, stops them at a subtree:
 "**donut scoping**." The donut hole is the part you leave alone:
@@ -54,17 +87,17 @@ in `reset`, while Zazz utilities (`rounded-full`, `bg-primary`) must still overr
 }
 ```
 
-This is the clean way to wall off the parts you haven't converted (a vendor embed, a legacy date
-picker, a chunk of admin UI) so your migration rules don't reach into them. Unlike a
-`.app :not(.legacy-widget *)` selector, `@scope` accounts for hierarchical proximity, so it still
-behaves correctly when regions nest inside each other.
+This is useful when you need migration rules (not just layer isolation) to stop at a boundary— for
+example, `_migrations.css` shims that should apply to a converted section but not reach into a
+nested legacy widget inside it. Unlike a `.app :not(.legacy-widget *)` selector, `@scope` accounts
+for hierarchical proximity, so it still behaves correctly when regions nest inside each other.
 
-## Step 3: Blank-slate a region with `all: revert`
+## Step 4: Blank-slate a region with `all: revert`
 
-Once Zazz is on the page, its `reset` layer restyles native elements globally. That's what you want
-for new UI, but it also reaches into old markup. To hand a region fully to Zazz, reset it to the
-browser's defaults first with `all: revert`, which drops **every** property back to the user-agent
-value, erasing both your legacy styles and Zazz's on that element:
+Once Zazz is on the page, its `reset` sublayer restyles native elements globally. That's what you
+want for new UI, but it also reaches into old markup. To hand a region fully to Zazz, reset it to
+the browser's defaults first with `all: revert`, which drops **every** property back to the
+user-agent value, erasing both your legacy styles and Zazz's on that element:
 
 ```css
 @scope (.takeover) to (.legacy-widget) {
@@ -86,7 +119,7 @@ and it strips your old styles while Zazz's higher layers keep applying on top. R
 true blank slate (for example, to quarantine a third-party widget from both systems).
 </Callout>
 
-## Step 4: Translate old class names in `_migrations.css`
+## Step 5: Translate old class names in `_migrations.css`
 
 The last piece bridges markup you haven't rewritten yet. `_migrations.css` re-points your old
 class names at Zazz's component tokens, so existing HTML renders as Zazz **before** you touch it.
@@ -100,7 +133,7 @@ the component rule:
 ```css
 /* _migrations.css - a temporary bridge. Delete each rule as you rewrite the markup. */
 
-@layer migrations {
+@layer zazz.migrations {
   @scope (.app) to (.legacy-widget) {
     .btn-primary {
       --button-background: var(--primary);
@@ -119,20 +152,23 @@ the migration is done.
 
 1. **Layer.** Add the `@layer` order and import your old CSS into `legacy` (Step 1). Ship it.
    Nothing should change yet.
-2. **Scope.** Wrap each section you're converting and donut-scope out the widgets you're not
-   (Step 2).
-3. **Reset where needed.** Blank-slate stubborn regions with `all: revert` / `revert-layer` so
-   legacy styling stops leaking in (Step 3).
-4. **Translate, then replace.** Add `_migrations.css` rules to make old markup look right now
-   (Step 4), then rewrite the HTML to real Zazz classes and delete the shim, screen by screen.
+2. **Isolate.** Enable `_legacy.css` and add `data-legacy-css` attributes to wall off converted
+   and unconverted sections (Step 2). No CSS to write.
+3. **Scope (if needed).** For deeply interleaved regions, use `@scope` donut scoping to bound
+   migration rules more precisely (Step 3).
+4. **Reset where needed.** Blank-slate stubborn regions with `all: revert` / `revert-layer` so
+   legacy styling stops leaking in (Step 4).
+5. **Translate, then replace.** Add `_migrations.css` rules to make old markup look right now
+   (Step 5), then rewrite the HTML to real Zazz classes and delete the shim, screen by screen.
 
 ## Browser support
 
 <Callout type="warn">
 `@layer`, `all: revert`, and `revert-layer` are **Baseline widely available**, safe everywhere
-with no fallback. `@scope` is **Baseline 2024 (newly available)**: Chrome/Edge 118, Safari 17.4,
-Firefox 128. If you must support older browsers, drop the donut and lean on `@layer` alone (it does
-most of the work), or bound regions with a wrapper class and `:not()` instead of `@scope`.
+with no fallback. The `data-legacy-css` attributes are pure CSS built on those same features, so
+they share the same support floor. `@scope` is **Baseline 2024 (newly available)**: Chrome/Edge
+118, Safari 17.4, Firefox 128. If you must support older browsers, skip the `@scope` step and
+lean on `@layer` plus the `data-legacy-css` attributes instead.
 </Callout>
 
 ## Next steps

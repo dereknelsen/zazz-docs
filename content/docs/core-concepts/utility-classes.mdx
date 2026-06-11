@@ -19,7 +19,7 @@ No new CSS file, no class to name, no stylesheet to keep in sync with the markup
 
 - **Stay on-system.** Every utility resolves to a token, so spacing, color, and type come from the same shared vocabulary across the whole site. You compose from a palette instead of inventing values.
 - **No naming, no dead CSS.** You never invent `.card-inner-wrapper`, and removing markup removes its styling, so there's no orphaned rule to track down later.
-- **They win the cascade cleanly.** Utilities live in `@layer utilities`, the last [cascade layer](/docs/core-files/layers), so a utility overrides a component's own rule with no `!important` and no specificity battle.
+- **They win the cascade cleanly.** Utilities live in `@layer zazz.utilities`, the last [cascade layer](/docs/core-files/layers), so a utility overrides a component's own rule with no `!important` and no specificity battle.
 
 ## Semantic first, specific as the escape hatch
 

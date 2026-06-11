@@ -10,7 +10,7 @@ Zazz replaces specificity-based CSS architecture with a four-layer cascade syste
 Every stylesheet in Zazz slots into one of four layers, declared once in `_layers.css`:
 
 ```css
-@layer variables, reset, components, utilities;
+@layer zazz.variables, reset, components, utilities;
 ```
 
 Order matters. Later layers override earlier ones regardless of selector specificity. This eliminates the need for `!important`, BEM modifiers, or naming hacks:
@@ -33,7 +33,7 @@ Four files form the foundation. Every other file in the system depends on them.
 Declares the cascade order. Must load first. Contains a single line:
 
 ```css
-@layer variables, reset, components, utilities;
+@layer zazz.variables, reset, components, utilities;
 ```
 
 ### `_variables.css`
@@ -175,10 +175,10 @@ Each `.text-{size}` class bundles the correct font-size, line-height, letter-spa
 
 ## Component tokens
 
-Every component declares its own token namespace in `@layer variables`, each defaulting to a global token:
+Every component declares its own token namespace in `@layer zazz.variables`, each defaulting to a global token:
 
 ```css
-@layer variables {
+@layer zazz.variables {
   :root {
     --button-background: var(--card);
     --button-background--hover: var(--muted);

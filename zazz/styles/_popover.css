@@ -10,9 +10,9 @@
  *             anchor positioning (gated behind @supports; Firefox/Safari fall
  *             back to UA-centered popover)
  * @uses       backdrop-filter — popover surface blur
- * @tokens     --popover-* (Tier 3 owner; @layer variables)
+ * @tokens     --popover-* (Tier 3 owner; @layer zazz.variables)
  */
-@layer variables {
+@layer zazz.variables {
   :root {
     /* Styles */
     --popover-border: var(--border);
@@ -41,12 +41,12 @@
   }
 }
 
-@layer reset {
+@layer zazz.reset {
   /* ===========================================================================
   POPOVER ELEMENT ENHANCEMENTS
   - [popover] is a shared primitive (dropdown, navigation-menu, …). Token
-    defaults live in @layer variables above; this block wires native open/close
-    motion and anchor positioning. Surface chrome is in @layer components below.
+    defaults live in @layer zazz.variables above; this block wires native open/close
+    motion and anchor positioning. Surface chrome is in @layer zazz.components below.
   =========================================================================== */
 
   :where([popover]) {
@@ -102,7 +102,7 @@
   }
 }
 
-@layer components {
+@layer zazz.components {
   /* ===========================================================================
   POPOVER SURFACE — shared chrome for every [popover] consumer
   =========================================================================== */

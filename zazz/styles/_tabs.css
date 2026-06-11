@@ -8,9 +8,9 @@
  *             (@supports gated; checked-label fallback paints card fill without pill)
  * @uses       anchor-scope — isolates --active-tab inside nested menus
  * @uses       text-box, color-mix() — label trim and focus ring
- * @tokens     --tabs-* (@layer variables)
+ * @tokens     --tabs-* (@layer zazz.variables)
  */
-@layer variables {
+@layer zazz.variables {
   :root {
     --tabs-gap: var(--gap-xs);
     --tabs-track-padding: var(--step-0_5);
@@ -42,7 +42,7 @@
   }
 }
 
-@layer components {
+@layer zazz.components {
   /* ===========================================================================
   TABS — .tabs
   .tabs__list — inline-flex muted track (fits tab row only; panels live outside).

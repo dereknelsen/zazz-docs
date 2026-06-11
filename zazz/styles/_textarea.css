@@ -5,9 +5,9 @@
  * @requires   _layers.css, _variables.css, _fields.css
  * @uses       field-sizing: content — auto-grow with text (modern browsers;
  *             falls back to fixed min/max block-size where unsupported)
- * @tokens     --textarea-* (@layer variables)
+ * @tokens     --textarea-* (@layer zazz.variables)
  */
-@layer variables {
+@layer zazz.variables {
   :root {
     --textarea-inline-size: 100%;
     --textarea-min-inline-size: 0;
@@ -22,7 +22,7 @@
   }
 }
 
-@layer reset {
+@layer zazz.reset {
   @media screen and (max-width: 40rem) {
     :is(textarea) {
       /* Ensure form controls are legible on smaller viewports and don't zoom in when focused */
@@ -31,7 +31,7 @@
   }
 }
 
-@layer components {
+@layer zazz.components {
   /* ===========================================================================
   TEXTAREA — .textarea (auto-sizing)
   - field-sizing: content grows the box with the text; height clamps between

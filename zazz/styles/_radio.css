@@ -4,9 +4,9 @@
  * @layer      variables, components
  * @requires   _layers.css, _variables.css, _fields.css (.field-group layout)
  * @uses       appearance: none — custom circle + radial-gradient dot when :checked
- * @tokens     --radio-* (@layer variables)
+ * @tokens     --radio-* (@layer zazz.variables)
  */
-@layer variables {
+@layer zazz.variables {
   :root {
     --radio-size: var(--step-4_5);
     --radio-background: var(--input);
@@ -27,7 +27,7 @@
   }
 }
 
-@layer components {
+@layer zazz.components {
   /* ===========================================================================
   RADIO — .radio (+ .radio-group)
   - appearance: none redraws the circle from theme tokens; the checked dot is a

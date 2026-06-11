@@ -8,9 +8,9 @@
  * @uses       view-transition-name — stable menu across navigations
  * @uses       @starting-style — viewport enter animation
  * @uses       Overrides --dialog-* motion tokens for slide-right variant
- * @tokens     --mobile-menu-* (@layer variables)
+ * @tokens     --mobile-menu-* (@layer zazz.variables)
  */
-@layer variables {
+@layer zazz.variables {
   :root {
     --mobile-menu-background: var(--background);
     --mobile-menu-foreground: var(--foreground);
@@ -24,7 +24,7 @@
   }
 }
 
-@layer components {
+@layer zazz.components {
   /* ===========================================================================
   MOBILE MENU — full-screen dialog with accordion-based nested navigation
   - Composes .dialog[data-size="screen"] + .accordion for expand/collapse

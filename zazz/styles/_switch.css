@@ -6,9 +6,9 @@
  * @uses       appearance: none on input[role="switch"]
  * @uses       label:has(> input[role="switch"])::after — thumb drawn on label (no JS)
  * @uses       oklch(from …) — checked/hover track tints
- * @tokens     --switch-* (@layer variables; consumed in @layer reset)
+ * @tokens     --switch-* (@layer zazz.variables; consumed in @layer zazz.reset)
  */
-@layer variables {
+@layer zazz.variables {
   :root {
     --switch-track-width: var(--step-7);
     --switch-track-padding: var(--step-0_5);
@@ -26,7 +26,7 @@
   }
 }
 
-@layer reset {
+@layer zazz.reset {
   /* ===========================================================================
     SWITCH — native <input type="checkbox" role="switch"> internals
     - In the reset layer so component overrides win.

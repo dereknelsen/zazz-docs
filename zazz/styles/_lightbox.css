@@ -7,9 +7,9 @@
  * @uses       @container — thumb column count at narrow widths
  * @uses       @starting-style — dialog slide scale/opacity on snap
  * @uses       Embla sync — requires zazz/scripts/embla.js for carousel behaviour
- * @tokens     --lightbox-* (@layer variables)
+ * @tokens     --lightbox-* (@layer zazz.variables)
  */
-@layer variables {
+@layer zazz.variables {
   :root {
     --lightbox-aspect-ratio: 3 / 2;
     --lightbox-object-fit: cover;
@@ -42,7 +42,7 @@
   }
 }
 
-@layer components {
+@layer zazz.components {
   /* ===========================================================================
   LIGHTBOX — image gallery with fullscreen dialog slideshow
   - Inline gallery: main Embla carousel + linked thumb strip.

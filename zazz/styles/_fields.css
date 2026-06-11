@@ -7,11 +7,11 @@
  * @uses       :has(:user-invalid) — label/hint/error crossfade
  * @uses       @starting-style + visibility allow-discrete — hint ↔ error swap
  * @uses       color-mix() — destructive field tint on invalid
- * @tokens     --field-*, --field-group-* (Tier 3 owner; @layer variables)
+ * @tokens     --field-*, --field-group-* (Tier 3 owner; @layer zazz.variables)
  * @consumedby _input.css, _textarea.css, _select.css, _input-group.css,
  *             _password-group.css, _radio.css (.radio-group)
  */
-@layer variables {
+@layer zazz.variables {
   :root {
     --field-background: var(--input);
     --field-background--hover: var(--input);
@@ -53,7 +53,7 @@
   }
 }
 
-@layer components {
+@layer zazz.components {
   /* ===========================================================================
   FORM — global form behaviour shared across every control
   - This file holds only the cross-control glue: the shared field-level tokens,

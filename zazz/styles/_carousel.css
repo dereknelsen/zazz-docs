@@ -5,10 +5,10 @@
  * @requires   _layers.css, _variables.css
  * @uses       data-embla attributes — layout hooks only; behaviour from zazz/scripts/embla.js
  * @uses       container-type on viewport — basis-* / sm:basis-* utils query embla-viewport width
- * @tokens     --embla-* (@layer variables)
+ * @tokens     --embla-* (@layer zazz.variables)
  * @consumedby _lightbox.css
  */
-@layer variables {
+@layer zazz.variables {
   :root {
     --embla-slide-basis: calc(100% - var(--_gap, 0px));
     --embla-slide-min-width: 0;
@@ -21,7 +21,7 @@
    EMBLA CAROUSEL STYLES
    - Documentation: https://www.embla-carousel.com/
    =========================================================================== */
-@layer components {
+@layer zazz.components {
   /* <embla-carousel> is a custom element (inline by default) that applies
      data-embla="root" to itself — give it block flow like the legacy div. */
   embla-carousel {

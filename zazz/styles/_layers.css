@@ -1,10 +1,12 @@
 /**
  * _layers.css — Cascade layer order (must load first).
  *
- * @layer      legacy, variables, reset, components, utilities (declares the order)
- * @requires   none
- * @uses       @layer — required by every other stylesheet in this folder
- * @see        CONVENTIONS.md — file anatomy & layer architecture
+ * @layer      legacy, zazz, overrides
+ * @sublayers  zazz.variables, zazz.reset, zazz.components, zazz.migrations, zazz.utilities
  */
 
-@layer legacy, variables, reset, components, migrations, utilities;
+@layer legacy, zazz, overrides;
+
+@layer zazz {
+  @layer variables, reset, components, migrations, utilities;
+}

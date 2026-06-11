@@ -5,9 +5,9 @@
  * @requires   _layers.css, _variables.css, _reset.css
  * @uses       color-mix(), oklch(from …) — variant hover/active tints
  * @uses       text-box — vertical trim (patchy browser support)
- * @tokens     --button-* (@layer variables)
+ * @tokens     --button-* (@layer zazz.variables)
  */
-@layer variables {
+@layer zazz.variables {
   :root {
     --button-ring-color: var(--ring-color);
 
@@ -41,7 +41,7 @@
   }
 }
 
-@layer components {
+@layer zazz.components {
   /* ===========================================================================
   BUTTON
   =========================================================================== */

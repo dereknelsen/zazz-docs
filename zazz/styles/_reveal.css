@@ -5,7 +5,7 @@
  * @requires   _layers.css, _variables.css
  * @uses       prefers-reduced-reveal — custom media (not prefers-reduced-motion)
  * @uses       Behaviour requires zazz/scripts/reveal.js (IntersectionObserver)
- * @tokens     --reveal-global-* (@layer variables);
+ * @tokens     --reveal-global-* (@layer zazz.variables);
  *             per-instance --reveal-* set from data-* attributes (typed in _properties.css)
  * @version    0.1.0
  * @since      0.1.0
@@ -38,7 +38,7 @@
  *   data-reveal-scale="0.5"             optional initial scale (requires JS mod)
  */
 
-@layer variables {
+@layer zazz.variables {
   :root {
     --reveal-global-duration: var(--default-transition-duration);
     --reveal-global-ease: var(--default-transition-timing-function);
@@ -49,7 +49,7 @@
   }
 }
 
-@layer utilities {
+@layer zazz.utilities {
   /* --- Animation Styles --- */
   @media screen and (prefers-reduced-reveal: no-preference) {
     :where(

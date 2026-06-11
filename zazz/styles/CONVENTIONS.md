@@ -32,14 +32,24 @@ CSSDoc is intentionally lightweight:
 Cascade order is declared once, in [`_layers.css`](./_layers.css), and must load first:
 
 ```css
-@layer legacy, variables, reset, components, utilities;
+@layer legacy, zazz, overrides;
+
+@layer zazz {
+  @layer variables, reset, components, migrations, utilities;
+}
 ```
 
 Load order lives in [`main.css`](./main.css): it `@import`s `_layers.css` first
-and then every component file in the same order. Everything slots into one of these four
-layers. Layering — not selector specificity or BEM — is how we control the cascade, so a
+and then every component file in the same order. Everything slots into one of these layers.
+Layering — not selector specificity or BEM — is how we control the cascade, so a
 plain `.button` rule in `components` can still be overridden by a `utilities` class
 without `!important`.
+
+The three top-level layers, in order:
+
+- **`legacy`** — your existing (pre-Zazz) CSS, when you import it with `layer(legacy)`. Lowest priority.
+- **`zazz`** — everything Zazz ships: variables, reset, components, migrations, utilities (as sublayers).
+- **`overrides`** — application-level rules that need to beat even Zazz utilities. Use sparingly.
 
 For loading, link the single `main.css` bundle — it `@import`s every layer in cascade order,
 so there's nothing to keep in sync. For transfer size, enable **brotli or gzip** on the server:
@@ -61,11 +71,11 @@ A component file is written top-to-bottom in this order:
 | #   | Section                  | Layer               | Required?                     |
 | --- | ------------------------ | ------------------- | ----------------------------- |
 | 1   | CSSDoc header            | —                   | always                        |
-| 2   | Deprecated css rules     | `@layer legacy` | when migrating to Zazz        |
-| 2   | Component token hooks    | `@layer variables`  | when the component has tokens |
-| 3   | Native-element baselines | `@layer reset`      | only if it redraws native UI  |
-| 4   | Component rules          | `@layer components` | the component itself          |
-| 5   | Utility classes          | `@layer utilities`  | only if it ships utilities    |
+| 2   | Deprecated css rules     | `@layer legacy`     | when migrating to Zazz        |
+| 2   | Component token hooks    | `@layer zazz.variables`  | when the component has tokens |
+| 3   | Native-element baselines | `@layer zazz.reset`      | only if it redraws native UI  |
+| 4   | Component rules          | `@layer zazz.components` | the component itself          |
+| 5   | Utility classes          | `@layer zazz.utilities`  | only if it ships utilities    |
 
 ```css
 /**
@@ -75,15 +85,15 @@ A component file is written top-to-bottom in this order:
  * @requires   _layers.css, _variables.css, _reset.css
  * @uses       color-mix(), oklch(from …) — variant hover/active tints
  * @uses       text-box — vertical trim (patchy browser support)
- * @tokens     --button-* (@layer variables)
+ * @tokens     --button-* (@layer zazz.variables)
  */
-@layer variables {
+@layer zazz.variables {
   :root {
     /* the component's override hooks — see §5 */
   }
 }
 
-@layer components {
+@layer zazz.components {
   .button {
     /* rules that consume the hooks above */
   }
@@ -99,6 +109,7 @@ The four layers, by responsibility:
   the `::picker` chrome in [`_select.css`](./_select.css), the redrawn switch in
   [`_switch.css`](./_switch.css)). [`_reset.css`](./_reset.css) owns the global baseline.
 - **`components`** — the actual component (`.button`, `.dialog`, `.field`).
+- **`migrations`** — temporary shims that map old class names to Zazz tokens while you rewrite markup. Delete each rule once the corresponding markup is updated. See [`_migrations.css`](./_migrations.css).
 - **`utilities`** — atomic, override-anything classes ([`_utilities.css`](./_utilities.css)),
   written with `:where()` for zero specificity.
 
@@ -118,7 +129,7 @@ column** (tag name padded to 11 chars + a space) so headers scan like a table.
 | `@layer`              | yes             | Cascade layers this file contributes to, in order: `variables, components`.                       |
 | `@requires`           | yes             | Load-order dependencies — files that must load before this one. `none` for `_layers.css`.         |
 | `@uses`               | —               | One modern CSS API/feature per line, with an inline `— note`. Flag support caveats here.          |
-| `@tokens`             | when owned      | The token namespace this file exposes = its override hooks, e.g. `--button-* (@layer variables)`. |
+| `@tokens`             | when owned      | The token namespace this file exposes = its override hooks, e.g. `--button-* (@layer zazz.variables)`. |
 | `@consumedby`         | when applicable | Reverse dependency — files that build on this one.                                                |
 | `@see`                | —               | External URL or cross-file reference. (Replaces the old block `@link`.)                           |
 | `@example`            | —               | Usage markup. Used where authoring is non-obvious (`_reveal.css`).                                |
@@ -126,7 +137,7 @@ column** (tag name padded to 11 chars + a space) so headers scan like a table.
 
 ### Rules
 
-- **Open with `/**`** (two stars), close with ` \*/`. One space-star-space per line.
+- **Open with `/**`** (two stars), close with `\*/`. One space-star-space per line.
 - **Summary line is verbatim** — don't reword existing component descriptions.
 - **`@requires`** is one comma-separated line; wrap long lists and indent the
   continuation to the value column. Always include `_layers.css` (every file needs the
@@ -136,7 +147,7 @@ column** (tag name padded to 11 chars + a space) so headers scan like a table.
   reader learns what might need a fallback.
 - **`@tokens`** names the namespace, not every token (the tokens self-document via
   naming — see §5). Note tier ownership for shared families:
-  `--field-* (Tier 3 owner; @layer variables)`.
+  `--field-* (Tier 3 owner; @layer zazz.variables)`.
 - **`@consumedby`** mirrors `@requires` from the other direction. If you add a file that
   `@requires _foo.css`, add it to `_foo.css`'s `@consumedby`.
 
@@ -154,7 +165,7 @@ The header from [`_fields.css`](./_fields.css), showing every tag in use:
  * @uses       :has(:user-invalid) — label/hint/error crossfade
  * @uses       @starting-style + visibility allow-discrete — hint ↔ error swap
  * @uses       color-mix() — destructive field tint on invalid
- * @tokens     --field-*, --field-group-* (Tier 3 owner; @layer variables)
+ * @tokens     --field-*, --field-group-* (Tier 3 owner; @layer zazz.variables)
  * @consumedby _input.css, _textarea.css, _select.css, _input-group.css,
  *             _password-group.css, _radio.css (.radio-group)
  */
@@ -175,7 +186,7 @@ Three comment styles, each with a job:
   =========================================================================== */
 ```
 
-**Token group labels** are short lowercase tags inside a `@layer variables` block.
+**Token group labels** are short lowercase tags inside a `@layer zazz.variables` block.
 They group related hooks; they do **not** document individual tokens (the names do):
 
 ```css
@@ -206,7 +217,7 @@ without editing a single rule.
 
 ### Tiered tokens
 
-Global tokens live in [`_variables.css`](./_variables.css) under `@layer variables`,
+Global tokens live in [`_variables.css`](./_variables.css) under `@layer zazz.variables`,
 organized in tiers (literal scales → semantic roles → component primitives):
 
 | Tier                 | Example                                                                                                  | Where               |
@@ -223,11 +234,11 @@ queries with typed comparison/range syntax. Theme roles register with `syntax: "
 
 ### Local component tokens
 
-Every component re-declares a namespace in its own `@layer variables` block, and each
+Every component re-declares a namespace in its own `@layer zazz.variables` block, and each
 token **defaults to a global token**:
 
 ```css
-@layer variables {
+@layer zazz.variables {
   :root {
     --button-background: var(--card);
     --button-background--hover: var(--muted);
@@ -251,7 +262,7 @@ load-bearing — don't blur them:
 
 | Kind                    | Looks like                                                   | Lives in                       | Declared on | Apps override? |
 | ----------------------- | ------------------------------------------------------------ | ------------------------------ | ----------- | -------------- |
-| **Public theming hook** | `--accordion-summary-padding-block` (unprefixed, namespaced) | `@layer variables`             | `:root`     | **yes** — the API |
+| **Public theming hook** | `--accordion-summary-padding-block` (unprefixed, namespaced) | `@layer zazz.variables`             | `:root`     | **yes** — the API |
 | **Private internal**    | `--_ring-width`, `--_ring` (leading `--_`)                   | the rule that uses it (`components`/`reset`) | the element | **no** — plumbing |
 
 **Public hooks** are the override API. They default to a global token, are read by the
@@ -274,8 +285,8 @@ them overridable:
 **Private internals** are transient plumbing — the ring widths flipped on `:focus-visible`
 (`--_ring-width`, `--_ring-offset-width`, `--_ring`), or a value composed and reused within
 one rule (`--details-content-transition`). They carry the `--_` prefix and are declared
-_inside the rule that consumes them_, in `@layer components` or `reset` — **never** in
-`@layer variables`. They aren't hooks; apps don't touch them. Scoping these to the element
+_inside the rule that consumes them_, in `@layer zazz.components` or `reset` — **never** in
+`@layer zazz.variables`. They aren't hooks; apps don't touch them. Scoping these to the element
 (or `:where(el)`) is correct precisely _because_ they aren't meant to be overridden from
 `:root`.
 
@@ -289,7 +300,7 @@ Component rules read the token a single time. Variants and sizes then only **rea
 token values** — they never restate the rule:
 
 ```css
-@layer components {
+@layer zazz.components {
   .button {
     background-color: var(--button-background); /* referenced once */
   }
@@ -315,19 +326,24 @@ This is what keeps the files small and the system consistent: one declaration of
 Because rules resolve tokens lazily, an app can intervene at any of three scopes:
 
 1. **Global** — redefine a semantic token in `_variables.css` (or on `:root` in app CSS):
+
    ```css
    :root {
      --radius-md: 0;
    } /* squares every component's medium radius */
    ```
+
 2. **Component default** — redefine a component token on `:root`/a scope to re-skin
    every instance of that component:
+
    ```css
    :root {
      --button-radius: var(--radius-full);
    } /* all buttons go pill-shaped */
    ```
+
 3. **Instance** — set the token inline or via a variant/size attribute for a one-off:
+
    ```html
    <button class="button" style="--button-background: var(--secondary)">One-off</button>
    ```
@@ -381,10 +397,10 @@ variables layer.
 
 These deviate from the canonical shape on purpose — document the reason in-file:
 
-- **Split `@layer variables` blocks** — [`_dialog.css`](./_dialog.css) declares motion
+- **Split `@layer zazz.variables` blocks** — [`_dialog.css`](./_dialog.css) declares motion
   tokens up top and sizing tokens in a second block lower down. Fine; label the second
   block.
-- **Component living in `@layer reset`** — [`_switch.css`](./_switch.css) redraws the
+- **Component living in `@layer zazz.reset`** — [`_switch.css`](./_switch.css) redraws the
   native `input[role="switch"]`, so it belongs in `reset` (it must lose to component
   overrides). Note it in `@tokens`.
 - **`@supports`-gated progressive enhancement** — [`_popover.css`](./_popover.css),
@@ -397,13 +413,20 @@ These deviate from the canonical shape on purpose — document the reason in-fil
 - **Extended header** — [`_reveal.css`](./_reveal.css) keeps `@version`/`@since`/
   `@example` plus a data-attribute table because it is a configurable subsystem, not a
   single component.
-- **`--_` coordination var in `@layer variables`** — [`_utilities.css`](./_utilities.css)
+- **`--_` coordination var in `@layer zazz.variables`** — [`_utilities.css`](./_utilities.css)
   declares `--_gap` on `:root` inside its variables block. It's the one `--_` var that lives
   in a variables layer: an _inheriting_ coordination default (set on a container, read by
   descendants for `gap`), left unregistered so default inheritance applies. The §5 rule
-  ("private internals live next to their rule, never in `@layer variables`") governs
+  ("private internals live next to their rule, never in `@layer zazz.variables`") governs
   component hooks; the utilities composition/coordination system is system plumbing, not a
   component. Keep the in-file comment explaining the two `--_` kinds.
+- **`_legacy.css` attribute hooks** — when enabled (uncomment in `main.css`), `_legacy.css`
+  provides two zero-specificity opt-outs for mixed codebases. `[data-legacy-css="none"]`
+  applies `all: revert-layer` inside `@layer legacy`, stripping legacy styles from that
+  subtree so only Zazz applies. `[data-legacy-css="only"]` applies `all: revert-layer`
+  inside `@layer zazz`, stripping Zazz from that subtree so only legacy styles apply. Both
+  use `:where()` to stay at zero specificity. This is the attribute-driven alternative to
+  `@scope` donut scoping for per-region isolation during migration.
 
 ---
 
@@ -420,14 +443,14 @@ These deviate from the canonical shape on purpose — document the reason in-fil
     * @layer      variables, components
     * @requires   _layers.css, _variables.css
     * @uses       <feature> — <note / support caveat>
-    * @tokens     --<component>-* (@layer variables)
+    * @tokens     --<component>-* (@layer zazz.variables)
     */
    ```
 
 3. Declare the token hooks, each defaulting to a global token:
 
    ```css
-   @layer variables {
+   @layer zazz.variables {
      :root {
        /* surface */
        --<component>-background: var(--card);
@@ -438,7 +461,7 @@ These deviate from the canonical shape on purpose — document the reason in-fil
    }
    ```
 
-4. Write the rules in `@layer components`, referencing each token once.
+4. Write the rules in `@layer zazz.components`, referencing each token once.
 5. Add variants/sizes as `[data-*]` selectors that **only reassign tokens**.
 6. If you read another component's tokens, add this file to that file's `@consumedby`.
-7. If you redraw native UI, put those rules in `@layer reset` and say why.
+7. If you redraw native UI, put those rules in `@layer zazz.reset` and say why.

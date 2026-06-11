@@ -7,9 +7,9 @@
  * @uses       :focus-within — lifts shell ring/border as one field
  * @uses       :has() — restore padding when addons absent; invalid text color
  * @uses       data-align on .input-group__addon — inline-start/end, block-start/end
- * @tokens     --input-group-* (@layer variables)
+ * @tokens     --input-group-* (@layer zazz.variables)
  */
-@layer variables {
+@layer zazz.variables {
   :root {
     --input-group-display: flex;
     --input-group-wrap: wrap;
@@ -28,7 +28,7 @@
   }
 }
 
-@layer components {
+@layer zazz.components {
   /* ===========================================================================
   INPUT GROUP — .input-group  (shadcn-style composition)
   - A single bordered shell that fuses a text control with addons (icons, text,

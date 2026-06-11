@@ -7,9 +7,9 @@
  *             --font-weight-*, --leading-*, --tracking-* from _variables.css;
  *             exposes .text-* (scale) and Tailwind-style .font-* (weight) utilities
  * @uses       font-optical-sizing — heading optical size
- * @tokens     --prose-* (@layer variables)
+ * @tokens     --prose-* (@layer zazz.variables)
  */
-@layer variables {
+@layer zazz.variables {
   :root {
     --prose-gap: var(--gap-sm);
     --prose-figure-gap: var(--gap-xs);
@@ -19,7 +19,7 @@
   }
 }
 
-@layer reset {
+@layer zazz.reset {
   /* ===========================================================================
   TYPOGRAPHY — base styles for text elements
   =========================================================================== */
@@ -33,7 +33,7 @@
   }
 }
 
-@layer components {
+@layer zazz.components {
   /* ===========================================================================
   TYPOGRAPHY — prose component styles
   =========================================================================== */
@@ -251,7 +251,7 @@
   }
 }
 
-@layer utilities {
+@layer zazz.utilities {
   /* ===========================================================================
   TYPOGRAPHY — type scale, weight & link utilities
   =========================================================================== */

@@ -78,13 +78,28 @@ If you persist a user's theme choice (see [Dark mode](/docs/core-concepts/dark-m
 
 ```html
 <script>
-  (() => {
-    const storedTheme = localStorage.getItem("theme");
-    const prefersDark = matchMedia("(prefers-color-scheme: dark)").matches;
-    const theme = storedTheme ?? (prefersDark ? "dark" : "light");
-    document.documentElement.classList.toggle("dark", theme === "dark");
-  })();
-</script>
+    /**
+     * Synchronizes the preview theme with the user's preference.
+     * - Reads "theme" from localStorage.
+     * - Falls back to "prefers-color-scheme: dark" media query if unset.
+     * - Applies the "dark" class to document.documentElement if theme is "dark".
+     * - Saves the resolved theme to localStorage for consistency.
+     * This block runs synchronously before dom load to prevent theme flash on load.
+     */
+    (() => {
+        try {
+            const storedTheme = localStorage.getItem("theme");
+            const prefersDark = matchMedia("(prefers-color-scheme: dark)").matches;
+            const theme = storedTheme ?? (prefersDark ? "dark" : "light");
+            document.documentElement.classList.toggle("dark", theme === "dark");
+        } catch {
+            document.documentElement.classList.toggle(
+                "dark",
+                matchMedia("(prefers-color-scheme: dark)").matches
+            );
+        }
+    })();
+  </script>
 ```
 
 Put this block last in `<head>`, after stylesheets and deferred `<script src>` tags.
@@ -218,7 +233,7 @@ The reset gives `<body>`, `<main>`, and section landmarks their own layout and c
 
 `main.css` handles this for you. If you link files individually, keep this order:
 
-1. `_layers.css`: declares `@layer variables, reset, components, utilities;` ([why this comes first](/docs/core-files/layers))
+1. `_layers.css`: declares `@layer zazz.variables, reset, components, utilities;` ([why this comes first](/docs/core-files/layers))
 2. `_properties.css`: registered `@property` declarations
 3. `_variables.css`: global design tokens
 4. `_reset.css`: element baselines

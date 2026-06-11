@@ -4,7 +4,7 @@ description: Zazz's atomic utility classes, the override layer that wins by casc
 ---
 
 Utilities are Zazz's atomic classes: one job each, applied in markup. They live in the **last**
-cascade layer (`@layer utilities`), so a utility always wins over a component rule. No
+cascade layer (`@layer zazz.utilities`), so a utility always wins over a component rule. No
 `!important`, no specificity tricks. Every utility is wrapped in `:where()` for zero specificity,
 which means your own selectors can still override them when you need to.
 

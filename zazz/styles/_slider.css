@@ -10,7 +10,7 @@
  * via JS if a filled track is needed. The thumb is centered on the track with a
  * calc'd negative margin so retuning either size keeps it aligned.
  */
-@layer reset {
+@layer zazz.reset {
   :where(input[type="range"]) {
     --range-track-height: var(--step-1_5);
     --range-track-background: var(--muted);

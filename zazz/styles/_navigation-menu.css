@@ -9,9 +9,9 @@
  * @uses       :has(:popover-open) — chevron rotation without JS
  * @uses       view-transition-name — stable header across navigations
  * @uses       @starting-style — slide-down viewport reveal
- * @tokens     --navigation-* (@layer variables)
+ * @tokens     --navigation-* (@layer zazz.variables)
  */
-@layer variables {
+@layer zazz.variables {
   :root {
     --navigation-icon-transition: transform var(--default-transition-duration)
       var(--default-transition-timing-function);
@@ -30,7 +30,7 @@
   }
 }
 
-@layer components {
+@layer zazz.components {
   .navigation-menu {
     /* View transitions - keeps the header stable when navigating between pages */
     view-transition-name: global-component;

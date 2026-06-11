@@ -5,9 +5,9 @@
  * @requires   _layers.css, _variables.css, _fields.css, _reset.css
  * @uses       ::-webkit-calendar-picker-indicator — date/time picker chrome (WebKit)
  * @uses       mask — calendar icon (not background-image, for color: currentColor)
- * @tokens     --input-* (@layer variables)
+ * @tokens     --input-* (@layer zazz.variables)
  */
-@layer variables {
+@layer zazz.variables {
   :root {
     --input-inline-size: 100%;
     --input-min-inline-size: 0;
@@ -26,7 +26,7 @@
   }
 }
 
-@layer reset {
+@layer zazz.reset {
   @media screen and (max-width: 40rem) {
     :is(input) {
       /* Ensure form controls are legible on smaller viewports and don't zoom in when focused */
@@ -35,7 +35,7 @@
   }
 }
 
-@layer components {
+@layer zazz.components {
   /* ===========================================================================
   TEXT INPUTS — .input
   - One class for every text-like type (text, search, email, number, date, …);

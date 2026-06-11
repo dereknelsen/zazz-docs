@@ -8,7 +8,7 @@
  * @uses       style() queries — read typed @property tokens from _properties.css
  */
 
-@layer variables {
+@layer zazz.variables {
   /* ===========================================================================
     INTERNAL UTILITY VARIABLES — `--_` prefix
     System-level variables that utilities compose into a single declaration.
@@ -115,7 +115,7 @@
   initial-value: 1;
 }
 
-@layer utilities {
+@layer zazz.utilities {
   /* ===========================================================================
     FONT FAMILY UTILITIES
     =========================================================================== */

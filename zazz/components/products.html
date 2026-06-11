@@ -75,10 +75,17 @@
      * This block runs synchronously before dom load to prevent theme flash on load.
      */
     (() => {
-      const storedTheme = localStorage.getItem("theme");
-      const prefersDark = matchMedia("(prefers-color-scheme: dark)").matches;
-      const theme = storedTheme ?? (prefersDark ? "dark" : "light");
-      document.documentElement.classList.toggle("dark", theme === "dark");
+        try {
+            const storedTheme = localStorage.getItem("theme");
+            const prefersDark = matchMedia("(prefers-color-scheme: dark)").matches;
+            const theme = storedTheme ?? (prefersDark ? "dark" : "light");
+            document.documentElement.classList.toggle("dark", theme === "dark");
+        } catch {
+            document.documentElement.classList.toggle(
+                "dark",
+                matchMedia("(prefers-color-scheme: dark)").matches
+            );
+        }
     })();
   </script>
 </head>

@@ -6,12 +6,12 @@ description: Adopt Zazz incrementally on top of an existing CSS codebase, using 
 You don't have to rewrite your CSS to start using Zazz. Because Zazz lives entirely in cascade
 layers and styles at zero specificity, you can drop it into an existing project and let it take
 over screen by screen. No big-bang rewrite, no `!important` war with your old styles. Three native
-CSS features do the work: cascade layers (`@layer`), `all: revert`, and `@scope` with donut
+CSS features do the work: cascade layers (`@layer`), `all: revert-layer`, and `@scope` with donut
 scoping.
 
 ## The core problem: unlayered styles beat layered ones
 
-Zazz puts every rule inside a layer (`variables, reset, components, utilities`). The cascade has a
+Zazz puts every rule inside a layer (`legacy, variables, reset, components, migrations, utilities`). The cascade has a
 rule that surprises people: **any unlayered author rule beats every layered rule, regardless of
 specificity.** Your existing CSS is almost certainly unlayered, so on its own it would override
 Zazz's components and utilities everywhere the two overlap.
@@ -25,12 +25,11 @@ In the entry stylesheet you load before Zazz, declare the full layer order up fr
 your legacy CSS into the lowest layer:
 
 ```css
-/* entry.css — loaded before Zazz */
-@layer legacy, variables, reset, components, migration, utilities;
+/* entry.css - loaded before Zazz */
+@layer legacy, variables, reset, components, migrations, utilities;
 
 @import "./legacy/app.css" layer(legacy);   /* old CSS → lowest priority */
-@import "./zazz/styles/main.css";            /* Zazz: variables, reset, components, utilities */
-@import "./migration.css";                   /* the shim → @layer migration (Step 4) */
+@import "./zazz/styles/main.css";            /* includes _legacy.css + _migrations.css */
 ```
 
 The **first** `@layer` statement wins for ordering, so declaring it here (before `main.css`
@@ -39,8 +38,8 @@ systems style the same thing, Zazz wins; everywhere Zazz is silent, your old CSS
 day one, nothing visually breaks.
 
 <Callout>
-The `migration` layer sits **above** Zazz's `reset` and `components` but **below** `utilities`.
-That ordering matters in Step 4: a translated class like `.btn` must outrank the element baseline
+The `migrations` layer sits **above** Zazz's `reset` and `components` but **below** `utilities`.
+That ordering matters in Step 4: a translated class like `.btn-primary` must outrank the element baseline
 in `reset`, while Zazz utilities (`rounded-full`, `bg-primary`) must still override it.
 </Callout>
 
@@ -87,60 +86,34 @@ and it strips your old styles while Zazz's higher layers keep applying on top. R
 true blank slate (for example, to quarantine a third-party widget from both systems).
 </Callout>
 
-## Step 4: Translate old class names in `_migration.css`
+## Step 4: Translate old class names in `_migrations.css`
 
-The last piece bridges markup you haven't rewritten yet. A `_migration.css` shim re-points your old
+The last piece bridges markup you haven't rewritten yet. `_migrations.css` re-points your old
 class names at Zazz's component tokens, so existing HTML renders as Zazz **before** you touch it.
 Because Zazz components are token-driven, the shim is small and stays themeable, so light/dark and
 brand changes flow through for free.
 
-Here `.btn` is translated to the Zazz button. Mirror the token-driven rule from `_button.css`; old
-modifier classes map to Zazz variants the same way `data-variant` does, by reassigning the
-component's tokens, not restating the rule:
+Here `.btn-primary` is translated to the Zazz button semantic tokens. Old modifier classes map to
+Zazz variants the same way `data-variant` does, by reassigning the component tokens, not restating
+the component rule:
 
 ```css
-/* _migration.css — a temporary bridge. Delete each rule as you rewrite the markup. */
+/* _migrations.css - a temporary bridge. Delete each rule as you rewrite the markup. */
 
-@layer migration {
+@layer migrations {
   @scope (.app) to (.legacy-widget) {
-
-    /* .btn → .button. Every value is a Zazz token, so theme and dark mode
-       come along automatically. */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--button-gap);
-      block-size: var(--button-height);
-      padding-inline: var(--button-padding);
-      border: var(--button-border);
-      border-radius: var(--button-radius);
-      background: var(--button-background);
-      color: var(--button-foreground);
-      font-family: var(--button-font-family);
-      font-size: var(--button-font-size);
-      font-weight: var(--button-font-weight);
-      line-height: var(--button-line-height);
-    }
-
-    /* Old modifiers → Zazz variants: reassign tokens, don't restate rules. */
     .btn-primary {
       --button-background: var(--primary);
       --button-foreground: var(--primary-foreground);
-    }
-
-    .btn-danger {
-      --button-background: var(--destructive);
-      --button-foreground: var(--destructive-foreground);
     }
   }
 }
 ```
 
-The same move works for any component: a legacy `.card` adopts `--card`/`--radius-lg`, a `.tag`
-adopts the badge tokens, and so on. Each translated rule is a stepping stone. Once a screen's
-markup is updated to `class="button" data-variant="primary"`, delete its `.btn` shim. When
-`_migration.css` is empty, the migration is done.
+The same move works for any component: a legacy `.card` can adopt card tokens, a `.tag` can adopt
+badge tokens, and so on. Each translated rule is a stepping stone. Once a screen's markup is
+updated to native Zazz classes and attributes, delete its shim. When `_migrations.css` is empty,
+the migration is done.
 
 ## A migration path
 
@@ -150,7 +123,7 @@ markup is updated to `class="button" data-variant="primary"`, delete its `.btn` 
    (Step 2).
 3. **Reset where needed.** Blank-slate stubborn regions with `all: revert` / `revert-layer` so
    legacy styling stops leaking in (Step 3).
-4. **Translate, then replace.** Add `_migration.css` rules to make old markup look right now
+4. **Translate, then replace.** Add `_migrations.css` rules to make old markup look right now
    (Step 4), then rewrite the HTML to real Zazz classes and delete the shim, screen by screen.
 
 ## Browser support

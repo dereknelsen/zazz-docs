@@ -32,7 +32,7 @@ CSSDoc is intentionally lightweight:
 Cascade order is declared once, in [`_layers.css`](./_layers.css), and must load first:
 
 ```css
-@layer migrations, variables, reset, components, utilities;
+@layer legacy, variables, reset, components, utilities;
 ```
 
 Load order lives in [`main.css`](./main.css): it `@import`s `_layers.css` first
@@ -61,7 +61,7 @@ A component file is written top-to-bottom in this order:
 | #   | Section                  | Layer               | Required?                     |
 | --- | ------------------------ | ------------------- | ----------------------------- |
 | 1   | CSSDoc header            | —                   | always                        |
-| 2   | Deprecated css rules     | `@layer migrations` | when migrating to Zazz        |
+| 2   | Deprecated css rules     | `@layer legacy` | when migrating to Zazz        |
 | 2   | Component token hooks    | `@layer variables`  | when the component has tokens |
 | 3   | Native-element baselines | `@layer reset`      | only if it redraws native UI  |
 | 4   | Component rules          | `@layer components` | the component itself          |

@@ -1,0 +1,25 @@
+
+
+/**
+ * _legacy.css — Scoped legacy reset boundary
+ *
+ * @layer      legacy
+ * @requires   _layers.css
+ * @uses       @scope — limits the reset to opted-in legacy regions only
+ * @uses       all: revert-layer — strips pre-layered declarations in that region
+ * @see        _migrations.css — translate old system classes to Zazz tokens there
+ * @example    <section data-legacy-styles="true">…legacy markup…</section>
+ */
+@layer legacy {
+  /* ===========================================================================
+  LEGACY RESET BASELINE
+  Use this only to clear old declarations in opted-in regions.
+  Do not put framework-to-Zazz translation rules here.
+  =========================================================================== */
+  @scope (html) to ([data-legacy-styles="true"] *) {
+    :scope,
+    :scope * {
+      all: revert-layer;
+    }
+  }
+}

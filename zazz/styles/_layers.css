@@ -1,10 +1,10 @@
 /**
  * _layers.css — Cascade layer order (must load first).
  *
- * @layer      variables, reset, components, utilities (declares the order)
+ * @layer      migrations, variables, reset, components, utilities (declares the order)
  * @requires   none
  * @uses       @layer — required by every other stylesheet in this folder
  * @see        CONVENTIONS.md — file anatomy & layer architecture
  */
 
-@layer variables, reset, components, utilities;
+@layer migrations, variables, reset, components, utilities;

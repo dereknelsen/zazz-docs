@@ -18,31 +18,26 @@ Grab what you need from the repository. For most projects, copy both folders:
 
 Use degit to copy only the directories you need, without cloning the whole repo.
 
-<Tabs items={["npm", "pnpm"]}>
-  <Tab value="npm">
+**With npm:**
 
 ```bash
 npm install -g degit
-npx degit dereknelsen/zazz-docs/zazz/styles ./local/templates/custom/zazz/styles
-npx degit dereknelsen/zazz-docs/zazz/scripts ./local/templates/custom/zazz/scripts
+npx degit dereknelsen/zazz-docs/zazz/styles ./src/zazz/styles
+npx degit dereknelsen/zazz-docs/zazz/scripts ./src/zazz/scripts
 ```
 
-  </Tab>
-  <Tab value="pnpm">
+**With pnpm:**
 
 ```bash
 pnpm add -g degit
-pnpm dlx degit dereknelsen/zazz-docs/zazz/styles ./local/templates/custom/zazz/styles
-pnpm dlx degit dereknelsen/zazz-docs/zazz/scripts ./local/templates/custom/zazz/scripts
+pnpm dlx degit dereknelsen/zazz-docs/zazz/styles ./src/zazz/styles
+pnpm dlx degit dereknelsen/zazz-docs/zazz/scripts ./src/zazz/scripts
 ```
-
-  </Tab>
-</Tabs>
 
 Need one file only?
 
 ```bash
-pnpm dlx degit dereknelsen/zazz-docs/zazz/styles/_dialog.css ./local/templates/custom/zazz/styles/_dialog.css
+pnpm dlx degit dereknelsen/zazz-docs/zazz/styles/_dialog.css ./src/zazz/styles/_dialog.css
 ```
 
 <Callout type="warn">

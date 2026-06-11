@@ -68,9 +68,9 @@ Other scripts: `pnpm build` (production build), `pnpm types:check` (typecheck an
 ## Documentation
 
 - [Introduction](content/docs/index.mdx): what Zazz is, and the four commitments behind it
-- [Getting started](content/docs/getting-started): install, overview, page transitions
+- [Getting started](content/docs/getting-started): install, structuring your head tag, page transitions
 - [Core concepts](content/docs/core-concepts): utility classes, states, responsive design, dark mode, theming, colors
-- [Core files](content/docs/core-files): `_layers.css`, `_reset.css`, and structuring your head tag
+- [Core files](content/docs/core-files): `_layers.css`, `_reset.css`, file anatomy, scripting
 - [Components](content/docs/components): buttons, forms, dialogs, navigation, and more
 - [Utilities](content/docs/utilities): the full utility-class reference
 

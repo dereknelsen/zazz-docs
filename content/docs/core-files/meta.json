@@ -1,4 +1,4 @@
 {
   "title": "Core files",
-  "pages": ["head", "layers", "reset", "file-anatomy", "scripting"]
+  "pages": ["layers", "reset", "file-anatomy", "scripting"]
 }

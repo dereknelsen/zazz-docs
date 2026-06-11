@@ -1,0 +1,169 @@
+---
+title: Migrating to Zazz
+description: Adopt Zazz incrementally on top of an existing CSS codebase, using cascade layers, scoped resets, and @scope donut scoping so the two systems never fight while you migrate.
+---
+
+You don't have to rewrite your CSS to start using Zazz. Because Zazz lives entirely in cascade
+layers and styles at zero specificity, you can drop it into an existing project and let it take
+over screen by screen. No big-bang rewrite, no `!important` war with your old styles. Three native
+CSS features do the work: cascade layers (`@layer`), `all: revert`, and `@scope` with donut
+scoping.
+
+## The core problem: unlayered styles beat layered ones
+
+Zazz puts every rule inside a layer (`variables, reset, components, utilities`). The cascade has a
+rule that surprises people: **any unlayered author rule beats every layered rule, regardless of
+specificity.** Your existing CSS is almost certainly unlayered, so on its own it would override
+Zazz's components and utilities everywhere the two overlap.
+
+The fix is to give your old CSS a layer of its own, ordered *below* Zazz. From there, everything
+else follows.
+
+## Step 1: Layer your old CSS below Zazz
+
+In the entry stylesheet you load before Zazz, declare the full layer order up front, then import
+your legacy CSS into the lowest layer:
+
+```css
+/* entry.css — loaded before Zazz */
+@layer legacy, variables, reset, components, migration, utilities;
+
+@import "./legacy/app.css" layer(legacy);   /* old CSS → lowest priority */
+@import "./zazz/styles/main.css";            /* Zazz: variables, reset, components, utilities */
+@import "./migration.css";                   /* the shim → @layer migration (Step 4) */
+```
+
+The **first** `@layer` statement wins for ordering, so declaring it here (before `main.css`
+re-declares its own subset) locks `legacy` underneath everything Zazz ships. Now where both
+systems style the same thing, Zazz wins; everywhere Zazz is silent, your old CSS still applies. On
+day one, nothing visually breaks.
+
+<Callout>
+The `migration` layer sits **above** Zazz's `reset` and `components` but **below** `utilities`.
+That ordering matters in Step 4: a translated class like `.btn` must outrank the element baseline
+in `reset`, while Zazz utilities (`rounded-full`, `bg-primary`) must still override it.
+</Callout>
+
+## Step 2: Bound where styles apply with `@scope`
+
+`@scope` applies a block of rules to a region and, with a lower boundary, stops them at a subtree:
+"**donut scoping**." The donut hole is the part you leave alone:
+
+```css
+@scope (.app) to (.legacy-widget) {
+  /* matches inside .app, but NOT inside any .legacy-widget */
+}
+```
+
+This is the clean way to wall off the parts you haven't converted (a vendor embed, a legacy date
+picker, a chunk of admin UI) so your migration rules don't reach into them. Unlike a
+`.app :not(.legacy-widget *)` selector, `@scope` accounts for hierarchical proximity, so it still
+behaves correctly when regions nest inside each other.
+
+## Step 3: Blank-slate a region with `all: revert`
+
+Once Zazz is on the page, its `reset` layer restyles native elements globally. That's what you want
+for new UI, but it also reaches into old markup. To hand a region fully to Zazz, reset it to the
+browser's defaults first with `all: revert`, which drops **every** property back to the user-agent
+value, erasing both your legacy styles and Zazz's on that element:
+
+```css
+@scope (.takeover) to (.legacy-widget) {
+  :scope,
+  :scope * {
+    all: revert; /* ignore all author CSS; start from UA defaults */
+  }
+}
+```
+
+Bounding the reset inside `@scope` is what lets you avoid a global `* { all: revert }`, which the
+cascade can't cleanly override and which web components and lower layers can't escape.
+
+<Callout>
+`all: revert` is the sledgehammer. It removes Zazz too. Its surgical sibling, `all: revert-layer`,
+drops only to the **previous cascade layer**. Put a `revert-layer` reset inside the `legacy` layer
+and it strips your old styles while Zazz's higher layers keep applying on top. Reach for
+`revert-layer` when you mean "remove my old styles but keep Zazz," and `revert` when you want a
+true blank slate (for example, to quarantine a third-party widget from both systems).
+</Callout>
+
+## Step 4: Translate old class names in `_migration.css`
+
+The last piece bridges markup you haven't rewritten yet. A `_migration.css` shim re-points your old
+class names at Zazz's component tokens, so existing HTML renders as Zazz **before** you touch it.
+Because Zazz components are token-driven, the shim is small and stays themeable, so light/dark and
+brand changes flow through for free.
+
+Here `.btn` is translated to the Zazz button. Mirror the token-driven rule from `_button.css`; old
+modifier classes map to Zazz variants the same way `data-variant` does, by reassigning the
+component's tokens, not restating the rule:
+
+```css
+/* _migration.css — a temporary bridge. Delete each rule as you rewrite the markup. */
+
+@layer migration {
+  @scope (.app) to (.legacy-widget) {
+
+    /* .btn → .button. Every value is a Zazz token, so theme and dark mode
+       come along automatically. */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--button-gap);
+      block-size: var(--button-height);
+      padding-inline: var(--button-padding);
+      border: var(--button-border);
+      border-radius: var(--button-radius);
+      background: var(--button-background);
+      color: var(--button-foreground);
+      font-family: var(--button-font-family);
+      font-size: var(--button-font-size);
+      font-weight: var(--button-font-weight);
+      line-height: var(--button-line-height);
+    }
+
+    /* Old modifiers → Zazz variants: reassign tokens, don't restate rules. */
+    .btn-primary {
+      --button-background: var(--primary);
+      --button-foreground: var(--primary-foreground);
+    }
+
+    .btn-danger {
+      --button-background: var(--destructive);
+      --button-foreground: var(--destructive-foreground);
+    }
+  }
+}
+```
+
+The same move works for any component: a legacy `.card` adopts `--card`/`--radius-lg`, a `.tag`
+adopts the badge tokens, and so on. Each translated rule is a stepping stone. Once a screen's
+markup is updated to `class="button" data-variant="primary"`, delete its `.btn` shim. When
+`_migration.css` is empty, the migration is done.
+
+## A migration path
+
+1. **Layer.** Add the `@layer` order and import your old CSS into `legacy` (Step 1). Ship it.
+   Nothing should change yet.
+2. **Scope.** Wrap each section you're converting and donut-scope out the widgets you're not
+   (Step 2).
+3. **Reset where needed.** Blank-slate stubborn regions with `all: revert` / `revert-layer` so
+   legacy styling stops leaking in (Step 3).
+4. **Translate, then replace.** Add `_migration.css` rules to make old markup look right now
+   (Step 4), then rewrite the HTML to real Zazz classes and delete the shim, screen by screen.
+
+## Browser support
+
+<Callout type="warn">
+`@layer`, `all: revert`, and `revert-layer` are **Baseline widely available**, safe everywhere
+with no fallback. `@scope` is **Baseline 2024 (newly available)**: Chrome/Edge 118, Safari 17.4,
+Firefox 128. If you must support older browsers, drop the donut and lean on `@layer` alone (it does
+most of the work), or bound regions with a wrapper class and `:not()` instead of `@scope`.
+</Callout>
+
+## Next steps
+
+- Set up the entry stylesheet in [Installation](/docs/getting-started/installation).
+- Read [Overview](/docs/getting-started/overview) for the full four-layer cascade model that makes
+  all of this predictable.

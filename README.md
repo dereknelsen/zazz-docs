@@ -1,45 +1,79 @@
-# zazz-docs
+# Zazz
 
-This is a Next.js application generated with
-[Create Fumadocs](https://github.com/fuma-nama/fumadocs).
+**A variables-driven design framework that survives real projects.**
 
-Run development server:
+Zazz is a zero-build CSS and UI kit for the modern web, a lightweight alternative to Tailwind and shadcn. It needs no bundler and no framework. It runs on native web standards: design tokens, cascade layers, and modern browser APIs like Popover, `<dialog>`, anchor positioning, and view transitions. You link one stylesheet and write markup.
+
+To customize it, you change tokens rather than override rules. Change one variable and every component that reads it updates, with no source edits and no `!important`.
+
+This repository holds both **Zazz itself** (the `zazz/` folder) and the **documentation site** that demonstrates it.
+
+## Why Zazz
+
+- **Zero build step.** Plain CSS and native HTML APIs. No bundler or framework dependency.
+- **Tokens drive everything.** Spacing, color, radius, and type all resolve from variables. To customize, you override a token instead of editing the source.
+- **Cascade layers.** Utilities override components without `!important` or selector tricks.
+- **Dark mode included.** Role tokens resolve light and dark through `light-dark()`, so you never hand-write `.dark` overrides.
+- **Portable.** Works in plain HTML and in any framework, including Next.js, Astro, Webflow, and WordPress. The markup stays the same when your stack changes.
+
+## Quick start
+
+1. Copy the `zazz/styles/` folder into your project:
+
+   ```bash
+   git clone https://github.com/dereknelsen/zazz-docs.git
+   cp -r zazz-docs/zazz/styles ./zazz/styles
+   ```
+
+2. Link the stylesheet and declare your color scheme:
+
+   ```html
+   <head>
+     <meta name="color-scheme" content="light dark" />
+     <link rel="stylesheet" href="./zazz/styles/main.css" />
+   </head>
+   ```
+
+3. Write markup with components and utility classes:
+
+   ```html
+   <button class="button" data-variant="primary">It works</button>
+   ```
+
+`main.css` imports every token, reset, component, and utility in the correct cascade order. For the full walkthrough, see [Installation](content/docs/getting-started/installation.mdx).
+
+## What's in this repo
+
+| Path | What it is |
+| --- | --- |
+| `zazz/styles/` | The design system: tokens, reset, components, and utilities. This is what you ship. |
+| `zazz/scripts/` | Vanilla-JS enhancements: carousel, lightbox, reveal, tabs, password. No build step. |
+| `zazz/components/` | The canonical HTML example for each component, used as the single source of truth. |
+| `content/docs/` | The documentation, authored in MDX. |
+| `app/`, `components/`, `lib/` | The Next.js and Fumadocs site that renders the docs. |
+
+## Run the docs site
+
+The documentation is a Next.js app built with [Fumadocs](https://fumadocs.dev).
 
 ```bash
-npm run dev
-# or
+pnpm install
 pnpm dev
-# or
-yarn dev
 ```
 
-Open http://localhost:3000 with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-## Explore
+Other scripts: `pnpm build` (production build), `pnpm types:check` (typecheck and MDX), `pnpm lint`, `pnpm fmt`.
 
-In the project, you can see:
+## Documentation
 
-- `lib/source.ts`: Code for content source adapter, [`loader()`](https://fumadocs.dev/docs/headless/source-api) provides the interface to access your content.
-- `lib/layout.shared.tsx`: Shared options for layouts, optional but preferred to keep.
+- [Introduction](content/docs/index.mdx): what Zazz is, and the four commitments behind it
+- [Getting started](content/docs/getting-started): install, overview, page transitions
+- [Core concepts](content/docs/core-concepts): utility classes, states, responsive design, dark mode, theming, colors
+- [Core files](content/docs/core-files): `_layers.css`, `_reset.css`, and structuring your head tag
+- [Components](content/docs/components): buttons, forms, dialogs, navigation, and more
+- [Utilities](content/docs/utilities): the full utility-class reference
 
-| Route                     | Description                                            |
-| ------------------------- | ------------------------------------------------------ |
-| `app/(home)`              | The route group for your landing page and other pages. |
-| `app/docs`                | The documentation layout and pages.                    |
-| `app/api/search/route.ts` | The Route Handler for search.                          |
+## License
 
-### Fumadocs MDX
-
-A `source.config.ts` config file has been included, you can customise different options like frontmatter schema.
-
-Read the [Introduction](https://fumadocs.dev/docs/mdx) for further details.
-
-## Learn More
-
-To learn more about Next.js and Fumadocs, take a look at the following
-resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [Fumadocs](https://fumadocs.dev) - learn about Fumadocs
+[MIT](LICENSE) © Derek Nelsen

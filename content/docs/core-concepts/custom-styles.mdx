@@ -1,9 +1,9 @@
 ---
 title: Adding custom styles
-description: When tokens and utilities don't cover it, extend Zazz without touching its source — override a token, drop a rule into the right layer, or write a one-off inline.
+description: When tokens and utilities don't cover it, extend Zazz without touching its source. Override a token, drop a rule into the right layer, or write a one-off inline.
 ---
 
-Zazz's tokens and utilities cover most of what you'll build, but every project has a one-off. When you hit one, you extend the system from the *outside* — you never edit files in `zazz/styles/`. Keep your additions in your own stylesheet, loaded after `main.css`, and they slot into the [cascade](/docs/core-files/layers) exactly where they should.
+Zazz's tokens and utilities cover most of what you'll build, but every project has a one-off. When you hit one, you extend the system from the *outside*, and you never edit files in `zazz/styles/`. Keep your additions in your own stylesheet, loaded after `main.css`, and they land in the [cascade](/docs/core-files/layers) after Zazz's own layers.
 
 ```html
 <link rel="stylesheet" href="./zazz/styles/main.css" />
@@ -12,7 +12,7 @@ Zazz's tokens and utilities cover most of what you'll build, but every project h
 
 ## Start with a token override
 
-Most customizations aren't new CSS at all — they're a different value for an existing token. Reach for this first, at the [narrowest scope that works](/docs/core-concepts/theme-variables):
+Most customizations aren't new CSS at all; they're a different value for an existing token. Reach for this first, at the [narrowest scope that works](/docs/core-concepts/theme-variables):
 
 ```css
 /* your-styles.css */
@@ -31,7 +31,7 @@ A token override is the most durable kind of custom style: it composes with dark
 
 ## Add your own utilities
 
-When you want a reusable class that isn't in the set, add it to `@layer utilities` so it lands in the right layer — winning over components, like every other utility. Wrap the selector in `:where()` to keep it zero-specificity and overridable:
+When you want a reusable class that isn't in the set, add it to `@layer utilities` so it lands in the right layer, winning over components like every other utility. Wrap the selector in `:where()` to keep it zero-specificity and overridable:
 
 ```css
 @layer utilities {
@@ -47,7 +47,7 @@ Compose from tokens (`var(--primary)`, `var(--gap-md)`) rather than literals, an
 
 ## Add your own components
 
-For a larger pattern with variants, write it in `@layer components` and give it token hooks, mirroring how Zazz components are built — see [File anatomy](/docs/core-files/file-anatomy):
+For a larger pattern with variants, write it in `@layer components` and give it token hooks, mirroring how Zazz components are built. See [File anatomy](/docs/core-files/file-anatomy):
 
 ```css
 @layer components {
@@ -61,11 +61,11 @@ For a larger pattern with variants, write it in `@layer components` and give it 
 }
 ```
 
-Because it's in `components`, your utilities still override it — so a `.callout p-xl` works as expected.
+Because it's in `components`, your utilities still override it, so a `.callout p-xl` works as expected.
 
 ## The escape hatch: unlayered CSS
 
-A rule written **outside any layer** beats everything in Zazz — every component and every utility — regardless of specificity:
+A rule written **outside any layer** beats everything in Zazz (every component and every utility) regardless of specificity:
 
 ```css
 /* No @layer wrapper. This wins over all layered styles. */
@@ -80,8 +80,8 @@ That makes it powerful and easy to misuse. It's the right tool when you delibera
 
 In order of preference:
 
-1. **Token override** — a different value for an existing variable. Composes with everything.
-2. **Layered rule** — a new utility or component in `@layer utilities` / `@layer components`.
-3. **Unlayered rule** — only when you intend to override all of Zazz.
+1. **Token override:** a different value for an existing variable. Composes with everything.
+2. **Layered rule:** a new utility or component in `@layer utilities` / `@layer components`.
+3. **Unlayered rule:** only when you intend to override all of Zazz.
 
 The one rule that doesn't bend: don't edit `zazz/styles/`. Every customization above lives in your own files, so updating Zazz never clobbers your work.

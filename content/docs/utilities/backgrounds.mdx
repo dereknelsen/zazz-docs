@@ -8,8 +8,8 @@ between light and dark. Like the text utilities, each value is
 `oklch(from var(--role) l c h / calc(alpha × --_background-alpha))`, so
 [color-opacity](/docs/utilities/color-opacity) can dim just the background channel.
 
-Background color is the one place Zazz also ships utilities for a numeric scale — the **shade**
-and **tint** overlays — because dimming or lightening a surface is so common.
+Background color is the one place Zazz also ships utilities for a numeric scale, the **shade**
+and **tint** overlays, because dimming or lightening a surface is so common.
 
 ## Surfaces & roles
 
@@ -50,7 +50,7 @@ transparent; `*-full` is the most opaque step.
 | **Shade** (darken) | `bg-shade-none`, `bg-shade-50 … bg-shade-950`, `bg-shade-full` | `--shade-*` (from `neutral-950`) | scrims, modal backdrops (e.g. `bg-shade-800`) |
 | **Tint** (lighten) | `bg-tint-none`, `bg-tint-50 … bg-tint-950`, `bg-tint-full` | `--tint-*` (from white) | frosted highlights over imagery |
 
-Because they're alpha overlays, they read the underlying surface through — layer one over media or
+Because they're alpha overlays, they read the underlying surface through. Layer one over media or
 a colored panel rather than painting a solid fill.
 
 ```html
@@ -63,15 +63,15 @@ a colored panel rather than painting a solid fill.
 
 ## Variants
 
-- **Hover:** every role plus `transparent`/`none` has a `hover:bg-*` counterpart — see
+- **Hover:** every role plus `transparent`/`none` has a `hover:bg-*` counterpart. See
   [Hover states](/docs/utilities/hover).
-- **Opacity:** dim just the background channel with `bg-opacity-*` — see
+- **Opacity:** dim just the background channel with `bg-opacity-*`. See
   [Color opacity](/docs/utilities/color-opacity). It multiplies into the token's own alpha, so
   shade/tint/faded keep their built-in translucency.
 
 <Callout type="info">
 The full numeric brand scales (`--primary-600`, `--neutral-100`, …) have **no** `bg-` utility
-classes by design — reach a fixed shade through the token in custom CSS or inline. The role
+classes by design. Reach a fixed shade through the token in custom CSS or inline. The role
 tokens above cover the everyday cases. See the
 [token reference](/docs/getting-started/overview#core-files) for the scale model.
 </Callout>

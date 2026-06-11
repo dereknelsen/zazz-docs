@@ -1,6 +1,6 @@
 ---
 title: Navigation
-description: SPA-like page transitions using the Navigation API and View Transitions — instant content swaps with animated crossfades.
+description: "SPA-like page transitions using the Navigation API and View Transitions: instant content swaps with animated crossfades."
 ---
 
 The navigation script intercepts same-origin page navigations and swaps `<main>` content without a full page reload. Combined with `_page-transitions.css`, this creates smooth, app-like transitions between pages.
@@ -46,7 +46,7 @@ The script uses `document.startViewTransition()` when available. The CSS in `_pa
 - **Old content** fades out and scales down slightly
 - **New content** fades in and scales up from slightly smaller
 
-The animation respects `prefers-reduced-motion` — when reduced motion is preferred, content swaps instantly without animation.
+The animation respects `prefers-reduced-motion`. When reduced motion is preferred, content swaps instantly without animation.
 
 ### Customizing the transition
 
@@ -88,4 +88,4 @@ The script only intercepts navigations that are:
 - Not form submissions
 - Interceptable (`e.canIntercept === true`)
 
-Everything else — external links, `target="_blank"`, downloads, form posts — behaves normally.
+Everything else (external links, `target="_blank"`, downloads, form posts) behaves normally.

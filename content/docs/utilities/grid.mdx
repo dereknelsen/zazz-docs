@@ -1,6 +1,6 @@
 ---
 title: Grid
-description: Grid container, columns/rows, spans, subgrid, auto-flow, place-items, and the gap-aware responsive auto-fill grid — plus the coordination variables that span and wrap utilities read.
+description: Grid container, columns/rows, spans, subgrid, auto-flow, place-items, and the gap-aware responsive auto-fill grid, plus the coordination variables that span and wrap utilities read.
 ---
 
 `grid` turns on a grid container; `grid-cols-N` / `grid-rows-N` define the tracks; `col-span-*` /
@@ -49,12 +49,12 @@ Adopt the parent grid's tracks so nested content lines up across cards or rows.
 Both have responsive variants. See the [Card](/docs/components/card) subgrid example for a
 real-world layout.
 
-## Stacking — grid-area-pile
+## Stacking: grid-area-pile
 
 <Preview src="utilities/grid-pile" />
 
-`grid-area-pile` stacks every direct child into one cell and centers them (`place-items: center`)
-— the clean way to layer an overlay on media, or an avatar fallback under an image. Override an
+`grid-area-pile` stacks every direct child into one cell and centers them (`place-items: center`):
+the clean way to layer an overlay on media, or an avatar fallback under an image. Override an
 individual child's placement with `self-*` / `justify-self-*`.
 
 ## Place items
@@ -73,7 +73,7 @@ Shorthand for aligning all grid children in both axes at once.
 
 Combine `grid-flow-row` with `grid-cols-N` (N > 1) and the grid switches to a **gap-aware
 `auto-fill`** track formula: items fill across, then wrap to the next row as the container
-narrows — responsive columns with no breakpoints. The track floor is the larger of
+narrows: responsive columns with no breakpoints. The track floor is the larger of
 `--_grid-col-min` (`min(100%, 25ch)`) and an even `1/N` share of the row minus gaps, so columns
 never get narrower than readable.
 
@@ -85,7 +85,7 @@ never get narrower than readable.
 
 ## Coordination variables
 
-Grid utilities expose three **inheriting** coordination variables — set on the container, read by
+Grid utilities expose three **inheriting** coordination variables: set on the container, read by
 descendants. They're left unregistered so normal inheritance carries them down.
 
 | Variable | Set by | Default | Read by |
@@ -95,6 +95,6 @@ descendants. They're left unregistered so normal inheritance carries them down.
 | `--_grid-col-min` | `.grid` | `min(100%, 25ch)` | `grid-flow-row` auto-fill track floor |
 
 Because `--_grid-cols` inherits, a `col-span-3` placed inside a `grid-cols-2` clamps to `span 2`
-instead of overflowing — the span reads the same count the container declared. See the
+instead of overflowing: the span reads the same count the container declared. See the
 [utilities overview](/docs/utilities#coordination-variables-inheriting-on-purpose) for how these
 differ from the non-inheriting composition variables.

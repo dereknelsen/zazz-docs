@@ -1,6 +1,6 @@
 ---
 title: Spacing
-description: Padding and margin utilities built on the semantic gap scale and logical properties — including the composition variables that let you touch one edge without disturbing the others.
+description: Padding and margin utilities built on the semantic gap scale and logical properties, including the composition variables that let you touch one edge without disturbing the others.
 ---
 
 Padding and margin both draw from the **semantic gap scale** (`--gap-xs` … `--gap-xl`) and use
@@ -47,7 +47,7 @@ other size.
 
 ### Negative margins
 
-Pull an element past its edge — useful for full-bleed media inside padded containers.
+Pull an element past its edge, useful for full-bleed media inside padded containers.
 
 | Scope | Classes |
 |---|---|
@@ -55,7 +55,7 @@ Pull an element past its edge — useful for full-bleed media inside padded cont
 | Inline / block axis | `-mx-xs … -mx-xl`, `-my-xs … -my-xl` |
 | Per side | `-mt-* -mr-* -mb-* -ml-*` (`xs`–`xl`) |
 
-Negative margins are base classes only — no responsive variants.
+Negative margins are base classes only, with no responsive variants.
 
 ## Composition variables
 
@@ -84,7 +84,7 @@ through the shared rule.
 ```
 
 The payoff is **independent edges**. Stacking an all-sides class with a side class overrides only
-that edge — source order makes the more specific setter win:
+that edge. Source order makes the more specific setter win:
 
 ```html
 <!-- medium padding everywhere, but a flush left edge -->
@@ -100,7 +100,7 @@ that edge — source order makes the more specific setter win:
 | `--_margin-inline-start` · `--_margin-inline-end` | `<length-percentage> \| auto` | `0` | `m-* mx-* ml-* mr-* -m* mx-auto` |
 | `--_margin-block-start` · `--_margin-block-end` | `<length-percentage> \| auto` | `0` | `m-* my-* mt-* mb-* -m* my-auto` |
 
-The margin variables accept `auto` in their registered syntax — that's why `mx-auto` composes
+The margin variables accept `auto` in their registered syntax, which is why `mx-auto` composes
 exactly like a size value. The same pattern (composing rule + per-edge setter) powers
 [border radius](/docs/utilities/borders#border-radius); see the
 [overview](/docs/utilities#composition-variables-registered-non-inheriting) for the full model.

@@ -1,10 +1,10 @@
 ---
 title: Gap & basis
-description: Gap utilities for flex and grid, plus the gap-aware flex-basis fractions — and the --_gap coordination variable that ties them together.
+description: Gap utilities for flex and grid, plus the gap-aware flex-basis fractions and the --_gap coordination variable that ties them together.
 ---
 
 `gap-*` sets the space between flex or grid children; `basis-*` sets a flex item's base size. They
-share one coordination variable (`--_gap`) so fraction widths subtract the gap automatically — no
+share one coordination variable (`--_gap`) so fraction widths subtract the gap automatically, with no
 off-by-a-gutter math.
 
 ## Gap
@@ -27,8 +27,8 @@ spacing stays consistent across layout primitives.
 
 ### Axis gaps
 
-Set column and row gaps independently. `gap-x-*` maps to `column-gap`, `gap-y-*` to `row-gap` —
-same size keywords as `gap-*` (`0`, `0.5px`, `px`, `xs`–`xl`).
+Set column and row gaps independently. `gap-x-*` maps to `column-gap`, `gap-y-*` to `row-gap`,
+using the same size keywords as `gap-*` (`0`, `0.5px`, `px`, `xs`–`xl`).
 
 ```html
 <div class="grid grid-cols-3 gap-x-lg gap-y-sm"><!-- wide columns, tight rows --></div>
@@ -57,14 +57,14 @@ container set.
 thirds on a wider container.
 
 <Callout type="info">
-For the fractions to subtract the right gutter, set a `gap-*` class on the same flex container —
-that's what populates `--_gap`. With no gap class, `--_gap` defaults to `0px` and the fractions
+For the fractions to subtract the right gutter, set a `gap-*` class on the same flex container.
+That's what populates `--_gap`. With no gap class, `--_gap` defaults to `0px` and the fractions
 fall back to even splits.
 </Callout>
 
 ## The `--_gap` coordination variables
 
-`gap-*` doesn't only set the `gap` property — it also publishes the value as an **inheriting**
+`gap-*` doesn't only set the `gap` property; it also publishes the value as an **inheriting**
 variable that `basis-*` and the [responsive auto-fill grid](/docs/utilities/grid#responsive-auto-fill-grid)
 read back.
 
@@ -74,7 +74,7 @@ read back.
 | `--_gap-x` | — | `gap-x-*` | `column-gap` |
 | `--_gap-y` | — | `gap-y-*` | `row-gap` |
 
-These are left unregistered (and therefore inheriting) on purpose — a value set on the container
+These are left unregistered (and therefore inheriting) on purpose: a value set on the container
 must reach the children that compute their width from it. This is the opposite of the
 non-inheriting composition variables behind padding/margin/radius; see the
 [overview](/docs/utilities#private-composition-and-coordination-variables) for the contrast.

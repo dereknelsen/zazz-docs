@@ -1,16 +1,16 @@
 ---
 title: Responsive design
-description: Zazz is responsive by default — fluid type and spacing scale on their own, and responsive utilities answer to the container a component sits in, not the viewport.
+description: Zazz is responsive by default. Fluid type and spacing scale on their own, and responsive utilities answer to the container a component sits in, not the viewport.
 ---
 
-Most design systems make you describe every layout at every screen size. Zazz starts from the opposite assumption: type and spacing already scale fluidly, and when you *do* add breakpoints, they respond to the space a component actually has — the nearest container — not the width of the window. Build a component once and it adapts wherever you drop it.
+Zazz is responsive before you write a single breakpoint: type and spacing already scale fluidly, and when you *do* add breakpoints, they respond to the space a component actually has (the nearest container), not the width of the window. Build a component once and it adapts wherever you drop it.
 
 ## Fluid by default
 
 Before you reach for a single breakpoint, two systems are already responding to the viewport:
 
-- **Type** — every `text-*` class is a `clamp()` that grows smoothly between a min and max size. `text-h1` is large on a desktop and proportionally smaller on a phone, with no breakpoint in between.
-- **Spacing** — the `--step-*` scale derives from a fluid interval, so `gap-md`, `p-lg`, and the rest tighten on small screens and open up on large ones.
+- **Type:** every `text-*` class is a `clamp()` that grows smoothly between a min and max size. `text-h1` is large on a desktop and proportionally smaller on a phone, with no breakpoint in between.
+- **Spacing:** the `--step-*` scale derives from a fluid interval, so `gap-md`, `p-lg`, and the rest tighten on small screens and open up on large ones.
 
 A lot of layouts need no breakpoints at all because of this.
 
@@ -18,9 +18,9 @@ A lot of layouts need no breakpoints at all because of this.
 
 When you need a layout to change shape, prefix a utility with a breakpoint: `xs:` `sm:` `md:` `lg:` `xl:`. The key difference from viewport frameworks:
 
-> A responsive prefix triggers when the **nearest container** crosses the threshold — not the viewport.
+> A responsive prefix triggers when the **nearest container** crosses the threshold, not the viewport.
 
-The reset makes `<main>`, the section landmarks, `.container`, and `.article` into container-query contexts, so components measure the space they're in. The same card reflows to one column inside a narrow sidebar and three columns in a wide main area — without knowing where it lives.
+The reset makes `<main>`, the section landmarks, `.container`, and `.article` into container-query contexts, so components measure the space they're in. The same card reflows to one column inside a narrow sidebar and three columns in a wide main area, without knowing where it lives.
 
 ```html
 <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
@@ -49,14 +49,14 @@ Base utilities apply at every size; a prefixed utility layers on at its breakpoi
 <div class="flex flex-col md:flex-row gap-md">…</div>
 ```
 
-The families available at each breakpoint: `display`, `grid-cols` / `grid-rows`, `flex-direction`, `text-align`, `align-items`, `justify-content`, `col-span`, `row-span`, and `basis`. Less-toggled families (self-alignment, place-items, visibility) ship as base classes only — apply them outside the responsive layer.
+The families available at each breakpoint: `display`, `grid-cols` / `grid-rows`, `flex-direction`, `text-align`, `align-items`, `justify-content`, `col-span`, `row-span`, and `basis`. Less-toggled families (self-alignment, place-items, visibility) ship as base classes only, so apply them outside the responsive layer.
 
 ## Layouts that respond without breakpoints
 
 Some Zazz utilities adapt on their own, so you can often skip prefixes entirely:
 
-- **Auto-fitting grids** — `grid-flow-row` with `grid-cols-N` (N > 1) wraps items responsively using a smart `auto-fill` formula. Items flow into as many columns as fit.
-- **Gap-aware basis** — `basis-1/2`, `basis-1/3`, and friends subtract the gap automatically, so flex children wrap cleanly with no manual math.
+- **Auto-fitting grids:** `grid-flow-row` with `grid-cols-N` (N > 1) wraps items responsively using a smart `auto-fill` formula. Items flow into as many columns as fit.
+- **Gap-aware basis:** `basis-1/2`, `basis-1/3`, and friends subtract the gap automatically, so flex children wrap cleanly with no manual math.
 
 ```html
 <!-- wraps from 1 to N columns based on available width, no prefixes -->
@@ -65,6 +65,6 @@ Some Zazz utilities adapt on their own, so you can often skip prefixes entirely:
 
 ## Browser support
 
-Zazz's responsive model is built on [container queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries), which are [Baseline](https://web.dev/baseline) and widely available (since 2023). In a browser without support, components fall back to their base (smallest) layout — usable, just not adaptive.
+Zazz's responsive model is built on [container queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries), which are [Baseline](https://web.dev/baseline) and widely available (since 2023). In a browser without support, components fall back to their base (smallest) layout: usable, just not adaptive.
 
-When you genuinely need to respond to the **viewport** rather than a container — a full-page layout shift, say — write a `@media` query in [your own stylesheet](/docs/core-concepts/custom-styles). For component-level responsiveness, prefer the container-based utilities.
+When you genuinely need to respond to the **viewport** rather than a container (a full-page layout shift, say), write a `@media` query in [your own stylesheet](/docs/core-concepts/custom-styles). For component-level responsiveness, prefer the container-based utilities.

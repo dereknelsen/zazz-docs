@@ -1,6 +1,6 @@
 ---
 title: File anatomy
-description: How every Zazz stylesheet is structured, documented, and layered — the rules that keep the cascade predictable when you read, extend, or override it.
+description: How every Zazz stylesheet is structured, documented, and layered, with the rules that keep the cascade predictable when you read, extend, or override it.
 ---
 
 Every stylesheet in `zazz/styles/` follows the same anatomy. Learn it once and you can read any file, find the token you need to override, and extend a component without fighting the cascade.
@@ -75,8 +75,8 @@ Every `.css` file opens with a JSDoc-style block comment. A summary line comes f
 
 Component tokens follow a strict naming convention:
 
-- `--{component}-{property}` — the default value: `--button-background`, `--dialog-radius`
-- `--{component}-{property}--{state}` — state variation with **double-dash** before the state: `--button-background--hover`, `--field-border--focus`
+- `--{component}-{property}`: the default value, like `--button-background` or `--dialog-radius`
+- `--{component}-{property}--{state}`: state variation with a **double-dash** before the state, like `--button-background--hover` or `--field-border--focus`
 
 ### Tiered tokens
 
@@ -108,7 +108,7 @@ Every component declares a namespace in its own `@layer variables` block, defaul
 }
 ```
 
-Rules reference a token **once**. Variants swap the token value — they never restate the rule:
+Rules reference a token **once**. Variants swap the token value; they never restate the rule:
 
 ```css
 @layer components {
@@ -130,8 +130,8 @@ Rules reference a token **once**. Variants swap the token value — they never r
 
 ## Selector conventions
 
-- **Blocks & elements**: `.component` and `.component__part` (`.input-group__addon`). No BEM modifier classes — use attributes.
-- **Variants & sizes**: data attributes — `[data-variant="primary"]`, `[data-size="sm"]`, `[data-side]`, `[data-align]`.
+- **Blocks & elements**: `.component` and `.component__part` (`.input-group__addon`). No BEM modifier classes; use attributes instead.
+- **Variants & sizes**: data attributes such as `[data-variant="primary"]`, `[data-size="sm"]`, `[data-side]`, `[data-align]`.
 - **Zero specificity**: `:where()` wraps reset and utility selectors so they stay overridable.
 - **Logical properties**: `inline-size`/`block-size`, `padding-inline`/`margin-block` for RTL support.
 - **Focus**: rings render as box-shadows from Tailwind/shadcn-compatible tokens (`--ring`, `--ring-width`, `--ring-offset-width`, `--ring-offset-color`), composed with the component's own shadow; a same-geometry transparent outline (`--outline-*`) is kept for forced-colors modes. Never `outline: none` without a replacement.
@@ -161,7 +161,7 @@ Three comment styles, each with a specific role:
 }
 ```
 
-**Inline rule comments** explain intent — the *why*, not the *what*:
+**Inline rule comments** explain intent: the *why*, not the *what*:
 
 ```css
 /* thumb centered on the track via a calc'd negative margin so retuning
@@ -174,9 +174,9 @@ Dark mode is a token concern, not a per-file one. Components read role tokens (`
 
 ## Allowed variations
 
-These deviate from the canonical shape on purpose — documented in-file:
+These deviate from the canonical shape on purpose, and each is documented in-file:
 
-- **Split `@layer variables` blocks** — When a component has motion tokens and sizing tokens that read better separated.
-- **Component in `@layer reset`** — When redrawing native UI (e.g. `_switch.css` redraws `input[role="switch"]`). See [`_reset.css`](/docs/core-files/reset).
-- **`@supports`-gated enhancement** — When anchor positioning or other cutting-edge APIs need a documented fallback.
-- **Attribute-hook components** — When styling depends on `[data-*]` attributes driven by JavaScript.
+- **Split `@layer variables` blocks:** when a component has motion tokens and sizing tokens that read better separated.
+- **Component in `@layer reset`:** when redrawing native UI (e.g. `_switch.css` redraws `input[role="switch"]`). See [`_reset.css`](/docs/core-files/reset).
+- **`@supports`-gated enhancement:** when anchor positioning or other newer APIs need a documented fallback.
+- **Attribute-hook components:** when styling depends on `[data-*]` attributes driven by JavaScript.

@@ -1,6 +1,6 @@
 ---
 title: Interactivity
-description: Cursor and pointer-event control, the opt-in focus ring, and the screen-reader-only helper — the accessibility and interaction utilities.
+description: "Cursor and pointer-event control, the opt-in focus ring, and the screen-reader-only helper: the accessibility and interaction utilities."
 ---
 
 A small set of utilities for pointer behavior, focus, and assistive technology. For hover-driven
@@ -17,7 +17,7 @@ color and motion, see [Hover states](/docs/utilities/hover).
 ## Focus ring
 
 `ring` opts an element into the Tailwind/shadcn-compatible focus ring. It renders as layered
-box-shadows — an **offset ring** plus the ring itself — and only appears on `:focus-visible`, so
+box-shadows (an **offset ring** plus the ring itself) and only appears on `:focus-visible`, so
 keyboard focus is clear while mouse clicks stay quiet.
 
 ```html
@@ -31,17 +31,17 @@ How it composes:
 - The ring color is `--primary`; the offset gap uses `--ring-offset-color` (the page background),
   so the ring reads as a clean halo.
 - A same-geometry **transparent `outline`** is kept as a twin for forced-colors / high-contrast
-  modes, where box-shadows don't render — focus never silently disappears.
+  modes, where box-shadows don't render, so focus never silently disappears.
 
 <Callout type="info">
-Components draw their own focus rings from the same `--ring-*` tokens — `ring` is for plain
+Components draw their own focus rings from the same `--ring-*` tokens; `ring` is for plain
 elements (links, custom controls) that don't already have one. To recolor, override
 `--ring-color` rather than `--ring`. See the [focus-ring conventions](/docs/core-files/file-anatomy#selector-conventions).
 </Callout>
 
 ## Screen-reader only
 
-`sr-only` hides content visually while keeping it in the accessibility tree — for labels an icon
+`sr-only` hides content visually while keeping it in the accessibility tree: for labels an icon
 button needs but a sighted user doesn't.
 
 ```html

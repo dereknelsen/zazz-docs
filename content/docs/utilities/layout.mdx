@@ -1,11 +1,45 @@
 ---
 title: Layout
-description: Display, position, overflow, z-index, aspect-ratio, object-fit, and order utilities — the box-level controls for how an element renders and sits in the flow.
+description: "Display, position, overflow, z-index, aspect-ratio, object-fit, and order utilities: the box-level controls for how an element renders and sits in the flow."
 ---
 
 Layout utilities control how a box renders and where it sits: its display mode, positioning,
-overflow, stacking, intrinsic ratio, and paint order. For the container/article wrappers and the
-breakpoint system, see [Responsive design](/docs/utilities/responsive-design).
+overflow, stacking, intrinsic ratio, and paint order, plus the page-level container wrappers
+below. For the responsive breakpoint system, see [Responsive design](/docs/utilities/responsive-design).
+
+## Containers
+
+`.container` and `.article` are self-contained page wrappers. Each sets its own max width, centers
+itself with `margin-inline: auto`, and registers a
+[container-query context](/docs/utilities/responsive-design#setting-up-a-container), so one
+element handles page width, gutters, and responsive scope with no wrapper div around it.
+
+| Class | Width | Container name | Use |
+|---|---|---|---|
+| `container` | `min(--screen-lg, 100% − 2 × --gap-md)` | `container` | full-width sections (caps ~80rem) |
+| `article` | `min(66ch, 100% − 2 × --gap-md)` | `article` | reading column (caps at a 66ch measure; also sets the base font size) |
+
+```html
+<section class="container">
+  <article class="article">Comfortable reading width, centered, with page gutters.</article>
+</section>
+```
+
+### One element, no gutter wrapper
+
+The width is a `min()` of two terms: a max cap and `100% − 2 × gutter`:
+
+```css
+:where(.container) {
+  inline-size: min(var(--screen-lg), 100% - var(--gap-md) * 2);
+  margin-inline: auto;
+}
+```
+
+On a wide viewport the cap wins: the column stops growing at `--screen-lg` and `margin-inline: auto`
+centers it. Once the viewport drops below that cap, the `100% − 2 × --gap-md` term wins instead,
+leaving a symmetric `--gap-md` gutter on each side. One element does both jobs, so there's no need
+for the usual full-width **padding wrapper** around a separate max-width child.
 
 ## Display
 
@@ -25,7 +59,7 @@ display values that also have responsive variants ([Responsive design](/docs/uti
 
 ### Visibility
 
-`visibility` keeps an element's box (and its space) but toggles its paint — distinct from
+`visibility` keeps an element's box (and its space) but toggles its paint, distinct from
 `hidden`, which removes the box entirely.
 
 | Class | Declaration |
@@ -79,7 +113,7 @@ offset matches the spacing rhythm of the rest of the page. `inset-*` sets all fo
 | `overflow-y-auto` | `overflow-y: auto; overflow-x: clip` |
 | `no-scrollbar` | hides the scrollbar while keeping scroll (Firefox, IE, and `::-webkit-scrollbar`) |
 
-`no-scrollbar` is a modifier — pair it with one of the scrolling classes (e.g.
+`no-scrollbar` is a modifier. Pair it with one of the scrolling classes (e.g.
 `overflow-y-auto no-scrollbar`) when you want scroll without the visible track.
 
 ## Z-index
@@ -97,7 +131,7 @@ context (`isolation: isolate`) so a subtree's z-indexes can't escape it.
 
 <Preview src="utilities/aspect-ratio" />
 
-Named ratios for media boxes — no custom values to remember.
+Named ratios for media boxes, with no custom values to remember.
 
 | Class | Ratio | Use |
 |---|---|---|
@@ -112,7 +146,7 @@ Named ratios for media boxes — no custom values to remember.
 
 <Preview src="utilities/object-fit" />
 
-Controls how a replaced element (`<img>`, `<video>`) fills its box — pair with an
+Controls how a replaced element (`<img>`, `<video>`) fills its box. Pair with an
 [aspect ratio](#aspect-ratio) or explicit [size](/docs/utilities/sizing).
 
 | Class | Declaration |

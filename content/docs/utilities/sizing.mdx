@@ -1,6 +1,6 @@
 ---
 title: Sizing
-description: Width, height, the square size shorthand, and min/max constraints — using logical properties, the step scale, the gap scale, and viewport/breakpoint units.
+description: Width, height, the square size shorthand, and min/max constraints, using logical properties, the step scale, the gap scale, and viewport/breakpoint units.
 ---
 
 Sizing utilities use **logical properties** (`inline-size`/`block-size`) so they follow writing
@@ -30,7 +30,7 @@ Width (`w-*`) sets `inline-size`; height (`h-*`) sets `block-size`. The named si
 | `w-screen-xs … w-screen-xl` | `var(--screen-xs … --screen-xl)` |
 | `h-screen-xs … h-screen-xl` | `var(--screen-xs … --screen-xl)` |
 
-The `screen-*` sizes resolve to the breakpoint widths (`xs` 40rem → `xl` 96rem) — handy for
+The `screen-*` sizes resolve to the breakpoint widths (`xs` 40rem → `xl` 96rem), handy for
 capping reading or layout columns to a known breakpoint.
 
 ## Size (square shorthand)
@@ -38,7 +38,7 @@ capping reading or layout columns to a known breakpoint.
 <Preview src="utilities/size" />
 
 `size-*` sets `inline-size` and `block-size` together. Its named sizes draw from the **gap scale**
-(not the step scale), which keeps them in the small, icon-friendly range — ideal for avatars,
+(not the step scale), which keeps them in the small, icon-friendly range, ideal for avatars,
 dots, and square media.
 
 | Class | Value (both axes) |
@@ -60,7 +60,7 @@ dots, and square media.
 
 ## Min & max constraints
 
-Clamp an element's size while letting it flex otherwise — pair `max-w-*` with `w-full` for the
+Clamp an element's size while letting it flex otherwise. Pair `max-w-*` with `w-full` for the
 common "fluid up to a cap" pattern.
 
 | Max width | Max height | Min width | Min height |
@@ -74,7 +74,7 @@ common "fluid up to a cap" pattern.
 
 `max-w-*` / `max-h-*` carry the full named scale (`xs`–`xl`, mapping to the same step values as
 `w-*`/`h-*`). `min-w-*` / `min-h-*` ship the structural values (`0`, `auto`, `full`, `screen`,
-`screen-*`) — the most common min-size needs.
+`screen-*`), the most common min-size needs.
 
 ```html
 <article class="w-full max-w-screen-sm mx-auto">Fluid, capped at the sm breakpoint, centered.</article>

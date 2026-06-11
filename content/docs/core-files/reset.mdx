@@ -1,13 +1,13 @@
 ---
 title: _reset.css
-description: The baseline layer — native-element resets and re-skinned controls that live in @layer reset, so your components and utilities always win over them.
+description: The baseline layer of native-element resets and re-skinned controls that live in @layer reset, so your components and utilities always win over them.
 ---
 
-`_reset.css` normalizes the browser's defaults and gives native controls a Zazz look. The whole file sits in `@layer reset` — the second-lowest [layer](/docs/core-files/layers) — so every component and utility you write overrides it without effort. It's a foundation you build on, not a wall you fight.
+`_reset.css` normalizes the browser's defaults and gives native controls a Zazz look. The whole file sits in `@layer reset`, the second-lowest [layer](/docs/core-files/layers), so every component and utility you write overrides it without effort.
 
 ## Zero specificity by design
 
-Almost every selector is wrapped in `:where()`, which contributes **zero specificity**. A reset rule for `:where(a)` is trivially overridden by your `.text-link` class or a component rule — you never have to out-specify the reset.
+Almost every selector is wrapped in `:where()`, which contributes **zero specificity**. A reset rule for `:where(a)` is trivially overridden by your `.text-link` class or a component rule, so you never have to out-specify the reset.
 
 ```css
 :where(a) {
@@ -31,7 +31,7 @@ A universal reset zeroes margins, padding, and borders and sets `box-sizing: bor
 }
 ```
 
-`<body>` becomes a flex column that fills the viewport (`100svh`), reserves the scrollbar gutter (`scrollbar-gutter: stable`, so page width doesn't jump between scrolling and non-scrolling pages), and opens a container context. `<main>` and the section landmarks each get their own container context too — which is what makes [container-query responsiveness](/docs/core-concepts/responsive-design) work out of the box.
+`<body>` becomes a flex column that fills the viewport (`100svh`), reserves the scrollbar gutter (`scrollbar-gutter: stable`, so page width doesn't jump between scrolling and non-scrolling pages), and opens a container context. `<main>` and the section landmarks each get their own container context too, which is what makes [container-query responsiveness](/docs/core-concepts/responsive-design) work with no setup.
 
 ### Theme-aware from the start
 
@@ -42,7 +42,7 @@ The reset reads role tokens, so the baseline itself is correct in light and dark
 :where(body) { color: var(--foreground); background-color: var(--background); }
 ```
 
-You get [dark mode](/docs/core-concepts/dark-mode) at the reset level — no `.dark` overrides needed for the page chrome.
+You get [dark mode](/docs/core-concepts/dark-mode) at the reset level, with no `.dark` overrides needed for the page chrome.
 
 ### Typography
 
@@ -67,8 +67,8 @@ A global `:focus-visible` rule paints the [focus ring](/docs/core-concepts/state
 
 ## Where some resets live instead
 
-To keep styling modular, a few controls are reset alongside their component rather than here: checkbox (`_checkbox.css`), range slider (`_slider.css`), switch (`_switch.css`), and the `<select>` picker panel (`_select.css`). They still write into `@layer reset` — they just live next to the component they redraw, an [allowed variation](/docs/core-files/file-anatomy#allowed-variations) on the standard file shape.
+To keep styling modular, a few controls are reset alongside their component rather than here: checkbox (`_checkbox.css`), range slider (`_slider.css`), switch (`_switch.css`), and the `<select>` picker panel (`_select.css`). They still write into `@layer reset`; they just live next to the component they redraw, an [allowed variation](/docs/core-files/file-anatomy#allowed-variations) on the standard file shape.
 
-## The takeaway
+## Overriding the reset
 
 Because the reset is a *layer* and not a pile of high-specificity global rules, you override it the same way you override anything else in Zazz: a utility class, a component rule, or a token. There's no `!important`, and nothing to undo.

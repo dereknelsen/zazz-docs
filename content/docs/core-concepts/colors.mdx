@@ -3,7 +3,7 @@ title: Colors
 description: Color in Zazz is role-first. Pick a role like primary or muted-foreground and light/dark swap for free; drop to a numeric scale only when a role can't express it.
 ---
 
-Color in Zazz is chosen by **role**, not by shade. Instead of "neutral-600," you reach for `muted-foreground`; instead of "indigo-600," you reach for `primary`. Because roles resolve through [`light-dark()`](/docs/core-concepts/dark-mode), a role-based design is correct in both themes with no extra work — and recoloring the brand is a one-line change.
+Color in Zazz is chosen by **role**, not by shade. Instead of "neutral-600," you reach for `muted-foreground`; instead of "indigo-600," you reach for `primary`. Because roles resolve through [`light-dark()`](/docs/core-concepts/dark-mode), a role-based design is correct in both themes with no extra work, and recoloring the brand is a one-line change.
 
 ```html
 <div class="bg-card text-card-foreground border border-border p-md rounded-lg">
@@ -33,29 +33,29 @@ Each surface has a matching foreground tuned for contrast on it:
 
 ### Brand
 
-`primary`, `secondary`, `tertiary` — each with a `-foreground` for text and icons placed on it.
+`primary`, `secondary`, `tertiary`, each with a `-foreground` for text and icons placed on it.
 
 ### Status
 
-`info`, `success`, `warning`, `destructive` — same `-foreground` pairing. Use `destructive` for dangerous actions and error states.
+`info`, `success`, `warning`, `destructive`, same `-foreground` pairing. Use `destructive` for dangerous actions and error states.
 
 ## When a role won't do: scales and overlays
 
-Reach past roles only when you need a specific shade — a fixed tint, a backdrop, a precise accent.
+Reach past roles only when you need a specific shade: a fixed tint, a backdrop, a precise accent.
 
-- **Brand & neutral scales** — `--primary-50`…`--primary-950` (and `--secondary-*`, `--tertiary-*`, `--neutral-*`), plus `--white` and `--black`. These are **tokens only — no utility classes**. Reach them in custom CSS or inline: `style="color: var(--primary-600)"`.
-- **Overlays** — `--shade-*` darkens (from neutral-950, ideal for modal backdrops like `--shade-800`) and `--tint-*` lightens (from white). `*-none` is transparent. Overlays *do* ship `bg-shade-*` and `bg-tint-*` utilities, since dimming a surface is common.
-- **Absolute** — `text-white`, `text-black`, `bg-white`, `bg-black`, `bg-transparent`.
+- **Brand & neutral scales:** `--primary-50`…`--primary-950` (and `--secondary-*`, `--tertiary-*`, `--neutral-*`), plus `--white` and `--black`. These are **tokens only, no utility classes**. Reach them in custom CSS or inline: `style="color: var(--primary-600)"`.
+- **Overlays:** `--shade-*` darkens (from neutral-950, ideal for modal backdrops like `--shade-800`) and `--tint-*` lightens (from white). `*-none` is transparent. Overlays *do* ship `bg-shade-*` and `bg-tint-*` utilities, since dimming a surface is common.
+- **Absolute:** `text-white`, `text-black`, `bg-white`, `bg-black`, `bg-transparent`.
 
-A fixed scale step stays the same in both themes — which is exactly why roles, not scales, are the default.
+A fixed scale step stays the same in both themes, which is exactly why roles, not scales, are the default.
 
 ## Built on oklch
 
-Zazz colors are authored in [`oklch()`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch), a perceptually uniform color space. That's what lets the system derive consistent variant tints and overlays with `oklch(from … )` and `color-mix()` — equal lightness steps actually look equal, and a single hue shift re-skins a whole ramp cleanly. `oklch()` is [Baseline](https://web.dev/baseline) and widely available.
+Zazz colors are authored in [`oklch()`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch), a perceptually uniform color space. That's what lets the system derive consistent variant tints and overlays with `oklch(from … )` and `color-mix()`: equal lightness steps actually look equal, and a single hue shift re-skins a whole ramp cleanly. `oklch()` is [Baseline](https://web.dev/baseline) and widely available.
 
 ## Color alpha vs element opacity
 
-Two different fades — don't confuse them:
+Two different fades, and it's worth not confusing them:
 
 - **Element opacity** (`opacity-{0,25,50,75,100}`) fades the whole element *and its children*.
 - **Color alpha** (`bg-opacity-*`, `text-opacity-*`, `border-opacity-*`) dims only that color channel, leaving children untouched. It's backed by `@property`-registered variables that don't inherit, so a faded background never bleeds into the text on top of it.
@@ -67,7 +67,7 @@ Two different fades — don't confuse them:
 
 ## Recoloring the brand
 
-Because everything reads tokens, changing your brand color is a single override — see [Theme variables](/docs/core-concepts/theme-variables) for the three scopes:
+Because everything reads tokens, changing your brand color is a single override. See [Theme variables](/docs/core-concepts/theme-variables) for the three scopes:
 
 ```css
 :root {

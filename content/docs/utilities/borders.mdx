@@ -1,11 +1,11 @@
 ---
 title: Borders
-description: Border color, sides, and style utilities plus the per-corner border-radius system — including the @property composition variables behind both.
+description: Border color, sides, and style utilities plus the per-corner border-radius system, including the @property composition variables behind both.
 ---
 
 Borders and radius are both **token-driven and composable**. Border color flows through a
 `--_border-color` indirection (so `border-opacity-*` can dim it), and radius uses the same
-composing-rule pattern as padding — touch one corner, leave the rest intact.
+composing-rule pattern as padding: touch one corner, leave the rest intact.
 
 ## Border
 
@@ -22,7 +22,7 @@ Add a border, then optionally recolor or restyle it. The default color is `--bor
 
 ### Color
 
-Color utilities set `--_border-color`; the border-drawing classes read it. Set both — e.g.
+Color utilities set `--_border-color`; the border-drawing classes read it. Set both, e.g.
 `border border-primary`.
 
 | Class | Token |
@@ -80,7 +80,7 @@ Each of these takes the full size range (`0`, `xs`–`xl`, `full`):
 
 Like padding, radius is built from four `@property`-registered, **non-inheriting** corner
 variables. A composing rule draws each corner from its variable, and each utility sets only the
-corner(s) it owns — so a per-edge class flattens just that edge and leaves a component's other
+corner(s) it owns, so a per-edge class flattens just that edge and leaves a component's other
 corners untouched.
 
 ```css

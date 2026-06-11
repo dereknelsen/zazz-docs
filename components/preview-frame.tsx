@@ -33,7 +33,7 @@ export function PreviewFrame({
   title = "Preview",
 }: PreviewFrameProps) {
   const ref = useRef<HTMLIFrameElement>(null);
-  const [height, setHeight] = useState(minHeight || 260);
+  const [height, setHeight] = useState(minHeight || 400);
   const [fullscreen, setFullscreen] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
@@ -84,15 +84,16 @@ export function PreviewFrame({
       syncTheme();
 
       // Wait for all stylesheets and fonts to finish loading before revealing.
-      const styleLinks = Array.from(doc.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]'));
-      const sheetPromises = styleLinks.map(
-        (link) =>
-          link.sheet
-            ? Promise.resolve()
-            : new Promise<void>((resolve) => {
-                link.addEventListener("load", () => resolve(), { once: true });
-                link.addEventListener("error", () => resolve(), { once: true });
-              }),
+      const styleLinks = Array.from(
+        doc.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]'),
+      );
+      const sheetPromises = styleLinks.map((link) =>
+        link.sheet
+          ? Promise.resolve()
+          : new Promise<void>((resolve) => {
+              link.addEventListener("load", () => resolve(), { once: true });
+              link.addEventListener("error", () => resolve(), { once: true });
+            }),
       );
 
       Promise.all([...sheetPromises, doc.fonts?.ready])
@@ -157,7 +158,10 @@ export function PreviewFrame({
         <button
           type="button"
           onClick={toggleFullscreen}
-          className={cn(buttonVariants({ variant: "outline", size: "sm" }), "absolute right-4 top-4 z-10 px-2 py-1 bg-fd-background shadow-xs")}
+          className={cn(
+            buttonVariants({ variant: "outline", size: "sm" }),
+            "absolute right-4 top-4 z-10 px-2 py-1 bg-fd-background shadow-xs",
+          )}
           aria-label="Close fullscreen preview"
         >
           <XIcon className="size-3.5 " />
@@ -176,7 +180,10 @@ export function PreviewFrame({
       {loadingSkeleton}
       <div className="absolute right-2 bottom-2 z-10">
         <button
-          className={cn(buttonVariants({ variant: "outline", size: "sm" }), "px-2 py-1 bg-fd-background shadow-xs")}
+          className={cn(
+            buttonVariants({ variant: "outline", size: "sm" }),
+            "px-2 py-1 bg-fd-background shadow-xs",
+          )}
           onClick={toggleFullscreen}
           aria-label="Expand preview fullscreen"
         >

@@ -1,9 +1,9 @@
 ---
 title: Scripting
-description: How Zazz scripts are structured, documented, and initialized — the vanilla-JavaScript conventions behind every browser-native behavior.
+description: "How Zazz scripts are structured, documented, and initialized: the vanilla-JavaScript conventions behind every browser-native behavior."
 ---
 
-Scripts in `zazz/scripts/` are served directly at `/zazz/scripts/*.js` — no bundler or transpiler. They run as browser-native JavaScript in modern browsers.
+Scripts in `zazz/scripts/` are served directly at `/zazz/scripts/*.js`, with no bundler or transpiler. They run as browser-native JavaScript in modern browsers.
 
 ## Philosophy
 
@@ -64,7 +64,7 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
 }
 ```
 
-Initialization is **idempotent** — guarded with attributes (`data-embla-init`), flags, or instance checks so re-running is safe.
+Initialization is **idempotent**: guarded with attributes (`data-embla-init`), flags, or instance checks so re-running is safe.
 
 ## Data-attribute configuration
 
@@ -142,5 +142,5 @@ Do not use banner block comments (`/* ==== ... ==== */`).
 - Double quotes for strings.
 - Semicolons required.
 - Optional chaining (`?.`) and nullish coalescing where they simplify guards.
-- No TypeScript source files — types live in JSDoc and `globals.d.ts`.
+- No TypeScript source files; types live in JSDoc and `globals.d.ts`.
 - Type-checking enabled via `tsconfig.json` (`checkJs: true`).

@@ -1,10 +1,10 @@
 ---
 title: Responsive design
-description: Zazz's responsive utility prefixes are container queries, not media queries — they respond to the nearest container, not the viewport. The breakpoints, the families that support them, and how to set up a container.
+description: Zazz's responsive utility prefixes are container queries, not media queries. They respond to the nearest container, not the viewport. The breakpoints, the families that support them, and how to set up a container.
 ---
 
 Responsive utilities in Zazz are **container-query based**. A prefix like `md:grid-cols-3` applies
-when the element's nearest **container** is wide enough — not the viewport. The same component
+when the element's nearest **container** is wide enough, not the viewport. The same component
 adapts correctly whether it's in a full-width section or a narrow sidebar, because it responds to
 the space it's actually in.
 
@@ -38,7 +38,7 @@ can still use `--screen-*` inside `calc()` elsewhere.
 
 ## Which utilities are responsive
 
-Responsive variants exist for the **layout** families — the ones you actually rearrange across
+Responsive variants exist for the **layout** families, the ones you actually rearrange across
 breakpoints. Each is available at every prefix (`xs:` through `xl:`):
 
 | Family | Responsive classes |
@@ -55,7 +55,7 @@ breakpoints. Each is available at every prefix (`xs:` through `xl:`):
 
 ### What is base-only (no prefix)
 
-To keep the stylesheet lean, less-toggled families ship **only** as base classes — apply them
+To keep the stylesheet lean, less-toggled families ship **only** as base classes. Apply them
 outside the responsive layer:
 
 - `self-*`, `justify-self-*`, `place-items-*`
@@ -72,10 +72,10 @@ Responsive prefixes query the nearest ancestor that's a **container context**. T
 one:
 
 - The page **body** is already a container (set in the reset), so utilities respond to the page
-  width out of the box.
+  width with no setup.
 - The `.container` and `.article` wrappers each register their own context
   (`container: … / inline-size`). Nest content inside one and its responsive utilities measure
-  *that* wrapper — which is what makes a component reusable in any column width.
+  *that* wrapper, which is what makes a component reusable in any column width.
 
 ```html
 <section class="container">
@@ -90,7 +90,7 @@ one:
 
 Source order in `_utilities.css` puts the base classes **before** the `@container` blocks, so a
 prefixed variant always wins over its base when its breakpoint is active. Write them in natural
-reading order — base first, then ascending prefixes:
+reading order: base first, then ascending prefixes:
 
 ```html
 <div class="flex-col sm:flex-row lg:items-center">…</div>
@@ -99,7 +99,7 @@ reading order — base first, then ascending prefixes:
 ## Container queries vs media queries
 
 Because these are container queries, a card laid out with `grid-cols-1 md:grid-cols-2` becomes two
-columns whenever **its container** passes `md` — in a wide main column it splits, in a narrow
+columns whenever **its container** passes `md`: in a wide main column it splits, in a narrow
 sidebar it stays single, *on the same page, at the same viewport width*. That's the advantage over
 viewport media queries: components stay correct wherever you drop them. Hit **Expand** on the
 previews above to widen their container and watch the breakpoints fire.

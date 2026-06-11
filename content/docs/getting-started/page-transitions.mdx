@@ -1,9 +1,9 @@
 ---
-title: Page Transitions
-description: SPA-like navigation with animated view transitions — instant content swaps that keep your site feeling like a native app.
+title: Page transitions
+description: "SPA-like navigation with animated view transitions: instant content swaps that keep your site feeling like a native app."
 ---
 
-Zazz includes built-in page transitions that make multi-page sites feel like single-page apps. When a visitor clicks a link, only the `<main>` content swaps — the header and footer stay in place, and a smooth crossfade animation bridges the old and new content.
+Zazz includes built-in page transitions that make multi-page sites feel like single-page apps. When a visitor clicks a link, only the `<main>` content swaps. The header and footer stay in place, and a smooth crossfade animation bridges the old and new content.
 
 ## Why page transitions?
 
@@ -14,11 +14,11 @@ Zazz eliminates this with two complementary technologies:
 1. **The Navigation API** intercepts link clicks and replaces `<main>` content via `fetch()`, avoiding full page reloads.
 2. **The View Transitions API** wraps the DOM swap in a crossfade animation, making the change feel intentional rather than abrupt.
 
-The result: near-instant navigations with visual continuity, no framework required.
+Together, they make navigation near-instant and visually continuous, with no framework required.
 
 ## What users experience
 
-- Header and footer remain visually stable — no flicker, no repaint.
+- Header and footer remain visually stable, with no flicker and no repaint.
 - Page content fades and scales smoothly between states.
 - Browser back/forward buttons work normally with animated transitions.
 - Scroll position is restored correctly.
@@ -73,8 +73,8 @@ The transition is controlled by CSS custom properties:
 Page transitions are entirely optional and degrade gracefully:
 
 - **Browsers without the Navigation API** (Firefox as of 2025) get standard full-page loads.
-- **Browsers without View Transitions** still get instant content swaps — just without the animation.
-- **JavaScript disabled** — normal link behavior, no degradation.
+- **Browsers without View Transitions** still get instant content swaps, just without the animation.
+- **JavaScript disabled:** normal link behavior, no degradation.
 
 Every page must work as a standalone document. The transitions are an enhancement layer, not a requirement.
 
@@ -82,7 +82,7 @@ Every page must work as a standalone document. The transitions are an enhancemen
 
 After swapping content, the navigation script automatically re-initializes:
 
-- **Reveal** — rescans for `[data-reveal]` elements in the new `<main>`.
-- **Embla** — initializes any new carousels in the swapped content.
+- **Reveal:** rescans for `[data-reveal]` elements in the new `<main>`.
+- **Embla:** initializes any new carousels in the swapped content.
 
 No manual re-initialization needed on your part.

@@ -1,11 +1,11 @@
 ---
 title: Color opacity
-description: Dim a color channel — text, background, or border — without fading the element or its children, backed by non-inheriting @property alpha variables.
+description: Dim a color channel (text, background, or border) without fading the element or its children, backed by non-inheriting @property alpha variables.
 ---
 
 Color-opacity utilities dim **one color channel** and nothing else. Unlike
 [`opacity-*`](/docs/utilities/effects#opacity), which fades the whole element (children included),
-these multiply into a single token's alpha — so text stays crisp while a background softens, and a
+these multiply into a single token's alpha, so text stays crisp while a background softens, and a
 child never inherits the dimming.
 
 ## The two opacity systems
@@ -19,7 +19,7 @@ Both use the same quartile scale: `0`, `25`, `50`, `75`, `100`.
 
 ## Channel alpha utilities
 
-Compose one with any matching color class — `bg-primary bg-opacity-50`, `text-foreground
+Compose one with any matching color class: `bg-primary bg-opacity-50`, `text-foreground
 text-opacity-75`, `border border-destructive border-opacity-25`.
 
 | Channel | Classes | Sets |
@@ -33,7 +33,7 @@ text-opacity-75`, `border border-destructive border-opacity-25`.
 <p class="text-foreground text-opacity-75">Slightly softened body text.</p>
 ```
 
-## How it works — non-inheriting alpha variables
+## How it works: non-inheriting alpha variables
 
 Every `text-*`, `bg-*`, and `border-*` color value is computed as a multiply, not a fixed alpha:
 
@@ -45,7 +45,7 @@ Every `text-*`, `bg-*`, and `border-*` color value is computed as a multiply, no
 
 `alpha` is the token's **own** alpha; `--_background-alpha` is the multiplier the opacity utility
 sets. Multiplying (rather than replacing) means a translucent token keeps its built-in
-translucency — `bg-faded bg-opacity-50` halves the *faded* alpha rather than forcing a flat 0.5.
+translucency: `bg-faded bg-opacity-50` halves the *faded* alpha rather than forcing a flat 0.5.
 
 The three multipliers are `@property`-registered with `inherits: false` and an `initial-value` of
 `1`, so the default is "unchanged" and **a value set on one element never leaks to its children**:
@@ -69,4 +69,4 @@ The three multipliers are `@property`-registered with `inherits: false` and an `
 | `--_border-alpha` | `<number>` | `1` | `border-opacity-*` |
 
 These sit alongside the padding/margin/radius composition variables as the non-inheriting half of
-the system — see the [overview](/docs/utilities#composition-variables-registered-non-inheriting).
+the system. See the [overview](/docs/utilities#composition-variables-registered-non-inheriting).

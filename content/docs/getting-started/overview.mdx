@@ -1,6 +1,6 @@
 ---
 title: Overview
-description: How Zazz controls the cascade with layers, tokens, and conventions — no specificity wars, no build step.
+description: "How Zazz controls the cascade with layers, tokens, and conventions: no specificity wars, no build step."
 ---
 
 Zazz replaces specificity-based CSS architecture with a four-layer cascade system. Understanding these layers is how you customize, extend, and maintain the system without fighting it.
@@ -22,7 +22,7 @@ Order matters. Later layers override earlier ones regardless of selector specifi
 | `components` | Component rules | `.button`, `.dialog`, `.field` |
 | `utilities` | Atomic override classes | `.text-primary`, `.gap-md`, `.rounded-full` |
 
-A plain `.button` rule in `components` can be overridden by a utility class in `utilities` — no `!important` needed.
+A plain `.button` rule in `components` can be overridden by a utility class in `utilities`, with no `!important` needed.
 
 ## Core files
 
@@ -86,7 +86,7 @@ Utility names follow Tailwind vocabulary where one exists so they read predictab
 
 ## Typography
 
-Zazz ships a complete fluid type system — every size scales smoothly from mobile to desktop without breakpoints or media queries.
+Zazz ships a complete fluid type system: every size scales smoothly from mobile to desktop without breakpoints or media queries.
 
 ### Font stacks
 
@@ -120,7 +120,7 @@ Font sizes use fluid `clamp()` values that interpolate between a minimum and max
 | `--font-size-h6` – `--font-size-h1` | 1.27 rem → 4.77 rem |
 | `--font-size-display` | 2.57 rem → 5.96 rem |
 
-The heading scale follows a modular ratio — each step roughly 1.25× the previous — so hierarchy is clear at any viewport.
+The heading scale follows a modular ratio (each step roughly 1.25× the previous) so hierarchy is clear at any viewport.
 
 ### Weight, tracking, and leading
 
@@ -151,7 +151,7 @@ Large headings get tighter tracking and shorter leading so they look dense and i
 
 ### The `.prose` container
 
-Wrap long-form content in `.prose` to apply the full typographic rhythm automatically — heading sizes, paragraph spacing, link colors, and figure margins:
+Wrap long-form content in `.prose` to apply the full typographic rhythm automatically: heading sizes, paragraph spacing, link colors, and figure margins:
 
 ```html
 <article class="prose">
@@ -188,7 +188,7 @@ Every component declares its own token namespace in `@layer variables`, each def
 }
 ```
 
-Component rules reference these tokens once. Variants and sizes reassign token values — they never restate the rule.
+Component rules reference these tokens once. Variants and sizes reassign token values; they never restate the rule.
 
 ## Variants and sizes
 
@@ -199,10 +199,10 @@ Zazz uses data attributes instead of BEM modifier classes:
 ```
 
 Attributes available per component:
-- `data-variant` — visual style (`primary`, `muted`, `ghost`, `destructive`)
-- `data-size` — dimensions (`sm`, `icon`, `icon-sm`)
-- `data-side` — directional placement
-- `data-align` — alignment
+- `data-variant`: visual style (`primary`, `muted`, `ghost`, `destructive`)
+- `data-size`: dimensions (`sm`, `icon`, `icon-sm`)
+- `data-side`: directional placement
+- `data-align`: alignment
 
 The default variant is always the absence of the attribute.
 
@@ -210,7 +210,7 @@ The default variant is always the absence of the attribute.
 
 Because component rules resolve tokens lazily, you can intervene at three scopes without editing source files:
 
-### 1. Global — re-skin the entire system
+### 1. Global: re-skin the entire system
 
 ```css
 :root {
@@ -219,7 +219,7 @@ Because component rules resolve tokens lazily, you can intervene at three scopes
 }
 ```
 
-### 2. Component — restyle all instances of one component
+### 2. Component: restyle all instances of one component
 
 ```css
 :root {
@@ -227,7 +227,7 @@ Because component rules resolve tokens lazily, you can intervene at three scopes
 }
 ```
 
-### 3. Instance — one-off override
+### 3. Instance: one-off override
 
 ```html
 <button class="button" style="--button-background: var(--secondary)">
@@ -239,9 +239,9 @@ Because component rules resolve tokens lazily, you can intervene at three scopes
 
 Dark mode works at three levels:
 
-1. **Automatic** — `color-scheme: light dark` on `:root` follows the system preference. Semantic tokens use `light-dark()` so they resolve without extra classes.
-2. **Manual** — Add a `.dark` class to re-declare tokens for forced dark mode.
-3. **Inverted surfaces** — Dark popovers/menus over a light page use container style queries: `@container style(--use-inverted-menu: "true")`.
+1. **Automatic:** `color-scheme: light dark` on `:root` follows the system preference. Semantic tokens use `light-dark()` so they resolve without extra classes.
+2. **Manual:** add a `.dark` class to re-declare tokens for forced dark mode.
+3. **Inverted surfaces:** dark popovers/menus over a light page use container style queries: `@container style(--use-inverted-menu: "true")`.
 
 ## Next steps
 

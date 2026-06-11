@@ -10,12 +10,14 @@
  * @see        _migrations.css — translate old system classes to Zazz tokens there
  * @example    <section data-legacy-styles="true">…legacy markup…</section>
  */
-@layer legacy {
-  /* ===========================================================================
+
+/* ===========================================================================
   LEGACY RESET BASELINE
   Use this only to clear old declarations in opted-in regions.
   Do not put framework-to-Zazz translation rules here.
-  =========================================================================== */
+  =========================================================================== /
+@layer legacy {
+  
   @scope (html) to ([data-legacy-styles="true"] *) {
     :scope,
     :scope * {
@@ -23,3 +25,4 @@
     }
   }
 }
+*/

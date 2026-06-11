@@ -7,21 +7,24 @@
  * @see        _legacy.css — optional scoped reset for legacy regions
  * @example    @import url("/path/to/old.css") layer(legacy);
  */
+
+/* ===========================================================================
+MIGRATION TRANSLATION RULES
+Add compatibility selectors here when moving from another CSS system
+(for example Bootstrap) to Zazz.
+
+Pattern:
+1) Keep old class names as selectors.
+2) Reassign Zazz public tokens on those selectors.
+3) Let Zazz component rules consume the tokens.
+=========================================================================== */
+
+/* Example: Bootstrap semantic class -> Zazz button tokens. /
 @layer migrations {
-	/* ===========================================================================
-	MIGRATION TRANSLATION RULES
-	Add compatibility selectors here when moving from another CSS system
-	(for example Bootstrap) to Zazz.
 
-	Pattern:
-	1) Keep old class names as selectors.
-	2) Reassign Zazz public tokens on those selectors.
-	3) Let Zazz component rules consume the tokens.
-	=========================================================================== */
-
-	/* Example: Bootstrap semantic class -> Zazz button tokens. */
 	.btn-primary {
 		--button-background: var(--primary);
 		--button-foreground: var(--primary-foreground);
 	}
 }
+*/

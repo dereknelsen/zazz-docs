@@ -1,0 +1,21 @@
+
+
+/**
+ * _migrations.css — Legacy stylesheet bridge for layered migration
+ *
+ * @layer      migrations
+ * @requires   _layers.css
+ * @uses       all: revert — neutralize legacy declarations before layered overrides
+ * @example    @import url("/path/to/old.css") layer(migrations);
+ */
+@layer migrations {
+  /* ===========================================================================
+  LEGACY RESET BASELINE
+  Neutralizes inherited legacy styles so migrated layered rules can opt in
+  intentionally.
+  =========================================================================== */
+
+  :is(*:not(path), *:not(path)::before, *:not(path)::after, a, [role='button']) {
+    all: revert;
+  }
+}

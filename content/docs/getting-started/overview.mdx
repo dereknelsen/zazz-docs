@@ -15,12 +15,12 @@ Every stylesheet in Zazz slots into one of four layers, declared once in `_layer
 
 Order matters. Later layers override earlier ones regardless of selector specificity. This eliminates the need for `!important`, BEM modifiers, or naming hacks:
 
-| Layer | Purpose | Example |
-|---|---|---|
-| `variables` | Token declarations only | `:root { --button-radius: var(--radius-md); }` |
-| `reset` | Native element baselines | `html`, `body`, `input`, `select` defaults |
-| `components` | Component rules | `.button`, `.dialog`, `.field` |
-| `utilities` | Atomic override classes | `.text-primary`, `.gap-md`, `.rounded-full` |
+| Layer        | Purpose                  | Example                                        |
+| ------------ | ------------------------ | ---------------------------------------------- |
+| `variables`  | Token declarations only  | `:root { --button-radius: var(--radius-md); }` |
+| `reset`      | Native element baselines | `html`, `body`, `input`, `select` defaults     |
+| `components` | Component rules          | `.button`, `.dialog`, `.field`                 |
+| `utilities`  | Atomic override classes  | `.text-primary`, `.gap-md`, `.rounded-full`    |
 
 A plain `.button` rule in `components` can be overridden by a utility class in `utilities`, with no `!important` needed.
 
@@ -40,11 +40,11 @@ Declares the cascade order. Must load first. Contains a single line:
 
 All global design tokens live here, organized in tiers:
 
-| Tier | Examples | Role |
-|---|---|---|
-| Brand scales | `--primary-50` through `--primary-950` | Raw color palette |
-| Semantic roles | `--background`, `--foreground`, `--primary`, `--muted` | Theme-aware values via `light-dark()` |
-| Metrics & systems | `--step-*`, `--radius-*`, `--gap-*`, `--font-size-*`, `--shadow-*` | Spacing, sizing, effects |
+| Tier              | Examples                                                           | Role                                  |
+| ----------------- | ------------------------------------------------------------------ | ------------------------------------- |
+| Brand scales      | `--primary-50` through `--primary-950`                             | Raw color palette                     |
+| Semantic roles    | `--background`, `--foreground`, `--primary`, `--muted`             | Theme-aware values via `light-dark()` |
+| Metrics & systems | `--step-*`, `--radius-*`, `--gap-*`, `--font-size-*`, `--shadow-*` | Spacing, sizing, effects              |
 
 Semantic roles use `light-dark()` so dark mode works automatically via `color-scheme: light dark`:
 
@@ -109,16 +109,16 @@ Two semantic aliases let you swap heading or body typefaces in one place:
 
 Font sizes use fluid `clamp()` values that interpolate between a minimum and maximum across viewport widths:
 
-| Token | Range |
-|---|---|
-| `--font-size-eyebrow` | 0.51 rem → 0.58 rem |
-| `--font-size-xs` | 0.58 rem → 0.64 rem |
-| `--font-size-sm` | 0.79 rem → 0.8 rem |
-| `--font-size-md` | 1 rem (static) |
-| `--font-size-lg` | 1.13 rem → 1.25 rem |
-| `--font-size-xl` | 1.27 rem → 1.56 rem |
+| Token                               | Range               |
+| ----------------------------------- | ------------------- |
+| `--font-size-eyebrow`               | 0.51 rem → 0.58 rem |
+| `--font-size-xs`                    | 0.58 rem → 0.64 rem |
+| `--font-size-sm`                    | 0.79 rem → 0.8 rem  |
+| `--font-size-md`                    | 1 rem (static)      |
+| `--font-size-lg`                    | 1.13 rem → 1.25 rem |
+| `--font-size-xl`                    | 1.27 rem → 1.56 rem |
 | `--font-size-h6` – `--font-size-h1` | 1.27 rem → 4.77 rem |
-| `--font-size-display` | 2.57 rem → 5.96 rem |
+| `--font-size-display`               | 2.57 rem → 5.96 rem |
 
 The heading scale follows a modular ratio (each step roughly 1.25× the previous) so hierarchy is clear at any viewport.
 
@@ -199,6 +199,7 @@ Zazz uses data attributes instead of BEM modifier classes:
 ```
 
 Attributes available per component:
+
 - `data-variant`: visual style (`primary`, `muted`, `ghost`, `destructive`)
 - `data-size`: dimensions (`sm`, `icon`, `icon-sm`)
 - `data-side`: directional placement
@@ -214,8 +215,8 @@ Because component rules resolve tokens lazily, you can intervene at three scopes
 
 ```css
 :root {
-  --radius-md: 0;         /* squares every component */
-  --primary: oklch(0.6 0.15 145);  /* new brand color everywhere */
+  --radius-md: 0; /* squares every component */
+  --primary: oklch(0.6 0.15 145); /* new brand color everywhere */
 }
 ```
 
@@ -223,16 +224,14 @@ Because component rules resolve tokens lazily, you can intervene at three scopes
 
 ```css
 :root {
-  --button-radius: var(--radius-full);  /* all buttons go pill-shaped */
+  --button-radius: var(--radius-full); /* all buttons go pill-shaped */
 }
 ```
 
 ### 3. Instance: one-off override
 
 ```html
-<button class="button" style="--button-background: var(--secondary)">
-  One-off
-</button>
+<button class="button" style="--button-background: var(--secondary)">One-off</button>
 ```
 
 ## Dark mode

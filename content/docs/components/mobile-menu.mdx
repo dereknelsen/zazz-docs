@@ -18,13 +18,16 @@ Internally it uses `.dialog[data-size="screen"]` for full-viewport coverage and
 
 ```html
 <!-- Trigger -->
-<button class="button" data-size="icon" command="show-modal" commandfor="mobile-menu-1">
-  ☰
-</button>
+<button class="button" data-size="icon" command="show-modal" commandfor="mobile-menu-1">☰</button>
 
 <!-- Menu -->
-<dialog id="mobile-menu-1" class="dialog mobile-menu dark"
-  data-size="screen" data-animation="slide-right" closedby="any">
+<dialog
+  id="mobile-menu-1"
+  class="dialog mobile-menu dark"
+  data-size="screen"
+  data-animation="slide-right"
+  closedby="any"
+>
   <div class="mobile-menu__viewport">
     <div class="mobile-menu__header">…</div>
     <div class="mobile-menu__body">
@@ -44,27 +47,27 @@ Internally it uses `.dialog[data-size="screen"]` for full-viewport coverage and
 
 ## Tokens
 
-| Token                                            | Default          |
-| ------------------------------------------------ | ---------------- |
-| `--mobile-menu-background`                       | `var(--background)` |
-| `--mobile-menu-foreground`                       | `var(--foreground)` |
-| `--mobile-menu-header-padding-inline`            | `var(--gap-sm)`  |
-| `--mobile-menu-header-padding-block`             | `var(--gap-xs)`  |
-| `--mobile-menu-body-padding-inline`              | `var(--gap-xs)`  |
-| `--mobile-menu-body-padding-block`               | `var(--gap-md)`  |
-| `--mobile-menu-footer-padding`                   | `var(--gap-sm)`  |
-| `--mobile-menu-footer-gap`                       | `var(--gap-xs)`  |
-| `--mobile-menu-nested-accordion-padding-inline-start` | `var(--gap-sm)`  |
+| Token                                                 | Default             |
+| ----------------------------------------------------- | ------------------- |
+| `--mobile-menu-background`                            | `var(--background)` |
+| `--mobile-menu-foreground`                            | `var(--foreground)` |
+| `--mobile-menu-header-padding-inline`                 | `var(--gap-sm)`     |
+| `--mobile-menu-header-padding-block`                  | `var(--gap-xs)`     |
+| `--mobile-menu-body-padding-inline`                   | `var(--gap-xs)`     |
+| `--mobile-menu-body-padding-block`                    | `var(--gap-md)`     |
+| `--mobile-menu-footer-padding`                        | `var(--gap-sm)`     |
+| `--mobile-menu-footer-gap`                            | `var(--gap-xs)`     |
+| `--mobile-menu-nested-accordion-padding-inline-start` | `var(--gap-sm)`     |
 
 ## API
 
-| Attribute        | Where            | Values                                     |
-| ---------------- | ---------------- | ------------------------------------------ |
-| `command`        | trigger          | `show-modal`, `close`                      |
-| `commandfor`     | trigger          | id of the `<dialog>`                       |
-| `data-size`      | `.mobile-menu`   | `screen`                                   |
-| `data-animation` | `.mobile-menu`   | `slide-right`                              |
-| `closedby`       | `<dialog>`       | `any`, `closerequest`, `none`              |
+| Attribute        | Where          | Values                        |
+| ---------------- | -------------- | ----------------------------- |
+| `command`        | trigger        | `show-modal`, `close`         |
+| `commandfor`     | trigger        | id of the `<dialog>`          |
+| `data-size`      | `.mobile-menu` | `screen`                      |
+| `data-animation` | `.mobile-menu` | `slide-right`                 |
+| `closedby`       | `<dialog>`     | `any`, `closerequest`, `none` |
 
 ## Composition notes
 

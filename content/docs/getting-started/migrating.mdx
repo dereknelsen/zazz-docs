@@ -14,7 +14,7 @@ rule that surprises people: **any unlayered author rule beats every layered rule
 specificity.** Your existing CSS is almost certainly unlayered, so on its own it would override
 Zazz's components and utilities everywhere the two overlap.
 
-The fix is to give your old CSS a layer of its own, ordered *below* Zazz. From there, everything
+The fix is to give your old CSS a layer of its own, ordered _below_ Zazz. From there, everything
 else follows.
 
 ## Step 1: Layer your old CSS below Zazz
@@ -26,8 +26,8 @@ your legacy CSS into the lowest layer:
 /* entry.css - loaded before Zazz */
 @layer legacy, zazz, overrides;
 
-@import "./legacy/app.css" layer(legacy);   /* old CSS → lowest priority */
-@import "./zazz/styles/main.css";            /* includes _legacy.css + _migrations.css */
+@import "./legacy/app.css" layer(legacy); /* old CSS → lowest priority */
+@import "./zazz/styles/main.css"; /* includes _legacy.css + _migrations.css */
 ```
 
 The **first** `@layer` statement wins for ordering, so declaring it here (before `main.css`
@@ -36,9 +36,9 @@ systems style the same thing, Zazz wins; everywhere Zazz is silent, your old CSS
 day one, nothing visually breaks.
 
 <Callout>
-`zazz.migrations` sits above Zazz's `reset` and `components` sublayers but below `zazz.utilities`.
-That ordering matters in Step 5: a translated class like `.btn-primary` must outrank the element
-baseline in `reset`, while Zazz utilities (`rounded-full`, `bg-primary`) must still override it.
+  `zazz.migrations` sits above Zazz's `reset` and `components` sublayers but below `zazz.utilities`.
+  That ordering matters in Step 5: a translated class like `.btn-primary` must outrank the element
+  baseline in `reset`, while Zazz utilities (`rounded-full`, `bg-primary`) must still override it.
 </Callout>
 
 ## Step 2: Isolate regions with `data-legacy-css`
@@ -53,10 +53,10 @@ one system or the other without writing any CSS. Uncomment its import in `main.c
 
 Then use the attributes on any element:
 
-| Attribute | Effect |
-|---|---|
+| Attribute                | Effect                                                                                             |
+| ------------------------ | -------------------------------------------------------------------------------------------------- |
 | `data-legacy-css="none"` | Strips the `legacy` layer from this element and its children. Zazz applies; your old CSS does not. |
-| `data-legacy-css="only"` | Strips the `zazz` layer from this element and its children. Your old CSS applies; Zazz does not. |
+| `data-legacy-css="only"` | Strips the `zazz` layer from this element and its children. Your old CSS applies; Zazz does not.   |
 
 Both use `:where()` for zero specificity and `all: revert-layer` rather than `all: revert`, so
 they're surgical: they remove one layer without disturbing the others or the browser's defaults.
@@ -112,11 +112,11 @@ Bounding the reset inside `@scope` is what lets you avoid a global `* { all: rev
 cascade can't cleanly override and which web components and lower layers can't escape.
 
 <Callout>
-`all: revert` is the sledgehammer. It removes Zazz too. Its surgical sibling, `all: revert-layer`,
-drops only to the **previous cascade layer**. Put a `revert-layer` reset inside the `legacy` layer
-and it strips your old styles while Zazz's higher layers keep applying on top. Reach for
-`revert-layer` when you mean "remove my old styles but keep Zazz," and `revert` when you want a
-true blank slate (for example, to quarantine a third-party widget from both systems).
+  `all: revert` is the sledgehammer. It removes Zazz too. Its surgical sibling, `all: revert-layer`,
+  drops only to the **previous cascade layer**. Put a `revert-layer` reset inside the `legacy` layer
+  and it strips your old styles while Zazz's higher layers keep applying on top. Reach for
+  `revert-layer` when you mean "remove my old styles but keep Zazz," and `revert` when you want a
+  true blank slate (for example, to quarantine a third-party widget from both systems).
 </Callout>
 
 ## Step 5: Translate old class names in `_migrations.css`
@@ -164,11 +164,11 @@ the migration is done.
 ## Browser support
 
 <Callout type="warn">
-`@layer`, `all: revert`, and `revert-layer` are **Baseline widely available**, safe everywhere
-with no fallback. The `data-legacy-css` attributes are pure CSS built on those same features, so
-they share the same support floor. `@scope` is **Baseline 2024 (newly available)**: Chrome/Edge
-118, Safari 17.4, Firefox 128. If you must support older browsers, skip the `@scope` step and
-lean on `@layer` plus the `data-legacy-css` attributes instead.
+  `@layer`, `all: revert`, and `revert-layer` are **Baseline widely available**, safe everywhere
+  with no fallback. The `data-legacy-css` attributes are pure CSS built on those same features, so
+  they share the same support floor. `@scope` is **Baseline 2024 (newly available)**: Chrome/Edge
+  118, Safari 17.4, Firefox 128. If you must support older browsers, skip the `@scope` step and lean
+  on `@layer` plus the `data-legacy-css` attributes instead.
 </Callout>
 
 ## Next steps

@@ -41,7 +41,7 @@ By default, the page follows the operating system's light/dark setting. Nothing 
 To pin dark mode regardless of system preference, add the `.dark` class, usually on `<html>`. It re-declares the role tokens and sets `color-scheme: dark` so native UI follows:
 
 ```html
-<html class="dark">
+<html class="dark"></html>
 ```
 
 ### 3. Inverted surfaces
@@ -58,10 +58,14 @@ If a value is driven by a role token, dark mode is already handled. Writing `.da
 
 ```css
 /* Don't. The role already swaps. */
-.dark .panel { background: var(--neutral-900); }
+.dark .panel {
+  background: var(--neutral-900);
+}
 
 /* Do. One declaration, correct in both themes. */
-.panel { background: var(--card); }
+.panel {
+  background: var(--card);
+}
 ```
 
 ## Building a theme toggle
@@ -86,7 +90,9 @@ For a user-facing switch, keep the CSS defaulting to the system preference and o
 ```
 
 <Callout>
-Offer two states, **system** and **its opposite**, not three. A pinned choice should stay pinned even when the OS setting later changes, and a three-way "system / light / dark" control always has two options that look identical, which reads as a broken toggle.
+  Offer two states, **system** and **its opposite**, not three. A pinned choice should stay pinned
+  even when the OS setting later changes, and a three-way "system / light / dark" control always has
+  two options that look identical, which reads as a broken toggle.
 </Callout>
 
 ## Forcing one section light or dark

@@ -10,7 +10,7 @@
  * via JS if a filled track is needed. The thumb is centered on the track with a
  * calc'd negative margin so retuning either size keeps it aligned.
  */
-@layer zazz.reset {
+@layer reset {
   :where(input[type="range"]) {
     --range-track-height: var(--step-1_5);
     --range-track-background: var(--muted);
@@ -64,7 +64,8 @@
     border: var(--range-thumb-border);
     border-radius: var(--range-thumb-radius);
     box-shadow: var(--range-thumb-shadow);
-    transition: border-color var(--default-transition-duration) var(--default-transition-timing-function);
+    transition: border-color var(--default-transition-duration)
+      var(--default-transition-timing-function);
   }
 
   :where(input[type="range"])::-moz-range-thumb {
@@ -75,12 +76,12 @@
     border: var(--range-thumb-border);
     border-radius: var(--range-thumb-radius);
     box-shadow: var(--range-thumb-shadow);
-    transition: border-color var(--default-transition-duration) var(--default-transition-timing-function);
+    transition: border-color var(--default-transition-duration)
+      var(--default-transition-timing-function);
   }
 
   :where(input[type="range"]:hover) {
     --range-thumb-border: 1px solid var(--primary);
-
   }
 
   :where(input[type="range"]:active) {

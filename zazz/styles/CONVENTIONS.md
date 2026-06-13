@@ -68,12 +68,12 @@ See [`components/index.html`](../components/index.html) for a complete working e
 
 A component file is written top-to-bottom in this order:
 
-| #   | Section                  | Layer               | Required?                     |
-| --- | ------------------------ | ------------------- | ----------------------------- |
-| 1   | CSSDoc header            | —                   | always                        |
-| 2   | Deprecated css rules     | `@layer legacy`     | when migrating to Zazz        |
+| #   | Section                  | Layer                    | Required?                     |
+| --- | ------------------------ | ------------------------ | ----------------------------- |
+| 1   | CSSDoc header            | —                        | always                        |
+| 2   | Deprecated css rules     | `@layer legacy`          | when migrating to Zazz        |
 | 2   | Component token hooks    | `@layer zazz.variables`  | when the component has tokens |
-| 3   | Native-element baselines | `@layer zazz.reset`      | only if it redraws native UI  |
+| 3   | Native-element baselines | `@layer reset`           | only if it redraws native UI  |
 | 4   | Component rules          | `@layer zazz.components` | the component itself          |
 | 5   | Utility classes          | `@layer zazz.utilities`  | only if it ships utilities    |
 
@@ -123,17 +123,17 @@ column** (tag name padded to 11 chars + a space) so headers scan like a table.
 
 ### Tag reference
 
-| Tag                   | Required        | Meaning                                                                                           |
-| --------------------- | --------------- | ------------------------------------------------------------------------------------------------- |
-| _(summary)_           | yes             | First line: `_file.css — Component (.selector)`. Kept verbatim.                                   |
-| `@layer`              | yes             | Cascade layers this file contributes to, in order: `variables, components`.                       |
-| `@requires`           | yes             | Load-order dependencies — files that must load before this one. `none` for `_layers.css`.         |
-| `@uses`               | —               | One modern CSS API/feature per line, with an inline `— note`. Flag support caveats here.          |
+| Tag                   | Required        | Meaning                                                                                                |
+| --------------------- | --------------- | ------------------------------------------------------------------------------------------------------ |
+| _(summary)_           | yes             | First line: `_file.css — Component (.selector)`. Kept verbatim.                                        |
+| `@layer`              | yes             | Cascade layers this file contributes to, in order: `variables, components`.                            |
+| `@requires`           | yes             | Load-order dependencies — files that must load before this one. `none` for `_layers.css`.              |
+| `@uses`               | —               | One modern CSS API/feature per line, with an inline `— note`. Flag support caveats here.               |
 | `@tokens`             | when owned      | The token namespace this file exposes = its override hooks, e.g. `--button-* (@layer zazz.variables)`. |
-| `@consumedby`         | when applicable | Reverse dependency — files that build on this one.                                                |
-| `@see`                | —               | External URL or cross-file reference. (Replaces the old block `@link`.)                           |
-| `@example`            | —               | Usage markup. Used where authoring is non-obvious (`_reveal.css`).                                |
-| `@version` / `@since` | —               | Optional, for versioned subsystems (`_reveal.css`).                                               |
+| `@consumedby`         | when applicable | Reverse dependency — files that build on this one.                                                     |
+| `@see`                | —               | External URL or cross-file reference. (Replaces the old block `@link`.)                                |
+| `@example`            | —               | Usage markup. Used where authoring is non-obvious (`_reveal.css`).                                     |
+| `@version` / `@since` | —               | Optional, for versioned subsystems (`_reveal.css`).                                                    |
 
 ### Rules
 
@@ -260,9 +260,9 @@ Naming convention:
 A component file declares two kinds of custom property, and the distinction is
 load-bearing — don't blur them:
 
-| Kind                    | Looks like                                                   | Lives in                       | Declared on | Apps override? |
-| ----------------------- | ------------------------------------------------------------ | ------------------------------ | ----------- | -------------- |
-| **Public theming hook** | `--accordion-summary-padding-block` (unprefixed, namespaced) | `@layer zazz.variables`             | `:root`     | **yes** — the API |
+| Kind                    | Looks like                                                   | Lives in                                     | Declared on | Apps override?    |
+| ----------------------- | ------------------------------------------------------------ | -------------------------------------------- | ----------- | ----------------- |
+| **Public theming hook** | `--accordion-summary-padding-block` (unprefixed, namespaced) | `@layer zazz.variables`                      | `:root`     | **yes** — the API |
 | **Private internal**    | `--_ring-width`, `--_ring` (leading `--_`)                   | the rule that uses it (`components`/`reset`) | the element | **no** — plumbing |
 
 **Public hooks** are the override API. They default to a global token, are read by the
@@ -400,7 +400,7 @@ These deviate from the canonical shape on purpose — document the reason in-fil
 - **Split `@layer zazz.variables` blocks** — [`_dialog.css`](./_dialog.css) declares motion
   tokens up top and sizing tokens in a second block lower down. Fine; label the second
   block.
-- **Component living in `@layer zazz.reset`** — [`_switch.css`](./_switch.css) redraws the
+- **Component living in `@layer reset`** — [`_switch.css`](./_switch.css) redraws the
   native `input[role="switch"]`, so it belongs in `reset` (it must lose to component
   overrides). Note it in `@tokens`.
 - **`@supports`-gated progressive enhancement** — [`_popover.css`](./_popover.css),
@@ -464,4 +464,4 @@ These deviate from the canonical shape on purpose — document the reason in-fil
 4. Write the rules in `@layer zazz.components`, referencing each token once.
 5. Add variants/sizes as `[data-*]` selectors that **only reassign tokens**.
 6. If you read another component's tokens, add this file to that file's `@consumedby`.
-7. If you redraw native UI, put those rules in `@layer zazz.reset` and say why.
+7. If you redraw native UI, put those rules in `@layer reset` and say why.

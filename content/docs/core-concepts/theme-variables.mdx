@@ -18,12 +18,12 @@ Tokens resolve lazily, so an override on `:root` cascades to everything that ref
 
 Tokens are organized from raw values up to component hooks. Reach for the most semantic tier that fits.
 
-| Tier | What it is | Examples |
-|---|---|---|
-| **Brand & literal scales** | Fixed color ramps | `--primary-50`…`--primary-950`, `--neutral-*`, `--shade-*`, `--tint-*` |
-| **Semantic roles** | Theme-aware meaning | `--background`, `--foreground`, `--primary`, `--muted`, `--border`, `--destructive` |
-| **Metrics & systems** | Spacing, type, shape, layout | `--gap-*`, `--step-*`, `--font-size-*`, `--radius-*`, `--shadow-*`, `--screen-*`, `--ring-*` |
-| **Component tokens** | Per-component hooks | `--button-background`, `--field-border`, `--dialog-radius` |
+| Tier                       | What it is                   | Examples                                                                                     |
+| -------------------------- | ---------------------------- | -------------------------------------------------------------------------------------------- |
+| **Brand & literal scales** | Fixed color ramps            | `--primary-50`…`--primary-950`, `--neutral-*`, `--shade-*`, `--tint-*`                       |
+| **Semantic roles**         | Theme-aware meaning          | `--background`, `--foreground`, `--primary`, `--muted`, `--border`, `--destructive`          |
+| **Metrics & systems**      | Spacing, type, shape, layout | `--gap-*`, `--step-*`, `--font-size-*`, `--radius-*`, `--shadow-*`, `--breakpoint-*`, `--ring-*` |
+| **Component tokens**       | Per-component hooks          | `--button-background`, `--field-border`, `--dialog-radius`                                   |
 
 Roles resolve through [`light-dark()`](/docs/core-concepts/dark-mode), so choosing a role instead of a scale step keeps both themes correct. Component tokens default to a global token, so they inherit your theme until you deliberately override one.
 
@@ -37,7 +37,7 @@ Redefine a token on `:root` and every consumer updates:
 
 ```css
 :root {
-  --radius-md: 0;            /* square every medium-radius corner */
+  --radius-md: 0; /* square every medium-radius corner */
   --primary: oklch(0.55 0.18 264);
 }
 ```
@@ -48,7 +48,7 @@ Reassign a component token to change every instance of it:
 
 ```css
 :root {
-  --button-radius: var(--radius-full);   /* all buttons go pill-shaped */
+  --button-radius: var(--radius-full); /* all buttons go pill-shaped */
 }
 ```
 
@@ -57,9 +57,7 @@ Reassign a component token to change every instance of it:
 Set the token inline, or let a `data-*` variant do it:
 
 ```html
-<button class="button" style="--button-background: var(--secondary)">
-  One-off secondary
-</button>
+<button class="button" style="--button-background: var(--secondary)">One-off secondary</button>
 ```
 
 ## The token families
@@ -69,7 +67,7 @@ Set the token inline, or let a `data-*` variant do it:
 - **Color:** roles and scales, covered in depth on the [Colors](/docs/core-concepts/colors) page.
 - **Radius:** `--radius-none…full`, scaled by `--radius-multiplier`. `md` for buttons/inputs, `lg` for cards/dialogs.
 - **Shadow:** `--shadow-xs…xl`, soft multi-layer elevations. Surfaces are flat by default; add depth intentionally.
-- **Layout:** `--container` (~80rem) and `--article` (~66ch) widths, plus `--screen-*` breakpoints used by [container queries](/docs/core-concepts/responsive-design).
+- **Layout:** `--container` (~80rem) and `--article` (~66ch) widths, plus `--breakpoint-*` breakpoints used by [container queries](/docs/core-concepts/responsive-design).
 - **Motion:** `--spring-easing`, `--spring-duration`, and the `--default-transition*` bundle. Everything zeroes under `prefers-reduced-motion`.
 
 ## Where the real values live

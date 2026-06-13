@@ -37,15 +37,15 @@ Animate individual elements with `data-reveal`:
 
 ### Available animations
 
-| Value | Effect |
-|---|---|
-| `slide-up` | Translate up from below |
-| `slide-down` | Translate down from above |
-| `slide-left` | Translate left from the right |
+| Value         | Effect                        |
+| ------------- | ----------------------------- |
+| `slide-up`    | Translate up from below       |
+| `slide-down`  | Translate down from above     |
+| `slide-left`  | Translate left from the right |
 | `slide-right` | Translate right from the left |
-| `fade` | Opacity only |
-| `grow` | Scale up from smaller |
-| `shrink` | Scale down from larger |
+| `fade`        | Opacity only                  |
+| `grow`        | Scale up from smaller         |
+| `shrink`      | Scale down from larger        |
 
 ## Stagger groups
 
@@ -77,17 +77,17 @@ Animate children from last to first:
 
 All attributes are optional. Set them on the element with `data-reveal` or `data-reveal-each`:
 
-| Attribute | Default | Description |
-|---|---|---|
-| `data-reveal-duration` | `900ms` | Animation duration in milliseconds |
-| `data-reveal-wait` | `0` | Base delay before animation starts (ms) |
-| `data-reveal-step` | `80` | Delay between staggered children (ms) |
-| `data-reveal-ease` | `cubic-bezier(0.4, 0, 0.2, 1)` | Timing function |
-| `data-reveal-distance` | `4rem` | Translation distance for slide animations |
-| `data-reveal-scale` | — | Custom scale value for grow/shrink |
-| `data-reveal-margin` | `0px` | IntersectionObserver `rootMargin` |
-| `data-reveal-threshold` | `0.2` | Visibility threshold (0–1) to trigger |
-| `data-reveal-order` | — | Set to `"reversed"` for reverse stagger |
+| Attribute               | Default                        | Description                               |
+| ----------------------- | ------------------------------ | ----------------------------------------- |
+| `data-reveal-duration`  | `900ms`                        | Animation duration in milliseconds        |
+| `data-reveal-wait`      | `0`                            | Base delay before animation starts (ms)   |
+| `data-reveal-step`      | `80`                           | Delay between staggered children (ms)     |
+| `data-reveal-ease`      | `cubic-bezier(0.4, 0, 0.2, 1)` | Timing function                           |
+| `data-reveal-distance`  | `4rem`                         | Translation distance for slide animations |
+| `data-reveal-scale`     | —                              | Custom scale value for grow/shrink        |
+| `data-reveal-margin`    | `0px`                          | IntersectionObserver `rootMargin`         |
+| `data-reveal-threshold` | `0.2`                          | Visibility threshold (0–1) to trigger     |
+| `data-reveal-order`     | —                              | Set to `"reversed"` for reverse stagger   |
 
 ## Global configuration
 
@@ -121,7 +121,11 @@ Or set global CSS custom properties on `:root`:
 
 ```js
 Reveal.disableAutoInit();
-const reveal = new Reveal({ config: { /* custom */ } });
+const reveal = new Reveal({
+  config: {
+    /* custom */
+  },
+});
 ```
 
 ### Refresh after DOM changes
@@ -143,10 +147,10 @@ Reveal respects `prefers-reduced-motion`. When reduced motion is preferred, elem
 
 The script sets these properties per-element for the CSS transitions to consume:
 
-| Property | Set by |
-|---|---|
-| `--reveal-duration` | `data-reveal-duration` |
-| `--reveal-ease` | `data-reveal-ease` |
-| `--reveal-wait` | `data-reveal-wait` (+ stagger calculation) |
-| `--reveal-distance` | `data-reveal-distance` |
-| `--reveal-scale` | `data-reveal-scale` |
+| Property            | Set by                                     |
+| ------------------- | ------------------------------------------ |
+| `--reveal-duration` | `data-reveal-duration`                     |
+| `--reveal-ease`     | `data-reveal-ease`                         |
+| `--reveal-wait`     | `data-reveal-wait` (+ stagger calculation) |
+| `--reveal-distance` | `data-reveal-distance`                     |
+| `--reveal-scale`    | `data-reveal-scale`                        |

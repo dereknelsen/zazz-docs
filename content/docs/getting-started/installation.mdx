@@ -41,7 +41,8 @@ pnpm dlx degit dereknelsen/zazz-docs/zazz/styles/_dialog.css ./src/zazz/styles/_
 ```
 
 <Callout type="warn">
-If you install individual style files, update your local `main.css` imports to include them in the right order.
+  If you install individual style files, update your local `main.css` imports to include them in the
+  right order.
 </Callout>
 
 ## Link the stylesheet
@@ -75,17 +76,17 @@ Create an HTML file and add a button:
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Paint the right theme before CSS loads -->
-  <meta name="color-scheme" content="light dark" />
-  <link rel="stylesheet" href="./zazz/styles/main.css" />
-  <title>Zazz Test</title>
-</head>
-<body>
-  <button class="button" data-variant="primary">It works</button>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Paint the right theme before CSS loads -->
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="./zazz/styles/main.css" />
+    <title>Zazz Test</title>
+  </head>
+  <body>
+    <button class="button" data-variant="primary">It works</button>
+  </body>
 </html>
 ```
 

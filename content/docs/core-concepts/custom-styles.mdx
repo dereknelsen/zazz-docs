@@ -3,7 +3,7 @@ title: Adding custom styles
 description: When tokens and utilities don't cover it, extend Zazz without touching its source. Override a token, drop a rule into the right layer, or write a one-off inline.
 ---
 
-Zazz's tokens and utilities cover most of what you'll build, but every project has a one-off. When you hit one, you extend the system from the *outside*, and you never edit files in `zazz/styles/`. Keep your additions in your own stylesheet, loaded after `main.css`, and they land in the [cascade](/docs/core-files/layers) after Zazz's own layers.
+Zazz's tokens and utilities cover most of what you'll build, but every project has a one-off. When you hit one, you extend the system from the _outside_, and you never edit files in `zazz/styles/`. Keep your additions in your own stylesheet, loaded after `main.css`, and they land in the [cascade](/docs/core-files/layers) after Zazz's own layers.
 
 ```html
 <link rel="stylesheet" href="./zazz/styles/main.css" />
@@ -17,8 +17,8 @@ Most customizations aren't new CSS at all; they're a different value for an exis
 ```css
 /* your-styles.css */
 :root {
-  --primary: oklch(0.6 0.2 145);   /* global: re-skin the brand */
-  --button-radius: var(--radius-full);   /* component default: pill buttons */
+  --primary: oklch(0.6 0.2 145); /* global: re-skin the brand */
+  --button-radius: var(--radius-full); /* component default: pill buttons */
 }
 ```
 

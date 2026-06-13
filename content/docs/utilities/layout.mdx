@@ -14,10 +14,10 @@ itself with `margin-inline: auto`, and registers a
 [container-query context](/docs/utilities/responsive-design#setting-up-a-container), so one
 element handles page width, gutters, and responsive scope with no wrapper div around it.
 
-| Class | Width | Container name | Use |
-|---|---|---|---|
-| `container` | `min(--screen-lg, 100% − 2 × --gap-md)` | `container` | full-width sections (caps ~80rem) |
-| `article` | `min(66ch, 100% − 2 × --gap-md)` | `article` | reading column (caps at a 66ch measure; also sets the base font size) |
+| Class       | Width                                   | Container name | Use                                                                   |
+| ----------- | --------------------------------------- | -------------- | --------------------------------------------------------------------- |
+| `container` | `min(--breakpoint-lg, 100% − 2 × --gap-md)` | `container`    | full-width sections (caps ~80rem)                                     |
+| `article`   | `min(66ch, 100% − 2 × --gap-md)`        | `article`      | reading column (caps at a 66ch measure; also sets the base font size) |
 
 ```html
 <section class="container">
@@ -31,27 +31,27 @@ The width is a `min()` of two terms: a max cap and `100% − 2 × gutter`:
 
 ```css
 :where(.container) {
-  inline-size: min(var(--screen-lg), 100% - var(--gap-md) * 2);
+  inline-size: min(var(--breakpoint-lg), 100% - var(--gap-md) * 2);
   margin-inline: auto;
 }
 ```
 
-On a wide viewport the cap wins: the column stops growing at `--screen-lg` and `margin-inline: auto`
+On a wide viewport the cap wins: the column stops growing at `--breakpoint-lg` and `margin-inline: auto`
 centers it. Once the viewport drops below that cap, the `100% − 2 × --gap-md` term wins instead,
 leaving a symmetric `--gap-md` gutter on each side. One element does both jobs, so there's no need
 for the usual full-width **padding wrapper** around a separate max-width child.
 
 ## Display
 
-| Class | Declaration |
-|---|---|
-| `block` | `display: block` |
+| Class          | Declaration             |
+| -------------- | ----------------------- |
+| `block`        | `display: block`        |
 | `inline-block` | `display: inline-block` |
-| `inline` | `display: inline` |
-| `flex` | `display: flex` |
-| `inline-flex` | `display: inline-flex` |
-| `grid` | `display: grid` |
-| `hidden` | `display: none` |
+| `inline`       | `display: inline`       |
+| `flex`         | `display: flex`         |
+| `inline-flex`  | `display: inline-flex`  |
+| `grid`         | `display: grid`         |
+| `hidden`       | `display: none`         |
 
 `flex` and `grid` are covered in depth in [Flexbox](/docs/utilities/flexbox) and
 [Grid](/docs/utilities/grid). `block`, `flex`, `inline-flex`, `grid`, and `hidden` are the
@@ -62,36 +62,36 @@ display values that also have responsive variants ([Responsive design](/docs/uti
 `visibility` keeps an element's box (and its space) but toggles its paint, distinct from
 `hidden`, which removes the box entirely.
 
-| Class | Declaration |
-|---|---|
-| `visible` | `visibility: visible` |
-| `invisible` | `visibility: hidden` |
+| Class       | Declaration           |
+| ----------- | --------------------- |
+| `visible`   | `visibility: visible` |
+| `invisible` | `visibility: hidden`  |
 
 ## Position
 
 <Preview src="utilities/position" />
 
-| Class | Declaration |
-|---|---|
-| `static` | `position: static` |
+| Class      | Declaration          |
+| ---------- | -------------------- |
+| `static`   | `position: static`   |
 | `relative` | `position: relative` |
 | `absolute` | `position: absolute` |
-| `fixed` | `position: fixed` |
-| `sticky` | `position: sticky` |
+| `fixed`    | `position: fixed`    |
+| `sticky`   | `position: sticky`   |
 
 ### Inset & edge offsets
 
 Offsets use the **semantic gap scale** (`--gap-xs` … `--gap-xl`), so a positioned element's
 offset matches the spacing rhythm of the rest of the page. `inset-*` sets all four edges at once.
 
-| Class | Declaration |
-|---|---|
-| `inset-0` | `top/right/bottom/left: 0` |
-| `inset-xs … inset-xl` | all four edges `= var(--gap-{size})` |
-| `top-xs … top-xl` | `top: var(--gap-{size})` |
-| `right-xs … right-xl` | `right: var(--gap-{size})` |
-| `bottom-xs … bottom-xl` | `bottom: var(--gap-{size})` |
-| `left-xs … left-xl` | `left: var(--gap-{size})` |
+| Class                   | Declaration                          |
+| ----------------------- | ------------------------------------ |
+| `inset-0`               | `top/right/bottom/left: 0`           |
+| `inset-xs … inset-xl`   | all four edges `= var(--gap-{size})` |
+| `top-xs … top-xl`       | `top: var(--gap-{size})`             |
+| `right-xs … right-xl`   | `right: var(--gap-{size})`           |
+| `bottom-xs … bottom-xl` | `bottom: var(--gap-{size})`          |
+| `left-xs … left-xl`     | `left: var(--gap-{size})`            |
 
 ```html
 <div class="relative">
@@ -103,15 +103,15 @@ offset matches the spacing rhythm of the rest of the page. `inset-*` sets all fo
 
 <Preview src="utilities/overflow" />
 
-| Class | Declaration |
-|---|---|
-| `overflow-visible` | `overflow: visible` |
-| `overflow-hidden` | `overflow: hidden` |
-| `overflow-clip` | `overflow: clip` |
-| `overflow-auto` | `overflow: auto` |
-| `overflow-x-auto` | `overflow-x: auto; overflow-y: clip` |
-| `overflow-y-auto` | `overflow-y: auto; overflow-x: clip` |
-| `no-scrollbar` | hides the scrollbar while keeping scroll (Firefox, IE, and `::-webkit-scrollbar`) |
+| Class              | Declaration                                                                       |
+| ------------------ | --------------------------------------------------------------------------------- |
+| `overflow-visible` | `overflow: visible`                                                               |
+| `overflow-hidden`  | `overflow: hidden`                                                                |
+| `overflow-clip`    | `overflow: clip`                                                                  |
+| `overflow-auto`    | `overflow: auto`                                                                  |
+| `overflow-x-auto`  | `overflow-x: auto; overflow-y: clip`                                              |
+| `overflow-y-auto`  | `overflow-y: auto; overflow-x: clip`                                              |
+| `no-scrollbar`     | hides the scrollbar while keeping scroll (Firefox, IE, and `::-webkit-scrollbar`) |
 
 `no-scrollbar` is a modifier. Pair it with one of the scrolling classes (e.g.
 `overflow-y-auto no-scrollbar`) when you want scroll without the visible track.
@@ -121,11 +121,11 @@ offset matches the spacing rhythm of the rest of the page. `inset-*` sets all fo
 A small, intentional stacking scale plus an isolation helper. `z-isolate` creates a new stacking
 context (`isolation: isolate`) so a subtree's z-indexes can't escape it.
 
-| Class | Declaration |
-|---|---|
-| `z-isolate` | `isolation: isolate` |
-| `z-0` | `z-index: 0` |
-| `z-10` `z-20` `z-30` `z-40` `z-50` | `z-index: 10 … 50` |
+| Class                              | Declaration          |
+| ---------------------------------- | -------------------- |
+| `z-isolate`                        | `isolation: isolate` |
+| `z-0`                              | `z-index: 0`         |
+| `z-10` `z-20` `z-30` `z-40` `z-50` | `z-index: 10 … 50`   |
 
 ## Aspect ratio
 
@@ -133,14 +133,14 @@ context (`isolation: isolate`) so a subtree's z-indexes can't escape it.
 
 Named ratios for media boxes, with no custom values to remember.
 
-| Class | Ratio | Use |
-|---|---|---|
-| `aspect-square` | `1 / 1` | avatars, thumbnails |
-| `aspect-landscape` | `3 / 2` | photography |
-| `aspect-portrait` | `2 / 3` | portrait media |
-| `aspect-widescreen` | `16 / 9` | video |
-| `aspect-univisium` | `2 / 1` | wide editorial |
-| `aspect-anamorphic` | `2.39 / 1` | cinematic |
+| Class               | Ratio      | Use                 |
+| ------------------- | ---------- | ------------------- |
+| `aspect-square`     | `1 / 1`    | avatars, thumbnails |
+| `aspect-landscape`  | `3 / 2`    | photography         |
+| `aspect-portrait`   | `2 / 3`    | portrait media      |
+| `aspect-widescreen` | `16 / 9`   | video               |
+| `aspect-univisium`  | `2 / 1`    | wide editorial      |
+| `aspect-anamorphic` | `2.39 / 1` | cinematic           |
 
 ## Object fit
 
@@ -149,13 +149,13 @@ Named ratios for media boxes, with no custom values to remember.
 Controls how a replaced element (`<img>`, `<video>`) fills its box. Pair with an
 [aspect ratio](#aspect-ratio) or explicit [size](/docs/utilities/sizing).
 
-| Class | Declaration |
-|---|---|
-| `object-contain` | `object-fit: contain` (fit inside, letterbox) |
-| `object-cover` | `object-fit: cover` (fill, crop) |
-| `object-fill` | `object-fit: fill` (stretch) |
-| `object-none` | `object-fit: none` (intrinsic size) |
-| `object-scale-down` | `object-fit: scale-down` |
+| Class               | Declaration                                   |
+| ------------------- | --------------------------------------------- |
+| `object-contain`    | `object-fit: contain` (fit inside, letterbox) |
+| `object-cover`      | `object-fit: cover` (fill, crop)              |
+| `object-fill`       | `object-fit: fill` (stretch)                  |
+| `object-none`       | `object-fit: none` (intrinsic size)           |
+| `object-scale-down` | `object-fit: scale-down`                      |
 
 ## Order
 
@@ -163,8 +163,8 @@ Controls how a replaced element (`<img>`, `<video>`) fills its box. Pair with an
 
 Reorder a flex or grid child visually without touching source order.
 
-| Class | Declaration |
-|---|---|
+| Class         | Declaration    |
+| ------------- | -------------- |
 | `order-first` | `order: -9999` |
-| `order-last` | `order: 9999` |
-| `order-none` | `order: 0` |
+| `order-last`  | `order: 9999`  |
+| `order-none`  | `order: 0`     |

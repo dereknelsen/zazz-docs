@@ -11,13 +11,13 @@ content can't blow out a track.
 
 <Preview src="utilities/grid-cols" />
 
-| Class | Declaration |
-|---|---|
-| `grid` | `display: grid` (also sets `--_grid-col-min: min(100%, 25ch)`) |
-| `grid-cols-1 … grid-cols-12` | `grid-template-columns: repeat(N, minmax(0, 1fr))` |
-| `grid-rows-1 … grid-rows-12` | `grid-template-rows: repeat(N, auto)` |
-| `grid-flow-row` | `grid-auto-flow: row` |
-| `grid-flow-col` | `grid-auto-flow: column` |
+| Class                        | Declaration                                                    |
+| ---------------------------- | -------------------------------------------------------------- |
+| `grid`                       | `display: grid` (also sets `--_grid-col-min: min(100%, 25ch)`) |
+| `grid-cols-1 … grid-cols-12` | `grid-template-columns: repeat(N, minmax(0, 1fr))`             |
+| `grid-rows-1 … grid-rows-12` | `grid-template-rows: repeat(N, auto)`                          |
+| `grid-flow-row`              | `grid-auto-flow: row`                                          |
+| `grid-flow-col`              | `grid-auto-flow: column`                                       |
 
 `grid-cols-N` and `grid-rows-N` also set the coordination variables `--_grid-cols` / `--_grid-rows`
 (see [below](#coordination-variables)). Display (`grid`), `grid-cols-*`, and `grid-rows-*` all have
@@ -30,10 +30,10 @@ responsive variants.
 Spans are **clamped to the track count** so a child can never span past the grid: each is
 `span min(N, var(--_grid-cols))`, reading the count the container set.
 
-| Class | Declaration |
-|---|---|
+| Class                      | Declaration                                   |
+| -------------------------- | --------------------------------------------- |
 | `col-span-1 … col-span-12` | `grid-column: span min(N, var(--_grid-cols))` |
-| `row-span-1 … row-span-12` | `grid-row: span min(N, var(--_grid-rows))` |
+| `row-span-1 … row-span-12` | `grid-row: span min(N, var(--_grid-rows))`    |
 
 `col-span-*` and `row-span-*` have responsive variants.
 
@@ -41,10 +41,10 @@ Spans are **clamped to the track count** so a child can never span past the grid
 
 Adopt the parent grid's tracks so nested content lines up across cards or rows.
 
-| Class | Declaration |
-|---|---|
+| Class               | Declaration                      |
+| ------------------- | -------------------------------- |
 | `grid-cols-subgrid` | `grid-template-columns: subgrid` |
-| `grid-rows-subgrid` | `grid-template-rows: subgrid` |
+| `grid-rows-subgrid` | `grid-template-rows: subgrid`    |
 
 Both have responsive variants. See the [Card](/docs/components/card) subgrid example for a
 real-world layout.
@@ -61,11 +61,11 @@ individual child's placement with `self-*` / `justify-self-*`.
 
 Shorthand for aligning all grid children in both axes at once.
 
-| Class | Declaration |
-|---|---|
-| `place-items-start` | `place-items: start` |
+| Class                | Declaration           |
+| -------------------- | --------------------- |
+| `place-items-start`  | `place-items: start`  |
 | `place-items-center` | `place-items: center` |
-| `place-items-end` | `place-items: end` |
+| `place-items-end`    | `place-items: end`    |
 
 ## Responsive auto-fill grid
 
@@ -88,11 +88,11 @@ never get narrower than readable.
 Grid utilities expose three **inheriting** coordination variables: set on the container, read by
 descendants. They're left unregistered so normal inheritance carries them down.
 
-| Variable | Set by | Default | Read by |
-|---|---|---|---|
-| `--_grid-cols` | `grid-cols-N` | `1` | `col-span-*` (clamp), auto-fill formula |
-| `--_grid-rows` | `grid-rows-N` | `1` | `row-span-*` (clamp) |
-| `--_grid-col-min` | `.grid` | `min(100%, 25ch)` | `grid-flow-row` auto-fill track floor |
+| Variable          | Set by        | Default           | Read by                                 |
+| ----------------- | ------------- | ----------------- | --------------------------------------- |
+| `--_grid-cols`    | `grid-cols-N` | `1`               | `col-span-*` (clamp), auto-fill formula |
+| `--_grid-rows`    | `grid-rows-N` | `1`               | `row-span-*` (clamp)                    |
+| `--_grid-col-min` | `.grid`       | `min(100%, 25ch)` | `grid-flow-row` auto-fill track floor   |
 
 Because `--_grid-cols` inherits, a `col-span-3` placed inside a `grid-cols-2` clamps to `span 2`
 instead of overflowing: the span reads the same count the container declared. See the

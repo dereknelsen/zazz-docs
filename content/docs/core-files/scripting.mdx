@@ -35,7 +35,9 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
 if (typeof module !== "undefined" && module.exports) {
   module.exports = MyExport;
 } else if (typeof define === "function" && define.amd) {
-  define([], function () { return MyExport; });
+  define([], function () {
+    return MyExport;
+  });
 } else if (typeof window !== "undefined") {
   window.MyExport = MyExport;
 }
@@ -43,12 +45,12 @@ if (typeof module !== "undefined" && module.exports) {
 
 ## Module exports
 
-| File | Global | Export shape |
-|---|---|---|
-| `utils.js` | `window.Utils` | `{ parseValue, parseDataAttributes }` |
-| `reveal.js` | `window.Reveal` | `Reveal` class |
-| `embla.js` | `window.EmblaInit` | `{ init, addDotBtnsAndClickHandlers, … }` |
-| `navigation.js` | _(none)_ | Side-effect only; no export |
+| File            | Global             | Export shape                              |
+| --------------- | ------------------ | ----------------------------------------- |
+| `utils.js`      | `window.Utils`     | `{ parseValue, parseDataAttributes }`     |
+| `reveal.js`     | `window.Reveal`    | `Reveal` class                            |
+| `embla.js`      | `window.EmblaInit` | `{ init, addDotBtnsAndClickHandlers, … }` |
+| `navigation.js` | _(none)_           | Side-effect only; no export               |
 
 ## Auto-initialization
 
@@ -78,12 +80,12 @@ Component scripts read configuration from HTML data attributes rather than JS op
 
 Scripts declare dependencies via `<script>` tag order, not imports:
 
-| Script | Depends on | Notes |
-|---|---|---|
-| `utils.js` | — | Load first; provides `window.Utils` |
-| `reveal.js` | — | Standalone |
-| `embla.js` | `utils.js`, Embla CDN libs | Requires Embla UMD bundles before this file |
-| `navigation.js` | — | App-level; not loaded in component preview iframes |
+| Script          | Depends on                 | Notes                                              |
+| --------------- | -------------------------- | -------------------------------------------------- |
+| `utils.js`      | —                          | Load first; provides `window.Utils`                |
+| `reveal.js`     | —                          | Standalone                                         |
+| `embla.js`      | `utils.js`, Embla CDN libs | Requires Embla UMD bundles before this file        |
+| `navigation.js` | —                          | App-level; not loaded in component preview iframes |
 
 Where these tags go in the document, and in what order, is covered in [Structuring your head tag](/docs/getting-started/head).
 
@@ -117,15 +119,15 @@ Every JSDoc block must include `@description`. Tag order:
 
 ### Required tags
 
-| Tag | Required on |
-|---|---|
-| `@fileoverview` | Every file |
-| `@description` | Every JSDoc block |
-| `@param` | Functions with parameters |
-| `@returns` | Functions that return a value |
-| `@private` | Non-exported helpers |
-| `@typedef` | Config/option objects |
-| `@namespace` | Export objects (`Utils`, `EmblaInit`) |
+| Tag             | Required on                           |
+| --------------- | ------------------------------------- |
+| `@fileoverview` | Every file                            |
+| `@description`  | Every JSDoc block                     |
+| `@param`        | Functions with parameters             |
+| `@returns`      | Functions that return a value         |
+| `@private`      | Non-exported helpers                  |
+| `@typedef`      | Config/option objects                 |
+| `@namespace`    | Export objects (`Utils`, `EmblaInit`) |
 
 ### Section dividers
 

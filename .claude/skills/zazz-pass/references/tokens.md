@@ -111,8 +111,8 @@ intentionally (**md** ≈ popovers/modals). Utilities: `.shadow-none|xs|sm|md|lg
 - **Containers (self-padding; register as container-query contexts):** `.container`
   (`--container`, ~80rem cap) for full-width sections, `.article` (`--article`, ~66ch) for
   reading width. No wrapper div needed.
-- **Breakpoints** (for `calc()` and **container** queries — not `@media`): `--screen-xs` 40rem,
-  `--screen-sm` 48rem, `--screen-md` 64rem, `--screen-lg` 80rem, `--screen-xl` 96rem.
+- **Breakpoints** (for `calc()` and **container** queries — not `@media`): `--breakpoint-xs` 40rem,
+  `--breakpoint-sm` 48rem, `--breakpoint-md` 64rem, `--breakpoint-lg` 80rem, `--breakpoint-xl` 96rem.
 - **Responsive utilities are container-query prefixed:** `.xs:* .sm:* .md:* .lg:* .xl:*`
   (e.g. `.md:grid-cols-3`, `.lg:flex-row`) — they respond to the nearest container, not the
   viewport. Available at each breakpoint: display, grid-cols, grid-rows, flex-direction,

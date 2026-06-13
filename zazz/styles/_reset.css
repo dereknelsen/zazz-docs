@@ -19,7 +19,7 @@
  * Note: <select> picker internals live in _select.css; popover in _popover.css;
  *   dialog in _dialog.css.
  */
-@layer zazz.reset {
+@layer reset {
   /* ===========================================================================
   UNIVERSAL RESET — box model, margins, padding, borders
   =========================================================================== */
@@ -75,6 +75,8 @@
     font-size: var(--font-size-md);
     line-height: var(--leading-md);
     letter-spacing: var(--tracking-md);
+
+    /* Enable container queries by default */
     container-type: inline-size;
     container-name: body;
   }
@@ -89,25 +91,50 @@
   }
 
   :where(main) {
+    --_container-type: inline-size;
+    --_container-name: main;
+
     /* Allow for more predictable z-indexing and spacing */
-    display: flex;
-    flex-direction: column;
     isolation: isolate;
     position: relative;
 
     /* Fill the flex body so the footer stays pinned to the bottom on short pages.
        Keeps main's box consistent between pages so view-transition snapshots align. */
     flex: 1 0 auto;
-    container-type: inline-size;
-    container-name: main;
     overflow: clip;
+
+    /* Enable container queries for main content */
+    container-type: var(--_container-type);
+    container-name: var(--_container-name);
+  }
+
+  :where(header) {
+    --_container-name: header;
+    --_container-type: inline-size;
+  }
+
+  :where(footer) {
+    --_container-name: footer;
+    --_container-type: inline-size;
+  }
+
+  :where(section) {
+    --_container-name: section;
+    --_container-type: inline-size;
+  }
+
+  :where(article) {
+    --_container-name: article;
+    --_container-type: inline-size;
   }
 
   :where(header, footer, section, article) {
     /* Allow for more predictable z-indexing */
     position: relative;
-    container-type: inline-size;
-    container-name: section;
+
+    /* Enable container queries for main content sections */
+    container-type: var(--_container-type);
+    container-name: var(--_container-name, layout);
   }
 
   :where(pre) {
@@ -459,7 +486,7 @@
   }
 
   /* Native <select> internals (::picker panel, <option>, ::picker-icon) live in
-     _select.css under @layer zazz.reset to keep the select styling modular. */
+     _select.css under @layer reset to keep the select styling modular. */
 
   /* Button resets */
   :where(button) {

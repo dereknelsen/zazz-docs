@@ -1,0 +1,218 @@
+@layer zazz.variables {
+  @property --_container {
+    syntax: "*";
+    inherits: false;
+  }
+
+  :root {
+    /* Standard layout steps align with screen breakpoints */
+    --layout-template-columns:
+        [container-bleed-start]
+            var(--gutters)
+                [container-full-start]
+                    minmax(0, 1fr)
+                        [container-xl-start]
+                            minmax(0, calc((var(--breakpoint-xl) - var(--breakpoint-lg)) / 2))
+                                [container-lg-start]
+                                    minmax(0, calc((var(--breakpoint-lg) - var(--breakpoint-md)) / 2))
+                                        [container-md-start]
+                                            minmax(0, calc((var(--breakpoint-md) - var(--breakpoint-sm)) / 2))
+                                                [container-sm-start]
+                                                    minmax(0, calc((var(--breakpoint-sm) - var(--breakpoint-xs)) / 2))
+                                                        [container-xs-start]
+                                                            minmax(0, var(--breakpoint-xs))
+                                                        [container-xs-end]
+                                                    minmax(0, calc((var(--breakpoint-sm) - var(--breakpoint-xs)) / 2))
+                                                [container-sm-end]
+                                            minmax(0, calc((var(--breakpoint-md) - var(--breakpoint-sm)) / 2))
+                                        [container-md-end]
+                                    minmax(0, calc((var(--breakpoint-lg) - var(--breakpoint-md)) / 2))
+                                [container-lg-end]
+                            minmax(0, calc((var(--breakpoint-xl) - var(--breakpoint-lg)) / 2))
+                        [container-xl-end]
+                    minmax(0, 1fr)
+                [container-full-end]
+            var(--gutters)
+        [container-bleed-end];
+    }
+
+}
+
+@layer zazz.utilities {
+
+    :where(main, header, footer, section, article):has(> .container:not([data-variant="article"])) {
+        --container-xs: container-xs-start / container-xs-end;
+        --container-sm: container-sm-start / container-sm-end;
+        --container-md: container-md-start / container-md-end;
+        --container-lg: container-lg-start / container-lg-end;
+        --container-xl: container-xl-start / container-xl-end;
+        --container-full: container-full-start / container-full-end;
+        --container-bleed: container-bleed-start / container-bleed-end;
+    }
+
+    :where(.container:not([data-variant="article"])) {
+        --default-container-grid-column: var(--container-md);
+        --default-article-inline-size: var(--article-md);
+
+        @container style(--is-breakpoint-xl: true) {
+            --container-xl: container-full-start / container-full-end;
+        }
+
+        @container style(--is-breakpoint-lg: true) {
+            --container-xl: container-full-start / container-full-end;
+            --container-lg: container-full-start / container-full-end;
+        }
+
+        @container style(--is-breakpoint-md: true) {
+            --container-xl: container-full-start / container-full-end;
+            --container-lg: container-full-start / container-full-end;
+            --container-md: container-full-start / container-full-end;
+        }
+
+        @container style(--is-breakpoint-sm: true) {
+            --container-xl: container-full-start / container-full-end;
+            --container-lg: container-full-start / container-full-end;
+            --container-md: container-full-start / container-full-end;
+            --container-sm: container-full-start / container-full-end;
+        }
+
+        @container style(--is-breakpoint-xs: true) {
+            --container-xl: container-full-start / container-full-end;
+            --container-lg: container-full-start / container-full-end;
+            --container-md: container-full-start / container-full-end;
+            --container-sm: container-full-start / container-full-end;
+            --container-xs: container-full-start / container-full-end;
+        }
+    }
+
+    /* Establish the layout grid on layout regions that hold containers */
+    :where(main, header, footer, section, article):has(> .container:not([data-variant="article"])) {
+        display: grid;
+        grid-template-columns: var(--layout-template-columns);
+    }
+
+    /* A container inherits the layout columns via subgrid */
+    :where(.container:not([data-variant="article"])) {
+
+        display: grid;
+        grid-column: 1 / -1;
+        /* span all of parent's columns */
+        grid-template-columns: subgrid;
+
+        /* Setting a container context breaks subgrid */
+        container-name: none;
+        container-type: normal;
+    }
+
+    /*
+    * Each child resolves its own column with a fallback chain:
+    *   explicit --_container  ->  the container's default  ->  global default
+    * This makes the rules order-independent.
+    */
+    :where(.container:not([data-variant="article"]))>* {
+        --_default-container: var(--default-container-grid-column);
+        grid-column: var(--_container, var(--_default-container));
+    }
+
+    /* Per-container default size (set on the .container:not([data-variant="article"]) element) */
+    :where(.container:not([data-variant="article"]))[data-container="xs"]>* {
+        --_default-container: var(--container-xs);
+    }
+
+    :where(.container:not([data-variant="article"]))[data-container="sm"]>* {
+        --_default-container: var(--container-sm);
+    }
+
+    :where(.container:not([data-variant="article"]))[data-container="md"]>* {
+        --_default-container: var(--container-md);
+    }
+
+    :where(.container:not([data-variant="article"]))[data-container="lg"]>* {
+        --_default-container: var(--container-lg);
+    }
+
+    :where(.container:not([data-variant="article"]))[data-container="xl"]>* {
+        --_default-container: var(--container-xl);
+    }
+
+    :where(.container:not([data-variant="article"]))[data-container="full"]>* {
+        --_default-container: var(--container-full);
+    }
+
+    :where(.container:not([data-variant="article"]))[data-container="bleed"]>* {
+        --_default-container: var(--container-bleed);
+    }
+
+    /* Per-child override (set on the direct child element) */
+    :where(.container:not([data-variant="article"]))>*[data-container="xs"] {
+        --_container: var(--container-xs);
+    }
+
+    :where(.container:not([data-variant="article"]))>*[data-container="sm"] {
+        --_container: var(--container-sm);
+    }
+
+    :where(.container:not([data-variant="article"]))>*[data-container="md"] {
+        --_container: var(--container-md);
+    }
+
+    :where(.container:not([data-variant="article"]))>*[data-container="lg"] {
+        --_container: var(--container-lg);
+    }
+
+    :where(.container:not([data-variant="article"]))>*[data-container="xl"] {
+        --_container: var(--container-xl);
+    }
+
+    :where(.container:not([data-variant="article"]))>*[data-container="full"] {
+        --_container: var(--container-full);
+    }
+
+    :where(.container:not([data-variant="article"]))>*[data-container="bleed"] {
+        --_container: var(--container-bleed);
+    }
+
+    /* ===========================================================================
+    CONTAINER VARIANTS
+    =========================================================================== */
+
+    :where(.container)[data-variant="article"] {
+        --_article: var(--default-article-inline-size);
+        --_container-name: article;
+        --_container-type: inline-size;
+        
+        inline-size: min(var(--_article), 100% - var(--gutters) * 2);
+        margin-inline: auto;
+        container-name: var(--_container-name);
+        container-type: var(--_container-type);
+    }
+
+    :where(.container[data-variant="article"])[data-container="xs"] > * {
+        --_article: var(--article-xs);
+    }
+
+    :where(.container[data-variant="article"])[data-container="sm"] > * {
+        --_article: var(--article-sm);
+    }
+
+    :where(.container[data-variant="article"])[data-container="md"] > * {
+        --_article: var(--article-md);
+    }
+
+    :where(.container[data-variant="article"])[data-container="lg"] > * {
+        --_article: var(--article-lg);
+    }
+
+    :where(.container[data-variant="article"])[data-container="xl"] > * {
+        --_article: var(--article-xl);
+    }
+
+    :where(.container[data-variant="article"])[data-container="full"] > * {
+        --_article: var(--article-full);
+    }
+
+    :where(.container[data-variant="article"])[data-container="bleed"] > * {
+        --_article: var(--article-bleed);
+    }
+}
+

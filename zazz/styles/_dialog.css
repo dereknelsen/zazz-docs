@@ -19,6 +19,7 @@
     --dialog-backdrop-blur: blur(5px);
     --dialog-shadow: var(--shadow-lg);
     --dialog-border: 1px solid var(--border);
+    --dialog-width: min(var(--breakpoint-md), 100% - var(--gutters) * 2);
 
     /* Reveal transitions/animations */
     --dialog-opacity--start: 0;
@@ -32,7 +33,7 @@
   }
 }
 
-@layer zazz.reset {
+@layer reset {
   /* ===========================================================================
   DIALOG — native <dialog> open/close animation, sizing, backdrop fade
   - In the reset layer so the .dialog component styling below wins.
@@ -205,7 +206,7 @@
   }
 
   .dialog[data-size="container"] {
-    --dialog-width: var(--container);
+    --dialog-width: var(--breakpoint-md);
   }
 
   .dialog[data-size="screen"] {

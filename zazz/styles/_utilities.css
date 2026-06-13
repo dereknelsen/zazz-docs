@@ -1051,12 +1051,12 @@
   }
 
   /* ===========================================================================
-  CONTAINER RESPONSIVE UTILITIES — nearest inline-size container vs --screen-*
-  Thresholds use literal rem (match --screen-*); var() is invalid in @container prelude.
+  CONTAINER RESPONSIVE UTILITIES — nearest inline-size container vs --breakpoint-*
+  Thresholds use literal rem (match --breakpoint-*); var() is invalid in @container prelude.
   =========================================================================== */
 
-  @container (width > 40rem) {
-    /* --screen-xs */
+  @container style(--is-breakpoint-xs: false) {
+    /* --breakpoint-xs */
     /* display */
     :where(.xs\:hidden) {
       display: none;
@@ -1406,11 +1406,10 @@
     :where(.xs\:basis-1\/2) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 1)) / 2);
     }
-
   }
 
-  @container (width > 48rem) {
-    /* --screen-sm */
+  @container style(--is-breakpoint-sm: true) {
+    /* --breakpoint-sm */
     /* display */
     :where(.sm\:hidden) {
       display: none;
@@ -1760,11 +1759,10 @@
     :where(.sm\:basis-1\/2) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 1)) / 2);
     }
-
   }
 
-  @container (width > 64rem) {
-    /* --screen-md */
+  @container style(--is-breakpoint-md: true) {
+    /* --breakpoint-md */
     /* display */
     :where(.md\:hidden) {
       display: none;
@@ -2114,11 +2112,10 @@
     :where(.md\:basis-1\/2) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 1)) / 2);
     }
-
   }
 
-  @container (width > 80rem) {
-    /* --screen-lg */
+  @container style(--is-breakpoint-lg: true) {
+    /* --breakpoint-lg */
     /* display */
     :where(.lg\:hidden) {
       display: none;
@@ -2468,11 +2465,10 @@
     :where(.lg\:basis-1\/2) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 1)) / 2);
     }
-
   }
 
-  @container (width > 96rem) {
-    /* --screen-xl */
+  @container style(--is-breakpoint-xl: true) {
+    /* --breakpoint-xl */
     /* display */
     :where(.xl\:hidden) {
       display: none;
@@ -2822,7 +2818,6 @@
     :where(.xl\:basis-1\/2) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 1)) / 2);
     }
-
   }
 
   /* Grid placement utilities */
@@ -3155,7 +3150,6 @@
   :where(.z-50) {
     z-index: 50;
   }
-  
 
   /* ===========================================================================
   OPACITY UTILITIES
@@ -3415,23 +3409,23 @@
   }
 
   :where(.w-screen-xs) {
-    inline-size: var(--screen-xs);
+    inline-size: var(--breakpoint-xs);
   }
 
   :where(.w-screen-sm) {
-    inline-size: var(--screen-sm);
+    inline-size: var(--breakpoint-sm);
   }
 
   :where(.w-screen-md) {
-    inline-size: var(--screen-md);
+    inline-size: var(--breakpoint-md);
   }
 
   :where(.w-screen-lg) {
-    inline-size: var(--screen-lg);
+    inline-size: var(--breakpoint-lg);
   }
 
   :where(.w-screen-xl) {
-    inline-size: var(--screen-xl);
+    inline-size: var(--breakpoint-xl);
   }
 
   :where(.h-0) {
@@ -3475,23 +3469,23 @@
   }
 
   :where(.h-screen-xs) {
-    block-size: var(--screen-xs);
+    block-size: var(--breakpoint-xs);
   }
 
   :where(.h-screen-sm) {
-    block-size: var(--screen-sm);
+    block-size: var(--breakpoint-sm);
   }
 
   :where(.h-screen-md) {
-    block-size: var(--screen-md);
+    block-size: var(--breakpoint-md);
   }
 
   :where(.h-screen-lg) {
-    block-size: var(--screen-lg);
+    block-size: var(--breakpoint-lg);
   }
 
   :where(.h-screen-xl) {
-    block-size: var(--screen-xl);
+    block-size: var(--breakpoint-xl);
   }
 
   :where(.size-0) {
@@ -3540,28 +3534,28 @@
   }
 
   :where(.size-screen-xs) {
-    inline-size: var(--screen-xs);
-    block-size: var(--screen-xs);
+    inline-size: var(--breakpoint-xs);
+    block-size: var(--breakpoint-xs);
   }
 
   :where(.size-screen-sm) {
-    inline-size: var(--screen-sm);
-    block-size: var(--screen-sm);
+    inline-size: var(--breakpoint-sm);
+    block-size: var(--breakpoint-sm);
   }
 
   :where(.size-screen-md) {
-    inline-size: var(--screen-md);
-    block-size: var(--screen-md);
+    inline-size: var(--breakpoint-md);
+    block-size: var(--breakpoint-md);
   }
 
   :where(.size-screen-lg) {
-    inline-size: var(--screen-lg);
-    block-size: var(--screen-lg);
+    inline-size: var(--breakpoint-lg);
+    block-size: var(--breakpoint-lg);
   }
 
   :where(.size-screen-xl) {
-    inline-size: var(--screen-xl);
-    block-size: var(--screen-xl);
+    inline-size: var(--breakpoint-xl);
+    block-size: var(--breakpoint-xl);
   }
 
   :where(.max-w-0) {
@@ -3601,23 +3595,23 @@
   }
 
   :where(.max-w-screen-xs) {
-    max-inline-size: var(--screen-xs);
+    max-inline-size: var(--breakpoint-xs);
   }
 
   :where(.max-w-screen-sm) {
-    max-inline-size: var(--screen-sm);
+    max-inline-size: var(--breakpoint-sm);
   }
 
   :where(.max-w-screen-md) {
-    max-inline-size: var(--screen-md);
+    max-inline-size: var(--breakpoint-md);
   }
 
   :where(.max-w-screen-lg) {
-    max-inline-size: var(--screen-lg);
+    max-inline-size: var(--breakpoint-lg);
   }
 
   :where(.max-w-screen-xl) {
-    max-inline-size: var(--screen-xl);
+    max-inline-size: var(--breakpoint-xl);
   }
 
   :where(.max-h-0) {
@@ -3657,23 +3651,23 @@
   }
 
   :where(.max-h-screen-xs) {
-    max-block-size: var(--screen-xs);
+    max-block-size: var(--breakpoint-xs);
   }
 
   :where(.max-h-screen-sm) {
-    max-block-size: var(--screen-sm);
+    max-block-size: var(--breakpoint-sm);
   }
 
   :where(.max-h-screen-md) {
-    max-block-size: var(--screen-md);
+    max-block-size: var(--breakpoint-md);
   }
 
   :where(.max-h-screen-lg) {
-    max-block-size: var(--screen-lg);
+    max-block-size: var(--breakpoint-lg);
   }
 
   :where(.max-h-screen-xl) {
-    max-block-size: var(--screen-xl);
+    max-block-size: var(--breakpoint-xl);
   }
 
   :where(.min-w-0) {
@@ -3693,23 +3687,23 @@
   }
 
   :where(.min-w-screen-xs) {
-    min-inline-size: var(--screen-xs);
+    min-inline-size: var(--breakpoint-xs);
   }
 
   :where(.min-w-screen-sm) {
-    min-inline-size: var(--screen-sm);
+    min-inline-size: var(--breakpoint-sm);
   }
 
   :where(.min-w-screen-md) {
-    min-inline-size: var(--screen-md);
+    min-inline-size: var(--breakpoint-md);
   }
 
   :where(.min-w-screen-lg) {
-    min-inline-size: var(--screen-lg);
+    min-inline-size: var(--breakpoint-lg);
   }
 
   :where(.min-w-screen-xl) {
-    min-inline-size: var(--screen-xl);
+    min-inline-size: var(--breakpoint-xl);
   }
 
   :where(.min-h-0) {
@@ -3729,23 +3723,23 @@
   }
 
   :where(.min-h-screen-xs) {
-    min-block-size: var(--screen-xs);
+    min-block-size: var(--breakpoint-xs);
   }
 
   :where(.min-h-screen-sm) {
-    min-block-size: var(--screen-sm);
+    min-block-size: var(--breakpoint-sm);
   }
 
   :where(.min-h-screen-md) {
-    min-block-size: var(--screen-md);
+    min-block-size: var(--breakpoint-md);
   }
 
   :where(.min-h-screen-lg) {
-    min-block-size: var(--screen-lg);
+    min-block-size: var(--breakpoint-lg);
   }
 
   :where(.min-h-screen-xl) {
-    min-block-size: var(--screen-xl);
+    min-block-size: var(--breakpoint-xl);
   }
 
   /* ===========================================================================
@@ -4987,25 +4981,6 @@
 
   :where(.border-double) {
     border-style: double;
-  }
-
-  /* ===========================================================================
-  LAYOUT — container and article wrappers (with container queries)
-  =========================================================================== */
-
-  /* Alternative: `max-w-screen-lg mx-auto w-full` */
-  :where(.container) {
-    inline-size: var(--container);
-    margin-inline: auto;
-    container: container / inline-size;
-  }
-
-  /* Alternative: `max-w-screen-xs mx-auto w-full` */
-  :where(.article) {
-    font-size: var(--font-size-md);
-    inline-size: var(--article);
-    margin-inline: auto;
-    container: article / inline-size;
   }
 
   /* ===========================================================================

@@ -33,15 +33,15 @@ This is the mechanism behind Zazz's [golden rule](/docs/core-concepts/utility-cl
 
 There are three top-level layers. The middle one, `zazz`, is itself subdivided:
 
-| Layer | Holds | File |
-|---|---|---|
-| `legacy` | Your existing (pre-Zazz) CSS, imported with `layer(legacy)`. Lowest priority; Zazz overrides it everywhere the two overlap. | your app's entry stylesheet |
-| `zazz.variables` | Design tokens — the `:root` custom properties everything reads | [`_variables.css`](/docs/core-concepts/theme-variables) + each component's `@layer zazz.variables` block |
-| `zazz.reset` | Native-element baselines and re-skinned controls | [`_reset.css`](/docs/core-files/reset) |
-| `zazz.components` | The components themselves — `.button`, `.card`, `.input`… | each `_*.css` component file |
-| `zazz.migrations` | Temporary shims that map old class names to Zazz tokens while you rewrite markup | [`_migrations.css`](/docs/core-files/migrations) |
-| `zazz.utilities` | Atomic, single-purpose classes that win last inside Zazz | [`_utilities.css`](/docs/core-concepts/utility-classes) |
-| `overrides` | Application rules that need to beat even Zazz utilities. Use sparingly. | your app's CSS |
+| Layer             | Holds                                                                                                                       | File                                                                                                     |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `legacy`          | Your existing (pre-Zazz) CSS, imported with `layer(legacy)`. Lowest priority; Zazz overrides it everywhere the two overlap. | your app's entry stylesheet                                                                              |
+| `zazz.variables`  | Design tokens — the `:root` custom properties everything reads                                                              | [`_variables.css`](/docs/core-concepts/theme-variables) + each component's `@layer zazz.variables` block |
+| `reset`           | Native-element baselines and re-skinned controls                                                                            | [`_reset.css`](/docs/core-files/reset)                                                                   |
+| `zazz.components` | The components themselves — `.button`, `.card`, `.input`…                                                                   | each `_*.css` component file                                                                             |
+| `zazz.migrations` | Temporary shims that map old class names to Zazz tokens while you rewrite markup                                            | [`_migrations.css`](/docs/core-files/migrations)                                                         |
+| `zazz.utilities`  | Atomic, single-purpose classes that win last inside Zazz                                                                    | [`_utilities.css`](/docs/core-concepts/utility-classes)                                                  |
+| `overrides`       | Application rules that need to beat even Zazz utilities. Use sparingly.                                                     | your app's CSS                                                                                           |
 
 `@property` registrations (in `_properties.css`) sit outside the layers, since registration is layer-independent, but their tokens are consumed throughout.
 
@@ -84,9 +84,9 @@ Reach for it when overriding a token isn't enough and you don't want the footgun
 
 Once enabled, two `data-legacy-css` attributes control which layer applies to a subtree:
 
-| Attribute | Effect |
-|---|---|
-| `data-legacy-css="none"` | Strips the `legacy` layer from this element and its children. Zazz applies; your old CSS does not. Use on sections you've converted. |
+| Attribute                | Effect                                                                                                                                    |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `data-legacy-css="none"` | Strips the `legacy` layer from this element and its children. Zazz applies; your old CSS does not. Use on sections you've converted.      |
 | `data-legacy-css="only"` | Strips the `zazz` layer from this element and its children. Your old CSS applies; Zazz does not. Use on sections you haven't touched yet. |
 
 Both use `:where()` for zero specificity and `all: revert-layer` rather than `all: revert`, so they're surgical: they remove one layer without disturbing the others.

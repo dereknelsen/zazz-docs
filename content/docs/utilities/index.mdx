@@ -20,7 +20,7 @@ utility-built panel stays on-brand and theme-aware for free.
    A plain `.button` rule lives in `components`; a `.rounded-full` utility lives in `utilities`
    and wins. See [Overview](/docs/getting-started/overview) for the full layer model.
 2. **Zero specificity.** Each rule is `:where(.utility) { … }`, specificity `(0,0,0)`. Utilities
-   override components by layer position, and *your* rules override utilities by ordinary
+   override components by layer position, and _your_ rules override utilities by ordinary
    specificity. No arms race.
 3. **Semantic first.** Prefer the most semantic utility that fits: `gap-md` before a raw length,
    `text-primary` before a literal scale step. Names follow Tailwind's vocabulary where one
@@ -31,16 +31,16 @@ utility-built panel stays on-brand and theme-aware for free.
 The atomic classes in `zazz/styles/_utilities.css` are organized here into the same families
 Tailwind uses, so you can scan by intent:
 
-| Group | Covers |
-|---|---|
-| [Layout](/docs/utilities/layout) | display, position, overflow, z-index, aspect-ratio, object-fit, order |
-| [Flexbox](/docs/utilities/flexbox) · [Grid](/docs/utilities/grid) · [Gap & basis](/docs/utilities/gap-and-basis) | flex/grid containers, alignment, spans, gaps, flex-basis |
-| [Spacing](/docs/utilities/spacing) · [Sizing](/docs/utilities/sizing) | padding, margin · width, height, size, min/max |
-| [Text color](/docs/utilities/text-color) · [Text & font](/docs/utilities/text-and-font) | color roles · alignment, transform, wrap, clamp, family |
-| [Backgrounds](/docs/utilities/backgrounds) · [Borders](/docs/utilities/borders) | surface colors, overlays · border, radius |
-| [Effects](/docs/utilities/effects) · [Color opacity](/docs/utilities/color-opacity) | shadow, opacity, scale, transition · channel alpha |
-| [Interactivity](/docs/utilities/interactivity) · [Hover states](/docs/utilities/hover) | cursor, focus ring, screen readers · `hover:` variants |
-| [Responsive design](/docs/utilities/responsive-design) | the `xs: sm: md: lg: xl:` container-query prefixes |
+| Group                                                                                                            | Covers                                                                |
+| ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| [Layout](/docs/utilities/layout)                                                                                 | display, position, overflow, z-index, aspect-ratio, object-fit, order |
+| [Flexbox](/docs/utilities/flexbox) · [Grid](/docs/utilities/grid) · [Gap & basis](/docs/utilities/gap-and-basis) | flex/grid containers, alignment, spans, gaps, flex-basis              |
+| [Spacing](/docs/utilities/spacing) · [Sizing](/docs/utilities/sizing)                                            | padding, margin · width, height, size, min/max                        |
+| [Text color](/docs/utilities/text-color) · [Text & font](/docs/utilities/text-and-font)                          | color roles · alignment, transform, wrap, clamp, family               |
+| [Backgrounds](/docs/utilities/backgrounds) · [Borders](/docs/utilities/borders)                                  | surface colors, overlays · border, radius                             |
+| [Effects](/docs/utilities/effects) · [Color opacity](/docs/utilities/color-opacity)                              | shadow, opacity, scale, transition · channel alpha                    |
+| [Interactivity](/docs/utilities/interactivity) · [Hover states](/docs/utilities/hover)                           | cursor, focus ring, screen readers · `hover:` variants                |
+| [Responsive design](/docs/utilities/responsive-design)                                                           | the `xs: sm: md: lg: xl:` container-query prefixes                    |
 
 ## Private composition and coordination variables
 
@@ -68,29 +68,29 @@ doubles as the default (no `:root` fallback needed).
 ```
 
 Because `p-md` sets all four edges and `pl-0` sets only the inline-start, `class="p-md pl-0"`
-resolves to *medium padding everywhere except a zeroed left*: the other three edges are
+resolves to _medium padding everywhere except a zeroed left_: the other three edges are
 untouched. The same pattern powers per-edge `rounded-*` and per-channel color opacity.
 
-| Variable | Registered syntax | Initial | Set by | Documented in |
-|---|---|---|---|---|
-| `--_padding-{inline,block}-{start,end}` | `<length-percentage>` | `0` | `p-* px-* py-* pt-* pr-* pb-* pl-*` | [Spacing](/docs/utilities/spacing) |
-| `--_margin-{inline,block}-{start,end}` | `<length-percentage> \| auto` | `0` | `m-* mx-* my-* mt-* … -m-* mx-auto` | [Spacing](/docs/utilities/spacing) |
-| `--_radius-{top-left,top-right,bottom-right,bottom-left}` | `<length-percentage>` | `0` | `rounded-* rounded-t-* rounded-tl-* …` | [Borders](/docs/utilities/borders) |
-| `--_text-alpha` · `--_background-alpha` · `--_border-alpha` | `<number>` | `1` | `text-opacity-* bg-opacity-* border-opacity-*` | [Color opacity](/docs/utilities/color-opacity) |
+| Variable                                                    | Registered syntax             | Initial | Set by                                         | Documented in                                  |
+| ----------------------------------------------------------- | ----------------------------- | ------- | ---------------------------------------------- | ---------------------------------------------- |
+| `--_padding-{inline,block}-{start,end}`                     | `<length-percentage>`         | `0`     | `p-* px-* py-* pt-* pr-* pb-* pl-*`            | [Spacing](/docs/utilities/spacing)             |
+| `--_margin-{inline,block}-{start,end}`                      | `<length-percentage> \| auto` | `0`     | `m-* mx-* my-* mt-* … -m-* mx-auto`            | [Spacing](/docs/utilities/spacing)             |
+| `--_radius-{top-left,top-right,bottom-right,bottom-left}`   | `<length-percentage>`         | `0`     | `rounded-* rounded-t-* rounded-tl-* …`         | [Borders](/docs/utilities/borders)             |
+| `--_text-alpha` · `--_background-alpha` · `--_border-alpha` | `<number>`                    | `1`     | `text-opacity-* bg-opacity-* border-opacity-*` | [Color opacity](/docs/utilities/color-opacity) |
 
 ### Coordination variables (inheriting on purpose)
 
-A second set stays *inheriting* (left unregistered, so default inheritance applies). These are
+A second set stays _inheriting_ (left unregistered, so default inheritance applies). These are
 set on a container and **read by descendants**: the gap variable feeds the gap-aware `basis-*`
 fractions and the responsive auto-fill grid, and the column/row counts let `col-span-*` clamp
 themselves so a span never exceeds the track count.
 
-| Variable | Default | Set by | Read by |
-|---|---|---|---|
-| `--_gap` | `0px` (on `:root`) | `gap-*` | `basis-1/2…1/6`, `grid-flow-row` auto-fill |
-| `--_gap-x` · `--_gap-y` | — | `gap-x-*` · `gap-y-*` | `column-gap` · `row-gap` |
-| `--_grid-cols` · `--_grid-rows` | `1` | `grid-cols-N` · `grid-rows-N` | `col-span-*` · `row-span-*`, auto-fill |
-| `--_grid-col-min` | `min(100%, 25ch)` (on `.grid`) | `.grid` | `grid-flow-row` auto-fill track floor |
+| Variable                        | Default                        | Set by                        | Read by                                    |
+| ------------------------------- | ------------------------------ | ----------------------------- | ------------------------------------------ |
+| `--_gap`                        | `0px` (on `:root`)             | `gap-*`                       | `basis-1/2…1/6`, `grid-flow-row` auto-fill |
+| `--_gap-x` · `--_gap-y`         | —                              | `gap-x-*` · `gap-y-*`         | `column-gap` · `row-gap`                   |
+| `--_grid-cols` · `--_grid-rows` | `1`                            | `grid-cols-N` · `grid-rows-N` | `col-span-*` · `row-span-*`, auto-fill     |
+| `--_grid-col-min`               | `min(100%, 25ch)` (on `.grid`) | `.grid`                       | `grid-flow-row` auto-fill track floor      |
 
 These are covered alongside their classes in [Gap & basis](/docs/utilities/gap-and-basis) and
 [Grid](/docs/utilities/grid).

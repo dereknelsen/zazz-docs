@@ -13,29 +13,29 @@ Add a border, then optionally recolor or restyle it. The default color is `--bor
 
 ### Sides
 
-| Class | Result |
-|---|---|
-| `border` | 1px solid on all sides |
-| `border-t` `border-r` `border-b` `border-l` | 1px solid on that side |
-| `border-none` | removes all borders |
-| `border-t-none` `border-r-none` `border-b-none` `border-l-none` | removes that side |
+| Class                                                           | Result                 |
+| --------------------------------------------------------------- | ---------------------- |
+| `border`                                                        | 1px solid on all sides |
+| `border-t` `border-r` `border-b` `border-l`                     | 1px solid on that side |
+| `border-none`                                                   | removes all borders    |
+| `border-t-none` `border-r-none` `border-b-none` `border-l-none` | removes that side      |
 
 ### Color
 
 Color utilities set `--_border-color`; the border-drawing classes read it. Set both, e.g.
 `border border-primary`.
 
-| Class | Token |
-|---|---|
-| *(default)* | `--border` |
-| `border-primary` `border-secondary` `border-tertiary` | brand roles |
-| `border-muted` `border-faded` | dim / fade |
+| Class                                                                | Token        |
+| -------------------------------------------------------------------- | ------------ |
+| _(default)_                                                          | `--border`   |
+| `border-primary` `border-secondary` `border-tertiary`                | brand roles  |
+| `border-muted` `border-faded`                                        | dim / fade   |
 | `border-info` `border-success` `border-warning` `border-destructive` | status roles |
 
 ### Style
 
-| Class | Declaration |
-|---|---|
+| Class           | Declaration            |
+| --------------- | ---------------------- |
 | `border-dashed` | `border-style: dashed` |
 | `border-dotted` | `border-style: dotted` |
 | `border-double` | `border-style: double` |
@@ -56,25 +56,25 @@ badges, `full` for pills and circles.
 
 ### All corners
 
-| Class | Value |
-|---|---|
-| `rounded-0` | `0` |
-| `rounded-xs` | `var(--radius-xs)` |
-| `rounded-sm` | `var(--radius-sm)` |
-| `rounded-md` | `var(--radius-md)` |
-| `rounded-lg` | `var(--radius-lg)` |
-| `rounded-xl` | `var(--radius-xl)` |
+| Class          | Value                |
+| -------------- | -------------------- |
+| `rounded-0`    | `0`                  |
+| `rounded-xs`   | `var(--radius-xs)`   |
+| `rounded-sm`   | `var(--radius-sm)`   |
+| `rounded-md`   | `var(--radius-md)`   |
+| `rounded-lg`   | `var(--radius-lg)`   |
+| `rounded-xl`   | `var(--radius-xl)`   |
 | `rounded-full` | `var(--radius-full)` |
 
 ### Per edge & per corner
 
 Each of these takes the full size range (`0`, `xs`–`xl`, `full`):
 
-| Scope | Classes |
-|---|---|
-| Top / bottom edge | `rounded-t-*` · `rounded-b-*` |
-| Left / right edge | `rounded-l-*` · `rounded-r-*` |
-| Single corner | `rounded-tl-*` `rounded-tr-*` `rounded-br-*` `rounded-bl-*` |
+| Scope             | Classes                                                     |
+| ----------------- | ----------------------------------------------------------- |
+| Top / bottom edge | `rounded-t-*` · `rounded-b-*`                               |
+| Left / right edge | `rounded-l-*` · `rounded-r-*`                               |
+| Single corner     | `rounded-tl-*` `rounded-tr-*` `rounded-br-*` `rounded-bl-*` |
 
 ## Composition variables
 
@@ -97,12 +97,12 @@ corners untouched.
 }
 ```
 
-| Variable | Syntax | Initial | Set by |
-|---|---|---|---|
-| `--_radius-top-left` | `<length-percentage>` | `0` | `rounded-* rounded-t-* rounded-l-* rounded-tl-*` |
-| `--_radius-top-right` | `<length-percentage>` | `0` | `rounded-* rounded-t-* rounded-r-* rounded-tr-*` |
-| `--_radius-bottom-right` | `<length-percentage>` | `0` | `rounded-* rounded-b-* rounded-r-* rounded-br-*` |
-| `--_radius-bottom-left` | `<length-percentage>` | `0` | `rounded-* rounded-b-* rounded-l-* rounded-bl-*` |
+| Variable                 | Syntax                | Initial | Set by                                           |
+| ------------------------ | --------------------- | ------- | ------------------------------------------------ |
+| `--_radius-top-left`     | `<length-percentage>` | `0`     | `rounded-* rounded-t-* rounded-l-* rounded-tl-*` |
+| `--_radius-top-right`    | `<length-percentage>` | `0`     | `rounded-* rounded-t-* rounded-r-* rounded-tr-*` |
+| `--_radius-bottom-right` | `<length-percentage>` | `0`     | `rounded-* rounded-b-* rounded-r-* rounded-br-*` |
+| `--_radius-bottom-left`  | `<length-percentage>` | `0`     | `rounded-* rounded-b-* rounded-l-* rounded-bl-*` |
 
 ```html
 <!-- flatten where a card meets a flush element, keep the outer corners round -->

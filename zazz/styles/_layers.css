@@ -1,12 +1,12 @@
 /**
  * _layers.css — Cascade layer order (must load first).
  *
- * @layer      legacy, zazz, overrides
- * @sublayers  zazz.variables, zazz.reset, zazz.components, zazz.migrations, zazz.utilities
+ * @layer      legacy, reset, zazz, migrations
+ * @sublayers  zazz.variables, zazz.reset, zazz.components, zazz.utilities
  */
 
-@layer legacy, zazz, overrides;
+@layer legacy, reset, zazz, migrations;
 
 @layer zazz {
-  @layer variables, reset, components, migrations, utilities;
+  @layer variables, components, utilities;
 }

@@ -41,7 +41,7 @@
   }
 }
 
-@layer zazz.reset {
+@layer reset {
   /* ===========================================================================
   POPOVER ELEMENT ENHANCEMENTS
   - [popover] is a shared primitive (dropdown, navigation-menu, …). Token

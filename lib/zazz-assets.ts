@@ -120,4 +120,3 @@ export function readComponentJs(scripts?: readonly ExampleScript[]): string | nu
 
   return blocks.length > 0 ? blocks.join("\n\n") : null;
 }
-

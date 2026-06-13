@@ -16,7 +16,7 @@
   }
 }
 
-@layer zazz.reset {
+@layer reset {
   /* ===========================================================================
   DETAILS & SUMMARY — native open/close transition + summary marker reset
   - In the reset layer so the .accordion component styling below wins.

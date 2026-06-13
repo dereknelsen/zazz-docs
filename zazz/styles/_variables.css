@@ -326,15 +326,40 @@
     * ========================================================================== */
 
     /* semantic */
-    --article: min(66ch, 100% - var(--gap-md) * 2);
-    --container: min(var(--screen-lg), 100% - var(--gap-md) * 2);
+    --gutters: var(--gap-md);
+    
+    /* breakpoints — for calcs and container queries */
+    --breakpoint-xs: 40rem;
+    @container (width <= 40rem) {
+      --is-breakpoint-xs: true;
+    }
 
-    /* breakpoints — for calcs and container queries, not @media */
-    --screen-xs: 40rem;
-    --screen-sm: 48rem;
-    --screen-md: 64rem;
-    --screen-lg: 80rem;
-    --screen-xl: 96rem;
+    --breakpoint-sm: 48rem;
+    @container (width <= 48rem) {
+      --is-breakpoint-sm: true;
+    }
+
+    --breakpoint-md: 64rem;
+    @container (width <= 64rem) {
+      --is-breakpoint-md: true;
+    }
+
+    --breakpoint-lg: 80rem;
+    @container (width <= 80rem) {
+      --is-breakpoint-lg: true;
+    }
+
+    --breakpoint-xl: 96rem;
+    @container (width <= 96rem) {
+      --is-breakpoint-xl: true;
+    }
+
+    /* article container widths */
+    --article-xs: 45ch;
+    --article-sm: 50ch;
+    --article-md: 65ch;
+    --article-lg: 70ch;
+    --article-xl: 75ch;
 
     /* ==========================================================================
     * 8. Effects — shadows, focus rings

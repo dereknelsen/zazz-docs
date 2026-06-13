@@ -14,16 +14,16 @@ off-by-a-gutter math.
 Gaps use the **semantic gap scale**, the same `--gap-*` tokens that drive padding and margin, so
 spacing stays consistent across layout primitives.
 
-| Class | Value |
-|---|---|
-| `gap-0` | `0` |
-| `gap-0.5px` | `0.5px` |
-| `gap-px` | `1px` |
-| `gap-xs` | `var(--gap-xs)` |
-| `gap-sm` | `var(--gap-sm)` |
-| `gap-md` | `var(--gap-md)` |
-| `gap-lg` | `var(--gap-lg)` |
-| `gap-xl` | `var(--gap-xl)` |
+| Class       | Value           |
+| ----------- | --------------- |
+| `gap-0`     | `0`             |
+| `gap-0.5px` | `0.5px`         |
+| `gap-px`    | `1px`           |
+| `gap-xs`    | `var(--gap-xs)` |
+| `gap-sm`    | `var(--gap-sm)` |
+| `gap-md`    | `var(--gap-md)` |
+| `gap-lg`    | `var(--gap-lg)` |
+| `gap-xl`    | `var(--gap-xl)` |
 
 ### Axis gaps
 
@@ -42,24 +42,24 @@ The fractions are **gap-aware**: each subtracts its share of the gap so N items 
 fit on one line. `basis-1/3` resolves to `calc((100% - 2 × gap) / 3)`, reading the gap the
 container set.
 
-| Class | Resolves to |
-|---|---|
-| `basis-0` | `flex-basis: 0` |
-| `basis-auto` | `flex-basis: auto` |
-| `basis-full` | `flex-basis: 100%` |
-| `basis-1/2` | `(100% − 1 × gap) / 2` |
-| `basis-1/3` | `(100% − 2 × gap) / 3` |
-| `basis-1/4` | `(100% − 3 × gap) / 4` |
-| `basis-1/5` | `(100% − 4 × gap) / 5` |
-| `basis-1/6` | `(100% − 5 × gap) / 6` |
+| Class        | Resolves to            |
+| ------------ | ---------------------- |
+| `basis-0`    | `flex-basis: 0`        |
+| `basis-auto` | `flex-basis: auto`     |
+| `basis-full` | `flex-basis: 100%`     |
+| `basis-1/2`  | `(100% − 1 × gap) / 2` |
+| `basis-1/3`  | `(100% − 2 × gap) / 3` |
+| `basis-1/4`  | `(100% − 3 × gap) / 4` |
+| `basis-1/5`  | `(100% − 4 × gap) / 5` |
+| `basis-1/6`  | `(100% − 5 × gap) / 6` |
 
 `basis-*` has responsive variants, so `basis-full md:basis-1/3` gives full-width rows that become
 thirds on a wider container.
 
 <Callout type="info">
-For the fractions to subtract the right gutter, set a `gap-*` class on the same flex container.
-That's what populates `--_gap`. With no gap class, `--_gap` defaults to `0px` and the fractions
-fall back to even splits.
+  For the fractions to subtract the right gutter, set a `gap-*` class on the same flex container.
+  That's what populates `--_gap`. With no gap class, `--_gap` defaults to `0px` and the fractions
+  fall back to even splits.
 </Callout>
 
 ## The `--_gap` coordination variables
@@ -68,11 +68,11 @@ fall back to even splits.
 variable that `basis-*` and the [responsive auto-fill grid](/docs/utilities/grid#responsive-auto-fill-grid)
 read back.
 
-| Variable | Default | Set by | Read by |
-|---|---|---|---|
-| `--_gap` | `0px` (on `:root`) | `gap-*` | `basis-1/2…1/6`, `grid-flow-row` auto-fill |
-| `--_gap-x` | — | `gap-x-*` | `column-gap` |
-| `--_gap-y` | — | `gap-y-*` | `row-gap` |
+| Variable   | Default            | Set by    | Read by                                    |
+| ---------- | ------------------ | --------- | ------------------------------------------ |
+| `--_gap`   | `0px` (on `:root`) | `gap-*`   | `basis-1/2…1/6`, `grid-flow-row` auto-fill |
+| `--_gap-x` | —                  | `gap-x-*` | `column-gap`                               |
+| `--_gap-y` | —                  | `gap-y-*` | `row-gap`                                  |
 
 These are left unregistered (and therefore inheriting) on purpose: a value set on the container
 must reach the children that compute their width from it. This is the opposite of the

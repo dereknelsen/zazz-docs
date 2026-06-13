@@ -19,15 +19,15 @@ Every role ships `text-{role}`, `bg-{role}`, and `border-{role}` utilities.
 
 Each surface has a matching foreground tuned for contrast on it:
 
-| Surface | Foreground | Use for |
-|---|---|---|
-| `background` | `foreground` | The page itself |
-| `card` | `card-foreground` | Cards, raised panels |
-| `popover` | `popover-foreground` | Menus, tooltips, dialogs |
-| `input` | `input-foreground` | Form control fills |
-| `muted` | `muted-foreground` | Dimmed surfaces and secondary text |
-| `faded` | `faded-foreground` | Faded surfaces and tertiary text |
-| `border` | `border-foreground` | Hairlines and dividers |
+| Surface      | Foreground           | Use for                            |
+| ------------ | -------------------- | ---------------------------------- |
+| `background` | `foreground`         | The page itself                    |
+| `card`       | `card-foreground`    | Cards, raised panels               |
+| `popover`    | `popover-foreground` | Menus, tooltips, dialogs           |
+| `input`      | `input-foreground`   | Form control fills                 |
+| `muted`      | `muted-foreground`   | Dimmed surfaces and secondary text |
+| `faded`      | `faded-foreground`   | Faded surfaces and tertiary text   |
+| `border`     | `border-foreground`  | Hairlines and dividers             |
 
 `muted` dims (it's darker than its surface in light mode); `faded` lightens. Pair a surface with its foreground and contrast takes care of itself.
 
@@ -44,7 +44,7 @@ Each surface has a matching foreground tuned for contrast on it:
 Reach past roles only when you need a specific shade: a fixed tint, a backdrop, a precise accent.
 
 - **Brand & neutral scales:** `--primary-50`…`--primary-950` (and `--secondary-*`, `--tertiary-*`, `--neutral-*`), plus `--white` and `--black`. These are **tokens only, no utility classes**. Reach them in custom CSS or inline: `style="color: var(--primary-600)"`.
-- **Overlays:** `--shade-*` darkens (from neutral-950, ideal for modal backdrops like `--shade-800`) and `--tint-*` lightens (from white). `*-none` is transparent. Overlays *do* ship `bg-shade-*` and `bg-tint-*` utilities, since dimming a surface is common.
+- **Overlays:** `--shade-*` darkens (from neutral-950, ideal for modal backdrops like `--shade-800`) and `--tint-*` lightens (from white). `*-none` is transparent. Overlays _do_ ship `bg-shade-*` and `bg-tint-*` utilities, since dimming a surface is common.
 - **Absolute:** `text-white`, `text-black`, `bg-white`, `bg-black`, `bg-transparent`.
 
 A fixed scale step stays the same in both themes, which is exactly why roles, not scales, are the default.
@@ -57,7 +57,7 @@ Zazz colors are authored in [`oklch()`](https://developer.mozilla.org/en-US/docs
 
 Two different fades, and it's worth not confusing them:
 
-- **Element opacity** (`opacity-{0,25,50,75,100}`) fades the whole element *and its children*.
+- **Element opacity** (`opacity-{0,25,50,75,100}`) fades the whole element _and its children_.
 - **Color alpha** (`bg-opacity-*`, `text-opacity-*`, `border-opacity-*`) dims only that color channel, leaving children untouched. It's backed by `@property`-registered variables that don't inherit, so a faded background never bleeds into the text on top of it.
 
 ```html
@@ -71,7 +71,7 @@ Because everything reads tokens, changing your brand color is a single override.
 
 ```css
 :root {
-  --primary: oklch(0.6 0.2 145);   /* every primary surface, ring, and accent follows */
+  --primary: oklch(0.6 0.2 145); /* every primary surface, ring, and accent follows */
 }
 ```
 

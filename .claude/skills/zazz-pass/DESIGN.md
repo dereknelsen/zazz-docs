@@ -491,7 +491,7 @@ Spring easing (`--spring-easing`) with 0.333s duration. Fallback: `cubic-bezier(
 
 ### Breakpoints
 
-`--screen-xs` (640px) · `--screen-sm` (768px) · `--screen-md` (1024px) · `--screen-lg` (1280px) · `--screen-xl` (1536px)
+`--breakpoint-xs` (640px) · `--breakpoint-sm` (768px) · `--breakpoint-md` (1024px) · `--breakpoint-lg` (1280px) · `--breakpoint-xl` (1536px)
 
 ---
 

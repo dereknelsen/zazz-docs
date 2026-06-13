@@ -8,11 +8,11 @@ color and motion, see [Hover states](/docs/utilities/hover).
 
 ## Pointer & cursor
 
-| Class | Declaration | Use |
-|---|---|---|
-| `pointer-events-none` | `pointer-events: none` | make an overlay click-through |
-| `pointer-cursor` | `cursor: pointer` | signal interactivity on a non-button |
-| `pointer-default` | `cursor: default` | suppress the text/pointer cursor |
+| Class                 | Declaration            | Use                                  |
+| --------------------- | ---------------------- | ------------------------------------ |
+| `pointer-events-none` | `pointer-events: none` | make an overlay click-through        |
+| `pointer-cursor`      | `cursor: pointer`      | signal interactivity on a non-button |
+| `pointer-default`     | `cursor: default`      | suppress the text/pointer cursor     |
 
 ## Focus ring
 
@@ -34,9 +34,10 @@ How it composes:
   modes, where box-shadows don't render, so focus never silently disappears.
 
 <Callout type="info">
-Components draw their own focus rings from the same `--ring-*` tokens; `ring` is for plain
-elements (links, custom controls) that don't already have one. To recolor, override
-`--ring-color` rather than `--ring`. See the [focus-ring conventions](/docs/core-files/file-anatomy#selector-conventions).
+  Components draw their own focus rings from the same `--ring-*` tokens; `ring` is for plain
+  elements (links, custom controls) that don't already have one. To recolor, override `--ring-color`
+  rather than `--ring`. See the [focus-ring
+  conventions](/docs/core-files/file-anatomy#selector-conventions).
 </Callout>
 
 ## Screen-reader only

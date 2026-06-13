@@ -33,14 +33,14 @@ If you find yourself wanting a brand-new rule, that's the signal to browse the [
 
 ## The families you'll use most
 
-| Family | Examples |
-|---|---|
-| Layout | `flex`, `grid`, `grid-cols-3`, `flex-col`, `items-center`, `justify-between`, `basis-1/2` |
-| Spacing | `gap-md`, `p-lg`, `px-md`, `py-sm`, `mt-sm`, `mx-auto` |
-| Type | `text-h2`, `text-sm`, `text-eyebrow`, `text-center`, `text-balance`, `font-heading` |
-| Color | `bg-primary`, `text-foreground`, `text-muted-foreground`, `border-border` |
-| Shape & depth | `rounded-lg`, `rounded-b-0`, `shadow-md`, `ring` |
-| Sizing | `w-full`, `max-w-screen-md`, `size-8`, `aspect-square` |
+| Family        | Examples                                                                                  |
+| ------------- | ----------------------------------------------------------------------------------------- |
+| Layout        | `flex`, `grid`, `grid-cols-3`, `flex-col`, `items-center`, `justify-between`, `basis-1/2` |
+| Spacing       | `gap-md`, `p-lg`, `px-md`, `py-sm`, `mt-sm`, `mx-auto`                                    |
+| Type          | `text-h2`, `text-sm`, `text-eyebrow`, `text-center`, `text-balance`, `font-heading`       |
+| Color         | `bg-primary`, `text-foreground`, `text-muted-foreground`, `border-border`                 |
+| Shape & depth | `rounded-lg`, `rounded-b-0`, `shadow-md`, `ring`                                          |
+| Sizing        | `w-full`, `max-w-screen-md`, `size-8`, `aspect-square`                                    |
 
 The full catalog, organized by family, lives in the [Utilities](/docs/utilities) reference; this is the everyday subset.
 
@@ -48,13 +48,13 @@ The full catalog, organized by family, lives in the [Utilities](/docs/utilities)
 
 Look closely at those class names and the same five rungs keep reappearing: `xs sm md lg xl`. That t-shirt scale isn't a spacing quirk; it's the measuring stick for the whole system. `lg` means "the large step" whether you're setting a gap, a corner, a shadow, a width, or a breakpoint:
 
-| Property | Class |
-|---|---|
-| Spacing | `gap-lg` · `p-lg` · `mt-lg` |
-| Radius | `rounded-lg` |
-| Shadow | `shadow-lg` |
-| Sizing | `size-lg` · `max-w-screen-lg` |
-| Breakpoint | `lg:grid-cols-3` |
+| Property   | Class                         |
+| ---------- | ----------------------------- |
+| Spacing    | `gap-lg` · `p-lg` · `mt-lg`   |
+| Radius     | `rounded-lg`                  |
+| Shadow     | `shadow-lg`                   |
+| Sizing     | `size-lg` · `max-w-screen-lg` |
+| Breakpoint | `lg:grid-cols-3`              |
 
 Repeating one scale instead of inventing a new set of values per property buys two things:
 
@@ -80,9 +80,7 @@ Padding, margin, and radius utilities use a composition system: each class sets 
 Components carry their own look and expose variants through [`data-*` attributes](/docs/components/button); utilities handle placement, spacing, and one-off color. Combine them freely; the utility always has the final say:
 
 ```html
-<button class="button mt-md w-full" data-variant="primary" data-size="lg">
-  Continue
-</button>
+<button class="button mt-md w-full" data-variant="primary" data-size="lg">Continue</button>
 ```
 
 ## Beyond the base state

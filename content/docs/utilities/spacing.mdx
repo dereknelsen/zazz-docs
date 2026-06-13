@@ -12,15 +12,15 @@ a component's spacing intact.
 
 <Preview src="utilities/padding" />
 
-| Scope | Classes | Sets |
-|---|---|---|
-| All sides | `p-0 p-xs p-sm p-md p-lg p-xl` | all four edges |
-| Inline axis (left + right) | `px-0 px-xs … px-xl` | `padding-inline` |
-| Block axis (top + bottom) | `py-0 py-xs … py-xl` | `padding-block` |
-| Top | `pt-0 pt-xs … pt-xl` | `padding-block-start` |
-| Bottom | `pb-0 pb-xs … pb-xl` | `padding-block-end` |
-| Left | `pl-0 pl-xs … pl-xl` | `padding-inline-start` |
-| Right | `pr-0 pr-xs … pr-xl` | `padding-inline-end` |
+| Scope                      | Classes                        | Sets                   |
+| -------------------------- | ------------------------------ | ---------------------- |
+| All sides                  | `p-0 p-xs p-sm p-md p-lg p-xl` | all four edges         |
+| Inline axis (left + right) | `px-0 px-xs … px-xl`           | `padding-inline`       |
+| Block axis (top + bottom)  | `py-0 py-xs … py-xl`           | `padding-block`        |
+| Top                        | `pt-0 pt-xs … pt-xl`           | `padding-block-start`  |
+| Bottom                     | `pb-0 pb-xs … pb-xl`           | `padding-block-end`    |
+| Left                       | `pl-0 pl-xs … pl-xl`           | `padding-inline-start` |
+| Right                      | `pr-0 pr-xs … pr-xl`           | `padding-inline-end`   |
 
 Each size maps to its gap token (`p-md` → `var(--gap-md)`). `pt`/`pb` are block edges and
 `pl`/`pr` are inline edges, so they follow writing direction.
@@ -30,12 +30,12 @@ Each size maps to its gap token (`p-md` → `var(--gap-md)`). `pt`/`pb` are bloc
 Margin mirrors padding's scopes and adds **`auto`** (for centering and pushing) and a
 **negative** scale.
 
-| Scope | Classes |
-|---|---|
-| All sides | `m-0 m-xs … m-xl` |
-| Inline axis | `mx-0 mx-xs … mx-xl`, `mx-auto` |
-| Block axis | `my-0 my-xs … my-xl`, `my-auto` |
-| Per side | `mt-* mr-* mb-* ml-*` (each `0`, `xs`–`xl`, and `auto`) |
+| Scope       | Classes                                                 |
+| ----------- | ------------------------------------------------------- |
+| All sides   | `m-0 m-xs … m-xl`                                       |
+| Inline axis | `mx-0 mx-xs … mx-xl`, `mx-auto`                         |
+| Block axis  | `my-0 my-xs … my-xl`, `my-auto`                         |
+| Per side    | `mt-* mr-* mb-* ml-*` (each `0`, `xs`–`xl`, and `auto`) |
 
 ### Auto margins
 
@@ -49,11 +49,11 @@ other size.
 
 Pull an element past its edge, useful for full-bleed media inside padded containers.
 
-| Scope | Classes |
-|---|---|
-| All sides | `-m-xs … -m-xl` |
-| Inline / block axis | `-mx-xs … -mx-xl`, `-my-xs … -my-xl` |
-| Per side | `-mt-* -mr-* -mb-* -ml-*` (`xs`–`xl`) |
+| Scope               | Classes                               |
+| ------------------- | ------------------------------------- |
+| All sides           | `-m-xs … -m-xl`                       |
+| Inline / block axis | `-mx-xs … -mx-xl`, `-my-xs … -my-xl`  |
+| Per side            | `-mt-* -mr-* -mb-* -ml-*` (`xs`–`xl`) |
 
 Negative margins are base classes only, with no responsive variants.
 
@@ -93,12 +93,12 @@ that edge. Source order makes the more specific setter win:
 
 <Preview src="utilities/padding-compose" />
 
-| Variable | Syntax | Initial | Set by |
-|---|---|---|---|
-| `--_padding-inline-start` · `--_padding-inline-end` | `<length-percentage>` | `0` | `p-* px-* pl-* pr-*` |
-| `--_padding-block-start` · `--_padding-block-end` | `<length-percentage>` | `0` | `p-* py-* pt-* pb-*` |
-| `--_margin-inline-start` · `--_margin-inline-end` | `<length-percentage> \| auto` | `0` | `m-* mx-* ml-* mr-* -m* mx-auto` |
-| `--_margin-block-start` · `--_margin-block-end` | `<length-percentage> \| auto` | `0` | `m-* my-* mt-* mb-* -m* my-auto` |
+| Variable                                            | Syntax                        | Initial | Set by                           |
+| --------------------------------------------------- | ----------------------------- | ------- | -------------------------------- |
+| `--_padding-inline-start` · `--_padding-inline-end` | `<length-percentage>`         | `0`     | `p-* px-* pl-* pr-*`             |
+| `--_padding-block-start` · `--_padding-block-end`   | `<length-percentage>`         | `0`     | `p-* py-* pt-* pb-*`             |
+| `--_margin-inline-start` · `--_margin-inline-end`   | `<length-percentage> \| auto` | `0`     | `m-* mx-* ml-* mr-* -m* mx-auto` |
+| `--_margin-block-start` · `--_margin-block-end`     | `<length-percentage> \| auto` | `0`     | `m-* my-* mt-* mb-* -m* my-auto` |
 
 The margin variables accept `auto` in their registered syntax, which is why `mx-auto` composes
 exactly like a size value. The same pattern (composing rule + per-edge setter) powers

@@ -1,9 +1,9 @@
 ---
 title: _reset.css
-description: The baseline layer of native-element resets and re-skinned controls that live in @layer zazz.reset, so your components and utilities always win over them.
+description: The baseline layer of native-element resets and re-skinned controls that live in @layer reset, so your components and utilities always win over them.
 ---
 
-`_reset.css` normalizes the browser's defaults and gives native controls a Zazz look. The whole file sits in `@layer zazz.reset`, the second-lowest [layer](/docs/core-files/layers), so every component and utility you write overrides it without effort.
+`_reset.css` normalizes the browser's defaults and gives native controls a Zazz look. The whole file sits in `@layer reset`, the second-lowest [layer](/docs/core-files/layers), so every component and utility you write overrides it without effort.
 
 ## Zero specificity by design
 
@@ -38,8 +38,13 @@ A universal reset zeroes margins, padding, and borders and sets `box-sizing: bor
 The reset reads role tokens, so the baseline itself is correct in light and dark mode:
 
 ```css
-:where(html) { background-color: var(--background); }
-:where(body) { color: var(--foreground); background-color: var(--background); }
+:where(html) {
+  background-color: var(--background);
+}
+:where(body) {
+  color: var(--foreground);
+  background-color: var(--background);
+}
 ```
 
 You get [dark mode](/docs/core-concepts/dark-mode) at the reset level, with no `.dark` overrides needed for the page chrome.
@@ -67,8 +72,8 @@ A global `:focus-visible` rule paints the [focus ring](/docs/core-concepts/state
 
 ## Where some resets live instead
 
-To keep styling modular, a few controls are reset alongside their component rather than here: checkbox (`_checkbox.css`), range slider (`_slider.css`), switch (`_switch.css`), and the `<select>` picker panel (`_select.css`). They still write into `@layer zazz.reset`; they just live next to the component they redraw, an [allowed variation](/docs/core-files/file-anatomy#allowed-variations) on the standard file shape.
+To keep styling modular, a few controls are reset alongside their component rather than here: checkbox (`_checkbox.css`), range slider (`_slider.css`), switch (`_switch.css`), and the `<select>` picker panel (`_select.css`). They still write into `@layer reset`; they just live next to the component they redraw, an [allowed variation](/docs/core-files/file-anatomy#allowed-variations) on the standard file shape.
 
 ## Overriding the reset
 
-Because the reset is a *layer* and not a pile of high-specificity global rules, you override it the same way you override anything else in Zazz: a utility class, a component rule, or a token. There's no `!important`, and nothing to undo.
+Because the reset is a _layer_ and not a pile of high-specificity global rules, you override it the same way you override anything else in Zazz: a utility class, a component rule, or a token. There's no `!important`, and nothing to undo.

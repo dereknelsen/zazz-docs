@@ -45,24 +45,22 @@ Carousels auto-initialize on `DOMContentLoaded`.
 
 ### Structural roles
 
-| `data-embla` value | Role |
-|---|---|
-| `root` | Carousel container; holds all config attributes |
-| `viewport` | Visible window (required) |
-| `container` | Slides flex track |
-| `slide` | Individual slide |
-| `prev` / `next` | Navigation buttons (optional) |
-| `dots` / `dot` | Dot pagination container and template (optional) |
-| `thumbs` | Linked thumbnail carousel container (optional) |
+| `data-embla` value | Role                                             |
+| ------------------ | ------------------------------------------------ |
+| `root`             | Carousel container; holds all config attributes  |
+| `viewport`         | Visible window (required)                        |
+| `container`        | Slides flex track                                |
+| `slide`            | Individual slide                                 |
+| `prev` / `next`    | Navigation buttons (optional)                    |
+| `dots` / `dot`     | Dot pagination container and template (optional) |
+| `thumbs`           | Linked thumbnail carousel container (optional)   |
 
 ## Configuration
 
 All Embla core options can be set via data attributes on the `root` element:
 
 ```html
-<div data-embla="root" data-embla-loop="true" data-embla-align="start">
-  ...
-</div>
+<div data-embla="root" data-embla-loop="true" data-embla-align="start">...</div>
 ```
 
 Attributes are parsed by `Utils.parseDataAttributes()`: kebab-case converts to camelCase, and values are type-coerced automatically.
@@ -74,17 +72,17 @@ Enable plugins with bare attributes and configure with prefixed options:
 ```html
 <!-- Autoplay with 3s delay -->
 <div data-embla="root" data-embla-autoplay data-embla-autoplay-delay="3000">
-
-<!-- Auto scroll at speed 2 -->
-<div data-embla="root" data-embla-autoscroll data-embla-autoscroll-speed="2">
-
-<!-- Class names with custom snapped class -->
-<div data-embla="root" data-embla-classnames data-embla-classnames-snapped="is-snapped">
+  <!-- Auto scroll at speed 2 -->
+  <div data-embla="root" data-embla-autoscroll data-embla-autoscroll-speed="2">
+    <!-- Class names with custom snapped class -->
+    <div data-embla="root" data-embla-classnames data-embla-classnames-snapped="is-snapped"></div>
+  </div>
+</div>
 ```
 
-| Plugin | Attribute prefix | CDN bundle required |
-|---|---|---|
-| Autoplay | `data-embla-autoplay-*` | `embla-carousel-autoplay` |
+| Plugin      | Attribute prefix          | CDN bundle required          |
+| ----------- | ------------------------- | ---------------------------- |
+| Autoplay    | `data-embla-autoplay-*`   | `embla-carousel-autoplay`    |
 | Auto Scroll | `data-embla-autoscroll-*` | `embla-carousel-auto-scroll` |
 | Class Names | `data-embla-classnames-*` | `embla-carousel-class-names` |
 
@@ -144,9 +142,7 @@ Carousels inside `<dialog>` elements can't measure their viewport until the dial
 - `data-embla-start` on a trigger element stores the slide index to open to.
 
 ```html
-<button commandfor="gallery-dialog" data-embla-start="2">
-  Open at slide 3
-</button>
+<button commandfor="gallery-dialog" data-embla-start="2">Open at slide 3</button>
 ```
 
 ## Drag-aware click suppression

@@ -26,7 +26,7 @@
   }
 }
 
-@layer zazz.reset {
+@layer reset {
   @media screen and (max-width: 40rem) {
     :is(input) {
       /* Ensure form controls are legible on smaller viewports and don't zoom in when focused */

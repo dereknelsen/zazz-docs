@@ -13,42 +13,42 @@ and **tint** overlays, because dimming or lightening a surface is so common.
 
 ## Surfaces & roles
 
-| Class | Token |
-|---|---|
-| `bg-background` / `bg-foreground` | `--background` / `--foreground` |
-| `bg-card` / `bg-card-foreground` | `--card` / `--card-foreground` |
-| `bg-input` / `bg-input-foreground` | `--input` / `--input-foreground` |
+| Class                                | Token                              |
+| ------------------------------------ | ---------------------------------- |
+| `bg-background` / `bg-foreground`    | `--background` / `--foreground`    |
+| `bg-card` / `bg-card-foreground`     | `--card` / `--card-foreground`     |
+| `bg-input` / `bg-input-foreground`   | `--input` / `--input-foreground`   |
 | `bg-border` / `bg-border-foreground` | `--border` / `--border-foreground` |
-| `bg-muted` / `bg-muted-foreground` | `--muted` / `--muted-foreground` |
-| `bg-faded` / `bg-faded-foreground` | `--faded` / `--faded-foreground` |
+| `bg-muted` / `bg-muted-foreground`   | `--muted` / `--muted-foreground`   |
+| `bg-faded` / `bg-faded-foreground`   | `--faded` / `--faded-foreground`   |
 
 ## Brand & status
 
-| Brand | Status |
-|---|---|
-| `bg-primary` / `bg-primary-foreground` | `bg-info` / `bg-info-foreground` |
-| `bg-secondary` / `bg-secondary-foreground` | `bg-success` / `bg-success-foreground` |
-| `bg-tertiary` / `bg-tertiary-foreground` | `bg-warning` / `bg-warning-foreground` |
-| | `bg-destructive` / `bg-destructive-foreground` |
+| Brand                                      | Status                                         |
+| ------------------------------------------ | ---------------------------------------------- |
+| `bg-primary` / `bg-primary-foreground`     | `bg-info` / `bg-info-foreground`               |
+| `bg-secondary` / `bg-secondary-foreground` | `bg-success` / `bg-success-foreground`         |
+| `bg-tertiary` / `bg-tertiary-foreground`   | `bg-warning` / `bg-warning-foreground`         |
+|                                            | `bg-destructive` / `bg-destructive-foreground` |
 
 ## Absolute & empty
 
-| Class | Result |
-|---|---|
-| `bg-white` | `--white` (does not flip in dark mode) |
-| `bg-black` | `--black` (does not flip in dark mode) |
-| `bg-transparent` | `background-color: transparent` |
-| `bg-none` | `background: none` (clears image + color) |
+| Class            | Result                                    |
+| ---------------- | ----------------------------------------- |
+| `bg-white`       | `--white` (does not flip in dark mode)    |
+| `bg-black`       | `--black` (does not flip in dark mode)    |
+| `bg-transparent` | `background-color: transparent`           |
+| `bg-none`        | `background: none` (clears image + color) |
 
 ## Overlay scales
 
 Two alpha-based overlay ramps for dimming and lightening any surface. `*-none` is fully
 transparent; `*-full` is the most opaque step.
 
-| Scale | Classes | Built from | Use |
-|---|---|---|---|
+| Scale              | Classes                                                        | Built from                       | Use                                           |
+| ------------------ | -------------------------------------------------------------- | -------------------------------- | --------------------------------------------- |
 | **Shade** (darken) | `bg-shade-none`, `bg-shade-50 … bg-shade-950`, `bg-shade-full` | `--shade-*` (from `neutral-950`) | scrims, modal backdrops (e.g. `bg-shade-800`) |
-| **Tint** (lighten) | `bg-tint-none`, `bg-tint-50 … bg-tint-950`, `bg-tint-full` | `--tint-*` (from white) | frosted highlights over imagery |
+| **Tint** (lighten) | `bg-tint-none`, `bg-tint-50 … bg-tint-950`, `bg-tint-full`     | `--tint-*` (from white)          | frosted highlights over imagery               |
 
 Because they're alpha overlays, they read the underlying surface through. Layer one over media or
 a colored panel rather than painting a solid fill.
@@ -70,8 +70,8 @@ a colored panel rather than painting a solid fill.
   shade/tint/faded keep their built-in translucency.
 
 <Callout type="info">
-The full numeric brand scales (`--primary-600`, `--neutral-100`, …) have **no** `bg-` utility
-classes by design. Reach a fixed shade through the token in custom CSS or inline. The role
-tokens above cover the everyday cases. See the
-[token reference](/docs/getting-started/overview#core-files) for the scale model.
+  The full numeric brand scales (`--primary-600`, `--neutral-100`, …) have **no** `bg-` utility
+  classes by design. Reach a fixed shade through the token in custom CSS or inline. The role tokens
+  above cover the everyday cases. See the [token
+  reference](/docs/getting-started/overview#core-files) for the scale model.
 </Callout>

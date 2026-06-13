@@ -50,11 +50,15 @@ export default function HomePage() {
             return l.external ? (
               <a
                 key={l.label}
-                className={l.main ? cn((buttonVariants({ variant: "primary" })), "w-fit pr-3 gap-3.5") : cn(
-                  "opacity-60 hover:opacity-100",
-                  "group inline-flex w-fit items-center gap-3.5 px-2 py-0.5 text-sm leading-tight tracking-tight",
-                  "text-fd-foreground no-underline transition hover:text-fd-primary",
-                  "focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-fd-ring focus-visible:ring-offset-4 focus-visible:outline-none",)
+                className={
+                  l.main
+                    ? cn(buttonVariants({ variant: "primary" }), "w-fit pr-3 gap-3.5")
+                    : cn(
+                        "opacity-60 hover:opacity-100",
+                        "group inline-flex w-fit items-center gap-3.5 px-2 py-0.5 text-sm leading-tight tracking-tight",
+                        "text-fd-foreground no-underline transition hover:text-fd-primary",
+                        "focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-fd-ring focus-visible:ring-offset-4 focus-visible:outline-none",
+                      )
                 }
                 href={l.href}
                 target="_blank"
@@ -69,11 +73,15 @@ export default function HomePage() {
             ) : (
               <Link
                 key={l.label}
-                className={l.main ? cn((buttonVariants({ variant: "primary" })), "w-fit pr-3 gap-3.5") : cn(
-                  "opacity-60 hover:opacity-100",
-                  "group inline-flex w-fit items-center gap-3.5 px-2 py-0.5 text-sm leading-tight tracking-tight",
-                  "text-fd-foreground no-underline transition hover:text-fd-primary",
-                  "focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-fd-ring focus-visible:ring-offset-4 focus-visible:outline-none")
+                className={
+                  l.main
+                    ? cn(buttonVariants({ variant: "primary" }), "w-fit pr-3 gap-3.5")
+                    : cn(
+                        "opacity-60 hover:opacity-100",
+                        "group inline-flex w-fit items-center gap-3.5 px-2 py-0.5 text-sm leading-tight tracking-tight",
+                        "text-fd-foreground no-underline transition hover:text-fd-primary",
+                        "focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-fd-ring focus-visible:ring-offset-4 focus-visible:outline-none",
+                      )
                 }
                 href={l.href}
               >

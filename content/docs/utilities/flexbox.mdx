@@ -11,13 +11,13 @@ for reordering see [order](/docs/utilities/layout#order).
 
 <Preview src="utilities/flex-direction" />
 
-| Class | Declaration |
-|---|---|
-| `flex` | `display: flex` |
-| `inline-flex` | `display: inline-flex` |
-| `flex-row` | `flex-direction: row` |
-| `flex-row-reverse` | `flex-direction: row-reverse` |
-| `flex-col` | `flex-direction: column` |
+| Class              | Declaration                      |
+| ------------------ | -------------------------------- |
+| `flex`             | `display: flex`                  |
+| `inline-flex`      | `display: inline-flex`           |
+| `flex-row`         | `flex-direction: row`            |
+| `flex-row-reverse` | `flex-direction: row-reverse`    |
+| `flex-col`         | `flex-direction: column`         |
 | `flex-col-reverse` | `flex-direction: column-reverse` |
 
 `flex`, `inline-flex`, `flex-row`, and `flex-col` have responsive variants. `flex-col md:flex-row`
@@ -29,12 +29,12 @@ The `flex` shorthands cover the common grow/shrink intents.
 
 <Preview src="utilities/flex-grow" />
 
-| Class | Declaration | Meaning |
-|---|---|---|
-| `flex-1` | `flex: 1` | grow and shrink, ignore initial size |
-| `flex-auto` | `flex: auto` | grow and shrink from content size |
-| `flex-initial` | `flex: initial` | shrink but don't grow |
-| `flex-none` | `flex: none` | neither grow nor shrink |
+| Class          | Declaration     | Meaning                              |
+| -------------- | --------------- | ------------------------------------ |
+| `flex-1`       | `flex: 1`       | grow and shrink, ignore initial size |
+| `flex-auto`    | `flex: auto`    | grow and shrink from content size    |
+| `flex-initial` | `flex: initial` | shrink but don't grow                |
+| `flex-none`    | `flex: none`    | neither grow nor shrink              |
 
 ## Align & justify
 
@@ -44,13 +44,13 @@ The `flex` shorthands cover the common grow/shrink intents.
 modern CSS Box Alignment keywords (`start`/`end`, not `flex-start`/`flex-end`).
 
 | Cross axis — `align-items` | Main axis — `justify-content` |
-|---|---|
-| `items-start` | `justify-start` |
-| `items-center` | `justify-center` |
-| `items-end` | `justify-end` |
-| `items-stretch` | `justify-stretch` |
-| | `justify-between` |
-| | `justify-around` |
+| -------------------------- | ----------------------------- |
+| `items-start`              | `justify-start`               |
+| `items-center`             | `justify-center`              |
+| `items-end`                | `justify-end`                 |
+| `items-stretch`            | `justify-stretch`             |
+|                            | `justify-between`             |
+|                            | `justify-around`              |
 
 `items-*` and `justify-*` both have responsive variants.
 
@@ -59,12 +59,12 @@ modern CSS Box Alignment keywords (`start`/`end`, not `flex-start`/`flex-end`).
 Override the container's cross-axis alignment on a single child with `self-*`. (These are
 base-only, with no responsive variants.)
 
-| Class | Declaration |
-|---|---|
-| `self-auto` | `align-self: auto` |
-| `self-start` | `align-self: start` |
-| `self-center` | `align-self: center` |
-| `self-end` | `align-self: end` |
+| Class          | Declaration           |
+| -------------- | --------------------- |
+| `self-auto`    | `align-self: auto`    |
+| `self-start`   | `align-self: start`   |
+| `self-center`  | `align-self: center`  |
+| `self-end`     | `align-self: end`     |
 | `self-stretch` | `align-self: stretch` |
 
 `justify-self-auto`, `justify-self-start`, `justify-self-center`, `justify-self-end`, and

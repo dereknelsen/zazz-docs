@@ -21,8 +21,7 @@
   }
 }
 
-
-@layer zazz.reset {
+@layer reset {
   /* ===========================================================================
   SELECT — native <select> internals (::picker, <option>, ::picker-icon)
   - In the reset layer so component overrides win; the plain appearance reset

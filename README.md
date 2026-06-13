@@ -44,13 +44,13 @@ This repository holds both **Zazz itself** (the `zazz/` folder) and the **docume
 
 ## What's in this repo
 
-| Path | What it is |
-| --- | --- |
-| `zazz/styles/` | The design system: tokens, reset, components, and utilities. This is what you ship. |
-| `zazz/scripts/` | Vanilla-JS enhancements: carousel, lightbox, reveal, tabs, password. No build step. |
-| `zazz/components/` | The canonical HTML example for each component, used as the single source of truth. |
-| `content/docs/` | The documentation, authored in MDX. |
-| `app/`, `components/`, `lib/` | The Next.js and Fumadocs site that renders the docs. |
+| Path                          | What it is                                                                          |
+| ----------------------------- | ----------------------------------------------------------------------------------- |
+| `zazz/styles/`                | The design system: tokens, reset, components, and utilities. This is what you ship. |
+| `zazz/scripts/`               | Vanilla-JS enhancements: carousel, lightbox, reveal, tabs, password. No build step. |
+| `zazz/components/`            | The canonical HTML example for each component, used as the single source of truth.  |
+| `content/docs/`               | The documentation, authored in MDX.                                                 |
+| `app/`, `components/`, `lib/` | The Next.js and Fumadocs site that renders the docs.                                |
 
 ## Run the docs site
 

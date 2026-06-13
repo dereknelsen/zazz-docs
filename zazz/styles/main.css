@@ -2,24 +2,24 @@
  * main.css — Plain-CSS entry point; @import bundle in cascade order.
  *
  * @layer      none
- * @requires   all other stylesheets in this folder
+ * @requires   _layers.css must be loaded before this file
  * @see        CONVENTIONS.md — file anatomy & layer architecture
  */
 
-/* Layer contract: must stay first. */
+/* Layer contract is loaded separately before legacy CSS imports. */
 @import "./_layers.css";
 
-/* Optional compatibility layer (disabled by default). */
-/* @import "./_legacy.css"; */
+/* Legacy/Zazz CSS mode boundaries. Must load after external legacy CSS imports. */
+@import "./_legacy.css";
 
 /* Global foundation: typed properties + shared tokens. */
 @import "./_properties.css";
 @import "./_variables.css";
 
-/* Reset layer baseline (global native defaults). */
+/* Reset layer baseline. */
 @import "./_reset.css";
 
-/* Component files: most contribute variables/components (some also reset/utilities). */
+/* Component files. */
 @import "./_page-transitions.css";
 @import "./_typography.css";
 @import "./_badge.css";
@@ -46,8 +46,6 @@
 @import "./_lightbox.css";
 @import "./_reveal.css";
 
-/* Optional migrations layer (disabled by default). */
-/* @import "./_migrations.css"; */
-
-/* Utilities layer should remain last for intentional overrides. */
+/* Utilities and layout remain the final normal Zazz override layer. */
 @import "./_utilities.css";
+@import "./_layout.css";

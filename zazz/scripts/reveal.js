@@ -127,6 +127,18 @@ class Reveal {
   }
 
   /**
+   * @description Normalizes a duration to a CSS time value without duplicating units.
+   *
+   * @param {number|string} value - Milliseconds as a number, or a CSS time string.
+   * @returns {string} A CSS time value (e.g. "300ms", "0.333s").
+   */
+  #formatTime(value) {
+    const str = value.toString().trim();
+    if (/^-?\d*\.?\d+(ms|s)$/.test(str)) return str;
+    return `${Math.max(0, parseInt(str, 10) || 0)}ms`;
+  }
+
+  /**
    * @description Sets CSS custom properties on an element when a value is provided.
    *
    * @param {HTMLElement} element - The element to set properties on.
@@ -170,7 +182,7 @@ class Reveal {
       const calculatedWait = groupProps.baseWait + groupProps.step * i;
 
       this.#setRevealProperties(child, {
-        "--reveal-duration": `${groupProps.duration}ms`,
+        "--reveal-duration": this.#formatTime(groupProps.duration),
         "--reveal-ease": groupProps.ease,
         "--reveal-wait": `${calculatedWait}ms`,
         "--reveal-distance": groupProps.distance,
@@ -199,8 +211,8 @@ class Reveal {
       : null;
 
     this.#setRevealProperties(element, {
-      "--reveal-duration": elementDuration ? `${elementDuration}ms` : null,
-      "--reveal-wait": elementWait ? `${elementWait}ms` : null,
+      "--reveal-duration": elementDuration !== null ? this.#formatTime(elementDuration) : null,
+      "--reveal-wait": elementWait !== null ? this.#formatTime(elementWait) : null,
       "--reveal-ease": dataset.revealEase || null,
       "--reveal-distance": dataset.revealDistance || null,
       "--reveal-scale": dataset.revealScale || null,
@@ -220,9 +232,9 @@ class Reveal {
     this.#observers.clear();
 
     const rootStyle = document.documentElement.style;
-    rootStyle.setProperty("--reveal-global-duration", `${this.config.duration}ms`);
+    rootStyle.setProperty("--reveal-global-duration", this.#formatTime(this.config.duration));
     rootStyle.setProperty("--reveal-global-ease", this.config.ease);
-    rootStyle.setProperty("--reveal-global-wait", `${this.config.wait}ms`);
+    rootStyle.setProperty("--reveal-global-wait", this.#formatTime(this.config.wait));
     rootStyle.setProperty("--reveal-global-distance", this.config.distance);
     rootStyle.setProperty("--reveal-global-grow", this.config.grow.toString());
     rootStyle.setProperty("--reveal-global-shrink", this.config.shrink.toString());

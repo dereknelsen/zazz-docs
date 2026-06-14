@@ -9,7 +9,7 @@ over screen by screen. No big-bang rewrite, no `!important` war with your old st
 
 ## The core problem: unlayered styles beat layered ones
 
-Zazz puts every rule inside a layer (`legacy`, `zazz.*`, or `overrides`). The cascade has a
+Zazz puts every rule inside a layer (`legacy`, `reset`, `zazz.*`, or `migrations`). The cascade has a
 rule that surprises people: **any unlayered author rule beats every layered rule, regardless of
 specificity.** Your existing CSS is almost certainly unlayered, so on its own it would override
 Zazz's components and utilities everywhere the two overlap.
@@ -24,21 +24,22 @@ your legacy CSS into the lowest layer:
 
 ```css
 /* entry.css - loaded before Zazz */
-@layer legacy, zazz, overrides;
+@layer legacy, reset, zazz, migrations;
 
 @import "./legacy/app.css" layer(legacy); /* old CSS → lowest priority */
-@import "./zazz/styles/main.css"; /* includes _legacy.css + _migrations.css */
+@import "./zazz/styles/main.css"; /* re-declares the same order */
 ```
 
 The **first** `@layer` statement wins for ordering, so declaring it here (before `main.css`
-re-declares its own subset) locks `legacy` underneath everything Zazz ships. Now where both
+re-declares the same order) locks `legacy` underneath everything Zazz ships. Now where both
 systems style the same thing, Zazz wins; everywhere Zazz is silent, your old CSS still applies. On
 day one, nothing visually breaks.
 
 <Callout>
-  `zazz.migrations` sits above Zazz's `reset` and `components` sublayers but below `zazz.utilities`.
-  That ordering matters in Step 5: a translated class like `.btn-primary` must outrank the element
-  baseline in `reset`, while Zazz utilities (`rounded-full`, `bg-primary`) must still override it.
+  The `migrations` layer sits at the very top of the stack, above `zazz.utilities`. That ordering
+  matters in Step 5: a translated class like `.btn-primary` outranks everything in Zazz, so old
+  markup renders correctly even against utility classes. Once you rewrite the markup and delete the
+  shim, native Zazz classes and utilities take over as usual.
 </Callout>
 
 ## Step 2: Isolate regions with `data-legacy-css`
@@ -87,8 +88,8 @@ more deeply interleaved, `@scope` gives you finer control.
 }
 ```
 
-This is useful when you need migration rules (not just layer isolation) to stop at a boundary— for
-example, `_migrations.css` shims that should apply to a converted section but not reach into a
+This is useful when you need migration rules (not just layer isolation) to stop at a boundary, for
+example `migrations`-layer shims that should apply to a converted section but not reach into a
 nested legacy widget inside it. Unlike a `.app :not(.legacy-widget *)` selector, `@scope` accounts
 for hierarchical proximity, so it still behaves correctly when regions nest inside each other.
 
@@ -119,10 +120,11 @@ cascade can't cleanly override and which web components and lower layers can't e
   true blank slate (for example, to quarantine a third-party widget from both systems).
 </Callout>
 
-## Step 5: Translate old class names in `_migrations.css`
+## Step 5: Translate old class names in the `migrations` layer
 
-The last piece bridges markup you haven't rewritten yet. `_migrations.css` re-points your old
-class names at Zazz's component tokens, so existing HTML renders as Zazz **before** you touch it.
+The last piece bridges markup you haven't rewritten yet. A shim in the `migrations` layer re-points
+your old class names at Zazz's component tokens, so existing HTML renders as Zazz **before** you
+touch it. These rules live in `_legacy.css` (or any file you load) inside `@layer migrations`.
 Because Zazz components are token-driven, the shim is small and stays themeable, so light/dark and
 brand changes flow through for free.
 
@@ -131,9 +133,9 @@ Zazz variants the same way `data-variant` does, by reassigning the component tok
 the component rule:
 
 ```css
-/* _migrations.css - a temporary bridge. Delete each rule as you rewrite the markup. */
+/* @layer migrations — a temporary bridge. Delete each rule as you rewrite the markup. */
 
-@layer zazz.migrations {
+@layer migrations {
   @scope (.app) to (.legacy-widget) {
     .btn-primary {
       --button-background: var(--primary);
@@ -145,8 +147,8 @@ the component rule:
 
 The same move works for any component: a legacy `.card` can adopt card tokens, a `.tag` can adopt
 badge tokens, and so on. Each translated rule is a stepping stone. Once a screen's markup is
-updated to native Zazz classes and attributes, delete its shim. When `_migrations.css` is empty,
-the migration is done.
+updated to native Zazz classes and attributes, delete its shim. When the `migrations` layer is
+empty, the migration is done.
 
 ## A migration path
 
@@ -158,7 +160,7 @@ the migration is done.
    migration rules more precisely (Step 3).
 4. **Reset where needed.** Blank-slate stubborn regions with `all: revert` / `revert-layer` so
    legacy styling stops leaking in (Step 4).
-5. **Translate, then replace.** Add `_migrations.css` rules to make old markup look right now
+5. **Translate, then replace.** Add `migrations`-layer shims to make old markup look right now
    (Step 5), then rewrite the HTML to real Zazz classes and delete the shim, screen by screen.
 
 ## Browser support

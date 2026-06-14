@@ -425,14 +425,17 @@ Shared `--field-*` tokens unify `.input`, `.textarea`, `.select`, `.input-group`
 
 ## 5. Layout Principles
 
-### Container Widths
+### Container bands
 
-| Class        | Width                                  | Purpose                    |
-| ------------ | -------------------------------------- | -------------------------- |
-| `.container` | `min(80rem, 100% - var(--gap-md) * 2)` | Full-width content wrapper |
-| `.article`   | `min(66ch, 100% - var(--gap-md) * 2)`  | Reading-width content      |
+| Markup                                | Result                                                           | Purpose                    |
+| ------------------------------------- | --------------------------------------------------------------- | -------------------------- |
+| `.container`                          | Subgrid band system; children land in the `lg` band by default  | Full-width content wrapper |
+| `.container[data-variant="article"]`  | Centered reading width (`--article-lg` 70ch by default)         | Reading-width content      |
 
-Both self-pad via `min()` — no wrapper div needed. Both register as container query containers.
+`.container` is a subgrid spanning its region; each direct child drops into a band (`xs sm md lg xl`
+cap + center at that breakpoint, `full` = region minus gutters, `bleed` = edge to edge). Set the band
+per child with `data-container="…"`, or the default for all children with `data-default-container="…"`
+on the container. No wrapper div needed. See `references/tokens.md` §7 for the full model.
 
 ### Spacing
 

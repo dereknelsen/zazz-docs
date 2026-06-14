@@ -16,7 +16,7 @@
 @property --use-inverted-menu {
   syntax: "*";
   inherits: true;
-  initial-value: "true";
+  initial-value: true;
 }
 
 /* Animations */

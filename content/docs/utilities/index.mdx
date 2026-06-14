@@ -16,7 +16,7 @@ utility-built panel stays on-brand and theme-aware for free.
 
 ## The rules that govern every utility
 
-1. **Cascade, not specificity.** The layer order is `variables, reset, components, utilities`.
+1. **Cascade, not specificity.** Inside Zazz the sublayers run `variables, components, utilities`.
    A plain `.button` rule lives in `components`; a `.rounded-full` utility lives in `utilities`
    and wins. See [Overview](/docs/getting-started/overview) for the full layer model.
 2. **Zero specificity.** Each rule is `:where(.utility) { … }`, specificity `(0,0,0)`. Utilities
@@ -40,7 +40,7 @@ Tailwind uses, so you can scan by intent:
 | [Backgrounds](/docs/utilities/backgrounds) · [Borders](/docs/utilities/borders)                                  | surface colors, overlays · border, radius                             |
 | [Effects](/docs/utilities/effects) · [Color opacity](/docs/utilities/color-opacity)                              | shadow, opacity, scale, transition · channel alpha                    |
 | [Interactivity](/docs/utilities/interactivity) · [Hover states](/docs/utilities/hover)                           | cursor, focus ring, screen readers · `hover:` variants                |
-| [Responsive design](/docs/utilities/responsive-design)                                                           | the `xs: sm: md: lg: xl:` container-query prefixes                    |
+| [Responsive design](/docs/utilities/responsive-design)                                                           | the `@xs: @sm: @md: @lg: @xl:` container-query prefixes               |
 
 ## Private composition and coordination variables
 
@@ -97,13 +97,13 @@ These are covered alongside their classes in [Gap & basis](/docs/utilities/gap-a
 
 ## Responsive & state variants
 
-Every layout-related utility has container-query-prefixed variants (`xs: sm: md: lg: xl:`) that
-respond to the **nearest container**, not the viewport. Color, opacity, and scale utilities also
-ship `hover:` variants that need no JavaScript.
+Every layout-related utility has container-query-prefixed variants (`@xs: @sm: @md: @lg: @xl:`, plus
+the `@max-*` forms) gated on centralized breakpoint flags the **body** publishes off the page width.
+Color, opacity, and scale utilities also ship `hover:` variants that need no JavaScript.
 
 ```html
-<div class="flex flex-col md:flex-row gap-md">
-  <aside class="md:basis-1/3">Sidebar</aside>
+<div class="flex flex-col @md:flex-row gap-md">
+  <aside class="@md:basis-1/3">Sidebar</aside>
   <main class="flex-1 hover:bg-muted transition">Content</main>
 </div>
 ```

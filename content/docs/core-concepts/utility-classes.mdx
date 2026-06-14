@@ -54,7 +54,7 @@ Look closely at those class names and the same five rungs keep reappearing: `xs 
 | Radius     | `rounded-lg`                  |
 | Shadow     | `shadow-lg`                   |
 | Sizing     | `size-lg` · `max-w-screen-lg` |
-| Breakpoint | `lg:grid-cols-3`              |
+| Breakpoint | `@lg:grid-cols-3`             |
 
 Repeating one scale instead of inventing a new set of values per property buys two things:
 
@@ -88,6 +88,6 @@ Components carry their own look and expose variants through [`data-*` attributes
 Utilities also cover interaction and layout that responds to space:
 
 - **State variants:** `hover:bg-primary`, `hover:scale-105`, plus the automatic focus ring. See [Hover, focus, and other states](/docs/core-concepts/states).
-- **Responsive variants:** `md:grid-cols-3`, `lg:flex-row`, driven by container size rather than the viewport. See [Responsive design](/docs/core-concepts/responsive-design).
+- **Responsive variants:** `@md:grid-cols-3`, `@lg:flex-row`, driven by container style queries rather than viewport media queries. See [Responsive design](/docs/core-concepts/responsive-design).
 
 When utilities genuinely can't express something, you extend the system without editing source. See [Adding custom styles](/docs/core-concepts/custom-styles).

@@ -10,13 +10,16 @@
 
 @layer zazz.variables {
   :root {
-    --page-transition-duration: var(--default-transition-duration);
-    --page-transition-ease: var(--default-transition-timing-function);
-    --page-transition-wait: 0ms;
+    --page-transition-duration: 500ms;
+    --page-transition-ease: var(--bezier-easing);
+    --page-transition-wait: 250ms;
     --page-transition-origin: center top;
-    --page-transition-scale: 0.99;
-    --page-transition-translate: 0, 0, 0;
-    --page-transition-opacity: 0;
+    --page-transition-scale--new: 1;
+    --page-transition-scale--old: 1;
+    --page-transition-translate--new: 0, 1rem, 0;
+    --page-transition-translate--old: 0, 0, 0;
+    --page-transition-opacity--new: 0;
+    --page-transition-opacity--old: 0;
   }
 }
 
@@ -25,17 +28,18 @@
   @media screen and (prefers-reduced-motion: no-preference) {
     ::view-transition-old(main-content) {
       animation: global-page-transition--old var(--page-transition-duration)
-        var(--page-transition-ease) var(--page-transition-wait) forwards;
+        var(--page-transition-ease) both;
     }
 
     ::view-transition-new(main-content) {
       animation: global-page-transition--new var(--page-transition-duration)
-        var(--page-transition-ease) var(--page-transition-wait) forwards;
+        var(--page-transition-ease) both;
+      animation-delay: var(--page-transition-wait);
     }
 
     /* Persist shared chrome without cross-fading */
-    ::view-transition-old(global),
-    ::view-transition-new(global) {
+    ::view-transition-old(global-header),
+    ::view-transition-new(global-footer) {
       animation: none;
     }
   }
@@ -50,15 +54,17 @@
 
   @keyframes global-page-transition--old {
     to {
-      opacity: var(--page-transition-opacity);
-      transform: scale(var(--page-transition-scale)) translate3d(var(--page-transition-translate));
+      opacity: var(--page-transition-opacity--new);
+      transform: scale(var(--page-transition-scale--old))
+        translate3d(var(--page-transition-translate--old));
     }
   }
 
   @keyframes global-page-transition--new {
     from {
-      opacity: var(--page-transition-opacity);
-      transform: scale(var(--page-transition-scale)) translate3d(var(--page-transition-translate));
+      opacity: var(--page-transition-opacity--new);
+      transform: scale(var(--page-transition-scale--new))
+        translate3d(var(--page-transition-translate--new));
     }
   }
 

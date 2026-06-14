@@ -11,8 +11,8 @@
  */
 @layer zazz.variables {
   :root {
-    --tooltip-background: var(--popover);
-    --tooltip-foreground: var(--popover-foreground);
+    --tooltip-background: var(--foreground);
+    --tooltip-foreground: var(--background);
     --tooltip-border: transparent;
     --tooltip-radius: var(--radius-sm);
     --tooltip-shadow: var(--shadow-sm);

@@ -6,14 +6,14 @@ description: "One line of CSS that makes the whole system predictable: the casca
 `_layers.css` is the smallest file in Zazz and the most important. It declares the order of the [cascade layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) every other stylesheet writes into, and that order, not selector specificity, decides which rule wins.
 
 ```css
-@layer legacy, zazz, overrides;
+@layer legacy, reset, zazz, migrations;
 
 @layer zazz {
-  @layer variables, reset, components, migrations, utilities;
+  @layer variables, components, utilities;
 }
 ```
 
-That's the entire file. Because it must establish the order before any layer has content, it loads first; `main.css` `@import`s it ahead of everything else.
+That's the entire file. Because it has to establish the order before any layer has content, it loads first; `main.css` `@import`s it ahead of everything else.
 
 ## Why layers instead of specificity
 
@@ -29,28 +29,29 @@ Cascade layers change the rule: **a later layer beats an earlier layer regardles
 
 This is the mechanism behind Zazz's [golden rule](/docs/core-concepts/utility-classes): compose with utilities and they always have the final say, so you rarely write custom CSS to override a component.
 
-## What lives in each layer
+## The layer order
 
-There are three top-level layers. The middle one, `zazz`, is itself subdivided:
+Six layers in all, reading from lowest priority to highest:
 
-| Layer             | Holds                                                                                                                       | File                                                                                                     |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `legacy`          | Your existing (pre-Zazz) CSS, imported with `layer(legacy)`. Lowest priority; Zazz overrides it everywhere the two overlap. | your app's entry stylesheet                                                                              |
-| `zazz.variables`  | Design tokens — the `:root` custom properties everything reads                                                              | [`_variables.css`](/docs/core-concepts/theme-variables) + each component's `@layer zazz.variables` block |
-| `reset`           | Native-element baselines and re-skinned controls                                                                            | [`_reset.css`](/docs/core-files/reset)                                                                   |
-| `zazz.components` | The components themselves — `.button`, `.card`, `.input`…                                                                   | each `_*.css` component file                                                                             |
-| `zazz.migrations` | Temporary shims that map old class names to Zazz tokens while you rewrite markup                                            | [`_migrations.css`](/docs/core-files/migrations)                                                         |
-| `zazz.utilities`  | Atomic, single-purpose classes that win last inside Zazz                                                                    | [`_utilities.css`](/docs/core-concepts/utility-classes)                                                  |
-| `overrides`       | Application rules that need to beat even Zazz utilities. Use sparingly.                                                     | your app's CSS                                                                                           |
+| Layer             | Holds                                                                                                                                       | File                                                                                                     |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `legacy`          | Your existing (pre-Zazz) CSS, imported with `layer(legacy)`. Lowest priority, so Zazz overrides it wherever the two overlap.                | your app's entry stylesheet                                                                               |
+| `reset`           | Native-element baselines and re-skinned controls                                                                                            | [`_reset.css`](/docs/core-files/reset)                                                                   |
+| `zazz.variables`  | Design tokens, the `:root` custom properties everything reads                                                                               | [`_variables.css`](/docs/core-concepts/theme-variables) + each component's `@layer zazz.variables` block |
+| `zazz.components` | The components themselves: `.button`, `.card`, `.input`…                                                                                     | each `_*.css` component file                                                                              |
+| `zazz.utilities`  | Atomic, single-purpose classes that win last inside Zazz                                                                                     | [`_utilities.css`](/docs/core-concepts/utility-classes)                                                  |
+| `migrations`      | Temporary shims that map old class names to Zazz tokens, plus the `data-legacy-css` reverts. On top, so it can override anything mid-migration. | [`_legacy.css`](/docs/getting-started/migrating)                                                          |
 
 `@property` registrations (in `_properties.css`) sit outside the layers, since registration is layer-independent, but their tokens are consumed throughout.
 
+Two parts of the order are worth calling out. **`reset` is its own top-level layer** below all of Zazz, so component and utility rules always outrank native-element baselines. And **`migrations` sits on top of `zazz.utilities`,** at the very top of the stack: a class-translation shim, or a `data-legacy-css` revert, has to win over even a utility class for old markup to render correctly before you rewrite it. See [Migrating to Zazz](/docs/getting-started/migrating) for how that plays out.
+
 ## Unlayered styles beat everything
 
-There's one level above all three layers: **unlayered CSS.** Any rule you write outside a `@layer` block overrides every layered rule, no matter how specific the layered selector is.
+There's one level above all six layers: **unlayered CSS.** Any rule you write outside a `@layer` block overrides every layered rule, no matter how specific the layered selector is.
 
 ```css
-/* No @layer wrapper — this beats Zazz's components AND utilities. */
+/* No @layer wrapper — this beats Zazz's components, utilities, and migrations. */
 .button {
   border-radius: 0;
 }
@@ -58,24 +59,26 @@ There's one level above all three layers: **unlayered CSS.** Any rule you write 
 
 That makes unlayered CSS the ultimate escape hatch and an easy footgun. Prefer overriding a token, or adding your rule to the right layer, so you stay inside the system. See [Adding custom styles](/docs/core-concepts/custom-styles). Reach for unlayered CSS only when you deliberately want to trump everything.
 
-## The `overrides` layer
+## Beating Zazz utilities
 
-`@layer overrides` sits above `zazz` (including its utilities sublayer) but below unlayered CSS. It's the right place for application rules that need to beat Zazz utilities without going fully unlayered.
+Earlier versions of Zazz shipped a separate `overrides` layer for app rules that needed to beat utilities. That layer is gone. When overriding a token isn't enough and an app rule has to win over a utility, declare your own layer **after** Zazz. The first `@layer` statement sets the order, so a name added at the end outranks everything Zazz ships:
 
 ```css
-@layer overrides {
-  /* beats everything in zazz, including utilities */
+@layer legacy, reset, zazz, migrations, app;
+
+@layer app {
+  /* beats Zazz utilities, without the footgun of unlayered CSS */
   .button {
     border-radius: 0;
   }
 }
 ```
 
-Reach for it when overriding a token isn't enough and you don't want the footgun of unlayered CSS.
+This keeps your overrides layered and predictable. Reach for it only when overriding a [token](/docs/core-concepts/theme-variables) won't do.
 
 ## Scoped isolation with `_legacy.css`
 
-`_legacy.css` is an optional file (disabled by default in `main.css`) that adds two attribute hooks for mixed codebases. Uncomment its import when you're migrating an existing project alongside Zazz:
+`_legacy.css` is an optional file (disabled by default in `main.css`) for mixed codebases. It carries the `data-legacy-css` attribute hooks and is the home for your migration shims. Uncomment its import when you're migrating an existing project alongside Zazz:
 
 ```css
 /* main.css — uncomment to enable */
@@ -89,7 +92,7 @@ Once enabled, two `data-legacy-css` attributes control which layer applies to a 
 | `data-legacy-css="none"` | Strips the `legacy` layer from this element and its children. Zazz applies; your old CSS does not. Use on sections you've converted.      |
 | `data-legacy-css="only"` | Strips the `zazz` layer from this element and its children. Your old CSS applies; Zazz does not. Use on sections you haven't touched yet. |
 
-Both use `:where()` for zero specificity and `all: revert-layer` rather than `all: revert`, so they're surgical: they remove one layer without disturbing the others.
+Both use `:where()` for zero specificity and `all: revert-layer` rather than `all: revert`, so they're surgical: they remove one layer without disturbing the others. A `!none` / `!only` pair does the same with `all: revert !important` from the `migrations` layer when you need to force the boundary.
 
 ```html
 <!-- This section is converted — block legacy styles, keep Zazz -->

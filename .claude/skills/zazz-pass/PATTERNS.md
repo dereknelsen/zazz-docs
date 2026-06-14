@@ -21,9 +21,13 @@ sentence case — let the class do the uppercasing.)
 ## Page structure
 
 The standard page: a `<header>` with logo + desktop nav + mobile nav, a `<main>` of
-`<section>`s, and a `<footer>`. `.container` constrains width, centers, and self-pads;
-`<section>`s own the vertical rhythm with `.py-*`. Desktop nav is `hidden sm:flex`; the mobile
-nav is `flex sm:hidden` and opens a dialog (see the Dialog component / mobile-menu).
+`<section>`s, and a `<footer>`. `.container` places its direct children into a centered band
+(default `lg`); `<section>`s own the vertical rhythm with `.py-*`. Desktop nav is
+`hidden @sm:flex`; the mobile nav is `flex @sm:hidden` and opens a dialog (see the Dialog
+component / mobile-menu). The container is a subgrid band system, not a fixed-width wrapper —
+set the band per child with `data-container="xs|sm|md|lg|xl|full|bleed"`, or change the default
+for all children with `data-default-container="…"` on the `.container`. See
+`references/tokens.md` §7 for the full band model.
 
 ```html
 <body>
@@ -32,7 +36,7 @@ nav is `flex sm:hidden` and opens a dialog (see the Dialog component / mobile-me
       <a href="/">
         <!-- site logo -->
       </a>
-      <nav class="hidden sm:flex items-center py-md">
+      <nav class="hidden @sm:flex items-center py-md">
         <menu class="flex items-center gap-sm">
           <li>
             <a class="button" data-variant="ghost" href="/">Home</a>
@@ -40,7 +44,7 @@ nav is `flex sm:hidden` and opens a dialog (see the Dialog component / mobile-me
           <!-- navigation links and dropdowns -->
         </menu>
       </nav>
-      <nav class="flex sm:hidden">
+      <nav class="flex @sm:hidden">
         <!-- mobile navigation — use the dialog pattern -->
       </nav>
     </div>
@@ -73,7 +77,7 @@ Group an optional eyebrow, a heading, a subheading, and the call-to-action butto
 `<hgroup>`. Center on mobile, left-align from `md`.
 
 ```html
-<hgroup class="flex flex-col gap-sm text-center md:text-left">
+<hgroup class="flex flex-col gap-sm text-center @md:text-left">
   <!-- eyebrow (optional) -->
   <span class="text-eyebrow">Featured</span>
 
@@ -84,7 +88,7 @@ Group an optional eyebrow, a heading, a subheading, and the call-to-action butto
   <p class="text-xl text-muted-foreground">How vexingly quick daft zebras jump.</p>
 
   <!-- CTA buttons -->
-  <div class="flex mt-sm justify-center md:justify-start">
+  <div class="flex mt-sm justify-center @md:justify-start">
     <a class="button" data-variant="primary" href="/products">Products</a>
     <a class="button" data-variant="ghost" href="/contact">Contact us</a>
   </div>
@@ -100,7 +104,8 @@ Group an optional eyebrow, a heading, a subheading, and the call-to-action butto
 For the rest, reach for the primitives and components directly — they carry their own
 composition guidance:
 
-- Structure & spacing → `references/tokens.md` (`.container` / `.article`, `--gap-*`, the
-  responsive `sm:`/`md:`/`lg:` utilities).
+- Structure & spacing → `references/tokens.md` (`.container` band system +
+  `data-container`/`data-default-container`, `.container[data-variant="article"]`, `--gap-*`, the
+  responsive `@sm:`/`@md:`/`@lg:` utilities and `@max-*` container variants).
 - Components (cards, carousels, dialogs, forms, navigation, …) → `references/components.md`.
 - Brand voice, color roles, type scale, archetypes → `DESIGN.md`.

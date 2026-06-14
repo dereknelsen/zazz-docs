@@ -32,7 +32,7 @@
     * ========================================================================== */
 
     /* Use dark popovers/menus */
-    --use-inverted-menu: "true";
+    --use-inverted-menu: true;
 
     /* base */
     --background: light-dark(var(--white), var(--neutral-900));
@@ -523,8 +523,8 @@
    * light values; setting color-scheme on descendants alone does not flip them.
    */
 
-  @container style(--use-inverted-menu: "true") {
-    :where([popover]) {
+  @container style(--use-inverted-menu: true) {
+    :where([popover]:not([data-use-inverted-menu="false"])) {
       color-scheme: dark;
 
       --background: var(--neutral-900);

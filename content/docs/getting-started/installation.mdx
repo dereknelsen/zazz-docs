@@ -67,7 +67,7 @@ Stick with the single `main.css` link. CSS this regular compresses extremely wel
 A separate `<link rel="preload" as="style">` for `main.css` is **not** needed. A same-document stylesheet link is already the highest-priority, render-blocking fetch. `preload` is for *late-discovered* resources (web fonts, CSS pulled in by JS), not the stylesheet you link in `<head>`.
 </Callout>
 
-You _can_ instead link each `_*.css` file individually (with `preload` hints) to avoid `main.css`'s `@import` chain, but with HTTP/2-3 multiplexing and server compression it's rarely worth the upkeep. If you do, keep the cascade order: `_layers.css` first, then `_legacy.css`, `_properties.css`, `_variables.css`, `_reset.css`; component files in any order; `_migrations.css`; `_utilities.css` last.
+You _can_ instead link each `_*.css` file individually (with `preload` hints) to avoid `main.css`'s `@import` chain, but with HTTP/2-3 multiplexing and server compression it's rarely worth the upkeep. If you do, keep the cascade order: `_layers.css` first, then `_legacy.css`, `_properties.css`, `_variables.css`, `_reset.css`; component files in any order; then `_utilities.css` and `_layout.css` last.
 
 ## Verify it works
 
@@ -103,12 +103,13 @@ my-project/
 │   └── styles/
 │       ├── main.css          ← entry point
 │       ├── _layers.css       ← cascade order (loads first)
-│       ├── _legacy.css        ← scoped legacy reset boundary
+│       ├── _legacy.css        ← scoped legacy + migration boundary
+│       ├── _properties.css   ← typed @property registrations
 │       ├── _variables.css    ← global design tokens
 │       ├── _reset.css        ← element baselines
-│       ├── _migrations.css   ← old class to token translation layer
-│       ├── _utilities.css    ← atomic helper classes
 │       ├── _button.css       ← component styles
+│       ├── _utilities.css    ← atomic helper classes
+│       ├── _layout.css       ← container + layout grid
 │       └── ...
 │   └── scripts/
 │       ├── navigation.js      ← page transitions and link handling

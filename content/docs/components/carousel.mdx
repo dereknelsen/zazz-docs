@@ -7,7 +7,7 @@ A carousel is an Embla slider wrapped in `<embla-carousel>`. The element is the 
 root: put Embla options such as `data-embla-loop` and `data-embla-classnames` on it, then
 compose the usual `viewport` → `container` → `slide` structure inside. Each slide sets its
 own responsive width with `basis-*` utilities
-(`basis-full xs:basis-1/2 sm:basis-1/3 md:basis-1/4`).
+(`basis-full @xs:basis-1/2 @sm:basis-1/3 @md:basis-1/4`).
 
 `<embla-carousel>` uses light DOM, so the markup you write is the markup that gets styled.
 It initializes when connected, defers initialization while inside a closed `<dialog>`, and

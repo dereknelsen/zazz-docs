@@ -9,37 +9,104 @@ below. For the responsive breakpoint system, see [Responsive design](/docs/utili
 
 ## Containers
 
-`.container` and `.article` are self-contained page wrappers. Each sets its own max width, centers
-itself with `margin-inline: auto`, and registers a
-[container-query context](/docs/utilities/responsive-design#setting-up-a-container), so one
-element handles page width, gutters, and responsive scope with no wrapper div around it.
-
-| Class       | Width                                   | Container name | Use                                                                   |
-| ----------- | --------------------------------------- | -------------- | --------------------------------------------------------------------- |
-| `container` | `min(--breakpoint-lg, 100% − 2 × --gap-md)` | `container`    | full-width sections (caps ~80rem)                                     |
-| `article`   | `min(66ch, 100% − 2 × --gap-md)`        | `article`      | reading column (caps at a 66ch measure; also sets the base font size) |
+`.container` is the page's width system. Put it on (or directly inside) a region (`main`, `section`,
+`header`, `footer`, `article`) and the region turns into a shared column grid. The container spans
+that grid and drops each of its children into a centered **band**, so one class handles page width,
+gutters, and which children sit wider or narrower, with no extra wrapper divs.
 
 ```html
 <section class="container">
-  <article class="article">Comfortable reading width, centered, with page gutters.</article>
+  <h1>Centered in the large band, with page gutters.</h1>
+  <p>Body copy lines up to the same width.</p>
 </section>
 ```
 
-### One element, no gutter wrapper
+### The bands
 
-The width is a `min()` of two terms: a max cap and `100% − 2 × gutter`:
+Every container exposes the same set of bands. A band caps and centers its content while the region
+is wider than the cap, then fills to the gutters once it isn't, with no breakpoint snap in between.
+Children land in the `lg` band unless you say otherwise.
 
-```css
-:where(.container) {
-  inline-size: min(var(--breakpoint-lg), 100% - var(--gap-md) * 2);
-  margin-inline: auto;
-}
+| Band             | Caps at                     | Use                                       |
+| ---------------- | --------------------------- | ----------------------------------------- |
+| `xs`             | `--breakpoint-xs` (40rem)   | a very narrow column                      |
+| `sm`             | `--breakpoint-sm` (48rem)   | forms, sign-in cards                      |
+| `md`             | `--breakpoint-md` (64rem)   | text-forward sections                     |
+| `lg` _(default)_ | `--breakpoint-lg` (80rem)   | standard page width                       |
+| `xl`             | `--breakpoint-xl` (96rem)   | wide dashboards and galleries             |
+| `full`           | region width, minus gutters | edge-aligned rows that still keep gutters |
+| `bleed`          | edge to edge, no gutter     | full-bleed media and color bands          |
+
+### Set the default band
+
+`data-default-container` on the container changes the band every child lands in:
+
+```html
+<!-- the whole section caps at the medium width -->
+<section class="container" data-default-container="md">
+  <h2>A narrower section</h2>
+  <p>Everything here lines up to the md band.</p>
+</section>
 ```
 
-On a wide viewport the cap wins: the column stops growing at `--breakpoint-lg` and `margin-inline: auto`
-centers it. Once the viewport drops below that cap, the `100% − 2 × --gap-md` term wins instead,
-leaving a symmetric `--gap-md` gutter on each side. One element does both jobs, so there's no need
-for the usual full-width **padding wrapper** around a separate max-width child.
+### Break a child out
+
+`data-container` on a direct child overrides that one child's band, so it can run wider (or tuck
+narrower) than its siblings without leaving the container:
+
+```html
+<section class="container">
+  <h1>Title in the large band</h1>
+  <p>Reading-width copy.</p>
+
+  <!-- this figure runs edge to edge -->
+  <figure data-container="bleed">
+    <img src="/wide.jpg" alt="" />
+  </figure>
+</section>
+```
+
+The default and the override draw from the same band names, so an `md` section can hold one `full`
+row and an `lg` section can hold one `sm` form. Every band is a pair of named grid lines in a single
+shared column template, which is what lets a child jump to any of them by name.
+
+### The article variant
+
+For long-form reading, add `data-variant="article"`. Instead of a band, the container becomes a
+centered column measured in `ch` for a comfortable line length. This replaces the old `.article`
+class.
+
+```html
+<article class="container" data-variant="article">
+  <h1>A reading column</h1>
+  <p>Measured for a comfortable line length and centered with page gutters.</p>
+</article>
+```
+
+`data-default-container` picks the measure:
+
+| Value            | Width |
+| ---------------- | ----- |
+| `xs`             | 45ch  |
+| `sm`             | 50ch  |
+| `md`             | 65ch  |
+| `lg` _(default)_ | 70ch  |
+| `xl`             | 75ch  |
+
+### Responsive containers
+
+The container takes the same breakpoint variants as the other layout utilities (see
+[Responsive design](/docs/utilities/responsive-design)). A `@md:container` is a plain block below
+its breakpoint and becomes a banded grid from `md` up; `@max-md:container` does the reverse, banding
+only below `md`. Both forms work with `data-variant="article"` too.
+
+```html
+<!-- a banded grid from md up, a plain block below it -->
+<section class="@md:container">…</section>
+
+<!-- banded only below md, where a two-column grid would get too tight -->
+<div class="grid grid-cols-2 @max-md:container">…</div>
+```
 
 ## Display
 

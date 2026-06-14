@@ -275,6 +275,7 @@
     --button-height: var(--step-6);
     --button-padding: var(--step-2);
     --button-radius: var(--radius-sm);
+    --button-icon-size: var(--step-3_5);
 
     block-size: var(--button-height);
     inline-size: var(--button-height);

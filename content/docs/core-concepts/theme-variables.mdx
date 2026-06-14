@@ -67,7 +67,7 @@ Set the token inline, or let a `data-*` variant do it:
 - **Color:** roles and scales, covered in depth on the [Colors](/docs/core-concepts/colors) page.
 - **Radius:** `--radius-none…full`, scaled by `--radius-multiplier`. `md` for buttons/inputs, `lg` for cards/dialogs.
 - **Shadow:** `--shadow-xs…xl`, soft multi-layer elevations. Surfaces are flat by default; add depth intentionally.
-- **Layout:** `--container` (~80rem) and `--article` (~66ch) widths, plus `--breakpoint-*` breakpoints used by [container queries](/docs/core-concepts/responsive-design).
+- **Layout:** `--breakpoint-xs…xl` for the responsive [breakpoints](/docs/core-concepts/responsive-design), `--gutters` for the page margin, and `--article-xs…xl` (in `ch`) for reading-column widths. The container [bands](/docs/utilities/layout#containers) are carved from the breakpoint tokens.
 - **Motion:** `--spring-easing`, `--spring-duration`, and the `--default-transition*` bundle. Everything zeroes under `prefers-reduced-motion`.
 
 ## Where the real values live

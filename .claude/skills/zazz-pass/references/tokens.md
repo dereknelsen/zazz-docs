@@ -108,17 +108,37 @@ intentionally (**md** ≈ popovers/modals). Utilities: `.shadow-none|xs|sm|md|lg
 
 ## 7. Layout & breakpoints
 
-- **Containers (self-padding; register as container-query contexts):** `.container`
-  (`--container`, ~80rem cap) for full-width sections, `.article` (`--article`, ~66ch) for
-  reading width. No wrapper div needed.
+- **`.container` — subgrid band system.** A `<main>/<header>/<footer>/<section>/<article>` that
+  `:has(> .container)` becomes a layout grid with named band lines; the `.container` is a subgrid
+  spanning the whole region, and each **direct child** drops into a band. No wrapper div, no fixed
+  width — the band caps + centers content fluidly. Bands: `xs sm md lg xl` (cap at the matching
+  breakpoint width), `full` (region width minus gutters), `bleed` (edge-to-edge, gutters included).
+  **Default band is `lg`.**
+  - `data-default-container="xs|sm|md|lg|xl|full|bleed"` on the `.container` resets the default for
+    all its children.
+  - `data-container="xs|sm|md|lg|xl|full|bleed"` on a **direct child** overrides that one child's band.
+  - Responsive variants: `@md:container`, `@max-md:container`, etc. — the element is a band subgrid
+    only at/above (min) or below (max) its breakpoint, and a plain block otherwise. (`@max-md:container`
+    pairs with a grid that takes over above `md`; see `products.html`.)
+- **`.container[data-variant="article"]` — reading width** (replaces the old `.article`). A centered,
+  inline-size container; widths from `--article-xs` 45ch, `--article-sm` 50ch, `--article-md` 65ch,
+  `--article-lg` 70ch, `--article-xl` 75ch. **Default `lg`.** Pick the width with
+  `data-default-container="xs..xl"`. Responsive `@md:container[data-variant="article"]` / `@max-*`
+  variants exist. (full/bleed aren't reading widths — use them on a plain band `.container`.)
+- **Gutters:** `--gutters` (= `--gap-md`) — the region's edge padding the band system reserves.
 - **Breakpoints** (for `calc()` and **container** queries — not `@media`): `--breakpoint-xs` 40rem,
   `--breakpoint-sm` 48rem, `--breakpoint-md` 64rem, `--breakpoint-lg` 80rem, `--breakpoint-xl` 96rem.
-- **Responsive utilities are container-query prefixed:** `.xs:* .sm:* .md:* .lg:* .xl:*`
-  (e.g. `.md:grid-cols-3`, `.lg:flex-row`) — they respond to the nearest container, not the
-  viewport. Available at each breakpoint: display, grid-cols, grid-rows, flex-direction,
-  text-align, align-items, justify-content, col-span, row-span, basis. (Less-toggled
-  families — align-self, justify-self, place-items, visibility, negative margins — ship
+- **Responsive utilities are `@`-prefixed:** `@xs:* @sm:* @md:* @lg:* @xl:*` — author as
+  `class="@md:grid-cols-3"`, `class="@lg:flex-row"`. Mobile-first (apply at/above the breakpoint),
+  gated on global `--is-breakpoint-*` flags sourced from the **body** container, so they track the
+  viewport breakpoint (not the nearest arbitrary container). Available at each breakpoint: display
+  (`hidden block flex inline-flex grid grid-cols-subgrid grid-rows-subgrid`), grid-cols, grid-rows,
+  flex-direction (`flex-row flex-col`), text-align, items-*, justify-*, col-span, row-span, basis.
+  (Less-toggled families — align-self, justify-self, place-items, visibility, negative margins — ship
   only as base classes, not per-breakpoint; apply them outside the responsive layer.)
+  - **`@max-*` (below the breakpoint):** the inverse of the min variants — applies only *below* its
+    breakpoint. In utilities this only exists for the **container** family (`@max-md:container` etc.);
+    the atomic utilities above (grid-cols, display, …) ship min variants only.
 - **Display:** `.hidden .block .inline-block .inline .visible .invisible`.
 - **Flexbox:** `.flex .inline-flex`, direction `.flex-row .flex-row-reverse .flex-col
 .flex-col-reverse`, shorthand `.flex-1 .flex-auto .flex-initial .flex-none`, alignment

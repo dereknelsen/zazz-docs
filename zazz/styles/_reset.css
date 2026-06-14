@@ -112,8 +112,12 @@
     view-transition-name: var(--_view-transition-name);
   }
 
-  :where([data-transition-layer="global"]) {
-    view-transition-name: global;
+  :where([data-transition-layer="global-header"]) {
+    view-transition-name: global-header;
+  }
+
+  :where([data-transition-layer="global-footer"]) {
+    view-transition-name: global-footer;
   }
 
   :where(header) {

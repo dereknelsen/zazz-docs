@@ -3,26 +3,32 @@ title: Overview
 description: "How Zazz controls the cascade with layers, tokens, and conventions: no specificity wars, no build step."
 ---
 
-Zazz replaces specificity-based CSS architecture with a four-layer cascade system. Understanding these layers is how you customize, extend, and maintain the system without fighting it.
+Zazz replaces specificity-based CSS architecture with a layered cascade. Understanding these layers is how you customize, extend, and maintain the system without fighting it.
 
-## The four cascade layers
+## The cascade layers
 
-Every stylesheet in Zazz slots into one of four layers, declared once in `_layers.css`:
+Every stylesheet in Zazz slots into a cascade layer, and the layers are declared once, in order, in `_layers.css`:
 
 ```css
-@layer zazz.variables, reset, components, utilities;
+@layer legacy, reset, zazz, migrations;
+
+@layer zazz {
+  @layer variables, components, utilities;
+}
 ```
 
 Order matters. Later layers override earlier ones regardless of selector specificity. This eliminates the need for `!important`, BEM modifiers, or naming hacks:
 
-| Layer        | Purpose                  | Example                                        |
-| ------------ | ------------------------ | ---------------------------------------------- |
-| `variables`  | Token declarations only  | `:root { --button-radius: var(--radius-md); }` |
-| `reset`      | Native element baselines | `html`, `body`, `input`, `select` defaults     |
-| `components` | Component rules          | `.button`, `.dialog`, `.field`                 |
-| `utilities`  | Atomic override classes  | `.text-primary`, `.gap-md`, `.rounded-full`    |
+| Layer             | Purpose                                              | Example                                        |
+| ----------------- | ---------------------------------------------------- | ---------------------------------------------- |
+| `legacy`          | Your pre-Zazz CSS during a migration (lowest)        | `@import "old.css" layer(legacy)`              |
+| `reset`           | Native element baselines                             | `html`, `body`, `input`, `select` defaults     |
+| `zazz.variables`  | Token declarations only                              | `:root { --button-radius: var(--radius-md); }` |
+| `zazz.components` | Component rules                                       | `.button`, `.dialog`, `.field`                 |
+| `zazz.utilities`  | Atomic override classes                              | `.text-primary`, `.gap-md`, `.rounded-full`    |
+| `migrations`      | Class-translation shims during a migration (highest) | `.btn-primary { --button-background: … }`      |
 
-A plain `.button` rule in `components` can be overridden by a utility class in `utilities`, with no `!important` needed.
+A plain `.button` rule in `components` can be overridden by a utility class in `utilities`, with no `!important` needed. The outer `legacy` and `migrations` layers bracket the stack for incremental adoption (see [Migrating to Zazz](/docs/getting-started/migrating)); day to day you work in the middle three Zazz sublayers.
 
 ## Core files
 
@@ -30,10 +36,14 @@ Four files form the foundation. Every other file in the system depends on them.
 
 ### `_layers.css`
 
-Declares the cascade order. Must load first. Contains a single line:
+Declares the cascade order. Must load first:
 
 ```css
-@layer zazz.variables, reset, components, utilities;
+@layer legacy, reset, zazz, migrations;
+
+@layer zazz {
+  @layer variables, components, utilities;
+}
 ```
 
 ### `_variables.css`

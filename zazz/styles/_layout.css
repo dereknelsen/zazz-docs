@@ -110,6 +110,7 @@
   }
 
   :where(:is(.container, [class*=":container"]):not([data-variant="article"])) {
+    /* default container sizes */
     --default-container-grid-column: var(--container-lg);
     --default-article-inline-size: var(--article-lg);
 

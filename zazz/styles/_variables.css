@@ -327,32 +327,16 @@
 
     /* semantic */
     --gutters: var(--gap-md);
-    
-    /* breakpoints — for calcs and container queries */
+
+    /* breakpoints — length tokens for calcs and container queries.
+       The matching --is-breakpoint-* state flags are sourced from the body
+       container after this :root block (the size-query subject must be a body
+       descendant, so it cannot live in :root). */
     --breakpoint-xs: 40rem;
-    @container (width <= 40rem) {
-      --is-breakpoint-xs: true;
-    }
-
     --breakpoint-sm: 48rem;
-    @container (width <= 48rem) {
-      --is-breakpoint-sm: true;
-    }
-
     --breakpoint-md: 64rem;
-    @container (width <= 64rem) {
-      --is-breakpoint-md: true;
-    }
-
     --breakpoint-lg: 80rem;
-    @container (width <= 80rem) {
-      --is-breakpoint-lg: true;
-    }
-
     --breakpoint-xl: 96rem;
-    @container (width <= 96rem) {
-      --is-breakpoint-xl: true;
-    }
 
     /* article container widths */
     --article-xs: 45ch;
@@ -489,6 +473,41 @@
     --decoration-offset: 2px;
     --decoration-offset--hover: 3px;
     --decoration-offset--active: 2px;
+  }
+
+  /* ==========================================================================
+   * Breakpoint state flags — global, sourced from the body container.
+   * Set the same value on every body descendant so any style() consumer
+   * resolves it identically, no matter which container it reads from (the
+   * .container element is intentionally container-type: normal).
+   * Mobile-first: --is-breakpoint-X becomes true once width reaches X.
+   * Registered as typed @property (false default) in _properties.css.
+   * Literal rem required — var() is invalid in a container-query prelude.
+   * ========================================================================== */
+  @container (width >= 40rem) {
+    :where(body *) {
+      --is-breakpoint-xs: true;
+    }
+  }
+  @container (width >= 48rem) {
+    :where(body *) {
+      --is-breakpoint-sm: true;
+    }
+  }
+  @container (width >= 64rem) {
+    :where(body *) {
+      --is-breakpoint-md: true;
+    }
+  }
+  @container (width >= 80rem) {
+    :where(body *) {
+      --is-breakpoint-lg: true;
+    }
+  }
+  @container (width >= 96rem) {
+    :where(body *) {
+      --is-breakpoint-xl: true;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

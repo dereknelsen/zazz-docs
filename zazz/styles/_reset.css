@@ -6,8 +6,8 @@
  * @uses       appearance: none — select chevron reset
  * @uses       ::details-content — accordion open/close (see _accordion.css for .accordion)
  * @uses       container-type — layout containers on main, article, section
- * @uses       view-transition-name via the <main> tag - main-content and [data-transition-layer] — 
- *             global-component (animated in _page-transitions.css)
+ * @uses       view-transition-name via the <main> tag - main-content and [data-transition-layer] —
+ *             global (animated in _page-transitions.css)
  * @uses       text-box — vertical trim on headings
  * @uses       color-mix(), oklch(from …), contrast-color() — mark/highlight tints
  * @tokens     Native-control hooks declared per element — --code-*, --kbd-*,
@@ -93,6 +93,7 @@
   :where(main) {
     --_container-type: inline-size;
     --_container-name: main;
+    --_view-transition-name: main-content;
 
     /* Allow for more predictable z-indexing and spacing */
     isolation: isolate;
@@ -106,6 +107,13 @@
     /* Enable container queries for main content */
     container-type: var(--_container-type);
     container-name: var(--_container-name);
+
+    /* View transitions - Main content is isolated from the rest of the page and can be animated independently of, for example, the header or footer */
+    view-transition-name: var(--_view-transition-name);
+  }
+
+  :where([data-transition-layer="global"]) {
+    view-transition-name: global;
   }
 
   :where(header) {
@@ -301,6 +309,10 @@
   :where(figure) {
     display: flex;
     flex-direction: column;
+
+    > img {
+      inline-size: 100%;
+    }
   }
 
   /* Custom text selection styling — the tinted background is safe everywhere
@@ -357,11 +369,11 @@
   }
 
   :where(select:is([multiple], [size])) optgroup {
-    font-weight: bolder;
+    font-weight: var(--font-weight-strong);
   }
 
   :where(select:is([multiple], [size])) optgroup option {
-    padding-inline-start: 20px;
+    padding-inline-start: var(--gap-sm);
   }
 
   :-moz-ui-invalid {
@@ -510,18 +522,5 @@
 
   :where([hidden]:not([hidden="until-found"])) {
     display: none !important;
-  }
-
-  /* ===========================================================================
-  VIEW TRANSITION LAYERS
-  =========================================================================== */
-
-  :where(main) {
-    /* View transitions - Main content is isolated from the rest of the page and can be animated independently of, for example, the header or footer */
-    view-transition-name: main-content;
-  }
-
-  :where([data-transition-layer="global-component"]) {
-    view-transition-name: global-component;
   }
 }

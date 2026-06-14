@@ -9,19 +9,19 @@ discovers and enhances markup; you rarely touch it.
 
 ## 1. Platform APIs and their markup hooks
 
-| API                                        | Used by                            | Markup hook                                                                                                           | Polyfill                                |
-| ------------------------------------------ | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| Popover API                                | tooltip, dropdown, navigation-menu | `popover="auto"` / `popover="hint"`, `popovertarget="<id>"`, `:popover-open`                                          | `@oddbird/popover-polyfill`             |
-| Invoker Commands                           | dialog, lightbox                   | `command="show-modal"` / `command="close"`, `commandfor="<id>"`                                                       | `invokers/compatible`                   |
-| Interest Invokers                          | tooltip                            | `interestfor="<id>"` (hover/focus/long-press → hint, wires ARIA)                                                      | `invokers/compatible`                   |
-| CSS Anchor Positioning                     | popover/tooltip placement          | `data-side`, `data-align` (drive `anchor-name` / `position-area`)                                                     | `@supports`-gated; UA-centered fallback |
-| Native `<dialog>`                          | dialog, lightbox, mobile-menu      | `<dialog>`, `::backdrop`, `closedby="any"`                                                                            | (via Invoker Commands polyfill)         |
-| Native `<details>`                         | accordion                          | `<details>`/`<summary>`, `::details-content`, `interpolate-size: allow-keywords`                                      | —                                       |
-| View Transitions                           | cross-page nav                     | `@view-transition { navigation: auto }`, `data-transition-layer="global-component"`, `document.startViewTransition()` | —                                       |
-| Navigation API                             | SPA-style nav                      | `navigation.js` (app-level; **not** loaded in preview iframes)                                                        | falls back to full page load            |
-| `light-dark()` + container `style()` query | theming, dark mode, inverted menus | `.dark` class, `--use-inverted-menu: "true"` on `[popover]`                                                           | —                                       |
-| IntersectionObserver                       | scroll reveals                     | `[data-reveal]` / `[data-reveal-each]` (via `reveal.js`)                                                              | —                                       |
-| `:user-invalid` / `:has()`                 | form validation                    | surfaces error state after commit, not while typing                                                                   | —                                       |
+| API                                        | Used by                            | Markup hook                                                                                                 | Polyfill                                |
+| ------------------------------------------ | ---------------------------------- | ----------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| Popover API                                | tooltip, dropdown, navigation-menu | `popover="auto"` / `popover="hint"`, `popovertarget="<id>"`, `:popover-open`                                | `@oddbird/popover-polyfill`             |
+| Invoker Commands                           | dialog, lightbox                   | `command="show-modal"` / `command="close"`, `commandfor="<id>"`                                             | `invokers/compatible`                   |
+| Interest Invokers                          | tooltip                            | `interestfor="<id>"` (hover/focus/long-press → hint, wires ARIA)                                            | `invokers/compatible`                   |
+| CSS Anchor Positioning                     | popover/tooltip placement          | `data-side`, `data-align` (drive `anchor-name` / `position-area`)                                           | `@supports`-gated; UA-centered fallback |
+| Native `<dialog>`                          | dialog, lightbox, mobile-menu      | `<dialog>`, `::backdrop`, `closedby="any"`                                                                  | (via Invoker Commands polyfill)         |
+| Native `<details>`                         | accordion                          | `<details>`/`<summary>`, `::details-content`, `interpolate-size: allow-keywords`                            | —                                       |
+| View Transitions                           | cross-page nav                     | `@view-transition { navigation: auto }`, `data-transition-layer="global"`, `document.startViewTransition()` | —                                       |
+| Navigation API                             | SPA-style nav                      | `navigation.js` (app-level; **not** loaded in preview iframes)                                              | falls back to full page load            |
+| `light-dark()` + container `style()` query | theming, dark mode, inverted menus | `.dark` class, `--use-inverted-menu: "true"` on `[popover]`                                                 | —                                       |
+| IntersectionObserver                       | scroll reveals                     | `[data-reveal]` / `[data-reveal-each]` (via `reveal.js`)                                                    | —                                       |
+| `:user-invalid` / `:has()`                 | form validation                    | surfaces error state after commit, not while typing                                                         | —                                       |
 
 ## 2. Zazz JS behaviors (data-attribute driven)
 

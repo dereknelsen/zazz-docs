@@ -25,17 +25,17 @@ Include the script and the page transitions stylesheet:
 Mark your page landmarks with `data-transition-layer` so the view transition knows which elements to animate:
 
 ```html
-<header data-transition-layer="global-component">...</header>
+<header data-transition-layer="global">...</header>
 <main>...</main>
-<footer data-transition-layer="global-component">...</footer>
+<footer data-transition-layer="global">...</footer>
 ```
 
 ## What gets transitioned
 
-| Layer              | Behavior                                                       |
-| ------------------ | -------------------------------------------------------------- |
-| `main-content`     | Animated crossfade (old fades/scales out, new fades/scales in) |
-| `global-component` | Persists without animation                                     |
+| Layer          | Behavior                                                       |
+| -------------- | -------------------------------------------------------------- |
+| `main-content` | Animated crossfade (old fades/scales out, new fades/scales in) |
+| `global`       | Persists without animation                                     |
 
 The header and footer stay in place while `<main>` content transitions. This keeps navigation chrome visually stable.
 

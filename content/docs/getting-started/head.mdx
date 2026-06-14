@@ -210,7 +210,7 @@ Put styles, scripts, and the theme block in `<head>`. Deferred scripts keep thei
     </script>
   </head>
   <body>
-    <header data-transition-layer="global-component">
+    <header data-transition-layer="global">
       <!-- Navigation -->
     </header>
 
@@ -218,7 +218,7 @@ Put styles, scripts, and the theme block in `<head>`. Deferred scripts keep thei
       <!-- Page content -->
     </main>
 
-    <footer data-transition-layer="global-component">
+    <footer data-transition-layer="global">
       <!-- Footer -->
     </footer>
   </body>
@@ -264,9 +264,9 @@ Deferred scripts auto-initialize on `DOMContentLoaded`. No manual init on a norm
 For page transitions (cross-document or SPA-style via `navigation.js`), mark landmarks with `data-transition-layer`:
 
 ```html
-<header data-transition-layer="global-component">...</header>
+<header data-transition-layer="global">...</header>
 <main>...</main>
-<footer data-transition-layer="global-component">...</footer>
+<footer data-transition-layer="global">...</footer>
 ```
 
 These map to `view-transition-name` values in `_page-transitions.css`. The `<main>` content animates on navigation; header and footer stay put.

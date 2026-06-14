@@ -33,7 +33,7 @@
 @layer zazz.components {
   .navigation-menu {
     /* View transitions - keeps the header stable when navigating between pages */
-    view-transition-name: global-component;
+    view-transition-name: global;
 
     --popover-shadow: var(--navigation-popover-shadow);
     --popover-child-radius: var(--navigation-popover-child-radius);

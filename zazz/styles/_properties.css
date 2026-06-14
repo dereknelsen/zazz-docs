@@ -6,7 +6,8 @@
  * @uses       @property — typed custom properties for style() container queries
  * @uses       syntax "*" on theme roles so light-dark() re-resolves under color-scheme
  * @tokens     Registers _variables.css tokens as typed @property so container
- *             style() queries gain typed comparison and range syntax. Theme roles
+ *             style() queries gain typed comparison and range syntax (e.g. the
+ *             --is-breakpoint-* layout flags, false default). Theme roles
  *             use syntax "*" so light-dark() re-resolves under color-scheme overrides.
  * @see        https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@property
  * @see        https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@property/syntax
@@ -42,4 +43,38 @@
   syntax: "<time>";
   inherits: true;
   initial-value: 0s;
+}
+
+/* Layout breakpoint state — boolean flags read by container style() queries.
+ * Typed enum + false default so style(--is-breakpoint-X: false) resolves before
+ * any min-width query matches. Sourced from the body container in _variables.css. */
+
+@property --is-breakpoint-xs {
+  syntax: "true | false";
+  inherits: true;
+  initial-value: false;
+}
+
+@property --is-breakpoint-sm {
+  syntax: "true | false";
+  inherits: true;
+  initial-value: false;
+}
+
+@property --is-breakpoint-md {
+  syntax: "true | false";
+  inherits: true;
+  initial-value: false;
+}
+
+@property --is-breakpoint-lg {
+  syntax: "true | false";
+  inherits: true;
+  initial-value: false;
+}
+
+@property --is-breakpoint-xl {
+  syntax: "true | false";
+  inherits: true;
+  initial-value: false;
 }

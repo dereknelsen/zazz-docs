@@ -34,8 +34,8 @@
     }
 
     /* Persist shared chrome without cross-fading */
-    ::view-transition-old(global-component),
-    ::view-transition-new(global-component) {
+    ::view-transition-old(global),
+    ::view-transition-new(global) {
       animation: none;
     }
   }

@@ -731,11 +731,24 @@
   }
 
   :where(.grid-cols-subgrid) {
+    /* span all of parent's columns */
     grid-template-columns: subgrid;
+
+    /* Setting a container context breaks subgrid */
+    container-name: none;
+    container-type: normal;
   }
 
   :where(.grid-rows-subgrid) {
     grid-template-rows: subgrid;
+    grid-row: 1 / -1;
+
+    /* span all of parent's columns */
+    grid-template-columns: subgrid;
+
+    /* Setting a container context breaks subgrid */
+    container-name: none;
+    container-type: normal;
   }
 
   /* Allows for stacking items on top of each other */
@@ -1017,7 +1030,7 @@
     grid-row: span min(12, var(--_grid-rows, 12));
   }
 
-  /* base before @container breakpoints so sm:/md: variants win */
+  /* base before @container breakpoints so @sm:/@md: variants win */
   :where(.basis-0) {
     flex-basis: 0;
   }
@@ -1051,359 +1064,360 @@
   }
 
   /* ===========================================================================
-  CONTAINER RESPONSIVE UTILITIES — nearest inline-size container vs --breakpoint-*
-  Thresholds use literal rem (match --breakpoint-*); var() is invalid in @container prelude.
+  CONTAINER RESPONSIVE UTILITIES — mobile-first, gated on the global breakpoint
+  state flags (--is-breakpoint-*, sourced from the body container in _variables.css).
+  Each prefix applies at or above its breakpoint: style(--is-breakpoint-X: true).
   =========================================================================== */
 
-  @container style(--is-breakpoint-xs: false) {
-    /* --breakpoint-xs */
+  @container style(--is-breakpoint-xs: true) {
+    /* --breakpoint-xs and up */
     /* display */
-    :where(.xs\:hidden) {
+    :where(.\@xs\:hidden) {
       display: none;
     }
 
-    :where(.xs\:block) {
+    :where(.\@xs\:block) {
       display: block;
     }
 
-    :where(.xs\:flex) {
+    :where(.\@xs\:flex) {
       display: flex;
     }
 
-    :where(.xs\:inline-flex) {
+    :where(.\@xs\:inline-flex) {
       display: inline-flex;
     }
 
-    :where(.xs\:grid) {
+    :where(.\@xs\:grid) {
       display: grid;
     }
 
-    :where(.xs\:grid-cols-subgrid) {
+    :where(.\@xs\:grid-cols-subgrid) {
       grid-template-columns: subgrid;
     }
 
-    :where(.xs\:grid-rows-subgrid) {
+    :where(.\@xs\:grid-rows-subgrid) {
       grid-template-rows: subgrid;
     }
 
     /* grid-cols */
-    :where(.xs\:grid-cols-1) {
+    :where(.\@xs\:grid-cols-1) {
       --_grid-cols: 1;
       grid-template-columns: repeat(var(--_grid-cols, 1), minmax(0, 1fr));
     }
 
-    :where(.xs\:grid-cols-2) {
+    :where(.\@xs\:grid-cols-2) {
       --_grid-cols: 2;
       grid-template-columns: repeat(var(--_grid-cols, 2), minmax(0, 1fr));
     }
 
-    :where(.xs\:grid-cols-3) {
+    :where(.\@xs\:grid-cols-3) {
       --_grid-cols: 3;
       grid-template-columns: repeat(var(--_grid-cols, 3), minmax(0, 1fr));
     }
 
-    :where(.xs\:grid-cols-4) {
+    :where(.\@xs\:grid-cols-4) {
       --_grid-cols: 4;
       grid-template-columns: repeat(var(--_grid-cols, 4), minmax(0, 1fr));
     }
 
-    :where(.xs\:grid-cols-5) {
+    :where(.\@xs\:grid-cols-5) {
       --_grid-cols: 5;
       grid-template-columns: repeat(var(--_grid-cols, 5), minmax(0, 1fr));
     }
 
-    :where(.xs\:grid-cols-6) {
+    :where(.\@xs\:grid-cols-6) {
       --_grid-cols: 6;
       grid-template-columns: repeat(var(--_grid-cols, 6), minmax(0, 1fr));
     }
 
-    :where(.xs\:grid-cols-7) {
+    :where(.\@xs\:grid-cols-7) {
       --_grid-cols: 7;
       grid-template-columns: repeat(var(--_grid-cols, 7), minmax(0, 1fr));
     }
 
-    :where(.xs\:grid-cols-8) {
+    :where(.\@xs\:grid-cols-8) {
       --_grid-cols: 8;
       grid-template-columns: repeat(var(--_grid-cols, 8), minmax(0, 1fr));
     }
 
-    :where(.xs\:grid-cols-9) {
+    :where(.\@xs\:grid-cols-9) {
       --_grid-cols: 9;
       grid-template-columns: repeat(var(--_grid-cols, 9), minmax(0, 1fr));
     }
 
-    :where(.xs\:grid-cols-10) {
+    :where(.\@xs\:grid-cols-10) {
       --_grid-cols: 10;
       grid-template-columns: repeat(var(--_grid-cols, 10), minmax(0, 1fr));
     }
 
-    :where(.xs\:grid-cols-11) {
+    :where(.\@xs\:grid-cols-11) {
       --_grid-cols: 11;
       grid-template-columns: repeat(var(--_grid-cols, 11), minmax(0, 1fr));
     }
 
-    :where(.xs\:grid-cols-12) {
+    :where(.\@xs\:grid-cols-12) {
       --_grid-cols: 12;
       grid-template-columns: repeat(var(--_grid-cols, 12), minmax(0, 1fr));
     }
 
     /* grid-rows */
-    :where(.xs\:grid-rows-1) {
+    :where(.\@xs\:grid-rows-1) {
       --_grid-rows: 1;
       grid-template-rows: repeat(var(--_grid-rows, 1), auto);
     }
 
-    :where(.xs\:grid-rows-2) {
+    :where(.\@xs\:grid-rows-2) {
       --_grid-rows: 2;
       grid-template-rows: repeat(var(--_grid-rows, 2), auto);
     }
 
-    :where(.xs\:grid-rows-3) {
+    :where(.\@xs\:grid-rows-3) {
       --_grid-rows: 3;
       grid-template-rows: repeat(var(--_grid-rows, 3), auto);
     }
 
-    :where(.xs\:grid-rows-4) {
+    :where(.\@xs\:grid-rows-4) {
       --_grid-rows: 4;
       grid-template-rows: repeat(var(--_grid-rows, 4), auto);
     }
 
-    :where(.xs\:grid-rows-5) {
+    :where(.\@xs\:grid-rows-5) {
       --_grid-rows: 5;
       grid-template-rows: repeat(var(--_grid-rows, 5), auto);
     }
 
-    :where(.xs\:grid-rows-6) {
+    :where(.\@xs\:grid-rows-6) {
       --_grid-rows: 6;
       grid-template-rows: repeat(var(--_grid-rows, 6), auto);
     }
 
-    :where(.xs\:grid-rows-7) {
+    :where(.\@xs\:grid-rows-7) {
       --_grid-rows: 7;
       grid-template-rows: repeat(var(--_grid-rows, 7), auto);
     }
 
-    :where(.xs\:grid-rows-8) {
+    :where(.\@xs\:grid-rows-8) {
       --_grid-rows: 8;
       grid-template-rows: repeat(var(--_grid-rows, 8), auto);
     }
 
-    :where(.xs\:grid-rows-9) {
+    :where(.\@xs\:grid-rows-9) {
       --_grid-rows: 9;
       grid-template-rows: repeat(var(--_grid-rows, 9), auto);
     }
 
-    :where(.xs\:grid-rows-10) {
+    :where(.\@xs\:grid-rows-10) {
       --_grid-rows: 10;
       grid-template-rows: repeat(var(--_grid-rows, 10), auto);
     }
 
-    :where(.xs\:grid-rows-11) {
+    :where(.\@xs\:grid-rows-11) {
       --_grid-rows: 11;
       grid-template-rows: repeat(var(--_grid-rows, 11), auto);
     }
 
-    :where(.xs\:grid-rows-12) {
+    :where(.\@xs\:grid-rows-12) {
       --_grid-rows: 12;
       grid-template-rows: repeat(var(--_grid-rows, 12), auto);
     }
 
     /* flex-direction */
-    :where(.xs\:flex-row) {
+    :where(.\@xs\:flex-row) {
       flex-direction: row;
     }
 
-    :where(.xs\:flex-col) {
+    :where(.\@xs\:flex-col) {
       flex-direction: column;
     }
 
     /* text-align */
-    :where(.xs\:text-center) {
+    :where(.\@xs\:text-center) {
       text-align: center;
     }
 
-    :where(.xs\:text-left) {
+    :where(.\@xs\:text-left) {
       text-align: left;
     }
 
-    :where(.xs\:text-right) {
+    :where(.\@xs\:text-right) {
       text-align: right;
     }
 
-    :where(.xs\:text-justify) {
+    :where(.\@xs\:text-justify) {
       text-align: justify;
     }
 
     /* align-items */
-    :where(.xs\:items-start) {
+    :where(.\@xs\:items-start) {
       align-items: start;
     }
 
-    :where(.xs\:items-center) {
+    :where(.\@xs\:items-center) {
       align-items: center;
     }
 
-    :where(.xs\:items-end) {
+    :where(.\@xs\:items-end) {
       align-items: end;
     }
 
-    :where(.xs\:items-stretch) {
+    :where(.\@xs\:items-stretch) {
       align-items: stretch;
     }
 
     /* justify-content */
-    :where(.xs\:justify-start) {
+    :where(.\@xs\:justify-start) {
       justify-content: start;
     }
 
-    :where(.xs\:justify-center) {
+    :where(.\@xs\:justify-center) {
       justify-content: center;
     }
 
-    :where(.xs\:justify-end) {
+    :where(.\@xs\:justify-end) {
       justify-content: end;
     }
 
-    :where(.xs\:justify-stretch) {
+    :where(.\@xs\:justify-stretch) {
       justify-content: stretch;
     }
 
-    :where(.xs\:justify-around) {
+    :where(.\@xs\:justify-around) {
       justify-content: space-around;
     }
 
-    :where(.xs\:justify-between) {
+    :where(.\@xs\:justify-between) {
       justify-content: space-between;
     }
 
     /* col-span */
-    :where(.xs\:col-span-1) {
+    :where(.\@xs\:col-span-1) {
       grid-column: span min(1, var(--_grid-cols, 1));
     }
 
-    :where(.xs\:col-span-2) {
+    :where(.\@xs\:col-span-2) {
       grid-column: span min(2, var(--_grid-cols, 2));
     }
 
-    :where(.xs\:col-span-3) {
+    :where(.\@xs\:col-span-3) {
       grid-column: span min(3, var(--_grid-cols, 3));
     }
 
-    :where(.xs\:col-span-4) {
+    :where(.\@xs\:col-span-4) {
       grid-column: span min(4, var(--_grid-cols, 4));
     }
 
-    :where(.xs\:col-span-5) {
+    :where(.\@xs\:col-span-5) {
       grid-column: span min(5, var(--_grid-cols, 5));
     }
 
-    :where(.xs\:col-span-6) {
+    :where(.\@xs\:col-span-6) {
       grid-column: span min(6, var(--_grid-cols, 6));
     }
 
-    :where(.xs\:col-span-7) {
+    :where(.\@xs\:col-span-7) {
       grid-column: span min(7, var(--_grid-cols, 7));
     }
 
-    :where(.xs\:col-span-8) {
+    :where(.\@xs\:col-span-8) {
       grid-column: span min(8, var(--_grid-cols, 8));
     }
 
-    :where(.xs\:col-span-9) {
+    :where(.\@xs\:col-span-9) {
       grid-column: span min(9, var(--_grid-cols, 9));
     }
 
-    :where(.xs\:col-span-10) {
+    :where(.\@xs\:col-span-10) {
       grid-column: span min(10, var(--_grid-cols, 10));
     }
 
-    :where(.xs\:col-span-11) {
+    :where(.\@xs\:col-span-11) {
       grid-column: span min(11, var(--_grid-cols, 11));
     }
 
-    :where(.xs\:col-span-12) {
+    :where(.\@xs\:col-span-12) {
       grid-column: span min(12, var(--_grid-cols, 12));
     }
 
     /* row-span */
-    :where(.xs\:row-span-1) {
+    :where(.\@xs\:row-span-1) {
       grid-row: span min(1, var(--_grid-rows, 1));
     }
 
-    :where(.xs\:row-span-2) {
+    :where(.\@xs\:row-span-2) {
       grid-row: span min(2, var(--_grid-rows, 2));
     }
 
-    :where(.xs\:row-span-3) {
+    :where(.\@xs\:row-span-3) {
       grid-row: span min(3, var(--_grid-rows, 3));
     }
 
-    :where(.xs\:row-span-4) {
+    :where(.\@xs\:row-span-4) {
       grid-row: span min(4, var(--_grid-rows, 4));
     }
 
-    :where(.xs\:row-span-5) {
+    :where(.\@xs\:row-span-5) {
       grid-row: span min(5, var(--_grid-rows, 5));
     }
 
-    :where(.xs\:row-span-6) {
+    :where(.\@xs\:row-span-6) {
       grid-row: span min(6, var(--_grid-rows, 6));
     }
 
-    :where(.xs\:row-span-7) {
+    :where(.\@xs\:row-span-7) {
       grid-row: span min(7, var(--_grid-rows, 7));
     }
 
-    :where(.xs\:row-span-8) {
+    :where(.\@xs\:row-span-8) {
       grid-row: span min(8, var(--_grid-rows, 8));
     }
 
-    :where(.xs\:row-span-9) {
+    :where(.\@xs\:row-span-9) {
       grid-row: span min(9, var(--_grid-rows, 9));
     }
 
-    :where(.xs\:row-span-10) {
+    :where(.\@xs\:row-span-10) {
       grid-row: span min(10, var(--_grid-rows, 10));
     }
 
-    :where(.xs\:row-span-11) {
+    :where(.\@xs\:row-span-11) {
       grid-row: span min(11, var(--_grid-rows, 11));
     }
 
-    :where(.xs\:row-span-12) {
+    :where(.\@xs\:row-span-12) {
       grid-row: span min(12, var(--_grid-rows, 12));
     }
 
     /* basis */
-    :where(.xs\:basis-0) {
+    :where(.\@xs\:basis-0) {
       flex-basis: 0;
     }
 
-    :where(.xs\:basis-auto) {
+    :where(.\@xs\:basis-auto) {
       flex-basis: auto;
     }
 
-    :where(.xs\:basis-full) {
+    :where(.\@xs\:basis-full) {
       flex-basis: 100%;
     }
 
-    :where(.xs\:basis-1\/6) {
+    :where(.\@xs\:basis-1\/6) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 5)) / 6);
     }
 
-    :where(.xs\:basis-1\/5) {
+    :where(.\@xs\:basis-1\/5) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 4)) / 5);
     }
 
-    :where(.xs\:basis-1\/4) {
+    :where(.\@xs\:basis-1\/4) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 3)) / 4);
     }
 
-    :where(.xs\:basis-1\/3) {
+    :where(.\@xs\:basis-1\/3) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 2)) / 3);
     }
 
-    :where(.xs\:basis-1\/2) {
+    :where(.\@xs\:basis-1\/2) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 1)) / 2);
     }
   }
@@ -1411,352 +1425,352 @@
   @container style(--is-breakpoint-sm: true) {
     /* --breakpoint-sm */
     /* display */
-    :where(.sm\:hidden) {
+    :where(.\@sm\:hidden) {
       display: none;
     }
 
-    :where(.sm\:block) {
+    :where(.\@sm\:block) {
       display: block;
     }
 
-    :where(.sm\:flex) {
+    :where(.\@sm\:flex) {
       display: flex;
     }
 
-    :where(.sm\:inline-flex) {
+    :where(.\@sm\:inline-flex) {
       display: inline-flex;
     }
 
-    :where(.sm\:grid) {
+    :where(.\@sm\:grid) {
       display: grid;
     }
 
-    :where(.sm\:grid-cols-subgrid) {
+    :where(.\@sm\:grid-cols-subgrid) {
       grid-template-columns: subgrid;
     }
 
-    :where(.sm\:grid-rows-subgrid) {
+    :where(.\@sm\:grid-rows-subgrid) {
       grid-template-rows: subgrid;
     }
 
     /* grid-cols */
-    :where(.sm\:grid-cols-1) {
+    :where(.\@sm\:grid-cols-1) {
       --_grid-cols: 1;
       grid-template-columns: repeat(var(--_grid-cols, 1), minmax(0, 1fr));
     }
 
-    :where(.sm\:grid-cols-2) {
+    :where(.\@sm\:grid-cols-2) {
       --_grid-cols: 2;
       grid-template-columns: repeat(var(--_grid-cols, 2), minmax(0, 1fr));
     }
 
-    :where(.sm\:grid-cols-3) {
+    :where(.\@sm\:grid-cols-3) {
       --_grid-cols: 3;
       grid-template-columns: repeat(var(--_grid-cols, 3), minmax(0, 1fr));
     }
 
-    :where(.sm\:grid-cols-4) {
+    :where(.\@sm\:grid-cols-4) {
       --_grid-cols: 4;
       grid-template-columns: repeat(var(--_grid-cols, 4), minmax(0, 1fr));
     }
 
-    :where(.sm\:grid-cols-5) {
+    :where(.\@sm\:grid-cols-5) {
       --_grid-cols: 5;
       grid-template-columns: repeat(var(--_grid-cols, 5), minmax(0, 1fr));
     }
 
-    :where(.sm\:grid-cols-6) {
+    :where(.\@sm\:grid-cols-6) {
       --_grid-cols: 6;
       grid-template-columns: repeat(var(--_grid-cols, 6), minmax(0, 1fr));
     }
 
-    :where(.sm\:grid-cols-7) {
+    :where(.\@sm\:grid-cols-7) {
       --_grid-cols: 7;
       grid-template-columns: repeat(var(--_grid-cols, 7), minmax(0, 1fr));
     }
 
-    :where(.sm\:grid-cols-8) {
+    :where(.\@sm\:grid-cols-8) {
       --_grid-cols: 8;
       grid-template-columns: repeat(var(--_grid-cols, 8), minmax(0, 1fr));
     }
 
-    :where(.sm\:grid-cols-9) {
+    :where(.\@sm\:grid-cols-9) {
       --_grid-cols: 9;
       grid-template-columns: repeat(var(--_grid-cols, 9), minmax(0, 1fr));
     }
 
-    :where(.sm\:grid-cols-10) {
+    :where(.\@sm\:grid-cols-10) {
       --_grid-cols: 10;
       grid-template-columns: repeat(var(--_grid-cols, 10), minmax(0, 1fr));
     }
 
-    :where(.sm\:grid-cols-11) {
+    :where(.\@sm\:grid-cols-11) {
       --_grid-cols: 11;
       grid-template-columns: repeat(var(--_grid-cols, 11), minmax(0, 1fr));
     }
 
-    :where(.sm\:grid-cols-12) {
+    :where(.\@sm\:grid-cols-12) {
       --_grid-cols: 12;
       grid-template-columns: repeat(var(--_grid-cols, 12), minmax(0, 1fr));
     }
 
     /* grid-rows */
-    :where(.sm\:grid-rows-1) {
+    :where(.\@sm\:grid-rows-1) {
       --_grid-rows: 1;
       grid-template-rows: repeat(var(--_grid-rows, 1), auto);
     }
 
-    :where(.sm\:grid-rows-2) {
+    :where(.\@sm\:grid-rows-2) {
       --_grid-rows: 2;
       grid-template-rows: repeat(var(--_grid-rows, 2), auto);
     }
 
-    :where(.sm\:grid-rows-3) {
+    :where(.\@sm\:grid-rows-3) {
       --_grid-rows: 3;
       grid-template-rows: repeat(var(--_grid-rows, 3), auto);
     }
 
-    :where(.sm\:grid-rows-4) {
+    :where(.\@sm\:grid-rows-4) {
       --_grid-rows: 4;
       grid-template-rows: repeat(var(--_grid-rows, 4), auto);
     }
 
-    :where(.sm\:grid-rows-5) {
+    :where(.\@sm\:grid-rows-5) {
       --_grid-rows: 5;
       grid-template-rows: repeat(var(--_grid-rows, 5), auto);
     }
 
-    :where(.sm\:grid-rows-6) {
+    :where(.\@sm\:grid-rows-6) {
       --_grid-rows: 6;
       grid-template-rows: repeat(var(--_grid-rows, 6), auto);
     }
 
-    :where(.sm\:grid-rows-7) {
+    :where(.\@sm\:grid-rows-7) {
       --_grid-rows: 7;
       grid-template-rows: repeat(var(--_grid-rows, 7), auto);
     }
 
-    :where(.sm\:grid-rows-8) {
+    :where(.\@sm\:grid-rows-8) {
       --_grid-rows: 8;
       grid-template-rows: repeat(var(--_grid-rows, 8), auto);
     }
 
-    :where(.sm\:grid-rows-9) {
+    :where(.\@sm\:grid-rows-9) {
       --_grid-rows: 9;
       grid-template-rows: repeat(var(--_grid-rows, 9), auto);
     }
 
-    :where(.sm\:grid-rows-10) {
+    :where(.\@sm\:grid-rows-10) {
       --_grid-rows: 10;
       grid-template-rows: repeat(var(--_grid-rows, 10), auto);
     }
 
-    :where(.sm\:grid-rows-11) {
+    :where(.\@sm\:grid-rows-11) {
       --_grid-rows: 11;
       grid-template-rows: repeat(var(--_grid-rows, 11), auto);
     }
 
-    :where(.sm\:grid-rows-12) {
+    :where(.\@sm\:grid-rows-12) {
       --_grid-rows: 12;
       grid-template-rows: repeat(var(--_grid-rows, 12), auto);
     }
 
     /* flex-direction */
-    :where(.sm\:flex-row) {
+    :where(.\@sm\:flex-row) {
       flex-direction: row;
     }
 
-    :where(.sm\:flex-col) {
+    :where(.\@sm\:flex-col) {
       flex-direction: column;
     }
 
     /* text-align */
-    :where(.sm\:text-center) {
+    :where(.\@sm\:text-center) {
       text-align: center;
     }
 
-    :where(.sm\:text-left) {
+    :where(.\@sm\:text-left) {
       text-align: left;
     }
 
-    :where(.sm\:text-right) {
+    :where(.\@sm\:text-right) {
       text-align: right;
     }
 
-    :where(.sm\:text-justify) {
+    :where(.\@sm\:text-justify) {
       text-align: justify;
     }
 
     /* align-items */
-    :where(.sm\:items-start) {
+    :where(.\@sm\:items-start) {
       align-items: start;
     }
 
-    :where(.sm\:items-center) {
+    :where(.\@sm\:items-center) {
       align-items: center;
     }
 
-    :where(.sm\:items-end) {
+    :where(.\@sm\:items-end) {
       align-items: end;
     }
 
-    :where(.sm\:items-stretch) {
+    :where(.\@sm\:items-stretch) {
       align-items: stretch;
     }
 
     /* justify-content */
-    :where(.sm\:justify-start) {
+    :where(.\@sm\:justify-start) {
       justify-content: start;
     }
 
-    :where(.sm\:justify-center) {
+    :where(.\@sm\:justify-center) {
       justify-content: center;
     }
 
-    :where(.sm\:justify-end) {
+    :where(.\@sm\:justify-end) {
       justify-content: end;
     }
 
-    :where(.sm\:justify-stretch) {
+    :where(.\@sm\:justify-stretch) {
       justify-content: stretch;
     }
 
-    :where(.sm\:justify-around) {
+    :where(.\@sm\:justify-around) {
       justify-content: space-around;
     }
 
-    :where(.sm\:justify-between) {
+    :where(.\@sm\:justify-between) {
       justify-content: space-between;
     }
 
     /* col-span */
-    :where(.sm\:col-span-1) {
+    :where(.\@sm\:col-span-1) {
       grid-column: span min(1, var(--_grid-cols, 1));
     }
 
-    :where(.sm\:col-span-2) {
+    :where(.\@sm\:col-span-2) {
       grid-column: span min(2, var(--_grid-cols, 2));
     }
 
-    :where(.sm\:col-span-3) {
+    :where(.\@sm\:col-span-3) {
       grid-column: span min(3, var(--_grid-cols, 3));
     }
 
-    :where(.sm\:col-span-4) {
+    :where(.\@sm\:col-span-4) {
       grid-column: span min(4, var(--_grid-cols, 4));
     }
 
-    :where(.sm\:col-span-5) {
+    :where(.\@sm\:col-span-5) {
       grid-column: span min(5, var(--_grid-cols, 5));
     }
 
-    :where(.sm\:col-span-6) {
+    :where(.\@sm\:col-span-6) {
       grid-column: span min(6, var(--_grid-cols, 6));
     }
 
-    :where(.sm\:col-span-7) {
+    :where(.\@sm\:col-span-7) {
       grid-column: span min(7, var(--_grid-cols, 7));
     }
 
-    :where(.sm\:col-span-8) {
+    :where(.\@sm\:col-span-8) {
       grid-column: span min(8, var(--_grid-cols, 8));
     }
 
-    :where(.sm\:col-span-9) {
+    :where(.\@sm\:col-span-9) {
       grid-column: span min(9, var(--_grid-cols, 9));
     }
 
-    :where(.sm\:col-span-10) {
+    :where(.\@sm\:col-span-10) {
       grid-column: span min(10, var(--_grid-cols, 10));
     }
 
-    :where(.sm\:col-span-11) {
+    :where(.\@sm\:col-span-11) {
       grid-column: span min(11, var(--_grid-cols, 11));
     }
 
-    :where(.sm\:col-span-12) {
+    :where(.\@sm\:col-span-12) {
       grid-column: span min(12, var(--_grid-cols, 12));
     }
 
     /* row-span */
-    :where(.sm\:row-span-1) {
+    :where(.\@sm\:row-span-1) {
       grid-row: span min(1, var(--_grid-rows, 1));
     }
 
-    :where(.sm\:row-span-2) {
+    :where(.\@sm\:row-span-2) {
       grid-row: span min(2, var(--_grid-rows, 2));
     }
 
-    :where(.sm\:row-span-3) {
+    :where(.\@sm\:row-span-3) {
       grid-row: span min(3, var(--_grid-rows, 3));
     }
 
-    :where(.sm\:row-span-4) {
+    :where(.\@sm\:row-span-4) {
       grid-row: span min(4, var(--_grid-rows, 4));
     }
 
-    :where(.sm\:row-span-5) {
+    :where(.\@sm\:row-span-5) {
       grid-row: span min(5, var(--_grid-rows, 5));
     }
 
-    :where(.sm\:row-span-6) {
+    :where(.\@sm\:row-span-6) {
       grid-row: span min(6, var(--_grid-rows, 6));
     }
 
-    :where(.sm\:row-span-7) {
+    :where(.\@sm\:row-span-7) {
       grid-row: span min(7, var(--_grid-rows, 7));
     }
 
-    :where(.sm\:row-span-8) {
+    :where(.\@sm\:row-span-8) {
       grid-row: span min(8, var(--_grid-rows, 8));
     }
 
-    :where(.sm\:row-span-9) {
+    :where(.\@sm\:row-span-9) {
       grid-row: span min(9, var(--_grid-rows, 9));
     }
 
-    :where(.sm\:row-span-10) {
+    :where(.\@sm\:row-span-10) {
       grid-row: span min(10, var(--_grid-rows, 10));
     }
 
-    :where(.sm\:row-span-11) {
+    :where(.\@sm\:row-span-11) {
       grid-row: span min(11, var(--_grid-rows, 11));
     }
 
-    :where(.sm\:row-span-12) {
+    :where(.\@sm\:row-span-12) {
       grid-row: span min(12, var(--_grid-rows, 12));
     }
 
     /* basis */
-    :where(.sm\:basis-0) {
+    :where(.\@sm\:basis-0) {
       flex-basis: 0;
     }
 
-    :where(.sm\:basis-auto) {
+    :where(.\@sm\:basis-auto) {
       flex-basis: auto;
     }
 
-    :where(.sm\:basis-full) {
+    :where(.\@sm\:basis-full) {
       flex-basis: 100%;
     }
 
-    :where(.sm\:basis-1\/6) {
+    :where(.\@sm\:basis-1\/6) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 5)) / 6);
     }
 
-    :where(.sm\:basis-1\/5) {
+    :where(.\@sm\:basis-1\/5) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 4)) / 5);
     }
 
-    :where(.sm\:basis-1\/4) {
+    :where(.\@sm\:basis-1\/4) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 3)) / 4);
     }
 
-    :where(.sm\:basis-1\/3) {
+    :where(.\@sm\:basis-1\/3) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 2)) / 3);
     }
 
-    :where(.sm\:basis-1\/2) {
+    :where(.\@sm\:basis-1\/2) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 1)) / 2);
     }
   }
@@ -1764,352 +1778,352 @@
   @container style(--is-breakpoint-md: true) {
     /* --breakpoint-md */
     /* display */
-    :where(.md\:hidden) {
+    :where(.\@md\:hidden) {
       display: none;
     }
 
-    :where(.md\:block) {
+    :where(.\@md\:block) {
       display: block;
     }
 
-    :where(.md\:flex) {
+    :where(.\@md\:flex) {
       display: flex;
     }
 
-    :where(.md\:inline-flex) {
+    :where(.\@md\:inline-flex) {
       display: inline-flex;
     }
 
-    :where(.md\:grid) {
+    :where(.\@md\:grid) {
       display: grid;
     }
 
-    :where(.md\:grid-cols-subgrid) {
+    :where(.\@md\:grid-cols-subgrid) {
       grid-template-columns: subgrid;
     }
 
-    :where(.md\:grid-rows-subgrid) {
+    :where(.\@md\:grid-rows-subgrid) {
       grid-template-rows: subgrid;
     }
 
     /* grid-cols */
-    :where(.md\:grid-cols-1) {
+    :where(.\@md\:grid-cols-1) {
       --_grid-cols: 1;
       grid-template-columns: repeat(var(--_grid-cols, 1), minmax(0, 1fr));
     }
 
-    :where(.md\:grid-cols-2) {
+    :where(.\@md\:grid-cols-2) {
       --_grid-cols: 2;
       grid-template-columns: repeat(var(--_grid-cols, 2), minmax(0, 1fr));
     }
 
-    :where(.md\:grid-cols-3) {
+    :where(.\@md\:grid-cols-3) {
       --_grid-cols: 3;
       grid-template-columns: repeat(var(--_grid-cols, 3), minmax(0, 1fr));
     }
 
-    :where(.md\:grid-cols-4) {
+    :where(.\@md\:grid-cols-4) {
       --_grid-cols: 4;
       grid-template-columns: repeat(var(--_grid-cols, 4), minmax(0, 1fr));
     }
 
-    :where(.md\:grid-cols-5) {
+    :where(.\@md\:grid-cols-5) {
       --_grid-cols: 5;
       grid-template-columns: repeat(var(--_grid-cols, 5), minmax(0, 1fr));
     }
 
-    :where(.md\:grid-cols-6) {
+    :where(.\@md\:grid-cols-6) {
       --_grid-cols: 6;
       grid-template-columns: repeat(var(--_grid-cols, 6), minmax(0, 1fr));
     }
 
-    :where(.md\:grid-cols-7) {
+    :where(.\@md\:grid-cols-7) {
       --_grid-cols: 7;
       grid-template-columns: repeat(var(--_grid-cols, 7), minmax(0, 1fr));
     }
 
-    :where(.md\:grid-cols-8) {
+    :where(.\@md\:grid-cols-8) {
       --_grid-cols: 8;
       grid-template-columns: repeat(var(--_grid-cols, 8), minmax(0, 1fr));
     }
 
-    :where(.md\:grid-cols-9) {
+    :where(.\@md\:grid-cols-9) {
       --_grid-cols: 9;
       grid-template-columns: repeat(var(--_grid-cols, 9), minmax(0, 1fr));
     }
 
-    :where(.md\:grid-cols-10) {
+    :where(.\@md\:grid-cols-10) {
       --_grid-cols: 10;
       grid-template-columns: repeat(var(--_grid-cols, 10), minmax(0, 1fr));
     }
 
-    :where(.md\:grid-cols-11) {
+    :where(.\@md\:grid-cols-11) {
       --_grid-cols: 11;
       grid-template-columns: repeat(var(--_grid-cols, 11), minmax(0, 1fr));
     }
 
-    :where(.md\:grid-cols-12) {
+    :where(.\@md\:grid-cols-12) {
       --_grid-cols: 12;
       grid-template-columns: repeat(var(--_grid-cols, 12), minmax(0, 1fr));
     }
 
     /* grid-rows */
-    :where(.md\:grid-rows-1) {
+    :where(.\@md\:grid-rows-1) {
       --_grid-rows: 1;
       grid-template-rows: repeat(var(--_grid-rows, 1), auto);
     }
 
-    :where(.md\:grid-rows-2) {
+    :where(.\@md\:grid-rows-2) {
       --_grid-rows: 2;
       grid-template-rows: repeat(var(--_grid-rows, 2), auto);
     }
 
-    :where(.md\:grid-rows-3) {
+    :where(.\@md\:grid-rows-3) {
       --_grid-rows: 3;
       grid-template-rows: repeat(var(--_grid-rows, 3), auto);
     }
 
-    :where(.md\:grid-rows-4) {
+    :where(.\@md\:grid-rows-4) {
       --_grid-rows: 4;
       grid-template-rows: repeat(var(--_grid-rows, 4), auto);
     }
 
-    :where(.md\:grid-rows-5) {
+    :where(.\@md\:grid-rows-5) {
       --_grid-rows: 5;
       grid-template-rows: repeat(var(--_grid-rows, 5), auto);
     }
 
-    :where(.md\:grid-rows-6) {
+    :where(.\@md\:grid-rows-6) {
       --_grid-rows: 6;
       grid-template-rows: repeat(var(--_grid-rows, 6), auto);
     }
 
-    :where(.md\:grid-rows-7) {
+    :where(.\@md\:grid-rows-7) {
       --_grid-rows: 7;
       grid-template-rows: repeat(var(--_grid-rows, 7), auto);
     }
 
-    :where(.md\:grid-rows-8) {
+    :where(.\@md\:grid-rows-8) {
       --_grid-rows: 8;
       grid-template-rows: repeat(var(--_grid-rows, 8), auto);
     }
 
-    :where(.md\:grid-rows-9) {
+    :where(.\@md\:grid-rows-9) {
       --_grid-rows: 9;
       grid-template-rows: repeat(var(--_grid-rows, 9), auto);
     }
 
-    :where(.md\:grid-rows-10) {
+    :where(.\@md\:grid-rows-10) {
       --_grid-rows: 10;
       grid-template-rows: repeat(var(--_grid-rows, 10), auto);
     }
 
-    :where(.md\:grid-rows-11) {
+    :where(.\@md\:grid-rows-11) {
       --_grid-rows: 11;
       grid-template-rows: repeat(var(--_grid-rows, 11), auto);
     }
 
-    :where(.md\:grid-rows-12) {
+    :where(.\@md\:grid-rows-12) {
       --_grid-rows: 12;
       grid-template-rows: repeat(var(--_grid-rows, 12), auto);
     }
 
     /* flex-direction */
-    :where(.md\:flex-row) {
+    :where(.\@md\:flex-row) {
       flex-direction: row;
     }
 
-    :where(.md\:flex-col) {
+    :where(.\@md\:flex-col) {
       flex-direction: column;
     }
 
     /* text-align */
-    :where(.md\:text-center) {
+    :where(.\@md\:text-center) {
       text-align: center;
     }
 
-    :where(.md\:text-left) {
+    :where(.\@md\:text-left) {
       text-align: left;
     }
 
-    :where(.md\:text-right) {
+    :where(.\@md\:text-right) {
       text-align: right;
     }
 
-    :where(.md\:text-justify) {
+    :where(.\@md\:text-justify) {
       text-align: justify;
     }
 
     /* align-items */
-    :where(.md\:items-start) {
+    :where(.\@md\:items-start) {
       align-items: start;
     }
 
-    :where(.md\:items-center) {
+    :where(.\@md\:items-center) {
       align-items: center;
     }
 
-    :where(.md\:items-end) {
+    :where(.\@md\:items-end) {
       align-items: end;
     }
 
-    :where(.md\:items-stretch) {
+    :where(.\@md\:items-stretch) {
       align-items: stretch;
     }
 
     /* justify-content */
-    :where(.md\:justify-start) {
+    :where(.\@md\:justify-start) {
       justify-content: start;
     }
 
-    :where(.md\:justify-center) {
+    :where(.\@md\:justify-center) {
       justify-content: center;
     }
 
-    :where(.md\:justify-end) {
+    :where(.\@md\:justify-end) {
       justify-content: end;
     }
 
-    :where(.md\:justify-stretch) {
+    :where(.\@md\:justify-stretch) {
       justify-content: stretch;
     }
 
-    :where(.md\:justify-around) {
+    :where(.\@md\:justify-around) {
       justify-content: space-around;
     }
 
-    :where(.md\:justify-between) {
+    :where(.\@md\:justify-between) {
       justify-content: space-between;
     }
 
     /* col-span */
-    :where(.md\:col-span-1) {
+    :where(.\@md\:col-span-1) {
       grid-column: span min(1, var(--_grid-cols, 1));
     }
 
-    :where(.md\:col-span-2) {
+    :where(.\@md\:col-span-2) {
       grid-column: span min(2, var(--_grid-cols, 2));
     }
 
-    :where(.md\:col-span-3) {
+    :where(.\@md\:col-span-3) {
       grid-column: span min(3, var(--_grid-cols, 3));
     }
 
-    :where(.md\:col-span-4) {
+    :where(.\@md\:col-span-4) {
       grid-column: span min(4, var(--_grid-cols, 4));
     }
 
-    :where(.md\:col-span-5) {
+    :where(.\@md\:col-span-5) {
       grid-column: span min(5, var(--_grid-cols, 5));
     }
 
-    :where(.md\:col-span-6) {
+    :where(.\@md\:col-span-6) {
       grid-column: span min(6, var(--_grid-cols, 6));
     }
 
-    :where(.md\:col-span-7) {
+    :where(.\@md\:col-span-7) {
       grid-column: span min(7, var(--_grid-cols, 7));
     }
 
-    :where(.md\:col-span-8) {
+    :where(.\@md\:col-span-8) {
       grid-column: span min(8, var(--_grid-cols, 8));
     }
 
-    :where(.md\:col-span-9) {
+    :where(.\@md\:col-span-9) {
       grid-column: span min(9, var(--_grid-cols, 9));
     }
 
-    :where(.md\:col-span-10) {
+    :where(.\@md\:col-span-10) {
       grid-column: span min(10, var(--_grid-cols, 10));
     }
 
-    :where(.md\:col-span-11) {
+    :where(.\@md\:col-span-11) {
       grid-column: span min(11, var(--_grid-cols, 11));
     }
 
-    :where(.md\:col-span-12) {
+    :where(.\@md\:col-span-12) {
       grid-column: span min(12, var(--_grid-cols, 12));
     }
 
     /* row-span */
-    :where(.md\:row-span-1) {
+    :where(.\@md\:row-span-1) {
       grid-row: span min(1, var(--_grid-rows, 1));
     }
 
-    :where(.md\:row-span-2) {
+    :where(.\@md\:row-span-2) {
       grid-row: span min(2, var(--_grid-rows, 2));
     }
 
-    :where(.md\:row-span-3) {
+    :where(.\@md\:row-span-3) {
       grid-row: span min(3, var(--_grid-rows, 3));
     }
 
-    :where(.md\:row-span-4) {
+    :where(.\@md\:row-span-4) {
       grid-row: span min(4, var(--_grid-rows, 4));
     }
 
-    :where(.md\:row-span-5) {
+    :where(.\@md\:row-span-5) {
       grid-row: span min(5, var(--_grid-rows, 5));
     }
 
-    :where(.md\:row-span-6) {
+    :where(.\@md\:row-span-6) {
       grid-row: span min(6, var(--_grid-rows, 6));
     }
 
-    :where(.md\:row-span-7) {
+    :where(.\@md\:row-span-7) {
       grid-row: span min(7, var(--_grid-rows, 7));
     }
 
-    :where(.md\:row-span-8) {
+    :where(.\@md\:row-span-8) {
       grid-row: span min(8, var(--_grid-rows, 8));
     }
 
-    :where(.md\:row-span-9) {
+    :where(.\@md\:row-span-9) {
       grid-row: span min(9, var(--_grid-rows, 9));
     }
 
-    :where(.md\:row-span-10) {
+    :where(.\@md\:row-span-10) {
       grid-row: span min(10, var(--_grid-rows, 10));
     }
 
-    :where(.md\:row-span-11) {
+    :where(.\@md\:row-span-11) {
       grid-row: span min(11, var(--_grid-rows, 11));
     }
 
-    :where(.md\:row-span-12) {
+    :where(.\@md\:row-span-12) {
       grid-row: span min(12, var(--_grid-rows, 12));
     }
 
     /* basis */
-    :where(.md\:basis-0) {
+    :where(.\@md\:basis-0) {
       flex-basis: 0;
     }
 
-    :where(.md\:basis-auto) {
+    :where(.\@md\:basis-auto) {
       flex-basis: auto;
     }
 
-    :where(.md\:basis-full) {
+    :where(.\@md\:basis-full) {
       flex-basis: 100%;
     }
 
-    :where(.md\:basis-1\/6) {
+    :where(.\@md\:basis-1\/6) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 5)) / 6);
     }
 
-    :where(.md\:basis-1\/5) {
+    :where(.\@md\:basis-1\/5) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 4)) / 5);
     }
 
-    :where(.md\:basis-1\/4) {
+    :where(.\@md\:basis-1\/4) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 3)) / 4);
     }
 
-    :where(.md\:basis-1\/3) {
+    :where(.\@md\:basis-1\/3) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 2)) / 3);
     }
 
-    :where(.md\:basis-1\/2) {
+    :where(.\@md\:basis-1\/2) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 1)) / 2);
     }
   }
@@ -2117,352 +2131,352 @@
   @container style(--is-breakpoint-lg: true) {
     /* --breakpoint-lg */
     /* display */
-    :where(.lg\:hidden) {
+    :where(.\@lg\:hidden) {
       display: none;
     }
 
-    :where(.lg\:block) {
+    :where(.\@lg\:block) {
       display: block;
     }
 
-    :where(.lg\:flex) {
+    :where(.\@lg\:flex) {
       display: flex;
     }
 
-    :where(.lg\:inline-flex) {
+    :where(.\@lg\:inline-flex) {
       display: inline-flex;
     }
 
-    :where(.lg\:grid) {
+    :where(.\@lg\:grid) {
       display: grid;
     }
 
-    :where(.lg\:grid-cols-subgrid) {
+    :where(.\@lg\:grid-cols-subgrid) {
       grid-template-columns: subgrid;
     }
 
-    :where(.lg\:grid-rows-subgrid) {
+    :where(.\@lg\:grid-rows-subgrid) {
       grid-template-rows: subgrid;
     }
 
     /* grid-cols */
-    :where(.lg\:grid-cols-1) {
+    :where(.\@lg\:grid-cols-1) {
       --_grid-cols: 1;
       grid-template-columns: repeat(var(--_grid-cols, 1), minmax(0, 1fr));
     }
 
-    :where(.lg\:grid-cols-2) {
+    :where(.\@lg\:grid-cols-2) {
       --_grid-cols: 2;
       grid-template-columns: repeat(var(--_grid-cols, 2), minmax(0, 1fr));
     }
 
-    :where(.lg\:grid-cols-3) {
+    :where(.\@lg\:grid-cols-3) {
       --_grid-cols: 3;
       grid-template-columns: repeat(var(--_grid-cols, 3), minmax(0, 1fr));
     }
 
-    :where(.lg\:grid-cols-4) {
+    :where(.\@lg\:grid-cols-4) {
       --_grid-cols: 4;
       grid-template-columns: repeat(var(--_grid-cols, 4), minmax(0, 1fr));
     }
 
-    :where(.lg\:grid-cols-5) {
+    :where(.\@lg\:grid-cols-5) {
       --_grid-cols: 5;
       grid-template-columns: repeat(var(--_grid-cols, 5), minmax(0, 1fr));
     }
 
-    :where(.lg\:grid-cols-6) {
+    :where(.\@lg\:grid-cols-6) {
       --_grid-cols: 6;
       grid-template-columns: repeat(var(--_grid-cols, 6), minmax(0, 1fr));
     }
 
-    :where(.lg\:grid-cols-7) {
+    :where(.\@lg\:grid-cols-7) {
       --_grid-cols: 7;
       grid-template-columns: repeat(var(--_grid-cols, 7), minmax(0, 1fr));
     }
 
-    :where(.lg\:grid-cols-8) {
+    :where(.\@lg\:grid-cols-8) {
       --_grid-cols: 8;
       grid-template-columns: repeat(var(--_grid-cols, 8), minmax(0, 1fr));
     }
 
-    :where(.lg\:grid-cols-9) {
+    :where(.\@lg\:grid-cols-9) {
       --_grid-cols: 9;
       grid-template-columns: repeat(var(--_grid-cols, 9), minmax(0, 1fr));
     }
 
-    :where(.lg\:grid-cols-10) {
+    :where(.\@lg\:grid-cols-10) {
       --_grid-cols: 10;
       grid-template-columns: repeat(var(--_grid-cols, 10), minmax(0, 1fr));
     }
 
-    :where(.lg\:grid-cols-11) {
+    :where(.\@lg\:grid-cols-11) {
       --_grid-cols: 11;
       grid-template-columns: repeat(var(--_grid-cols, 11), minmax(0, 1fr));
     }
 
-    :where(.lg\:grid-cols-12) {
+    :where(.\@lg\:grid-cols-12) {
       --_grid-cols: 12;
       grid-template-columns: repeat(var(--_grid-cols, 12), minmax(0, 1fr));
     }
 
     /* grid-rows */
-    :where(.lg\:grid-rows-1) {
+    :where(.\@lg\:grid-rows-1) {
       --_grid-rows: 1;
       grid-template-rows: repeat(var(--_grid-rows, 1), auto);
     }
 
-    :where(.lg\:grid-rows-2) {
+    :where(.\@lg\:grid-rows-2) {
       --_grid-rows: 2;
       grid-template-rows: repeat(var(--_grid-rows, 2), auto);
     }
 
-    :where(.lg\:grid-rows-3) {
+    :where(.\@lg\:grid-rows-3) {
       --_grid-rows: 3;
       grid-template-rows: repeat(var(--_grid-rows, 3), auto);
     }
 
-    :where(.lg\:grid-rows-4) {
+    :where(.\@lg\:grid-rows-4) {
       --_grid-rows: 4;
       grid-template-rows: repeat(var(--_grid-rows, 4), auto);
     }
 
-    :where(.lg\:grid-rows-5) {
+    :where(.\@lg\:grid-rows-5) {
       --_grid-rows: 5;
       grid-template-rows: repeat(var(--_grid-rows, 5), auto);
     }
 
-    :where(.lg\:grid-rows-6) {
+    :where(.\@lg\:grid-rows-6) {
       --_grid-rows: 6;
       grid-template-rows: repeat(var(--_grid-rows, 6), auto);
     }
 
-    :where(.lg\:grid-rows-7) {
+    :where(.\@lg\:grid-rows-7) {
       --_grid-rows: 7;
       grid-template-rows: repeat(var(--_grid-rows, 7), auto);
     }
 
-    :where(.lg\:grid-rows-8) {
+    :where(.\@lg\:grid-rows-8) {
       --_grid-rows: 8;
       grid-template-rows: repeat(var(--_grid-rows, 8), auto);
     }
 
-    :where(.lg\:grid-rows-9) {
+    :where(.\@lg\:grid-rows-9) {
       --_grid-rows: 9;
       grid-template-rows: repeat(var(--_grid-rows, 9), auto);
     }
 
-    :where(.lg\:grid-rows-10) {
+    :where(.\@lg\:grid-rows-10) {
       --_grid-rows: 10;
       grid-template-rows: repeat(var(--_grid-rows, 10), auto);
     }
 
-    :where(.lg\:grid-rows-11) {
+    :where(.\@lg\:grid-rows-11) {
       --_grid-rows: 11;
       grid-template-rows: repeat(var(--_grid-rows, 11), auto);
     }
 
-    :where(.lg\:grid-rows-12) {
+    :where(.\@lg\:grid-rows-12) {
       --_grid-rows: 12;
       grid-template-rows: repeat(var(--_grid-rows, 12), auto);
     }
 
     /* flex-direction */
-    :where(.lg\:flex-row) {
+    :where(.\@lg\:flex-row) {
       flex-direction: row;
     }
 
-    :where(.lg\:flex-col) {
+    :where(.\@lg\:flex-col) {
       flex-direction: column;
     }
 
     /* text-align */
-    :where(.lg\:text-center) {
+    :where(.\@lg\:text-center) {
       text-align: center;
     }
 
-    :where(.lg\:text-left) {
+    :where(.\@lg\:text-left) {
       text-align: left;
     }
 
-    :where(.lg\:text-right) {
+    :where(.\@lg\:text-right) {
       text-align: right;
     }
 
-    :where(.lg\:text-justify) {
+    :where(.\@lg\:text-justify) {
       text-align: justify;
     }
 
     /* align-items */
-    :where(.lg\:items-start) {
+    :where(.\@lg\:items-start) {
       align-items: start;
     }
 
-    :where(.lg\:items-center) {
+    :where(.\@lg\:items-center) {
       align-items: center;
     }
 
-    :where(.lg\:items-end) {
+    :where(.\@lg\:items-end) {
       align-items: end;
     }
 
-    :where(.lg\:items-stretch) {
+    :where(.\@lg\:items-stretch) {
       align-items: stretch;
     }
 
     /* justify-content */
-    :where(.lg\:justify-start) {
+    :where(.\@lg\:justify-start) {
       justify-content: start;
     }
 
-    :where(.lg\:justify-center) {
+    :where(.\@lg\:justify-center) {
       justify-content: center;
     }
 
-    :where(.lg\:justify-end) {
+    :where(.\@lg\:justify-end) {
       justify-content: end;
     }
 
-    :where(.lg\:justify-stretch) {
+    :where(.\@lg\:justify-stretch) {
       justify-content: stretch;
     }
 
-    :where(.lg\:justify-around) {
+    :where(.\@lg\:justify-around) {
       justify-content: space-around;
     }
 
-    :where(.lg\:justify-between) {
+    :where(.\@lg\:justify-between) {
       justify-content: space-between;
     }
 
     /* col-span */
-    :where(.lg\:col-span-1) {
+    :where(.\@lg\:col-span-1) {
       grid-column: span min(1, var(--_grid-cols, 1));
     }
 
-    :where(.lg\:col-span-2) {
+    :where(.\@lg\:col-span-2) {
       grid-column: span min(2, var(--_grid-cols, 2));
     }
 
-    :where(.lg\:col-span-3) {
+    :where(.\@lg\:col-span-3) {
       grid-column: span min(3, var(--_grid-cols, 3));
     }
 
-    :where(.lg\:col-span-4) {
+    :where(.\@lg\:col-span-4) {
       grid-column: span min(4, var(--_grid-cols, 4));
     }
 
-    :where(.lg\:col-span-5) {
+    :where(.\@lg\:col-span-5) {
       grid-column: span min(5, var(--_grid-cols, 5));
     }
 
-    :where(.lg\:col-span-6) {
+    :where(.\@lg\:col-span-6) {
       grid-column: span min(6, var(--_grid-cols, 6));
     }
 
-    :where(.lg\:col-span-7) {
+    :where(.\@lg\:col-span-7) {
       grid-column: span min(7, var(--_grid-cols, 7));
     }
 
-    :where(.lg\:col-span-8) {
+    :where(.\@lg\:col-span-8) {
       grid-column: span min(8, var(--_grid-cols, 8));
     }
 
-    :where(.lg\:col-span-9) {
+    :where(.\@lg\:col-span-9) {
       grid-column: span min(9, var(--_grid-cols, 9));
     }
 
-    :where(.lg\:col-span-10) {
+    :where(.\@lg\:col-span-10) {
       grid-column: span min(10, var(--_grid-cols, 10));
     }
 
-    :where(.lg\:col-span-11) {
+    :where(.\@lg\:col-span-11) {
       grid-column: span min(11, var(--_grid-cols, 11));
     }
 
-    :where(.lg\:col-span-12) {
+    :where(.\@lg\:col-span-12) {
       grid-column: span min(12, var(--_grid-cols, 12));
     }
 
     /* row-span */
-    :where(.lg\:row-span-1) {
+    :where(.\@lg\:row-span-1) {
       grid-row: span min(1, var(--_grid-rows, 1));
     }
 
-    :where(.lg\:row-span-2) {
+    :where(.\@lg\:row-span-2) {
       grid-row: span min(2, var(--_grid-rows, 2));
     }
 
-    :where(.lg\:row-span-3) {
+    :where(.\@lg\:row-span-3) {
       grid-row: span min(3, var(--_grid-rows, 3));
     }
 
-    :where(.lg\:row-span-4) {
+    :where(.\@lg\:row-span-4) {
       grid-row: span min(4, var(--_grid-rows, 4));
     }
 
-    :where(.lg\:row-span-5) {
+    :where(.\@lg\:row-span-5) {
       grid-row: span min(5, var(--_grid-rows, 5));
     }
 
-    :where(.lg\:row-span-6) {
+    :where(.\@lg\:row-span-6) {
       grid-row: span min(6, var(--_grid-rows, 6));
     }
 
-    :where(.lg\:row-span-7) {
+    :where(.\@lg\:row-span-7) {
       grid-row: span min(7, var(--_grid-rows, 7));
     }
 
-    :where(.lg\:row-span-8) {
+    :where(.\@lg\:row-span-8) {
       grid-row: span min(8, var(--_grid-rows, 8));
     }
 
-    :where(.lg\:row-span-9) {
+    :where(.\@lg\:row-span-9) {
       grid-row: span min(9, var(--_grid-rows, 9));
     }
 
-    :where(.lg\:row-span-10) {
+    :where(.\@lg\:row-span-10) {
       grid-row: span min(10, var(--_grid-rows, 10));
     }
 
-    :where(.lg\:row-span-11) {
+    :where(.\@lg\:row-span-11) {
       grid-row: span min(11, var(--_grid-rows, 11));
     }
 
-    :where(.lg\:row-span-12) {
+    :where(.\@lg\:row-span-12) {
       grid-row: span min(12, var(--_grid-rows, 12));
     }
 
     /* basis */
-    :where(.lg\:basis-0) {
+    :where(.\@lg\:basis-0) {
       flex-basis: 0;
     }
 
-    :where(.lg\:basis-auto) {
+    :where(.\@lg\:basis-auto) {
       flex-basis: auto;
     }
 
-    :where(.lg\:basis-full) {
+    :where(.\@lg\:basis-full) {
       flex-basis: 100%;
     }
 
-    :where(.lg\:basis-1\/6) {
+    :where(.\@lg\:basis-1\/6) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 5)) / 6);
     }
 
-    :where(.lg\:basis-1\/5) {
+    :where(.\@lg\:basis-1\/5) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 4)) / 5);
     }
 
-    :where(.lg\:basis-1\/4) {
+    :where(.\@lg\:basis-1\/4) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 3)) / 4);
     }
 
-    :where(.lg\:basis-1\/3) {
+    :where(.\@lg\:basis-1\/3) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 2)) / 3);
     }
 
-    :where(.lg\:basis-1\/2) {
+    :where(.\@lg\:basis-1\/2) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 1)) / 2);
     }
   }
@@ -2470,352 +2484,352 @@
   @container style(--is-breakpoint-xl: true) {
     /* --breakpoint-xl */
     /* display */
-    :where(.xl\:hidden) {
+    :where(.\@xl\:hidden) {
       display: none;
     }
 
-    :where(.xl\:block) {
+    :where(.\@xl\:block) {
       display: block;
     }
 
-    :where(.xl\:flex) {
+    :where(.\@xl\:flex) {
       display: flex;
     }
 
-    :where(.xl\:inline-flex) {
+    :where(.\@xl\:inline-flex) {
       display: inline-flex;
     }
 
-    :where(.xl\:grid) {
+    :where(.\@xl\:grid) {
       display: grid;
     }
 
-    :where(.xl\:grid-cols-subgrid) {
+    :where(.\@xl\:grid-cols-subgrid) {
       grid-template-columns: subgrid;
     }
 
-    :where(.xl\:grid-rows-subgrid) {
+    :where(.\@xl\:grid-rows-subgrid) {
       grid-template-rows: subgrid;
     }
 
     /* grid-cols */
-    :where(.xl\:grid-cols-1) {
+    :where(.\@xl\:grid-cols-1) {
       --_grid-cols: 1;
       grid-template-columns: repeat(var(--_grid-cols, 1), minmax(0, 1fr));
     }
 
-    :where(.xl\:grid-cols-2) {
+    :where(.\@xl\:grid-cols-2) {
       --_grid-cols: 2;
       grid-template-columns: repeat(var(--_grid-cols, 2), minmax(0, 1fr));
     }
 
-    :where(.xl\:grid-cols-3) {
+    :where(.\@xl\:grid-cols-3) {
       --_grid-cols: 3;
       grid-template-columns: repeat(var(--_grid-cols, 3), minmax(0, 1fr));
     }
 
-    :where(.xl\:grid-cols-4) {
+    :where(.\@xl\:grid-cols-4) {
       --_grid-cols: 4;
       grid-template-columns: repeat(var(--_grid-cols, 4), minmax(0, 1fr));
     }
 
-    :where(.xl\:grid-cols-5) {
+    :where(.\@xl\:grid-cols-5) {
       --_grid-cols: 5;
       grid-template-columns: repeat(var(--_grid-cols, 5), minmax(0, 1fr));
     }
 
-    :where(.xl\:grid-cols-6) {
+    :where(.\@xl\:grid-cols-6) {
       --_grid-cols: 6;
       grid-template-columns: repeat(var(--_grid-cols, 6), minmax(0, 1fr));
     }
 
-    :where(.xl\:grid-cols-7) {
+    :where(.\@xl\:grid-cols-7) {
       --_grid-cols: 7;
       grid-template-columns: repeat(var(--_grid-cols, 7), minmax(0, 1fr));
     }
 
-    :where(.xl\:grid-cols-8) {
+    :where(.\@xl\:grid-cols-8) {
       --_grid-cols: 8;
       grid-template-columns: repeat(var(--_grid-cols, 8), minmax(0, 1fr));
     }
 
-    :where(.xl\:grid-cols-9) {
+    :where(.\@xl\:grid-cols-9) {
       --_grid-cols: 9;
       grid-template-columns: repeat(var(--_grid-cols, 9), minmax(0, 1fr));
     }
 
-    :where(.xl\:grid-cols-10) {
+    :where(.\@xl\:grid-cols-10) {
       --_grid-cols: 10;
       grid-template-columns: repeat(var(--_grid-cols, 10), minmax(0, 1fr));
     }
 
-    :where(.xl\:grid-cols-11) {
+    :where(.\@xl\:grid-cols-11) {
       --_grid-cols: 11;
       grid-template-columns: repeat(var(--_grid-cols, 11), minmax(0, 1fr));
     }
 
-    :where(.xl\:grid-cols-12) {
+    :where(.\@xl\:grid-cols-12) {
       --_grid-cols: 12;
       grid-template-columns: repeat(var(--_grid-cols, 12), minmax(0, 1fr));
     }
 
     /* grid-rows */
-    :where(.xl\:grid-rows-1) {
+    :where(.\@xl\:grid-rows-1) {
       --_grid-rows: 1;
       grid-template-rows: repeat(var(--_grid-rows, 1), auto);
     }
 
-    :where(.xl\:grid-rows-2) {
+    :where(.\@xl\:grid-rows-2) {
       --_grid-rows: 2;
       grid-template-rows: repeat(var(--_grid-rows, 2), auto);
     }
 
-    :where(.xl\:grid-rows-3) {
+    :where(.\@xl\:grid-rows-3) {
       --_grid-rows: 3;
       grid-template-rows: repeat(var(--_grid-rows, 3), auto);
     }
 
-    :where(.xl\:grid-rows-4) {
+    :where(.\@xl\:grid-rows-4) {
       --_grid-rows: 4;
       grid-template-rows: repeat(var(--_grid-rows, 4), auto);
     }
 
-    :where(.xl\:grid-rows-5) {
+    :where(.\@xl\:grid-rows-5) {
       --_grid-rows: 5;
       grid-template-rows: repeat(var(--_grid-rows, 5), auto);
     }
 
-    :where(.xl\:grid-rows-6) {
+    :where(.\@xl\:grid-rows-6) {
       --_grid-rows: 6;
       grid-template-rows: repeat(var(--_grid-rows, 6), auto);
     }
 
-    :where(.xl\:grid-rows-7) {
+    :where(.\@xl\:grid-rows-7) {
       --_grid-rows: 7;
       grid-template-rows: repeat(var(--_grid-rows, 7), auto);
     }
 
-    :where(.xl\:grid-rows-8) {
+    :where(.\@xl\:grid-rows-8) {
       --_grid-rows: 8;
       grid-template-rows: repeat(var(--_grid-rows, 8), auto);
     }
 
-    :where(.xl\:grid-rows-9) {
+    :where(.\@xl\:grid-rows-9) {
       --_grid-rows: 9;
       grid-template-rows: repeat(var(--_grid-rows, 9), auto);
     }
 
-    :where(.xl\:grid-rows-10) {
+    :where(.\@xl\:grid-rows-10) {
       --_grid-rows: 10;
       grid-template-rows: repeat(var(--_grid-rows, 10), auto);
     }
 
-    :where(.xl\:grid-rows-11) {
+    :where(.\@xl\:grid-rows-11) {
       --_grid-rows: 11;
       grid-template-rows: repeat(var(--_grid-rows, 11), auto);
     }
 
-    :where(.xl\:grid-rows-12) {
+    :where(.\@xl\:grid-rows-12) {
       --_grid-rows: 12;
       grid-template-rows: repeat(var(--_grid-rows, 12), auto);
     }
 
     /* flex-direction */
-    :where(.xl\:flex-row) {
+    :where(.\@xl\:flex-row) {
       flex-direction: row;
     }
 
-    :where(.xl\:flex-col) {
+    :where(.\@xl\:flex-col) {
       flex-direction: column;
     }
 
     /* text-align */
-    :where(.xl\:text-center) {
+    :where(.\@xl\:text-center) {
       text-align: center;
     }
 
-    :where(.xl\:text-left) {
+    :where(.\@xl\:text-left) {
       text-align: left;
     }
 
-    :where(.xl\:text-right) {
+    :where(.\@xl\:text-right) {
       text-align: right;
     }
 
-    :where(.xl\:text-justify) {
+    :where(.\@xl\:text-justify) {
       text-align: justify;
     }
 
     /* align-items */
-    :where(.xl\:items-start) {
+    :where(.\@xl\:items-start) {
       align-items: start;
     }
 
-    :where(.xl\:items-center) {
+    :where(.\@xl\:items-center) {
       align-items: center;
     }
 
-    :where(.xl\:items-end) {
+    :where(.\@xl\:items-end) {
       align-items: end;
     }
 
-    :where(.xl\:items-stretch) {
+    :where(.\@xl\:items-stretch) {
       align-items: stretch;
     }
 
     /* justify-content */
-    :where(.xl\:justify-start) {
+    :where(.\@xl\:justify-start) {
       justify-content: start;
     }
 
-    :where(.xl\:justify-center) {
+    :where(.\@xl\:justify-center) {
       justify-content: center;
     }
 
-    :where(.xl\:justify-end) {
+    :where(.\@xl\:justify-end) {
       justify-content: end;
     }
 
-    :where(.xl\:justify-stretch) {
+    :where(.\@xl\:justify-stretch) {
       justify-content: stretch;
     }
 
-    :where(.xl\:justify-around) {
+    :where(.\@xl\:justify-around) {
       justify-content: space-around;
     }
 
-    :where(.xl\:justify-between) {
+    :where(.\@xl\:justify-between) {
       justify-content: space-between;
     }
 
     /* col-span */
-    :where(.xl\:col-span-1) {
+    :where(.\@xl\:col-span-1) {
       grid-column: span min(1, var(--_grid-cols, 1));
     }
 
-    :where(.xl\:col-span-2) {
+    :where(.\@xl\:col-span-2) {
       grid-column: span min(2, var(--_grid-cols, 2));
     }
 
-    :where(.xl\:col-span-3) {
+    :where(.\@xl\:col-span-3) {
       grid-column: span min(3, var(--_grid-cols, 3));
     }
 
-    :where(.xl\:col-span-4) {
+    :where(.\@xl\:col-span-4) {
       grid-column: span min(4, var(--_grid-cols, 4));
     }
 
-    :where(.xl\:col-span-5) {
+    :where(.\@xl\:col-span-5) {
       grid-column: span min(5, var(--_grid-cols, 5));
     }
 
-    :where(.xl\:col-span-6) {
+    :where(.\@xl\:col-span-6) {
       grid-column: span min(6, var(--_grid-cols, 6));
     }
 
-    :where(.xl\:col-span-7) {
+    :where(.\@xl\:col-span-7) {
       grid-column: span min(7, var(--_grid-cols, 7));
     }
 
-    :where(.xl\:col-span-8) {
+    :where(.\@xl\:col-span-8) {
       grid-column: span min(8, var(--_grid-cols, 8));
     }
 
-    :where(.xl\:col-span-9) {
+    :where(.\@xl\:col-span-9) {
       grid-column: span min(9, var(--_grid-cols, 9));
     }
 
-    :where(.xl\:col-span-10) {
+    :where(.\@xl\:col-span-10) {
       grid-column: span min(10, var(--_grid-cols, 10));
     }
 
-    :where(.xl\:col-span-11) {
+    :where(.\@xl\:col-span-11) {
       grid-column: span min(11, var(--_grid-cols, 11));
     }
 
-    :where(.xl\:col-span-12) {
+    :where(.\@xl\:col-span-12) {
       grid-column: span min(12, var(--_grid-cols, 12));
     }
 
     /* row-span */
-    :where(.xl\:row-span-1) {
+    :where(.\@xl\:row-span-1) {
       grid-row: span min(1, var(--_grid-rows, 1));
     }
 
-    :where(.xl\:row-span-2) {
+    :where(.\@xl\:row-span-2) {
       grid-row: span min(2, var(--_grid-rows, 2));
     }
 
-    :where(.xl\:row-span-3) {
+    :where(.\@xl\:row-span-3) {
       grid-row: span min(3, var(--_grid-rows, 3));
     }
 
-    :where(.xl\:row-span-4) {
+    :where(.\@xl\:row-span-4) {
       grid-row: span min(4, var(--_grid-rows, 4));
     }
 
-    :where(.xl\:row-span-5) {
+    :where(.\@xl\:row-span-5) {
       grid-row: span min(5, var(--_grid-rows, 5));
     }
 
-    :where(.xl\:row-span-6) {
+    :where(.\@xl\:row-span-6) {
       grid-row: span min(6, var(--_grid-rows, 6));
     }
 
-    :where(.xl\:row-span-7) {
+    :where(.\@xl\:row-span-7) {
       grid-row: span min(7, var(--_grid-rows, 7));
     }
 
-    :where(.xl\:row-span-8) {
+    :where(.\@xl\:row-span-8) {
       grid-row: span min(8, var(--_grid-rows, 8));
     }
 
-    :where(.xl\:row-span-9) {
+    :where(.\@xl\:row-span-9) {
       grid-row: span min(9, var(--_grid-rows, 9));
     }
 
-    :where(.xl\:row-span-10) {
+    :where(.\@xl\:row-span-10) {
       grid-row: span min(10, var(--_grid-rows, 10));
     }
 
-    :where(.xl\:row-span-11) {
+    :where(.\@xl\:row-span-11) {
       grid-row: span min(11, var(--_grid-rows, 11));
     }
 
-    :where(.xl\:row-span-12) {
+    :where(.\@xl\:row-span-12) {
       grid-row: span min(12, var(--_grid-rows, 12));
     }
 
     /* basis */
-    :where(.xl\:basis-0) {
+    :where(.\@xl\:basis-0) {
       flex-basis: 0;
     }
 
-    :where(.xl\:basis-auto) {
+    :where(.\@xl\:basis-auto) {
       flex-basis: auto;
     }
 
-    :where(.xl\:basis-full) {
+    :where(.\@xl\:basis-full) {
       flex-basis: 100%;
     }
 
-    :where(.xl\:basis-1\/6) {
+    :where(.\@xl\:basis-1\/6) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 5)) / 6);
     }
 
-    :where(.xl\:basis-1\/5) {
+    :where(.\@xl\:basis-1\/5) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 4)) / 5);
     }
 
-    :where(.xl\:basis-1\/4) {
+    :where(.\@xl\:basis-1\/4) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 3)) / 4);
     }
 
-    :where(.xl\:basis-1\/3) {
+    :where(.\@xl\:basis-1\/3) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 2)) / 3);
     }
 
-    :where(.xl\:basis-1\/2) {
+    :where(.\@xl\:basis-1\/2) {
       flex-basis: calc((100% - (var(--_gap, 0px) * 1)) / 2);
     }
   }
@@ -4086,7 +4100,7 @@
   =========================================================================== */
 
   /* Composing rules — one per axis. The substring triggers also catch negative
-     (`-mx-…`) and responsive (`xs:-m-…`) margin classes, so those sections only
+     (`-mx-…`) and responsive (`@xs:-m-…`) margin classes, so those sections only
      need to set vars. `m-<size>` substrings are safe here (unlike `p-<size>`,
      they don't collide with `gap-<size>`). */
   :where(

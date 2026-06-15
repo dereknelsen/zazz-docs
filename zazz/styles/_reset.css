@@ -298,10 +298,6 @@
   }
 
   :where(img, video) {
-    /* Placeholder for lazy loading */
-    background-color: var(--background);
-    background-image: linear-gradient(var(--muted), var(--muted));
-
     /* Ensure the image is responsive */
     max-inline-size: 100%;
     block-size: auto;

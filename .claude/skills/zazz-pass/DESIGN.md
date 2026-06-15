@@ -434,7 +434,7 @@ Shared `--field-*` tokens unify `.input`, `.textarea`, `.select`, `.input-group`
 
 `.container` is a subgrid spanning its region; each direct child drops into a band (`xs sm md lg xl`
 cap + center at that breakpoint, `full` = region minus gutters, `bleed` = edge to edge). Set the band
-per child with `data-container="…"`, or the default for all children with `data-default-container="…"`
+per child with `data-container="…"`, or the default for all children with `data-container="…"`
 on the container. No wrapper div needed. See `references/tokens.md` §7 for the full model.
 
 ### Spacing

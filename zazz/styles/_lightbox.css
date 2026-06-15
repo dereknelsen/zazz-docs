@@ -284,6 +284,7 @@
     --lightbox-thumb-radius: var(--radius-sm);
     --dialog-background: transparent;
     --dialog-border: none;
+    
     overflow: clip;
     pointer-events: none;
     outline: none;

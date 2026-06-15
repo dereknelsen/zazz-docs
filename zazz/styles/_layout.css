@@ -111,7 +111,7 @@
 
   :where(:is(.container, [class*=":container"]):not([data-variant="article"])) {
     /* default container sizes */
-    --default-container-grid-column: var(--container-lg);
+    --default-container-grid-column: var(--container-md);
     --default-article-inline-size: var(--article-lg);
 
     /* Always span every region column. As a subgrid this re-exposes all bands; as
@@ -163,49 +163,49 @@
   /* Per-container default size (set on the container element) */
   :where(
       :is(.container, [class*=":container"]):not([data-variant="article"])
-    )[data-default-container="xs"]
+    )[data-container="xs"]
     > * {
     --_default-container: var(--container-xs);
   }
 
   :where(
       :is(.container, [class*=":container"]):not([data-variant="article"])
-    )[data-default-container="sm"]
+    )[data-container="sm"]
     > * {
     --_default-container: var(--container-sm);
   }
 
   :where(
       :is(.container, [class*=":container"]):not([data-variant="article"])
-    )[data-default-container="md"]
+    )[data-container="md"]
     > * {
     --_default-container: var(--container-md);
   }
 
   :where(
       :is(.container, [class*=":container"]):not([data-variant="article"])
-    )[data-default-container="lg"]
+    )[data-container="lg"]
     > * {
     --_default-container: var(--container-lg);
   }
 
   :where(
       :is(.container, [class*=":container"]):not([data-variant="article"])
-    )[data-default-container="xl"]
+    )[data-container="xl"]
     > * {
     --_default-container: var(--container-xl);
   }
 
   :where(
       :is(.container, [class*=":container"]):not([data-variant="article"])
-    )[data-default-container="full"]
+    )[data-container="full"]
     > * {
     --_default-container: var(--container-full);
   }
 
   :where(
       :is(.container, [class*=":container"]):not([data-variant="article"])
-    )[data-default-container="bleed"]
+    )[data-container="bleed"]
     > * {
     --_default-container: var(--container-bleed);
   }
@@ -399,43 +399,43 @@
 
   :where(
     :is(.container, [class*=":container"])[data-variant="article"]
-  )[data-default-container="xs"] {
+  )[data-container="xs"] {
     --_article: var(--article-xs);
   }
 
   :where(
     :is(.container, [class*=":container"])[data-variant="article"]
-  )[data-default-container="sm"] {
+  )[data-container="sm"] {
     --_article: var(--article-sm);
   }
 
   :where(
     :is(.container, [class*=":container"])[data-variant="article"]
-  )[data-default-container="md"] {
+  )[data-container="md"] {
     --_article: var(--article-md);
   }
 
   :where(
     :is(.container, [class*=":container"])[data-variant="article"]
-  )[data-default-container="lg"] {
+  )[data-container="lg"] {
     --_article: var(--article-lg);
   }
 
   :where(
     :is(.container, [class*=":container"])[data-variant="article"]
-  )[data-default-container="xl"] {
+  )[data-container="xl"] {
     --_article: var(--article-xl);
   }
 
   :where(
     :is(.container, [class*=":container"])[data-variant="article"]
-  )[data-default-container="full"] {
+  )[data-container="full"] {
     --_article: var(--article-full);
   }
 
   :where(
     :is(.container, [class*=":container"])[data-variant="article"]
-  )[data-default-container="bleed"] {
+  )[data-container="bleed"] {
     --_article: var(--article-bleed);
   }
 

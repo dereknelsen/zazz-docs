@@ -491,30 +491,161 @@
     </section>
 
     <!-- Prose, in an article reading column -->
-    <section class="py-xl border-t">
-      <div class="container prose" data-variant="article">
+    <article class="py-xl border-t">
+      <div class="container prose" data-variant="article" data-container="sm">
         <hgroup>
           <span class="text-eyebrow">Prose</span>
           <h2>Long-form content</h2>
-          <p class="text-lg text-muted-foreground">Wrap rich text in .prose for tuned typography.</p>
+          <p class="text-lg text-muted-foreground">
+            Wrap rich text in <code>.prose</code> for tuned typography. Body and paragraphs default to
+            <code>.text-md</code>; override size with <code>.text-xs</code> through <code>.text-xl</code>.
+          </p>
         </hgroup>
+
+        <hgroup>
+          <h1>How vexingly quick daft zebras jump.</h1>
+          <p>
+            Default paragraph — no class needed; matches body size. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit.
+          </p>
+  
+          <h2>How vexingly quick daft zebras jump.</h2>
+          <p>
+            Default paragraph — no class needed; matches body size. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit.
+          </p>
+    
+          <h3>How vexingly quick daft zebras jump.</h3>
+          <p>
+            Default paragraph — no class needed; matches body size. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit.
+          </p>
+
+          <h4>How vexingly quick daft zebras jump.</h4>
+          <p>
+            Default paragraph — no class needed; matches body size. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit.
+          </p>
+  
+          <h5>How vexingly quick daft zebras jump.</h5>
+          <p>
+            Default paragraph — no class needed; matches body size. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit.
+          </p>
+    
+          <h6>How vexingly quick daft zebras jump.</h6>
+          <p>
+            Default paragraph — no class needed; matches body size. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit.
+          </p>
+        </hgroup>
+
+        <hr />
+
+          <span class="text-eyebrow">text-xl</span>
+          <p class="text-xl">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet
+            ipsum mauris.
+          </p>
+
+          <span class="text-eyebrow">text-lg</span>
+          <p class="text-lg">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet
+            ipsum mauris.
+          </p>
+
+          <span class="text-eyebrow">text-md</span>
+          <p>
+            Default paragraph — no class needed; matches body size. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit.
+          </p>
+
+          <span class="text-eyebrow">text-sm</span>
+          <p class="text-sm">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet
+            ipsum mauris.
+          </p>
+
+          <span class="text-eyebrow">text-xs</span>
+          <p class="text-xs">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet
+            ipsum mauris.
+          </p>
+
+        <hr />
+
+        <hgroup>
+          <span class="text-eyebrow">Prose</span>
+          <h2>Paragraph spacing</h2>
+          <p class="text-lg text-muted-foreground">
+            Wrap rich text in <code>.prose</code> for tuned typography. Body and paragraphs default to
+            <code>.text-md</code>; override size with <code>.text-xs</code> through <code>.text-xl</code>.
+          </p>
+        </hgroup>
+
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet
-          ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit.
+          Inline semantics: <strong>strong emphasis</strong>, <em>italic emphasis</em>,
+          <a href="#">a prose link</a>, and <code>inline code</code>.
         </p>
-        <h3>A subheading</h3>
-        <p>
-          The <code>.prose</code> wrapper styles headings, paragraphs, lists, links, and figures from
-          the theme tokens. It pairs naturally with the article container, which sets a comfortable
-          reading measure.
-        </p>
-        <ul>
-          <li>Sentence case headings and labels throughout.</li>
-          <li>Semantic role tokens, so dark mode swaps for free.</li>
-          <li>No hand-written CSS, only Zazz utilities and components.</li>
-        </ul>
+
+        <blockquote>
+          <p>
+            Typography is the craft of endowing human language with a durable visual form.
+          </p>
+          <cite>— Robert Bringhurst</cite>
+        </blockquote>
+
+        <figure>
+          <figcaption>Unordered list</figcaption>
+          <ul>
+            <li>Unordered list item with disc markers.</li>
+            <li>Sentence case headings and labels throughout.</li>
+            <li>Semantic role tokens, so dark mode swaps for free.</li>
+          </ul>
+       </figure>
+
+        <figure>
+          <figcaption>Ordered list</figcaption>
+          <ol>
+            <li>Ordered list item one.</li>
+            <li>Ordered list item two.</li>
+            <li>Ordered list item three.</li>
+          </ol>
+        </figure>
+
+        <dl>
+          <dt>Soliloquy</dt>
+          <dd>
+            In drama, where a character speaks to themselves, representing their inner
+            thoughts or feelings and in the process relaying them to the audience (but
+            not to other characters.)
+          </dd>
+          <dt>Monologue</dt>
+          <dd>
+            In drama, where a character speaks their thoughts out loud to share them
+            with the audience and any other characters present.
+          </dd>
+          <dt>Aside</dt>
+          <dd>
+            In drama, where a character shares a comment only with the audience for
+            humorous or dramatic effect. This is usually a feeling, thought, or piece of
+            additional background information.
+          </dd>
+        </dl>
+
+        <figure>
+          <img
+            sizes="auto"
+            loading="lazy"
+            width="800"
+            height="400"
+            src="https://placehold.co/800x400"
+            alt="Placeholder demonstrating figure and image styling within prose"
+          />
+          <figcaption>Figure with caption — images pick up radius and border from prose tokens.</figcaption>
+        </figure>
       </div>
-    </section>
+    </article>
   </main>
 
   <footer class="border-t" data-transition-layer="global-footer">

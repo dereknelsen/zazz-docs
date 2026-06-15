@@ -12,12 +12,15 @@
  */
 @layer reset {
   :where(input[type="range"]) {
+    --range-ring-color: var(--ring-color);
+
     --range-track-height: var(--step-1_5);
     --range-track-background: var(--muted);
     --range-track-border: 1px solid var(--muted);
     --range-track-radius: var(--radius-full);
     --range-thumb-size: var(--step-4);
     --range-thumb-background: var(--background);
+
     --range-thumb-shadow: var(--shadow-xs);
     --range-thumb-border: 1px solid var(--border);
     --range-thumb-radius: var(--radius-full);
@@ -35,7 +38,6 @@
     outline: var(--outline-width) var(--outline-style) transparent;
     outline-offset: var(--outline-offset);
 
-    transition: var(--default-transition);
   }
 
   :where(input[type="range"])::-webkit-slider-runnable-track {
@@ -55,6 +57,16 @@
   }
 
   :where(input[type="range"])::-webkit-slider-thumb {
+    /* ring renders as box-shadow so it composes with --range-thumb-shadow; the
+       ring widths animate from 0 so the ring grows in smoothly on focus */
+    --_ring-offset-width: 0px;
+    --_ring-width: 0px;
+    --_ring: color-mix(in oklch, var(--range-ring-color) var(--ring-opacity), transparent);
+    box-shadow:
+      0 0 0 var(--_ring-offset-width) var(--ring-offset-color),
+      0 0 0 calc(var(--_ring-offset-width) + var(--_ring-width)) var(--_ring),
+      var(--range-thumb-shadow);
+
     -webkit-appearance: none;
     appearance: none;
     margin-block-start: var(--range-thumb-offset);
@@ -63,21 +75,30 @@
     background-color: var(--range-thumb-background);
     border: var(--range-thumb-border);
     border-radius: var(--range-thumb-radius);
-    box-shadow: var(--range-thumb-shadow);
-    transition: border-color var(--default-transition-duration)
-      var(--default-transition-timing-function);
+
+    transition: var(--default-transition);
   }
 
   :where(input[type="range"])::-moz-range-thumb {
+    /* ring renders as box-shadow so it composes with --range-thumb-shadow; the
+       ring widths animate from 0 so the ring grows in smoothly on focus */
+    --_ring-offset-width: 0px;
+    --_ring-width: 0px;
+    --_ring: color-mix(in oklch, var(--range-ring-color) var(--ring-opacity), transparent);
+    
     appearance: none;
     inline-size: var(--range-thumb-size);
     block-size: var(--range-thumb-size);
     background-color: var(--range-thumb-background);
     border: var(--range-thumb-border);
     border-radius: var(--range-thumb-radius);
-    box-shadow: var(--range-thumb-shadow);
-    transition: border-color var(--default-transition-duration)
-      var(--default-transition-timing-function);
+    
+    box-shadow:
+      0 0 0 var(--_ring-offset-width) var(--ring-offset-color),
+      0 0 0 calc(var(--_ring-offset-width) + var(--_ring-width)) var(--_ring),
+      var(--range-thumb-shadow);
+
+    transition: var(--default-transition);
   }
 
   :where(input[type="range"]:hover) {

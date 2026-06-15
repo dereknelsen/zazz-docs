@@ -3120,6 +3120,10 @@
     left: var(--gap-xl);
   }
 
+  :where(.left-0) {
+    left: 0rem;
+  }
+
   :where(.left-xs) {
     left: var(--gap-xs);
   }
@@ -3138,6 +3142,10 @@
 
   :where(.left-xl) {
     left: var(--gap-xl);
+  }
+
+  :where(.top-0) {
+    top: 0rem;
   }
 
   :where(.top-xs) {
@@ -3160,6 +3168,10 @@
     top: var(--gap-xl);
   }
 
+  :where(.right-0) {
+    right: 0rem;
+  }
+
   :where(.right-xs) {
     right: var(--gap-xs);
   }
@@ -3178,6 +3190,10 @@
 
   :where(.right-xl) {
     right: var(--gap-xl);
+  }
+
+  :where(.bottom-0) {
+    bottom: 0rem;
   }
 
   :where(.bottom-xs) {

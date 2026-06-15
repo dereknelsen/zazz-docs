@@ -114,7 +114,7 @@ intentionally (**md** ≈ popovers/modals). Utilities: `.shadow-none|xs|sm|md|lg
   width — the band caps + centers content fluidly. Bands: `xs sm md lg xl` (cap at the matching
   breakpoint width), `full` (region width minus gutters), `bleed` (edge-to-edge, gutters included).
   **Default band is `lg`.**
-  - `data-default-container="xs|sm|md|lg|xl|full|bleed"` on the `.container` resets the default for
+  - `data-container="xs|sm|md|lg|xl|full|bleed"` on the `.container` resets the default for
     all its children.
   - `data-container="xs|sm|md|lg|xl|full|bleed"` on a **direct child** overrides that one child's band.
   - Responsive variants: `@md:container`, `@max-md:container`, etc. — the element is a band subgrid
@@ -123,7 +123,7 @@ intentionally (**md** ≈ popovers/modals). Utilities: `.shadow-none|xs|sm|md|lg
 - **`.container[data-variant="article"]` — reading width** (replaces the old `.article`). A centered,
   inline-size container; widths from `--article-xs` 45ch, `--article-sm` 50ch, `--article-md` 65ch,
   `--article-lg` 70ch, `--article-xl` 75ch. **Default `lg`.** Pick the width with
-  `data-default-container="xs..xl"`. Responsive `@md:container[data-variant="article"]` / `@max-*`
+  `data-container="xs..xl"`. Responsive `@md:container[data-variant="article"]` / `@max-*`
   variants exist. (full/bleed aren't reading widths — use them on a plain band `.container`.)
 - **Gutters:** `--gutters` (= `--gap-md`) — the region's edge padding the band system reserves.
 - **Breakpoints** (for `calc()` and **container** queries — not `@media`): `--breakpoint-xs` 40rem,

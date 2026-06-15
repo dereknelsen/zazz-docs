@@ -40,9 +40,7 @@
   =========================================================================== */
 
   /* Prevent body scroll when a dialog inside the preview is open */
-  :where(html:has(dialog[open] body)) {
-    scrollbar-gutter: stable both-edges;
-  }
+
 
   /* Dialog animations with spring easing */
   :where(dialog) {
@@ -53,6 +51,8 @@
     contain: layout style;
     opacity: var(--dialog-opacity--start);
     box-shadow: var(--dialog-shadow);
+    overscroll-behavior: contain;
+    overflow: auto;
     transform: translate3d(var(--dialog-translate--start)) scale(var(--dialog-scale--start));
     transition:
       opacity var(--dialog-transition-duration) var(--dialog-transition-timing-function),
@@ -81,7 +81,15 @@
 
   /* Dialog backdrop with smooth fade transition */
   :where(dialog)::backdrop {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
     opacity: 0;
+    overscroll-behavior: contain;
+    overflow: auto;
     background-color: var(--dialog-backdrop-color);
     backdrop-filter: var(--dialog-backdrop-blur);
     transition: opacity var(--dialog-backdrop-transition-duration)
@@ -123,7 +131,6 @@
     container-type: inline-size;
     container-name: dialog;
     font-size: var(--font-size-md);
-    overflow: clip;
     isolation: isolate;
   }
 

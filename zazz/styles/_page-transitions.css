@@ -10,13 +10,13 @@
 
 @layer zazz.variables {
   :root {
-    --page-transition-duration: 500ms;
+    --page-transition-duration: 0ms;
     --page-transition-ease: var(--bezier-easing);
-    --page-transition-wait: 250ms;
+    --page-transition-wait: 0ms;
     --page-transition-origin: center top;
     --page-transition-scale--new: 1;
     --page-transition-scale--old: 1;
-    --page-transition-translate--new: 0, 1rem, 0;
+    --page-transition-translate--new: 0, 0, 0;
     --page-transition-translate--old: 0, 0, 0;
     --page-transition-opacity--new: 0;
     --page-transition-opacity--old: 0;
@@ -40,6 +40,7 @@
     /* Persist shared chrome without cross-fading */
     ::view-transition-old(global-header),
     ::view-transition-new(global-footer) {
+      z-index: 2;
       animation: none;
     }
   }
@@ -48,6 +49,7 @@
      (when page heights differ) can't paint over the chrome during the crossfade.
      Group z-index applies regardless of motion preference. */
   ::view-transition-group(main-content) {
+    z-index: 1;
     overflow: clip;
     transform-origin: var(--page-transition-origin);
   }

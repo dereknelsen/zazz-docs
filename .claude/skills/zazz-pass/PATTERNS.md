@@ -26,7 +26,7 @@ The standard page: a `<header>` with logo + desktop nav + mobile nav, a `<main>`
 `hidden @sm:flex`; the mobile nav is `flex @sm:hidden` and opens a dialog (see the Dialog
 component / mobile-menu). The container is a subgrid band system, not a fixed-width wrapper —
 set the band per child with `data-container="xs|sm|md|lg|xl|full|bleed"`, or change the default
-for all children with `data-default-container="…"` on the `.container`. See
+for all children with `data-container="…"` on the `.container`. See
 `references/tokens.md` §7 for the full band model.
 
 ```html
@@ -105,7 +105,7 @@ For the rest, reach for the primitives and components directly — they carry th
 composition guidance:
 
 - Structure & spacing → `references/tokens.md` (`.container` band system +
-  `data-container`/`data-default-container`, `.container[data-variant="article"]`, `--gap-*`, the
+  `data-container`/`data-container`, `.container[data-variant="article"]`, `--gap-*`, the
   responsive `@sm:`/`@md:`/`@lg:` utilities and `@max-*` container variants).
 - Components (cards, carousels, dialogs, forms, navigation, …) → `references/components.md`.
 - Brand voice, color roles, type scale, archetypes → `DESIGN.md`.

@@ -101,7 +101,7 @@
 </head>
 
 <body class="bg-background">
-  <header class="py-md border-b" data-transition-layer="global-header">
+  <header class="py-md border-b sticky top-0" data-transition-layer="global-header">
     <div class="container">
       <div class="flex items-center justify-between">
         <a href="index.html" class="text-h6 font-black"> ACME Inc. </a>
@@ -130,7 +130,69 @@
           <!-- CTA buttons -->
           <div class="flex items-center mt-md gap-xs justify-center @md:justify-start">
             <a class="button" data-variant="primary" href="products.html">Products</a>
-            <a class="button" data-variant="ghost" href="#">Contact us</a>
+            <button class="button" type="button" data-variant="ghost" command="show-modal" commandfor="dialog-example-1">
+              Contact us
+            </button>
+            <dialog id="dialog-example-1" class="dialog" closedby="any">
+              <div class="dialog__content">
+                <header class="dialog__header">
+                  <h2 class="text-lg font-heading font-strong">Dialog title</h2>
+                  <p class="text-muted-foreground">
+                    This dialog was opened using an
+                    <a
+                      href="https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API"
+                      target="_blank"
+                      class="text-link"
+                      >invoker command</a
+                    >.
+                  </p>
+                </header>
+                <div class="dialog__body">
+                  <p>Set the size of the dialog with the <code>data-size</code> attribute.</p>
+                </div>
+                <footer class="dialog__footer">
+                  <button class="button" type="button" commandfor="dialog-example-1" command="close">
+                    Cancel
+                  </button>
+                  <button class="button" data-variant="primary" commandfor="dialog-example-1" command="close">
+                    Accept
+                  </button>
+                </footer>
+              </div>
+              <button
+                class="button dialog__close"
+                data-size="icon"
+                data-variant="ghost"
+                type="button"
+                commandfor="dialog-example-1"
+                command="close"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                  <rect width="256" height="256" fill="none" />
+                  <line
+                    x1="200"
+                    y1="56"
+                    x2="56"
+                    y2="200"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="16"
+                  />
+                  <line
+                    x1="200"
+                    y1="200"
+                    x2="56"
+                    y2="56"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="16"
+                  />
+                </svg>
+              </button>
+            </dialog>
+            
           </div>
         </hgroup>
 

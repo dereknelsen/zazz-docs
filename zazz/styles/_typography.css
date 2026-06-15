@@ -11,25 +11,10 @@
  */
 @layer zazz.variables {
   :root {
-    --prose-gap: var(--gap-sm);
-    --prose-figure-gap: var(--gap-xs);
+    --prose-figcaption-margin: var(--gap-xs) 0 0 0;
     --prose-img-radius: var(--radius-md);
-    --prose-img-border: 1px solid var(--border);
+    --prose-img-border: none;
     --prose-link-color: var(--primary);
-  }
-}
-
-@layer reset {
-  /* ===========================================================================
-  TYPOGRAPHY — base styles for text elements
-  =========================================================================== */
-
-  :where(figcaption) {
-    font-family: var(--font-family-body);
-    font-size: var(--font-size-sm);
-    line-height: var(--leading-md);
-    font-weight: var(--font-weight-body);
-    letter-spacing: var(--tracking-md);
   }
 }
 
@@ -39,7 +24,6 @@
   =========================================================================== */
 
   :where(.prose) {
-    gap: var(--prose-gap);
     flex-direction: column;
     display: flex;
   }
@@ -143,27 +127,70 @@
     max-inline-size: 100%;
     display: flex;
     flex-direction: column;
-    gap: var(--prose-figure-gap);
   }
 
-  :where(.prose figcaption) {
-    font-style: italic;
+  :where(.prose figure:has(img, video)) {
+    gap: var(--prose-figcaption-gap);
   }
 
-  :where(.prose img) {
+  :where(.prose img, .prose video) {
     border-radius: var(--prose-img-radius);
     border: var(--prose-img-border);
   }
 
+  :where(.prose figure:has(img, video) > figcaption) {
+    display: flex;
+    margin: var(--prose-figcaption-margin);
+    font-style: italic;
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-sm);
+    line-height: var(--leading-md);
+    font-weight: var(--font-weight-body);
+    letter-spacing: var(--tracking-md);
+  }
+
+  :where(.prose figcaption:has(+ :where(ul, ol, dl))) {
+    font-weight: var(--font-weight-strong);
+  }
+
   :where(.prose ul) {
     list-style: disc;
-    padding-left: var(--gap-md);
+    padding-inline-start: var(--gap-md);
   }
 
   :where(.prose ol) {
     list-style: decimal;
-    padding-left: var(--gap-md);
+    padding-inline-start: var(--gap-md);
   }
+
+  :where(.prose dl > dd) {
+    padding-inline-start: var(--gap-md);
+  }
+
+  :where(.prose dl > dt) {
+    font-weight: var(--font-weight-strong);
+
+    &::after {
+      content: ":";
+    }
+  }
+
+  :where(.prose blockquote) {
+    padding-inline-start: var(--gap-sm);
+    border-inline-start: 1px solid var(--border);
+    font-style: italic;
+  }
+
+  :where(.prose blockquote > cite) {
+    color: var(--muted-foreground);
+    padding-inline-start: var(--gap-xs);
+    font-style: normal;
+    font-size: var(--font-size-sm);
+    line-height: var(--leading-sm);
+    font-weight: var(--font-weight-body);
+    letter-spacing: var(--tracking-sm);
+  }
+
 
   /* ===========================================================================
   PARAGRAPH RHYTHM — top margin on non-first blocks within .prose
@@ -180,6 +207,14 @@
 
   :where(.prose ol:not(:first-child)) {
     margin-block-start: var(--paragraph-spacing-md);
+  }
+
+  :where(.prose dl:not(:first-child)) {
+    margin-block-start: var(--paragraph-spacing-md);
+  }
+
+  :where(.prose figure :where(ul, ol, dl):first-child, .prose figure > figcaption + :where(ul, ol, dl):nth-child(2)) {
+    margin-block-start: 0rem;
   }
 
   :where(.prose .text-display:not(:first-child)) {
@@ -242,12 +277,28 @@
     margin-block: calc(var(--gap-lg) * var(--paragraph-spacing-multiplier));
   }
 
-  .prose .text-eyebrow + * {
-    margin-block-start: 0;
+  :where(.prose .text-eyebrow + *) {
+    margin-block-start: var(--paragraph-spacing-xs);
   }
 
-  .prose .text-eyebrow:has(+ *) {
-    margin-block-end: var(--paragraph-spacing-eyebrow);
+  :where(.prose figure:not(:first-child)) {
+    margin-block-start: var(--paragraph-spacing-md);
+  }
+
+  :where(.prose figure:not(:first-child):has(:is(img, video))) {
+    margin-block-start: calc(var(--paragraph-spacing-md) * 2);
+  }
+
+  :where(.prose dl > dt:not(:first-child)) {
+    margin-block-start: var(--paragraph-spacing-md);
+  }
+
+  :where(.prose blockquote:not(:first-child)) {
+    margin-block-start: var(--paragraph-spacing-lg);
+  }
+
+  :where(.prose blockquote:not(:last-child)) {
+    margin-block-end: var(--paragraph-spacing-lg);
   }
 }
 

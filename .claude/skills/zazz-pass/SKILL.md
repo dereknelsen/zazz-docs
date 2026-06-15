@@ -82,7 +82,7 @@ Tokens resolve lazily, so you can intervene at three scopes — pick the narrowe
 2. Get the real markup — fetch `/docs/components/{name}` or read
    `zazz/components/{name}/*.html`. Adapt it; don't reinvent.
 3. Apply variants via `data-*`; set spacing/color/type via semantic tokens & `text-*` classes.
-4. Compose pages from the `.container` band system (`data-container`/`data-default-container`, and
+4. Compose pages from the `.container` band system (`data-container`/`data-container`, and
    `data-variant="article"` for reading width) + flex/grid utilities. Responsive utilities are
    `@`-prefixed (`@md:grid-cols-2`); see `references/tokens.md` §7.
 

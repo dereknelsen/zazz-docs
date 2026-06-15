@@ -236,19 +236,19 @@
     /* paragraph-spacing */
     --paragraph-spacing-multiplier: 1;
 
-    --paragraph-spacing-display: calc(1em * var(--paragraph-spacing-multiplier));
-    --paragraph-spacing-h1: calc(1em * var(--paragraph-spacing-multiplier));
-    --paragraph-spacing-h2: calc(1em * var(--paragraph-spacing-multiplier));
-    --paragraph-spacing-h3: calc(1em * var(--paragraph-spacing-multiplier));
-    --paragraph-spacing-h4: calc(1em * var(--paragraph-spacing-multiplier));
-    --paragraph-spacing-h5: calc(1em * var(--paragraph-spacing-multiplier));
-    --paragraph-spacing-h6: calc(1em * var(--paragraph-spacing-multiplier));
-    --paragraph-spacing-xl: calc(1em * var(--paragraph-spacing-multiplier));
-    --paragraph-spacing-lg: calc(0.5em * var(--paragraph-spacing-multiplier));
-    --paragraph-spacing-md: calc(0.5em * var(--paragraph-spacing-multiplier));
-    --paragraph-spacing-sm: calc(0.5em * var(--paragraph-spacing-multiplier));
-    --paragraph-spacing-xs: calc(0.25em * var(--paragraph-spacing-multiplier));
-    --paragraph-spacing-eyebrow: calc(1em * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-display: calc(1.75rlh * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-h1: calc(1.75rlh * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-h2: calc(1.5rlh * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-h3: calc(1.5rlh * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-h4: calc(1.25rlh * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-h5: calc(1.25rlh * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-h6: calc(1.25rlh * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-xl: calc(0.75rlh * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-lg: calc(0.75rlh * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-md: calc(0.75rlh * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-sm: calc(0.5rlh * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-xs: calc(0.5rlh * var(--paragraph-spacing-multiplier));
+    --paragraph-spacing-eyebrow: calc(1rlh * var(--paragraph-spacing-multiplier));
 
     /* ==========================================================================
     * 5. Spacing — interval modifier, semantic gaps, step scale

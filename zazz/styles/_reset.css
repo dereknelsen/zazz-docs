@@ -43,6 +43,7 @@
     -webkit-text-size-adjust: 100%;
     background-color: var(--background);
     -webkit-tap-highlight-color: transparent;
+    overflow: clip;
   }
 
   :where(:host) {
@@ -55,6 +56,7 @@
     display: flex;
     flex-direction: column;
     font-optical-sizing: auto;
+    position: relative;
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
     -moz-osx-font-smoothing: grayscale;
@@ -63,15 +65,10 @@
     color: var(--foreground);
     background-color: var(--background);
     block-size: 100svh;
-    inline-size: 100vi;
-    overflow-x: clip;
-    overflow-y: auto;
-    /* Reserve the scrollbar gutter so main keeps the same width whether a page
-       scrolls or not. Without this, a tall page (scrollbar) and a short page (no
-       scrollbar) capture main at different widths, and the view-transition
-       snapshots mismatch — the edge overflow seen during the crossfade. */
-    scrollbar-gutter: stable;
     scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+    overflow-y: auto;
+    overflow-x: clip;
     font-size: var(--font-size-md);
     line-height: var(--leading-md);
     letter-spacing: var(--tracking-md);

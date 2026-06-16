@@ -73,6 +73,27 @@ Animate children from last to first:
 </div>
 ```
 
+## Combining with hover and other transitions
+
+Reveal animates by controlling the element's CSS transition: the duration, the stagger delay, the timing function, and which properties move (`opacity` and `transform`). That means it owns `transition-*` on whatever element it's set on.
+
+So don't add a `transition` (or `transition-all`) utility to the same element you put `data-reveal` on. Both want to set `transition-*`, and the utility resets the delay reveal calculated, so the stagger collapses and everything fires at once.
+
+When an element needs its own transition too — a `hover:` border, say — wrap it. Put the reveal on an outer `div` and keep the `transition` on the inner element. Each one controls its own transitions, and they stop stepping on each other:
+
+```html
+<!-- The wrapper handles the reveal; the card keeps its hover transition -->
+<div data-reveal-each="slide-up">
+  <a class="card transition hover:border-primary">First card</a>
+  <a class="card transition hover:border-primary">Second card</a>
+</div>
+```
+
+```html
+<!-- Avoid: one element doing both. The `transition` utility wipes the stagger. -->
+<a class="card transition hover:border-primary" data-reveal="slide-up">Card</a>
+```
+
 ## Configuration attributes
 
 All attributes are optional. Set them on the element with `data-reveal` or `data-reveal-each`:

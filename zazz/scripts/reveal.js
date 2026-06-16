@@ -31,12 +31,27 @@
  * </div>
  */
 
-const DEFAULT_DURATION = document.documentElement.style.getPropertyValue(
-  "--default-transition-duration",
-);
-const DEFAULT_EASE = document.documentElement.style.getPropertyValue(
-  "--default-transition-timing-function",
-);
+/**
+ * @description Reads a CSS custom property from `:root` computed styles.
+ * @param {string} name - Custom property name (e.g. "--reveal-global-duration").
+ * @returns {string} Trimmed value, or "" when unset.
+ */
+function getRootCssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
+/**
+ * @description Parses a CSS time value into milliseconds.
+ * @param {string} value - CSS time string (e.g. "300ms", "0.5s") or bare number string.
+ * @returns {number} Duration in milliseconds.
+ */
+function parseCssTimeMs(value) {
+  const str = value.trim();
+  if (!str) return 0;
+  if (/^-?\d*\.?\d+ms$/.test(str)) return parseFloat(str);
+  if (/^-?\d*\.?\d+s$/.test(str)) return parseFloat(str) * 1000;
+  return parseInt(str, 10) || 0;
+}
 
 /**
  * @class
@@ -48,27 +63,37 @@ const DEFAULT_EASE = document.documentElement.style.getPropertyValue(
  * @example
  * const reveal = new Reveal({
  *   config: {
- *     duration: 600,
+ *     duration: 400,
  *     ease: "ease-in-out",
  *     threshold: 0.3,
  *     margin: "100px",
- *     step: 100,
+ *     step: 40,
  *   },
  * });
  */
 class Reveal {
+  /**
+   * @description Default config from `--reveal-global-*` tokens in `_reveal.css`.
+   * @returns {RevealConfig}
+   */
+  static #readDefaultConfig() {
+    return {
+      margin: "0px",
+      threshold: 0.2,
+      duration: getRootCssVar("--reveal-global-duration") || "400ms",
+      ease: getRootCssVar("--reveal-global-ease") || "cubic-bezier(0.4, 0, 0.2, 1)",
+      wait: parseCssTimeMs(getRootCssVar("--reveal-global-wait")),
+      distance: getRootCssVar("--reveal-global-distance") || "1rem",
+      step: 80,
+      grow: parseFloat(getRootCssVar("--reveal-global-grow")) || 0.97,
+      shrink: parseFloat(getRootCssVar("--reveal-global-shrink")) || 1.03,
+    };
+  }
+
   /** @type {RevealConfig} */
-  static defaultConfig = {
-    margin: "0px",
-    threshold: 0.2,
-    duration: DEFAULT_DURATION.trim() || "900ms",
-    ease: DEFAULT_EASE.trim() || "cubic-bezier(0.4, 0, 0.2, 1)",
-    wait: 0,
-    distance: "4rem",
-    step: 80,
-    grow: 0.9,
-    shrink: 1.1,
-  };
+  static get defaultConfig() {
+    return Reveal.#readDefaultConfig();
+  }
 
   /** @type {Map<string, IntersectionObserver>} */
   #observers = new Map();

@@ -1,8 +1,10 @@
+@import "./_properties.css";
+
 /**
  * _variables.css — Global design tokens (Tier 1).
  *
  * @layer      variables
- * @requires   _layers.css, _properties.css
+ * @requires   layers.css, _properties.css
  * @uses       light-dark() — theme roles follow color-scheme / .dark overrides
  * @uses       oklch(from …) — shade/tint scales and shadow alphas
  * @uses       color-mix() — focus ring (--ring)
@@ -14,7 +16,7 @@
  *             whole system; see CONVENTIONS.md.
  */
 /* Token values — @property registrations live in _properties.css (style() queries). */
-@layer zazz.variables {
+@layer variables {
   :root {
     /* Enable light/dark mode - make sure to redeclare dark mode tokens on .dark at the bottom of the file */
     color-scheme: light dark;
@@ -32,7 +34,9 @@
     * ========================================================================== */
 
     /* Use dark popovers/menus */
-    --use-inverted-menu: true;
+    --use-legacy: false;
+    --use-zazz: true;
+    --use-inverted-popovers: true;
 
     /* base */
     --background: light-dark(var(--white), var(--neutral-900));
@@ -523,7 +527,7 @@
    * light values; setting color-scheme on descendants alone does not flip them.
    */
 
-  @container style(--use-inverted-menu: true) {
+  @container style(--use-inverted-popovers: true) {
     :where([popover]:not([data-use-inverted-menu="false"])) {
       color-scheme: dark;
 

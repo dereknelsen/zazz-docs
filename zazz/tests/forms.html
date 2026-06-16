@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <!-- Paint the right theme (bg, form controls, scrollbars) before CSS loads. -->
   <meta name="color-scheme" content="light dark" />
-  <title>Zazz tests | Forms</title>
+  <title>Zazz tests | Overview</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,23 +15,22 @@
     href="https://fonts.googleapis.com/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Geist:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet" />
 
-  <!-- Zazz styles: one bundle — main.css @imports every layer in cascade order.
-       No separate preload: a same-document stylesheet link is already the highest-priority,
-       render-blocking fetch. Let the server's brotli/gzip handle transfer size. -->
-  <link rel="stylesheet" href="../../styles/main.css" />
+  <!-- Zazz styles: one bundle — zazz.css @imports the foundation layers (layers,
+       variables, reset) and every component in cascade order. -->
+  <link rel="stylesheet" href="../styles/zazz.css" />
 
   <!-- Preload critical js -->
-  <link rel="preload" href="../../scripts/navigation.js" as="script" />
-  <link rel="preload" href="../../scripts/utils.js" as="script" />
-  <link rel="preload" href="../../scripts/reveal.js" as="script" />
-  <link rel="preload" href="../../scripts/embla.js" as="script" />
-  <link rel="preload" href="../../scripts/carousel.js" as="script" />
-  <link rel="preload" href="../../scripts/lightbox.js" as="script" />
-  <link rel="preload" href="../../scripts/password.js" as="script" />
-  <link rel="preload" href="../../scripts/tabs.js" as="script" />
+  <link rel="preload" href="../scripts/navigation.js" as="script" />
+  <link rel="preload" href="../scripts/utils.js" as="script" />
+  <link rel="preload" href="../scripts/reveal.js" as="script" />
+  <link rel="preload" href="../scripts/embla.js" as="script" />
+  <link rel="preload" href="../scripts/carousel.js" as="script" />
+  <link rel="preload" href="../scripts/lightbox.js" as="script" />
+  <link rel="preload" href="../scripts/password.js" as="script" />
+  <link rel="preload" href="../scripts/tabs.js" as="script" />
 
   <!-- Prefetching related pages -->
-  <link rel="prefetch" href="index.html" />
+  <link rel="prefetch" href="layout.html" />
 
   <!-- WARNING: CDN scripts not recommended for production.
      If you need to use a CDN, create a new SRI hash (@see: https://srihash.org/)
@@ -67,14 +66,14 @@
     defer></script>
 
   <!-- Zazz scripts -->
-  <script src="../../scripts/navigation.js" defer></script>
-  <script src="../../scripts/utils.js" defer></script>
-  <script src="../../scripts/reveal.js" defer></script>
-  <script src="../../scripts/embla.js" defer></script>
-  <script src="../../scripts/carousel.js" defer></script>
-  <script src="../../scripts/lightbox.js" defer></script>
-  <script src="../../scripts/password.js" defer></script>
-  <script src="../../scripts/tabs.js" defer></script>
+  <script src="../scripts/navigation.js" defer></script>
+  <script src="../scripts/utils.js" defer></script>
+  <script src="../scripts/reveal.js" defer></script>
+  <script src="../scripts/embla.js" defer></script>
+  <script src="../scripts/carousel.js" defer></script>
+  <script src="../scripts/lightbox.js" defer></script>
+  <script src="../scripts/password.js" defer></script>
+  <script src="../scripts/tabs.js" defer></script>
   <script>
     /**
      * Synchronizes the preview theme with the user's preference.
@@ -108,6 +107,8 @@
         <nav>
           <menu class="flex gap-xs">
             <li><a class="button" data-variant="ghost" data-size="sm" href="index.html">Overview</a></li>
+            <li><a class="button" data-variant="ghost" data-size="sm" href="about.html">About</a></li>
+            <li><a class="button" data-variant="ghost" data-size="sm" href="products.html">Products</a></li>
             <li><a class="button" data-variant="ghost" data-size="sm" href="layout.html">Layout</a></li>
             <li><a class="button" data-variant="ghost" data-size="sm" href="responsive.html">Responsive</a></li>
             <li><a class="button" data-variant="ghost" data-size="sm" href="components.html">Components</a></li>
@@ -269,11 +270,11 @@
               <fieldset class="field-group">
                 <legend>Preferences</legend>
                 <div class="flex flex-col gap-xs">
-                  <label class="field" data-direction="horizontal">
+                  <label class="field" data-orientation="horizontal">
                     <input type="checkbox" name="preferences-newsletter" />
                     <span class="field__label">Subscribe to the newsletter</span>
                   </label>
-                  <label class="field" data-direction="horizontal">
+                  <label class="field" data-orientation="horizontal">
                     <input type="checkbox" name="preferences-terms" checked />
                     <span class="field__label">Accept terms &amp; conditions</span>
                   </label>
@@ -283,15 +284,15 @@
               <fieldset class="radio-group">
                 <legend>Plan</legend>
                 <div class="flex flex-col gap-xs">
-                  <label class="field" data-direction="horizontal">
+                  <label class="field" data-orientation="horizontal">
                     <input class="radio" type="radio" name="plan" value="starter" />
                     <span class="field__label">Starter</span>
                   </label>
-                  <label class="field" data-direction="horizontal">
+                  <label class="field" data-orientation="horizontal">
                     <input class="radio" type="radio" name="plan" value="pro" checked />
                     <span class="field__label">Pro</span>
                   </label>
-                  <label class="field" data-direction="horizontal">
+                  <label class="field" data-orientation="horizontal">
                     <input class="radio" type="radio" name="plan" value="team" />
                     <span class="field__label">Team</span>
                   </label>
@@ -301,11 +302,11 @@
               <fieldset class="field-group">
                 <legend>Notifications</legend>
                 <div class="flex flex-col gap-xs">
-                  <label class="field" data-direction="horizontal">
+                  <label class="field" data-orientation="horizontal">
                     <input type="checkbox" role="switch" name="notifications-email" />
                     <span class="field__label">Email notifications</span>
                   </label>
-                  <label class="field" data-direction="horizontal">
+                  <label class="field" data-orientation="horizontal">
                     <input type="checkbox" role="switch" name="notifications-2fa" checked />
                     <span class="field__label">Two-factor authentication</span>
                   </label>
@@ -334,10 +335,12 @@
       <div class="flex items-center justify-between gap-md">
         <div class="text-h6 font-black">Zazz tests</div>
         <menu class="flex gap-sm">
-          <li><a class="button" data-variant="link" href="index.html">Overview</a></li>
+          <li><a class="button" data-variant="link" href="about.html">About</a></li>
           <li><a class="button" data-variant="link" href="layout.html">Layout</a></li>
           <li><a class="button" data-variant="link" href="responsive.html">Responsive</a></li>
+          <li><a class="button" data-variant="link" href="products.html">Products</a></li>
           <li><a class="button" data-variant="link" href="components.html">Components</a></li>
+          <li><a class="button" data-variant="link" href="forms.html">Forms</a></li>
         </menu>
       </div>
     </div>

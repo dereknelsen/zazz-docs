@@ -1,0 +1,58 @@
+/**
+ * zazz.css — Plain-CSS entry point; @import bundle in cascade order.
+ *
+ * Bundles the foundation layers (layers → variables → reset) followed by every
+ * component, so a page only needs a single stylesheet link. Order matters:
+ * layers.css declares the cascade layers and must load first.
+ *
+ * Legacy support: import your legacy stylesheets into the legacy layer at the slot
+ * below (between the reset baseline and the components). Projects that prefer to
+ * compose the layers by hand can import the foundation files individually in the
+ * same order instead of using this bundle — see CONVENTIONS.md.
+ *
+ * @layer      none
+ * @see        CONVENTIONS.md — file anatomy & layer architecture
+ */
+
+/* Foundation — order matters; layers.css declares the cascade layers first. */
+@import "./layers.css";
+@import "./variables.css";
+@import "./reset.css";
+
+/* Legacy slot — import legacy stylesheets here, into the legacy layer (between the
+   reset baseline and the components), e.g.:
+   @import "./your-legacy.css" layer(legacy); */
+
+/* Component files. */
+@import "./_page-transitions.css";
+@import "./_typography.css";
+@import "./_badge.css";
+@import "./_button.css";
+@import "./_button-group.css";
+@import "./_toggle.css";
+@import "./_toggle-group.css";
+@import "./_accordion.css";
+@import "./_popover.css";
+@import "./_tooltip.css";
+@import "./_dialog.css";
+@import "./_dropdown.css";
+@import "./_navigation-menu.css";
+@import "./_mobile-menu.css";
+@import "./_fields.css";
+@import "./_input.css";
+@import "./_textarea.css";
+@import "./_select.css";
+@import "./_checkbox.css";
+@import "./_slider.css";
+@import "./_switch.css";
+@import "./_input-group.css";
+@import "./_password-group.css";
+@import "./_radio.css";
+@import "./_tabs.css";
+@import "./_carousel.css";
+@import "./_lightbox.css";
+@import "./_reveal.css";
+
+/* Utilities and layout remain the final normal Zazz override layer. */
+@import "./_utilities.css";
+@import "./_layout.css";

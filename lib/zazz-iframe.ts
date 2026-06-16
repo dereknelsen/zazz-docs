@@ -6,10 +6,11 @@ import type { ExampleScript } from "zazz/components/manifest";
  * scripts, so the iframe is the *only* place Zazz CSS runs on the docs site — fully
  * sandboxed from Tailwind + fumadocs.
  *
- * Styling loads as the single `main.css` bundle by absolute URL from the `/zazz/*` route
- * (see `app/zazz/[...path]/route.ts`); its relative `@import "./_*.css"` rules resolve
- * against that URL. One request to maintain — the server's brotli/gzip handles transfer
- * size. Pure string building — safe to run on the client.
+ * Styling loads as the single `zazz.css` bundle by absolute URL from the `/zazz/*` route
+ * (see `app/zazz/[...path]/route.ts`); its relative `@import "./*.css"` rules (the
+ * foundation layers followed by every component) resolve against that URL. One request
+ * to maintain — the server's brotli/gzip handles transfer size. Pure string building —
+ * safe to run on the client.
  */
 
 export interface BuildPreviewOptions {
@@ -64,10 +65,10 @@ export function buildPreviewDocument({
   align = "center",
   justify = "center",
 }: BuildPreviewOptions): string {
-  // One bundle: main.css @imports every layer in cascade order. No separate preload —
-  // a same-document stylesheet link is already the highest-priority, render-blocking
-  // fetch; the server's brotli/gzip handles transfer size.
-  const styles = `<link rel="stylesheet" href="/zazz/styles/main.css">`;
+  // One bundle: zazz.css @imports the foundation layers (layers, variables, reset) and
+  // every component in cascade order. No separate preload — a same-document stylesheet
+  // link is already the highest-priority, render-blocking fetch.
+  const styles = `<link rel="stylesheet" href="/zazz/styles/zazz.css">`;
 
   const needsCarousel = scripts.includes("carousel") || scripts.includes("lightbox");
   const needsEmbla = scripts.includes("embla") || needsCarousel;

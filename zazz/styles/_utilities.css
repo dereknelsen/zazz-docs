@@ -2,13 +2,13 @@
  * _utilities.css — Atomic layout, spacing, and typography utility classes.
  *
  * @layer      utilities
- * @requires   _layers.css, _variables.css
+ * @requires   layers.css, _variables.css
  * @uses       :where() — zero specificity so utilities stay overridable
  * @uses       container-type / @container — responsive layout utilities
  * @uses       style() queries — read typed @property tokens from _properties.css
  */
 
-@layer zazz.variables {
+@layer variables {
   /* ===========================================================================
     INTERNAL UTILITY VARIABLES — `--_` prefix
     System-level variables that utilities compose into a single declaration.

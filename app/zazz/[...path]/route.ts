@@ -6,8 +6,8 @@ import path from "node:path";
  * over HTTP at `/zazz/*`, straight from the single source on disk — no copy into
  * `public/`, no bundling. This is what the documented "served directly at
  * `/zazz/scripts/*.js`" contract (see `zazz/scripts/CONVENTIONS.md`) relies on, and
- * what lets the component-preview iframes load `main.css` — whose internal
- * `@import "./_*.css"` rules then resolve relative to `/zazz/styles/main.css`.
+ * what lets the component-preview iframes load `zazz.css` — whose internal
+ * `@import "./_*.css"` rules then resolve relative to `/zazz/styles/zazz.css`.
  */
 
 export const runtime = "nodejs";

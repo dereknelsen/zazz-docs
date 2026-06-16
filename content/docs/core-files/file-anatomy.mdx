@@ -12,7 +12,7 @@ A component file is written top-to-bottom in this order:
 | #   | Section                  | Layer                    | Required?                     |
 | --- | ------------------------ | ------------------------ | ----------------------------- |
 | 1   | CSSDoc header            | —                        | always                        |
-| 2   | Component token hooks    | `@layer zazz.variables`  | when the component has tokens |
+| 2   | Component token hooks    | `@layer variables`  | when the component has tokens |
 | 3   | Native-element baselines | `@layer reset`           | only if it redraws native UI  |
 | 4   | Component rules          | `@layer zazz.components` | the component itself          |
 | 5   | Utility classes          | `@layer zazz.utilities`  | only if it ships utilities    |
@@ -22,11 +22,11 @@ A component file is written top-to-bottom in this order:
  * _button.css — Button (.button)
  *
  * @layer      variables, components
- * @requires   _layers.css, _variables.css, _reset.css
+ * @requires   layers.css, _variables.css, _reset.css
  * @uses       color-mix(), oklch(from …) — variant hover/active tints
- * @tokens     --button-* (@layer zazz.variables)
+ * @tokens     --button-* (@layer variables)
  */
-@layer zazz.variables {
+@layer variables {
   :root {
     /* the component's override hooks */
   }
@@ -48,11 +48,11 @@ Every `.css` file opens with a JSDoc-style block comment. A summary line comes f
  * _fields.css — Shared form field family (Tier 3 owner for --field-*)
  *
  * @layer      variables, components
- * @requires   _layers.css, _variables.css
+ * @requires   layers.css, _variables.css
  * @uses       :user-invalid — validation after commit (not while typing)
  * @uses       :has(:user-invalid) — label/hint/error crossfade
  * @uses       @starting-style + visibility allow-discrete — hint ↔ error swap
- * @tokens     --field-*, --field-group-* (Tier 3 owner; @layer zazz.variables)
+ * @tokens     --field-*, --field-group-* (Tier 3 owner; @layer variables)
  * @consumedby _input.css, _textarea.css, _select.css, _input-group.css,
  *             _password-group.css, _radio.css (.radio-group)
  */
@@ -64,7 +64,7 @@ Every `.css` file opens with a JSDoc-style block comment. A summary line comes f
 | ------------- | --------------- | -------------------------------------------------------------- |
 | _(summary)_   | yes             | First line: `_file.css — Component (.selector)`                |
 | `@layer`      | yes             | Cascade layers this file contributes to, in order              |
-| `@requires`   | yes             | Files that must load before this one. `none` for `_layers.css` |
+| `@requires`   | yes             | Files that must load before this one. `none` for `layers.css` |
 | `@uses`       | —               | One modern CSS API/feature per line with support caveat        |
 | `@tokens`     | when owned      | The token namespace this file exposes                          |
 | `@consumedby` | when applicable | Files that depend on this one                                  |
@@ -93,10 +93,10 @@ The full map of which token to reach for, and when, lives in [Theme variables](/
 
 ### Local component tokens
 
-Every component declares a namespace in its own `@layer zazz.variables` block, defaulting to a global token:
+Every component declares a namespace in its own `@layer variables` block, defaulting to a global token:
 
 ```css
-@layer zazz.variables {
+@layer variables {
   :root {
     /* surface */
     --button-background: var(--card);
@@ -149,7 +149,7 @@ Three comment styles, each with a specific role:
   =========================================================================== */
 ```
 
-**Token group labels** group related hooks inside `@layer zazz.variables`:
+**Token group labels** group related hooks inside `@layer variables`:
 
 ```css
 :root {
@@ -176,7 +176,7 @@ Dark mode is a token concern, not a per-file one. Components read role tokens (`
 
 These deviate from the canonical shape on purpose, and each is documented in-file:
 
-- **Split `@layer zazz.variables` blocks:** when a component has motion tokens and sizing tokens that read better separated.
+- **Split `@layer variables` blocks:** when a component has motion tokens and sizing tokens that read better separated.
 - **Component in `@layer reset`:** when redrawing native UI (e.g. `_switch.css` redraws `input[role="switch"]`). See [`_reset.css`](/docs/core-files/reset).
 - **`@supports`-gated enhancement:** when anchor positioning or other newer APIs need a documented fallback.
 - **Attribute-hook components:** when styling depends on `[data-*]` attributes driven by JavaScript.

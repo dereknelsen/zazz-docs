@@ -1,9 +1,9 @@
 ---
-title: _layers.css
+title: layers.css
 description: "One line of CSS that makes the whole system predictable: the cascade-layer order that lets utilities beat components without a single !important."
 ---
 
-`_layers.css` is the smallest file in Zazz and the most important. It declares the order of the [cascade layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) every other stylesheet writes into, and that order, not selector specificity, decides which rule wins.
+`layers.css` is the smallest file in Zazz and the most important. It declares the order of the [cascade layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) every other stylesheet writes into, and that order, not selector specificity, decides which rule wins.
 
 ```css
 @layer legacy, reset, zazz, migrations;
@@ -13,7 +13,7 @@ description: "One line of CSS that makes the whole system predictable: the casca
 }
 ```
 
-That's the entire file. Because it has to establish the order before any layer has content, it loads first; `main.css` `@import`s it ahead of everything else.
+That's the entire file. Because it has to establish the order before any layer has content, it loads first; `zazz.css` `@import`s it ahead of everything else.
 
 ## Why layers instead of specificity
 
@@ -37,7 +37,7 @@ Six layers in all, reading from lowest priority to highest:
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | `legacy`          | Your existing (pre-Zazz) CSS, imported with `layer(legacy)`. Lowest priority, so Zazz overrides it wherever the two overlap.                | your app's entry stylesheet                                                                               |
 | `reset`           | Native-element baselines and re-skinned controls                                                                                            | [`_reset.css`](/docs/core-files/reset)                                                                   |
-| `zazz.variables`  | Design tokens, the `:root` custom properties everything reads                                                                               | [`_variables.css`](/docs/core-concepts/theme-variables) + each component's `@layer zazz.variables` block |
+| `zazz.variables`  | Design tokens, the `:root` custom properties everything reads                                                                               | [`_variables.css`](/docs/core-concepts/theme-variables) + each component's `@layer variables` block |
 | `zazz.components` | The components themselves: `.button`, `.card`, `.input`…                                                                                     | each `_*.css` component file                                                                              |
 | `zazz.utilities`  | Atomic, single-purpose classes that win last inside Zazz                                                                                     | [`_utilities.css`](/docs/core-concepts/utility-classes)                                                  |
 | `migrations`      | Temporary shims that map old class names to Zazz tokens, plus the `data-legacy-css` reverts. On top, so it can override anything mid-migration. | [`_legacy.css`](/docs/getting-started/migrating)                                                          |
@@ -78,10 +78,10 @@ This keeps your overrides layered and predictable. Reach for it only when overri
 
 ## Scoped isolation with `_legacy.css`
 
-`_legacy.css` is an optional file (disabled by default in `main.css`) for mixed codebases. It carries the `data-legacy-css` attribute hooks and is the home for your migration shims. Uncomment its import when you're migrating an existing project alongside Zazz:
+`_legacy.css` is an optional file (disabled by default in `zazz.css`) for mixed codebases. It carries the `data-legacy-css` attribute hooks and is the home for your migration shims. Uncomment its import when you're migrating an existing project alongside Zazz:
 
 ```css
-/* main.css — uncomment to enable */
+/* zazz.css — uncomment to enable */
 @import "./_legacy.css";
 ```
 

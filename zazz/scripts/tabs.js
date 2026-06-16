@@ -10,7 +10,7 @@
  *
  * Keyboard behavior on the focused tab radio:
  * - Horizontal (default): ArrowLeft / ArrowRight move between tabs.
- * - Vertical (`data-direction="vertical"`): ArrowUp / ArrowDown move between tabs.
+ * - Vertical (`data-orientation="vertical"`): ArrowUp / ArrowDown move between tabs.
  * - Home / End jump to the first / last enabled tab.
  * - Navigation wraps around and skips disabled tabs.
  *
@@ -66,7 +66,7 @@ class TabGroup extends HTMLElement {
       .filter((tab) => !tab.disabled);
     if (tabs.length < 2) return;
 
-    const vertical = this.getAttribute("data-direction") === "vertical";
+    const vertical = this.getAttribute("data-orientation") === "vertical";
     const prevKey = vertical ? "ArrowUp" : "ArrowLeft";
     const nextKey = vertical ? "ArrowDown" : "ArrowRight";
 

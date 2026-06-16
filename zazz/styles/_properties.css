@@ -2,7 +2,7 @@
  * _properties.css — Typed @property registrations for design tokens.
  *
  * @layer      (layer-independent — @property registrations apply globally)
- * @requires   _layers.css
+ * @requires   layers.css
  * @uses       @property — typed custom properties for style() container queries
  * @uses       syntax "*" on theme roles so light-dark() re-resolves under color-scheme
  * @tokens     Registers _variables.css tokens as typed @property so container
@@ -13,9 +13,24 @@
  * @see        https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@property/syntax
  */
 
-@property --use-inverted-menu {
+/* Legacy/Zazz CSS mode boundaries */
+@property --use-legacy {
   syntax: "*";
   inherits: true;
+  initial-value: false;
+}
+
+@property --use-zazz {
+  syntax: "*";
+  inherits: true;
+  initial-value: true;
+}
+
+/* Inverted menu */
+
+@property --use-inverted-popovers {
+  syntax: "*";
+  inherits: false;
   initial-value: true;
 }
 
@@ -27,17 +42,12 @@
   initial-value: 0s;
 }
 
-@property --reveal-duration {
-  syntax: "<time>";
-  inherits: true;
-  initial-value: 900ms;
-}
-
-@property --reveal-wait {
-  syntax: "<time>";
-  inherits: true;
-  initial-value: 0ms;
-}
+/* NOTE: --reveal-duration / --reveal-wait are intentionally NOT registered.
+ * reveal.js sets them per-element, and _reveal.css resolves them with
+ * var(--reveal-*, var(--reveal-global-*)). A registered property is never
+ * guaranteed-invalid, so registering them would make that var() fallback
+ * dead — the global/config defaults could never apply. They are not used in
+ * any style() query, so typing buys nothing here. */
 
 @property --spring-duration {
   syntax: "<time>";

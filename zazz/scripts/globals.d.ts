@@ -10,6 +10,8 @@ interface EmblaCarouselType {
   scrollTo(index: number, jump?: boolean): void;
   scrollPrev(): void;
   scrollNext(): void;
+  canScrollPrev(): boolean;
+  canScrollNext(): boolean;
   slideNodes(): HTMLElement[];
   on(event: string, callback: () => void): EmblaCarouselType;
   destroy(): void;

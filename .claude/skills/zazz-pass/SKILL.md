@@ -31,7 +31,7 @@ previews also expose the matching CSS and, for web components, the matching JS t
   reassign tokens (see `zazz/styles/_button.css`). You restyle by overriding tokens, not
   editing rules.
 - **`data-*` for variants** (shadcn-familiar): `data-variant`, `data-size`, `data-side`,
-  `data-align`, `data-direction`, `data-animation`. The **default** variant is the _absence_
+  `data-align`, `data-orientation`, `data-animation`. The **default** variant is the _absence_
   of the attribute. Write `class="button" data-variant="primary"` — never `.button-primary`.
 - **Modern APIs do the work** (Popover, native `<dialog>`, Invoker Commands, anchor
   positioning, View Transitions, `<details>`). Polyfills are already loaded — preserve them.

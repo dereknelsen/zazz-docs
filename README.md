@@ -30,7 +30,7 @@ This repository holds both **Zazz itself** (the `zazz/` folder) and the **docume
    ```html
    <head>
      <meta name="color-scheme" content="light dark" />
-     <link rel="stylesheet" href="./zazz/styles/main.css" />
+     <link rel="stylesheet" href="./zazz/styles/zazz.css" />
    </head>
    ```
 
@@ -40,7 +40,7 @@ This repository holds both **Zazz itself** (the `zazz/` folder) and the **docume
    <button class="button" data-variant="primary">It works</button>
    ```
 
-`main.css` imports every token, reset, component, and utility in the correct cascade order. For the full walkthrough, see [Installation](content/docs/getting-started/installation.mdx).
+`zazz.css` imports every token, reset, component, and utility in the correct cascade order. For the full walkthrough, see [Installation](content/docs/getting-started/installation.mdx).
 
 ## What's in this repo
 
@@ -70,7 +70,7 @@ Other scripts: `pnpm build` (production build), `pnpm types:check` (typecheck an
 - [Introduction](content/docs/index.mdx): what Zazz is, and the four commitments behind it
 - [Getting started](content/docs/getting-started): install, structuring your head tag, page transitions
 - [Core concepts](content/docs/core-concepts): utility classes, states, responsive design, dark mode, theming, colors
-- [Core files](content/docs/core-files): `_layers.css`, `_reset.css`, file anatomy, scripting
+- [Core files](content/docs/core-files): `layers.css`, `_reset.css`, file anatomy, scripting
 - [Components](content/docs/components): buttons, forms, dialogs, navigation, and more
 - [Utilities](content/docs/utilities): the full utility-class reference
 

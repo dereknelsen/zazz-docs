@@ -7,7 +7,7 @@ Zazz replaces specificity-based CSS architecture with a layered cascade. Underst
 
 ## The cascade layers
 
-Every stylesheet in Zazz slots into a cascade layer, and the layers are declared once, in order, in `_layers.css`:
+Every stylesheet in Zazz slots into a cascade layer, and the layers are declared once, in order, in `layers.css`:
 
 ```css
 @layer legacy, reset, zazz, migrations;
@@ -34,7 +34,7 @@ A plain `.button` rule in `components` can be overridden by a utility class in `
 
 Four files form the foundation. Every other file in the system depends on them.
 
-### `_layers.css`
+### `layers.css`
 
 Declares the cascade order. Must load first:
 
@@ -185,10 +185,10 @@ Each `.text-{size}` class bundles the correct font-size, line-height, letter-spa
 
 ## Component tokens
 
-Every component declares its own token namespace in `@layer zazz.variables`, each defaulting to a global token:
+Every component declares its own token namespace in `@layer variables`, each defaulting to a global token:
 
 ```css
-@layer zazz.variables {
+@layer variables {
   :root {
     --button-background: var(--card);
     --button-background--hover: var(--muted);
@@ -250,7 +250,7 @@ Dark mode works at three levels:
 
 1. **Automatic:** `color-scheme: light dark` on `:root` follows the system preference. Semantic tokens use `light-dark()` so they resolve without extra classes.
 2. **Manual:** add a `.dark` class to re-declare tokens for forced dark mode.
-3. **Inverted surfaces:** dark popovers/menus over a light page use container style queries: `@container style(--use-inverted-menu: "true")`.
+3. **Inverted surfaces:** dark popovers/menus over a light page use container style queries: `@container style(--use-inverted-popovers: "true")`.
 
 ## Next steps
 

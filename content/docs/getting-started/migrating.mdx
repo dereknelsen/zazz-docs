@@ -27,10 +27,10 @@ your legacy CSS into the lowest layer:
 @layer legacy, reset, zazz, migrations;
 
 @import "./legacy/app.css" layer(legacy); /* old CSS → lowest priority */
-@import "./zazz/styles/main.css"; /* re-declares the same order */
+@import "./zazz/styles/zazz.css"; /* re-declares the same order */
 ```
 
-The **first** `@layer` statement wins for ordering, so declaring it here (before `main.css`
+The **first** `@layer` statement wins for ordering, so declaring it here (before `zazz.css`
 re-declares the same order) locks `legacy` underneath everything Zazz ships. Now where both
 systems style the same thing, Zazz wins; everywhere Zazz is silent, your old CSS still applies. On
 day one, nothing visually breaks.
@@ -45,10 +45,10 @@ day one, nothing visually breaks.
 ## Step 2: Isolate regions with `data-legacy-css`
 
 `_legacy.css` (disabled by default) adds two HTML attributes that let you opt any subtree into
-one system or the other without writing any CSS. Uncomment its import in `main.css`:
+one system or the other without writing any CSS. Uncomment its import in `zazz.css`:
 
 ```css
-/* main.css */
+/* zazz.css */
 @import "./_legacy.css"; /* remove the comment to enable */
 ```
 

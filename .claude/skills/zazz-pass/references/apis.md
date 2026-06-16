@@ -19,7 +19,7 @@ discovers and enhances markup; you rarely touch it.
 | Native `<details>`                         | accordion                          | `<details>`/`<summary>`, `::details-content`, `interpolate-size: allow-keywords`                            | —                                       |
 | View Transitions                           | cross-page nav                     | `@view-transition { navigation: auto }`, `data-transition-layer="global"`, `document.startViewTransition()` | —                                       |
 | Navigation API                             | SPA-style nav                      | `navigation.js` (app-level; **not** loaded in preview iframes)                                              | falls back to full page load            |
-| `light-dark()` + container `style()` query | theming, dark mode, inverted menus | `.dark` class, `--use-inverted-menu: "true"` on `[popover]`                                                 | —                                       |
+| `light-dark()` + container `style()` query | theming, dark mode, inverted menus | `.dark` class, `--use-inverted-popovers: "true"` on `[popover]`                                                 | —                                       |
 | IntersectionObserver                       | scroll reveals                     | `[data-reveal]` / `[data-reveal-each]` (via `reveal.js`)                                                    | —                                       |
 | `:user-invalid` / `:has()`                 | form validation                    | surfaces error state after commit, not while typing                                                         | —                                       |
 
@@ -64,6 +64,24 @@ Put `data-reveal` on a single element, or `data-reveal-each` on a parent to stag
 | `data-reveal-order`                | `reversed`                                                                | reverse stagger order (group only)                    |
 | `data-reveal-margin`               | rootMargin                                                                | IntersectionObserver margin (default `0px`)           |
 | `data-reveal-threshold`            | 0–1                                                                       | visibility to trigger (default 0.2)                   |
+
+**Reveal owns `transition-*` on the element it's set on.** It drives the animation through
+`transition-duration`, `-delay` (the stagger), `-property`, and `-timing-function`, so don't
+put a `transition` / `transition-all` utility on the same element — they'd compete for those
+properties and break the stagger. When an element also needs its own transition (a `hover:`
+state, for example), wrap it: put the reveal on an outer `div` and keep `transition` on the
+inner element.
+
+```html
+<!-- ✅ outer div reveals; inner card keeps its own hover transition -->
+<div data-reveal-each="slide-up">
+  <a class="card transition hover:border-primary">…</a>
+  <a class="card transition hover:border-primary">…</a>
+</div>
+
+<!-- ❌ same element does both — `transition` wipes out reveal's stagger delay -->
+<a class="card transition hover:border-primary" data-reveal="slide-up">…</a>
+```
 
 ### Embla carousel — `embla.js` (`window.EmblaInit`) — requires the Embla CDN UMD bundles
 

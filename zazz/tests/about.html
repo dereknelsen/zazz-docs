@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <!-- Paint the right theme (bg, form controls, scrollbars) before CSS loads. -->
   <meta name="color-scheme" content="light dark" />
-  <title>Zazz Example Page | Home</title>
+  <title>Zazz tests | Overview</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,10 +15,9 @@
     href="https://fonts.googleapis.com/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Geist:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet" />
 
-  <!-- Zazz styles: one bundle — main.css @imports every layer in cascade order.
-       No separate preload: a same-document stylesheet link is already the highest-priority,
-       render-blocking fetch. Let the server's brotli/gzip handle transfer size. -->
-  <link rel="stylesheet" href="../styles/main.css" />
+  <!-- Zazz styles: one bundle — zazz.css @imports the foundation layers (layers,
+       variables, reset) and every component in cascade order. -->
+  <link rel="stylesheet" href="../styles/zazz.css" />
 
   <!-- Preload critical js -->
   <link rel="preload" href="../scripts/navigation.js" as="script" />
@@ -31,7 +30,7 @@
   <link rel="preload" href="../scripts/tabs.js" as="script" />
 
   <!-- Prefetching related pages -->
-  <link rel="prefetch" href="products.html" />
+  <link rel="prefetch" href="layout.html" />
 
   <!-- WARNING: CDN scripts not recommended for production.
      If you need to use a CDN, create a new SRI hash (@see: https://srihash.org/)
@@ -101,19 +100,25 @@
 </head>
 
 <body class="bg-background">
-  <header class="py-md border-b sticky top-0" data-transition-layer="global-header">
+  <header class="py-md border-b" data-transition-layer="global-header">
     <div class="container">
       <div class="flex items-center justify-between">
-        <a href="index.html" class="text-h6 font-black"> ACME Inc. </a>
+        <a href="index.html" class="text-h6 font-black">Zazz tests</a>
         <nav>
-          <menu class="flex gap-sm">
-            <li><a class="button" data-variant="ghost" href="index.html">Home</a></li>
-            <li><a class="button" href="products.html">Products</a></li>
+          <menu class="flex gap-xs">
+            <li><a class="button" data-variant="ghost" data-size="sm" href="index.html">Overview</a></li>
+            <li><a class="button" data-variant="ghost" data-size="sm" href="about.html">About</a></li>
+            <li><a class="button" data-variant="ghost" data-size="sm" href="products.html">Products</a></li>
+            <li><a class="button" data-variant="ghost" data-size="sm" href="layout.html">Layout</a></li>
+            <li><a class="button" data-variant="ghost" data-size="sm" href="responsive.html">Responsive</a></li>
+            <li><a class="button" data-variant="ghost" data-size="sm" href="components.html">Components</a></li>
+            <li><a class="button" data-variant="ghost" data-size="sm" href="forms.html">Forms</a></li>
           </menu>
         </nav>
       </div>
     </div>
   </header>
+
   <main>
     <section class="container py-xl">
       <div class="grid grid-cols-2 grid-flow-row gap-lg items-center">
@@ -206,7 +211,7 @@
       </div>
     </section>
     <section class="container py-xl">
-      <embla-carousel data-embla-classnames>
+      <embla-carousel data-embla-classnames data-container="lg">
         <div class="flex items-end justify-between gap-md flex-wrap pb-lg">
           <h2 class="text-h5 font-heading">Featured Articles</h2>
           <div class="flex @md:hidden gap-xs">
@@ -399,13 +404,19 @@
     </section>
   </main>
   <footer class="border-t" data-transition-layer="global-footer">
-    <nav class="container py-xl grid grid-cols-2 @md:grid-cols-4 gap-md">
-      <div class="text-h6 font-black">ACME Inc.</div>
-      <menu class="flex gap-sm">
-        <li><a class="button" data-variant="link" href="index.html">Home</a></li>
-        <li><a class="button" data-variant="link" href="products.html">Products</a></li>
-      </menu>
-    </nav>
+    <div class="container py-xl">
+      <div class="flex items-center justify-between gap-md">
+        <div class="text-h6 font-black">Zazz tests</div>
+        <menu class="flex gap-sm">
+          <li><a class="button" data-variant="link" href="about.html">About</a></li>
+          <li><a class="button" data-variant="link" href="layout.html">Layout</a></li>
+          <li><a class="button" data-variant="link" href="responsive.html">Responsive</a></li>
+          <li><a class="button" data-variant="link" href="products.html">Products</a></li>
+          <li><a class="button" data-variant="link" href="components.html">Components</a></li>
+          <li><a class="button" data-variant="link" href="forms.html">Forms</a></li>
+        </menu>
+      </div>
+    </div>
   </footer>
 </body>
 

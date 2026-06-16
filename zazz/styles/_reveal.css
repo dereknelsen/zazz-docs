@@ -3,7 +3,7 @@
  *
  * @layer      variables, utilities
  * @requires   _layers.css, _variables.css
- * @uses       prefers-reduced-reveal — custom media (not prefers-reduced-motion)
+ * @uses       prefers-reduced-motion — native media feature
  * @uses       Behaviour requires zazz/scripts/reveal.js (IntersectionObserver)
  * @tokens     --reveal-global-* (@layer zazz.variables);
  *             per-instance --reveal-* set from data-* attributes (typed in _properties.css)
@@ -51,7 +51,7 @@
 
 @layer zazz.utilities {
   /* --- Animation Styles --- */
-  @media screen and (prefers-reduced-reveal: no-preference) {
+  @media screen and (prefers-reduced-motion: no-preference) {
     :where(
       [data-reveal]:not([data-gjs-type]),
       [data-reveal-each]:not([data-gjs-type]) > *:not([data-gjs-type])
@@ -116,7 +116,7 @@
   }
 
   /* --- Accessibility: Reduced Motion --- */
-  @media (prefers-reduced-reveal: reduce) {
+  @media (prefers-reduced-motion: reduce) {
     /* Immediately show elements without transition */
     :where([data-reveal], [data-reveal-each] > *) {
       transition: none !important;

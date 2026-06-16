@@ -145,6 +145,17 @@ Carousels inside `<dialog>` elements can't measure their viewport until the dial
 <button commandfor="gallery-dialog" data-embla-start="2">Open at slide 3</button>
 ```
 
+## Drag when all slides fit
+
+When every slide already fits in the viewport there is nothing to scroll, so dragging is disabled automatically — otherwise Embla rubber-bands on drag, which feels broken. This is wired through Embla's [`watchDrag`](https://www.embla-carousel.com/api/options/#watchdrag) option with a callback that re-checks on every pointer down (so it stays correct across resizes and `reInit`).
+
+Override it explicitly if needed:
+
+```html
+<!-- Force-disable dragging -->
+<div data-embla="root" data-embla-watch-drag="false">...</div>
+```
+
 ## Drag-aware click suppression
 
 When carousels contain clickable slides (e.g. lightbox triggers with `commandfor`), dragging is distinguished from clicking. After a drag gesture, clicks are suppressed for a short window to prevent accidental activation.

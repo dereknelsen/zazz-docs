@@ -380,6 +380,16 @@ function initEmblaRoot(emblaNode) {
     }
   });
 
+  // Veto drag gestures when every slide already fits in the viewport — with a
+  // single snap Embla still rubber-bands on drag, which feels broken. The
+  // callback re-evaluates on every pointer down, so it stays correct across
+  // resizes/reInit. Respect an explicit data-embla-watch-drag override.
+  // @see https://github.com/davidjerleke/embla-carousel/issues/416
+  if (!("watchDrag" in apiOptions)) {
+    apiOptions.watchDrag = (/** @type {EmblaCarouselType} */ api) =>
+      api.canScrollPrev() || api.canScrollNext();
+  }
+
   const autoplayOptions = Utils.parseDataAttributes(emblaNode, "data-embla-autoplay-");
   const autoscrollOptions = Utils.parseDataAttributes(emblaNode, "data-embla-autoscroll-");
   const classnamesOptions = Utils.parseDataAttributes(emblaNode, "data-embla-classnames-");

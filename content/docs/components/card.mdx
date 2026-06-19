@@ -4,15 +4,15 @@ description: Product and content cards composed from theme tokens and utilities.
 ---
 
 Cards are built from utility classes. There is no `.card` primitive. Wrap a
-`bg-card text-card-foreground` surface in a `border rounded-lg overflow-clip` container, then
+`bg-card text-card-foreground` surface in a `rounded-md shadow-sm overflow-clip` container, then
 compose a figure, a `.badge`, `text-*` content, and a footer with utilities and theme tokens.
 
 ## Default
 
 <Preview src="card/default" />
 
-The default above uses a full-bleed `aspect-landscape` figure, `.p-md` / `.gap-sm` spacing,
-and an avatar plus a muted button in the footer. Because it reuses existing utilities,
+The default above uses a full-bleed `aspect-landscape` figure, `px-sm pb-sm` / `gap-sm` spacing,
+and an avatar in the footer. Because it reuses existing utilities,
 dark mode and theming work automatically.
 
 ## Subgrid

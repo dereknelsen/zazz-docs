@@ -4,8 +4,10 @@ description: A multi-line text field on the shared field foundation.
 ---
 
 The `.textarea` shares the `--field-*` tokens with the other form controls, including
-`:user-invalid` validation styling. Use the native `rows` attribute (and `field-sizing` where
-supported) to control its height.
+`:user-invalid` validation styling. It sets `field-sizing: content` unconditionally, so the box
+auto-grows with its text and clamps between `--textarea-min-block-size` (`5lh`) and
+`--textarea-max-block-size` (`12lh`), then scrolls — adjust those tokens to change the height
+range. `rows` is not the height lever here.
 
 ## Default
 

@@ -1,7 +1,7 @@
 # Zazz token reference
 
 A **map** of which token to reach for and when. Authoritative _values_ live in
-`zazz/styles/_variables.css` (global Tiers 1–3) and each `zazz/styles/_*.css` (component
+`zazz/styles/foundation/_variables.css` (global Tiers 1–3) and each `zazz/styles/ui/_*.css` (component
 tokens, Tier 4) — read those when you need an exact number, so this file can't drift.
 
 Two rules govern every choice:

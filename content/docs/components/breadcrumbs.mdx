@@ -4,8 +4,10 @@ description: Hierarchical navigation composed from link buttons and separators.
 ---
 
 Breadcrumbs are a composition, not a dedicated primitive. A `<nav>` wraps a `<menu>` of
-link buttons (`.button[data-variant="link"]`) separated by muted `/` glyphs. Mark the current
-page with `aria-disabled="true"` so it reads as the active, non-interactive crumb.
+link buttons (`<a class="button" data-variant="link">`) separated by
+`<span class="text-muted-foreground opacity-50">/</span>` glyphs. The current page is rendered as
+a `<div class="button" data-variant="link" aria-disabled="true">` — the same link styling on a
+non-interactive `<div>` instead of an `<a>`, so it reads as the active crumb.
 
 ## Default
 

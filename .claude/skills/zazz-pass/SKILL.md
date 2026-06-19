@@ -24,11 +24,11 @@ previews also expose the matching CSS and, for web components, the matching JS t
 
 ## How Zazz thinks (mental model)
 
-- **Cascade layers, not specificity.** Top-level order is `@layer legacy, zazz, overrides`.
-  `zazz` is subdivided: `variables, reset, components, migrations, utilities`. A utility wins
+- **Cascade layers, not specificity.** Top-level order is `@layer variables, reset, legacy, zazz, migrations`.
+  `zazz` is subdivided: `components, utilities`. A utility wins
   over a component rule with no `!important`. Don't fight the cascade with selector tricks.
 - **Tokens are hooks.** Components read `var(--token)` and never hardcode; variants just
-  reassign tokens (see `zazz/styles/_button.css`). You restyle by overriding tokens, not
+  reassign tokens (see `zazz/styles/ui/_button.css`). You restyle by overriding tokens, not
   editing rules.
 - **`data-*` for variants** (shadcn-familiar): `data-variant`, `data-size`, `data-side`,
   `data-align`, `data-orientation`, `data-animation`. The **default** variant is the _absence_

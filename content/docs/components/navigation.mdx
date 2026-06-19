@@ -3,7 +3,7 @@ title: Navigation
 description: "SPA-like page transitions using the Navigation API and View Transitions: instant content swaps with animated crossfades."
 ---
 
-The navigation script intercepts same-origin page navigations and swaps `<main>` content without a full page reload. Combined with `_page-transitions.css`, this creates smooth, app-like transitions between pages.
+The navigation script intercepts same-origin page navigations and swaps `<main>` content without a full page reload. Combined with `foundation/_view-transitions.css`, this creates smooth, app-like transitions between pages.
 
 ## How it works
 
@@ -15,33 +15,34 @@ The navigation script intercepts same-origin page navigations and swaps `<main>`
 
 ## Setup
 
-`navigation.js` ships inside the single [`zazz.js`](/docs/getting-started/head#script-load-order) module. Include it alongside the page-transitions stylesheet (already part of `zazz.css`):
+`navigation.js` ships inside the single [`zazz.js`](/docs/getting-started/head#script-load-order) module. The view-transition styles live in `foundation/_view-transitions.css`, which is `@import`ed by `zazz.css` — so the usual single link covers them:
 
 ```html
-<link rel="stylesheet" href="./zazz/styles/_page-transitions.css" />
+<link rel="stylesheet" href="./zazz/styles/zazz.css" />
 <script type="module" src="./zazz/scripts/zazz.js"></script>
 ```
 
-Mark your page landmarks with `data-transition-layer` so the view transition knows which elements to animate:
+Mark your header and footer with `data-transition-layer` so the view transition knows which chrome to persist. `<main>` gets `view-transition-name: main-content` automatically via `:where(main)` in `_reset.css` — it needs no attribute:
 
 ```html
-<header data-transition-layer="global">...</header>
+<header data-transition-layer="global-header">...</header>
 <main>...</main>
-<footer data-transition-layer="global">...</footer>
+<footer data-transition-layer="global-footer">...</footer>
 ```
 
 ## What gets transitioned
 
-| Layer          | Behavior                                                       |
-| -------------- | -------------------------------------------------------------- |
-| `main-content` | Animated crossfade (old fades/scales out, new fades/scales in) |
-| `global`       | Persists without animation                                     |
+| Layer            | Behavior                                                       |
+| ---------------- | -------------------------------------------------------------- |
+| `main-content`   | Animated crossfade (old fades/scales out, new fades/scales in) |
+| `global-header`  | Persists without animation                                     |
+| `global-footer`  | Persists without animation                                     |
 
 The header and footer stay in place while `<main>` content transitions. This keeps navigation chrome visually stable.
 
 ## View Transition API
 
-The script uses `document.startViewTransition()` when available. The CSS in `_page-transitions.css` defines the animation:
+The script uses `document.startViewTransition()` when available. The CSS in `foundation/_view-transitions.css` defines the animation:
 
 - **Old content** fades out and scales down slightly
 - **New content** fades in and scales up from slightly smaller
@@ -50,16 +51,35 @@ The animation respects `prefers-reduced-motion`. When reduced motion is preferre
 
 ### Customizing the transition
 
-Override the transition tokens on `:root`:
+Override the transition tokens on `:root`. The scale, opacity, and translate values are split into `--new` and `--old` pairs so the incoming and outgoing snapshots can animate differently:
 
 ```css
 :root {
-  --page-transition-duration: 400ms;
-  --page-transition-ease: ease-out;
-  --page-transition-scale: 0.98;
-  --page-transition-opacity: 0;
+  --view-transition-duration: 400ms;
+  --view-transition-ease: ease-out;
+  --view-transition-wait: 0ms;
+  --view-transition-origin: center top;
+  --view-transition-scale--new: 1;
+  --view-transition-scale--old: 1;
+  --view-transition-opacity--new: 0;
+  --view-transition-opacity--old: 0;
+  --view-transition-translate--new: 0, 0, 0;
+  --view-transition-translate--old: 0, 0, 0;
 }
 ```
+
+| Token                            | Default                | Effect                              |
+| -------------------------------- | ---------------------- | ----------------------------------- |
+| `--view-transition-duration`     | `0ms`                  | How long the crossfade takes        |
+| `--view-transition-ease`         | `var(--bezier-easing)` | Easing curve                        |
+| `--view-transition-wait`         | `0ms`                  | Delay before the new content animates |
+| `--view-transition-origin`       | `center top`           | `transform-origin` for the group    |
+| `--view-transition-scale--new`   | `1`                    | Scale of incoming content           |
+| `--view-transition-scale--old`   | `1`                    | Scale of outgoing content           |
+| `--view-transition-opacity--new` | `0`                    | Start opacity for incoming content  |
+| `--view-transition-opacity--old` | `0`                    | End opacity for outgoing content    |
+| `--view-transition-translate--new` | `0, 0, 0`            | `translate3d` for incoming content  |
+| `--view-transition-translate--old` | `0, 0, 0`            | `translate3d` for outgoing content  |
 
 ## Graceful degradation
 

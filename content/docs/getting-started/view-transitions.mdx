@@ -1,0 +1,96 @@
+---
+title: View transitions
+description: "SPA-like navigation with animated view transitions: instant content swaps that keep your site feeling like a native app."
+---
+
+Zazz includes built-in view transitions that make multi-page sites feel like single-page apps. When a visitor clicks a link, only the `<main>` content swaps. The header and footer stay in place, and a smooth crossfade animation bridges the old and new content.
+
+## Why view transitions?
+
+Traditional multi-page sites flash white between navigations. The browser tears down the entire DOM, re-fetches stylesheets, re-executes scripts, and re-paints from scratch. Users feel the seam.
+
+Zazz eliminates this with two complementary technologies:
+
+1. **The Navigation API** intercepts link clicks and replaces `<main>` content via `fetch()`, avoiding full page reloads.
+2. **The View Transitions API** wraps the DOM swap in a crossfade animation, making the change feel intentional rather than abrupt.
+
+Together, they make navigation near-instant and visually continuous, with no framework required.
+
+## What users experience
+
+- Header and footer remain visually stable, with no flicker and no repaint.
+- Page content fades and scales smoothly between states.
+- Browser back/forward buttons work normally with animated transitions.
+- Scroll position is restored correctly.
+- Focus moves to the new page's heading for screen reader users.
+
+## Enabling transitions
+
+Include the stylesheet and the `zazz.js` module (it bundles `navigation.js`). The transition styles live in `foundation/_view-transitions.css`, which `zazz.css` already `@import`s, so the single link covers them:
+
+```html
+<link rel="stylesheet" href="./zazz/styles/zazz.css" />
+<script type="module" src="./zazz/scripts/zazz.js"></script>
+```
+
+Mark your header and footer. `<main>` gets its view-transition name automatically — it needs no attribute:
+
+```html
+<header data-transition-layer="global-header">...</header>
+<main>...</main>
+<footer data-transition-layer="global-footer">...</footer>
+```
+
+That's it. Every same-origin link on your site now transitions smoothly.
+
+## Customizing the animation
+
+The transition is controlled by CSS custom properties. Scale, opacity, and translate are split into `--new` and `--old` pairs so incoming and outgoing content can animate independently:
+
+```css
+:root {
+  --view-transition-duration: 400ms;
+  --view-transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --view-transition-scale--new: 0.99;
+  --view-transition-scale--old: 1;
+  --view-transition-opacity--new: 0;
+  --view-transition-opacity--old: 0;
+}
+```
+
+| Token                              | Default                | Effect                              |
+| ---------------------------------- | ---------------------- | ----------------------------------- |
+| `--view-transition-duration`       | `0ms`                  | How long the crossfade takes        |
+| `--view-transition-ease`           | `var(--bezier-easing)` | Easing curve                        |
+| `--view-transition-wait`           | `0ms`                  | Delay before the new content animates |
+| `--view-transition-origin`         | `center top`           | `transform-origin` for the group    |
+| `--view-transition-scale--new`     | `1`                    | Scale of incoming content           |
+| `--view-transition-scale--old`     | `1`                    | Scale of outgoing content           |
+| `--view-transition-opacity--new`   | `0`                    | Start opacity for incoming content  |
+| `--view-transition-opacity--old`   | `0`                    | End opacity for outgoing content    |
+| `--view-transition-translate--new` | `0, 0, 0`              | `translate3d` for incoming content  |
+| `--view-transition-translate--old` | `0, 0, 0`              | `translate3d` for outgoing content  |
+
+## Accessibility
+
+- Transitions respect `prefers-reduced-motion`. When reduced motion is preferred, content swaps instantly.
+- After each navigation, focus is routed to the `<h1>` in the new content (or `<main>` if no heading exists), ensuring screen reader users know the page changed.
+
+## Progressive enhancement
+
+Page transitions are entirely optional and degrade gracefully:
+
+- **Browsers without the Navigation API** (Firefox as of 2025) get standard full-page loads.
+- **Browsers without View Transitions** still get instant content swaps, just without the animation.
+- **JavaScript disabled:** normal link behavior, no degradation.
+
+Every page must work as a standalone document. The transitions are an enhancement layer, not a requirement.
+
+## Integration with other scripts
+
+After swapping content, the navigation script automatically re-initializes:
+
+- **Reveal:** rescans for `[data-reveal]` elements in the new `<main>`.
+- **Embla:** initializes any new carousels in the swapped content.
+
+No manual re-initialization needed on your part.

@@ -23,7 +23,7 @@ Internally it uses `.dialog[data-size="screen"]` for full-viewport coverage and
 <!-- Menu -->
 <dialog
   id="mobile-menu-1"
-  class="dialog mobile-menu dark"
+  class="dialog mobile-menu"
   data-size="screen"
   data-animation="slide-right"
   closedby="any"
@@ -49,11 +49,12 @@ Internally it uses `.dialog[data-size="screen"]` for full-viewport coverage and
 
 | Token                                                 | Default             |
 | ----------------------------------------------------- | ------------------- |
-| `--mobile-menu-background`                            | `var(--background)` |
-| `--mobile-menu-foreground`                            | `var(--foreground)` |
-| `--mobile-menu-header-padding-inline`                 | `var(--gap-sm)`     |
-| `--mobile-menu-header-padding-block`                  | `var(--gap-xs)`     |
-| `--mobile-menu-body-padding-inline`                   | `var(--gap-xs)`     |
+| `--mobile-menu-background`                            | `var(--background)`        |
+| `--mobile-menu-foreground`                            | `var(--foreground)`        |
+| `--mobile-menu-backdrop`                              | `var(--faded-foreground)`  |
+| `--mobile-menu-header-padding-inline`                 | `var(--gap-md) var(--gap-xs)` |
+| `--mobile-menu-header-padding-block`                  | `var(--gap-xs)`            |
+| `--mobile-menu-body-padding-inline`                   | `var(--gap-sm)`            |
 | `--mobile-menu-body-padding-block`                    | `var(--gap-md)`     |
 | `--mobile-menu-footer-padding`                        | `var(--gap-sm)`     |
 | `--mobile-menu-footer-gap`                            | `var(--gap-xs)`     |

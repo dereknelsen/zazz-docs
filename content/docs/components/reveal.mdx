@@ -16,12 +16,14 @@ No keyframes, no JavaScript animation loops, just CSS transitions triggered by a
 
 ## Setup
 
-`reveal.js` ships inside the single [`zazz.js`](/docs/getting-started/head#script-load-order) module; its styles are part of `zazz.css`. If you link files individually, include `_reveal.css`:
+`reveal.js` ships inside the single [`zazz.js`](/docs/getting-started/head#script-load-order) module; its styles are part of `zazz.css`, which `@import`s `ui/_reveal.css`. The normal setup is one link to `zazz.css` plus the module:
 
 ```html
-<link rel="stylesheet" href="./zazz/styles/_reveal.css" />
+<link rel="stylesheet" href="./zazz/styles/zazz.css" />
 <script type="module" src="./zazz/scripts/zazz.js"></script>
 ```
+
+If you link files individually, the reveal styles live at `./zazz/styles/ui/_reveal.css`.
 
 Reveal auto-initializes once the DOM is parsed. No manual setup needed for standard pages.
 
@@ -100,11 +102,11 @@ All attributes are optional. Set them on the element with `data-reveal` or `data
 
 | Attribute               | Default                        | Description                               |
 | ----------------------- | ------------------------------ | ----------------------------------------- |
-| `data-reveal-duration`  | `900ms`                        | Animation duration in milliseconds        |
+| `data-reveal-duration`  | `--reveal-global-duration`     | Animation duration. Defaults to the global transition duration (`--default-transition-duration`); JS fallback `400ms` |
 | `data-reveal-wait`      | `0`                            | Base delay before animation starts (ms)   |
 | `data-reveal-step`      | `80`                           | Delay between staggered children (ms)     |
-| `data-reveal-ease`      | `cubic-bezier(0.4, 0, 0.2, 1)` | Timing function                           |
-| `data-reveal-distance`  | `4rem`                         | Translation distance for slide animations |
+| `data-reveal-ease`      | `--reveal-global-ease`         | Timing function. Defaults to `--default-transition-timing-function`; JS fallback `cubic-bezier(0.4, 0, 0.2, 1)` |
+| `data-reveal-distance`  | `1rem`                         | Translation distance for slide animations |
 | `data-reveal-scale`     | —                              | Custom scale value for grow/shrink        |
 | `data-reveal-margin`    | `0px`                          | IntersectionObserver `rootMargin`         |
 | `data-reveal-threshold` | `0.2`                          | Visibility threshold (0–1) to trigger     |
@@ -133,8 +135,19 @@ Or set global CSS custom properties on `:root`:
   --reveal-global-duration: 600ms;
   --reveal-global-ease: ease-in-out;
   --reveal-global-distance: 2rem;
+  --reveal-global-grow: 0.97; /* scale for grow */
+  --reveal-global-shrink: 1.03; /* scale for shrink */
 }
 ```
+
+| Token                     | Default                                | Description                       |
+| ------------------------- | -------------------------------------- | --------------------------------- |
+| `--reveal-global-duration`| `var(--default-transition-duration)`   | Animation duration                |
+| `--reveal-global-ease`    | `var(--default-transition-timing-function)` | Timing function              |
+| `--reveal-global-wait`    | `0ms`                                  | Base delay before animation       |
+| `--reveal-global-distance`| `1rem`                                 | Slide translation distance        |
+| `--reveal-global-grow`    | `0.97`                                 | Scale for `grow`                  |
+| `--reveal-global-shrink`  | `1.03`                                 | Scale for `shrink`                |
 
 ## Manual control
 
@@ -162,7 +175,7 @@ The SPA navigation script (`navigation.js`) calls `refresh()` automatically afte
 
 ## Reduced motion
 
-Reveal respects `prefers-reduced-motion`. When reduced motion is preferred, elements appear immediately without animation. The CSS uses a custom `prefers-reduced-reveal` media query so you can control reveal behavior independently from other motion preferences.
+Reveal respects `prefers-reduced-motion`. The CSS uses the standard `@media (prefers-reduced-motion: reduce)` query: when reduced motion is preferred, elements appear immediately with transitions and transforms disabled.
 
 ## CSS custom properties
 

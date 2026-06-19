@@ -1,26 +1,32 @@
 /**
- * _page-transitions.css — Cross-document view transitions
+ * _view-transitions.css — Cross-document view transitions
  *
  * @layer      variables, utilities
  * @requires   layers.css, _variables.css, _reset.css ([data-transition-layer] names)
  * @uses       ::view-transition-old/new — cross-document page transitions
- * @uses       @view-transition — enabled in _variables.css
- * @tokens     --page-transition-* (@layer variables)
+ * @uses       @view-transition { navigation: auto } — enabled here, behind @supports
+ * @tokens     --view-transition-* (@layer variables)
  */
 
 
 @layer variables {
+  @supports at-rule(@view-transition) and (navigation: auto) {
+    @view-transition {
+      navigation: auto;
+    }
+  }
+
   :root {
-    --page-transition-duration: 0ms;
-    --page-transition-ease: var(--bezier-easing);
-    --page-transition-wait: 0ms;
-    --page-transition-origin: center top;
-    --page-transition-scale--new: 1;
-    --page-transition-scale--old: 1;
-    --page-transition-translate--new: 0, 0, 0;
-    --page-transition-translate--old: 0, 0, 0;
-    --page-transition-opacity--new: 0;
-    --page-transition-opacity--old: 0;
+    --view-transition-duration: 0ms;
+    --view-transition-ease: var(--bezier-easing);
+    --view-transition-wait: 0ms;
+    --view-transition-origin: center top;
+    --view-transition-scale--new: 1;
+    --view-transition-scale--old: 1;
+    --view-transition-translate--new: 0, 0, 0;
+    --view-transition-translate--old: 0, 0, 0;
+    --view-transition-opacity--new: 0;
+    --view-transition-opacity--old: 0;
   }
 }
 
@@ -29,14 +35,14 @@
     /* View transitions — main is isolated from header/footer (see _reset.css view-transition-name) */
     @media screen and (prefers-reduced-motion: no-preference) {
       ::view-transition-old(main-content) {
-        animation: global-page-transition--old var(--page-transition-duration)
-          var(--page-transition-ease) both;
+        animation: global-view-transition--old var(--view-transition-duration)
+          var(--view-transition-ease) both;
       }
 
       ::view-transition-new(main-content) {
-        animation: global-page-transition--new var(--page-transition-duration)
-          var(--page-transition-ease) both;
-        animation-delay: var(--page-transition-wait);
+        animation: global-view-transition--new var(--view-transition-duration)
+          var(--view-transition-ease) both;
+        animation-delay: var(--view-transition-wait);
       }
 
       /* Persist shared chrome without cross-fading */
@@ -53,22 +59,22 @@
     ::view-transition-group(main-content) {
       z-index: 1;
       overflow: clip;
-      transform-origin: var(--page-transition-origin);
+      transform-origin: var(--view-transition-origin);
     }
 
-    @keyframes global-page-transition--old {
+    @keyframes global-view-transition--old {
       to {
-        opacity: var(--page-transition-opacity--new);
-        transform: scale(var(--page-transition-scale--old))
-          translate3d(var(--page-transition-translate--old));
+        opacity: var(--view-transition-opacity--new);
+        transform: scale(var(--view-transition-scale--old))
+          translate3d(var(--view-transition-translate--old));
       }
     }
 
-    @keyframes global-page-transition--new {
+    @keyframes global-view-transition--new {
       from {
-        opacity: var(--page-transition-opacity--new);
-        transform: scale(var(--page-transition-scale--new))
-          translate3d(var(--page-transition-translate--new));
+        opacity: var(--view-transition-opacity--new);
+        transform: scale(var(--view-transition-scale--new))
+          translate3d(var(--view-transition-translate--new));
       }
     }
 

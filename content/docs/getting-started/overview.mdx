@@ -7,13 +7,13 @@ Zazz replaces specificity-based CSS architecture with a layered cascade. Underst
 
 ## The cascade layers
 
-Every stylesheet in Zazz slots into a cascade layer, and the layers are declared once, in order, in `layers.css`:
+Every stylesheet in Zazz slots into a cascade layer, and the layers are declared once, in order, in `_layers.css`:
 
 ```css
-@layer legacy, reset, zazz, migrations;
+@layer variables, reset, legacy, zazz, migrations;
 
 @layer zazz {
-  @layer variables, components, utilities;
+  @layer components, utilities;
 }
 ```
 
@@ -21,28 +21,28 @@ Order matters. Later layers override earlier ones regardless of selector specifi
 
 | Layer             | Purpose                                              | Example                                        |
 | ----------------- | ---------------------------------------------------- | ---------------------------------------------- |
-| `legacy`          | Your pre-Zazz CSS during a migration (lowest)        | `@import "old.css" layer(legacy)`              |
+| `variables`       | Token declarations only (lowest)                     | `:root { --button-radius: var(--radius-md); }` |
 | `reset`           | Native element baselines                             | `html`, `body`, `input`, `select` defaults     |
-| `zazz.variables`  | Token declarations only                              | `:root { --button-radius: var(--radius-md); }` |
+| `legacy`          | Your pre-Zazz CSS during a migration                 | `@import "old.css" layer(legacy)`              |
 | `zazz.components` | Component rules                                       | `.button`, `.dialog`, `.field`                 |
 | `zazz.utilities`  | Atomic override classes                              | `.text-primary`, `.gap-md`, `.rounded-full`    |
 | `migrations`      | Class-translation shims during a migration (highest) | `.btn-primary { --button-background: … }`      |
 
-A plain `.button` rule in `components` can be overridden by a utility class in `utilities`, with no `!important` needed. The outer `legacy` and `migrations` layers bracket the stack for incremental adoption (see [Migrating to Zazz](/docs/getting-started/migrating)); day to day you work in the middle three Zazz sublayers.
+A plain `.button` rule in `components` can be overridden by a utility class in `utilities`, with no `!important` needed. The outer `legacy` and `migrations` layers bracket the stack for incremental adoption (see [Migrating to Zazz](/docs/getting-started/migrating)); day to day you work in the two Zazz sublayers.
 
 ## Core files
 
 Four files form the foundation. Every other file in the system depends on them.
 
-### `layers.css`
+### `_layers.css`
 
 Declares the cascade order. Must load first:
 
 ```css
-@layer legacy, reset, zazz, migrations;
+@layer variables, reset, legacy, zazz, migrations;
 
 @layer zazz {
-  @layer variables, components, utilities;
+  @layer components, utilities;
 }
 ```
 
@@ -250,7 +250,7 @@ Dark mode works at three levels:
 
 1. **Automatic:** `color-scheme: light dark` on `:root` follows the system preference. Semantic tokens use `light-dark()` so they resolve without extra classes.
 2. **Manual:** add a `.dark` class to re-declare tokens for forced dark mode.
-3. **Inverted surfaces:** dark popovers/menus over a light page use container style queries: `@container style(--use-inverted-popovers: "true")`.
+3. **Inverted surfaces:** dark popovers/menus over a light page use container style queries: `@container style(--use-inverted-popovers: true)`. Opt a single popover out with `data-use-inverted-menu="false"`.
 
 ## Next steps
 

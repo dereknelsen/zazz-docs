@@ -17,9 +17,9 @@ discovers and enhances markup; you rarely touch it.
 | CSS Anchor Positioning                     | popover/tooltip placement          | `data-side`, `data-align` (drive `anchor-name` / `position-area`)                                           | `@supports`-gated; UA-centered fallback |
 | Native `<dialog>`                          | dialog, lightbox, mobile-menu      | `<dialog>`, `::backdrop`, `closedby="any"`                                                                  | (via Invoker Commands polyfill)         |
 | Native `<details>`                         | accordion                          | `<details>`/`<summary>`, `::details-content`, `interpolate-size: allow-keywords`                            | —                                       |
-| View Transitions                           | cross-page nav                     | `@view-transition { navigation: auto }`, `data-transition-layer="global"`, `document.startViewTransition()` | —                                       |
+| View Transitions                           | cross-page nav                     | `@view-transition { navigation: auto }`, `data-transition-layer="global-header"` / `="global-footer"` (`<main>` is automatic), `document.startViewTransition()` | —                                       |
 | Navigation API                             | SPA-style nav                      | `navigation.js` (app-level; **not** loaded in preview iframes)                                              | falls back to full page load            |
-| `light-dark()` + container `style()` query | theming, dark mode, inverted menus | `.dark` class, `--use-inverted-popovers: "true"` on `[popover]`                                                 | —                                       |
+| `light-dark()` + container `style()` query | theming, dark mode, inverted menus | `.dark` class, `--use-inverted-popovers: true` on `[popover]` (opt out per-popover with `data-use-inverted-menu="false"`) | —                                       |
 | IntersectionObserver                       | scroll reveals                     | `[data-reveal]` / `[data-reveal-each]` (via `reveal.js`)                                                    | —                                       |
 | `:user-invalid` / `:has()`                 | form validation                    | surfaces error state after commit, not while typing                                                         | —                                       |
 
@@ -56,12 +56,12 @@ Put `data-reveal` on a single element, or `data-reveal-each` on a parent to stag
 | Attribute                          | Values / unit                                                             | Notes                                                 |
 | ---------------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------- |
 | `data-reveal` / `data-reveal-each` | `slide-up` `slide-down` `slide-left` `slide-right` `fade` `grow` `shrink` | single vs. stagger-group                              |
-| `data-reveal-duration`             | ms                                                                        | default: `--default-transition-duration` (else 900ms) |
+| `data-reveal-duration`             | ms                                                                        | default: `--default-transition-duration` (JS fallback 400ms) |
 | `data-reveal-wait`                 | ms                                                                        | base delay before start (default 0)                   |
 | `data-reveal-step`                 | ms                                                                        | stagger between children (group only; default 80)     |
 | `data-reveal-ease`                 | CSS timing function                                                       | default: `--default-transition-timing-function`       |
-| `data-reveal-distance`             | CSS length                                                                | slide travel (default `4rem`)                         |
-| `data-reveal-scale`                | number                                                                    | grow/shrink factor (defaults grow 0.9, shrink 1.1)    |
+| `data-reveal-distance`             | CSS length                                                                | slide travel (default `1rem`)                         |
+| `data-reveal-scale`                | number                                                                    | grow/shrink factor (defaults grow 0.97, shrink 1.03)  |
 | `data-reveal-order`                | `reversed`                                                                | reverse stagger order (group only)                    |
 | `data-reveal-margin`               | rootMargin                                                                | IntersectionObserver margin (default `0px`)           |
 | `data-reveal-threshold`            | 0–1                                                                       | visibility to trigger (default 0.2)                   |
@@ -125,5 +125,5 @@ defers while inside a closed `<dialog>`, and destroys its Embla instances on dis
 
 `@oddbird/popover-polyfill` (Popover API) · `invokers/compatible` (Invoker + Interest
 Invokers, i.e. `command`/`commandfor`/`interestfor`) · the Embla Carousel CDN UMD bundles
-(core + autoplay, auto-scroll, class-names, ssr plugins). See `zazz/components/index.html` for
+(core + autoplay, auto-scroll, class-names, ssr plugins). See `zazz/tests/index.html` for
 the exact tags and SRI hashes.

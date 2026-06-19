@@ -205,7 +205,7 @@ Put styles, scripts, and the theme block in `<head>`. Deferred scripts keep thei
     </script>
   </head>
   <body>
-    <header data-transition-layer="global">
+    <header data-transition-layer="global-header">
       <!-- Navigation -->
     </header>
 
@@ -213,7 +213,7 @@ Put styles, scripts, and the theme block in `<head>`. Deferred scripts keep thei
       <!-- Page content -->
     </main>
 
-    <footer data-transition-layer="global">
+    <footer data-transition-layer="global-footer">
       <!-- Footer -->
     </footer>
   </body>
@@ -231,12 +231,13 @@ The reset gives `<body>`, `<main>`, and section landmarks their own layout and c
 
 `zazz.css` handles this for you. If you link files individually, keep this order:
 
-1. `layers.css`: declares `@layer legacy, reset, zazz, migrations;` ([why this comes first](/docs/core-files/layers))
-2. `_properties.css`: registered `@property` declarations
-3. `_variables.css`: global design tokens
-4. `_reset.css`: element baselines
-5. Component files, in any order
-6. `_utilities.css`, then `_layout.css`: atomic overrides and the container/layout grid (load last)
+1. `foundation/_layers.css`: declares `@layer variables, reset, legacy, zazz, migrations;` ([why this comes first](/docs/core-files/layers))
+2. `foundation/_variables.css`: global design tokens (and the inline `@property` registrations)
+3. `foundation/_reset.css`: element baselines
+4. `foundation/_typography.css`: type system and `.prose`
+5. `foundation/_view-transitions.css`: cross-document page transitions
+6. `ui/_*.css` component files, in any order
+7. `foundation/_utilities.css`, then `foundation/_layout.css`: atomic overrides and the container/layout grid (load last)
 
 With HTTP/2–3 multiplexing and server compression, the single `zazz.css` link is usually enough. No manual ordering to maintain.
 
@@ -257,12 +258,12 @@ Everything auto-initializes once the DOM is parsed. No manual init on a normal p
 
 ## View transition layers
 
-For page transitions (cross-document or SPA-style via `navigation.js`), mark landmarks with `data-transition-layer`:
+For page transitions (cross-document or SPA-style via `navigation.js`), mark the header and footer with `data-transition-layer`. `<main>` gets its view-transition name automatically and needs no attribute:
 
 ```html
-<header data-transition-layer="global">...</header>
+<header data-transition-layer="global-header">...</header>
 <main>...</main>
-<footer data-transition-layer="global">...</footer>
+<footer data-transition-layer="global-footer">...</footer>
 ```
 
-These map to `view-transition-name` values in `_page-transitions.css`. The `<main>` content animates on navigation; header and footer stay put.
+These map to `view-transition-name` values in `foundation/_view-transitions.css`. The `<main>` content animates on navigation; header and footer stay put.

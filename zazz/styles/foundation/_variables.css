@@ -7,7 +7,6 @@
  * @uses       light-dark() — theme roles follow color-scheme / .dark overrides
  * @uses       oklch(from …) — shade/tint scales and shadow alphas
  * @uses       color-mix() — focus ring (--ring)
- * @uses       @view-transition { navigation: auto } — cross-document view transitions
  * @uses       interpolate-size: allow-keywords — discrete block-size animations (details, etc.)
  * @tokens     Global token tiers (the root override hooks) — Theme roles, brand
  *             scales (50–950), grayscale/shade/tint, typography, spacing, radius,
@@ -92,11 +91,6 @@
   :root {
     /* Enable light/dark mode - make sure to redeclare dark mode tokens on .dark at the bottom of the file */
     color-scheme: light dark;
-
-    /* View transitions */
-    @view-transition {
-      navigation: auto;
-    }
 
     /* Enable discrete value animations, e.g. block-size: auto; */
     interpolate-size: allow-keywords;

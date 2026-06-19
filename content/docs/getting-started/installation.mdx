@@ -37,7 +37,7 @@ pnpm dlx degit dereknelsen/zazz-docs/zazz/scripts ./src/zazz/scripts
 Need one file only?
 
 ```bash
-pnpm dlx degit dereknelsen/zazz-docs/zazz/styles/_dialog.css ./src/zazz/styles/_dialog.css
+pnpm dlx degit dereknelsen/zazz-docs/zazz/styles/ui/_dialog.css ./src/zazz/styles/ui/_dialog.css
 ```
 
 <Callout type="warn">
@@ -67,7 +67,7 @@ Stick with the single `zazz.css` link. CSS this regular compresses extremely wel
 A separate `<link rel="preload" as="style">` for `zazz.css` is **not** needed. A same-document stylesheet link is already the highest-priority, render-blocking fetch. `preload` is for *late-discovered* resources (web fonts, CSS pulled in by JS), not the stylesheet you link in `<head>`.
 </Callout>
 
-You _can_ instead link each `_*.css` file individually (with `preload` hints) to avoid `zazz.css`'s `@import` chain, but with HTTP/2-3 multiplexing and server compression it's rarely worth the upkeep. If you do, keep the cascade order: `layers.css` first, then `_legacy.css`, `_properties.css`, `_variables.css`, `_reset.css`; component files in any order; then `_utilities.css` and `_layout.css` last.
+You _can_ instead link each `_*.css` file individually (with `preload` hints) to avoid `zazz.css`'s `@import` chain, but with HTTP/2-3 multiplexing and server compression it's rarely worth the upkeep. If you do, keep the cascade order: `foundation/_layers.css` first, then `foundation/_variables.css`, `foundation/_reset.css`, `foundation/_typography.css`, `foundation/_view-transitions.css`; the `ui/_*.css` component files in any order; then `foundation/_utilities.css` and `foundation/_layout.css` last.
 
 ## Verify it works
 
@@ -100,22 +100,26 @@ A typical project looks like this:
 my-project/
 ├── index.html
 ├── zazz/
-│   └── styles/
-│       ├── zazz.css          ← entry point
-│       ├── layers.css       ← cascade order (loads first)
-│       ├── _legacy.css        ← scoped legacy + migration boundary
-│       ├── _properties.css   ← typed @property registrations
-│       ├── _variables.css    ← global design tokens
-│       ├── _reset.css        ← element baselines
-│       ├── _button.css       ← component styles
-│       ├── _utilities.css    ← atomic helper classes
-│       ├── _layout.css       ← container + layout grid
-│       └── ...
+│   ├── styles/
+│   │   ├── zazz.css                ← entry point (@imports everything)
+│   │   ├── foundation/
+│   │   │   ├── _layers.css         ← cascade order (loads first)
+│   │   │   ├── _variables.css      ← global design tokens
+│   │   │   ├── _reset.css          ← element baselines
+│   │   │   ├── _typography.css     ← type system + .prose
+│   │   │   ├── _view-transitions.css ← cross-document page transitions
+│   │   │   ├── _utilities.css      ← atomic helper classes
+│   │   │   └── _layout.css         ← container + layout grid
+│   │   └── ui/
+│   │       ├── _button.css         ← component styles
+│   │       ├── _dialog.css
+│   │       └── ...
 │   └── scripts/
-│       ├── navigation.js      ← page transitions and link handling
-│       ├── reveal.js          ← reveal effects
+│       ├── zazz.js                 ← entry module (imports all scripts)
+│       ├── navigation.js           ← page transitions and link handling
+│       ├── reveal.js               ← reveal effects
 │       └── ...
-└── your-styles.css           ← your overrides (optional)
+└── your-styles.css                 ← your overrides (optional)
 ```
 
 ## Customizing

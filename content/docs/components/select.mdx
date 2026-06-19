@@ -7,6 +7,10 @@ The `.select` restyles a native `<select>` using `appearance: base-select`, so t
 picker matches the rest of the system where supported. Falls back to the native control
 otherwise (gated behind `@supports`).
 
+The `base-select` pattern requires a `<button><selectedcontent></selectedcontent></button>` as
+the select's first child — the button is the trigger and `<selectedcontent>` mirrors the chosen
+option. Keep the `<option>`s (an `<optgroup>` label works as a native fallback) after it.
+
 ## Default
 
 <Preview src="select/default" />

@@ -68,8 +68,9 @@ for all children with `data-container="…"` on the `.container`. See
 </body>
 ```
 
-Add `data-transition-layer="global"` to the `<header>` the `<footer>` to persist them across view
-transitions (see `references/apis.md`).
+Add `data-transition-layer="global-header"` to the `<header>` and `data-transition-layer="global-footer"`
+to the `<footer>` to persist them across view transitions (`<main>` animates automatically; see
+`references/apis.md`).
 
 ## Heading group with CTAs
 

@@ -11,6 +11,10 @@ handled by the browser.
 
 <Preview src="accordion/default" />
 
-There are no attributes to configure. Author the disclosure with standard `<details>`
-markup. Multiple panels can be open at once by default; give a group of `<details>` the same
-`name` to make them mutually exclusive.
+There are no data-* attributes to configure. Author each panel as a `<details class="border-b">`
+with a `<summary class="font-strong hover:text-muted-foreground">`, an inline chevron `<svg>`
+that rotates on open, and a `<div class="pb-sm">` body. Multiple panels can be open at once by
+default; give a group of `<details>` the same `name` to make them mutually exclusive.
+
+Theming runs through tokens: `--accordion-summary-padding-block`, `--accordion-icon-size`, and
+`--accordion-icon-transform-open` (the open-state chevron rotation).

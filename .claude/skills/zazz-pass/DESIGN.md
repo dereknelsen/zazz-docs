@@ -395,11 +395,11 @@ Headings use `text-wrap: balance`. Body uses `text-wrap: pretty`. Tight-leading 
 
 ### Buttons
 
-Subtly rounded (`--radius-md`, ~10px). Fixed height (`--step-8`). Variants (via `data-variant`): **default** (no attribute — bordered, `--background`), **primary** (solid `--primary`), **muted** (`--muted` fill), **ghost** (transparent, hover reveals `--muted`), **destructive** (solid `--destructive`), **link** (inline, underlined). Sizes (via `data-size`): `sm`, `icon`, `icon-sm`.
+Subtly rounded (`--radius-md`, ~10px). Fixed height (`--step-8`). Variants (via `data-variant`): **default** (no attribute — bordered, `--card`), **primary** (solid `--primary`), **muted** (`--muted` fill), **ghost** (transparent, hover reveals `--muted`), **destructive** (solid `--destructive`), **link** (inline, underlined). Sizes (via `data-size`): `sm`, `icon`, `icon-sm`.
 
 ### Badges
 
-Gently rounded chips (`--radius-sm`, ~6px). Height `--step-5`. Variants (via `data-variant`): `default`, `primary`, `muted`, `ghost`, `link` — note badge has **no** `destructive` variant. Size: `icon`. `--font-size-xs`, `--font-weight-strong`.
+Gently rounded chips (`--radius-sm`, ~6px). Height `--step-5_5`. Variants (via `data-variant`): `default`, `primary`, `muted`, `ghost`, `link` — note badge has **no** `destructive` variant. Size: `icon`. `--font-size-xs`, `--font-weight-strong`.
 
 ### Dialog
 
@@ -407,7 +407,7 @@ Native `<dialog>` via Invoker Commands API. `--card` surface, `--shadow-md`, `--
 
 ### Dropdown & Navigation Menu
 
-Popover API + CSS anchor positioning. Native light-dismiss. Dropdown items are `.button[data-variant="ghost"]`. Navigation menu supports mega-panels with `__viewport` grid and `__featured` callout.
+Popover API + CSS anchor positioning. Native light-dismiss. Dropdown items are `.button[data-variant="ghost"]`. Navigation menu supports mega-panels with a `__viewport` grid and rich `__link` rows (title + description); callouts are built from utilities (e.g. `bg-muted rounded-sm p-sm` + `.text-eyebrow`).
 
 ### Tabs
 

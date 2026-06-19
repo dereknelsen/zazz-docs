@@ -50,7 +50,7 @@ Each script attaches its public API to `window` (the documented surface) **and**
 | --------------- | ------------------ | ----------------------------------------- |
 | `utils.js`      | `window.Utils`     | `{ parseValue, parseDataAttributes }`     |
 | `reveal.js`     | `window.Reveal`    | `Reveal` class                            |
-| `embla.js`      | `window.EmblaInit` | `{ init, addDotBtnsAndClickHandlers, … }` |
+| `embla.js`      | `window.EmblaInit` | `{ init, initRoot, addDotBtnsAndClickHandlers }` |
 | `navigation.js` | _(none)_           | Side-effect only; no export               |
 
 The web-component scripts (`carousel.js`, `lightbox.js`, `password.js`, `tabs.js`) export their element class and register the custom element as a side effect.

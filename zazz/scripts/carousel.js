@@ -31,6 +31,8 @@
  * </embla-carousel>
  */
 
+import { EmblaInit } from "./embla.js";
+
 class EmblaCarouselElement extends HTMLElement {
   /** @type {MutationObserver|null} */
   #dialogObserver = null;
@@ -73,7 +75,7 @@ class EmblaCarouselElement extends HTMLElement {
    * @returns {void}
    */
   init() {
-    window.EmblaInit?.initRoot(this);
+    EmblaInit.initRoot(this);
   }
 
   /**
@@ -89,13 +91,10 @@ if (typeof window !== "undefined" && !customElements.get("embla-carousel")) {
   customElements.define("embla-carousel", EmblaCarouselElement);
 }
 
-// Export for module environments or attach to window
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = EmblaCarouselElement;
-} else if (typeof define === "function" && define.amd) {
-  define([], function () {
-    return EmblaCarouselElement;
-  });
-} else if (typeof window !== "undefined") {
+// Attach to window so embla.js's lightbox sync can feature-detect the element type,
+// and export for module consumers (lightbox.js imports it via the zazz.js bundle).
+if (typeof window !== "undefined") {
   window.EmblaCarouselElement = EmblaCarouselElement;
 }
+
+export { EmblaCarouselElement };

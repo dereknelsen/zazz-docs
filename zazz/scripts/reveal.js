@@ -325,13 +325,10 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
   };
 }
 
-// Export for module environments or attach to window
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = Reveal;
-} else if (typeof define === "function" && define.amd) {
-  define([], function () {
-    return Reveal;
-  });
-} else if (typeof window !== "undefined") {
+// Attach to window for the documented public API (`window.Reveal`, `new Reveal()`),
+// and export for module consumers (navigation.js imports it via the zazz.js bundle).
+if (typeof window !== "undefined") {
   window.Reveal = Reveal;
 }
+
+export { Reveal };

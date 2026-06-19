@@ -15,7 +15,7 @@ Applies to all files in `zazz/scripts/`:
 - `tabs.js`
 - `utils.js`
 
-Scripts are served directly at `/zazz/scripts/*.js` — no bundler or transpiler. Write browser-native JavaScript that runs as-is in modern browsers.
+Scripts are served directly at `/zazz/scripts/*.js` — no bundler or transpiler. Write browser-native **ES modules** that run as-is in modern browsers. `zazz.js` is the entry module: it `import`s every component script so a page loads behavior with one `<script type="module" src="…/zazz.js">` tag. When you add a script, add an `import "./your-script.js";` line to `zazz.js`.
 
 Type-checking is enabled via `zazz/scripts/tsconfig.json` (`checkJs: true`). Run `npm run scripts:check` (or the full `npm run types:check`) to validate. Ambient types for CDN and cross-script globals live in `zazz/scripts/globals.d.ts`.
 
@@ -25,7 +25,7 @@ Type-checking is enabled via `zazz/scripts/tsconfig.json` (`checkJs: true`). Run
 
 ### Philosophy
 
-- **Vanilla JS only.** No frameworks, no npm imports, no build step. Scripts may depend on globals loaded by prior `<script>` tags (e.g. Embla CDN libs).
+- **Vanilla JS only.** No framework, no npm runtime deps, no build step — just native ES modules. Cross-script dependencies use `import`; external libraries Zazz doesn't ship (the Embla CDN UMD bundles) are still read as globals loaded by prior `<script>` tags.
 - **HTML-first.** Markup and data attributes drive behavior. Authors configure components in HTML; scripts discover and enhance the DOM.
 - **Progressive enhancement.** Feature-detect APIs before use. When unsupported, degrade gracefully (e.g. `navigation.js` falls back to full page loads).
 - **Minimal surface area.** Export a small public API. Keep helpers private with `@private` JSDoc or class private fields (`#method`).
@@ -37,8 +37,9 @@ Every script follows this layout:
 1. `"use strict";` as the first line.
 2. `@fileoverview` JSDoc block describing the module.
 3. Implementation grouped with `// --- Section name ---` dividers in long files.
-4. Auto-initialization block (when applicable).
-5. Universal export block at the bottom.
+4. `import` statements for any sibling modules this script depends on.
+5. Auto-initialization block (when applicable).
+6. `window` assignment for the public API, then a named `export`, at the bottom.
 
 ```javascript
 "use strict";
@@ -47,6 +48,8 @@ Every script follows this layout:
  * @fileoverview Module title.
  * @description What this module does.
  */
+
+import { Dependency } from "./dependency.js"; // only when this module needs another
 
 // --- Section name ---
 
@@ -57,21 +60,17 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
   // ...
 }
 
-// Export for module environments or attach to window
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = MyExport;
-} else if (typeof define === "function" && define.amd) {
-  define([], function () {
-    return MyExport;
-  });
-} else if (typeof window !== "undefined") {
+// Attach to window for the documented public API, then export for module consumers.
+if (typeof window !== "undefined") {
   window.MyExport = MyExport;
 }
+
+export { MyExport };
 ```
 
 ### Module exports
 
-Use a named export object or class, then attach it via the universal export pattern above. This supports CommonJS, AMD, and browser globals.
+Attach a named export object or class to `window` for the documented public API, then `export` it for module consumers (the `zazz.js` entry and any sibling script that imports it).
 
 | File            | Global                        | Export shape                          |
 | --------------- | ----------------------------- | ------------------------------------- |
@@ -117,7 +116,7 @@ Interactive components ship as **light-DOM custom elements** that augment existi
 - **Guard registration:** `if (!customElements.get("tag-name")) customElements.define(...)` so double script loads are safe.
 - **Custom elements are `display: inline` by default** — add a `display` rule in the component's stylesheet.
 - **Degrade gracefully.** Without JS the markup must still render sensibly (a password field stays masked; tabs keep native radio behavior).
-- Export the element class via the universal export block like any other script.
+- Attach the element class to `window` and `export` it like any other script.
 
 ### Data-attribute configuration
 
@@ -132,20 +131,20 @@ Boolean flags can be bare attributes (`data-embla-autoplay`) or explicit values 
 
 ### Dependencies and load order
 
-Scripts declare dependencies via `<script>` tag order, not imports.
+Scripts declare dependencies with ES `import`s, so the module graph resolves order — the `zazz.js` entry is the only tag a page loads.
 
-| Script          | Depends on                 | Notes                                              |
-| --------------- | -------------------------- | -------------------------------------------------- |
-| `utils.js`      | —                          | Load first; provides `window.Utils`                |
-| `reveal.js`     | —                          | Standalone                                         |
-| `embla.js`      | `utils.js`, Embla CDN libs | Requires Embla UMD bundles before this file        |
-| `carousel.js`   | `embla.js`                 | `<embla-carousel>` calls `EmblaInit.initRoot`      |
-| `lightbox.js`   | `carousel.js`              | `<media-lightbox>` coordinates carousel elements   |
-| `password.js`   | —                          | Standalone (`<input-password>`)                    |
-| `tabs.js`       | —                          | Standalone (`<tab-group>`)                         |
-| `navigation.js` | —                          | App-level; not loaded in component preview iframes |
+| Script          | Imports       | Notes                                            |
+| --------------- | ------------- | ------------------------------------------------ |
+| `utils.js`      | —             | Provides `window.Utils`                          |
+| `reveal.js`     | —             | Standalone                                       |
+| `embla.js`      | `utils.js`    | Also needs the Embla CDN globals (see below)     |
+| `carousel.js`   | `embla.js`    | `<embla-carousel>` calls `EmblaInit.initRoot`    |
+| `lightbox.js`   | `carousel.js` | `<media-lightbox>` coordinates carousel elements |
+| `password.js`   | —             | Standalone (`<input-password>`)                  |
+| `tabs.js`       | —             | Standalone (`<tab-group>`)                       |
+| `navigation.js` | —             | App-level; inert in component preview iframes    |
 
-When a script needs `Utils`, assume `window.Utils` is available — do not bundle or duplicate parsing logic.
+When a script needs `Utils`, `import { Utils } from "./utils.js"` — do not duplicate parsing logic. The one thing the module graph can't order is the **Embla CDN UMD bundles**: `embla.js` reads them as globals, so their `<script defer>` tags must precede the `zazz.js` module in the document.
 
 ### DOM interaction patterns
 

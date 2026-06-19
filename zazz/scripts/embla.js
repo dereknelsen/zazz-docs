@@ -67,6 +67,8 @@
  * </div>
  */
 
+import { Utils } from "./utils.js";
+
 // --- Dot navigation ---
 
 /**
@@ -700,13 +702,10 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
   }
 }
 
-// Export for module environments or attach to window
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = EmblaInit;
-} else if (typeof define === "function" && define.amd) {
-  define([], function () {
-    return EmblaInit;
-  });
-} else if (typeof window !== "undefined") {
+// Attach to window for the documented public API (`window.EmblaInit`), and export
+// for module consumers (carousel.js / navigation.js import it via the zazz.js bundle).
+if (typeof window !== "undefined") {
   window.EmblaInit = EmblaInit;
 }
+
+export { EmblaInit };

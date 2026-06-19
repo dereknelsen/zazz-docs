@@ -15,11 +15,11 @@ The navigation script intercepts same-origin page navigations and swaps `<main>`
 
 ## Setup
 
-Include the script and the page transitions stylesheet:
+`navigation.js` ships inside the single [`zazz.js`](/docs/getting-started/head#script-load-order) module. Include it alongside the page-transitions stylesheet (already part of `zazz.css`):
 
 ```html
 <link rel="stylesheet" href="./zazz/styles/_page-transitions.css" />
-<script src="./zazz/scripts/navigation.js"></script>
+<script type="module" src="./zazz/scripts/zazz.js"></script>
 ```
 
 Mark your page landmarks with `data-transition-layer` so the view transition knows which elements to animate:

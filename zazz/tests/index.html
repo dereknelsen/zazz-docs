@@ -20,14 +20,7 @@
   <link rel="stylesheet" href="../styles/zazz.css" />
 
   <!-- Preload critical js -->
-  <link rel="preload" href="../scripts/navigation.js" as="script" />
-  <link rel="preload" href="../scripts/utils.js" as="script" />
-  <link rel="preload" href="../scripts/reveal.js" as="script" />
-  <link rel="preload" href="../scripts/embla.js" as="script" />
-  <link rel="preload" href="../scripts/carousel.js" as="script" />
-  <link rel="preload" href="../scripts/lightbox.js" as="script" />
-  <link rel="preload" href="../scripts/password.js" as="script" />
-  <link rel="preload" href="../scripts/tabs.js" as="script" />
+  <link rel="modulepreload" href="../scripts/zazz.js" />
 
   <!-- Prefetching related pages -->
   <link rel="prefetch" href="layout.html" />
@@ -65,15 +58,8 @@
     integrity="sha384-apu0WDHR0c+4Z5qNk7egPNoCxXkYq80e+Qh6xJ6f67S53mSyYdKE6tIeXxvKJ6x9" crossorigin="anonymous"
     defer></script>
 
-  <!-- Zazz scripts -->
-  <script src="../scripts/navigation.js" defer></script>
-  <script src="../scripts/utils.js" defer></script>
-  <script src="../scripts/reveal.js" defer></script>
-  <script src="../scripts/embla.js" defer></script>
-  <script src="../scripts/carousel.js" defer></script>
-  <script src="../scripts/lightbox.js" defer></script>
-  <script src="../scripts/password.js" defer></script>
-  <script src="../scripts/tabs.js" defer></script>
+  <!-- Zazz scripts: one ES module bundles every component script. -->
+  <script type="module" src="../scripts/zazz.js"></script>
   <script>
     /**
      * Synchronizes the preview theme with the user's preference.

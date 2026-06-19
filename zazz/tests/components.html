@@ -20,14 +20,7 @@
   <link rel="stylesheet" href="../styles/zazz.css" />
 
   <!-- Preload critical js -->
-  <link rel="preload" href="../scripts/navigation.js" as="script" />
-  <link rel="preload" href="../scripts/utils.js" as="script" />
-  <link rel="preload" href="../scripts/reveal.js" as="script" />
-  <link rel="preload" href="../scripts/embla.js" as="script" />
-  <link rel="preload" href="../scripts/carousel.js" as="script" />
-  <link rel="preload" href="../scripts/lightbox.js" as="script" />
-  <link rel="preload" href="../scripts/password.js" as="script" />
-  <link rel="preload" href="../scripts/tabs.js" as="script" />
+  <link rel="modulepreload" href="../scripts/zazz.js" />
 
   <!-- Prefetching related pages -->
   <link rel="prefetch" href="layout.html" />
@@ -65,15 +58,8 @@
     integrity="sha384-apu0WDHR0c+4Z5qNk7egPNoCxXkYq80e+Qh6xJ6f67S53mSyYdKE6tIeXxvKJ6x9" crossorigin="anonymous"
     defer></script>
 
-  <!-- Zazz scripts -->
-  <script src="../scripts/navigation.js" defer></script>
-  <script src="../scripts/utils.js" defer></script>
-  <script src="../scripts/reveal.js" defer></script>
-  <script src="../scripts/embla.js" defer></script>
-  <script src="../scripts/carousel.js" defer></script>
-  <script src="../scripts/lightbox.js" defer></script>
-  <script src="../scripts/password.js" defer></script>
-  <script src="../scripts/tabs.js" defer></script>
+  <!-- Zazz scripts: one ES module bundles every component script. -->
+  <script type="module" src="../scripts/zazz.js"></script>
   <script>
     /**
      * Synchronizes the preview theme with the user's preference.
@@ -136,6 +122,90 @@
 
     <section class="pb-xl">
       <div class="container">
+        <!-- Buttons -->
+        <div class="mb-lg">
+          <h2 class="text-h6 font-heading pb-sm">Buttons</h2>
+          <div class="flex items-center gap-xs pb-sm">
+            <button class="button" type="button">Default</button>
+            <button class="button" data-variant="primary" type="button">Primary</button>
+            <button class="button" data-variant="muted" type="button">Muted</button>
+            <button class="button" data-variant="ghost" type="button">Ghost</button>
+            <button class="button" data-variant="destructive" type="button">Destructive</button>
+            <button class="button" data-variant="link" type="button">Link</button>
+          </div>
+          <div class="flex items-center gap-xs">
+            <button class="button" data-variant="primary" type="button">
+              Start free trial
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                <rect width="256" height="256" fill="none" />
+                <line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round"
+                  stroke-linejoin="round" stroke-width="16" />
+                <polyline points="144 56 216 128 144 200" fill="none" stroke="currentColor" stroke-linecap="round"
+                  stroke-linejoin="round" stroke-width="16" />
+              </svg>
+            </button>
+            <button class="button" data-variant="primary" data-size="sm" type="button">Small</button>
+            <button class="button" data-variant="primary" data-size="icon" type="button" aria-label="Add">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                <rect width="256" height="256" fill="none" />
+                <line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round"
+                  stroke-linejoin="round" stroke-width="16" />
+                <line x1="128" y1="40" x2="128" y2="216" fill="none" stroke="currentColor" stroke-linecap="round"
+                  stroke-linejoin="round" stroke-width="16" />
+              </svg>
+            </button>
+            <button class="button" data-variant="muted" data-size="icon-sm" type="button" aria-label="Add">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                <rect width="256" height="256" fill="none" />
+                <line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round"
+                  stroke-linejoin="round" stroke-width="16" />
+                <line x1="128" y1="40" x2="128" y2="216" fill="none" stroke="currentColor" stroke-linecap="round"
+                  stroke-linejoin="round" stroke-width="16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Button Group -->
+        <div class="mb-lg">
+          <div class="flex flex-col items-start gap-md">
+            <div class="button-group" role="group" aria-label="Text alignment">
+              <button class="button" type="button">Left</button>
+              <button class="button" type="button">Center</button>
+              <button class="button" type="button">Right</button>
+            </div>
+          
+            <div class="button-group" role="group" aria-label="Pagination">
+              <button class="button" data-variant="muted" type="button">Previous</button>
+              <button class="button" data-variant="muted" data-size="icon" type="button">1</button>
+              <button class="button" data-variant="muted" data-size="icon" type="button">2</button>
+              <button class="button" data-variant="muted" data-size="icon" type="button">3</button>
+              <button class="button" data-variant="muted" type="button">Next</button>
+            </div>
+          
+          </div>
+        </div>
+        
+
+        <!-- Toggle Group -->
+        <div class="mb-lg">
+          <h2 class="text-h6 font-heading pb-sm">Toggle Group</h2>
+          <div class="toggle-group" role="group" aria-label="Text formatting">
+            <label class="toggle">
+              <input type="checkbox" name="format" value="bold" />
+              <span>Bold</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" name="format" value="italic" />
+              <span>Italic</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" name="format" value="underline" />
+              <span>Underline</span>
+            </label>
+          </div>
+        </div>
+        
         <!-- Buttons -->
         <div class="mb-lg">
           <h2 class="text-h6 font-heading pb-sm">Buttons</h2>

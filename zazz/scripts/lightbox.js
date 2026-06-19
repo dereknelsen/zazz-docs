@@ -29,6 +29,8 @@
  * </media-lightbox>
  */
 
+import { EmblaCarouselElement } from "./carousel.js";
+
 class MediaLightbox extends HTMLElement {
   /** @type {AbortController|null} */
   #controller = null;
@@ -81,8 +83,7 @@ class MediaLightbox extends HTMLElement {
 
     // <embla-carousel> defers init while its dialog is closed — init now.
     // (This element connects before its children, so its observer fires first.)
-    const CarouselElement = window.EmblaCarouselElement;
-    if (CarouselElement && dialogRoot instanceof CarouselElement) {
+    if (dialogRoot instanceof EmblaCarouselElement) {
       dialogRoot.init();
     }
 
@@ -117,13 +118,10 @@ if (typeof window !== "undefined" && !customElements.get("media-lightbox")) {
   customElements.define("media-lightbox", MediaLightbox);
 }
 
-// Export for module environments or attach to window
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = MediaLightbox;
-} else if (typeof define === "function" && define.amd) {
-  define([], function () {
-    return MediaLightbox;
-  });
-} else if (typeof window !== "undefined") {
+// Attach to window for parity with the other component scripts, and export for
+// module consumers (loaded for its side effect — the custom-element registration).
+if (typeof window !== "undefined") {
   window.MediaLightbox = MediaLightbox;
 }
+
+export { MediaLightbox };

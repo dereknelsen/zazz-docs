@@ -46,10 +46,16 @@ To pin dark mode regardless of system preference, add the `.dark` class, usually
 
 ### 3. Inverted surfaces
 
-Popovers and menus render dark-on-light by default (a common design touch) via a container style query (`@container style(--use-inverted-popovers: "true")`). To opt a subtree out, flip the flag:
+Popovers and menus render dark-on-light by default (a common design touch) via a container style query (`@container style(--use-inverted-popovers: "true")`). To opt a subtree out, flip the flag or use the `data-use-inverted-popovers` attribute:
+
+```css
+:root {
+  --use-inverted-popovers: false;
+}
+```
 
 ```html
-<div style="--use-inverted-popovers: 'false'">…</div>
+<div data-use-inverted-popovers="false">…</div>
 ```
 
 ## Don't hand-write dark overrides

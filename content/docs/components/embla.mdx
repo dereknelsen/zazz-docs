@@ -13,19 +13,20 @@ Zazz wraps [Embla Carousel](https://www.embla-carousel.com/) with a declarative,
 
 ## Setup
 
-Include the Embla CDN bundles, utilities, and the init script:
+Carousels are driven by `embla.js`, which ships inside the single [`zazz.js`](/docs/getting-started/head#script-load-order) module (along with `utils.js`, which it imports). Embla itself loads from its CDN UMD bundles, and those must come **before** the module — `embla.js` reads them as globals:
 
 ```html
-<script src="./zazz/scripts/utils.js"></script>
-<script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
-<!-- Optional plugins -->
-<script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"></script>
-<script src="https://unpkg.com/embla-carousel-auto-scroll/embla-carousel-auto-scroll.umd.js"></script>
-<script src="https://unpkg.com/embla-carousel-class-names/embla-carousel-class-names.umd.js"></script>
-<script src="./zazz/scripts/embla.js"></script>
+<!-- Embla core + optional plugins, before the module -->
+<script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js" defer></script>
+<script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js" defer></script>
+<script src="https://unpkg.com/embla-carousel-auto-scroll/embla-carousel-auto-scroll.umd.js" defer></script>
+<script src="https://unpkg.com/embla-carousel-class-names/embla-carousel-class-names.umd.js" defer></script>
+
+<!-- One module bundles utils.js, embla.js, and every other component script -->
+<script type="module" src="./zazz/scripts/zazz.js"></script>
 ```
 
-Carousels auto-initialize on `DOMContentLoaded`.
+Carousels auto-initialize once the DOM is parsed.
 
 ## Basic markup
 

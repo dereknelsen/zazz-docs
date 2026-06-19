@@ -16,14 +16,14 @@ No keyframes, no JavaScript animation loops, just CSS transitions triggered by a
 
 ## Setup
 
-Include both the stylesheet and the script:
+`reveal.js` ships inside the single [`zazz.js`](/docs/getting-started/head#script-load-order) module; its styles are part of `zazz.css`. If you link files individually, include `_reveal.css`:
 
 ```html
 <link rel="stylesheet" href="./zazz/styles/_reveal.css" />
-<script src="./zazz/scripts/reveal.js"></script>
+<script type="module" src="./zazz/scripts/zazz.js"></script>
 ```
 
-Reveal auto-initializes on `DOMContentLoaded`. No manual setup needed for standard pages.
+Reveal auto-initializes once the DOM is parsed. No manual setup needed for standard pages.
 
 ## Single elements
 

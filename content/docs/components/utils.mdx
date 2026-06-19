@@ -7,10 +7,10 @@ description: Shared DOM and data-attribute parsing utilities used by other Zazz 
 
 ## Setup
 
-Load before any script that depends on it:
+`utils.js` ships inside the single [`zazz.js`](/docs/getting-started/head#script-load-order) module and loads automatically — `embla.js` `import`s it directly, so there's no load order to manage by hand:
 
 ```html
-<script src="./zazz/scripts/utils.js"></script>
+<script type="module" src="./zazz/scripts/zazz.js"></script>
 ```
 
 Exposes `window.Utils` with two functions.

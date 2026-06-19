@@ -108,11 +108,10 @@ Put this block last in `<head>`, after stylesheets and deferred `<script src>` t
 
 ### Optional head hints
 
-Preload scripts every page needs so the browser fetches them alongside CSS:
+Preload the script bundle so the browser fetches it alongside CSS. `zazz.js` is an ES module, so use `modulepreload` — it primes the module **and** its imports:
 
 ```html
-<link rel="preload" href="./zazz/scripts/navigation.js" as="script" />
-<link rel="preload" href="./zazz/scripts/reveal.js" as="script" />
+<link rel="modulepreload" href="./zazz/scripts/zazz.js" />
 ```
 
 Prefetch pages visitors are likely to open next. Low priority, won't block render:
@@ -145,8 +144,7 @@ Put styles, scripts, and the theme block in `<head>`. Deferred scripts keep thei
     <link rel="stylesheet" href="./zazz/styles/zazz.css" />
     <link rel="stylesheet" href="./your-styles.css" />
 
-    <link rel="preload" href="./zazz/scripts/navigation.js" as="script" />
-    <link rel="preload" href="./zazz/scripts/reveal.js" as="script" />
+    <link rel="modulepreload" href="./zazz/scripts/zazz.js" />
     <link rel="prefetch" href="./products.html" />
 
     <!-- CDN scripts: demos only. Pin SRI hashes if you use them. -->
@@ -194,11 +192,8 @@ Put styles, scripts, and the theme block in `<head>`. Deferred scripts keep thei
       defer
     ></script>
 
-    <!-- Zazz scripts: order matters -->
-    <script src="./zazz/scripts/navigation.js" defer></script>
-    <script src="./zazz/scripts/reveal.js" defer></script>
-    <script src="./zazz/scripts/utils.js" defer></script>
-    <script src="./zazz/scripts/embla.js" defer></script>
+    <!-- Zazz scripts: one ES module bundles every component script -->
+    <script type="module" src="./zazz/scripts/zazz.js"></script>
 
     <script>
       (() => {
@@ -247,17 +242,18 @@ With HTTP/2–3 multiplexing and server compression, the single `zazz.css` link 
 
 ## Script load order
 
-Scripts depend on `<script>` tag order. Load them in `<head>` with `defer`. Parsing continues, but scripts still run in document order before `DOMContentLoaded`:
+Every Zazz behavior ships in one ES module, `zazz.js`, which `import`s the rest in the right internal order. You load it once. A module is deferred automatically, so it runs after the document is parsed but before `DOMContentLoaded` — no `defer` attribute needed.
+
+What still has to come *before* the module, in document order:
 
 1. **Polyfills** (optional): Popover API (`@oddbird/popover-polyfill`), Invokers/tooltip (`invokers/compatible`)
-2. **Embla CDN bundles**: core UMD build, then plugins (`autoplay`, `auto-scroll`, `class-names`, `ssr`)
-3. `navigation.js`: app-level page transitions (skip inside component preview iframes)
-4. `reveal.js`: standalone scroll reveals
-5. `utils.js`: shared parsing utilities. Must run before `embla.js`.
-6. `embla.js`: requires `utils.js` and the Embla globals
-7. **Inline theme script** (last, no `defer`): applies `.dark` before first paint
+2. **Embla CDN bundles** (only if a page has carousels): core UMD build, then plugins (`autoplay`, `auto-scroll`, `class-names`, `ssr`). `embla.js` reads these as globals.
+3. **`zazz.js`** (`<script type="module">`): utils, reveal, embla, carousel, lightbox, password, tabs, and navigation, in dependency order.
+4. **Inline theme script** (last, no `type="module"`): applies `.dark` before first paint.
 
-Deferred scripts auto-initialize on `DOMContentLoaded`. No manual init on a normal page. See [Scripting](/docs/core-files/scripting) for how these files work.
+Classic `defer` scripts and module scripts share one execution queue and run in document order, so placing the Embla CDN `<script defer>` tags ahead of the module guarantees its globals exist first.
+
+Everything auto-initializes once the DOM is parsed. No manual init on a normal page. See [Scripting](/docs/core-files/scripting) for how these files work.
 
 ## View transition layers
 

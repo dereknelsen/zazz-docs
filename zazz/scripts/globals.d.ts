@@ -115,12 +115,3 @@ interface Window {
     ) => void;
   };
 }
-
-interface DefineAMD {
-  (deps: string[], factory: () => unknown): void;
-  amd?: boolean;
-}
-
-declare var define: DefineAMD | undefined;
-
-declare var module: { exports: unknown } | undefined;

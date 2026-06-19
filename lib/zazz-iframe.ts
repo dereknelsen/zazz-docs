@@ -2,9 +2,9 @@ import type { ExampleScript } from "zazz/components/manifest";
 
 /**
  * Builds the full HTML document for a component-preview iframe. The example fragment is
- * wrapped in a minimal page that loads the real Zazz stylesheet and (conditionally) its
- * scripts, so the iframe is the *only* place Zazz CSS runs on the docs site — fully
- * sandboxed from Tailwind + fumadocs.
+ * wrapped in a minimal page that loads the real Zazz stylesheet and (when the example
+ * needs behavior) the single `zazz.js` module, so the iframe is the *only* place Zazz
+ * CSS runs on the docs site — fully sandboxed from Tailwind + fumadocs.
  *
  * Styling loads as the single `zazz.css` bundle by absolute URL from the `/zazz/*` route
  * (see `app/zazz/[...path]/route.ts`); its relative `@import "./*.css"` rules (the
@@ -70,25 +70,21 @@ export function buildPreviewDocument({
   // link is already the highest-priority, render-blocking fetch.
   const styles = `<link rel="stylesheet" href="/zazz/styles/zazz.css">`;
 
-  const needsCarousel = scripts.includes("carousel") || scripts.includes("lightbox");
-  const needsEmbla = scripts.includes("embla") || needsCarousel;
-  const needsLightbox = scripts.includes("lightbox");
-  const needsPassword = scripts.includes("password");
-  const needsTabs = scripts.includes("tabs");
-  const needsReveal = scripts.includes("reveal");
-
-  // navigation.js is intentionally excluded — it hijacks navigation for the full app.
-  const zazzScripts: string[] = [];
-  if (needsEmbla) zazzScripts.push("/zazz/scripts/utils.js"); // embla.js depends on Utils
-  if (needsReveal) zazzScripts.push("/zazz/scripts/reveal.js"); // standalone
-  if (needsEmbla) zazzScripts.push("/zazz/scripts/embla.js");
-  if (needsCarousel) zazzScripts.push("/zazz/scripts/carousel.js"); // <embla-carousel>, needs embla.js
-  if (needsLightbox) zazzScripts.push("/zazz/scripts/lightbox.js"); // <media-lightbox>, needs carousel.js
-  if (needsPassword) zazzScripts.push("/zazz/scripts/password.js"); // <input-password>, standalone
-  if (needsTabs) zazzScripts.push("/zazz/scripts/tabs.js"); // <tab-group>, standalone
-
+  // Embla reads the CDN UMD bundles as globals, so when an example uses a
+  // carousel/lightbox they must load (as `defer` scripts) *before* the zazz.js
+  // module. Defer scripts and module scripts execute in document order, so the
+  // CDN tags below precede the module tag.
+  const needsEmbla =
+    scripts.includes("embla") || scripts.includes("carousel") || scripts.includes("lightbox");
   const emblaCdn = needsEmbla ? EMBLA_CDN : "";
-  const scriptTags = zazzScripts.map((src) => `<script src="${src}" defer></script>`).join("\n");
+
+  // One ES module bundles every component script (utils, reveal, embla, carousel,
+  // lightbox, password, tabs, navigation) — see zazz/scripts/zazz.js. It's loaded
+  // only when the example needs Zazz behavior; static examples skip it entirely.
+  // navigation.js rides along but is inert here: the preview has no <main> to swap
+  // and BLOCK_NAVIGATION already cancels link clicks before any navigation starts.
+  const scriptTags =
+    scripts.length > 0 ? `<script type="module" src="/zazz/scripts/zazz.js"></script>` : "";
 
   return /* html */ `<!doctype html>
 <html lang="en">
@@ -121,24 +117,24 @@ ${scriptTags}
 <style>
   html, body { margin: 0; background: var(--background); color: var(--foreground); block-size: 100%; inline-size: 100%; overflow: clip; }
   .zazz-preview {
+    display: grid;
     box-sizing: border-box;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: ${align};
-    justify-content: ${justify};
+    align-content: ${align};
+    justify-items: ${justify};
     gap: var(--gap-md);
     padding: var(--gap-md);
     inline-size: 100%;
     block-size: 100%;
     min-block-size: ${minHeight}px;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: clip;
   }
 </style>
 </head>
   <body>
-    <div class="zazz-preview">
+    <main class="zazz-preview">
       ${html}
-    </div>
+    </main>
   </body>
 </html>`;
 }

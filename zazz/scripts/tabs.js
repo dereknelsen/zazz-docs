@@ -105,13 +105,10 @@ if (typeof window !== "undefined" && !customElements.get("tab-group")) {
   customElements.define("tab-group", TabGroup);
 }
 
-// Export for module environments or attach to window
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = TabGroup;
-} else if (typeof define === "function" && define.amd) {
-  define([], function () {
-    return TabGroup;
-  });
-} else if (typeof window !== "undefined") {
+// Attach to window for parity with the other component scripts, and export for
+// module consumers (loaded for its side effect — the custom-element registration).
+if (typeof window !== "undefined") {
   window.TabGroup = TabGroup;
 }
+
+export { TabGroup };

@@ -80,13 +80,10 @@ const Utils = {
   parseDataAttributes,
 };
 
-// Export for module environments or attach to window
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = Utils;
-} else if (typeof define === "function" && define.amd) {
-  define([], function () {
-    return Utils;
-  });
-} else if (typeof window !== "undefined") {
+// Attach to window for the documented public API (`window.Utils`), and export
+// for module consumers (embla.js imports it via the zazz.js bundle).
+if (typeof window !== "undefined") {
   window.Utils = Utils;
 }
+
+export { Utils };

@@ -3,10 +3,10 @@ import type { ExampleScript } from "zazz/components/manifest";
 /**
  * Builds the full HTML document for a component-preview iframe. The example fragment is
  * wrapped in a minimal page that loads the real Zazz stylesheet and (when the example
- * needs behavior) the single `zazz.js` module, so the iframe is the *only* place Zazz
+ * needs behavior) the single `main.js` module, so the iframe is the *only* place Zazz
  * CSS runs on the docs site — fully sandboxed from Tailwind + fumadocs.
  *
- * Styling loads as the single `zazz.css` bundle by absolute URL from the `/zazz/*` route
+ * Styling loads as the single `main.css` bundle by absolute URL from the `/zazz/*` route
  * (see `app/zazz/[...path]/route.ts`); its relative `@import "./*.css"` rules (the
  * foundation layers followed by every component) resolve against that URL. One request
  * to maintain — the server's brotli/gzip handles transfer size. Pure string building —
@@ -29,7 +29,8 @@ export interface BuildPreviewOptions {
 const FONTS = `
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Geist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">`;
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwcGFWNOITd.woff2">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Geist:ital,wght@0,100..900;1,100..900&display=optional" rel="stylesheet">`;
 
 // Native in modern engines; the polyfills keep previews consistent across browsers and
 // power tooltips (interestfor), dialogs (command/commandfor), dropdowns/menus (popover).
@@ -65,13 +66,13 @@ export function buildPreviewDocument({
   align = "center",
   justify = "center",
 }: BuildPreviewOptions): string {
-  // One bundle: zazz.css @imports the foundation layers (layers, variables, reset) and
+  // One bundle: main.css @imports the foundation layers (layers, variables, reset) and
   // every component in cascade order. No separate preload — a same-document stylesheet
   // link is already the highest-priority, render-blocking fetch.
-  const styles = `<link rel="stylesheet" href="/zazz/styles/zazz.css">`;
+  const styles = `<link rel="stylesheet" href="/zazz/styles/main.css">`;
 
   // Embla reads the CDN UMD bundles as globals, so when an example uses a
-  // carousel/lightbox they must load (as `defer` scripts) *before* the zazz.js
+  // carousel/lightbox they must load (as `defer` scripts) *before* the main.js
   // module. Defer scripts and module scripts execute in document order, so the
   // CDN tags below precede the module tag.
   const needsEmbla =
@@ -79,12 +80,12 @@ export function buildPreviewDocument({
   const emblaCdn = needsEmbla ? EMBLA_CDN : "";
 
   // One ES module bundles every component script (utils, reveal, embla, carousel,
-  // lightbox, password, tabs, navigation) — see zazz/scripts/zazz.js. It's loaded
+  // lightbox, password, tabs, navigation) — see zazz/scripts/main.js. It's loaded
   // only when the example needs Zazz behavior; static examples skip it entirely.
   // navigation.js rides along but is inert here: the preview has no <main> to swap
   // and BLOCK_NAVIGATION already cancels link clicks before any navigation starts.
   const scriptTags =
-    scripts.length > 0 ? `<script type="module" src="/zazz/scripts/zazz.js"></script>` : "";
+    scripts.length > 0 ? `<script type="module" src="/zazz/scripts/main.js"></script>` : "";
 
   return /* html */ `<!doctype html>
 <html lang="en">

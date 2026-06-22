@@ -59,6 +59,11 @@ class EmblaCarouselElement extends HTMLElement {
     this.#dialogObserver?.disconnect();
     this.#dialogObserver = null;
 
+    // Abort first so the per-carousel DOM listeners (prev/next, dots, thumbs,
+    // drag-click suppression) are removed before the Embla instances are torn down.
+    this._emblaController?.abort();
+    delete this._emblaController;
+
     this._emblaApi?.destroy();
     this._emblaApiThumb?.destroy();
     delete this._emblaApi;
@@ -92,7 +97,7 @@ if (typeof window !== "undefined" && !customElements.get("embla-carousel")) {
 }
 
 // Attach to window so embla.js's lightbox sync can feature-detect the element type,
-// and export for module consumers (lightbox.js imports it via the zazz.js bundle).
+// and export for module consumers (lightbox.js imports it via the main.js bundle).
 if (typeof window !== "undefined") {
   window.EmblaCarouselElement = EmblaCarouselElement;
 }

@@ -15,7 +15,7 @@ Applies to all files in `zazz/scripts/`:
 - `tabs.js`
 - `utils.js`
 
-Scripts are served directly at `/zazz/scripts/*.js` — no bundler or transpiler. Write browser-native **ES modules** that run as-is in modern browsers. `zazz.js` is the entry module: it `import`s every component script so a page loads behavior with one `<script type="module" src="…/zazz.js">` tag. When you add a script, add an `import "./your-script.js";` line to `zazz.js`.
+Scripts are served directly at `/zazz/scripts/*.js` — no bundler or transpiler. Write browser-native **ES modules** that run as-is in modern browsers. `main.js` is the entry module: it `import`s every component script so a page loads behavior with one `<script type="module" src="…/main.js">` tag. When you add a script, add an `import "./your-script.js";` line to `main.js`.
 
 Type-checking is enabled via `zazz/scripts/tsconfig.json` (`checkJs: true`). Run `npm run scripts:check` (or the full `npm run types:check`) to validate. Ambient types for CDN and cross-script globals live in `zazz/scripts/globals.d.ts`.
 
@@ -70,7 +70,7 @@ export { MyExport };
 
 ### Module exports
 
-Attach a named export object or class to `window` for the documented public API, then `export` it for module consumers (the `zazz.js` entry and any sibling script that imports it).
+Attach a named export object or class to `window` for the documented public API, then `export` it for module consumers (the `main.js` entry and any sibling script that imports it).
 
 | File            | Global                        | Export shape                          |
 | --------------- | ----------------------------- | ------------------------------------- |
@@ -131,7 +131,7 @@ Boolean flags can be bare attributes (`data-embla-autoplay`) or explicit values 
 
 ### Dependencies and load order
 
-Scripts declare dependencies with ES `import`s, so the module graph resolves order — the `zazz.js` entry is the only tag a page loads.
+Scripts declare dependencies with ES `import`s, so the module graph resolves order — the `main.js` entry is the only tag a page loads.
 
 | Script          | Imports       | Notes                                            |
 | --------------- | ------------- | ------------------------------------------------ |
@@ -144,7 +144,7 @@ Scripts declare dependencies with ES `import`s, so the module graph resolves ord
 | `tabs.js`       | —             | Standalone (`<tab-group>`)                       |
 | `navigation.js` | —             | App-level; inert in component preview iframes    |
 
-When a script needs `Utils`, `import { Utils } from "./utils.js"` — do not duplicate parsing logic. The one thing the module graph can't order is the **Embla CDN UMD bundles**: `embla.js` reads them as globals, so their `<script defer>` tags must precede the `zazz.js` module in the document.
+When a script needs `Utils`, `import { Utils } from "./utils.js"` — do not duplicate parsing logic. The one thing the module graph can't order is the **Embla CDN UMD bundles**: `embla.js` reads them as globals, so their `<script defer>` tags must precede the `main.js` module in the document.
 
 ### DOM interaction patterns
 

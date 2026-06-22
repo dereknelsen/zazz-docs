@@ -13,7 +13,7 @@ Zazz wraps [Embla Carousel](https://www.embla-carousel.com/) with a declarative,
 
 ## Setup
 
-Carousels are driven by `embla.js`, which ships inside the single [`zazz.js`](/docs/getting-started/head#script-load-order) module (along with `utils.js`, which it imports). Embla itself loads from its CDN UMD bundles, and those must come **before** the module — `embla.js` reads them as globals:
+Carousels are driven by `embla.js`, which ships inside the single [`main.js`](/docs/getting-started/head#script-load-order) module (along with `utils.js`, which it imports). Embla itself loads from its CDN UMD bundles, and those must come **before** the module — `embla.js` reads them as globals:
 
 ```html
 <!-- Embla core + optional plugins, before the module -->
@@ -23,7 +23,7 @@ Carousels are driven by `embla.js`, which ships inside the single [`zazz.js`](/d
 <script src="https://unpkg.com/embla-carousel-class-names/embla-carousel-class-names.umd.js" defer></script>
 
 <!-- One module bundles utils.js, embla.js, and every other component script -->
-<script type="module" src="./zazz/scripts/zazz.js"></script>
+<script type="module" src="./zazz/scripts/main.js"></script>
 ```
 
 Carousels auto-initialize once the DOM is parsed.

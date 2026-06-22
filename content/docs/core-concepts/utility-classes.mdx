@@ -3,7 +3,7 @@ title: Styling with utility classes
 description: Build interfaces by composing small, single-purpose classes in your markup, each one wired to a design token, so what you build stays on-system.
 ---
 
-You style a Zazz interface by adding utility classes to your HTML (`flex`, `gap-md`, `text-h2`, `bg-primary`, `rounded-lg`) instead of writing CSS. Each class does one thing and maps to a [design token](/docs/core-concepts/theme-variables), so a layout assembled from utilities is consistent by construction and adapts to your theme for free.
+You style a Zazz interface by adding utility classes to your HTML (`flex`, `gap-md`, `text-h2`, `bg-primary`, `rounded-lg`) instead of writing CSS. Each class does one thing and maps to a [design token](/docs/foundation/variables), so a layout assembled from utilities is consistent by construction and adapts to your theme for free.
 
 ```html
 <article class="card p-lg flex flex-col gap-md rounded-lg shadow-sm">
@@ -19,7 +19,7 @@ No new CSS file, no class to name, no stylesheet to keep in sync with the markup
 
 - **Stay on-system.** Every utility resolves to a token, so spacing, color, and type come from the same shared vocabulary across the whole site. You compose from a palette instead of inventing values.
 - **No naming, no dead CSS.** You never invent `.card-inner-wrapper`, and removing markup removes its styling, so there's no orphaned rule to track down later.
-- **They win the cascade cleanly.** Utilities live in `@layer zazz.utilities`, the last [cascade layer](/docs/core-files/layers), so a utility overrides a component's own rule with no `!important` and no specificity battle.
+- **They win the cascade cleanly.** Utilities live in `@layer zazz.utilities`, the last [cascade layer](/docs/foundation/layers), so a utility overrides a component's own rule with no `!important` and no specificity battle.
 
 ## Semantic first, specific as the escape hatch
 
@@ -29,7 +29,7 @@ Reach for the most semantic option that fits, and only get specific when nothing
 - **Color** → role classes like `bg-card`, `text-muted-foreground`, `border-primary`, so [light and dark](/docs/core-concepts/dark-mode) swap automatically. Numeric [color scales](/docs/core-concepts/colors) are the last resort.
 - **Type** → a single `text-*` class (`text-h1`…`text-xs`, `text-eyebrow`) that bundles size, weight, leading, and tracking. Never compose type from separate utilities.
 
-If you find yourself wanting a brand-new rule, that's the signal to browse the [Utilities](/docs/utilities) reference first. There's usually a class for it.
+If you find yourself wanting a brand-new rule, that's the signal to browse the [Utilities](/docs/foundation/utilities) reference first. There's usually a class for it.
 
 ## The families you'll use most
 
@@ -42,7 +42,7 @@ If you find yourself wanting a brand-new rule, that's the signal to browse the [
 | Shape & depth | `rounded-lg`, `rounded-b-0`, `shadow-md`, `ring`                                          |
 | Sizing        | `w-full`, `max-w-screen-md`, `size-8`, `aspect-square`                                    |
 
-The full catalog, organized by family, lives in the [Utilities](/docs/utilities) reference; this is the everyday subset.
+The full catalog, organized by family, lives in the [Utilities](/docs/foundation/utilities) reference; this is the everyday subset.
 
 ## One scale, everywhere
 

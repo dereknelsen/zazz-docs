@@ -1,5 +1,5 @@
 /**
- * zazz.css — Plain-CSS entry point; @import bundle in cascade order.
+ * main.css — Plain-CSS entry point; @import bundle in cascade order.
  *
  * Bundles the foundation layers (layers → variables → reset) followed by every
  * component, so a page only needs a single stylesheet link. Order matters:

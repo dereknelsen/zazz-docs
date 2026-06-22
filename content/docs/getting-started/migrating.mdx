@@ -27,19 +27,19 @@ your legacy CSS into the `legacy` layer:
 @layer variables, reset, legacy, zazz, migrations;
 
 @import "./legacy/app.css" layer(legacy); /* old CSS → below Zazz */
-@import "./zazz/styles/zazz.css"; /* re-declares the same order */
+@import "./zazz/styles/main.css"; /* re-declares the same order */
 ```
 
-The **first** `@layer` statement wins for ordering, so declaring it here (before `zazz.css`
+The **first** `@layer` statement wins for ordering, so declaring it here (before `main.css`
 re-declares the same order) locks `legacy` underneath everything Zazz ships. Now where both
 systems style the same thing, Zazz wins; everywhere Zazz is silent, your old CSS still applies. On
 day one, nothing visually breaks.
 
-`zazz.css` already leaves a commented slot for this import, so if you load Zazz directly you can
+`main.css` already leaves a commented slot for this import, so if you load Zazz directly you can
 uncomment it there instead:
 
 ```css
-/* zazz.css */
+/* main.css */
 @import "./your-legacy.css" layer(legacy);
 ```
 
@@ -100,7 +100,7 @@ cascade can't cleanly override and which web components and lower layers can't e
 The last piece bridges markup you haven't rewritten yet. A shim in the `migrations` layer re-points
 your old class names at Zazz's component tokens, so existing HTML renders as Zazz **before** you
 touch it. These rules live in a `migrations.css` you create and load (import it at the commented
-slot at the bottom of `zazz.css`) inside `@layer migrations`. Because Zazz components are
+slot at the bottom of `main.css`) inside `@layer migrations`. Because Zazz components are
 token-driven, the shim is small and stays themeable, so light/dark and brand changes flow through
 for free.
 

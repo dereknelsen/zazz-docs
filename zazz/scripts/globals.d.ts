@@ -41,6 +41,8 @@ interface Element {
   _emblaApi?: EmblaCarouselType;
   /** @internal Set by embla.js when a thumb carousel is linked. */
   _emblaApiThumb?: EmblaCarouselType;
+  /** @internal Set by embla.js; aborts all per-carousel listeners on teardown. */
+  _emblaController?: AbortController;
 }
 
 interface InitEmblaKeyboardNavFn {

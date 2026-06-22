@@ -76,9 +76,10 @@ import { Utils } from "./utils.js";
  *
  * @param {EmblaCarouselType} emblaApi - The Embla carousel API instance.
  * @param {Element} dotsNode - Container element for dot navigation.
+ * @param {AbortSignal} [signal] - Aborts the dot click listeners on teardown.
  * @returns {(() => void)|undefined} Cleanup function to remove dots.
  */
-const addDotBtnsAndClickHandlers = (emblaApi, dotsNode) => {
+const addDotBtnsAndClickHandlers = (emblaApi, dotsNode, signal) => {
   if (!dotsNode) return;
 
   const templateDot = dotsNode.querySelector('[data-embla="dot"]');
@@ -107,7 +108,7 @@ const addDotBtnsAndClickHandlers = (emblaApi, dotsNode) => {
       dotNodes.push(dot);
       dotsNode.appendChild(dot);
 
-      dot.addEventListener("click", () => emblaApi.scrollTo(i), false);
+      dot.addEventListener("click", () => emblaApi.scrollTo(i), { signal });
     }
   };
 
@@ -144,12 +145,13 @@ const addDotBtnsAndClickHandlers = (emblaApi, dotsNode) => {
  *
  * @param {EmblaCarouselType} emblaApiMain - Main carousel API instance.
  * @param {EmblaCarouselType} emblaApiThumb - thumb carousel API instance.
+ * @param {AbortSignal} [signal] - Aborts the thumb click listeners on teardown.
  */
-const addThumbClickHandlers = (emblaApiMain, emblaApiThumb) => {
+const addThumbClickHandlers = (emblaApiMain, emblaApiThumb, signal) => {
   const slidesthumbs = emblaApiThumb.slideNodes();
 
   slidesthumbs.forEach((/** @type {HTMLElement} */ slideNode, /** @type {number} */ index) => {
-    slideNode.addEventListener("click", () => emblaApiMain.scrollTo(index), false);
+    slideNode.addEventListener("click", () => emblaApiMain.scrollTo(index), { signal });
   });
 };
 
@@ -207,9 +209,10 @@ let suppressCommandsUntil = 0;
  * @param {EmblaCarouselType} emblaApi - Carousel instance tied to this root.
  * @param {string} clickSelector - Click targets to suppress after dragging.
  * @param {{ dragThresholdPx?: number }} [options] - Per-carousel drag tolerance.
+ * @param {AbortSignal} [signal] - Aborts the pointer/click listeners on teardown.
  * @returns {void}
  */
-function bindDragClickSuppression(root, emblaApi, clickSelector, options = {}) {
+function bindDragClickSuppression(root, emblaApi, clickSelector, options = {}, signal) {
   const DRAG_THRESHOLD_PX = options.dragThresholdPx ?? 6;
   const SUPPRESS_WINDOW_MS = 250;
   // Slides that open a dialog (command="show-modal") also need command suppression.
@@ -241,7 +244,7 @@ function bindDragClickSuppression(root, emblaApi, clickSelector, options = {}) {
       lastY = e.clientY;
       snapAtDown = emblaApi.selectedScrollSnap();
     },
-    { passive: true },
+    { passive: true, signal },
   );
 
   root.addEventListener(
@@ -254,7 +257,7 @@ function bindDragClickSuppression(root, emblaApi, clickSelector, options = {}) {
 
       if (pointerDistance() >= DRAG_THRESHOLD_PX) moved = true;
     },
-    { passive: true },
+    { passive: true, signal },
   );
 
   const finalizePointer = () => {
@@ -266,8 +269,8 @@ function bindDragClickSuppression(root, emblaApi, clickSelector, options = {}) {
     moved = false;
   };
 
-  root.addEventListener("pointerup", finalizePointer, { passive: true });
-  root.addEventListener("pointercancel", finalizePointer, { passive: true });
+  root.addEventListener("pointerup", finalizePointer, { passive: true, signal });
+  root.addEventListener("pointercancel", finalizePointer, { passive: true, signal });
   emblaApi.on("pointerUp", finalizePointer);
 
   // Touch/trackpad drags can move with tiny deltas. Treat Embla scroll as drag intent,
@@ -296,7 +299,7 @@ function bindDragClickSuppression(root, emblaApi, clickSelector, options = {}) {
       e.preventDefault();
       e.stopImmediatePropagation();
     },
-    true,
+    { capture: true, signal },
   );
 }
 
@@ -420,22 +423,33 @@ function initEmblaRoot(emblaNode) {
 
   emblaNode._emblaApi = emblaApi;
 
+  // One controller per root scopes every carousel listener below; the owner
+  // (`<embla-carousel>` disconnectedCallback) aborts it on teardown so the DOM
+  // listeners are removed alongside the destroyed Embla instance.
+  const controller = new AbortController();
+  const { signal } = controller;
+  emblaNode._emblaController = controller;
+
   if (emblaPrevButtonNode) {
-    emblaPrevButtonNode.addEventListener("click", () => emblaApi.scrollPrev(), false);
+    emblaPrevButtonNode.addEventListener("click", () => emblaApi.scrollPrev(), { signal });
   }
 
   if (emblaNextButtonNode) {
-    emblaNextButtonNode.addEventListener("click", () => emblaApi.scrollNext(), false);
+    emblaNextButtonNode.addEventListener("click", () => emblaApi.scrollNext(), { signal });
   }
 
   if (emblaDotsNode) {
-    addDotBtnsAndClickHandlers(emblaApi, emblaDotsNode);
+    addDotBtnsAndClickHandlers(emblaApi, emblaDotsNode, signal);
   }
 
   if (emblaNode.classList.contains("lightbox__stage")) {
-    bindDragClickSuppression(emblaNode, emblaApi, ".lightbox__slide[commandfor]", {
-      dragThresholdPx: 14,
-    });
+    bindDragClickSuppression(
+      emblaNode,
+      emblaApi,
+      ".lightbox__slide[commandfor]",
+      { dragThresholdPx: 14 },
+      signal,
+    );
   }
 
   if (emblathumbsNode) {
@@ -449,10 +463,10 @@ function initEmblaRoot(emblaNode) {
       });
 
       emblaNode._emblaApiThumb = emblaApiThumb;
-      addThumbClickHandlers(emblaApi, emblaApiThumb);
+      addThumbClickHandlers(emblaApi, emblaApiThumb, signal);
       addTogglethumbsActive(emblaApi, emblaApiThumb);
 
-      bindDragClickSuppression(emblathumbsNode, emblaApiThumb, ".lightbox__thumb");
+      bindDragClickSuppression(emblathumbsNode, emblaApiThumb, ".lightbox__thumb", {}, signal);
     }
   }
 }
@@ -703,7 +717,7 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
 }
 
 // Attach to window for the documented public API (`window.EmblaInit`), and export
-// for module consumers (carousel.js / navigation.js import it via the zazz.js bundle).
+// for module consumers (carousel.js / navigation.js import it via the main.js bundle).
 if (typeof window !== "undefined") {
   window.EmblaInit = EmblaInit;
 }

@@ -6,7 +6,7 @@ description: Set text color from the semantic role tokens so light and dark mode
 `text-*` color utilities read the **theme role tokens**, which resolve through `light-dark()`. Use
 a role (not a literal scale step) and both light and dark modes stay correct with no extra
 classes. Every value is computed as `oklch(from var(--role) l c h / calc(alpha × --_text-alpha))`,
-so the [color-opacity](/docs/utilities/color-opacity) utilities can dim just the text channel.
+so the [color-opacity](/docs/foundation/utilities/color-opacity) utilities can dim just the text channel.
 
 ## Surfaces & text
 
@@ -61,13 +61,13 @@ Paired surface/`-foreground` roles. Use the foreground on top of its matching su
 
 ## Variants
 
-- **Hover:** every role above has a `hover:text-*` counterpart. See [Hover states](/docs/utilities/hover).
+- **Hover:** every role above has a `hover:text-*` counterpart. See [Hover states](/docs/foundation/utilities/hover).
 - **Opacity:** dim just the text channel (not the whole element) with `text-opacity-*`. See
-  [Color opacity](/docs/utilities/color-opacity).
+  [Color opacity](/docs/foundation/utilities/color-opacity).
 
 <Callout type="info">
   The fluid **type scale** (`text-display`, `text-h1`–`text-h6`, `text-xl`–`text-xs`,
   `text-eyebrow`) and **font-weight** utilities live in the type system, not the utilities layer.
   See [Typography in the overview](/docs/getting-started/overview#typography). For alignment,
-  transform, wrapping, and family, see [Text & font](/docs/utilities/text-and-font).
+  transform, wrapping, and family, see [Text & font](/docs/foundation/utilities/text-and-font).
 </Callout>

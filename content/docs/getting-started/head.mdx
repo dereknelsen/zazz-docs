@@ -18,7 +18,7 @@ This is all most pages need:
   <meta name="color-scheme" content="light dark" />
 
   <!-- One stylesheet: @imports every layer in cascade order -->
-  <link rel="stylesheet" href="./zazz/styles/zazz.css" />
+  <link rel="stylesheet" href="./zazz/styles/main.css" />
 
   <title>Page title</title>
 </head>
@@ -38,24 +38,24 @@ The `<meta name="color-scheme" content="light dark">` tag tells the browser you 
 
 ### Link one stylesheet
 
-Point a single `<link>` at `zazz.css`. It `@import`s every Zazz file in the correct [cascade order](/docs/core-files/layers). One link, every token, component, and utility:
+Point a single `<link>` at `main.css`. It `@import`s every Zazz file in the correct [cascade order](/docs/foundation/layers). One link, every token, component, and utility:
 
 ```html
-<link rel="stylesheet" href="./zazz/styles/zazz.css" />
+<link rel="stylesheet" href="./zazz/styles/main.css" />
 ```
 
 <Callout>
-A separate `<link rel="preload" as="style">` for `zazz.css` is **not** needed. A same-document stylesheet link is already the highest-priority, render-blocking fetch. `preload` is for *late-discovered* resources (web fonts, CSS pulled in by JS), not the stylesheet you link in `<head>`.
+A separate `<link rel="preload" as="style">` for `main.css` is **not** needed. A same-document stylesheet link is already the highest-priority, render-blocking fetch. `preload` is for *late-discovered* resources (web fonts, CSS pulled in by JS), not the stylesheet you link in `<head>`.
 </Callout>
 
 For production, keep the single link and turn on **brotli or gzip** at your host. CSS this regular compresses to roughly 10–15% of its raw size. Better than splitting files by hand, and nothing to keep in sync.
 
 ### Add your overrides after Zazz
 
-Your own stylesheet loads _after_ `zazz.css` so it can reassign any token. See [Adding custom styles](/docs/core-concepts/custom-styles) for what to put in it.
+Your own stylesheet loads _after_ `main.css` so it can reassign any token. See [Adding custom styles](/docs/core-concepts/custom-styles) for what to put in it.
 
 ```html
-<link rel="stylesheet" href="./zazz/styles/zazz.css" />
+<link rel="stylesheet" href="./zazz/styles/main.css" />
 <link rel="stylesheet" href="./your-styles.css" />
 ```
 
@@ -108,10 +108,10 @@ Put this block last in `<head>`, after stylesheets and deferred `<script src>` t
 
 ### Optional head hints
 
-Preload the script bundle so the browser fetches it alongside CSS. `zazz.js` is an ES module, so use `modulepreload` — it primes the module **and** its imports:
+Preload the script bundle so the browser fetches it alongside CSS. `main.js` is an ES module, so use `modulepreload` — it primes the module **and** its imports:
 
 ```html
-<link rel="modulepreload" href="./zazz/scripts/zazz.js" />
+<link rel="modulepreload" href="./zazz/scripts/main.js" />
 ```
 
 Prefetch pages visitors are likely to open next. Low priority, won't block render:
@@ -141,10 +141,10 @@ Put styles, scripts, and the theme block in `<head>`. Deferred scripts keep thei
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="./zazz/styles/zazz.css" />
+    <link rel="stylesheet" href="./zazz/styles/main.css" />
     <link rel="stylesheet" href="./your-styles.css" />
 
-    <link rel="modulepreload" href="./zazz/scripts/zazz.js" />
+    <link rel="modulepreload" href="./zazz/scripts/main.js" />
     <link rel="prefetch" href="./products.html" />
 
     <!-- CDN scripts: demos only. Pin SRI hashes if you use them. -->
@@ -193,7 +193,7 @@ Put styles, scripts, and the theme block in `<head>`. Deferred scripts keep thei
     ></script>
 
     <!-- Zazz scripts: one ES module bundles every component script -->
-    <script type="module" src="./zazz/scripts/zazz.js"></script>
+    <script type="module" src="./zazz/scripts/main.js"></script>
 
     <script>
       (() => {
@@ -225,13 +225,13 @@ Put styles, scripts, and the theme block in `<head>`. Deferred scripts keep thei
   [SRI](https://srihash.org/) `integrity` hashes. Update the hashes when you bump versions.
 </Callout>
 
-The reset gives `<body>`, `<main>`, and section landmarks their own layout and container context. See [`_reset.css`](/docs/core-files/reset).
+The reset gives `<body>`, `<main>`, and section landmarks their own layout and container context. See [`_reset.css`](/docs/foundation/reset).
 
 ## Stylesheet load order
 
-`zazz.css` handles this for you. If you link files individually, keep this order:
+`main.css` handles this for you. If you link files individually, keep this order:
 
-1. `foundation/_layers.css`: declares `@layer variables, reset, legacy, zazz, migrations;` ([why this comes first](/docs/core-files/layers))
+1. `foundation/_layers.css`: declares `@layer variables, reset, legacy, zazz, migrations;` ([why this comes first](/docs/foundation/layers))
 2. `foundation/_variables.css`: global design tokens (and the inline `@property` registrations)
 3. `foundation/_reset.css`: element baselines
 4. `foundation/_typography.css`: type system and `.prose`
@@ -239,22 +239,22 @@ The reset gives `<body>`, `<main>`, and section landmarks their own layout and c
 6. `ui/_*.css` component files, in any order
 7. `foundation/_utilities.css`, then `foundation/_layout.css`: atomic overrides and the container/layout grid (load last)
 
-With HTTP/2–3 multiplexing and server compression, the single `zazz.css` link is usually enough. No manual ordering to maintain.
+With HTTP/2–3 multiplexing and server compression, the single `main.css` link is usually enough. No manual ordering to maintain.
 
 ## Script load order
 
-Every Zazz behavior ships in one ES module, `zazz.js`, which `import`s the rest in the right internal order. You load it once. A module is deferred automatically, so it runs after the document is parsed but before `DOMContentLoaded` — no `defer` attribute needed.
+Every Zazz behavior ships in one ES module, `main.js`, which `import`s the rest in the right internal order. You load it once. A module is deferred automatically, so it runs after the document is parsed but before `DOMContentLoaded` — no `defer` attribute needed.
 
 What still has to come *before* the module, in document order:
 
 1. **Polyfills** (optional): Popover API (`@oddbird/popover-polyfill`), Invokers/tooltip (`invokers/compatible`)
 2. **Embla CDN bundles** (only if a page has carousels): core UMD build, then plugins (`autoplay`, `auto-scroll`, `class-names`, `ssr`). `embla.js` reads these as globals.
-3. **`zazz.js`** (`<script type="module">`): utils, reveal, embla, carousel, lightbox, password, tabs, and navigation, in dependency order.
+3. **`main.js`** (`<script type="module">`): utils, reveal, embla, carousel, lightbox, password, tabs, and navigation, in dependency order.
 4. **Inline theme script** (last, no `type="module"`): applies `.dark` before first paint.
 
 Classic `defer` scripts and module scripts share one execution queue and run in document order, so placing the Embla CDN `<script defer>` tags ahead of the module guarantees its globals exist first.
 
-Everything auto-initializes once the DOM is parsed. No manual init on a normal page. See [Scripting](/docs/core-files/scripting) for how these files work.
+Everything auto-initializes once the DOM is parsed. No manual init on a normal page. See [Scripting](/docs/scripts/scripting) for how these files work.
 
 ## View transition layers
 

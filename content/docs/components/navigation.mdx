@@ -15,11 +15,11 @@ The navigation script intercepts same-origin page navigations and swaps `<main>`
 
 ## Setup
 
-`navigation.js` ships inside the single [`zazz.js`](/docs/getting-started/head#script-load-order) module. The view-transition styles live in `foundation/_view-transitions.css`, which is `@import`ed by `zazz.css` — so the usual single link covers them:
+`navigation.js` ships inside the single [`main.js`](/docs/getting-started/head#script-load-order) module. The view-transition styles live in `foundation/_view-transitions.css`, which is `@import`ed by `main.css` — so the usual single link covers them:
 
 ```html
-<link rel="stylesheet" href="./zazz/styles/zazz.css" />
-<script type="module" src="./zazz/scripts/zazz.js"></script>
+<link rel="stylesheet" href="./zazz/styles/main.css" />
+<script type="module" src="./zazz/scripts/main.js"></script>
 ```
 
 Mark your header and footer with `data-transition-layer` so the view transition knows which chrome to persist. `<main>` gets `view-transition-name: main-content` automatically via `:where(main)` in `_reset.css` — it needs no attribute:

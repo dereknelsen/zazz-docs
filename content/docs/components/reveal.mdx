@@ -16,11 +16,11 @@ No keyframes, no JavaScript animation loops, just CSS transitions triggered by a
 
 ## Setup
 
-`reveal.js` ships inside the single [`zazz.js`](/docs/getting-started/head#script-load-order) module; its styles are part of `zazz.css`, which `@import`s `ui/_reveal.css`. The normal setup is one link to `zazz.css` plus the module:
+`reveal.js` ships inside the single [`main.js`](/docs/getting-started/head#script-load-order) module; its styles are part of `main.css`, which `@import`s `ui/_reveal.css`. The normal setup is one link to `main.css` plus the module:
 
 ```html
-<link rel="stylesheet" href="./zazz/styles/zazz.css" />
-<script type="module" src="./zazz/scripts/zazz.js"></script>
+<link rel="stylesheet" href="./zazz/styles/main.css" />
+<script type="module" src="./zazz/scripts/main.js"></script>
 ```
 
 If you link files individually, the reveal styles live at `./zazz/styles/ui/_reveal.css`.

@@ -1,7 +1,7 @@
 /**
  * @fileoverview Zazz — single entry point for every component script.
  * @description Imports all Zazz behavior modules so a page needs only one
- * `<script type="module" src=".../zazz.js">` instead of eight separate tags.
+ * `<script type="module" src=".../main.js">` instead of eight separate tags.
  * Each module runs for its side effects: global/utility setup, scroll-reveal
  * and carousel auto-initialization, SPA navigation, and the custom-element
  * registrations (`<embla-carousel>`, `<media-lightbox>`, `<input-password>`,

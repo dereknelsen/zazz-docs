@@ -3803,11 +3803,11 @@
   }
 
   :where(.max-w-md) {
-    max-inline-size: var(--step-56);
+    max-inline-size: var(--step-36);
   }
 
   :where(.max-w-lg) {
-    max-inline-size: var(--step-72);
+    max-inline-size: var(--step-80);
   }
 
   :where(.max-w-xl) {

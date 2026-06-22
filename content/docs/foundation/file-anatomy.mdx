@@ -5,6 +5,22 @@ description: How every Zazz stylesheet is structured, documented, and layered, w
 
 Every stylesheet in `zazz/styles/` follows the same anatomy. Learn it once and you can read any file, find the token you need to override, and extend a component without fighting the cascade.
 
+## The foundation files
+
+`zazz/styles/` splits in two. The `foundation/` folder holds the base system, and `ui/` holds one file per component. This section documents the foundation files; the [Components](/docs/components) section covers `ui/`.
+
+| File                   | What it does                                              | Docs                                                       |
+| ---------------------- | -------------------------------------------------------- | ---------------------------------------------------------- |
+| `_layers.css`          | Declares the cascade-layer order, loaded first           | [Layers](/docs/foundation/layers)                          |
+| `_variables.css`       | Global design tokens (colors, type, spacing, and more)   | [Theme variables](/docs/foundation/variables)              |
+| `_reset.css`           | Native-element baselines and re-skinned controls         | [Reset](/docs/foundation/reset)                            |
+| `_typography.css`      | The `.prose` container and the `.text-*` / `.font-*` utilities | [Typography](/docs/foundation/typography)             |
+| `_view-transitions.css`| Cross-document page transitions                          | [View transitions](/docs/foundation/view-transitions)      |
+| `_utilities.css`       | The atomic utility classes                                | [Utilities](/docs/foundation/utilities)                    |
+| `_layout.css`          | The container and layout-grid utilities                  | [Layout](/docs/foundation/utilities/layout)                |
+
+`main.css` `@import`s all of them, in cascade order, so a page links one stylesheet. The rest of this page is the shape each file shares.
+
 ## File anatomy
 
 A component file is written top-to-bottom in this order:
@@ -89,7 +105,7 @@ Global tokens in `_variables.css` are organized in tiers:
 | Metrics & systems    | `--step-*`, `--radius-*`, `--gap-*`, `--font-size-*`       | `_variables.css`    |
 | Component tokens     | `--button-background`, `--field-border`, `--dialog-radius` | each component file |
 
-The full map of which token to reach for, and when, lives in [Theme variables](/docs/core-concepts/theme-variables) and [Colors](/docs/core-concepts/colors).
+The full map of which token to reach for, and when, lives in [Theme variables](/docs/foundation/variables) and [Colors](/docs/core-concepts/colors).
 
 ### Local component tokens
 
@@ -177,6 +193,6 @@ Dark mode is a token concern, not a per-file one. Components read role tokens (`
 These deviate from the canonical shape on purpose, and each is documented in-file:
 
 - **Split `@layer variables` blocks:** when a component has motion tokens and sizing tokens that read better separated.
-- **Component in `@layer reset`:** when redrawing native UI (e.g. `_switch.css` redraws `input[role="switch"]`). See [`_reset.css`](/docs/core-files/reset).
+- **Component in `@layer reset`:** when redrawing native UI (e.g. `_switch.css` redraws `input[role="switch"]`). See [`_reset.css`](/docs/foundation/reset).
 - **`@supports`-gated enhancement:** when anchor positioning or other newer APIs need a documented fallback.
 - **Attribute-hook components:** when styling depends on `[data-*]` attributes driven by JavaScript.

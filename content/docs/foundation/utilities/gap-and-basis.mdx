@@ -65,7 +65,7 @@ thirds on a wider container.
 ## The `--_gap` coordination variables
 
 `gap-*` doesn't only set the `gap` property; it also publishes the value as an **inheriting**
-variable that `basis-*` and the [responsive auto-fill grid](/docs/utilities/grid#responsive-auto-fill-grid)
+variable that `basis-*` and the [responsive auto-fill grid](/docs/foundation/utilities/grid#responsive-auto-fill-grid)
 read back.
 
 | Variable   | Default            | Set by    | Read by                                    |
@@ -77,4 +77,4 @@ read back.
 These are left unregistered (and therefore inheriting) on purpose: a value set on the container
 must reach the children that compute their width from it. This is the opposite of the
 non-inheriting composition variables behind padding/margin/radius; see the
-[overview](/docs/utilities#private-composition-and-coordination-variables) for the contrast.
+[overview](/docs/foundation/utilities#private-composition-and-coordination-variables) for the contrast.

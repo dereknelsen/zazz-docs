@@ -13,7 +13,7 @@ description: "One line of CSS that makes the whole system predictable: the casca
 }
 ```
 
-That's the entire file. Because it has to establish the order before any layer has content, it loads first; `zazz.css` `@import`s it ahead of everything else.
+That's the entire file. Because it has to establish the order before any layer has content, it loads first; `main.css` `@import`s it ahead of everything else.
 
 ## Why layers instead of specificity
 
@@ -35,8 +35,8 @@ Five top-level layers, reading from lowest priority to highest:
 
 | Layer             | Holds                                                                                         | File                                                                                          |
 | ----------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `variables`       | Design tokens, the `:root` custom properties everything reads                                 | [`_variables.css`](/docs/core-concepts/theme-variables) + each component's `@layer variables` block |
-| `reset`           | Native-element baselines and re-skinned controls                                              | [`_reset.css`](/docs/core-files/reset)                                                         |
+| `variables`       | Design tokens, the `:root` custom properties everything reads                                 | [`_variables.css`](/docs/foundation/variables) + each component's `@layer variables` block |
+| `reset`           | Native-element baselines and re-skinned controls                                              | [`_reset.css`](/docs/foundation/reset)                                                         |
 | `legacy`          | Your existing (pre-Zazz) CSS, imported with `layer(legacy)`. Zazz overrides it wherever the two overlap. | your app's entry stylesheet                                                          |
 | `zazz`            | Everything Zazz ships, as two sublayers: `components` then `utilities`                         | `ui/_*.css` (components) and [`_utilities.css`](/docs/core-concepts/utility-classes)           |
 | `migrations`      | Temporary shims for old markup during migration. On top, so it can override anything mid-rewrite. | optional `migrations.css` you add                                                          |
@@ -45,7 +45,7 @@ Inside `zazz`, `utilities` comes after `components`, so a utility class always b
 
 Two parts of the order are worth calling out. **`variables` and `reset` are their own top-level layers, below the rest of Zazz**, so component and utility rules always outrank both design-token defaults and native-element baselines. And **`legacy` sits above them but below `zazz`,** so the framework wins over your pre-Zazz CSS wherever they overlap, while `migrations` sits at the very top so a translation shim can win over even a utility class for old markup that hasn't been rewritten yet.
 
-`@property` registrations live inline in [`_variables.css`](/docs/core-concepts/theme-variables). Registration is layer-independent, but the tokens it types are consumed throughout.
+`@property` registrations live inline in [`_variables.css`](/docs/foundation/variables). Registration is layer-independent, but the tokens it types are consumed throughout.
 
 ## Unlayered styles beat everything
 
@@ -75,18 +75,18 @@ When overriding a token isn't enough and an app rule has to win over a utility, 
 }
 ```
 
-This keeps your overrides layered and predictable. Reach for it only when overriding a [token](/docs/core-concepts/theme-variables) won't do.
+This keeps your overrides layered and predictable. Reach for it only when overriding a [token](/docs/foundation/variables) won't do.
 
 ## Bringing along legacy CSS
 
-Migrating an existing project? Import your old stylesheet into the `legacy` layer. `zazz.css` leaves a commented slot for exactly this:
+Migrating an existing project? Import your old stylesheet into the `legacy` layer. `main.css` leaves a commented slot for exactly this:
 
 ```css
-/* zazz.css — uncomment and point at your stylesheet */
+/* main.css — uncomment and point at your stylesheet */
 @import "./your-legacy.css" layer(legacy);
 ```
 
-Because `legacy` sits below `zazz`, Zazz wins wherever the two overlap, and your untouched markup keeps rendering from its old rules until you convert it. For shims that have to win _over_ Zazz during the rewrite — mapping an old class name onto Zazz tokens, say — add a `migrations.css` at the top of the stack (there's a commented `@import` slot for it at the bottom of `zazz.css`); the `migrations` layer outranks the utilities. For surgical, per-region isolation you can also reach for [`@scope`](https://developer.mozilla.org/en-US/docs/Web/CSS/@scope) donut scoping. See [Migrating to Zazz](/docs/getting-started/migrating) for the full walkthrough.
+Because `legacy` sits below `zazz`, Zazz wins wherever the two overlap, and your untouched markup keeps rendering from its old rules until you convert it. For shims that have to win _over_ Zazz during the rewrite — mapping an old class name onto Zazz tokens, say — add a `migrations.css` at the top of the stack (there's a commented `@import` slot for it at the bottom of `main.css`); the `migrations` layer outranks the utilities. For surgical, per-region isolation you can also reach for [`@scope`](https://developer.mozilla.org/en-US/docs/Web/CSS/@scope) donut scoping. See [Migrating to Zazz](/docs/getting-started/migrating) for the full walkthrough.
 
 ## Browser support
 

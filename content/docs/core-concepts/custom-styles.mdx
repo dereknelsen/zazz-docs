@@ -3,16 +3,16 @@ title: Adding custom styles
 description: When tokens and utilities don't cover it, extend Zazz without touching its source. Override a token, drop a rule into the right layer, or write a one-off inline.
 ---
 
-Zazz's tokens and utilities cover most of what you'll build, but every project has a one-off. When you hit one, you extend the system from the _outside_, and you never edit files in `zazz/styles/`. Keep your additions in your own stylesheet, loaded after `zazz.css`, and they land in the [cascade](/docs/core-files/layers) after Zazz's own layers.
+Zazz's tokens and utilities cover most of what you'll build, but every project has a one-off. When you hit one, you extend the system from the _outside_, and you never edit files in `zazz/styles/`. Keep your additions in your own stylesheet, loaded after `main.css`, and they land in the [cascade](/docs/foundation/layers) after Zazz's own layers.
 
 ```html
-<link rel="stylesheet" href="./zazz/styles/zazz.css" />
+<link rel="stylesheet" href="./zazz/styles/main.css" />
 <link rel="stylesheet" href="./your-styles.css" />
 ```
 
 ## Start with a token override
 
-Most customizations aren't new CSS at all; they're a different value for an existing token. Reach for this first, at the [narrowest scope that works](/docs/core-concepts/theme-variables):
+Most customizations aren't new CSS at all; they're a different value for an existing token. Reach for this first, at the [narrowest scope that works](/docs/foundation/variables):
 
 ```css
 /* your-styles.css */
@@ -47,7 +47,7 @@ Compose from tokens (`var(--primary)`, `var(--gap-md)`) rather than literals, an
 
 ## Add your own components
 
-For a larger pattern with variants, write it in `@layer zazz.components` and give it token hooks, mirroring how Zazz components are built. See [File anatomy](/docs/core-files/file-anatomy):
+For a larger pattern with variants, write it in `@layer zazz.components` and give it token hooks, mirroring how Zazz components are built. See [File anatomy](/docs/foundation/file-anatomy):
 
 ```css
 @layer zazz.components {
@@ -74,7 +74,7 @@ A rule written **outside any layer** beats everything in Zazz (every component a
 }
 ```
 
-That makes it powerful and easy to misuse. It's the right tool when you deliberately need to trump the system; the rest of the time, a token override or a properly layered rule keeps you inside it. See [`layers.css`](/docs/core-files/layers) for why unlayered styles win.
+That makes it powerful and easy to misuse. It's the right tool when you deliberately need to trump the system; the rest of the time, a token override or a properly layered rule keeps you inside it. See [`layers.css`](/docs/foundation/layers) for why unlayered styles win.
 
 ## Pick the smallest tool
 

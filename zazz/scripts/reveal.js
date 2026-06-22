@@ -326,7 +326,7 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
 }
 
 // Attach to window for the documented public API (`window.Reveal`, `new Reveal()`),
-// and export for module consumers (navigation.js imports it via the zazz.js bundle).
+// and export for module consumers (navigation.js imports it via the main.js bundle).
 if (typeof window !== "undefined") {
   window.Reveal = Reveal;
 }

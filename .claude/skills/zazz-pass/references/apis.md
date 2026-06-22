@@ -26,8 +26,8 @@ discovers and enhances markup; you rarely touch it.
 ## 2. Zazz JS behaviors (data-attribute driven)
 
 Configure entirely in markup. Don't edit `zazz/scripts/` unless the task is explicitly about
-framework internals. Every behavior ships in one ES module — `zazz/scripts/zazz.js` — loaded
-with a single `<script type="module" src="…/zazz.js">`; its `import` graph orders the rest.
+framework internals. Every behavior ships in one ES module — `zazz/scripts/main.js` — loaded
+with a single `<script type="module" src="…/main.js">`; its `import` graph orders the rest.
 The only external ordering: Embla-backed components need the Embla CDN UMD bundles loaded (as
 `defer` scripts) **before** the module, since `embla.js` reads them as globals.
 

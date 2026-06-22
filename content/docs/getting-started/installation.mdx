@@ -41,33 +41,33 @@ pnpm dlx degit dereknelsen/zazz-docs/zazz/styles/ui/_dialog.css ./src/zazz/style
 ```
 
 <Callout type="warn">
-  If you install individual style files, update your local `zazz.css` imports to include them in the
+  If you install individual style files, update your local `main.css` imports to include them in the
   right order.
 </Callout>
 
 ## Link the stylesheet
 
-Add a single `<link>` to your HTML. Point it at `zazz.css`; it imports everything in the correct cascade order:
+Add a single `<link>` to your HTML. Point it at `main.css`; it imports everything in the correct cascade order:
 
 ```html
-<link rel="stylesheet" href="./zazz/styles/zazz.css" />
+<link rel="stylesheet" href="./zazz/styles/main.css" />
 ```
 
 That's it. Every component, token, and utility is now available.
 
-### Production: keep `zazz.css`, compress on the server
+### Production: keep `main.css`, compress on the server
 
-Stick with the single `zazz.css` link. CSS this regular compresses extremely well. Turn on **brotli or gzip** at your host and the whole bundle ships at roughly 10–15% of its raw size, with zero source changes. That's a far bigger win than hand-splitting files, and there's nothing to keep in sync.
+Stick with the single `main.css` link. CSS this regular compresses extremely well. Turn on **brotli or gzip** at your host and the whole bundle ships at roughly 10–15% of its raw size, with zero source changes. That's a far bigger win than hand-splitting files, and there's nothing to keep in sync.
 
 ```html
-<link rel="stylesheet" href="./zazz/styles/zazz.css" />
+<link rel="stylesheet" href="./zazz/styles/main.css" />
 ```
 
 <Callout>
-A separate `<link rel="preload" as="style">` for `zazz.css` is **not** needed. A same-document stylesheet link is already the highest-priority, render-blocking fetch. `preload` is for *late-discovered* resources (web fonts, CSS pulled in by JS), not the stylesheet you link in `<head>`.
+A separate `<link rel="preload" as="style">` for `main.css` is **not** needed. A same-document stylesheet link is already the highest-priority, render-blocking fetch. `preload` is for *late-discovered* resources (web fonts, CSS pulled in by JS), not the stylesheet you link in `<head>`.
 </Callout>
 
-You _can_ instead link each `_*.css` file individually (with `preload` hints) to avoid `zazz.css`'s `@import` chain, but with HTTP/2-3 multiplexing and server compression it's rarely worth the upkeep. If you do, keep the cascade order: `foundation/_layers.css` first, then `foundation/_variables.css`, `foundation/_reset.css`, `foundation/_typography.css`, `foundation/_view-transitions.css`; the `ui/_*.css` component files in any order; then `foundation/_utilities.css` and `foundation/_layout.css` last.
+You _can_ instead link each `_*.css` file individually (with `preload` hints) to avoid `main.css`'s `@import` chain, but with HTTP/2-3 multiplexing and server compression it's rarely worth the upkeep. If you do, keep the cascade order: `foundation/_layers.css` first, then `foundation/_variables.css`, `foundation/_reset.css`, `foundation/_typography.css`, `foundation/_view-transitions.css`; the `ui/_*.css` component files in any order; then `foundation/_utilities.css` and `foundation/_layout.css` last.
 
 ## Verify it works
 
@@ -81,7 +81,7 @@ Create an HTML file and add a button:
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Paint the right theme before CSS loads -->
     <meta name="color-scheme" content="light dark" />
-    <link rel="stylesheet" href="./zazz/styles/zazz.css" />
+    <link rel="stylesheet" href="./zazz/styles/main.css" />
     <title>Zazz Test</title>
   </head>
   <body>
@@ -101,7 +101,7 @@ my-project/
 ├── index.html
 ├── zazz/
 │   ├── styles/
-│   │   ├── zazz.css                ← entry point (@imports everything)
+│   │   ├── main.css                ← entry point (@imports everything)
 │   │   ├── foundation/
 │   │   │   ├── _layers.css         ← cascade order (loads first)
 │   │   │   ├── _variables.css      ← global design tokens
@@ -115,7 +115,7 @@ my-project/
 │   │       ├── _dialog.css
 │   │       └── ...
 │   └── scripts/
-│       ├── zazz.js                 ← entry module (imports all scripts)
+│       ├── main.js                 ← entry module (imports all scripts)
 │       ├── navigation.js           ← page transitions and link handling
 │       ├── reveal.js               ← reveal effects
 │       └── ...
@@ -124,10 +124,10 @@ my-project/
 
 ## Customizing
 
-Override any token on `:root` in your own stylesheet. Load it after `zazz.css`:
+Override any token on `:root` in your own stylesheet. Load it after `main.css`:
 
 ```html
-<link rel="stylesheet" href="./zazz/styles/zazz.css" />
+<link rel="stylesheet" href="./zazz/styles/main.css" />
 <link rel="stylesheet" href="./your-styles.css" />
 ```
 
@@ -143,10 +143,10 @@ Every component that references `--primary` or `--radius-md` updates automatical
 
 ## Using with a bundler
 
-If you're using Vite, webpack, or esbuild, import `zazz.css` directly:
+If you're using Vite, webpack, or esbuild, import `main.css` directly:
 
 ```js
-import "./zazz/styles/zazz.css";
+import "./zazz/styles/main.css";
 ```
 
 The `@import` statements resolve at build time. No additional configuration needed.

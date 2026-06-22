@@ -81,7 +81,7 @@ const Utils = {
 };
 
 // Attach to window for the documented public API (`window.Utils`), and export
-// for module consumers (embla.js imports it via the zazz.js bundle).
+// for module consumers (embla.js imports it via the main.js bundle).
 if (typeof window !== "undefined") {
   window.Utils = Utils;
 }

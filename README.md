@@ -30,7 +30,7 @@ This repository holds both **Zazz itself** (the `zazz/` folder) and the **docume
    ```html
    <head>
      <meta name="color-scheme" content="light dark" />
-     <link rel="stylesheet" href="./zazz/styles/zazz.css" />
+     <link rel="stylesheet" href="./zazz/styles/main.css" />
    </head>
    ```
 
@@ -40,7 +40,7 @@ This repository holds both **Zazz itself** (the `zazz/` folder) and the **docume
    <button class="button" data-variant="primary">It works</button>
    ```
 
-`zazz.css` imports every token, reset, component, and utility in the correct cascade order. For the full walkthrough, see [Installation](content/docs/getting-started/installation.mdx).
+`main.css` imports every token, reset, component, and utility in the correct cascade order. For the full walkthrough, see [Installation](content/docs/getting-started/installation.mdx).
 
 ## What's in this repo
 

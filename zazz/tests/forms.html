@@ -11,16 +11,23 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Preload latin Geist woff2 (Google Fonts v5) so it is ready before first paint. -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Geist:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="preload"
+    as="font"
+    type="font/woff2"
+    crossorigin
+    href="https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwcGFWNOITd.woff2" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Geist:ital,wght@0,100..900;1,100..900&display=optional"
     rel="stylesheet" />
 
-  <!-- Zazz styles: one bundle — zazz.css @imports the foundation layers (layers,
+  <!-- Zazz styles: one bundle — main.css @imports the foundation layers (layers,
        variables, reset) and every component in cascade order. -->
-  <link rel="stylesheet" href="../styles/zazz.css" />
+  <link rel="stylesheet" href="../styles/main.css" />
 
   <!-- Preload critical js -->
-  <link rel="modulepreload" href="../scripts/zazz.js" />
+  <link rel="modulepreload" href="../scripts/main.js" />
 
   <!-- Prefetching related pages -->
   <link rel="prefetch" href="layout.html" />
@@ -59,7 +66,7 @@
     defer></script>
 
   <!-- Zazz scripts: one ES module bundles every component script. -->
-  <script type="module" src="../scripts/zazz.js"></script>
+  <script type="module" src="../scripts/main.js"></script>
   <script>
     /**
      * Synchronizes the preview theme with the user's preference.
@@ -105,7 +112,7 @@
     </div>
   </header>
 
-  <main>
+  <main data-layout="main">
     <section class="py-xl">
       <div class="container" data-container="md">
         <hgroup class="flex flex-col gap-sm pb-md">

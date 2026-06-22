@@ -3,7 +3,7 @@ title: Scripting
 description: "How Zazz scripts are structured, documented, and initialized: the vanilla-JavaScript conventions behind every browser-native behavior."
 ---
 
-Scripts in `zazz/scripts/` are served directly at `/zazz/scripts/*.js`, with no bundler or transpiler. They are native ES modules and run as-is in modern browsers. A single entry module, `zazz.js`, `import`s every component script, so a page loads behavior with one `<script type="module" src="./zazz/scripts/zazz.js">` tag (see [Structuring your head tag](/docs/getting-started/head#script-load-order)).
+Scripts in `zazz/scripts/` are served directly at `/zazz/scripts/*.js`, with no bundler or transpiler. They are native ES modules and run as-is in modern browsers. A single entry module, `main.js`, `import`s every component script, so a page loads behavior with one `<script type="module" src="./zazz/scripts/main.js">` tag (see [Structuring your head tag](/docs/getting-started/head#script-load-order)).
 
 ## Philosophy
 
@@ -34,7 +34,7 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
 }
 
 // Attach to window for the documented public API, then export for module consumers
-// (the zazz.js entry and any sibling script that imports this one).
+// (the main.js entry and any sibling script that imports this one).
 if (typeof window !== "undefined") {
   window.MyExport = MyExport;
 }
@@ -44,7 +44,7 @@ export { MyExport };
 
 ## Module exports
 
-Each script attaches its public API to `window` (the documented surface) **and** provides a matching named `export` that the `zazz.js` bundle and sibling modules `import`:
+Each script attaches its public API to `window` (the documented surface) **and** provides a matching named `export` that the `main.js` bundle and sibling modules `import`:
 
 | File            | Global             | Export shape                              |
 | --------------- | ------------------ | ----------------------------------------- |
@@ -81,7 +81,7 @@ Component scripts read configuration from HTML data attributes rather than JS op
 
 ## Dependencies and load order
 
-Cross-script dependencies are real ES `import`s, so the module graph resolves order — you load `zazz.js` and nothing else needs sequencing:
+Cross-script dependencies are real ES `import`s, so the module graph resolves order — you load `main.js` and nothing else needs sequencing:
 
 | Script          | Imports       | Notes                                              |
 | --------------- | ------------- | -------------------------------------------------- |
@@ -94,7 +94,7 @@ Cross-script dependencies are real ES `import`s, so the module graph resolves or
 | `tabs.js`       | —             | Standalone (`<tab-group>`)                          |
 | `navigation.js` | —             | App-level; inert in component preview iframes      |
 
-The one ordering the module graph can't enforce is the **Embla CDN UMD bundles**: `embla.js` reads them as globals, so their `<script defer>` tags must precede the `zazz.js` module in the document. Where these tags go is covered in [Structuring your head tag](/docs/getting-started/head#script-load-order).
+The one ordering the module graph can't enforce is the **Embla CDN UMD bundles**: `embla.js` reads them as globals, so their `<script defer>` tags must precede the `main.js` module in the document. Where these tags go is covered in [Structuring your head tag](/docs/getting-started/head#script-load-order).
 
 ## DOM interaction patterns
 

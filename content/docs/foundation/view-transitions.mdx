@@ -26,11 +26,11 @@ Together, they make navigation near-instant and visually continuous, with no fra
 
 ## Enabling transitions
 
-Include the stylesheet and the `zazz.js` module (it bundles `navigation.js`). The transition styles live in `foundation/_view-transitions.css`, which `zazz.css` already `@import`s, so the single link covers them:
+Include the stylesheet and the `main.js` module (it bundles `navigation.js`). The transition styles live in `foundation/_view-transitions.css`, which `main.css` already `@import`s, so the single link covers them:
 
 ```html
-<link rel="stylesheet" href="./zazz/styles/zazz.css" />
-<script type="module" src="./zazz/scripts/zazz.js"></script>
+<link rel="stylesheet" href="./zazz/styles/main.css" />
+<script type="module" src="./zazz/scripts/main.js"></script>
 ```
 
 Mark your header and footer. `<main>` gets its view-transition name automatically — it needs no attribute:

@@ -29,7 +29,7 @@ CSSDoc is intentionally lightweight:
 
 ## 2. File anatomy
 
-Cascade order is declared once, in [`_layers.css`](./foundation/_layers.css), and must load first:
+Cascade order is declared once, in [`_layers.css`](./base/_layers.css), and must load first:
 
 ```css
 @layer variables, reset, legacy, zazz, migrations;
@@ -230,7 +230,7 @@ organized in tiers (literal scales → semantic roles → component primitives):
 | **Component tokens** | `--button-background`, `--field-border`, `--dialog-radius`                                               | each component file |
 
 Selected tokens are also **registered as typed `@property`**, inline in
-[`_variables.css`](./foundation/_variables.css), so they can be read by container `style()`
+[`_variables.css`](./base/_variables.css), so they can be read by container `style()`
 queries with typed comparison/range syntax. Theme roles register with `syntax: "*"` so
 `light-dark()` re-resolves correctly under a descendant's `color-scheme`.
 

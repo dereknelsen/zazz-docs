@@ -45,8 +45,8 @@ Color utilities set `--_border-color`; the border-drawing classes read it. Set b
 ```
 
 The drawn color is `oklch(from var(--_border-color) l c h / calc(alpha × --_border-alpha))`, so
-`border-opacity-*` ([Color opacity](/docs/foundation/utilities/color-opacity)) dims the line, and
-`hover:border-*` ([Hover states](/docs/foundation/utilities/hover)) recolors it on hover.
+`border-opacity-*` ([Color opacity](/docs/base/utilities/color-opacity)) dims the line, and
+`hover:border-*` ([Hover states](/docs/base/utilities/hover)) recolors it on hover.
 
 ## Border radius
 
@@ -111,4 +111,4 @@ corners untouched.
 
 `--_border-color` is a related, single-purpose indirection (not `@property`-registered): the
 color classes set it, the drawing classes read it through the alpha-multiply pattern. See the
-[overview](/docs/foundation/utilities#composition-variables-registered-non-inheriting) for the full model.
+[overview](/docs/base/utilities#composition-variables-registered-non-inheriting) for the full model.

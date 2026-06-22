@@ -3,7 +3,7 @@ title: Typography
 description: "What _typography.css ships: the .prose container for long-form HTML, plus the .text-* and .font-* utilities that read Zazz's type tokens."
 ---
 
-`_typography.css` turns the type tokens in [`_variables.css`](/docs/foundation/variables) into something you can use. It does two jobs. It styles raw HTML inside a `.prose` container, and it exposes the `.text-*` and `.font-*` utility classes you reach for everywhere else.
+`_typography.css` turns the type tokens in [`_variables.css`](/docs/base/variables) into something you can use. It does two jobs. It styles raw HTML inside a `.prose` container, and it exposes the `.text-*` and `.font-*` utility classes you reach for everywhere else.
 
 The tokens themselves (font families, sizes, weights, line-heights, letter-spacing) live in `_variables.css`. This file consumes them.
 
@@ -24,7 +24,7 @@ Zazz defaults to Geist. See [Structuring your head tag](/docs/getting-started/he
 
 Every size in the scale is a fluid `clamp()` value, so text grows with the viewport instead of jumping at breakpoints. The scale runs from `--font-size-eyebrow` up through the body sizes (`xs` to `xl`), the heading steps (`h6` to `h1`), and `--font-size-display` at the top.
 
-Each step pairs a size token with matching weight, line-height, and letter-spacing tokens (`--font-weight-*`, `--leading-*`, `--tracking-*`). Larger steps get tighter tracking and shorter leading so headings read as dense and deliberate. Body sizes get looser tracking and taller leading for comfortable reading. The exact values live in `_variables.css`; the [variables reference](/docs/foundation/variables) lists the tiers.
+Each step pairs a size token with matching weight, line-height, and letter-spacing tokens (`--font-weight-*`, `--leading-*`, `--tracking-*`). Larger steps get tighter tracking and shorter leading so headings read as dense and deliberate. Body sizes get looser tracking and taller leading for comfortable reading. The exact values live in `_variables.css`; the [variables reference](/docs/base/variables) lists the tiers.
 
 ## The `.text-*` and `.font-*` utilities
 
@@ -35,7 +35,7 @@ Each step pairs a size token with matching weight, line-height, and letter-spaci
 <p class="text-sm text-muted-foreground">Caption text</p>
 ```
 
-`.font-*` covers weight on its own. You get the Tailwind-style numeric weights (`.font-thin` through `.font-black`) plus three semantic ones that track the tokens: `.font-body`, `.font-heading`, and `.font-strong`. For the full catalog, with text alignment, transform, wrapping, and line-clamp, see [Text and font](/docs/foundation/utilities/text-and-font). For color, see [Text color](/docs/foundation/utilities/text-color).
+`.font-*` covers weight on its own. You get the Tailwind-style numeric weights (`.font-thin` through `.font-black`) plus three semantic ones that track the tokens: `.font-body`, `.font-heading`, and `.font-strong`. For the full catalog, with text alignment, transform, wrapping, and line-clamp, see [Text and font](/docs/base/utilities/text-and-font). For color, see [Text color](/docs/base/utilities/text-color).
 
 ## The `.prose` container
 
@@ -63,4 +63,4 @@ Vertical rhythm between blocks runs off the `--paragraph-spacing-*` tokens, so y
 
 ## Where this sits
 
-`_typography.css` writes into four layers: `variables` (the `--prose-*` hooks), `reset` (the figcaption baseline it shares with `_reset.css`), `components` (`.prose`), and `utilities` (`.text-*`, `.font-*`). For why a single file spans that many layers, see [File anatomy](/docs/foundation/file-anatomy).
+`_typography.css` writes into four layers: `variables` (the `--prose-*` hooks), `reset` (the figcaption baseline it shares with `_reset.css`), `components` (`.prose`), and `utilities` (`.text-*`, `.font-*`). For why a single file spans that many layers, see [File anatomy](/docs/base/file-anatomy).

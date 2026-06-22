@@ -4,7 +4,7 @@ description: Dim a color channel (text, background, or border) without fading th
 ---
 
 Color-opacity utilities dim **one color channel** and nothing else. Unlike
-[`opacity-*`](/docs/foundation/utilities/effects#opacity), which fades the whole element (children included),
+[`opacity-*`](/docs/base/utilities/effects#opacity), which fades the whole element (children included),
 these multiply into a single token's alpha, so text stays crisp while a background softens, and a
 child never inherits the dimming.
 
@@ -12,7 +12,7 @@ child never inherits the dimming.
 
 |                     | What it affects                   | Classes                                                                |
 | ------------------- | --------------------------------- | ---------------------------------------------------------------------- |
-| **Element opacity** | the entire element + its children | `opacity-0 … opacity-100` ([Effects](/docs/foundation/utilities/effects#opacity)) |
+| **Element opacity** | the entire element + its children | `opacity-0 … opacity-100` ([Effects](/docs/base/utilities/effects#opacity)) |
 | **Channel alpha**   | only the named color channel      | `text-opacity-*` · `bg-opacity-*` · `border-opacity-*`                 |
 
 Both use the same quartile scale: `0`, `25`, `50`, `75`, `100`.
@@ -69,4 +69,4 @@ The three multipliers are `@property`-registered with `inherits: false` and an `
 | `--_border-alpha`     | `<number>` | `1`     | `border-opacity-*` |
 
 These sit alongside the padding/margin/radius composition variables as the non-inheriting half of
-the system. See the [overview](/docs/foundation/utilities#composition-variables-registered-non-inheriting).
+the system. See the [overview](/docs/base/utilities#composition-variables-registered-non-inheriting).

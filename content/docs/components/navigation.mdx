@@ -3,7 +3,7 @@ title: Navigation
 description: "SPA-like page transitions using the Navigation API and View Transitions: instant content swaps with animated crossfades."
 ---
 
-The navigation script intercepts same-origin page navigations and swaps `<main>` content without a full page reload. Combined with `foundation/_view-transitions.css`, this creates smooth, app-like transitions between pages.
+The navigation script intercepts same-origin page navigations and swaps `<main>` content without a full page reload. Combined with `base/_view-transitions.css`, this creates smooth, app-like transitions between pages.
 
 ## How it works
 
@@ -15,7 +15,7 @@ The navigation script intercepts same-origin page navigations and swaps `<main>`
 
 ## Setup
 
-`navigation.js` ships inside the single [`main.js`](/docs/getting-started/head#script-load-order) module. The view-transition styles live in `foundation/_view-transitions.css`, which is `@import`ed by `main.css` — so the usual single link covers them:
+`navigation.js` ships inside the single [`main.js`](/docs/getting-started/head#script-load-order) module. The view-transition styles live in `base/_view-transitions.css`, which is `@import`ed by `main.css` — so the usual single link covers them:
 
 ```html
 <link rel="stylesheet" href="./zazz/styles/main.css" />
@@ -42,7 +42,7 @@ The header and footer stay in place while `<main>` content transitions. This kee
 
 ## View Transition API
 
-The script uses `document.startViewTransition()` when available. The CSS in `foundation/_view-transitions.css` defines the animation:
+The script uses `document.startViewTransition()` when available. The CSS in `base/_view-transitions.css` defines the animation:
 
 - **Old content** fades out and scales down slightly
 - **New content** fades in and scales up from slightly smaller

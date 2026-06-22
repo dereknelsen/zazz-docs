@@ -35,8 +35,8 @@ Five top-level layers, reading from lowest priority to highest:
 
 | Layer             | Holds                                                                                         | File                                                                                          |
 | ----------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `variables`       | Design tokens, the `:root` custom properties everything reads                                 | [`_variables.css`](/docs/foundation/variables) + each component's `@layer variables` block |
-| `reset`           | Native-element baselines and re-skinned controls                                              | [`_reset.css`](/docs/foundation/reset)                                                         |
+| `variables`       | Design tokens, the `:root` custom properties everything reads                                 | [`_variables.css`](/docs/base/variables) + each component's `@layer variables` block |
+| `reset`           | Native-element baselines and re-skinned controls                                              | [`_reset.css`](/docs/base/reset)                                                         |
 | `legacy`          | Your existing (pre-Zazz) CSS, imported with `layer(legacy)`. Zazz overrides it wherever the two overlap. | your app's entry stylesheet                                                          |
 | `zazz`            | Everything Zazz ships, as two sublayers: `components` then `utilities`                         | `ui/_*.css` (components) and [`_utilities.css`](/docs/core-concepts/utility-classes)           |
 | `migrations`      | Temporary shims for old markup during migration. On top, so it can override anything mid-rewrite. | optional `migrations.css` you add                                                          |
@@ -45,7 +45,7 @@ Inside `zazz`, `utilities` comes after `components`, so a utility class always b
 
 Two parts of the order are worth calling out. **`variables` and `reset` are their own top-level layers, below the rest of Zazz**, so component and utility rules always outrank both design-token defaults and native-element baselines. And **`legacy` sits above them but below `zazz`,** so the framework wins over your pre-Zazz CSS wherever they overlap, while `migrations` sits at the very top so a translation shim can win over even a utility class for old markup that hasn't been rewritten yet.
 
-`@property` registrations live inline in [`_variables.css`](/docs/foundation/variables). Registration is layer-independent, but the tokens it types are consumed throughout.
+`@property` registrations live inline in [`_variables.css`](/docs/base/variables). Registration is layer-independent, but the tokens it types are consumed throughout.
 
 ## Unlayered styles beat everything
 
@@ -75,7 +75,7 @@ When overriding a token isn't enough and an app rule has to win over a utility, 
 }
 ```
 
-This keeps your overrides layered and predictable. Reach for it only when overriding a [token](/docs/foundation/variables) won't do.
+This keeps your overrides layered and predictable. Reach for it only when overriding a [token](/docs/base/variables) won't do.
 
 ## Bringing along legacy CSS
 

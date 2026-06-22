@@ -28,19 +28,19 @@ utility-built panel stays on-brand and theme-aware for free.
 
 ## How these pages are grouped
 
-The atomic classes in `zazz/styles/foundation/_utilities.css` are organized here into the same families
+The atomic classes in `zazz/styles/base/_utilities.css` are organized here into the same families
 Tailwind uses, so you can scan by intent:
 
 | Group                                                                                                            | Covers                                                                |
 | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| [Layout](/docs/foundation/utilities/layout)                                                                                 | display, position, overflow, z-index, aspect-ratio, object-fit, order |
-| [Flexbox](/docs/foundation/utilities/flexbox) · [Grid](/docs/foundation/utilities/grid) · [Gap & basis](/docs/foundation/utilities/gap-and-basis) | flex/grid containers, alignment, spans, gaps, flex-basis              |
-| [Spacing](/docs/foundation/utilities/spacing) · [Sizing](/docs/foundation/utilities/sizing)                                            | padding, margin · width, height, size, min/max                        |
-| [Text color](/docs/foundation/utilities/text-color) · [Text & font](/docs/foundation/utilities/text-and-font)                          | color roles · alignment, transform, wrap, clamp, family               |
-| [Backgrounds](/docs/foundation/utilities/backgrounds) · [Borders](/docs/foundation/utilities/borders)                                  | surface colors, overlays · border, radius                             |
-| [Effects](/docs/foundation/utilities/effects) · [Color opacity](/docs/foundation/utilities/color-opacity)                              | shadow, opacity, scale, transition · channel alpha                    |
-| [Interactivity](/docs/foundation/utilities/interactivity) · [Hover states](/docs/foundation/utilities/hover)                           | cursor, focus ring, screen readers · `hover:` variants                |
-| [Responsive design](/docs/foundation/utilities/responsive-design)                                                           | the `@xs: @sm: @md: @lg: @xl:` container-query prefixes               |
+| [Layout](/docs/base/utilities/layout)                                                                                 | display, position, overflow, z-index, aspect-ratio, object-fit, order |
+| [Flexbox](/docs/base/utilities/flexbox) · [Grid](/docs/base/utilities/grid) · [Gap & basis](/docs/base/utilities/gap-and-basis) | flex/grid containers, alignment, spans, gaps, flex-basis              |
+| [Spacing](/docs/base/utilities/spacing) · [Sizing](/docs/base/utilities/sizing)                                            | padding, margin · width, height, size, min/max                        |
+| [Text color](/docs/base/utilities/text-color) · [Text & font](/docs/base/utilities/text-and-font)                          | color roles · alignment, transform, wrap, clamp, family               |
+| [Backgrounds](/docs/base/utilities/backgrounds) · [Borders](/docs/base/utilities/borders)                                  | surface colors, overlays · border, radius                             |
+| [Effects](/docs/base/utilities/effects) · [Color opacity](/docs/base/utilities/color-opacity)                              | shadow, opacity, scale, transition · channel alpha                    |
+| [Interactivity](/docs/base/utilities/interactivity) · [Hover states](/docs/base/utilities/hover)                           | cursor, focus ring, screen readers · `hover:` variants                |
+| [Responsive design](/docs/base/utilities/responsive-design)                                                           | the `@xs: @sm: @md: @lg: @xl:` container-query prefixes               |
 
 ## Private composition and coordination variables
 
@@ -73,10 +73,10 @@ untouched. The same pattern powers per-edge `rounded-*` and per-channel color op
 
 | Variable                                                    | Registered syntax             | Initial | Set by                                         | Documented in                                  |
 | ----------------------------------------------------------- | ----------------------------- | ------- | ---------------------------------------------- | ---------------------------------------------- |
-| `--_padding-{inline,block}-{start,end}`                     | `<length-percentage>`         | `0`     | `p-* px-* py-* pt-* pr-* pb-* pl-*`            | [Spacing](/docs/foundation/utilities/spacing)             |
-| `--_margin-{inline,block}-{start,end}`                      | `<length-percentage> \| auto` | `0`     | `m-* mx-* my-* mt-* … -m-* mx-auto`            | [Spacing](/docs/foundation/utilities/spacing)             |
-| `--_radius-{top-left,top-right,bottom-right,bottom-left}`   | `<length-percentage>`         | `0`     | `rounded-* rounded-t-* rounded-tl-* …`         | [Borders](/docs/foundation/utilities/borders)             |
-| `--_text-alpha` · `--_background-alpha` · `--_border-alpha` | `<number>`                    | `1`     | `text-opacity-* bg-opacity-* border-opacity-*` | [Color opacity](/docs/foundation/utilities/color-opacity) |
+| `--_padding-{inline,block}-{start,end}`                     | `<length-percentage>`         | `0`     | `p-* px-* py-* pt-* pr-* pb-* pl-*`            | [Spacing](/docs/base/utilities/spacing)             |
+| `--_margin-{inline,block}-{start,end}`                      | `<length-percentage> \| auto` | `0`     | `m-* mx-* my-* mt-* … -m-* mx-auto`            | [Spacing](/docs/base/utilities/spacing)             |
+| `--_radius-{top-left,top-right,bottom-right,bottom-left}`   | `<length-percentage>`         | `0`     | `rounded-* rounded-t-* rounded-tl-* …`         | [Borders](/docs/base/utilities/borders)             |
+| `--_text-alpha` · `--_background-alpha` · `--_border-alpha` | `<number>`                    | `1`     | `text-opacity-* bg-opacity-* border-opacity-*` | [Color opacity](/docs/base/utilities/color-opacity) |
 
 ### Coordination variables (inheriting on purpose)
 
@@ -92,8 +92,8 @@ themselves so a span never exceeds the track count.
 | `--_grid-cols` · `--_grid-rows` | `1`                            | `grid-cols-N` · `grid-rows-N` | `col-span-*` · `row-span-*`, auto-fill     |
 | `--_grid-col-min`               | `min(100%, 25ch)` (on `.grid`) | `.grid`                       | `grid-flow-row` auto-fill track floor      |
 
-These are covered alongside their classes in [Gap & basis](/docs/foundation/utilities/gap-and-basis) and
-[Grid](/docs/foundation/utilities/grid).
+These are covered alongside their classes in [Gap & basis](/docs/base/utilities/gap-and-basis) and
+[Grid](/docs/base/utilities/grid).
 
 ## Responsive & state variants
 
@@ -108,6 +108,6 @@ Color, opacity, and scale utilities also ship `hover:` variants that need no Jav
 </div>
 ```
 
-See [Responsive design](/docs/foundation/utilities/responsive-design) for the breakpoint table and exactly
-which families are available per breakpoint, and [Hover states](/docs/foundation/utilities/hover) for the
+See [Responsive design](/docs/base/utilities/responsive-design) for the breakpoint table and exactly
+which families are available per breakpoint, and [Hover states](/docs/base/utilities/hover) for the
 full `hover:` catalog.

@@ -3,7 +3,7 @@ title: _reset.css
 description: The baseline layer of native-element resets and re-skinned controls that live in @layer reset, so your components and utilities always win over them.
 ---
 
-`_reset.css` normalizes the browser's defaults and gives native controls a Zazz look. The whole file sits in `@layer reset`, the second-lowest [layer](/docs/foundation/layers), so every component and utility you write overrides it without effort.
+`_reset.css` normalizes the browser's defaults and gives native controls a Zazz look. The whole file sits in `@layer reset`, the second-lowest [layer](/docs/base/layers), so every component and utility you write overrides it without effort.
 
 ## Zero specificity by design
 
@@ -72,7 +72,7 @@ A global `:focus-visible` rule paints the [focus ring](/docs/core-concepts/state
 
 ## Where some resets live instead
 
-To keep styling modular, a few controls are reset alongside their component rather than here: checkbox (`_checkbox.css`), range slider (`_slider.css`), switch (`_switch.css`), and the `<select>` picker panel (`_select.css`). They still write into `@layer reset`; they just live next to the component they redraw, an [allowed variation](/docs/foundation/file-anatomy#allowed-variations) on the standard file shape.
+To keep styling modular, a few controls are reset alongside their component rather than here: checkbox (`_checkbox.css`), range slider (`_slider.css`), switch (`_switch.css`), and the `<select>` picker panel (`_select.css`). They still write into `@layer reset`; they just live next to the component they redraw, an [allowed variation](/docs/base/file-anatomy#allowed-variations) on the standard file shape.
 
 ## Overriding the reset
 

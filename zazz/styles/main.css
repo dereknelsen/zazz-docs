@@ -1,25 +1,25 @@
 /**
  * main.css — Plain-CSS entry point; @import bundle in cascade order.
  *
- * Bundles the foundation layers (layers → variables → reset) followed by every
+ * Bundles the base layers (layers → variables → reset) followed by every
  * component, so a page only needs a single stylesheet link. Order matters:
  * layers.css declares the cascade layers and must load first.
  *
  * Legacy support: import your legacy stylesheets into the legacy layer at the slot
  * below (between the reset baseline and the components). Projects that prefer to
- * compose the layers by hand can import the foundation files individually in the
+ * compose the layers by hand can import the base files individually in the
  * same order instead of using this bundle — see CONVENTIONS.md.
  *
  * @layer      none
  * @see        CONVENTIONS.md — file anatomy & layer architecture
  */
 
-/* Foundation — order matters; _layers.css declares the cascade layers first. */
-@import "./foundation/_layers.css";
-@import "./foundation/_variables.css";
-@import "./foundation/_reset.css";
-@import "./foundation/_typography.css";
-@import "./foundation/_view-transitions.css";
+/* base — order matters; _layers.css declares the cascade layers first. */
+@import "./base/_layers.css";
+@import "./base/_variables.css";
+@import "./base/_reset.css";
+@import "./base/_typography.css";
+@import "./base/_view-transitions.css";
 
 /* Legacy layer — import legacy stylesheets here, into the legacy layer */
 /* @import "./your-legacy.css" layer(legacy); */
@@ -53,8 +53,8 @@
 @import "./ui/_reveal.css";
 
 /* Utilities and layout remain the final normal Zazz override layer. */
-@import "./foundation/_utilities.css";
-@import "./foundation/_layout.css";
+@import "./base/_utilities.css";
+@import "./base/_layout.css";
 
 /* Migrations layer - for legacy css overrides */
 /* @import "./migrations.css"; */

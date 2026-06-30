@@ -30,23 +30,8 @@ unprefixed class is your base and prefixes layer on as the page grows.
 <div class="grid grid-cols-1 @xs:grid-cols-2 @sm:grid-cols-3 @lg:grid-cols-4 gap-md">…</div>
 ```
 
-### Max-width variants
-
-Each breakpoint also has a `@max-*` form that does the opposite: active **below** its width, off at
-or above it. Reach for it when a rule should only apply on smaller screens.
-
-| Prefix     | Active when page width is… |
-| ---------- | -------------------------- |
-| `@max-xs:` | `< 40rem`                  |
-| `@max-sm:` | `< 48rem`                  |
-| `@max-md:` | `< 64rem`                  |
-| `@max-lg:` | `< 80rem`                  |
-| `@max-xl:` | `< 96rem`                  |
-
-```html
-<!-- two columns by default, but a single banded column below md -->
-<div class="grid grid-cols-2 @max-md:container">…</div>
-```
+The prefixes are min-width only. To target small screens, write the small layout as the unprefixed
+base and let a prefix override it from its breakpoint up.
 
 ## Where the breakpoints come from
 
@@ -90,8 +75,7 @@ never disagrees with itself from one region to the next.
 ## Which utilities are responsive
 
 Responsive variants exist for the **layout** families, the ones you actually rearrange across
-breakpoints. Each is available at every prefix (`@xs:` through `@xl:`, and the matching `@max-*`
-forms):
+breakpoints. Each is available at every prefix (`@xs:` through `@xl:`):
 
 | Family          | Responsive classes                                                                                 |
 | --------------- | -------------------------------------------------------------------------------------------------- |

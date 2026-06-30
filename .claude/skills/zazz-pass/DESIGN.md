@@ -323,7 +323,7 @@ Key steps: `--neutral-50` (#fcfcfc) · `--neutral-200` (#d4d4d7) · `--neutral-5
 
 ### Overlays
 
-- **Shade** (`--shade-50` through `--shade-950`): Alpha-based dim derived from neutral-950. Use for backdrops and darkening. `--shade-800` for modal backdrops (not `--muted`).
+- **Shade** (`--shade-50` through `--shade-950`): Alpha-based dim derived from neutral-950. Use for backdrops and darkening. `--shade-900` for modal backdrops (not `--muted`).
 - **Tint** (`--tint-50` through `--tint-950`): Alpha-based fade derived from white. Use for lightening over dark surfaces.
 
 ### Status Colors
@@ -403,7 +403,7 @@ Gently rounded chips (`--radius-sm`, ~6px). Height `--step-5_5`. Variants (via `
 
 ### Dialog
 
-Native `<dialog>` via Invoker Commands API. `--card` surface, `--shadow-md`, `--radius-lg`. Backdrop: `--shade-800`. Sizes (via `data-size`): `article` (default width), `container`, `screen`.
+Native `<dialog>` via Invoker Commands API. `--card` surface, `--shadow-md`, `--radius-lg`. Backdrop: `--shade-900`. Sizes (via `data-size`): `article` (default width), `container`, `screen`.
 
 ### Dropdown & Navigation Menu
 
@@ -429,7 +429,7 @@ Shared `--field-*` tokens unify `.input`, `.textarea`, `.select`, `.input-group`
 
 | Markup                                | Result                                                           | Purpose                    |
 | ------------------------------------- | --------------------------------------------------------------- | -------------------------- |
-| `.container`                          | Subgrid band system; children land in the `lg` band by default  | Full-width content wrapper |
+| `.container`                          | Subgrid band system; children land in the `md` band by default  | Full-width content wrapper |
 | `.container[data-variant="article"]`  | Centered reading width (`--article-lg` 70ch by default)         | Reading-width content      |
 
 `.container` is a subgrid spanning its region; each direct child drops into a band (`xs sm md lg xl`

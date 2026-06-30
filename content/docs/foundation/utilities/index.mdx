@@ -16,15 +16,15 @@ utility-built panel stays on-brand and theme-aware for free.
 
 ## The rules that govern every utility
 
+The [why, and the everyday subset](/docs/core-concepts/utility-classes), live in Core concepts; this
+page is the reference. Two mechanics set up everything below:
+
 1. **Cascade, not specificity.** Inside Zazz the sublayers run `variables, components, utilities`.
    A plain `.button` rule lives in `components`; a `.rounded-full` utility lives in `utilities`
-   and wins. See [Overview](/docs/getting-started/overview) for the full layer model.
+   and wins. See [`_layers.css`](/docs/core-files/layers) for the full layer model.
 2. **Zero specificity.** Each rule is `:where(.utility) { … }`, specificity `(0,0,0)`. Utilities
    override components by layer position, and _your_ rules override utilities by ordinary
    specificity. No arms race.
-3. **Semantic first.** Prefer the most semantic utility that fits: `gap-md` before a raw length,
-   `text-primary` before a literal scale step. Names follow Tailwind's vocabulary where one
-   exists, so they read predictably.
 
 ## How these pages are grouped
 
@@ -97,9 +97,9 @@ These are covered alongside their classes in [Gap & basis](/docs/base/utilities/
 
 ## Responsive & state variants
 
-Every layout-related utility has container-query-prefixed variants (`@xs: @sm: @md: @lg: @xl:`, plus
-the `@max-*` forms) gated on centralized breakpoint flags the **body** publishes off the page width.
-Color, opacity, and scale utilities also ship `hover:` variants that need no JavaScript.
+Every layout-related utility has container-query-prefixed variants (`@xs: @sm: @md: @lg: @xl:`) gated
+on centralized breakpoint flags the **body** publishes off the page width. Color, opacity, and scale
+utilities also ship `hover:` variants that need no JavaScript.
 
 ```html
 <div class="flex flex-col @md:flex-row gap-md">

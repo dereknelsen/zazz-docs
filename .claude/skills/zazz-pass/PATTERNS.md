@@ -22,7 +22,7 @@ sentence case — let the class do the uppercasing.)
 
 The standard page: a `<header>` with logo + desktop nav + mobile nav, a `<main>` of
 `<section>`s, and a `<footer>`. `.container` places its direct children into a centered band
-(default `lg`); `<section>`s own the vertical rhythm with `.py-*`. Desktop nav is
+(default `md`); `<section>`s own the vertical rhythm with `.py-*`. Desktop nav is
 `hidden @sm:flex`; the mobile nav is `flex @sm:hidden` and opens a dialog (see the Dialog
 component / mobile-menu). The container is a subgrid band system, not a fixed-width wrapper —
 set the band per child with `data-container="xs|sm|md|lg|xl|full|bleed"`, or change the default
@@ -105,8 +105,8 @@ Group an optional eyebrow, a heading, a subheading, and the call-to-action butto
 For the rest, reach for the primitives and components directly — they carry their own
 composition guidance:
 
-- Structure & spacing → `references/tokens.md` (`.container` band system +
-  `data-container`/`data-container`, `.container[data-variant="article"]`, `--gap-*`, the
-  responsive `@sm:`/`@md:`/`@lg:` utilities and `@max-*` container variants).
+- Structure & spacing → `references/tokens.md` (`.container` band system + `data-container`,
+  `.container[data-variant="article"]`, `--gap-*`, the responsive `@sm:`/`@md:`/`@lg:`
+  utilities and `@max-*` container variants).
 - Components (cards, carousels, dialogs, forms, navigation, …) → `references/components.md`.
 - Brand voice, color roles, type scale, archetypes → `DESIGN.md`.

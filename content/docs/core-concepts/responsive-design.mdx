@@ -26,7 +26,7 @@ When you need a layout to change shape, prefix a utility with a breakpoint: `@xs
 </div>
 ```
 
-Thresholds line up with the `--breakpoint-*` tokens, and each also has a `@max-*` form that applies _below_ its width instead of at or above it:
+Thresholds line up with the `--breakpoint-*` tokens. Each prefix is min-width: it activates at or above its width, so you write the small layout as the base and override upward.
 
 | Prefix | Page width | Token             |
 | ------ | ---------- | ----------------- |
@@ -45,7 +45,7 @@ Base utilities apply at every size; a prefixed utility layers on at its breakpoi
 <div class="flex flex-col @md:flex-row gap-md">…</div>
 ```
 
-The families available at each breakpoint: the page `container`, `display`, `grid-cols` / `grid-rows`, `flex-direction`, `text-align`, `align-items`, `justify-content`, `col-span`, `row-span`, and `basis`. Less-toggled families (self-alignment, place-items, visibility) ship as base classes only, so apply them outside the responsive layer.
+The families available at each breakpoint: the page `container`, `display`, `grid-cols` / `grid-rows`, `flex-direction`, `text-align`, `align-items`, `justify-content`, `col-span`, `row-span`, and `basis`. Less-toggled families (self-alignment, place-items, visibility) ship as base classes only, so apply them outside the responsive layer. The [utilities reference](/docs/utilities/responsive-design) has the full breakpoint table and the exact family list.
 
 ## Layouts that respond without breakpoints
 

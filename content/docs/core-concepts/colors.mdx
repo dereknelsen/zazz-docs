@@ -23,13 +23,14 @@ Each surface has a matching foreground tuned for contrast on it:
 | ------------ | -------------------- | ---------------------------------- |
 | `background` | `foreground`         | The page itself                    |
 | `card`       | `card-foreground`    | Cards, raised panels               |
-| `popover`    | `popover-foreground` | Menus, tooltips, dialogs           |
 | `input`      | `input-foreground`   | Form control fills                 |
 | `muted`      | `muted-foreground`   | Dimmed surfaces and secondary text |
 | `faded`      | `faded-foreground`   | Faded surfaces and tertiary text   |
 | `border`     | `border-foreground`  | Hairlines and dividers             |
 
 `muted` dims (it's darker than its surface in light mode); `faded` lightens. Pair a surface with its foreground and contrast takes care of itself.
+
+The `popover` surface (`--popover` / `--popover-foreground`) is the one exception. It's a token that menu, tooltip, and dialog components read directly, with no `text-`/`bg-` utility of its own.
 
 ### Brand
 

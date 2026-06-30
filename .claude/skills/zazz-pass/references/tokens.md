@@ -15,9 +15,9 @@ Two rules govern every choice:
 ## Contents
 
 1. Spacing · 2. Color roles · 3. Color scales & overlays · 4. Typography · 5. Radius ·
-2. Shadow · 7. Layout & breakpoints · 8. Focus ring · 9. Motion · 10. Opacity & alpha ·
-3. Borders · 12. Positioning · 13. Interaction · 14. State variants (hover/active) ·
-4. Transitions
+6. Shadow · 7. Layout & breakpoints · 8. Focus ring · 9. Motion · 10. Opacity & alpha ·
+11. Borders · 12. Positioning · 13. Interaction · 14. State variants (hover) ·
+15. Transitions
 
 ---
 
@@ -26,7 +26,8 @@ Two rules govern every choice:
 - **Semantic gaps (use first):** `--gap-xs --gap-sm --gap-md --gap-lg --gap-xl`. These are
   the default for padding, margins, and `gap`.
 - **Step scale (escape hatch):** `--step-0_5 --step-1 … --step-96`, plus `--step-px`,
-  `--step-0_5px`, `--step-full`. Half-steps carry an escaped dot — write `var(--step-2_5)` for 2.5×. Everything
+  `--step-0_5px`, `--step-full`. Half-steps run through `--step-5_5` (escaped dot —
+  `var(--step-2_5)` = 2.5×); above that the scale is whole-numbered and sparse. Everything
   derives from `--spacing-interval` (a fluid `clamp()`), so spacing scales with the viewport.
 - **Gap utilities:** `.gap-0 .gap-0.5px .gap-px .gap-xs .gap-sm .gap-md .gap-lg .gap-xl`,
   axis-specific `.gap-x-* .gap-y-*` (same sizes). Gap classes also set an internal `--_gap`
@@ -71,7 +72,7 @@ Reach here only when a role can't express it (a specific tint, a backdrop, a fix
   tertiary at **500**; dark shifts lighter. These have **no utility classes** — reach a fixed
   shade via the token in custom CSS or inline (`style="color: var(--primary-600)"`).
 - **Overlays (alpha):** `--shade-50…950` / `--shade-full` (darken; from neutral-950 — use for
-  backdrops, e.g. `--shade-800` for modal backdrops) and `--tint-50…950` / `--tint-full`
+  backdrops, e.g. `--shade-900`, the dialog's default backdrop) and `--tint-50…950` / `--tint-full`
   (lighten; from white). `*-none` = transparent. Overlays **do** ship `bg-*` utilities (the one
   numeric color scale that does), since dimming a surface is common.
 - **Utilities:** `.bg-shade-*`, `.bg-tint-*`, `.text-white`, `.text-black`, `.bg-white`,
@@ -113,7 +114,7 @@ intentionally (**md** ≈ popovers/modals). Utilities: `.shadow-none|xs|sm|md|lg
   spanning the whole region, and each **direct child** drops into a band. No wrapper div, no fixed
   width — the band caps + centers content fluidly. Bands: `xs sm md lg xl` (cap at the matching
   breakpoint width), `full` (region width minus gutters), `bleed` (edge-to-edge, gutters included).
-  **Default band is `lg`.**
+  **Default band is `md`.**
   - `data-container="xs|sm|md|lg|xl|full|bleed"` on the `.container` resets the default for
     all its children.
   - `data-container="xs|sm|md|lg|xl|full|bleed"` on a **direct child** overrides that one child's band.

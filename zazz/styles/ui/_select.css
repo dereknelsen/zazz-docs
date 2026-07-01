@@ -78,6 +78,7 @@
     :where(.select:open)::picker(select) {
       opacity: 1;
       transform: scale(var(--select-scale--end));
+      display: flex;
     }
 
     @starting-style {
@@ -202,6 +203,8 @@
        of a browser that supports customizable <select> (::picker) but not
        anchor-size — there the panel sizes to its content instead of stretching. */
     .select::picker(select) {
+      flex-direction: column;
+      gap: var(--step-px);
       inline-size: max-content;
       padding: var(--step-1_5);
       margin-block: var(--step-1_5);
@@ -215,7 +218,7 @@
 
     @supports (inline-size: anchor-size(width)) {
       .select::picker(select) {
-        inline-size: anchor-size(width);
+        min-inline-size: anchor-size(width);
       }
     }
 

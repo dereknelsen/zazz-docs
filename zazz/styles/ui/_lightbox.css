@@ -33,7 +33,7 @@
     --lightbox-slide-scale--start: 0.9;
     --lightbox-slide-scale--end: 1;
     --lightbox-img-scale--hover: 1.03;
-    --lightbox-img-filter--hover: brightness(1.2);
+    --lightbox-img-filter--hover: brightness(0.8);
     --lightbox-img-scale--active: 1;
     --lightbox-img-filter--active: brightness(0.5);
     --lightbox-img-transition-property: transform, filter;

@@ -130,6 +130,7 @@
       font-size: var(--font-size-sm);
       font-weight: var(--font-weight-strong);
       text-align: start;
+      min-inline-size: max-content;
     }
 
     /* ---------------------------------------------------------------------------
@@ -269,6 +270,10 @@
       align-items: var(--field-horizontal-align-items);
       justify-content: var(--field-horizontal-justify-content);
       gap: var(--field-horizontal-gap);
+    }
+
+    .field[data-orientation="horizontal"] .field__label {
+      align-self: center;
     }
   }
 }

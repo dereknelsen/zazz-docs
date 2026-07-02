@@ -5,153 +5,128 @@ description: Zazz combines editorial typography with emotive imagery to create w
 colorMode: light dark
 
 colors:
-  # All values are OKLCH — the authoritative token format (HEX is imprecise for our scales).
-  # Theme (light mode values shown, dark mode swaps automatically)
-  background: "oklch(1 0 0)"
-  foreground: "oklch(0.241 0.009 285.7)"
-  border: "oklch(0.949 0.001 287.28)"
-  border-foreground: "oklch(1 0 0 / 0.95)"
-  card: "oklch(1 0 0)"
-  card-foreground: "oklch(0.241 0.009 285.7)"
-  popover: "oklch(1 0 0)"
-  popover-foreground: "oklch(0.241 0.009 285.7)"
-  input: "oklch(0.973 0.001 287.31)"
-  input-foreground: "oklch(0.241 0.009 285.7)"
+  # No defaults ship — author every value from the brand (see Brand Customization below).
+  # Values are OKLCH — the authoritative token format (HEX is imprecise for our scales).
+  # Theme (author light-mode values; dark mode swaps automatically)
+  background:
+  foreground:
+  border:
+  border-foreground:
+  card:
+  card-foreground:
+  popover:
+  popover-foreground:
+  input:
+  input-foreground:
 
   # Overlay
-  muted: "oklch(0.198 0.008 285.68 / 0.05)"
-  muted-foreground: "oklch(0.198 0.008 285.68 / 0.6)"
-  faded: "oklch(1 0 0 / 0.1)"
-  faded-foreground: "oklch(1 0 0 / 0.6)"
+  muted:
+  muted-foreground:
+  faded:
+  faded-foreground:
 
   # Brand
-  primary: "oklch(0.511 0.23 276.97)"
-  primary-foreground: "oklch(1 0 0)"
-  secondary: "oklch(0.61 0.194 36.8)"
-  secondary-foreground: "oklch(1 0 0)"
-  tertiary: "oklch(0.613 0.208 14.68)"
-  tertiary-foreground: "oklch(1 0 0)"
+  primary:
+  primary-foreground:
+  secondary:
+  secondary-foreground:
+  tertiary:
+  tertiary-foreground:
 
-  # Status
-  info: "oklch(0.5876 0.1389 241.97)"
-  info-foreground: "oklch(1 0 0)"
-  success: "oklch(0.596 0.1274 163.23)"
-  success-foreground: "oklch(1 0 0)"
-  warning: "oklch(0.6658 0.1574 58.32)"
-  warning-foreground: "oklch(1 0 0)"
-  destructive: "oklch(0.5771 0.2152 27.33)"
-  destructive-foreground: "oklch(1 0 0)"
+  # Status — conventional hues (blue / green / amber / red) are fine when the brand has no equivalent
+  info:
+  info-foreground:
+  success:
+  success-foreground:
+  warning:
+  warning-foreground:
+  destructive:
+  destructive-foreground:
 
 typography:
+  # Font families are intentionally unspecified — set them in `fonts` below from the brand.
+  # The size / weight / leading / tracking scale is structural — keep it.
   display:
-    fontFamily: Geist, Verdana, sans-serif
     fontSize: 5.96rem
     fontWeight: 600
     lineHeight: 0.95
     letterSpacing: -0.05em
   h1:
-    fontFamily: Geist, Verdana, sans-serif
     fontSize: 4.77rem
     fontWeight: 600
     lineHeight: 0.95
     letterSpacing: -0.05em
   h2:
-    fontFamily: Geist, Verdana, sans-serif
     fontSize: 3.81rem
     fontWeight: 600
     lineHeight: 0.95
     letterSpacing: -0.025em
   h3:
-    fontFamily: Geist, Verdana, sans-serif
     fontSize: 3.05rem
     fontWeight: 600
     lineHeight: 1
     letterSpacing: -0.025em
   h4:
-    fontFamily: Geist, Verdana, sans-serif
     fontSize: 2.44rem
     fontWeight: 600
     lineHeight: 1
     letterSpacing: -0.015em
   h5:
-    fontFamily: Geist, Verdana, sans-serif
     fontSize: 1.95rem
     fontWeight: 600
     lineHeight: 1
     letterSpacing: -0.01em
   h6:
-    fontFamily: Geist, Verdana, sans-serif
     fontSize: 1.56rem
     fontWeight: 600
     lineHeight: 1
     letterSpacing: -0.005em
   body-xl:
-    fontFamily: Geist, Verdana, sans-serif
     fontSize: 1.56rem
     fontWeight: 400
     lineHeight: 1.5
   body-lg:
-    fontFamily: Geist, Verdana, sans-serif
     fontSize: 1.25rem
     fontWeight: 400
     lineHeight: 1.5
   body-md:
-    fontFamily: Geist, Verdana, sans-serif
     fontSize: 1rem
     fontWeight: 400
     lineHeight: 1.6
   body-sm:
-    fontFamily: Geist, Verdana, sans-serif
-    fontSize: 0.89rem
+    fontSize: 0.8rem
     fontWeight: 400
     lineHeight: 1.5
   body-xs:
-    fontFamily: Geist, Verdana, sans-serif
-    fontSize: 0.79rem
+    fontSize: 0.64rem
     fontWeight: 400
     lineHeight: 1.5
   eyebrow:
-    fontFamily: Geist, Verdana, sans-serif
     fontSize: 0.58rem
     fontWeight: 600
     lineHeight: 1.2
     letterSpacing: 0.1em
   mono:
-    fontFamily: '"Geist Mono", "Palatino Linotype", sans-serif'
     fontSize: 1rem
     fontWeight: 400
     lineHeight: 1.6
 
 spacing:
+  # Semantic scale only — px + xs–xl. No numeric step scale.
+  px: 1px
   xs: 8px
   sm: 16px
   md: 24px
   lg: 44px
   xl: 96px
-  px: 1px
-  0: 0px
-  1: 4px
-  2: 8px
-  3: 12px
-  4: 16px
-  5: 20px
-  6: 24px
-  7: 28px
-  8: 32px
-  9: 36px
-  10: 40px
-  11: 44px
-  12: 48px
-  16: 64px
-  20: 80px
-  24: 96px
 
 rounded:
-  xs: 4px
-  sm: 6px
-  md: 10px
-  lg: 20px
-  xl: 28px
+  # Roundness is unspecified — author the scale from the brand (full stays pill).
+  xs:
+  sm:
+  md:
+  lg:
+  xl:
   full: 9999px
 
 components:
@@ -231,18 +206,23 @@ components:
     padding: 0px
 
 fonts:
-  body: Geist, Verdana, sans-serif
-  heading: Geist, Verdana, sans-serif
-  mono: '"Geist Mono", "Palatino Linotype", sans-serif'
-roundness: medium
+  # Unspecified — author from the brand's real typefaces (never default to generic system fonts).
+  body:
+  heading:
+  mono:
+roundness:
 ---
 
 > **🎨 CRITICAL: Brand Customization**
 >
+> The token frontmatter above ships **intentionally blank** — no default colors, fonts, or roundness.
+> Fill it from the brand before generating anything. (The semantic spacing scale and the type
+> size/weight/leading/tracking scale are structural — leave them as-is.)
+>
 > When a URL or brand instructions are provided alongside this file:
 >
 > 1. **Fetch the website** — extract the brand's color palette, logo, imagery style, and visual identity
-> 2. **Update the YAML frontmatter** — replace `colors`, `fonts`, and `roundness` values to match the brand as precisely as reasonable
+> 2. **Fill the YAML frontmatter** — author `colors`, `fonts`, `rounded`, and `roundness` to match the brand as precisely as reasonable
 > 3. **Include the logo** in the header and footer of generated designs
 > 4. **Adapt the archetype** — choose the site archetype (below) that best fits the brand's market position
 >
@@ -266,15 +246,28 @@ Light mode feels like a premium catalog: crisp surfaces with photographic warmth
 
 Default to **Lifestyle Brand** when unclear — it balances conversion with brand investment. Most B2B clients fall between Distributor and Lifestyle.
 
+### Design with Intention
+
+The token contract in the frontmatter is what lets you be bold without the result turning to mush. Before generating a screen, commit to a clear aesthetic direction and execute it precisely — **intentionality, not intensity, is the bar.** Refined minimalism and expressive maximalism both win when they're deliberate. First decide: who uses this and to do what, which archetype fits, and the one thing a visitor will remember. Let those answers set density, imagery, and rhythm before placing a single section. Every generation should feel designed for _this_ brand — never converge on the same template, font, or palette twice.
+
 ### Design Guidelines
 
-- **Never use generic AI aesthetics** — cold tech minimalism, cliched startup palettes, sterile layouts. Designs must feel unique to the brand.
+**Creative ambition** — bring a point of view:
+
+- **Commit to a direction** — one cohesive, opinionated aesthetic true to the brand, not a safe average. Vary between light and dark, different type pairings, different atmospheres across generations.
+- **Distinctive typography** — pair the brand's sans with a classic serif italic (Playfair Display Italic, Cormorant Garamond Italic) on emphasis words ("_quality_", "_trusted_") for editorial cadence, and use the full scale for real hierarchy: a genuine `text-display`/`text-h1` moment against calm body copy, not five near-identical sizes. Always adopt the brand's real typefaces — never default to generic system fonts.
+- **Commit to the palette** — a dominant surface with sharp brand accents reads as _designed_; timid, evenly-distributed grays read as slop. The frontmatter ships no default palette — fill it from the brand and make its colors the point.
+- **Compose with tension** — break the centered stack. Play full-bleed imagery against capped text columns, use the left-label layout, overlap layers, and let section rhythm (`--gap-xl`, 96px) open real negative space. Asymmetry and generous whitespace are choices, not accidents.
+- **Build atmosphere, not flat fills** — layer depth from tokens: gradient washes across a brand scale (`--primary-600` → `--primary-900`), `shade`/`tint` transparencies, subtle noise/grain, decorative `--border` rules, and emotive photography. (Keep surfaces flat and reserve `--shadow-*` for genuine elevation — atmosphere lives in the background, not on every card.)
+- **Spend motion where it counts** — one orchestrated page-load with staggered reveals delights more than scattered micro-interactions. Use `--spring-easing` / `--spring-duration` for confident, unhurried movement and scroll reveals for narrative pacing.
 - **Balance conversion mechanics with brand storytelling** — clear CTAs and product grids alongside testimonials, messaging, and premium photography.
+
+**Discipline** — keeps it consistent:
+
+- **Never use generic AI aesthetics** — no cold tech minimalism, cliched startup palettes, sterile layouts, or the lazy violet-gradient-on-white centered hero. Designs must feel unique to the brand.
 - **Use Zazz tokens exclusively** — never hardcode colors, spacing, radii, shadows, or typography. Use `var(--token-name)`.
 - **Typography via `text-*` classes** — never compose type from individual size/weight/leading utilities.
 - **Spacing via `--gap-*` semantic scale** — never use arbitrary px/rem values.
-- **Editorial emphasis** — pair Geist body with a classic serif italic (Playfair Display Italic, Cormorant Garamond Italic) for display accent words.
-- **Motion** — use `--spring-easing` and `--spring-duration`. Subtle, confident, unhurried.
 - **Dark mode for free** — role tokens auto-swap; never write separate dark-mode overrides for token-handled values.
 
 ---
@@ -285,7 +278,7 @@ Default to **Lifestyle Brand** when unclear — it balances conversion with bran
 
 | Token                  | Role                                          | Light Character              | Dark Character              |
 | ---------------------- | --------------------------------------------- | ---------------------------- | --------------------------- |
-| `--background`         | Page surface                                  | White (--white)              | Blue-violet black           |
+| `--background`         | Page surface                                  | White / warm off-white       | Near-black (brand-cast)     |
 | `--foreground`         | Default text                                  | Rich charcoal (neutral-900)  | Pure white                  |
 | `--border`             | 1px lines and dividers                        | Soft cool gray (neutral-100) | Deep gray                   |
 | `--border-foreground`  | Text on outlined/bordered elements            | Near-opaque white (tint-950) | Subtle white (tint-100)     |
@@ -302,13 +295,16 @@ Default to **Lifestyle Brand** when unclear — it balances conversion with bran
 
 ### Brand Colors
 
-| Token         | Light Step (600)                   | Dark Step (500)                     | Character                     |
-| ------------- | ---------------------------------- | ----------------------------------- | ----------------------------- |
-| `--primary`   | `oklch(0.511 0.23 276.97)` #4f46e5 | `oklch(0.593 0.193 280.79)` #6e68ec | Deep blue-violet brand anchor |
-| `--secondary` | `oklch(0.61 0.194 36.8)` #de4917   | `oklch(0.687 0.198 34.85)` #fc603a  | Warm burnt orange complement  |
-| `--tertiary`  | `oklch(0.613 0.208 14.68)` #e5375b | `oklch(0.693 0.163 13.04)` #ef6b7f  | Vibrant rose-pink accent      |
+| Token         | Role                  | Character                                   |
+| ------------- | --------------------- | ------------------------------------------- |
+| `--primary`   | Dominant brand anchor | Author from the brand's primary color       |
+| `--secondary` | Complementary accent  | Author from a supporting brand color        |
+| `--tertiary`  | Third accent          | Author from a third brand color (or derive) |
 
-All brand foregrounds are white. Brand steps **lighter** in dark mode. Each has a full 50–950 OKLCH scale (see frontmatter).
+No brand colors ship by default — author all three from the brand (see the Brand Customization
+callout). Brand foregrounds are typically white. Bind step **600** (light) / **500** (dark), brand
+steps **lighter** in dark mode, and generate a full 50–950 OKLCH scale per color via
+[Tints.dev](https://www.tints.dev).
 
 Key scale steps for context:
 
@@ -317,9 +313,10 @@ Key scale steps for context:
 - **-600**: Deep saturated (light mode default)
 - **-900**: Near-black for deep accent panels
 
-### Grayscale (Neutrals with Blue-Violet Cast)
+### Grayscale (Neutrals)
 
-Key steps: `--neutral-50` (#fcfcfc) · `--neutral-200` (#d4d4d7) · `--neutral-500` (#888890) · `--neutral-700` (#52525b) · `--neutral-900` (#1f1f24) · `--neutral-950` (#151519)
+A full `--neutral-50` through `--neutral-950` scale — author it from the brand, ideally carrying a
+subtle cast of the brand hue rather than pure gray. Generate the scale via [Tints.dev](https://www.tints.dev).
 
 ### Overlays
 
@@ -343,11 +340,14 @@ All status foregrounds are white. Status steps **darker** in dark mode (opposite
 
 ### Font Families
 
-| Token                   | Stack                                         | Role               |
-| ----------------------- | --------------------------------------------- | ------------------ |
-| `--font-family-body`    | Geist, Verdana, sans-serif                    | Body copy, UI text |
-| `--font-family-heading` | Geist, Verdana, sans-serif                    | Headings, display  |
-| `--font-family-mono`    | "Geist Mono", "Palatino Linotype", sans-serif | Code, tabular data |
+No font families ship by default — author all three from the brand's real typefaces (with a
+sensible web-safe fallback stack). Never default to generic system fonts.
+
+| Token                   | Role               |
+| ----------------------- | ------------------ |
+| `--font-family-body`    | Body copy, UI text |
+| `--font-family-heading` | Headings, display  |
+| `--font-family-mono`    | Code, tabular data |
 
 ### Weights
 
@@ -374,8 +374,8 @@ All sizes are fluid via `clamp()`, scaling between mobile and desktop viewports.
 | `text-xl`      | 1.56rem        | 1.5     | 0        | Large body / intro paragraph  |
 | `text-lg`      | 1.25rem        | 1.5     | 0        | Lead text                     |
 | `text-md`      | 1rem           | 1.6     | 0        | Default body text             |
-| `text-sm`      | 0.89rem        | 1.5     | 0        | Small UI labels               |
-| `text-xs`      | 0.79rem        | 1.5     | 0        | Captions, fine print          |
+| `text-sm`      | 0.8rem         | 1.5     | 0        | Small UI labels               |
+| `text-xs`      | 0.64rem        | 1.5     | 0        | Captions, fine print          |
 | `text-eyebrow` | 0.58rem        | 1.2     | 0.1em    | Uppercase label, wide-tracked |
 
 Headings use `text-wrap: balance`. Body uses `text-wrap: pretty`. Tight-leading on large text, generous-leading on body.

@@ -1,5 +1,5 @@
 ---
-name: zazz-pass
+name: zazz
 description: >-
   Build, style, and lay out web UI with the Zazz Design Framework — this repo's default design
   system. Use this skill WHENEVER you create or modify any page, component, layout, or styling
@@ -63,6 +63,42 @@ writing net-new CSS every time.
 
 Full token map → **`references/tokens.md`**.
 
+## Design with intention
+
+The token discipline above is what lets you be bold without the result turning to mush. Before
+building anything past a single component, commit to a clear aesthetic direction — then execute
+it precisely. Refined minimalism and expressive maximalism both win; **intentionality, not
+intensity, is the bar.** Zazz supplies the vocabulary; you supply the point of view.
+
+- **Frame it first.** Who uses this, to do what? Which archetype fits — Industrial Distributor,
+  Lifestyle Brand, or Editorial Studio (see `DESIGN.md`)? What's the one thing a visitor will
+  remember? Let those answers set density, imagery, and rhythm before you place a section.
+- **Distinctive type is Zazz's signature move.** Pair Geist with a classic serif _italic_
+  (Playfair Display, Cormorant Garamond) on emphasis words — "the art of _quality_" — for
+  editorial cadence. Use the full scale for real hierarchy: a genuine `text-display`/`text-h1`
+  moment against calm body copy, not five near-identical sizes. Matching a brand? Adopt its real
+  typefaces — never fall back to generic system fonts as a default.
+- **Commit to the palette.** A dominant surface with sharp brand accents reads as _designed_;
+  timid, evenly-distributed grays read as slop. Route everything through role tokens so dark
+  mode comes free, and don't treat the default blue-violet as a neutral — when there's a brand,
+  make its colors the point.
+- **Compose with tension.** Break the centered stack. The `.container` band system is built for
+  it: play `bleed`/`full` imagery against capped `lg`/`article` text, use the left-label layout,
+  overlap layers with `grid-area-pile`, and let `gap-xl` open real negative space. Asymmetry and
+  whitespace are choices, not accidents.
+- **Build atmosphere, not flat fills.** Layer depth from tokens — gradient washes across a brand
+  scale (`--primary-600` → `--primary-900`), `shade`/`tint` transparencies, subtle noise/grain,
+  decorative `--border` rules. (Keep surfaces flat and reserve `--shadow-*` for genuine
+  elevation; atmosphere lives in the background, not on every card.)
+- **Spend motion where it counts.** One orchestrated page-load — staggered reveals via
+  `data-reveal`/`data-reveal-each` on the hero — delights more than scattered micro-interactions.
+  Use scroll reveals for narrative pacing and `--spring-easing` for confident, unhurried
+  movement. `prefers-reduced-motion` is already respected (Zazz zeroes the duration).
+
+Never ship generic AI aesthetics: overused system/`Inter`-style fonts, the lazy
+violet-gradient-on-white centered hero, predictable layouts, cookie-cutter cards. Make choices
+that feel designed for _this_ brand.
+
 ## Customizing without editing source
 
 Tokens resolve lazily, so you can intervene at three scopes — pick the narrowest that works.
@@ -116,6 +152,10 @@ patterns live in `PATTERNS.md`.
 
 ## Do / Don't
 
+- **Do** commit to one bold, cohesive aesthetic direction and execute it precisely. **Don't**
+  default to a timid centered stack of evenly-distributed grays.
+- **Do** create atmosphere and real hierarchy (editorial serif-italic accents, band-system
+  asymmetry, a staggered page-load reveal). **Don't** ship generic AI slop.
 - **Do** write all UI text in **sentence case** — headings, buttons, links, labels, nav.
   **Don't** Title-Case or UPPERCASE unless asked (the eyebrow's caps come from `.text-eyebrow`).
 - **Do** use `var(--token)` and semantic utilities. **Don't** hardcode colors, spacing, radii,

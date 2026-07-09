@@ -15,9 +15,9 @@ Two rules govern every choice:
 ## Contents
 
 1. Spacing · 2. Color roles · 3. Color scales & overlays · 4. Typography · 5. Radius ·
-6. Shadow · 7. Layout & breakpoints · 8. Focus ring · 9. Motion · 10. Opacity & alpha ·
-11. Borders · 12. Positioning · 13. Interaction · 14. State variants (hover) ·
-15. Transitions
+2. Shadow · 7. Layout & breakpoints · 8. Focus ring · 9. Motion · 10. Opacity & alpha ·
+3. Borders · 12. Positioning · 13. Interaction · 14. State variants (hover) ·
+4. Transitions
 
 ---
 
@@ -86,7 +86,7 @@ Reach here only when a role can't express it (a specific tint, a backdrop, a fix
   All sizes are fluid `clamp()`. This is the primary way to set type.
 - **Tokens behind them (only when a class won't do):** `--font-size-*`, `--font-weight-*`
   (`body|heading|strong|eyebrow`), `--tracking-*`, `--leading-*`, `--paragraph-spacing-*`,
-  families `--font-family-body|heading` and raw `--font-sans|serif|mono`.
+  families `--font-family-body|heading` and raw `--font-body|serif|mono`.
 - **Weight/family utilities (Tailwind-named):** `.font-thin … .font-black`, plus semantic
   `.font-body .font-heading .font-strong`, families `.font-sans .font-serif .font-mono`.
 - **Helpers:** `.text-center|left|right|justify`, `.uppercase .lowercase .capitalize .normal-case`,
@@ -134,10 +134,10 @@ intentionally (**md** ≈ popovers/modals). Utilities: `.shadow-none|xs|sm|md|lg
   gated on global `--is-breakpoint-*` flags sourced from the **body** container, so they track the
   viewport breakpoint (not the nearest arbitrary container). Available at each breakpoint: display
   (`hidden block flex inline-flex grid grid-cols-subgrid grid-rows-subgrid`), grid-cols, grid-rows,
-  flex-direction (`flex-row flex-col`), text-align, items-*, justify-*, col-span, row-span, basis.
+  flex-direction (`flex-row flex-col`), text-align, items-_, justify-_, col-span, row-span, basis.
   (Less-toggled families — align-self, justify-self, place-items, visibility, negative margins — ship
   only as base classes, not per-breakpoint; apply them outside the responsive layer.)
-  - **`@max-*` (below the breakpoint):** the inverse of the min variants — applies only *below* its
+  - **`@max-*` (below the breakpoint):** the inverse of the min variants — applies only _below_ its
     breakpoint. In utilities this only exists for the **container** family (`@max-md:container` etc.);
     the atomic utilities above (grid-cols, display, …) ship min variants only.
 - **Display:** `.hidden .block .inline-block .inline .visible .invisible`.
@@ -231,6 +231,8 @@ Hover variants for color, opacity, and scale — use the backslash-colon prefix 
   info, success, warning, destructive).
 - **Hover opacity:** `.hover\:opacity-{0,25,50,75,100}` (quartile).
 - **Hover scale:** `.hover\:scale-{0,50,75,90,95,100,105,110,125,150}`.
+- **Hover shadow:** `.hover\:shadow-{none,xs,sm,md,lg,xl}` (raise elevation on hover; pair
+  with `.transition` for a smooth lift).
 
 ---
 

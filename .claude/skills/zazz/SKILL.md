@@ -131,8 +131,9 @@ dedicated CSS files.
 
 Author behavior in **HTML**; scripts enhance markup with light-DOM custom elements and
 data-attribute hooks. Use `<embla-carousel>` for component carousels, `<media-lightbox>` for
-lightboxes, `<input-password>` for password visibility toggles, and `<tab-group>` for
-orientation-aware tab keyboard navigation. Legacy lower-level Embla markup still uses
+lightboxes, `<input-password>` for password visibility toggles, `<tab-group>` for
+orientation-aware tab keyboard navigation, and `<toast-region>` for toast notifications
+(fired via `command="--toast"` or `window.Toaster`). Legacy lower-level Embla markup still uses
 `data-embla="root"`; scroll reveals use `data-reveal-*`. Tooltips (`interestfor`), dialogs
 (`command`/`commandfor`), and popovers (`popovertarget`) use native invoker/popover APIs with
 polyfills already loaded.

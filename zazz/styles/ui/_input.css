@@ -27,89 +27,87 @@
   }
 }
 
-@container style(--use-zazz: true) {
-  @layer zazz.components {
-    /* ===========================================================================
-    TEXT INPUTS — .input
-    - One class for every text-like type (text, search, email, number, date, …);
-      the type only changes the picker/keyboard, not the box.
-    - Shares the --field-* tokens defined in _fields.css so it aligns with .select,
-      .textarea, and .button.
-    =========================================================================== */
+@layer zazz.components {
+  /* ===========================================================================
+  TEXT INPUTS — .input
+  - One class for every text-like type (text, search, email, number, date, …);
+    the type only changes the picker/keyboard, not the box.
+  - Shares the --field-* tokens defined in _fields.css so it aligns with .select,
+    .textarea, and .button.
+  =========================================================================== */
 
-    .input {
-      inline-size: var(--input-inline-size);
-      min-inline-size: var(--input-min-inline-size);
-      block-size: var(--field-height);
-      padding-inline-start: var(--input-padding-inline-start);
-      padding-inline-end: var(--input-padding-inline-end);
+  .input {
+    inline-size: var(--input-inline-size);
+    min-inline-size: var(--input-min-inline-size);
+    block-size: var(--field-height);
+    padding-inline-start: var(--input-padding-inline-start);
+    padding-inline-end: var(--input-padding-inline-end);
 
-      font-size: var(--input-font-size);
-      line-height: var(--input-line-height);
-      color: var(--field-foreground);
-      background-color: var(--field-background);
+    font-size: var(--input-font-size);
+    line-height: var(--input-line-height);
+    color: var(--field-foreground);
+    background-color: var(--field-background);
 
-      border: var(--input-border);
-      border-radius: var(--input-border-radius);
+    border: var(--input-border);
+    border-radius: var(--input-border-radius);
 
-      /* ring renders as box-shadow; transparent outline twin keeps focus visible
-         in forced-colors / high-contrast modes */
-      --_ring-offset-width: 0px;
-      --_ring-width: 0px;
-      box-shadow:
-        0 0 0 var(--_ring-offset-width) var(--ring-offset-color),
-        0 0 0 calc(var(--_ring-offset-width) + var(--_ring-width)) var(--ring);
-      outline: var(--outline-width) var(--outline-style) transparent;
-      outline-offset: var(--outline-offset);
+    /* ring renders as box-shadow; transparent outline twin keeps focus visible
+       in forced-colors / high-contrast modes */
+    --_ring-offset-width: 0px;
+    --_ring-width: 0px;
+    box-shadow:
+      0 0 0 var(--_ring-offset-width) var(--ring-offset-color),
+      0 0 0 calc(var(--_ring-offset-width) + var(--_ring-width)) var(--ring);
+    outline: var(--outline-width) var(--outline-style) transparent;
+    outline-offset: var(--outline-offset);
 
-      transition: var(--default-transition);
-    }
+    transition: var(--default-transition);
+  }
 
-    .input:hover {
-      border-color: var(--field-border--hover);
-      background-color: var(--field-background--hover);
-    }
+  .input:hover {
+    border-color: var(--field-border--hover);
+    background-color: var(--field-background--hover);
+  }
 
-    .input:focus-within {
-      background-color: var(--field-background--focus);
-      border-color: var(--field-border--focus);
-      --_ring-offset-width: var(--ring-offset-width);
-      --_ring-width: var(--ring-width);
-      outline-color: transparent;
-    }
+  .input:focus-within {
+    background-color: var(--field-background--focus);
+    border-color: var(--field-border--focus);
+    --_ring-offset-width: var(--ring-offset-width);
+    --_ring-width: var(--ring-width);
+    outline-color: transparent;
+  }
 
-    .input[type="date"],
-    .input[type="time"],
-    .input[type="datetime-local"] {
-      --input-padding-inline-end: var(--step-1_5);
-    }
+  .input[type="date"],
+  .input[type="time"],
+  .input[type="datetime-local"] {
+    --input-padding-inline-end: var(--step-1_5);
+  }
 
-    /* Native date/time controls keep their picker indicator tinted to the text */
-    .input::-webkit-calendar-picker-indicator {
-      cursor: pointer;
-      -webkit-appearance: none;
+  /* Native date/time controls keep their picker indicator tinted to the text */
+  .input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    -webkit-appearance: none;
 
-      margin: 0;
-      padding: 0;
-      inline-size: var(--input-calendar-picker-size);
-      block-size: var(--input-calendar-picker-size);
-      border-radius: var(--input-calendar-picker-radius);
+    margin: 0;
+    padding: 0;
+    inline-size: var(--input-calendar-picker-size);
+    block-size: var(--input-calendar-picker-size);
+    border-radius: var(--input-calendar-picker-radius);
 
-      transition:
-        opacity var(--default-transition-duration) var(--default-transition-timing-function),
-        display var(--default-transition-duration) var(--default-transition-timing-function)
-          allow-discrete;
+    transition:
+      opacity var(--default-transition-duration) var(--default-transition-timing-function),
+      display var(--default-transition-duration) var(--default-transition-timing-function)
+        allow-discrete;
 
-      mask: var(--input-calendar-picker-mask) no-repeat center /
-        var(--input-calendar-picker-icon-size);
-      background-size: var(--input-calendar-picker-icon-size);
-      background-color: var(--input-calendar-picker-color);
-      background-repeat: no-repeat;
-      background-position: center;
-    }
+    mask: var(--input-calendar-picker-mask) no-repeat center /
+      var(--input-calendar-picker-icon-size);
+    background-size: var(--input-calendar-picker-icon-size);
+    background-color: var(--input-calendar-picker-color);
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 
-    .input::-webkit-calendar-picker-indicator:is(:hover) {
-      opacity: 0.5;
-    }
+  .input::-webkit-calendar-picker-indicator:is(:hover) {
+    opacity: 0.5;
   }
 }

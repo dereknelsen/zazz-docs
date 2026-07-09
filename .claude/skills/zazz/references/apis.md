@@ -9,19 +9,19 @@ discovers and enhances markup; you rarely touch it.
 
 ## 1. Platform APIs and their markup hooks
 
-| API                                        | Used by                            | Markup hook                                                                                                 | Polyfill                                |
-| ------------------------------------------ | ---------------------------------- | ----------------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| Popover API                                | tooltip, dropdown, navigation-menu | `popover="auto"` / `popover="hint"`, `popovertarget="<id>"`, `:popover-open`                                | `@oddbird/popover-polyfill`             |
-| Invoker Commands                           | dialog, lightbox                   | `command="show-modal"` / `command="close"`, `commandfor="<id>"`                                             | `invokers/compatible`                   |
-| Interest Invokers                          | tooltip                            | `interestfor="<id>"` (hover/focus/long-press → hint, wires ARIA)                                            | `invokers/compatible`                   |
-| CSS Anchor Positioning                     | popover/tooltip placement          | `data-side`, `data-align` (drive `anchor-name` / `position-area`)                                           | `@supports`-gated; UA-centered fallback |
-| Native `<dialog>`                          | dialog, lightbox, mobile-menu      | `<dialog>`, `::backdrop`, `closedby="any"`                                                                  | (via Invoker Commands polyfill)         |
-| Native `<details>`                         | accordion                          | `<details>`/`<summary>`, `::details-content`, `interpolate-size: allow-keywords`                            | —                                       |
-| View Transitions                           | cross-page nav                     | `@view-transition { navigation: auto }`, `data-transition-layer="global-header"` / `="global-footer"` (`<main>` is automatic), `document.startViewTransition()` | —                                       |
-| Navigation API                             | SPA-style nav                      | `navigation.js` (app-level; **not** loaded in preview iframes)                                              | falls back to full page load            |
-| `light-dark()` + container `style()` query | theming, dark mode, inverted menus | `.dark` class, `--use-inverted-popovers: true` on `[popover]` (opt out per-popover with `data-use-inverted-menu="false"`) | —                                       |
-| IntersectionObserver                       | scroll reveals                     | `[data-reveal]` / `[data-reveal-each]` (via `reveal.js`)                                                    | —                                       |
-| `:user-invalid` / `:has()`                 | form validation                    | surfaces error state after commit, not while typing                                                         | —                                       |
+| API                                        | Used by                                     | Markup hook                                                                                                                                                     | Polyfill                                |
+| ------------------------------------------ | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| Popover API                                | tooltip, dropdown, navigation-menu, toaster | `popover="auto"` / `popover="hint"` / `popover="manual"` (toaster region — no light dismiss), `popovertarget="<id>"`, `:popover-open`                           | `@oddbird/popover-polyfill`             |
+| Invoker Commands                           | dialog, lightbox, toaster                   | `command="show-modal"` / `command="close"` / custom `command="--toast[-variant]"`, `commandfor="<id>"`                                                          | `invokers/compatible`                   |
+| Interest Invokers                          | tooltip                                     | `interestfor="<id>"` (hover/focus/long-press → hint, wires ARIA)                                                                                                | `invokers/compatible`                   |
+| CSS Anchor Positioning                     | popover/tooltip placement                   | `data-side`, `data-align` (drive `anchor-name` / `position-area`)                                                                                               | `@supports`-gated; UA-centered fallback |
+| Native `<dialog>`                          | dialog, lightbox, mobile-menu               | `<dialog>`, `::backdrop`, `closedby="any"`                                                                                                                      | (via Invoker Commands polyfill)         |
+| Native `<details>`                         | accordion                                   | `<details>`/`<summary>`, `::details-content`, `interpolate-size: allow-keywords`                                                                                | —                                       |
+| View Transitions                           | cross-page nav                              | `@view-transition { navigation: auto }`, `data-transition-layer="global-header"` / `="global-footer"` (`<main>` is automatic), `document.startViewTransition()` | —                                       |
+| Navigation API                             | SPA-style nav                               | `navigation.js` (app-level; **not** loaded in preview iframes)                                                                                                  | falls back to full page load            |
+| `light-dark()` + container `style()` query | theming, dark mode, inverted menus          | `.dark` class, `--use-inverted-popovers: true` on `[popover]` (opt out per-popover with `data-use-inverted-menu="false"`)                                       | —                                       |
+| IntersectionObserver                       | scroll reveals                              | `[data-reveal]` / `[data-reveal-each]` (via `reveal.js`)                                                                                                        | —                                       |
+| `:user-invalid` / `:has()`                 | form validation                             | surfaces error state after commit, not while typing                                                                                                             | —                                       |
 
 ## 2. Zazz JS behaviors (data-attribute driven)
 
@@ -36,12 +36,13 @@ The only external ordering: Embla-backed components need the Embla CDN UMD bundl
 These custom elements augment regular child markup; they do not use shadow DOM or templates,
 so existing Zazz classes and `data-*` hooks keep working.
 
-| Element            | Script        | Use for                                     | Notes                                                                                  |
-| ------------------ | ------------- | ------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `<embla-carousel>` | `carousel.js` | Component carousels and carousel roots      | The element is the Embla root; put `data-embla-*` options on it                        |
-| `<media-lightbox>` | `lightbox.js` | Inline gallery + fullscreen dialog lightbox | Coordinates gallery/dialog slide state; opening/closing still uses Invoker Commands    |
-| `<input-password>` | `password.js` | Password show/hide toggle                   | Wrap `.password-group`; optional `label-show` / `label-hide`; CSS swaps icons via ARIA |
-| `<tab-group>`      | `tabs.js`     | Radio-driven tabs with richer keyboard nav  | Carries `.tabs`; adds orientation-aware arrows, Home/End, and wrap-around              |
+| Element            | Script        | Use for                                     | Notes                                                                                                                       |
+| ------------------ | ------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `<embla-carousel>` | `carousel.js` | Component carousels and carousel roots      | The element is the Embla root; put `data-embla-*` options on it                                                             |
+| `<media-lightbox>` | `lightbox.js` | Inline gallery + fullscreen dialog lightbox | Coordinates gallery/dialog slide state; opening/closing still uses Invoker Commands                                         |
+| `<input-password>` | `password.js` | Password show/hide toggle                   | Wrap `.password-group`; optional `label-show` / `label-hide`; CSS swaps icons via ARIA                                      |
+| `<tab-group>`      | `tabs.js`     | Radio-driven tabs with richer keyboard nav  | Carries `.tabs`; adds orientation-aware arrows, Home/End, and wrap-around                                                   |
+| `<toast-region>`   | `toaster.js`  | Stacked toast notifications (top layer)     | Carries `.toaster` + `popover="manual"`; fire via `command="--toast"` on any button or `window.Toaster.toast()/success()/…` |
 
 Component preview iframes use `zazz/primitives/manifest.ts` to load scripts and expose a JS
 tab for these files. Custom elements are `display: inline` by default, so their component
@@ -53,18 +54,18 @@ Put `data-reveal` on a single element, or `data-reveal-each` on a parent to stag
 **direct children**. The animation plays once when the element enters the viewport (adds
 `.in-viewport`).
 
-| Attribute                          | Values / unit                                                             | Notes                                                 |
-| ---------------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------- |
-| `data-reveal` / `data-reveal-each` | `slide-up` `slide-down` `slide-left` `slide-right` `fade` `grow` `shrink` | single vs. stagger-group                              |
+| Attribute                          | Values / unit                                                             | Notes                                                        |
+| ---------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| `data-reveal` / `data-reveal-each` | `slide-up` `slide-down` `slide-left` `slide-right` `fade` `grow` `shrink` | single vs. stagger-group                                     |
 | `data-reveal-duration`             | ms                                                                        | default: `--default-transition-duration` (JS fallback 400ms) |
-| `data-reveal-wait`                 | ms                                                                        | base delay before start (default 0)                   |
-| `data-reveal-step`                 | ms                                                                        | stagger between children (group only; default 80)     |
-| `data-reveal-ease`                 | CSS timing function                                                       | default: `--default-transition-timing-function`       |
-| `data-reveal-distance`             | CSS length                                                                | slide travel (default `1rem`)                         |
-| `data-reveal-scale`                | number                                                                    | grow/shrink factor (defaults grow 0.97, shrink 1.03)  |
-| `data-reveal-order`                | `reversed`                                                                | reverse stagger order (group only)                    |
-| `data-reveal-margin`               | rootMargin                                                                | IntersectionObserver margin (default `0px`)           |
-| `data-reveal-threshold`            | 0–1                                                                       | visibility to trigger (default 0.2)                   |
+| `data-reveal-wait`                 | ms                                                                        | base delay before start (default 0)                          |
+| `data-reveal-step`                 | ms                                                                        | stagger between children (group only; default 80)            |
+| `data-reveal-ease`                 | CSS timing function                                                       | default: `--default-transition-timing-function`              |
+| `data-reveal-distance`             | CSS length                                                                | slide travel (default `1rem`)                                |
+| `data-reveal-scale`                | number                                                                    | grow/shrink factor (defaults grow 0.97, shrink 1.03)         |
+| `data-reveal-order`                | `reversed`                                                                | reverse stagger order (group only)                           |
+| `data-reveal-margin`               | rootMargin                                                                | IntersectionObserver margin (default `0px`)                  |
+| `data-reveal-threshold`            | 0–1                                                                       | visibility to trigger (default 0.2)                          |
 
 **Reveal owns `transition-*` on the element it's set on.** It drives the animation through
 `transition-duration`, `-delay` (the stagger), `-property`, and `-timing-function`, so don't

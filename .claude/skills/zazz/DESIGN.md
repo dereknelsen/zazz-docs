@@ -427,10 +427,10 @@ Shared `--field-*` tokens unify `.input`, `.textarea`, `.select`, `.input-group`
 
 ### Container bands
 
-| Markup                                | Result                                                           | Purpose                    |
-| ------------------------------------- | --------------------------------------------------------------- | -------------------------- |
-| `.container`                          | Subgrid band system; children land in the `md` band by default  | Full-width content wrapper |
-| `.container[data-variant="article"]`  | Centered reading width (`--article-lg` 70ch by default)         | Reading-width content      |
+| Markup                               | Result                                                         | Purpose                    |
+| ------------------------------------ | -------------------------------------------------------------- | -------------------------- |
+| `.container`                         | Subgrid band system; children land in the `md` band by default | Full-width content wrapper |
+| `.container[data-variant="article"]` | Centered reading width (`--article-lg` 70ch by default)        | Reading-width content      |
 
 `.container` is a subgrid spanning its region; each direct child drops into a band (`xs sm md lg xl`
 cap + center at that breakpoint, `full` = region minus gutters, `bleed` = edge to edge). Set the band

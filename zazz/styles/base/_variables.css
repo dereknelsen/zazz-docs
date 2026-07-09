@@ -1,4 +1,3 @@
-
 /**
  * _variables.css — Global design tokens (Tier 1).
  *
@@ -13,15 +12,6 @@
  *             layout, effects, animations. Re-declare any of these to re-skin the
  *             whole system; see CONVENTIONS.md.
  */
-
-/* Zazz CSS mode boundaries — typed "true | false" so container
- * style() queries get reliable typed comparison. With syntax "*" the value is
- * an opaque token stream and @container style(--use-zazz: true) can't match. */
- @property --use-zazz {
-  syntax: "true | false";
-  inherits: true;
-  initial-value: true;
-}
 
 /* Inverted menu */
 
@@ -234,17 +224,20 @@
     * ========================================================================== */
 
     /* font-family */
-    --font-sans:
+    --font-body:
       "Geist", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
       "Segoe UI Symbol", "Noto Color Emoji";
-    --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    --font-heading:
+      "Geist", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono:
       "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
 
     /* semantic font-families */
-    --font-family-body: var(--font-sans);
-    --font-family-heading: var(--font-sans);
+    --font-family-body: var(--font-body);
+    --font-family-heading: var(--font-heading);
+    --font-family-mono: var(--font-mono);
 
     /* font-size — fluid clamp() */
     --font-size-eyebrow: clamp(0.512rem, 0.609rem + 0.1213vi, 0.5787rem);
@@ -600,7 +593,7 @@
       --card-foreground: var(--white);
       --input: var(--tint-50);
       --input-foreground: var(--white);
-      --popover: var(--shade-950);
+      --popover: var(--shade-900);
       --popover-foreground: var(--white);
       --muted: var(--tint-50);
       --muted-foreground: var(--tint-600);
@@ -634,7 +627,7 @@
     --card-foreground: var(--white);
     --input: var(--tint-50);
     --input-foreground: var(--white);
-    --popover: var(--shade-950);
+    --popover: var(--shade-900);
     --popover-foreground: var(--white);
     --muted: var(--tint-50);
     --muted-foreground: var(--tint-600);

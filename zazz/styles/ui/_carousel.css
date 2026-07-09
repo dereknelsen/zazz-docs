@@ -18,46 +18,44 @@
   }
 }
 
-@container style(--use-zazz: true) {
-  /* ===========================================================================
-     EMBLA CAROUSEL STYLES
-     - Documentation: https://www.embla-carousel.com/
-     =========================================================================== */
-  @layer zazz.components {
-    /* <embla-carousel> is a custom element (inline by default) that applies
-       data-embla="root" to itself — give it block flow like the legacy div. */
-    embla-carousel {
-      display: block;
-    }
+/* ===========================================================================
+   EMBLA CAROUSEL STYLES
+   - Documentation: https://www.embla-carousel.com/
+   =========================================================================== */
+@layer zazz.components {
+  /* <embla-carousel> is a custom element (inline by default) that applies
+     data-embla="root" to itself — give it block flow like the legacy div. */
+  embla-carousel {
+    display: block;
+  }
 
-    :is(body:has([data-embla="viewport"].is-dragging) *) {
-      cursor: var(--embla-cursor--grabbing);
-    }
+  :is(body:has([data-embla="viewport"].is-dragging) *) {
+    cursor: var(--embla-cursor--grabbing);
+  }
 
-    [data-embla="root"] {
-      position: relative;
-      isolation: isolate;
-    }
+  [data-embla="root"] {
+    position: relative;
+    isolation: isolate;
+  }
 
-    [data-embla="viewport"] {
-      overflow: clip;
-      max-block-size: 100%;
-      max-inline-size: 100%;
-    }
+  [data-embla="viewport"] {
+    overflow: clip;
+    max-block-size: 100%;
+    max-inline-size: 100%;
+  }
 
-    [data-embla="container"] {
-      display: flex;
-      gap: var(--_gap, 0);
-      touch-action: var(--embla-touch-action);
-    }
+  [data-embla="container"] {
+    display: flex;
+    gap: var(--_gap, 0);
+    touch-action: var(--embla-touch-action);
+  }
 
-    [data-embla="slide"] {
-      flex: 0 0 var(--embla-slide-basis);
-      min-width: var(--embla-slide-min-width);
-    }
+  [data-embla="slide"] {
+    flex: 0 0 var(--embla-slide-basis);
+    min-width: var(--embla-slide-min-width);
+  }
 
-    [data-embla="thumbs"] [data-embla="slide"] {
-      flex: 0 0 auto;
-    }
+  [data-embla="thumbs"] [data-embla="slide"] {
+    flex: 0 0 auto;
   }
 }

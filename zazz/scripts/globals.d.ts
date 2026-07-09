@@ -69,6 +69,21 @@ interface Navigation extends EventTarget {
   addEventListener(type: "navigate", listener: (event: NavigateEvent) => void): void;
 }
 
+/**
+ * Invoker Commands API (command/commandfor). Native in Chromium 135+; the
+ * invokers polyfill dispatches a compatible event. Declared here (as interface
+ * merges) until lib.dom ships it.
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/CommandEvent
+ */
+interface CommandEvent extends Event {
+  readonly command: string;
+  readonly source: Element | null;
+}
+
+interface HTMLElementEventMap {
+  command: CommandEvent;
+}
+
 interface RevealInstance {
   init(): void;
   refresh(): void;
@@ -88,6 +103,38 @@ declare class EmblaCarouselHostElement extends HTMLElement {
   readonly api: EmblaCarouselType | null;
 }
 
+/** Toast content and behavior (see toaster.js for the authoritative JSDoc). */
+interface ToastAction {
+  label: string;
+  onClick?: (event: MouseEvent) => void;
+}
+
+interface ToastOptions {
+  title?: string;
+  description?: string;
+  variant?: "success" | "info" | "warning" | "destructive";
+  duration?: number;
+  action?: ToastAction;
+  closeButton?: boolean;
+  region?: string | Element;
+}
+
+/** Shape of the `<toast-region>` element class (defined in toaster.js). */
+declare class ToastRegionElement extends HTMLElement {
+  addToast(options?: ToastOptions): string;
+  dismiss(id?: string): void;
+  dismissAll(): void;
+}
+
+interface ToasterNamespace {
+  toast(options?: ToastOptions | string): string | null;
+  success(message: string, options?: ToastOptions): string | null;
+  info(message: string, options?: ToastOptions): string | null;
+  warning(message: string, options?: ToastOptions): string | null;
+  error(message: string, options?: ToastOptions): string | null;
+  dismiss(id?: string): void;
+}
+
 interface Window {
   navigation: Navigation;
   Utils: UtilsNamespace;
@@ -100,6 +147,10 @@ interface Window {
   InputPassword?: CustomElementConstructor;
   /** Set by tabs.js — the `<tab-group>` element class. */
   TabGroup?: CustomElementConstructor;
+  /** Set by toaster.js — the imperative toast API. */
+  Toaster: ToasterNamespace;
+  /** Set by toaster.js — the `<toast-region>` element class. */
+  ToastRegion?: typeof ToastRegionElement;
   EmblaInit: {
     init: (scope?: Document | Element) => void;
     initRoot: (emblaNode: Element) => void;

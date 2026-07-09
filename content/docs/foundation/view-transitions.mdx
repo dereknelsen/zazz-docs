@@ -58,26 +58,26 @@ as it moves:
 }
 ```
 
-| Token                              | Default                | Effect                              |
-| ---------------------------------- | ---------------------- | ----------------------------------- |
+| Token                              | Default                | Effect                                        |
+| ---------------------------------- | ---------------------- | --------------------------------------------- |
 | `--view-transition-duration`       | `0ms`                  | Length of the animation; set it to turn it on |
-| `--view-transition-ease`           | `var(--bezier-easing)` | Easing curve                        |
+| `--view-transition-ease`           | `var(--bezier-easing)` | Easing curve                                  |
 | `--view-transition-wait`           | `0ms`                  | Delay before the incoming content animates in |
-| `--view-transition-origin`         | `center top`           | Transform origin for scale and translate |
-| `--view-transition-scale--old`     | `1`                    | Scale of the outgoing content       |
-| `--view-transition-scale--new`     | `1`                    | Scale of the incoming content       |
-| `--view-transition-translate--old` | `0, 0, 0`              | `translate3d` of the outgoing content |
-| `--view-transition-translate--new` | `0, 0, 0`              | `translate3d` of the incoming content |
-| `--view-transition-opacity--old`   | `0`                    | Opacity the outgoing content fades to |
-| `--view-transition-opacity--new`   | `0`                    | Opacity the incoming content fades from |
+| `--view-transition-origin`         | `center top`           | Transform origin for scale and translate      |
+| `--view-transition-scale--old`     | `1`                    | Scale of the outgoing content                 |
+| `--view-transition-scale--new`     | `1`                    | Scale of the incoming content                 |
+| `--view-transition-translate--old` | `0, 0, 0`              | `translate3d` of the outgoing content         |
+| `--view-transition-translate--new` | `0, 0, 0`              | `translate3d` of the incoming content         |
+| `--view-transition-opacity--old`   | `0`                    | Opacity the outgoing content fades to         |
+| `--view-transition-opacity--new`   | `0`                    | Opacity the incoming content fades from       |
 
 ## What gets transitioned
 
-| View-transition name | Behavior                                                       |
-| -------------------- | -------------------------------------------------------------- |
-| `main-content`       | Animated: the old content fades out, the new one fades in      |
-| `global-header`      | Persists without animating                                     |
-| `global-footer`      | Persists without animating                                     |
+| View-transition name | Behavior                                                  |
+| -------------------- | --------------------------------------------------------- |
+| `main-content`       | Animated: the old content fades out, the new one fades in |
+| `global-header`      | Persists without animating                                |
+| `global-footer`      | Persists without animating                                |
 
 Keeping the chrome named and static is what makes navigation feel stable while the body changes.
 

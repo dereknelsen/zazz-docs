@@ -245,7 +245,7 @@ With HTTP/2–3 multiplexing and server compression, the single `main.css` link 
 
 Every Zazz behavior ships in one ES module, `main.js`, which `import`s the rest in the right internal order. You load it once. A module is deferred automatically, so it runs after the document is parsed but before `DOMContentLoaded` — no `defer` attribute needed.
 
-What still has to come *before* the module, in document order:
+What still has to come _before_ the module, in document order:
 
 1. **Polyfills** (optional): Popover API (`@oddbird/popover-polyfill`), Invokers/tooltip (`invokers/compatible`)
 2. **Embla CDN bundles** (only if a page has carousels): core UMD build, then plugins (`autoplay`, `auto-scroll`, `class-names`, `ssr`). `embla.js` reads these as globals.

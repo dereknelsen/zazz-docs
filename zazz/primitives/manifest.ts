@@ -8,7 +8,14 @@
  * overlay has room inside the iframe, and `requiresScripts` for anything JS-driven.
  */
 
-export type ExampleScript = "embla" | "reveal" | "carousel" | "lightbox" | "password" | "tabs";
+export type ExampleScript =
+  | "embla"
+  | "reveal"
+  | "carousel"
+  | "lightbox"
+  | "password"
+  | "tabs"
+  | "toaster";
 
 export interface ExampleMeta {
   /** Human label for the iframe `title` (a11y). */
@@ -35,6 +42,7 @@ const MANIFEST: Record<string, ExampleMeta> = {
   "dropdown/default": { align: "start", minHeight: 500 },
   "navigation-menu/default": { align: "start", minHeight: 500, requiresScripts: ["password"] },
   "select/default": { minHeight: 240 },
+  "toaster/default": { minHeight: 420, requiresScripts: ["toaster"] },
 
   // Carousel/lightbox — web components pull in embla.js + the Embla CDN bundles.
   "carousel/default": { minHeight: 460, requiresScripts: ["carousel"] },

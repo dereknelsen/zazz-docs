@@ -31,16 +31,16 @@ page is the reference. Two mechanics set up everything below:
 The atomic classes in `zazz/styles/base/_utilities.css` are organized here into the same families
 Tailwind uses, so you can scan by intent:
 
-| Group                                                                                                            | Covers                                                                |
-| ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| [Layout](/docs/base/utilities/layout)                                                                                 | display, position, overflow, z-index, aspect-ratio, object-fit, order |
+| Group                                                                                                                           | Covers                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| [Layout](/docs/base/utilities/layout)                                                                                           | display, position, overflow, z-index, aspect-ratio, object-fit, order |
 | [Flexbox](/docs/base/utilities/flexbox) · [Grid](/docs/base/utilities/grid) · [Gap & basis](/docs/base/utilities/gap-and-basis) | flex/grid containers, alignment, spans, gaps, flex-basis              |
-| [Spacing](/docs/base/utilities/spacing) · [Sizing](/docs/base/utilities/sizing)                                            | padding, margin · width, height, size, min/max                        |
-| [Text color](/docs/base/utilities/text-color) · [Text & font](/docs/base/utilities/text-and-font)                          | color roles · alignment, transform, wrap, clamp, family               |
-| [Backgrounds](/docs/base/utilities/backgrounds) · [Borders](/docs/base/utilities/borders)                                  | surface colors, overlays · border, radius                             |
-| [Effects](/docs/base/utilities/effects) · [Color opacity](/docs/base/utilities/color-opacity)                              | shadow, opacity, scale, transition · channel alpha                    |
-| [Interactivity](/docs/base/utilities/interactivity) · [Hover states](/docs/base/utilities/hover)                           | cursor, focus ring, screen readers · `hover:` variants                |
-| [Responsive design](/docs/base/utilities/responsive-design)                                                           | the `@xs: @sm: @md: @lg: @xl:` container-query prefixes               |
+| [Spacing](/docs/base/utilities/spacing) · [Sizing](/docs/base/utilities/sizing)                                                 | padding, margin · width, height, size, min/max                        |
+| [Text color](/docs/base/utilities/text-color) · [Text & font](/docs/base/utilities/text-and-font)                               | color roles · alignment, transform, wrap, clamp, family               |
+| [Backgrounds](/docs/base/utilities/backgrounds) · [Borders](/docs/base/utilities/borders)                                       | surface colors, overlays · border, radius                             |
+| [Effects](/docs/base/utilities/effects) · [Color opacity](/docs/base/utilities/color-opacity)                                   | shadow, opacity, scale, transition · channel alpha                    |
+| [Interactivity](/docs/base/utilities/interactivity) · [Hover states](/docs/base/utilities/hover)                                | cursor, focus ring, screen readers · `hover:` variants                |
+| [Responsive design](/docs/base/utilities/responsive-design)                                                                     | the `@xs: @sm: @md: @lg: @xl:` container-query prefixes               |
 
 ## Private composition and coordination variables
 
@@ -71,8 +71,8 @@ Because `p-md` sets all four edges and `pl-0` sets only the inline-start, `class
 resolves to _medium padding everywhere except a zeroed left_: the other three edges are
 untouched. The same pattern powers per-edge `rounded-*` and per-channel color opacity.
 
-| Variable                                                    | Registered syntax             | Initial | Set by                                         | Documented in                                  |
-| ----------------------------------------------------------- | ----------------------------- | ------- | ---------------------------------------------- | ---------------------------------------------- |
+| Variable                                                    | Registered syntax             | Initial | Set by                                         | Documented in                                       |
+| ----------------------------------------------------------- | ----------------------------- | ------- | ---------------------------------------------- | --------------------------------------------------- |
 | `--_padding-{inline,block}-{start,end}`                     | `<length-percentage>`         | `0`     | `p-* px-* py-* pt-* pr-* pb-* pl-*`            | [Spacing](/docs/base/utilities/spacing)             |
 | `--_margin-{inline,block}-{start,end}`                      | `<length-percentage> \| auto` | `0`     | `m-* mx-* my-* mt-* … -m-* mx-auto`            | [Spacing](/docs/base/utilities/spacing)             |
 | `--_radius-{top-left,top-right,bottom-right,bottom-left}`   | `<length-percentage>`         | `0`     | `rounded-* rounded-t-* rounded-tl-* …`         | [Borders](/docs/base/utilities/borders)             |

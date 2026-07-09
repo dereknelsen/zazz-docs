@@ -36,7 +36,7 @@ Build the palette as roles, each with a light and dark value. Generate 50–950 
 
 ## Typography
 
-In Figma, these already exist as `typography/*` text styles — `headings/` text-display–text-h6 and text-eyebrow, `body/` text-xl–text-xs, `bold/` strong-* for emphasized body text, `primitives/` text-button and text-badge. Apply the matching style to every text layer; never restyle text manually. Family: Geist (body + headings), Geist Mono (mono) — these are **fallback defaults only**. When a brand, brief, or prompt specifies typefaces, those always win; never default to Geist over a specified or brand typeface. The scale below (sizes, weights, leading, tracking) is structural and applies to whatever family is chosen. Sizes are desktop maximums; keep headings short.
+In Figma, these already exist as `typography/*` text styles — `headings/` text-display–text-h6 and text-eyebrow, `body/` text-xl–text-xs, `bold/` strong-\* for emphasized body text, `primitives/` text-button and text-badge. Apply the matching style to every text layer; never restyle text manually. Family: Geist (body + headings), Geist Mono (mono) — these are **fallback defaults only**. When a brand, brief, or prompt specifies typefaces, those always win; never default to Geist over a specified or brand typeface. The scale below (sizes, weights, leading, tracking) is structural and applies to whatever family is chosen. Sizes are desktop maximums; keep headings short.
 
 | Style   | Size  | Weight | Leading | Tracking | Use                         |
 | ------- | ----- | ------ | ------- | -------- | --------------------------- |

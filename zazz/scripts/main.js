@@ -5,7 +5,7 @@
  * Each module runs for its side effects: global/utility setup, scroll-reveal
  * and carousel auto-initialization, SPA navigation, and the custom-element
  * registrations (`<embla-carousel>`, `<media-lightbox>`, `<input-password>`,
- * `<tab-group>`).
+ * `<tab-group>`, `<toast-region>`).
  *
  * Internal dependencies are resolved by the module graph — utils.js loads
  * before embla.js, embla.js before carousel.js, carousel.js before
@@ -26,4 +26,5 @@ import "./carousel.js";
 import "./lightbox.js";
 import "./password.js";
 import "./tabs.js";
+import "./toaster.js";
 import "./navigation.js";

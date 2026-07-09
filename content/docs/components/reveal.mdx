@@ -100,17 +100,17 @@ When an element needs its own transition too — a `hover:` border, say — wrap
 
 All attributes are optional. Set them on the element with `data-reveal` or `data-reveal-each`:
 
-| Attribute               | Default                        | Description                               |
-| ----------------------- | ------------------------------ | ----------------------------------------- |
-| `data-reveal-duration`  | `--reveal-global-duration`     | Animation duration. Defaults to the global transition duration (`--default-transition-duration`); JS fallback `400ms` |
-| `data-reveal-wait`      | `0`                            | Base delay before animation starts (ms)   |
-| `data-reveal-step`      | `80`                           | Delay between staggered children (ms)     |
-| `data-reveal-ease`      | `--reveal-global-ease`         | Timing function. Defaults to `--default-transition-timing-function`; JS fallback `cubic-bezier(0.4, 0, 0.2, 1)` |
-| `data-reveal-distance`  | `1rem`                         | Translation distance for slide animations |
-| `data-reveal-scale`     | —                              | Custom scale value for grow/shrink        |
-| `data-reveal-margin`    | `0px`                          | IntersectionObserver `rootMargin`         |
-| `data-reveal-threshold` | `0.2`                          | Visibility threshold (0–1) to trigger     |
-| `data-reveal-order`     | —                              | Set to `"reversed"` for reverse stagger   |
+| Attribute               | Default                    | Description                                                                                                           |
+| ----------------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `data-reveal-duration`  | `--reveal-global-duration` | Animation duration. Defaults to the global transition duration (`--default-transition-duration`); JS fallback `400ms` |
+| `data-reveal-wait`      | `0`                        | Base delay before animation starts (ms)                                                                               |
+| `data-reveal-step`      | `80`                       | Delay between staggered children (ms)                                                                                 |
+| `data-reveal-ease`      | `--reveal-global-ease`     | Timing function. Defaults to `--default-transition-timing-function`; JS fallback `cubic-bezier(0.4, 0, 0.2, 1)`       |
+| `data-reveal-distance`  | `1rem`                     | Translation distance for slide animations                                                                             |
+| `data-reveal-scale`     | —                          | Custom scale value for grow/shrink                                                                                    |
+| `data-reveal-margin`    | `0px`                      | IntersectionObserver `rootMargin`                                                                                     |
+| `data-reveal-threshold` | `0.2`                      | Visibility threshold (0–1) to trigger                                                                                 |
+| `data-reveal-order`     | —                          | Set to `"reversed"` for reverse stagger                                                                               |
 
 ## Global configuration
 
@@ -140,14 +140,14 @@ Or set global CSS custom properties on `:root`:
 }
 ```
 
-| Token                     | Default                                | Description                       |
-| ------------------------- | -------------------------------------- | --------------------------------- |
-| `--reveal-global-duration`| `var(--default-transition-duration)`   | Animation duration                |
-| `--reveal-global-ease`    | `var(--default-transition-timing-function)` | Timing function              |
-| `--reveal-global-wait`    | `0ms`                                  | Base delay before animation       |
-| `--reveal-global-distance`| `1rem`                                 | Slide translation distance        |
-| `--reveal-global-grow`    | `0.97`                                 | Scale for `grow`                  |
-| `--reveal-global-shrink`  | `1.03`                                 | Scale for `shrink`                |
+| Token                      | Default                                     | Description                 |
+| -------------------------- | ------------------------------------------- | --------------------------- |
+| `--reveal-global-duration` | `var(--default-transition-duration)`        | Animation duration          |
+| `--reveal-global-ease`     | `var(--default-transition-timing-function)` | Timing function             |
+| `--reveal-global-wait`     | `0ms`                                       | Base delay before animation |
+| `--reveal-global-distance` | `1rem`                                      | Slide translation distance  |
+| `--reveal-global-grow`     | `0.97`                                      | Scale for `grow`            |
+| `--reveal-global-shrink`   | `1.03`                                      | Scale for `shrink`          |
 
 ## Manual control
 

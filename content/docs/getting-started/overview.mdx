@@ -24,7 +24,7 @@ Later layers override earlier ones regardless of selector specificity, so you ne
 | `variables`       | Token declarations only (lowest)                     | `:root { --button-radius: var(--radius-md); }` |
 | `reset`           | Native element baselines                             | `html`, `body`, `input`, `select` defaults     |
 | `legacy`          | Your pre-Zazz CSS during a migration                 | `@import "old.css" layer(legacy)`              |
-| `zazz.components` | Component rules                                       | `.button`, `.dialog`, `.field`                 |
+| `zazz.components` | Component rules                                      | `.button`, `.dialog`, `.field`                 |
 | `zazz.utilities`  | Atomic override classes                              | `.text-primary`, `.gap-md`, `.rounded-full`    |
 | `migrations`      | Class-translation shims during a migration (highest) | `.btn-primary { --button-background: … }`      |
 
@@ -51,7 +51,9 @@ Nothing in Zazz is hardcoded. Components read `var(--token)`, so you restyle by 
 ```
 
 ```html
-<button class="button" style="--button-background: var(--secondary)">Instance: this button only</button>
+<button class="button" style="--button-background: var(--secondary)">
+  Instance: this button only
+</button>
 ```
 
 The token tiers and the three override scopes are covered in full on [Theme variables](/docs/core-concepts/theme-variables).

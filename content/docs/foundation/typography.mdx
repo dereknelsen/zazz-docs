@@ -12,11 +12,11 @@ The tokens themselves (font families, sizes, weights, line-heights, letter-spaci
 Zazz ships three raw stacks and two semantic aliases. The aliases are the ones you override:
 
 ```css
---font-family-body: var(--font-sans);
---font-family-heading: var(--font-sans);
+--font-family-body: var(--font-body);
+--font-family-heading: var(--font-body);
 ```
 
-Point `--font-family-heading` at `--font-serif` and every heading switches, with no other change. The raw `--font-sans`, `--font-serif`, and `--font-mono` stacks back the `.font-sans` / `.font-serif` / `.font-mono` utilities when you want a one-off.
+Point `--font-family-heading` at `--font-heading` and every heading switches, with no other change. The raw `--font-body`, `--font-heading`, and `--font-mono` stacks back the `.font-sans` / `.font-serif` / `.font-mono` utilities when you want a one-off.
 
 Zazz defaults to Geist. See [Structuring your head tag](/docs/getting-started/head#loading-geist-default-typeface) for how to load it.
 
@@ -52,12 +52,12 @@ Inside `.prose`, headings take their matching `--font-size-h*`, `--leading-h*`, 
 
 A few `--prose-*` hooks let you retune it without editing the file:
 
-| Token                       | Default          | Controls                              |
-| --------------------------- | ---------------- | ------------------------------------- |
-| `--prose-link-color`        | `var(--primary)` | Link color inside prose               |
-| `--prose-img-radius`        | `var(--radius-md)` | Corner radius on images and video   |
-| `--prose-img-border`        | `none`           | Border on images and video            |
-| `--prose-figcaption-margin` | `var(--gap-xs) 0 0 0` | Spacing above a figure caption   |
+| Token                       | Default               | Controls                          |
+| --------------------------- | --------------------- | --------------------------------- |
+| `--prose-link-color`        | `var(--primary)`      | Link color inside prose           |
+| `--prose-img-radius`        | `var(--radius-md)`    | Corner radius on images and video |
+| `--prose-img-border`        | `none`                | Border on images and video        |
+| `--prose-figcaption-margin` | `var(--gap-xs) 0 0 0` | Spacing above a figure caption    |
 
 Vertical rhythm between blocks runs off the `--paragraph-spacing-*` tokens, so you can tighten or loosen a whole document from one place.
 

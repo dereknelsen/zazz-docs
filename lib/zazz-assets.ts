@@ -5,7 +5,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import type { ExampleScript } from "zazz/primitives/manifest";
 
-const COMPONENTS_ROOT = path.join(process.cwd(), "zazz", "components");
+const COMPONENTS_ROOT = path.join(process.cwd(), "zazz", "primitives");
 const STYLES_ROOT = path.join(process.cwd(), "zazz", "styles");
 const SCRIPTS_ROOT = path.join(process.cwd(), "zazz", "scripts");
 
@@ -14,6 +14,7 @@ const WEB_COMPONENT_SCRIPT_FILES: Partial<Record<ExampleScript, string[]>> = {
   lightbox: ["carousel.js", "lightbox.js"],
   password: ["password.js"],
   tabs: ["tabs.js"],
+  toaster: ["toaster.js"],
 };
 
 /**
@@ -82,7 +83,7 @@ export function listExamples(): string[] {
 export function readComponentCss(src: string): string | null {
   const component = src.split("/")[0];
   if (component === "utilities") return null;
-  const filePath = path.resolve(STYLES_ROOT, `_${component}.css`);
+  const filePath = path.resolve(STYLES_ROOT, "ui", `_${component}.css`);
 
   if (!filePath.startsWith(STYLES_ROOT + path.sep)) return null;
 

@@ -1,4 +1,12 @@
 {
   "title": "base",
-  "pages": ["file-anatomy", "layers", "variables", "reset", "typography", "view-transitions", "utilities"]
+  "pages": [
+    "file-anatomy",
+    "layers",
+    "variables",
+    "reset",
+    "typography",
+    "view-transitions",
+    "utilities"
+  ]
 }

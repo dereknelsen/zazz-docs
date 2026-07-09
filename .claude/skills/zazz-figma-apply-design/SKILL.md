@@ -23,16 +23,16 @@ Because variables are updated first, the rebind pass is visually lossless — **
 
 Update ONLY these groups. Read the file's actual variable names before editing — trust the file over this table if they differ.
 
-| Group                              | Variables                                                                                     | Kind                                     |
-| ---------------------------------- | --------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| `Theme/base` (Light/Dark)          | background, foreground, border, border-foreground, card, card-foreground, input, input-foreground | Aliases → `Grayscale` steps          |
-| `Theme/brand` (Light/Dark)         | primary, secondary, tertiary + their `*-foreground`s                                          | Aliases → `Corporate` steps / white      |
-| `Corporate/primary` `/secondary` `/tertiary` | 50–950 scale, 11 steps each                                                          | Raw hex                                   |
-| `Grayscale/neutral`                | white, 50–950, black (13)                                                                      | Raw hex                                   |
-| `Typography/font-family` (Desktop/Mobile) | font-heading, font-body, font-mono                                                      | Strings                                   |
-| `Spacing/semantic` (Desktop/Mobile) | the semantic gap set                                                                          | Aliases → step scale                      |
-| `Radius/semantic` (Desktop/Mobile) | radius-none, xs, sm, md, lg, xl (aliases → `scale/step-*`), radius-full (9999)                 | Aliases                                   |
-| `Radius/primitives`                | radius-button, radius-input, radius-badge, radius-card                                         | Aliases → `Radius/semantic`               |
+| Group                                        | Variables                                                                                         | Kind                                |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| `Theme/base` (Light/Dark)                    | background, foreground, border, border-foreground, card, card-foreground, input, input-foreground | Aliases → `Grayscale` steps         |
+| `Theme/brand` (Light/Dark)                   | primary, secondary, tertiary + their `*-foreground`s                                              | Aliases → `Corporate` steps / white |
+| `Corporate/primary` `/secondary` `/tertiary` | 50–950 scale, 11 steps each                                                                       | Raw hex                             |
+| `Grayscale/neutral`                          | white, 50–950, black (13)                                                                         | Raw hex                             |
+| `Typography/font-family` (Desktop/Mobile)    | font-heading, font-body, font-mono                                                                | Strings                             |
+| `Spacing/semantic` (Desktop/Mobile)          | the semantic gap set                                                                              | Aliases → step scale                |
+| `Radius/semantic` (Desktop/Mobile)           | radius-none, xs, sm, md, lg, xl (aliases → `scale/step-*`), radius-full (9999)                    | Aliases                             |
+| `Radius/primitives`                          | radius-button, radius-input, radius-badge, radius-card                                            | Aliases → `Radius/semantic`         |
 
 **Never touch** unless explicitly asked: `Theme/overlay`, `Theme/status`, `Grayscale/shade`, `Grayscale/tint`, `Typography` font-size / font-weight / letter-spacing / paragraph-spacing, the `Spacing` step scale, and `Layout`. These are structural.
 

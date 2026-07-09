@@ -46,12 +46,12 @@ export { MyExport };
 
 Each script attaches its public API to `window` (the documented surface) **and** provides a matching named `export` that the `main.js` bundle and sibling modules `import`:
 
-| File            | Global             | Export shape                              |
-| --------------- | ------------------ | ----------------------------------------- |
-| `utils.js`      | `window.Utils`     | `{ parseValue, parseDataAttributes }`     |
-| `reveal.js`     | `window.Reveal`    | `Reveal` class                            |
+| File            | Global             | Export shape                                     |
+| --------------- | ------------------ | ------------------------------------------------ |
+| `utils.js`      | `window.Utils`     | `{ parseValue, parseDataAttributes }`            |
+| `reveal.js`     | `window.Reveal`    | `Reveal` class                                   |
 | `embla.js`      | `window.EmblaInit` | `{ init, initRoot, addDotBtnsAndClickHandlers }` |
-| `navigation.js` | _(none)_           | Side-effect only; no export               |
+| `navigation.js` | _(none)_           | Side-effect only; no export                      |
 
 The web-component scripts (`carousel.js`, `lightbox.js`, `password.js`, `tabs.js`) export their element class and register the custom element as a side effect.
 
@@ -83,16 +83,16 @@ Component scripts read configuration from HTML data attributes rather than JS op
 
 Cross-script dependencies are real ES `import`s, so the module graph resolves order — you load `main.js` and nothing else needs sequencing:
 
-| Script          | Imports       | Notes                                              |
-| --------------- | ------------- | -------------------------------------------------- |
-| `utils.js`      | —             | Provides `window.Utils`                            |
-| `reveal.js`     | —             | Standalone                                         |
-| `embla.js`      | `utils.js`    | Also needs the Embla CDN globals (see below)       |
-| `carousel.js`   | `embla.js`    | `<embla-carousel>` calls `EmblaInit.initRoot`      |
-| `lightbox.js`   | `carousel.js` | `<media-lightbox>` coordinates carousel elements   |
-| `password.js`   | —             | Standalone (`<input-password>`)                    |
-| `tabs.js`       | —             | Standalone (`<tab-group>`)                          |
-| `navigation.js` | —             | App-level; inert in component preview iframes      |
+| Script          | Imports       | Notes                                            |
+| --------------- | ------------- | ------------------------------------------------ |
+| `utils.js`      | —             | Provides `window.Utils`                          |
+| `reveal.js`     | —             | Standalone                                       |
+| `embla.js`      | `utils.js`    | Also needs the Embla CDN globals (see below)     |
+| `carousel.js`   | `embla.js`    | `<embla-carousel>` calls `EmblaInit.initRoot`    |
+| `lightbox.js`   | `carousel.js` | `<media-lightbox>` coordinates carousel elements |
+| `password.js`   | —             | Standalone (`<input-password>`)                  |
+| `tabs.js`       | —             | Standalone (`<tab-group>`)                       |
+| `navigation.js` | —             | App-level; inert in component preview iframes    |
 
 The one ordering the module graph can't enforce is the **Embla CDN UMD bundles**: `embla.js` reads them as globals, so their `<script defer>` tags must precede the `main.js` module in the document. Where these tags go is covered in [Structuring your head tag](/docs/getting-started/head#script-load-order).
 

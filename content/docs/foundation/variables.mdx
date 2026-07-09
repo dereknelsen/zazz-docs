@@ -18,12 +18,12 @@ Tokens resolve lazily, so an override on `:root` cascades to everything that ref
 
 Tokens are organized from raw values up to component hooks. Reach for the most semantic tier that fits.
 
-| Tier                       | What it is                   | Examples                                                                                     |
-| -------------------------- | ---------------------------- | -------------------------------------------------------------------------------------------- |
-| **Brand & literal scales** | Fixed color ramps            | `--primary-50`…`--primary-950`, `--neutral-*`, `--shade-*`, `--tint-*`                       |
-| **Semantic roles**         | Theme-aware meaning          | `--background`, `--foreground`, `--primary`, `--muted`, `--border`, `--destructive`          |
+| Tier                       | What it is                   | Examples                                                                                         |
+| -------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------ |
+| **Brand & literal scales** | Fixed color ramps            | `--primary-50`…`--primary-950`, `--neutral-*`, `--shade-*`, `--tint-*`                           |
+| **Semantic roles**         | Theme-aware meaning          | `--background`, `--foreground`, `--primary`, `--muted`, `--border`, `--destructive`              |
 | **Metrics & systems**      | Spacing, type, shape, layout | `--gap-*`, `--step-*`, `--font-size-*`, `--radius-*`, `--shadow-*`, `--breakpoint-*`, `--ring-*` |
-| **Component tokens**       | Per-component hooks          | `--button-background`, `--field-border`, `--dialog-radius`                                   |
+| **Component tokens**       | Per-component hooks          | `--button-background`, `--field-border`, `--dialog-radius`                                       |
 
 Roles resolve through [`light-dark()`](/docs/core-concepts/dark-mode), so choosing a role instead of a scale step keeps both themes correct. Component tokens default to a global token, so they inherit your theme until you deliberately override one.
 

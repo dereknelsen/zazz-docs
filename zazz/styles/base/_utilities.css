@@ -8,7 +8,7 @@
  * @uses       style() queries — read typed @property tokens from _properties.css
  */
 
- @layer variables {
+@layer variables {
   /* ===========================================================================
     INTERNAL UTILITY VARIABLES — `--_` prefix
     System-level variables that utilities compose into a single declaration.
@@ -132,15 +132,15 @@
     =========================================================================== */
 
   :where(.font-sans) {
-    font-family: var(--font-sans);
+    font-family: var(--font-body);
   }
 
   :where(.font-serif) {
-    font-family: var(--font-serif);
+    font-family: var(--font-heading);
   }
 
   :where(.font-mono) {
-    font-family: var(--font-mono);
+    font-family: var(--font-family-mono);
   }
 
   /* ===========================================================================
@@ -300,11 +300,15 @@
   =========================================================================== */
 
   :where(.bg-background) {
-    background-color: oklch(from var(--background) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--background) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-foreground) {
-    background-color: oklch(from var(--foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-card) {
@@ -312,7 +316,9 @@
   }
 
   :where(.bg-card-foreground) {
-    background-color: oklch(from var(--card-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--card-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-border) {
@@ -320,7 +326,9 @@
   }
 
   :where(.bg-border-foreground) {
-    background-color: oklch(from var(--border-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--border-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-input) {
@@ -328,7 +336,9 @@
   }
 
   :where(.bg-input-foreground) {
-    background-color: oklch(from var(--input-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--input-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-muted) {
@@ -336,7 +346,9 @@
   }
 
   :where(.bg-muted-foreground) {
-    background-color: oklch(from var(--muted-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--muted-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-faded) {
@@ -344,7 +356,9 @@
   }
 
   :where(.bg-faded-foreground) {
-    background-color: oklch(from var(--faded-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--faded-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-primary) {
@@ -352,15 +366,21 @@
   }
 
   :where(.bg-primary-foreground) {
-    background-color: oklch(from var(--primary-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--primary-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-secondary) {
-    background-color: oklch(from var(--secondary) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-secondary-foreground) {
-    background-color: oklch(from var(--secondary-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-tertiary) {
@@ -368,7 +388,9 @@
   }
 
   :where(.bg-tertiary-foreground) {
-    background-color: oklch(from var(--tertiary-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tertiary-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-info) {
@@ -376,7 +398,9 @@
   }
 
   :where(.bg-info-foreground) {
-    background-color: oklch(from var(--info-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--info-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-success) {
@@ -384,7 +408,9 @@
   }
 
   :where(.bg-success-foreground) {
-    background-color: oklch(from var(--success-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--success-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-warning) {
@@ -392,15 +418,21 @@
   }
 
   :where(.bg-warning-foreground) {
-    background-color: oklch(from var(--warning-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--warning-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-destructive) {
-    background-color: oklch(from var(--destructive) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--destructive) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-destructive-foreground) {
-    background-color: oklch(from var(--destructive-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--destructive-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-white) {
@@ -412,7 +444,9 @@
   }
 
   :where(.bg-shade-none) {
-    background-color: oklch(from var(--shade-none) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-none) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-50) {
@@ -420,51 +454,75 @@
   }
 
   :where(.bg-shade-100) {
-    background-color: oklch(from var(--shade-100) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-100) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-200) {
-    background-color: oklch(from var(--shade-200) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-200) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-300) {
-    background-color: oklch(from var(--shade-300) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-300) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-400) {
-    background-color: oklch(from var(--shade-400) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-400) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-500) {
-    background-color: oklch(from var(--shade-500) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-500) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-600) {
-    background-color: oklch(from var(--shade-600) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-600) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-700) {
-    background-color: oklch(from var(--shade-700) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-700) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-800) {
-    background-color: oklch(from var(--shade-800) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-800) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-900) {
-    background-color: oklch(from var(--shade-900) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-900) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-950) {
-    background-color: oklch(from var(--shade-950) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-950) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-shade-full) {
-    background-color: oklch(from var(--shade-full) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--shade-full) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-tint-none) {
-    background-color: oklch(from var(--tint-none) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tint-none) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-tint-50) {
@@ -512,7 +570,9 @@
   }
 
   :where(.bg-tint-full) {
-    background-color: oklch(from var(--tint-full) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tint-full) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.bg-transparent) {
@@ -707,7 +767,7 @@
     grid-template-areas: "pile";
     place-items: center;
 
-    >* {
+    > * {
       grid-area: pile;
     }
   }
@@ -853,7 +913,8 @@
     grid-template-columns: repeat(var(--_grid-cols, 1), minmax(0, 1fr));
   }
 
-  :where(.grid-flow-row.grid-cols-2,
+  :where(
+    .grid-flow-row.grid-cols-2,
     .grid-flow-row.grid-cols-3,
     .grid-flow-row.grid-cols-4,
     .grid-flow-row.grid-cols-5,
@@ -863,10 +924,15 @@
     .grid-flow-row.grid-cols-9,
     .grid-flow-row.grid-cols-10,
     .grid-flow-row.grid-cols-11,
-    .grid-flow-row.grid-cols-12) {
-    --_grid-track-min: min(100%,
-        max(var(--_grid-col-min),
-          max(0%, calc((100% - (var(--_grid-cols, 1) - 1) * var(--_gap, 0px)) / var(--_grid-cols, 1)))));
+    .grid-flow-row.grid-cols-12
+  ) {
+    --_grid-track-min: min(
+      100%,
+      max(
+        var(--_grid-col-min),
+        max(0%, calc((100% - (var(--_grid-cols, 1) - 1) * var(--_gap, 0px)) / var(--_grid-cols, 1)))
+      )
+    );
     grid-auto-flow: row;
     grid-template-columns: repeat(auto-fill, minmax(var(--_grid-track-min), 1fr));
   }
@@ -1007,7 +1073,6 @@
   =========================================================================== */
 
   @container style(--is-breakpoint-xs: true) {
-
     /* --breakpoint-xs and up */
     /* display */
     :where(.\@xs\:hidden) {
@@ -1373,7 +1438,6 @@
   }
 
   @container style(--is-breakpoint-sm: true) {
-
     /* --breakpoint-sm */
     /* display */
     :where(.\@sm\:hidden) {
@@ -1739,7 +1803,6 @@
   }
 
   @container style(--is-breakpoint-md: true) {
-
     /* --breakpoint-md */
     /* display */
     :where(.\@md\:hidden) {
@@ -2105,7 +2168,6 @@
   }
 
   @container style(--is-breakpoint-lg: true) {
-
     /* --breakpoint-lg */
     /* display */
     :where(.\@lg\:hidden) {
@@ -2471,7 +2533,6 @@
   }
 
   @container style(--is-breakpoint-xl: true) {
-
     /* --breakpoint-xl */
     /* display */
     :where(.\@xl\:hidden) {
@@ -2849,37 +2910,8 @@
     grid-column: 1 / -1;
   }
 
-  :where(.grid-flow-row.grid-cols-2,
-    .grid-flow-row.grid-cols-3,
-    .grid-flow-row.grid-cols-4,
-    .grid-flow-row.grid-cols-5,
-    .grid-flow-row.grid-cols-6,
-    .grid-flow-row.grid-cols-7,
-    .grid-flow-row.grid-cols-8,
-    .grid-flow-row.grid-cols-9,
-    .grid-flow-row.grid-cols-10,
-    .grid-flow-row.grid-cols-11,
-    .grid-flow-row.grid-cols-12) :where([class*="col-span-"]:not([class*="col-span-full"])) {
-    grid-column: span min(var(--_col-span-responsive, 1), var(--_grid-cols, 1));
-  }
-
-  :where(.grid-flow-row.grid-cols-2,
-    .grid-flow-row.grid-cols-3,
-    .grid-flow-row.grid-cols-4,
-    .grid-flow-row.grid-cols-5,
-    .grid-flow-row.grid-cols-6,
-    .grid-flow-row.grid-cols-7,
-    .grid-flow-row.grid-cols-8,
-    .grid-flow-row.grid-cols-9,
-    .grid-flow-row.grid-cols-10,
-    .grid-flow-row.grid-cols-11,
-    .grid-flow-row.grid-cols-12) :where([class*="col-span-full"]) {
-    grid-column: span 1;
-  }
-
-  @container style(--is-breakpoint-xs: true) {
-
-    :where(.grid-flow-row.grid-cols-2,
+  :where(
+      .grid-flow-row.grid-cols-2,
       .grid-flow-row.grid-cols-3,
       .grid-flow-row.grid-cols-4,
       .grid-flow-row.grid-cols-5,
@@ -2889,75 +2921,120 @@
       .grid-flow-row.grid-cols-9,
       .grid-flow-row.grid-cols-10,
       .grid-flow-row.grid-cols-11,
-      .grid-flow-row.grid-cols-12) :where(.\@xs\:col-span-full) {
+      .grid-flow-row.grid-cols-12
+    )
+    :where([class*="col-span-"]:not([class*="col-span-full"])) {
+    grid-column: span min(var(--_col-span-responsive, 1), var(--_grid-cols, 1));
+  }
+
+  :where(
+      .grid-flow-row.grid-cols-2,
+      .grid-flow-row.grid-cols-3,
+      .grid-flow-row.grid-cols-4,
+      .grid-flow-row.grid-cols-5,
+      .grid-flow-row.grid-cols-6,
+      .grid-flow-row.grid-cols-7,
+      .grid-flow-row.grid-cols-8,
+      .grid-flow-row.grid-cols-9,
+      .grid-flow-row.grid-cols-10,
+      .grid-flow-row.grid-cols-11,
+      .grid-flow-row.grid-cols-12
+    )
+    :where([class*="col-span-full"]) {
+    grid-column: span 1;
+  }
+
+  @container style(--is-breakpoint-xs: true) {
+    :where(
+        .grid-flow-row.grid-cols-2,
+        .grid-flow-row.grid-cols-3,
+        .grid-flow-row.grid-cols-4,
+        .grid-flow-row.grid-cols-5,
+        .grid-flow-row.grid-cols-6,
+        .grid-flow-row.grid-cols-7,
+        .grid-flow-row.grid-cols-8,
+        .grid-flow-row.grid-cols-9,
+        .grid-flow-row.grid-cols-10,
+        .grid-flow-row.grid-cols-11,
+        .grid-flow-row.grid-cols-12
+      )
+      :where(.\@xs\:col-span-full) {
       grid-column: 1 / -1;
     }
   }
 
   @container style(--is-breakpoint-sm: true) {
-
-    :where(.grid-flow-row.grid-cols-2,
-      .grid-flow-row.grid-cols-3,
-      .grid-flow-row.grid-cols-4,
-      .grid-flow-row.grid-cols-5,
-      .grid-flow-row.grid-cols-6,
-      .grid-flow-row.grid-cols-7,
-      .grid-flow-row.grid-cols-8,
-      .grid-flow-row.grid-cols-9,
-      .grid-flow-row.grid-cols-10,
-      .grid-flow-row.grid-cols-11,
-      .grid-flow-row.grid-cols-12) :where(.\@sm\:col-span-full) {
+    :where(
+        .grid-flow-row.grid-cols-2,
+        .grid-flow-row.grid-cols-3,
+        .grid-flow-row.grid-cols-4,
+        .grid-flow-row.grid-cols-5,
+        .grid-flow-row.grid-cols-6,
+        .grid-flow-row.grid-cols-7,
+        .grid-flow-row.grid-cols-8,
+        .grid-flow-row.grid-cols-9,
+        .grid-flow-row.grid-cols-10,
+        .grid-flow-row.grid-cols-11,
+        .grid-flow-row.grid-cols-12
+      )
+      :where(.\@sm\:col-span-full) {
       grid-column: 1 / -1;
     }
   }
 
   @container style(--is-breakpoint-md: true) {
-
-    :where(.grid-flow-row.grid-cols-2,
-      .grid-flow-row.grid-cols-3,
-      .grid-flow-row.grid-cols-4,
-      .grid-flow-row.grid-cols-5,
-      .grid-flow-row.grid-cols-6,
-      .grid-flow-row.grid-cols-7,
-      .grid-flow-row.grid-cols-8,
-      .grid-flow-row.grid-cols-9,
-      .grid-flow-row.grid-cols-10,
-      .grid-flow-row.grid-cols-11,
-      .grid-flow-row.grid-cols-12) :where(.\@md\:col-span-full) {
+    :where(
+        .grid-flow-row.grid-cols-2,
+        .grid-flow-row.grid-cols-3,
+        .grid-flow-row.grid-cols-4,
+        .grid-flow-row.grid-cols-5,
+        .grid-flow-row.grid-cols-6,
+        .grid-flow-row.grid-cols-7,
+        .grid-flow-row.grid-cols-8,
+        .grid-flow-row.grid-cols-9,
+        .grid-flow-row.grid-cols-10,
+        .grid-flow-row.grid-cols-11,
+        .grid-flow-row.grid-cols-12
+      )
+      :where(.\@md\:col-span-full) {
       grid-column: 1 / -1;
     }
   }
 
   @container style(--is-breakpoint-lg: true) {
-
-    :where(.grid-flow-row.grid-cols-2,
-      .grid-flow-row.grid-cols-3,
-      .grid-flow-row.grid-cols-4,
-      .grid-flow-row.grid-cols-5,
-      .grid-flow-row.grid-cols-6,
-      .grid-flow-row.grid-cols-7,
-      .grid-flow-row.grid-cols-8,
-      .grid-flow-row.grid-cols-9,
-      .grid-flow-row.grid-cols-10,
-      .grid-flow-row.grid-cols-11,
-      .grid-flow-row.grid-cols-12) :where(.\@lg\:col-span-full) {
+    :where(
+        .grid-flow-row.grid-cols-2,
+        .grid-flow-row.grid-cols-3,
+        .grid-flow-row.grid-cols-4,
+        .grid-flow-row.grid-cols-5,
+        .grid-flow-row.grid-cols-6,
+        .grid-flow-row.grid-cols-7,
+        .grid-flow-row.grid-cols-8,
+        .grid-flow-row.grid-cols-9,
+        .grid-flow-row.grid-cols-10,
+        .grid-flow-row.grid-cols-11,
+        .grid-flow-row.grid-cols-12
+      )
+      :where(.\@lg\:col-span-full) {
       grid-column: 1 / -1;
     }
   }
 
   @container style(--is-breakpoint-xl: true) {
-
-    :where(.grid-flow-row.grid-cols-2,
-      .grid-flow-row.grid-cols-3,
-      .grid-flow-row.grid-cols-4,
-      .grid-flow-row.grid-cols-5,
-      .grid-flow-row.grid-cols-6,
-      .grid-flow-row.grid-cols-7,
-      .grid-flow-row.grid-cols-8,
-      .grid-flow-row.grid-cols-9,
-      .grid-flow-row.grid-cols-10,
-      .grid-flow-row.grid-cols-11,
-      .grid-flow-row.grid-cols-12) :where(.\@xl\:col-span-full) {
+    :where(
+        .grid-flow-row.grid-cols-2,
+        .grid-flow-row.grid-cols-3,
+        .grid-flow-row.grid-cols-4,
+        .grid-flow-row.grid-cols-5,
+        .grid-flow-row.grid-cols-6,
+        .grid-flow-row.grid-cols-7,
+        .grid-flow-row.grid-cols-8,
+        .grid-flow-row.grid-cols-9,
+        .grid-flow-row.grid-cols-10,
+        .grid-flow-row.grid-cols-11,
+        .grid-flow-row.grid-cols-12
+      )
+      :where(.\@xl\:col-span-full) {
       grid-column: 1 / -1;
     }
   }
@@ -3363,6 +3440,10 @@
     transform: scale(0);
   }
 
+  :where(.scale-25) {
+    transform: scale(0.25);
+  }
+
   :where(.scale-50) {
     transform: scale(0.5);
   }
@@ -3375,16 +3456,24 @@
     transform: scale(0.9);
   }
 
-  :where(.scale-95) {
-    transform: scale(0.95);
+  :where(.scale-98) {
+    transform: scale(0.98);
+  }
+
+  :where(.scale-99) {
+    transform: scale(0.99);
   }
 
   :where(.scale-100) {
     transform: scale(1);
   }
 
-  :where(.scale-105) {
-    transform: scale(1.05);
+  :where(.scale-101) {
+    transform: scale(1.01);
+  }
+
+  :where(.scale-102) {
+    transform: scale(1.02);
   }
 
   :where(.scale-110) {
@@ -3533,32 +3622,32 @@
 
   :where(.shadow-none) {
     --_ring-shadow: 0 0 #0000;
-    box-shadow: none;
+    box-shadow: var(--_ring-shadow, var(--shadow-none));
   }
 
   :where(.shadow-xs) {
     --_ring-shadow: var(--shadow-xs);
-    box-shadow: var(--shadow-xs);
+    box-shadow: var(--_ring-shadow, var(--shadow-xs));
   }
 
   :where(.shadow-sm) {
     --_ring-shadow: var(--shadow-sm);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--_ring-shadow, var(--shadow-sm));
   }
 
   :where(.shadow-md) {
     --_ring-shadow: var(--shadow-md);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--_ring-shadow, var(--shadow-md));
   }
 
   :where(.shadow-lg) {
     --_ring-shadow: var(--shadow-lg);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--_ring-shadow, var(--shadow-lg));
   }
 
   :where(.shadow-xl) {
     --_ring-shadow: var(--shadow-xl);
-    box-shadow: var(--shadow-xl);
+    box-shadow: var(--_ring-shadow, var(--shadow-xl));
   }
 
   /* ===========================================================================
@@ -4287,7 +4376,8 @@
      (`-mx-…`) and responsive (`@xs:-m-…`) margin classes, so those sections only
      need to set vars. `m-<size>` substrings are safe here (unlike `p-<size>`,
      they don't collide with `gap-<size>`). */
-  :where([class*="m-0"],
+  :where(
+    [class*="m-0"],
     [class*="m-xs"],
     [class*="m-sm"],
     [class*="m-md"],
@@ -4295,11 +4385,13 @@
     [class*="m-xl"],
     [class*="mx-"],
     [class*="ml-"],
-    [class*="mr-"]) {
+    [class*="mr-"]
+  ) {
     margin-inline: var(--_margin-inline-start) var(--_margin-inline-end);
   }
 
-  :where([class*="m-0"],
+  :where(
+    [class*="m-0"],
     [class*="m-xs"],
     [class*="m-sm"],
     [class*="m-md"],
@@ -4307,7 +4399,8 @@
     [class*="m-xl"],
     [class*="my-"],
     [class*="mt-"],
-    [class*="mb-"]) {
+    [class*="mb-"]
+  ) {
     margin-block: var(--_margin-block-start) var(--_margin-block-end);
   }
 
@@ -4712,7 +4805,8 @@
   /* Composing rules — one per physical corner, triggered only by classes that
      affect that corner. A corner you don't touch is left intact (e.g.
      `rounded-b-0` flattens the bottom and keeps a component's top radius). */
-  :where(.rounded-0,
+  :where(
+    .rounded-0,
     .rounded-xs,
     .rounded-sm,
     .rounded-md,
@@ -4721,11 +4815,13 @@
     .rounded-full,
     [class*="rounded-t-"],
     [class*="rounded-l-"],
-    [class*="rounded-tl-"]) {
+    [class*="rounded-tl-"]
+  ) {
     border-top-left-radius: var(--_radius-top-left);
   }
 
-  :where(.rounded-0,
+  :where(
+    .rounded-0,
     .rounded-xs,
     .rounded-sm,
     .rounded-md,
@@ -4734,11 +4830,13 @@
     .rounded-full,
     [class*="rounded-t-"],
     [class*="rounded-r-"],
-    [class*="rounded-tr-"]) {
+    [class*="rounded-tr-"]
+  ) {
     border-top-right-radius: var(--_radius-top-right);
   }
 
-  :where(.rounded-0,
+  :where(
+    .rounded-0,
     .rounded-xs,
     .rounded-sm,
     .rounded-md,
@@ -4747,11 +4845,13 @@
     .rounded-full,
     [class*="rounded-b-"],
     [class*="rounded-r-"],
-    [class*="rounded-br-"]) {
+    [class*="rounded-br-"]
+  ) {
     border-bottom-right-radius: var(--_radius-bottom-right);
   }
 
-  :where(.rounded-0,
+  :where(
+    .rounded-0,
     .rounded-xs,
     .rounded-sm,
     .rounded-md,
@@ -4760,7 +4860,8 @@
     .rounded-full,
     [class*="rounded-b-"],
     [class*="rounded-l-"],
-    [class*="rounded-bl-"]) {
+    [class*="rounded-bl-"]
+  ) {
     border-bottom-left-radius: var(--_radius-bottom-left);
   }
 
@@ -5138,19 +5239,23 @@
   }
 
   :where(.border-l) {
-    border-left: 1px solid oklch(from var(--_border-color) l c h / calc(alpha * var(--_border-alpha, 1)));
+    border-left: 1px solid
+      oklch(from var(--_border-color) l c h / calc(alpha * var(--_border-alpha, 1)));
   }
 
   :where(.border-t) {
-    border-top: 1px solid oklch(from var(--_border-color) l c h / calc(alpha * var(--_border-alpha, 1)));
+    border-top: 1px solid
+      oklch(from var(--_border-color) l c h / calc(alpha * var(--_border-alpha, 1)));
   }
 
   :where(.border-r) {
-    border-right: 1px solid oklch(from var(--_border-color) l c h / calc(alpha * var(--_border-alpha, 1)));
+    border-right: 1px solid
+      oklch(from var(--_border-color) l c h / calc(alpha * var(--_border-alpha, 1)));
   }
 
   :where(.border-b) {
-    border-bottom: 1px solid oklch(from var(--_border-color) l c h / calc(alpha * var(--_border-alpha, 1)));
+    border-bottom: 1px solid
+      oklch(from var(--_border-color) l c h / calc(alpha * var(--_border-alpha, 1)));
   }
 
   :where(.border-dashed) {
@@ -5195,7 +5300,8 @@
   }
 
   :where(.transition-transform) {
-    transition: transform var(--default-transition-duration) var(--default-transition-timing-function);
+    transition: transform var(--default-transition-duration)
+      var(--default-transition-timing-function);
   }
 
   :where(.transition-all) {
@@ -5204,6 +5310,14 @@
 
   :where(.transition) {
     transition: var(--default-transition);
+  }
+
+  :where(.will-change-transform) {
+    will-change: transform;
+  }
+
+  :where(.will-change-opacity) {
+    will-change: opacity;
   }
 
   /* ===========================================================================
@@ -5311,11 +5425,15 @@
   /* -- hover: background color (theme) -- */
 
   :where(.hover\:bg-background:hover) {
-    background-color: oklch(from var(--background) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--background) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-foreground:hover) {
-    background-color: oklch(from var(--foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-card:hover) {
@@ -5323,7 +5441,9 @@
   }
 
   :where(.hover\:bg-card-foreground:hover) {
-    background-color: oklch(from var(--card-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--card-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-input:hover) {
@@ -5331,7 +5451,9 @@
   }
 
   :where(.hover\:bg-input-foreground:hover) {
-    background-color: oklch(from var(--input-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--input-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-muted:hover) {
@@ -5339,7 +5461,9 @@
   }
 
   :where(.hover\:bg-muted-foreground:hover) {
-    background-color: oklch(from var(--muted-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--muted-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-faded:hover) {
@@ -5347,7 +5471,9 @@
   }
 
   :where(.hover\:bg-faded-foreground:hover) {
-    background-color: oklch(from var(--faded-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--faded-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-primary:hover) {
@@ -5355,15 +5481,21 @@
   }
 
   :where(.hover\:bg-primary-foreground:hover) {
-    background-color: oklch(from var(--primary-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--primary-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-secondary:hover) {
-    background-color: oklch(from var(--secondary) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-secondary-foreground:hover) {
-    background-color: oklch(from var(--secondary-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-tertiary:hover) {
@@ -5371,7 +5503,9 @@
   }
 
   :where(.hover\:bg-tertiary-foreground:hover) {
-    background-color: oklch(from var(--tertiary-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tertiary-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-info:hover) {
@@ -5379,7 +5513,9 @@
   }
 
   :where(.hover\:bg-info-foreground:hover) {
-    background-color: oklch(from var(--info-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--info-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-success:hover) {
@@ -5387,7 +5523,9 @@
   }
 
   :where(.hover\:bg-success-foreground:hover) {
-    background-color: oklch(from var(--success-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--success-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-warning:hover) {
@@ -5395,15 +5533,21 @@
   }
 
   :where(.hover\:bg-warning-foreground:hover) {
-    background-color: oklch(from var(--warning-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--warning-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-destructive:hover) {
-    background-color: oklch(from var(--destructive) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--destructive) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-destructive-foreground:hover) {
-    background-color: oklch(from var(--destructive-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--destructive-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.hover\:bg-transparent:hover) {
@@ -5480,6 +5624,10 @@
     transform: scale(0);
   }
 
+  :where(.hover\:scale-25:hover) {
+    transform: scale(0.25);
+  }
+
   :where(.hover\:scale-50:hover) {
     transform: scale(0.5);
   }
@@ -5492,16 +5640,24 @@
     transform: scale(0.9);
   }
 
-  :where(.hover\:scale-95:hover) {
-    transform: scale(0.95);
+  :where(.hover\:scale-98:hover) {
+    transform: scale(0.98);
+  }
+
+  :where(.hover\:scale-99:hover) {
+    transform: scale(0.99);
   }
 
   :where(.hover\:scale-100:hover) {
     transform: scale(1);
   }
 
-  :where(.hover\:scale-105:hover) {
-    transform: scale(1.05);
+  :where(.hover\:scale-101:hover) {
+    transform: scale(1.01);
+  }
+
+  :where(.hover\:scale-102:hover) {
+    transform: scale(1.02);
   }
 
   :where(.hover\:scale-110:hover) {
@@ -5514,6 +5670,32 @@
 
   :where(.hover\:scale-150:hover) {
     transform: scale(1.5);
+  }
+
+  /* -- hover: shadow (elevation) -- */
+
+  :where(.hover\:shadow-none:hover) {
+    --_ring-shadow: 0 0 #0000;
+  }
+
+  :where(.hover\:shadow-xs:hover) {
+    --_ring-shadow: var(--shadow-xs);
+  }
+
+  :where(.hover\:shadow-sm:hover) {
+    --_ring-shadow: var(--shadow-sm);
+  }
+
+  :where(.hover\:shadow-md:hover) {
+    --_ring-shadow: var(--shadow-md);
+  }
+
+  :where(.hover\:shadow-lg:hover) {
+    --_ring-shadow: var(--shadow-lg);
+  }
+
+  :where(.hover\:shadow-xl:hover) {
+    --_ring-shadow: var(--shadow-xl);
   }
 
   /* ===========================================================================
@@ -5626,11 +5808,15 @@
   /* -- group-hover: background color (theme) -- */
 
   :where(.group:hover .group-hover\:bg-background) {
-    background-color: oklch(from var(--background) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--background) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.group:hover .group-hover\:bg-foreground) {
-    background-color: oklch(from var(--foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.group:hover .group-hover\:bg-card) {
@@ -5638,7 +5824,9 @@
   }
 
   :where(.group:hover .group-hover\:bg-card-foreground) {
-    background-color: oklch(from var(--card-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--card-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.group:hover .group-hover\:bg-input) {
@@ -5646,7 +5834,9 @@
   }
 
   :where(.group:hover .group-hover\:bg-input-foreground) {
-    background-color: oklch(from var(--input-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--input-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.group:hover .group-hover\:bg-muted) {
@@ -5654,7 +5844,9 @@
   }
 
   :where(.group:hover .group-hover\:bg-muted-foreground) {
-    background-color: oklch(from var(--muted-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--muted-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.group:hover .group-hover\:bg-faded) {
@@ -5662,7 +5854,9 @@
   }
 
   :where(.group:hover .group-hover\:bg-faded-foreground) {
-    background-color: oklch(from var(--faded-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--faded-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.group:hover .group-hover\:bg-primary) {
@@ -5670,15 +5864,21 @@
   }
 
   :where(.group:hover .group-hover\:bg-primary-foreground) {
-    background-color: oklch(from var(--primary-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--primary-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.group:hover .group-hover\:bg-secondary) {
-    background-color: oklch(from var(--secondary) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.group:hover .group-hover\:bg-secondary-foreground) {
-    background-color: oklch(from var(--secondary-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--secondary-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.group:hover .group-hover\:bg-tertiary) {
@@ -5686,7 +5886,9 @@
   }
 
   :where(.group:hover .group-hover\:bg-tertiary-foreground) {
-    background-color: oklch(from var(--tertiary-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--tertiary-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.group:hover .group-hover\:bg-info) {
@@ -5694,7 +5896,9 @@
   }
 
   :where(.group:hover .group-hover\:bg-info-foreground) {
-    background-color: oklch(from var(--info-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--info-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.group:hover .group-hover\:bg-success) {
@@ -5702,7 +5906,9 @@
   }
 
   :where(.group:hover .group-hover\:bg-success-foreground) {
-    background-color: oklch(from var(--success-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--success-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.group:hover .group-hover\:bg-warning) {
@@ -5710,15 +5916,21 @@
   }
 
   :where(.group:hover .group-hover\:bg-warning-foreground) {
-    background-color: oklch(from var(--warning-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--warning-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.group:hover .group-hover\:bg-destructive) {
-    background-color: oklch(from var(--destructive) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--destructive) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.group:hover .group-hover\:bg-destructive-foreground) {
-    background-color: oklch(from var(--destructive-foreground) l c h / calc(alpha * var(--_background-alpha, 1)));
+    background-color: oklch(
+      from var(--destructive-foreground) l c h / calc(alpha * var(--_background-alpha, 1))
+    );
   }
 
   :where(.group:hover .group-hover\:bg-transparent) {

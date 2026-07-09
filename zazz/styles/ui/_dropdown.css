@@ -17,31 +17,29 @@
   }
 }
 
-@container style(--use-zazz: true) {
-  @layer zazz.components {
-    /* ===========================================================================
-    DROPDOWN — trigger + anchored popover menu
-    - Inherits --popover-* tokens and [popover] surface/positioning from _popover.css.
-    - Only dropdown-specific wiring lives here: anchor scope/name and nested buttons.
-    =========================================================================== */
+@layer zazz.components {
+  /* ===========================================================================
+  DROPDOWN — trigger + anchored popover menu
+  - Inherits --popover-* tokens and [popover] surface/positioning from _popover.css.
+  - Only dropdown-specific wiring lives here: anchor scope/name and nested buttons.
+  =========================================================================== */
 
-    .dropdown {
-      anchor-scope: --dropdown-trigger;
-      display: inline-block;
-    }
+  .dropdown {
+    anchor-scope: --dropdown-trigger;
+    display: inline-block;
+  }
 
-    .dropdown > [popovertarget] {
-      anchor-name: --dropdown-trigger;
-    }
+  .dropdown > [popovertarget] {
+    anchor-name: --dropdown-trigger;
+  }
 
-    .dropdown__popover {
-      position-anchor: --dropdown-trigger;
-      min-inline-size: var(--dropdown-min-inline-size);
-      box-shadow: var(--dropdown-shadow);
-    }
+  .dropdown__popover {
+    position-anchor: --dropdown-trigger;
+    min-inline-size: var(--dropdown-min-inline-size);
+    box-shadow: var(--dropdown-shadow);
+  }
 
-    .dropdown__popover .button {
-      --button-radius: var(--dropdown-button-radius);
-    }
+  .dropdown__popover .button {
+    --button-radius: var(--dropdown-button-radius);
   }
 }

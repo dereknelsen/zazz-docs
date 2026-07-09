@@ -13,6 +13,7 @@ Applies to all files in `zazz/scripts/`:
 - `password.js`
 - `reveal.js`
 - `tabs.js`
+- `toaster.js`
 - `utils.js`
 
 Scripts are served directly at `/zazz/scripts/*.js` — no bundler or transpiler. Write browser-native **ES modules** that run as-is in modern browsers. `main.js` is the entry module: it `import`s every component script so a page loads behavior with one `<script type="module" src="…/main.js">` tag. When you add a script, add an `import "./your-script.js";` line to `main.js`.
@@ -81,6 +82,7 @@ Attach a named export object or class to `window` for the documented public API,
 | `lightbox.js`   | `window.MediaLightbox`        | `<media-lightbox>` element class      |
 | `password.js`   | `window.InputPassword`        | `<input-password>` element class      |
 | `tabs.js`       | `window.TabGroup`             | `<tab-group>` element class           |
+| `toaster.js`    | `window.Toaster`              | `Toaster` API + `<toast-region>`      |
 | `navigation.js` | _(none)_                      | Side-effect only; no export           |
 
 Document export objects with `@namespace` JSDoc and `@property` for each key.
@@ -142,6 +144,7 @@ Scripts declare dependencies with ES `import`s, so the module graph resolves ord
 | `lightbox.js`   | `carousel.js` | `<media-lightbox>` coordinates carousel elements |
 | `password.js`   | —             | Standalone (`<input-password>`)                  |
 | `tabs.js`       | —             | Standalone (`<tab-group>`)                       |
+| `toaster.js`    | `utils.js`    | `<toast-region>` + `window.Toaster` toast API    |
 | `navigation.js` | —             | App-level; inert in component preview iframes    |
 
 When a script needs `Utils`, `import { Utils } from "./utils.js"` — do not duplicate parsing logic. The one thing the module graph can't order is the **Embla CDN UMD bundles**: `embla.js` reads them as globals, so their `<script defer>` tags must precede the `main.js` module in the document.

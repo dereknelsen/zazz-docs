@@ -74,7 +74,7 @@ A component file is written top-to-bottom in this order:
 | --- | ------------------------ | ------------------------ | ----------------------------- |
 | 1   | CSSDoc header            | —                        | always                        |
 | 2   | Deprecated css rules     | `@layer legacy`          | when migrating to Zazz        |
-| 2   | Component token hooks    | `@layer variables`  | when the component has tokens |
+| 2   | Component token hooks    | `@layer variables`       | when the component has tokens |
 | 3   | Native-element baselines | `@layer reset`           | only if it redraws native UI  |
 | 4   | Component rules          | `@layer zazz.components` | the component itself          |
 | 5   | Utility classes          | `@layer zazz.utilities`  | only if it ships utilities    |
@@ -125,17 +125,17 @@ column** (tag name padded to 11 chars + a space) so headers scan like a table.
 
 ### Tag reference
 
-| Tag                   | Required        | Meaning                                                                                                |
-| --------------------- | --------------- | ------------------------------------------------------------------------------------------------------ |
-| _(summary)_           | yes             | First line: `_file.css — Component (.selector)`. Kept verbatim.                                        |
-| `@layer`              | yes             | Cascade layers this file contributes to, in order: `variables, components`.                            |
-| `@requires`           | yes             | Load-order dependencies — files that must load before this one. `none` for `layers.css`.              |
-| `@uses`               | —               | One modern CSS API/feature per line, with an inline `— note`. Flag support caveats here.               |
+| Tag                   | Required        | Meaning                                                                                           |
+| --------------------- | --------------- | ------------------------------------------------------------------------------------------------- |
+| _(summary)_           | yes             | First line: `_file.css — Component (.selector)`. Kept verbatim.                                   |
+| `@layer`              | yes             | Cascade layers this file contributes to, in order: `variables, components`.                       |
+| `@requires`           | yes             | Load-order dependencies — files that must load before this one. `none` for `layers.css`.          |
+| `@uses`               | —               | One modern CSS API/feature per line, with an inline `— note`. Flag support caveats here.          |
 | `@tokens`             | when owned      | The token namespace this file exposes = its override hooks, e.g. `--button-* (@layer variables)`. |
-| `@consumedby`         | when applicable | Reverse dependency — files that build on this one.                                                     |
-| `@see`                | —               | External URL or cross-file reference. (Replaces the old block `@link`.)                                |
-| `@example`            | —               | Usage markup. Used where authoring is non-obvious (`_reveal.css`).                                     |
-| `@version` / `@since` | —               | Optional, for versioned subsystems (`_reveal.css`).                                                    |
+| `@consumedby`         | when applicable | Reverse dependency — files that build on this one.                                                |
+| `@see`                | —               | External URL or cross-file reference. (Replaces the old block `@link`.)                           |
+| `@example`            | —               | Usage markup. Used where authoring is non-obvious (`_reveal.css`).                                |
+| `@version` / `@since` | —               | Optional, for versioned subsystems (`_reveal.css`).                                               |
 
 ### Rules
 
@@ -264,7 +264,7 @@ load-bearing — don't blur them:
 
 | Kind                    | Looks like                                                   | Lives in                                     | Declared on | Apps override?    |
 | ----------------------- | ------------------------------------------------------------ | -------------------------------------------- | ----------- | ----------------- |
-| **Public theming hook** | `--accordion-summary-padding-block` (unprefixed, namespaced) | `@layer variables`                      | `:root`     | **yes** — the API |
+| **Public theming hook** | `--accordion-summary-padding-block` (unprefixed, namespaced) | `@layer variables`                           | `:root`     | **yes** — the API |
 | **Private internal**    | `--_ring-width`, `--_ring` (leading `--_`)                   | the rule that uses it (`components`/`reset`) | the element | **no** — plumbing |
 
 **Public hooks** are the override API. They default to a global token, are read by the
@@ -392,7 +392,7 @@ variables layer.
   `.font-heading` / `.font-strong`), families `.font-sans` / `.font-serif` / `.font-mono`, sizes `.text-sm`,
   etc. — so they read predictably to Tailwind users. Token names do **not** follow
   Tailwind; they use the tiered `--font-family-*` / `--font-weight-*` (semantic) over
-  `--font-sans` / `--font-serif` / `--font-mono` (raw) scheme.
+  `--font-body` / `--font-heading` / `--font-mono` (raw) scheme.
 
 ---
 

@@ -19,7 +19,7 @@ seed; [`heritage.md`](../zazz-pass/design-styles/heritage.md) is the canonical w
 it first; every new style mirrors its shape.**
 
 **A style is an overlay, not a fork.** `DESIGN.md` (brand tokens, type scale, archetypes) and
-`SKILL.md` (components, cascade, house rules) still govern. A style only sets *direction and rhythm*:
+`SKILL.md` (components, cascade, house rules) still govern. A style only sets _direction and rhythm_:
 which tokens to lean on, what mood the type/color/imagery carry, and how sections stack. When a style
 would contradict a house rule (sentence case, semantic tokens, `data-variant`, no hand-rolled CSS),
 the house rule wins — bake that into the file.
@@ -30,7 +30,7 @@ the house rule wins — bake that into the file.
 - The user names a vibe to codify ("make a brutalist style", "a luxury style like this").
 - You're expanding the `design-styles/` library.
 
-Not for building an actual page — that's `zazz-pass`. This skill only *authors the overlay file*.
+Not for building an actual page — that's `zazz-pass`. This skill only _authors the overlay file_.
 
 ## Workflow
 
@@ -47,14 +47,14 @@ Not for building an actual page — that's `zazz-pass`. This skill only *authors
    new tokens in a style file.
 4. **Pick the archetype.** Map the reference to Industrial Distributor / Lifestyle Brand / Editorial
    Studio (see `DESIGN.md`). If the content model doesn't fit (e.g. a SaaS product page), name the
-   closest archetype for *atmosphere* and note the divergence — don't force it.
+   closest archetype for _atmosphere_ and note the divergence — don't force it.
 5. **Name it.** One evocative, kebab-case noun for the file (`midnight.md`, `atelier.md`,
    `brutalist.md`) and a Title-Case H1 `Name — Design Style`. Avoid the brand's own name — styles are
    reusable across brands.
 6. **Write the file** following the template below, section for section.
 7. **Generalize past the sample brand.** Brand tokens get overwritten per-URL at generation time
-   (`DESIGN.md` Brand Customization), so describe the *direction* ("one hot accent against near-black")
-   not the literal hex. Give the concrete reference as an *example* (`e.g. a hot orange`), never a hard
+   (`DESIGN.md` Brand Customization), so describe the _direction_ ("one hot accent against near-black")
+   not the literal hex. Give the concrete reference as an _example_ (`e.g. a hot orange`), never a hard
    rule.
 
 ## What to read off the screenshot (DNA checklist)
@@ -72,26 +72,26 @@ Not for building an actual page — that's `zazz-pass`. This skill only *authors
   everything, badges, tickers, gradient washes, noise. → tokens/utilities that produce it.
 - **Motion cues** — implied stagger, scroll reveals, marquees, hover states. → `data-reveal-*`,
   `--spring-easing`.
-- **Mood & positioning** — the one sentence a visitor remembers, and *who it's for*. This becomes the
+- **Mood & positioning** — the one sentence a visitor remembers, and _who it's for_. This becomes the
   style's thesis paragraph.
 
 ## Screenshot → Zazz cheatsheet
 
-| You see                                   | Write it as                                                            |
-| ----------------------------------------- | ---------------------------------------------------------------------- |
-| Dark UI                                   | `colorMode` lean + role tokens (`--background`/`--foreground` auto-swap) |
-| One hot accent on CTAs/stats              | dominant `--primary` (a specific step), foregrounds white               |
-| Serif headings / italic emphasis words    | serif heading face + italic true-cuts on virtue nouns (`text-*`)        |
-| Black grotesk, tight, huge hero           | `text-display`/`text-h1` moment, heavy weight, geometric sans           |
-| Uppercase micro-labels                    | `text-eyebrow` (the only caps; everything else sentence case)           |
-| Full-bleed cinematic photo w/ text over   | `.container` `bleed`/`full` band, white overlay text                    |
-| Bordered cards on dark                    | `--card` + `1px solid var(--border)`, flat surfaces                     |
-| Big stat numbers                          | `text-display`/`text-h2` numerals in `--primary`, `text-eyebrow` labels |
-| Oversized ghost numerals / watermark      | large type at low opacity via `--muted`/tint, `grid-area-pile` overlap  |
-| Gradient band / colored section           | brand-scale wash (`--primary-600` → `--primary-900`)                    |
-| Generous whitespace                       | `--gap-xl` (96px) section rhythm, capped `article`/`lg` text            |
-| Staggered load / scroll reveals           | `data-reveal` / `data-reveal-each`, `--spring-easing`                   |
-| Left-aligned label + content column       | left-label layout (eyebrow column split by `--border`)                  |
+| You see                                 | Write it as                                                              |
+| --------------------------------------- | ------------------------------------------------------------------------ |
+| Dark UI                                 | `colorMode` lean + role tokens (`--background`/`--foreground` auto-swap) |
+| One hot accent on CTAs/stats            | dominant `--primary` (a specific step), foregrounds white                |
+| Serif headings / italic emphasis words  | serif heading face + italic true-cuts on virtue nouns (`text-*`)         |
+| Black grotesk, tight, huge hero         | `text-display`/`text-h1` moment, heavy weight, geometric sans            |
+| Uppercase micro-labels                  | `text-eyebrow` (the only caps; everything else sentence case)            |
+| Full-bleed cinematic photo w/ text over | `.container` `bleed`/`full` band, white overlay text                     |
+| Bordered cards on dark                  | `--card` + `1px solid var(--border)`, flat surfaces                      |
+| Big stat numbers                        | `text-display`/`text-h2` numerals in `--primary`, `text-eyebrow` labels  |
+| Oversized ghost numerals / watermark    | large type at low opacity via `--muted`/tint, `grid-area-pile` overlap   |
+| Gradient band / colored section         | brand-scale wash (`--primary-600` → `--primary-900`)                     |
+| Generous whitespace                     | `--gap-xl` (96px) section rhythm, capped `article`/`lg` text             |
+| Staggered load / scroll reveals         | `data-reveal` / `data-reveal-each`, `--spring-easing`                    |
+| Left-aligned label + content column     | left-label layout (eyebrow column split by `--border`)                   |
 
 ## The style file template
 
@@ -140,12 +140,12 @@ motifs), plus a reminder of the sentence-case house rule.>
 - **`data-variant`, not `.button-primary`.** Reference components by their real selector + `data-*` API.
 - **No net-new CSS or tokens** in a style file — it composes the existing system, it doesn't extend it.
 - **Dark mode is free** — role tokens auto-swap; never tell a style to hand-write `.dark` overrides.
-- **Don't restate DESIGN.md/SKILL.md** — point to them. A style adds *direction*, not documentation.
+- **Don't restate DESIGN.md/SKILL.md** — point to them. A style adds _direction_, not documentation.
 
 ## Do / Don't
 
 - **Do** ground every claim in a concrete screenshot observation. **Don't** write generic "modern, clean, bold" filler.
-- **Do** describe reusable *direction* with the reference as an example. **Don't** hardcode the sample brand's hex, copy, or name.
+- **Do** describe reusable _direction_ with the reference as an example. **Don't** hardcode the sample brand's hex, copy, or name.
 - **Do** name real typefaces with character (3–4). **Don't** default to system/`Inter`-style fonts.
 - **Do** map every trait to a Zazz token/utility/pattern. **Don't** invent CSS or tokens to reach a look.
 - **Do** mirror `heritage.md`'s section shape. **Don't** freestyle the structure.

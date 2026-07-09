@@ -6,7 +6,7 @@ description: A two-state button backed by a native checkbox or radio, styled lik
 A toggle is a `<label class="toggle">` wrapping a visually-hidden `<input>` and the
 visible content. It looks exactly like a [button](/docs/components/button) — same
 `data-variant` and `data-size` options — but the **on** state reuses the button's
-*active* look, driven entirely by the native input's `:checked` state (no JS). Use a
+_active_ look, driven entirely by the native input's `:checked` state (no JS). Use a
 `checkbox` for an independent on/off control; use a `radio` (sharing a `name`) when
 exactly one of a set may be on.
 
@@ -18,10 +18,10 @@ Give icon-only toggles an accessible name with `aria-label` on the input.
 
 ## API
 
-| Attribute      | Values                                                   |
-| -------------- | -------------------------------------------------------- |
+| Attribute      | Values                                                      |
+| -------------- | ----------------------------------------------------------- |
 | `data-variant` | `primary`, `muted`, `ghost`, `destructive` (omit = default) |
-| `data-size`    | `sm`, `icon`, `icon-sm`                                  |
+| `data-size`    | `sm`, `icon`, `icon-sm`                                     |
 
 The toggle's tokens (`--toggle-background`, `--toggle-radius`, …) default to the
 matching `--button-*` token, so theming the button family re-skins toggles for free.

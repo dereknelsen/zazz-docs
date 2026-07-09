@@ -9,15 +9,15 @@ Every stylesheet in `zazz/styles/` follows the same anatomy. Learn it once and y
 
 `zazz/styles/` splits in two. The `base/` folder holds the base system, and `ui/` holds one file per component. This section documents the base files; the [Components](/docs/components) section covers `ui/`.
 
-| File                   | What it does                                              | Docs                                                       |
-| ---------------------- | -------------------------------------------------------- | ---------------------------------------------------------- |
-| `_layers.css`          | Declares the cascade-layer order, loaded first           | [Layers](/docs/base/layers)                          |
-| `_variables.css`       | Global design tokens (colors, type, spacing, and more)   | [Theme variables](/docs/base/variables)              |
-| `_reset.css`           | Native-element baselines and re-skinned controls         | [Reset](/docs/base/reset)                            |
-| `_typography.css`      | The `.prose` container and the `.text-*` / `.font-*` utilities | [Typography](/docs/base/typography)             |
-| `_view-transitions.css`| Cross-document page transitions                          | [View transitions](/docs/base/view-transitions)      |
-| `_utilities.css`       | The atomic utility classes                                | [Utilities](/docs/base/utilities)                    |
-| `_layout.css`          | The container and layout-grid utilities                  | [Layout](/docs/base/utilities/layout)                |
+| File                    | What it does                                                   | Docs                                            |
+| ----------------------- | -------------------------------------------------------------- | ----------------------------------------------- |
+| `_layers.css`           | Declares the cascade-layer order, loaded first                 | [Layers](/docs/base/layers)                     |
+| `_variables.css`        | Global design tokens (colors, type, spacing, and more)         | [Theme variables](/docs/base/variables)         |
+| `_reset.css`            | Native-element baselines and re-skinned controls               | [Reset](/docs/base/reset)                       |
+| `_typography.css`       | The `.prose` container and the `.text-*` / `.font-*` utilities | [Typography](/docs/base/typography)             |
+| `_view-transitions.css` | Cross-document page transitions                                | [View transitions](/docs/base/view-transitions) |
+| `_utilities.css`        | The atomic utility classes                                     | [Utilities](/docs/base/utilities)               |
+| `_layout.css`           | The container and layout-grid utilities                        | [Layout](/docs/base/utilities/layout)           |
 
 `main.css` `@import`s all of them, in cascade order, so a page links one stylesheet. The rest of this page is the shape each file shares.
 
@@ -28,7 +28,7 @@ A component file is written top-to-bottom in this order:
 | #   | Section                  | Layer                    | Required?                     |
 | --- | ------------------------ | ------------------------ | ----------------------------- |
 | 1   | CSSDoc header            | —                        | always                        |
-| 2   | Component token hooks    | `@layer variables`  | when the component has tokens |
+| 2   | Component token hooks    | `@layer variables`       | when the component has tokens |
 | 3   | Native-element baselines | `@layer reset`           | only if it redraws native UI  |
 | 4   | Component rules          | `@layer zazz.components` | the component itself          |
 | 5   | Utility classes          | `@layer zazz.utilities`  | only if it ships utilities    |
@@ -76,16 +76,16 @@ Every `.css` file opens with a JSDoc-style block comment. A summary line comes f
 
 ### Tag reference
 
-| Tag           | Required        | Meaning                                                        |
-| ------------- | --------------- | -------------------------------------------------------------- |
-| _(summary)_   | yes             | First line: `_file.css — Component (.selector)`                |
-| `@layer`      | yes             | Cascade layers this file contributes to, in order              |
+| Tag           | Required        | Meaning                                                       |
+| ------------- | --------------- | ------------------------------------------------------------- |
+| _(summary)_   | yes             | First line: `_file.css — Component (.selector)`               |
+| `@layer`      | yes             | Cascade layers this file contributes to, in order             |
 | `@requires`   | yes             | Files that must load before this one. `none` for `layers.css` |
-| `@uses`       | —               | One modern CSS API/feature per line with support caveat        |
-| `@tokens`     | when owned      | The token namespace this file exposes                          |
-| `@consumedby` | when applicable | Files that depend on this one                                  |
-| `@see`        | —               | External URL or cross-file reference                           |
-| `@example`    | —               | Usage markup for non-obvious components                        |
+| `@uses`       | —               | One modern CSS API/feature per line with support caveat       |
+| `@tokens`     | when owned      | The token namespace this file exposes                         |
+| `@consumedby` | when applicable | Files that depend on this one                                 |
+| `@see`        | —               | External URL or cross-file reference                          |
+| `@example`    | —               | Usage markup for non-obvious components                       |
 
 ## Token naming
 

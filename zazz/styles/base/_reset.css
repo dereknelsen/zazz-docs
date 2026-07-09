@@ -196,13 +196,21 @@
   }
 
   :where(hr) {
-    block-size: 0;
+    block-size: 1px;
     color: var(--border);
-    border-top-width: 1px;
+    background-color: var(--border);
+    border: 0;
+  }
+
+  :where(hr[data-orientation="vertical"]) {
+    inline-size: 1px;
+    color: var(--border);
+    background-color: var(--border);
+    border: 0;
   }
 
   :where(code, samp, pre) {
-    font-family: var(--font-mono);
+    font-family: var(--font-family-mono);
     font-size: 1em;
   }
 

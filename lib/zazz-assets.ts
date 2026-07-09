@@ -3,7 +3,7 @@
 // the filesystem.
 import { readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
-import type { ExampleScript } from "zazz/components/manifest";
+import type { ExampleScript } from "zazz/primitives/manifest";
 
 const COMPONENTS_ROOT = path.join(process.cwd(), "zazz", "components");
 const STYLES_ROOT = path.join(process.cwd(), "zazz", "styles");
@@ -18,7 +18,7 @@ const WEB_COMPONENT_SCRIPT_FILES: Partial<Record<ExampleScript, string[]>> = {
 
 /**
  * Reads one vanilla-HTML example fragment from the centralized Zazz component
- * source. `src` is an id like `button/variants` → `zazz/components/button/variants.html`.
+ * source. `src` is an id like `button/variants` → `zazz/primitives/button/variants.html`.
  *
  * This is the single read point for example markup. `<Preview>` renders both the live
  * iframe and the code block from this one string, so no second copy can drift. Runs only
@@ -30,7 +30,7 @@ export function readExample(src: string): string | null {
   const id = src.replace(/\.html$/, "");
   const filePath = path.resolve(COMPONENTS_ROOT, `${id}.html`);
 
-  // Keep reads inside zazz/components — `src` comes from MDX authors, not end users,
+  // Keep reads inside zazz/primitives — `src` comes from MDX authors, not end users,
   // but a stray `../` should still never escape the source tree.
   if (!filePath.startsWith(COMPONENTS_ROOT + path.sep)) {
     return null;
@@ -44,7 +44,7 @@ export function readExample(src: string): string | null {
 }
 
 /**
- * Lists every example id (`"<component>/<example>"`) under `zazz/components`, excluding the
+ * Lists every example id (`"<component>/<example>"`) under `zazz/primitives`, excluding the
  * top-level standalone demo pages (`index.html`, `products.html`). Used by the debug
  * gallery to render every primitive at once.
  */

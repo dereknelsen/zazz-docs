@@ -18,7 +18,7 @@ lightweight shadcn + Tailwind alternative that runs with **no build step**). Bui
 before reaching for any other styling approach.
 
 **Single source of truth:** each component's markup lives once, in
-`zazz/components/{name}/*.html`, surfaced on the docs site at `/docs/components/{name}`. Never
+`zazz/primitives/{name}/*.html`, surfaced on the docs site at `/docs/components/{name}`. Never
 invent or paste a second copy — read or fetch the real example and adapt it. Component docs
 previews also expose the matching CSS and, for web components, the matching JS tab.
 
@@ -116,7 +116,7 @@ Tokens resolve lazily, so you can intervene at three scopes — pick the narrowe
 1. Find the primitive in **`references/components.md`** (selector + `data-*` values + what
    powers it + docs link).
 2. Get the real markup — fetch `/docs/components/{name}` or read
-   `zazz/components/{name}/*.html`. Adapt it; don't reinvent.
+   `zazz/primitives/{name}/*.html`. Adapt it; don't reinvent.
 3. Apply variants via `data-*`; set spacing/color/type via semantic tokens & `text-*` classes.
 4. Compose pages from the `.container` band system (`data-container` sets the band — on the
    container for its default, on a child to override that one; `data-variant="article"` for
@@ -178,4 +178,4 @@ patterns live in `PATTERNS.md`.
 | `DESIGN.md`                                                  | Brand colors, type scale, archetypes, motion, brand customization                                        |
 | `PATTERNS.md`                                                | Page structure, the sentence-case rule, heading-group + CTA composition                                  |
 | `modern-web-guidance` skill                                  | How a modern web API works + browser-support/fallbacks                                                   |
-| `/docs/components/{name}` or `zazz/components/{name}/*.html` | The canonical example markup (single source)                                                             |
+| `/docs/components/{name}` or `zazz/primitives/{name}/*.html` | The canonical example markup (single source)                                                             |

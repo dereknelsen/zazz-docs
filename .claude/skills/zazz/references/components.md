@@ -3,7 +3,7 @@
 The stable **API surface** only — selector, `data-*` attributes and their accepted values,
 what powers the component, and where the canonical example lives. **No example markup is
 copied here** (that would duplicate the single source). To author a component, fetch the real
-markup from the docs page or read `zazz/components/{name}/*.html` in-repo, then adapt it.
+markup from the docs page or read `zazz/primitives/{name}/*.html` in-repo, then adapt it.
 
 Variants/sizes follow the shadcn-style pattern: a `data-*` attribute reassigns the
 component's local tokens (see `zazz/styles/ui/_button.css`). The **default** variant is the
@@ -56,5 +56,5 @@ layout. Validation surfaces via `:user-invalid` — **after** blur/submit, never
   data-attribute-driven JS behaviors. Their full attribute catalogs are in `apis.md`.
 
 > Trust this index + the `_*.css` variant selectors for the real API, and the real example
-> markup (`zazz/components/{name}/*.html`) for structure. If an example ever shows an
+> markup (`zazz/primitives/{name}/*.html`) for structure. If an example ever shows an
 > attribute with no matching `_*.css` selector, the selector wins.

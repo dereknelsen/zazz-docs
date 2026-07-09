@@ -1,4 +1,4 @@
-import type { ExampleScript } from "zazz/components/manifest";
+import type { ExampleScript } from "zazz/primitives/manifest";
 
 /**
  * Builds the full HTML document for a component-preview iframe. The example fragment is

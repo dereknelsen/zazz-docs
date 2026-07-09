@@ -41,9 +41,9 @@
     --toggle-foreground--checked-hover: var(--primary-foreground);
     --toggle-foreground--checked-active: var(--primary-foreground);
 
-    --toggle-border: var(--button-border);
-    --toggle-border--hover: var(--button-border--hover);
-    --toggle-border--active: var(--button-border--active);
+    --toggle-border: 1px solid var(--button-border);
+    --toggle-border--hover: 1px solid var(--button-border--hover);
+    --toggle-border--active: 1px solid var(--button-border--active);
 
     --toggle-border--checked: 1px solid var(--primary);
     --toggle-border--checked-hover: 1px solid var(--primary);

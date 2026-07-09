@@ -11,7 +11,6 @@
 
 @layer variables {
   :root {
-    --accordion-summary-padding-block: var(--gap-sm);
     --accordion-icon-size: var(--step-4);
     --accordion-icon-transform-open: rotate(-180deg);
   }
@@ -66,7 +65,6 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-block: var(--accordion-summary-padding-block);
 
       /* ring renders as box-shadow; the ring widths animate from 0 so the ring
         grows in smoothly on focus */

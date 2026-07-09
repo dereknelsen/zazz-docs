@@ -43,7 +43,7 @@ so existing Zazz classes and `data-*` hooks keep working.
 | `<input-password>` | `password.js` | Password show/hide toggle                   | Wrap `.password-group`; optional `label-show` / `label-hide`; CSS swaps icons via ARIA |
 | `<tab-group>`      | `tabs.js`     | Radio-driven tabs with richer keyboard nav  | Carries `.tabs`; adds orientation-aware arrows, Home/End, and wrap-around              |
 
-Component preview iframes use `zazz/components/manifest.ts` to load scripts and expose a JS
+Component preview iframes use `zazz/primitives/manifest.ts` to load scripts and expose a JS
 tab for these files. Custom elements are `display: inline` by default, so their component
 styles define the needed block/flex display.
 
@@ -125,5 +125,5 @@ defers while inside a closed `<dialog>`, and destroys its Embla instances on dis
 
 `@oddbird/popover-polyfill` (Popover API) · `invokers/compatible` (Invoker + Interest
 Invokers, i.e. `command`/`commandfor`/`interestfor`) · the Embla Carousel CDN UMD bundles
-(core + autoplay, auto-scroll, class-names, ssr plugins). See `zazz/tests/index.html` for
+(core + autoplay, auto-scroll, class-names, ssr plugins). See `zazz/examples/index.html` for
 the exact tags and SRI hashes.

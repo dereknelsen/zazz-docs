@@ -125,6 +125,7 @@
       same treatment from their breakpoint up (the @container blocks below). */
     :where(.container:not([data-variant="article"])) {
       display: grid;
+      place-items: start stretch;
       /* span all of parent's columns */
       grid-template-columns: subgrid;
 

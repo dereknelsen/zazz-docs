@@ -229,20 +229,20 @@
   }
 
   :where(kbd) {
-    --kbd-font-family: var(--font-family-body);
-    --kbd-font-size: var(--font-size-sm);
+    --kbd-font-family: var(--font-family-mono);
+    --kbd-font-size: var(--font-size-xs);
     --kbd-line-height: 1;
     --kbd-display: inline-flex;
     --kbd-align-items: center;
     --kbd-justify-content: center;
     --kbd-background: var(--muted);
     --kbd-border: 1px solid transparent;
-    --kbd-padding-inline: 0;
+    --kbd-padding-inline: var(--step-1);
     --kbd-padding-block: 0;
     --kbd-radius: var(--radius-xs);
     --kbd-color: var(--muted-foreground);
-    --kbd-inline-size: var(--step-5);
-    --kbd-block-size: var(--step-5);
+    --kbd-min-inline-size: var(--step-5);
+    --kbd-min-block-size: var(--step-5);
     --kbd-icon-size: var(--step-3_5);
     --kbd-gap: var(--step-1);
 
@@ -260,8 +260,8 @@
     border-radius: var(--kbd-radius);
     color: var(--kbd-color);
     overflow: hidden;
-    block-size: var(--kbd-block-size);
-    min-inline-size: var(--kbd-inline-size);
+    min-block-size: var(--kbd-min-block-size);
+    min-inline-size: var(--kbd-min-inline-size);
     inline-size: fit-content;
     text-box: trim-both ex alphabetic;
   }

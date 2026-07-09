@@ -1,6 +1,6 @@
 /**
  * Per-example presentation metadata for the docs previews. Keyed by example id
- * (`"<component>/<example>"`, matching `zazz/components/<id>.html`).
+ * (`"<component>/<example>"`, matching `zazz/primitives/<id>.html`).
  *
  * Only deviations from the defaults need an entry — anything omitted renders
  * left-aligned with no minimum height and no scripts. Set `minHeight` for components

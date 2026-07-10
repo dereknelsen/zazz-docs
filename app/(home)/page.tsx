@@ -9,13 +9,7 @@ const links = [
   { label: "Read the docs", href: "/docs", external: false, main: true },
   {
     label: "Figma kit",
-    href: "https://www.figma.com/community/file/1468718708506413296/zazz-v0-4-3",
-    external: true,
-    main: false,
-  },
-  {
-    label: "Webflow kit",
-    href: "https://webflow.com/made-in-webflow/website/zazz-webflow-kit",
+    href: "https://www.figma.com/community/file/1468718708506413296",
     external: true,
     main: false,
   },

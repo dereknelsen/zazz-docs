@@ -104,7 +104,7 @@
     /* overlay */
     --muted: light-dark(var(--shade-50), var(--tint-50));
     --muted-foreground: light-dark(var(--shade-600), var(--tint-600));
-    --faded: light-dark(var(--tint-100), var(--shade-100));
+    --faded: light-dark(var(--tint-400), var(--shade-100));
     --faded-foreground: light-dark(var(--tint-600), var(--shade-600));
 
     /* brand */

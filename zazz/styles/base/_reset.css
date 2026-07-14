@@ -200,6 +200,7 @@
     color: var(--border);
     background-color: var(--border);
     border: 0;
+    flex-shrink: 0;
   }
 
   :where(hr[data-orientation="vertical"]) {

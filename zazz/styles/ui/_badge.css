@@ -12,10 +12,10 @@
   :root {
     --badge-ring-color: var(--ring-color);
 
-    --button-font-family: var(--font-family-body);
-    --button-font-size: var(--font-size-xs);
-    --button-font-weight: var(--font-weight-strong);
-    --button-line-height: 1;
+    --badge-font-family: var(--font-family-body);
+    --badge-font-size: var(--font-size-xs);
+    --badge-font-weight: var(--font-weight-strong);
+    --badge-line-height: 1;
 
     --badge-background: var(--background);
     --badge-background--hover: var(--muted);
@@ -48,10 +48,10 @@
   =========================================================================== */
 
   .badge {
-    font-family: var(--button-font-family);
-    font-size: var(--button-font-size);
-    font-weight: var(--button-font-weight);
-    line-height: var(--button-line-height);
+    font-family: var(--badge-font-family);
+    font-size: var(--badge-font-size);
+    font-weight: var(--badge-font-weight);
+    line-height: var(--badge-line-height);
 
     display: flex;
     align-items: center;

@@ -2,16 +2,18 @@
  * _select.css — Select (.select on customizable <select>)
  *
  * @layer      variables, reset, components
- * @requires   layers.css, _variables.css, _fields.css, _reset.css
+ * @requires   layers.css, _variables.css, _fields.css, _reset.css, _popover.css (--popover-*), _button.css (--button-*)
  * @uses       appearance: base-select — customizable select (Chromium 135+ / Safari 17+)
  * @uses       ::picker(select), ::picker-icon, selectedcontent, option::checkmark
  * @uses       @starting-style + allow-discrete — picker open animation
  * @uses       anchor-size(width) — match picker width to trigger (@supports gated)
+ * @uses       position-area, position-try-fallbacks — data-side × data-align picker placement (@supports gated)
+ * @uses       backdrop-filter — picker surface blur (shared with [popover])
  * @uses       Degrades to native OS dropdown where base-select is unsupported
- * @tokens     --select-* (@layer variables)
+ * @tokens     --select-* (@layer variables); picker panel reuses --popover-* (owned in _popover.css)
  */
 
-@layer variables {
+ @layer variables {
   :root {
     /* Box treatment — alias the shared --field-* family (owned in _fields.css) so
        a select, a text input, and a textarea read as one family. Retune a
@@ -34,6 +36,33 @@
     --select-picker-icon-size: var(--field-icon-size);
     --select-picker-icon-color: currentColor;
 
+    /* Option (menu item) — a ghost button rendered as a native <option>. Alias
+       the --button-* family (owned in _button.css) so a select's options and a
+       dropdown's ghost menu items read as one; retune a --button-* token and both
+       follow. The ghost look is base button minus the surface fill + border, so
+       only --option-background/--option-border diverge. Radius bridges to the
+       shared --popover-button-radius like every other [popover]-surface button. */
+    --option-font-family: var(--button-font-family);
+    --option-font-size: var(--button-font-size);
+    --option-font-weight: var(--button-font-weight);
+    --option-line-height: var(--button-line-height);
+    --option-gap: var(--button-gap);
+    --option-padding: var(--button-padding);
+    --option-height: var(--button-height);
+    --option-icon-size: var(--button-icon-size);
+    --option-radius: var(--popover-button-radius);
+    --option-shadow: var(--button-shadow);
+
+    --option-background: transparent;
+    --option-background--hover: var(--button-background--hover);
+    --option-background--active: var(--button-background--active);
+    --option-foreground: var(--button-foreground);
+    --option-foreground--hover: var(--button-foreground--hover);
+    --option-foreground--active: var(--button-foreground--active);
+    --option-border: 1px solid transparent;
+    --option-border--hover: 1px solid transparent;
+    --option-border--active: 1px solid transparent;
+
     /* Option checkmark
     ** @see https://www.svgbackgrounds.com/tools/svg-to-css/
     ** Set to Legacy / URL Wrapper to update icon */
@@ -41,9 +70,10 @@
     --option-checkmark-size: var(--field-icon-size);
     --option-checkmark-color: currentColor;
 
-    /* Reveal transitions/animations */
-    --select-scale--start: 0.98;
-    --select-scale--end: 1;
+    /* Reveal + surface for the dropdown panel are shared with [popover] — the
+       picker reads the --popover-* family (owned in _popover.css) so a select's
+       menu and a popover read as one surface. Retune a --popover-* token and
+       both follow; override here to diverge just the select's picker. */
   }
 }
 
@@ -62,28 +92,31 @@
   }
 
   :where(.select)::picker(select) {
-    opacity: 0;
-    transform: scale(var(--select-scale--start));
+    transform-origin: var(--popover-origin);
+    opacity: var(--popover-opacity--start);
+    backdrop-filter: var(--popover-backdrop-filter);
+    transform: scale(var(--popover-scale--start)) translate3d(var(--popover-translate--start));
 
     transition:
       opacity var(--default-transition-duration) var(--default-transition-timing-function),
       transform var(--default-transition-duration) var(--default-transition-timing-function),
-      overlay var(--default-transition-duration) var(--default-transition-timing-function)
-        allow-discrete,
-      display var(--default-transition-duration) var(--default-transition-timing-function)
-        allow-discrete;
+      padding var(--default-transition-duration) var(--default-transition-timing-function),
+      block-size var(--default-transition-duration) var(--default-transition-timing-function),
+      inline-size var(--default-transition-duration) var(--default-transition-timing-function),
+      overlay var(--default-transition-duration) var(--default-transition-timing-function) allow-discrete,
+      display var(--default-transition-duration) var(--default-transition-timing-function) allow-discrete;
   }
 
   :where(.select:open)::picker(select) {
-    opacity: 1;
-    transform: scale(var(--select-scale--end));
+    opacity: var(--popover-opacity--end);
+    transform: scale(var(--popover-scale--end)) translate3d(var(--popover-translate--end));
     display: flex;
   }
 
   @starting-style {
     :where(.select:open)::picker(select) {
-      opacity: 0;
-      transform: scale(var(--select-scale--start));
+      opacity: var(--popover-opacity--start);
+      transform: scale(var(--popover-scale--start)) translate3d(var(--popover-translate--start));
     }
   }
 
@@ -162,7 +195,7 @@
   }
 
   /* Trigger button child holds the (optional) leading icon + mirrored value */
-  .select > button {
+  .select>button {
     block-size: 100%;
     display: flex;
     flex: 1;
@@ -173,15 +206,17 @@
   }
 
   .select selectedcontent {
+    display: flex;
+    align-items: center;
+    block-size: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
-  /* Icons anywhere in the control (trigger or options) size to the field icon */
-  .select > button > svg,
-  .select option > svg,
-  .select selectedcontent > svg {
+  /* Trigger icons (leading glyph + mirrored value) size to the field icon */
+  .select>button>svg,
+  .select selectedcontent>svg {
     flex-shrink: 0;
     inline-size: var(--field-icon-size);
     block-size: var(--field-icon-size);
@@ -196,8 +231,8 @@
     transform: rotate(-180deg);
   }
 
-  /* Dropdown panel — styled like the card popovers, anchored to the trigger.
-     anchor-size() matches the panel to the trigger width; it is anchor-related,
+  /* Dropdown panel — the shared [popover] surface (--popover-* family), anchored
+     to the trigger. anchor-size() matches the panel to the trigger width; it is anchor-related,
      so it is gated. The fallback (max-content) only matters in the narrow case
      of a browser that supports customizable <select> (::picker) but not
      anchor-size — there the panel sizes to its content instead of stretching. */
@@ -205,14 +240,15 @@
     flex-direction: column;
     gap: var(--step-px);
     inline-size: max-content;
-    padding: var(--step-1_5);
-    margin-block: var(--step-1_5);
+    max-inline-size: var(--popover-max-inline-size);
+    padding: var(--popover-padding);
+    margin-block: var(--popover-margin-block);
 
-    background-color: var(--card);
-    color: var(--card-foreground);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
+    background-color: var(--popover);
+    color: var(--popover-foreground);
+    border: 1px solid var(--popover-border);
+    border-radius: var(--popover-radius);
+    box-shadow: var(--popover-shadow);
   }
 
   @supports (inline-size: anchor-size(width)) {
@@ -221,26 +257,170 @@
     }
   }
 
+  /* ===========================================================================
+  PICKER PLACEMENT — data-side × data-align, mirroring [popover] (row/block first,
+  column/inline second per MDN). Set on the .select; drives the --popover-* tokens
+  the surface + @supports block below consume. Defaults to bottom / start (no
+  attributes) so the picker keeps dropping below the trigger.
+  =========================================================================== */
+
+  /* bottom (default side) */
+  .select:not([data-side]):not([data-align])::picker(select),
+  .select:not([data-side])[data-align="start"]::picker(select),
+  .select[data-side="bottom"]:not([data-align])::picker(select),
+  .select[data-side="bottom"][data-align="start"]::picker(select) {
+    --popover-position-area: block-end span-inline-end;
+    --popover-origin: top center;
+    --popover-margin-block: var(--step-1_5);
+    --popover-margin-inline: 0;
+  }
+
+  .select:not([data-side])[data-align="center"]::picker(select),
+  .select[data-side="bottom"][data-align="center"]::picker(select) {
+    --popover-position-area: block-end span-all;
+    --popover-origin: top center;
+    --popover-margin-block: var(--step-1_5);
+    --popover-margin-inline: 0;
+  }
+
+  .select:not([data-side])[data-align="end"]::picker(select),
+  .select[data-side="bottom"][data-align="end"]::picker(select) {
+    --popover-position-area: block-end span-inline-start;
+    --popover-origin: top center;
+    --popover-margin-block: var(--step-1_5);
+    --popover-margin-inline: 0;
+  }
+
+  /* top */
+  .select[data-side="top"]:not([data-align])::picker(select),
+  .select[data-side="top"][data-align="start"]::picker(select) {
+    --popover-position-area: block-start span-inline-end;
+    --popover-origin: bottom center;
+    --popover-margin-block: var(--step-1_5);
+    --popover-margin-inline: 0;
+  }
+
+  .select[data-side="top"][data-align="center"]::picker(select) {
+    --popover-position-area: block-start span-all;
+    --popover-origin: bottom center;
+    --popover-margin-block: var(--step-1_5);
+    --popover-margin-inline: 0;
+  }
+
+  .select[data-side="top"][data-align="end"]::picker(select) {
+    --popover-position-area: block-start span-inline-start;
+    --popover-origin: bottom center;
+    --popover-margin-block: var(--step-1_5);
+    --popover-margin-inline: 0;
+  }
+
+  /* right */
+  .select[data-side="right"]:not([data-align])::picker(select),
+  .select[data-side="right"][data-align="start"]::picker(select) {
+    --popover-position-area: inline-end span-block-end;
+    --popover-origin: bottom left;
+    --popover-margin-block: 0;
+    --popover-margin-inline: var(--step-1_5);
+  }
+
+  .select[data-side="right"][data-align="center"]::picker(select) {
+    --popover-position-area: inline-end span-all;
+    --popover-origin: center left;
+    --popover-margin-block: 0;
+    --popover-margin-inline: var(--step-1_5);
+  }
+
+  .select[data-side="right"][data-align="end"]::picker(select) {
+    --popover-position-area: inline-end span-block-start;
+    --popover-origin: top left;
+    --popover-margin-block: 0;
+    --popover-margin-inline: var(--step-1_5);
+  }
+
+  /* left */
+  .select[data-side="left"]:not([data-align])::picker(select),
+  .select[data-side="left"][data-align="start"]::picker(select) {
+    --popover-position-area: inline-start span-block-end;
+    --popover-origin: bottom right;
+    --popover-margin-block: 0;
+    --popover-margin-inline: var(--step-1_5);
+  }
+
+  .select[data-side="left"][data-align="center"]::picker(select) {
+    --popover-position-area: inline-start span-all;
+    --popover-origin: center right;
+    --popover-margin-block: 0;
+    --popover-margin-inline: var(--step-1_5);
+  }
+
+  .select[data-side="left"][data-align="end"]::picker(select) {
+    --popover-position-area: inline-start span-block-start;
+    --popover-origin: top right;
+    --popover-margin-block: 0;
+    --popover-margin-inline: var(--step-1_5);
+  }
+
+  /* The picker is implicitly anchored to the select, so position-area needs no
+     anchor-name — but it is still anchor positioning, gated like _popover.css so
+     browsers without it (Firefox/Safari) keep the UA picker placement instead of
+     a mispositioned box. */
+  @supports (anchor-name: --zazz) {
+    .select::picker(select) {
+      position-area: var(--popover-position-area);
+      position-try-fallbacks: var(--popover-position-try-fallbacks);
+      margin-inline: var(--popover-margin-inline);
+    }
+  }
+
+  /* Options render as ghost buttons — the --option-* family (set in @layer
+     variables) aliases the --button-* ghost values, so a select's menu items and
+     a dropdown's ghost menu items read identically. Like .button, sizing rides on
+     min-block-size + padding-inline (no block padding) so every row is uniform. */
   .select option {
     display: flex;
     align-items: center;
-    gap: var(--field-gap);
-    padding: var(--step-1_5) var(--step-2);
+    gap: var(--option-gap);
+    min-block-size: var(--option-height);
+    padding-inline: var(--option-padding);
 
-    font-size: var(--select-font-size);
-    border-radius: var(--radius-sm);
+    font-family: var(--option-font-family);
+    font-size: var(--option-font-size);
+    font-weight: var(--option-font-weight);
+    line-height: var(--option-line-height);
+
+    color: var(--option-foreground);
+    background-color: var(--option-background);
+    border: var(--option-border);
+    border-radius: var(--option-radius);
+    box-shadow: var(--option-shadow);
     cursor: pointer;
 
     transition: var(--default-transition);
   }
 
   .select option:hover {
-    background-color: var(--muted);
+    color: var(--option-foreground--hover);
+    background-color: var(--option-background--hover);
+    border: var(--option-border--hover);
   }
 
   .select option:checked {
-    background-color: color-mix(in srgb, var(--primary) 10%, var(--card));
-    color: var(--primary);
+    color: var(--option-foreground--active);
+    background-color: var(--option-background--active);
+    border: var(--option-border--active);
+  }
+
+  .select option:disabled {
+    --option-foreground: var(--muted-foreground);
+    cursor: default;
+    opacity: 0.5;
+  }
+
+  .select option>svg {
+    flex-shrink: 0;
+    inline-size: var(--option-icon-size);
+    block-size: var(--option-icon-size);
+    color: var(--muted-foreground);
   }
 
   .select option::checkmark {

@@ -42,6 +42,8 @@ const MANIFEST: Record<string, ExampleMeta> = {
   "dropdown/default": { align: "start", minHeight: 500 },
   "navigation-menu/default": { align: "start", minHeight: 500, requiresScripts: ["password"] },
   "select/default": { minHeight: 240 },
+  "select/align": { align: "start", minHeight: 340 },
+  "select/sides": { minHeight: 420 },
   "toaster/default": { minHeight: 420, requiresScripts: ["toaster"] },
 
   // Carousel/lightbox — web components pull in embla.js + the Embla CDN bundles.

@@ -18,8 +18,8 @@
   :root {
     /* Styles */
     --popover-border: var(--border);
-    --popover-border-foreground: var(--border-foreground);
     --popover-radius: var(--radius-md);
+    --popover-button-radius: var(--radius-sm);
     --popover-shadow: var(--shadow-md);
     --popover-padding: var(--step-1_5);
     --popover-min-inline-size: var(--article-xs);
@@ -114,6 +114,10 @@
     padding: var(--popover-padding);
     min-inline-size: var(--popover-min-inline-size);
     max-inline-size: var(--popover-max-inline-size);
+  }
+
+  [popover] .button {
+    --button-radius: var(--popover-button-radius);
   }
 
   /* ===========================================================================

@@ -14,3 +14,27 @@ option. Keep the `<option>`s (an `<optgroup>` label works as a native fallback) 
 ## Default
 
 <Preview src="select/default" />
+
+## Placement
+
+Set `data-side` and `data-align` on the `.select` to place the picker. `data-side` picks which
+edge of the trigger it opens against (defaults to `bottom`); `data-align` picks which trigger
+edge the panel aligns to — and, when the options are wider than the trigger, which way it grows
+(defaults to `start`). This mirrors the [dropdown](/docs/components/dropdown) attributes, and is
+gated behind `@supports` (anchor positioning), so browsers without it keep the native picker
+placement. The picker also flips to the opposite side when there isn't room.
+
+### Sides
+
+<Preview src="select/sides" />
+
+### Alignment
+
+<Preview src="select/align" />
+
+## API
+
+| Attribute    | Where     | Values                           |
+| ------------ | --------- | -------------------------------- |
+| `data-side`  | `.select` | `top`, `bottom`, `left`, `right` |
+| `data-align` | `.select` | `start`, `center`, `end`         |

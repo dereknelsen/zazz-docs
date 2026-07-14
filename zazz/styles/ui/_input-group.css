@@ -26,6 +26,8 @@
     --input-group-textarea-min-block-size: 3lh;
     --input-group-textarea-padding-inline: var(--step-2);
     --input-group-textarea-padding-block: var(--step-1_5);
+
+    --input-group-shadow: 0 0 transparent;
   }
 }
 
@@ -66,13 +68,14 @@
     border: 1px solid var(--field-border);
     border-radius: var(--field-radius);
 
-    /* ring renders as box-shadow; transparent outline twin keeps focus visible
-       in forced-colors / high-contrast modes */
     --_ring-offset-width: 0px;
     --_ring-width: 0px;
+    --_ring: color-mix(in oklch, var(--button-ring-color) var(--ring-opacity), transparent);
     box-shadow:
       0 0 0 var(--_ring-offset-width) var(--ring-offset-color),
-      0 0 0 calc(var(--_ring-offset-width) + var(--_ring-width)) var(--ring);
+      0 0 0 calc(var(--_ring-offset-width) + var(--_ring-width)) var(--_ring),
+      var(--input-group-shadow);
+
     outline: var(--outline-width) var(--outline-style) transparent;
     outline-offset: var(--outline-offset);
 
@@ -105,8 +108,12 @@
   }
 
   .input-group .input {
-    block-size: 100%;
+    flex: 1;
     padding-inline: 0;
+
+    &:is(:hover, :active, :focus) {
+      background-color: transparent;
+    }
   }
 
   /* Restore the control's own inline padding on whichever edge has no addon, so

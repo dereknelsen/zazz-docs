@@ -587,13 +587,13 @@
 
       --background: var(--neutral-900);
       --foreground: var(--white);
-      --border: var(--tint-100);
+      --border: var(--tint-200);
       --border-foreground: var(--shade-500);
       --card: var(--neutral-950);
       --card-foreground: var(--white);
       --input: var(--tint-50);
       --input-foreground: var(--white);
-      --popover: var(--shade-900);
+      --popover: var(--shade-950);
       --popover-foreground: var(--white);
       --muted: var(--tint-50);
       --muted-foreground: var(--tint-600);
@@ -621,13 +621,13 @@
 
     --background: var(--neutral-900);
     --foreground: var(--white);
-    --border: var(--tint-100);
+    --border: var(--tint-200);
     --border-foreground: var(--shade-500);
     --card: var(--neutral-950);
     --card-foreground: var(--white);
     --input: var(--tint-50);
     --input-foreground: var(--white);
-    --popover: var(--shade-900);
+    --popover: var(--shade-950);
     --popover-foreground: var(--white);
     --muted: var(--tint-50);
     --muted-foreground: var(--tint-600);

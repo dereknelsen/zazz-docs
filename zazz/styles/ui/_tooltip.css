@@ -29,7 +29,7 @@
     /* Arrow */
     --tooltip-arrow-size: var(--step-2);
     --tooltip-arrow-color: var(--tooltip-background);
-    --tooltip-arrow-radius: calc(var(--tooltip-radius) / 3);
+    --tooltip-arrow-radius: var(--step-0_5);
 
     /* Reveal transitions — lighter than popover */
     --tooltip-transition-duration: calc(var(--default-transition-duration) / 2);

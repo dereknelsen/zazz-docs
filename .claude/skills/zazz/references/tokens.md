@@ -158,7 +158,7 @@ intentionally (**md** ≈ popovers/modals). Utilities: `.shadow-none|xs|sm|md|lg
   `.aspect-square` (1:1).
 - **Object fit:** `.object-contain .object-cover .object-fill .object-none .object-scale-down`.
 - **Overflow:** `.overflow-hidden .overflow-clip .overflow-auto .overflow-y-auto
-.overflow-x-auto` / `.scrollbar-none`.
+.overflow-x-auto` / `.no-scrollbar`.
 - **Accessibility:** `.sr-only`.
 
 ## 8. Focus ring
